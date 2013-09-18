@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tileset01d" tilewidth="32" tileheight="32">
+  <image source="Downloads/lpc_terrain/twosided/tileset01d.png" width="160" height="192"/>
+  <terraintypes>
+   <terrain name="Cobble" tile="16"/>
+  </terraintypes>
+ </tileset>
+ <tileset firstgid="31" name="sand" tilewidth="32" tileheight="32">
+  <image source="Downloads/lpc_terrain/twosided/sand.png" width="160" height="192"/>
+  <terraintypes>
+   <terrain name="Sand" tile="26"/>
+   <terrain name="fs" tile="5"/>
+  </terraintypes>
+ </tileset>
+ <tileset firstgid="61" name="sandwater" tilewidth="32" tileheight="32">
+  <image source="Downloads/lpc_terrain/twosided/sandwater.png" width="160" height="192"/>
+ </tileset>
+ <tileset firstgid="91" name="water" tilewidth="32" tileheight="32">
+  <image source="Downloads/lpc_terrain/twosided/water.png" width="160" height="192"/>
+  <terraintypes>
+   <terrain name="Water" tile="16"/>
+  </terraintypes>
+ </tileset>
+ <layer name="Tile Layer 1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1cEJAlEQBcGf1kaggi6oYZj/3UlBELbFOlQAb/ow21prAwAAAAAAAAAAAAAAAAAAAAAAAPhRr4McvbtKjxY9WvRo0aPl0zuexnlc9Ej0uI7b2PVI9LiPx3jqkejhf+jxT/Ro0aNFjxY9WvRo0aNFjxY9WvRo0aNFDwAAAAAAAAAAAAAA+K43Er8tFg==
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <imagelayer name="Image Layer 1" width="100" height="100"/>
+</map>
