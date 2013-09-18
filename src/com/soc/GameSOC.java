@@ -5,13 +5,15 @@ import com.artemis.World;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.soc.components.Player;
 import com.soc.components.Position;
 import com.soc.components.Sprite;
+import com.soc.components.Velocity;
 import com.soc.systems.Map;
+import com.soc.systems.MovementSystem;
+import com.soc.systems.PlayerInputSystem;
 import com.soc.systems.SpriteRenderSystem;
 
 public class GameSOC implements Screen {
@@ -28,7 +30,10 @@ public class GameSOC implements Screen {
 		camera.setToOrtho(false, 1280, 900);
 		this.game=game;
 		world=new World();
+		//True-->To call the process when we want and no when the world wants
 		spriteRenderSystem=world.setSystem(new SpriteRenderSystem(camera),true);
+	    world.setSystem(new PlayerInputSystem(camera));
+	    world.setSystem(new MovementSystem());
 		map = new Map("initial", camera);
 		
 		world.initialize();
@@ -36,6 +41,8 @@ public class GameSOC implements Screen {
 	    Entity e = world.createEntity();
 	    e.addComponent(new Position(150,150));
 	    e.addComponent(new Sprite());
+	    e.addComponent(new Player());
+	    e.addComponent(new Velocity(0,0));
 	    e.addToWorld();
 		
 	}
