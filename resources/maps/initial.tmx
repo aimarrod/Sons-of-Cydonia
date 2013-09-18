@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="grass_night" tilewidth="32" tileheight="32">
+  <image source="tiles/twosided/grass_night.png" width="160" height="192"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwTZGBgEByhWJqAHLo8PvXk2EeMedJomFz/YDOPWmGIDZPjNnz+xcanJI6lschTI0zINQ+Xn6kRR5TEKzXNo6ZearuPWDsHi3m0MIeY8EaXAwCsTxyj
+  </data>
+ </layer>
+</map>
