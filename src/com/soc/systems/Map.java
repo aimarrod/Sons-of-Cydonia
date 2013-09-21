@@ -1,5 +1,6 @@
 package com.soc.systems;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.artemis.Aspect;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -33,9 +36,17 @@ public class Map {
 	public Map(String name, OrthographicCamera camera) {
 		this.map = new TmxMapLoader().load(BASE_DIR + name + EXTENSION_TMX);
 		this.layers = map.getLayers();
-		System.out.println(layers.get("collision").getObjects().get(1));
+		processTerrain(layers.get("collision-rectangles"));
 		this.camera = camera; 
 		this.renderer = new OrthogonalTiledMapRenderer(map, UNITSCALE);
+	}
+	
+	//Has only rectangles
+	protected void processRectangleCollisions(MapLayer layer){
+		Iterator i = layer.getObjects().iterator();
+		while(i.hasNext()){
+			((RectangleMapObject)i.next()).getRectangle();
+		}
 	}
 
 	public void render() {

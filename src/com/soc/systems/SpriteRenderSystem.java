@@ -49,7 +49,7 @@ public class SpriteRenderSystem extends EntitySystem {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 	}
-	//Es para ir sacando los componentes de los entitys
+
 	protected void process(Entity e) {
 		if (pm.has(e)) {
 			Position position = pm.getSafe(e);

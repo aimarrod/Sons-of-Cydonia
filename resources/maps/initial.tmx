@@ -9,32 +9,29 @@
    <terrain name="Water" tile="16"/>
   </terraintypes>
  </tileset>
- <layer name="base" width="120" height="80">
+ <layer name="background" width="120" height="80">
   <data encoding="base64" compression="zlib">
    eJztwwEJAAAMBKGr8P3LrsdQcNVUVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVHz4De32f
   </data>
  </layer>
- <layer name="water" width="120" height="80">
+ <layer name="base" width="120" height="80">
   <data encoding="base64" compression="zlib">
    eJzt2O1qwjAYgNHcglegYx+wDTaRsd3/na1CC12WttRoTMM58P6yIOUxqU0IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPex64c27aKhLXFfjduS6qtzO/ZhvrHO27bUVudtW9NX4+15i+Y96NySz2iOwVpuSU5fjeu31Pc1/N/D4/2cesV9n8PfZ/BH4prU9dRpqtmwPl8mrtF4G5bajefQzcPEZxrXaU3fc8O59Txe957NdVjTd+0cR9+zv/2tkFCq75n3qfJy+h26+eon9VxO9fXeXFbu+nzsJ/Uepe/96du2nL35u5ufMP2ePJyFDbQtL2ftnsL8+Vbcl/L0bdulfYezjDXnHc48ysv5f3Xp72Ku8dM1b47ifYd9mzJ+AUQ4TPI=
   </data>
  </layer>
- <objectgroup name="collision" width="120" height="80">
-  <object name="Lake" x="0" y="1952">
-   <polygon points="0,0 160,0 160,128 192,128 192,160 256,160 256,96 544,96 544,128 576,128 576,160 608,160 608,192 640,192 640,224 768,224 768,512 928,512 928,544 960,544 960,608 0,608"/>
-  </object>
-  <object x="832" y="2208" width="32" height="32"/>
+ <objectgroup name="collision-base" width="120" height="80">
   <object x="1152" y="2496" width="32" height="32"/>
-  <object x="0" y="1856" width="32" height="32"/>
-  <object x="0" y="1952" width="160" height="608"/>
-  <object x="160" y="2080" width="32" height="32"/>
-  <object x="160" y="2112" width="96" height="448"/>
+  <object x="96" y="1952" width="64" height="608"/>
+  <object x="160" y="2080" width="32" height="480"/>
+  <object x="192" y="2112" width="64" height="448"/>
   <object x="256" y="2048" width="288" height="512"/>
   <object x="544" y="2080" width="32" height="480"/>
-  <object x="576" y="2112" width="32" height="448"/>
+  <object x="576" y="2112" width="32" height="480"/>
   <object x="608" y="2144" width="32" height="416"/>
   <object x="640" y="2176" width="128" height="384"/>
   <object x="768" y="2464" width="160" height="96"/>
   <object x="928" y="2496" width="32" height="64"/>
+  <object x="540" y="2013"/>
+  <object x="540" y="2013"/>
  </objectgroup>
 </map>
