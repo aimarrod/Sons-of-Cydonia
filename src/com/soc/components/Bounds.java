@@ -4,9 +4,10 @@ import com.artemis.Component;
 import com.badlogic.gdx.math.Polygon;
 
 public class Bounds extends Component{
-	public Polygon bounds;
+	public int width, height;
 	
-	public Bounds(float[] vertex){
-		bounds = new Polygon(vertex);
+	public Bounds(int width, int height){
+		this.width = width;
+		this.height = height;
 	}
 }

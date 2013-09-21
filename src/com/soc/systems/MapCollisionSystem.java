@@ -12,6 +12,8 @@ import com.artemis.utils.Bag;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
@@ -23,6 +25,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import com.soc.EntityFactory;
 import com.soc.components.Position;
 import com.soc.components.Bounds;
@@ -40,13 +43,13 @@ public class MapCollisionSystem extends EntityProcessingSystem {
 	ComponentMapper<Velocity> vm;
 		
 	private MapLayers layers;
-	private Bag<Polygon> terrains;
+	private Bag<Rectangle> terrains;
 	
 	@SuppressWarnings("unchecked")
 	public MapCollisionSystem(TiledMap map) {
 		super(Aspect.getAspectForAll(Position.class, Bounds.class, Velocity.class));
 		this.layers = map.getLayers();
-		this.terrains = new Bag<Polygon>();
+		this.terrains = new Bag<Rectangle>();
 		retrieveCollisionObjects(layers.get("collision"));
 
 	}
@@ -54,19 +57,22 @@ public class MapCollisionSystem extends EntityProcessingSystem {
 	protected void retrieveCollisionObjects(MapLayer layer){
 		Iterator<MapObject> i = layer.getObjects().iterator();
 		while(i.hasNext()){			
-			terrains.add( (((PolygonMapObject)i.next()).getPolygon()) );
+			terrains.add( (((RectangleMapObject)i.next()).getRectangle()) );
 		}
 	}
 
 	@Override
 	protected void process(Entity e) {
+		
 		for(int i=0; i < terrains.size(); i++){
 			Position pos = pm.get(e);
-			Polygon bounds = bm.get(e).bounds;
+			Bounds bounds = bm.get(e);
 			Velocity v = vm.get(e);
-			bounds.setPosition(pos.x+v.vx*world.delta, pos.y+v.vy*world.delta);
-			System.out.println(bounds.getX());
-			if(Intersector.overlapConvexPolygons(terrains.get(i), bounds)){
+
+			float px = pos.x + v.vx*world.delta;
+			float py = pos.y + v.vy*world.delta;
+			Rectangle poly = new Rectangle(px, py, bounds.height, bounds.width);
+			if(Intersector.overlaps(poly, terrains.get(i))){
 				System.out.println("Overlaps");
 				v.vx = 0;
 				v.vy = 0;

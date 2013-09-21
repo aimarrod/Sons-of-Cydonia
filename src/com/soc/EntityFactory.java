@@ -37,7 +37,7 @@ public class EntityFactory {
 	    e.addComponent(new Sprite());
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0));
-	    e.addComponent(new Bounds(new float[]{0,0,10,0,10,10,0,10}));
+	    e.addComponent(new Bounds(32, 32));
 	    e.addToWorld();
 	    
 	    return e;

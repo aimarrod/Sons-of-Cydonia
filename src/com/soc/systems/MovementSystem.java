@@ -5,12 +5,15 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
+import com.soc.components.Bounds;
 import com.soc.components.Position;
 import com.soc.components.Velocity;
 
 public class MovementSystem extends EntityProcessingSystem {
 	 @Mapper ComponentMapper<Position> pm;
 	 @Mapper ComponentMapper<Velocity> vm;
+	 @Mapper ComponentMapper<Bounds> bm;
+
 	 
 	 @SuppressWarnings("unchecked")
 	 public MovementSystem() {
@@ -24,7 +27,6 @@ public class MovementSystem extends EntityProcessingSystem {
 	     
 	  position.x += velocity.vx*world.delta;
 	  position.y += velocity.vy*world.delta;
-	   
 	 }
 	 
 	}

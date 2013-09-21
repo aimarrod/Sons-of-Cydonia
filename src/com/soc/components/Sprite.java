@@ -10,7 +10,7 @@ public class Sprite extends Component {
 	}
 
 	public Sprite() {
-		this("data/the_tardis.png");
+		this("data/archer.png");
 	}
 
 	public Texture sprite;

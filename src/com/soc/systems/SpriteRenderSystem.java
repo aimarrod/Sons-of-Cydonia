@@ -8,6 +8,7 @@ import com.artemis.annotations.Mapper;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.soc.components.Bounds;
 import com.soc.components.Position;
 import com.soc.components.Sprite;
 
@@ -16,13 +17,15 @@ public class SpriteRenderSystem extends EntitySystem {
 	ComponentMapper<Position> pm;
 	@Mapper
 	ComponentMapper<Sprite> sm;
+	@Mapper
+	ComponentMapper<Bounds> bm;
 
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 
 	@SuppressWarnings("unchecked")
 	public SpriteRenderSystem(OrthographicCamera camera) {
-		super(Aspect.getAspectForAll(Position.class, Sprite.class));
+		super(Aspect.getAspectForAll(Position.class, Sprite.class, Bounds.class));
 		this.camera = camera; // TODO Auto-generated constructor stub
 	}
 
@@ -54,12 +57,11 @@ public class SpriteRenderSystem extends EntitySystem {
 		if (pm.has(e)) {
 			Position position = pm.getSafe(e);
 			Sprite sprite = sm.get(e);
+			Bounds bounds = bm.get(e);
 
 			batch.setColor(sprite.r, sprite.g, sprite.b, sprite.a);
-			float posx = position.x;
-			float posy = position.y;
 
-			batch.draw(sprite.sprite, posx, posy);
+			batch.draw(sprite.sprite, position.x, position.y, bounds.width, bounds.height);
 		}
 	}
 
