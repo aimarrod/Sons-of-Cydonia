@@ -15,116 +15,159 @@ import com.soc.components.State;
 import com.soc.components.Velocity;
 
 
-	public class PlayerInputSystem extends EntityProcessingSystem implements InputProcessor {
+	public class PlayerInputSystem extends EntityProcessingSystem{
 		 @Mapper ComponentMapper<Velocity> vm;
 		 @Mapper ComponentMapper<State> sm;
 
 		  
 		 private OrthographicCamera camera;
 		 private Vector3 mouseVector;
-		  
+		 private State state;
+		 
 		 private int vx, vy;
-		 private int movement = 10000;
+		 private int movement = 15000;
 		  
 		 @SuppressWarnings("unchecked")
 		 public PlayerInputSystem(OrthographicCamera camera) {
-		  super(Aspect.getAspectForAll(Velocity.class, Player.class, State.class));
-		  this.camera=camera;
+			 super(Aspect.getAspectForAll(Velocity.class, Player.class, State.class));
+			 this.camera=camera;
+			 this.state = null;
 		 }
 		  
-		 @Override
+/*		 @Override
 		 protected void initialize() {
-		  Gdx.input.setInputProcessor(this);
+		  //Gdx.input.setInputProcessor(this);
 		 }
-		 
+	*/	 
 		 @Override
 		 protected void process(Entity e) {
-		  mouseVector = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
-		  camera.unproject(mouseVector);
+			 mouseVector = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
+			 camera.unproject(mouseVector);
 		   
-		  Velocity vel = vm.get(e);
+			 Velocity vel = vm.get(e);
 		   
-		  vel.vx = vx * world.getDelta();
-		  vel.vy = vy * world.getDelta();
-		  
-		  State state = sm.get(e);
-		  if(vx < 0 && state.state != State.WALK_WEST){
-			  state.state = State.WALK_WEST;
-			  state.statetime = 0;
-		  }
-		  if(vx > 0 && state.state != State.WALK_EAST){
-			  state.state = State.WALK_EAST;
-			  state.statetime = 0;
-		  }
-		  if(vy > 0 && state.state != State.WALK_NORTH ){
-			  state.state = State.WALK_NORTH;
-			  state.statetime = 0;
-		  }
-		  if(vy < 0 && state.state != State.WALK_SOUTH){
-			  state.state = State.WALK_SOUTH;
-			  state.statetime = 0;
-		  }
-		  if(vx == 0 && vy == 0 && state.state > 3){
-			  state.state -= 4;
-			  System.out.println(state.state);
-		  }
-		  
+			 vel.vx = vx * world.getDelta();
+			 vel.vy = vy * world.getDelta();
+			 
+			 state = sm.get(e);
+			 boolean moving = false;
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+				 vy = movement;
+				 state.direction = State.NORTH;
+				 moving = true;
+			 } else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+				 vy = -movement;
+				 state.direction = State.SOUTH;
+				 moving = true;
+			 } else {
+				 vy = 0;
+			 }
+			 
+			 if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+				 vx = -movement;
+				 state.direction = State.WEST;
+				 moving = true;
+			 } else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+				 vx = movement;
+				 state.direction = State.EAST;
+				 moving = true;
+			 } else {
+				 vx = 0;
+			 }
+			 
+			 if(moving){
+				 state.state = State.WALK;
+			 } else {
+				 state.state = State.IDLE;
+			 }
+			 			 
+			 
 		 }
+	}
 		 
-		 @Override
+/*		 //@Override
 		 public boolean keyDown(int keycode) {
-		  if (keycode == Input.Keys.UP) vy = movement;
-		  if (keycode == Input.Keys.DOWN) vy = -movement;
-		  if (keycode == Input.Keys.RIGHT) vx = movement;
-		  if (keycode == Input.Keys.LEFT) vx = -movement; 
-		  return false;
+			 if(state != null){
+				 if (keycode == Input.Keys.UP){ 
+					 state.direction = State.NORTH;
+					 state.statetime = 0;
+				 }
+				 if (keycode == Input.Keys.DOWN){ 
+					 vy = -movement;
+					 state.direction = State.SOUTH;
+					 state.statetime = 0;
+				 }
+				 if (keycode == Input.Keys.RIGHT){
+					 vx = movement;
+					 state.direction = State.EAST;
+					 state.statetime = 0;
+				 }
+				 if (keycode == Input.Keys.LEFT){
+					 vx = -movement; 
+					 state.direction = State.WEST;
+					 state.statetime = 0;
+				 }
+			 }
+			 return false;
 		 }
 		 
-		 @Override
+		 //@Override
 		 public boolean keyUp(int keycode) {
-		  if (keycode == Input.Keys.UP) vy = 0;
-		  if (keycode == Input.Keys.DOWN) vy = 0;
-		  if (keycode == Input.Keys.RIGHT) vx = 0;
-		  if (keycode == Input.Keys.LEFT) vx = 0; 
-		  return false;
+			 if(state != null){
+				 if (keycode == Input.Keys.UP){
+					 vy = 0;
+				 }
+				 if (keycode == Input.Keys.DOWN){
+					 vy = 0;
+				 }
+				 if (keycode == Input.Keys.RIGHT){
+					 vx = 0;
+				 }
+				 if (keycode == Input.Keys.LEFT){
+					 vx = 0;
+				 }
+			 }
+			 return false;
+
 		 }
 
-		@Override
+		//@Override
 		public boolean keyTyped(char character) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+		//@Override
 		public boolean touchDown(int screenX, int screenY, int pointer,
 				int button) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+		//@Override
 		public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+		//@Override
 		public boolean touchDragged(int screenX, int screenY, int pointer) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+		//@Override
 		public boolean mouseMoved(int screenX, int screenY) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-		@Override
+		//@Override
 		public boolean scrolled(int amount) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 		 
 		}
-
+*/

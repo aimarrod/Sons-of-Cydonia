@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.soc.components.Animated;
+import com.soc.components.Movement;
 import com.soc.components.Bounds;
 import com.soc.components.Player;
 import com.soc.components.Position;
@@ -43,9 +43,9 @@ public class EntityFactory {
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0));
 	    e.addComponent(new Bounds(32, 32));
-	    e.addComponent(new State(0));
+	    e.addComponent(new State(0,0));
 	    
-	    Animated anim = new Animated();
+	    Movement anim = new Movement();
 	    anim.animations = new Animation[8];
 	    //Super especifico (Tailor made)
 	    Texture sheet = new Texture(Gdx.files.internal("resources/archer_walking.png"));
@@ -55,8 +55,7 @@ public class EntityFactory {
 	   	for(int i = 0; i < tmp.length; i++){
 	   		TextureRegion tr = tmp[i][0];
 	   		TextureRegion[][] tmp2 = tr.split(tr.getRegionWidth()/9, tr.getRegionHeight());
-	   		anim.animations[i] = new Animation(1.0f, new TextureRegion[]{tmp2[0][0]});
-	   		anim.animations[i+4] = new Animation(1.0f/9f, tmp2[0]);
+	   		anim.animations[i] = new Animation(1.0f/9f, tmp2[0]);
 	   	}
 	   	//Fin especifico
 	   	e.addComponent(anim);
