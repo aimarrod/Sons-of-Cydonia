@@ -21,4 +21,6 @@ public class State extends Component{
 	final public static int WEST = 1;
 	final public static int SOUTH = 2;
 	final public static int EAST = 3;
+	
+	final public static int BLOCKED = 2;
 }

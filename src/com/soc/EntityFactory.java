@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.soc.components.Attack;
 import com.soc.components.Movement;
 import com.soc.components.Bounds;
 import com.soc.components.Player;
@@ -37,7 +38,7 @@ public class EntityFactory {
 		return instance;
 	}
 
-	public Entity createPlayer(float px, float py){
+	public Entity createArcher(float px, float py){
 		Entity e = entityWorld.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
@@ -45,24 +46,43 @@ public class EntityFactory {
 	    e.addComponent(new Bounds(32, 32));
 	    e.addComponent(new State(0,0));
 	    
-	    Movement anim = new Movement();
-	    anim.animations = new Animation[8];
-	    //Super especifico (Tailor made)
-	    Texture sheet = new Texture(Gdx.files.internal("resources/archer_walking.png"));
-	   	int vframes = 4;
-	   	int hframes = 9;
-	   	TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth(), sheet.getHeight() / 4);
-	   	for(int i = 0; i < tmp.length; i++){
-	   		TextureRegion tr = tmp[i][0];
-	   		TextureRegion[][] tmp2 = tr.split(tr.getRegionWidth()/9, tr.getRegionHeight());
-	   		anim.animations[i] = new Animation(1.0f/9f, tmp2[0]);
-	   	}
-	   	//Fin especifico
-	   	e.addComponent(anim);
+	    Movement movement = new Movement();
 	    
+	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), movement, 1.0f);
+	   	e.addComponent(movement);
+	    
+	   	Attack attack = new Attack();
+	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), attack, 0.4f);
+	   	e.addComponent(attack);
+	   	
 	    e.addToWorld();
 	    
 	    
 	    return e;
 	}
+	
+	public Entity createWarrior(float px, float py){
+		Entity e = entityWorld.createEntity();
+	    e.addComponent(new Position(px,py));
+	    e.addComponent(new Player());
+	    e.addComponent(new Velocity(0,0));
+	    e.addComponent(new Bounds(32, 32));
+	    e.addComponent(new State(0,0));
+	    
+	    Movement movement = new Movement();
+	    
+	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), movement, 1.0f);
+	   	e.addComponent(movement);
+	    
+	   	Attack attack = new Attack();
+	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), attack, 0.2f);
+	   	e.addComponent(attack);
+	   	
+	    e.addToWorld();
+	    
+	    
+	    return e;
+	}
+	
+
 }

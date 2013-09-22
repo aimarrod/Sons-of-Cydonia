@@ -50,36 +50,48 @@ import com.soc.components.Velocity;
 			 vel.vy = vy * world.getDelta();
 			 
 			 state = sm.get(e);
-			 boolean moving = false;
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-				 vy = movement;
-				 state.direction = State.NORTH;
-				 moving = true;
-			 } else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-				 vy = -movement;
-				 state.direction = State.SOUTH;
-				 moving = true;
-			 } else {
-				 vy = 0;
-			 }
+			 if(state.state < State.BLOCKED){
+				
+				if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+					state.statetime = 0;
+					state.state = State.ATTACK;
+					vx = 0;
+					vy = 0;
+					return;
+				}
+				 
+				boolean moving = false;
+				 
+			 	if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+				 	vy = movement;
+				 	state.direction = State.NORTH;
+				 	moving = true;
+			 	} else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+				 	vy = -movement;
+				 	state.direction = State.SOUTH;
+				 	moving = true;
+			 	} else {
+				 	vy = 0;
+			 	}
 			 
-			 if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-				 vx = -movement;
-				 state.direction = State.WEST;
-				 moving = true;
-			 } else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-				 vx = movement;
-				 state.direction = State.EAST;
-				 moving = true;
-			 } else {
-				 vx = 0;
-			 }
+			 	if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+				 	vx = -movement;
+				 	state.direction = State.WEST;
+				 	moving = true;
+			 	} else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+				 	vx = movement;
+				 	state.direction = State.EAST;
+				 	moving = true;
+			 	} else {
+				 	vx = 0;
+			 	}
 			 
-			 if(moving){
-				 state.state = State.WALK;
-			 } else {
-				 state.state = State.IDLE;
+			 	if(moving){
+				 	state.state = State.WALK;
+			 	} else {
+				 	state.state = State.IDLE;
+			 	}
 			 }
 			 			 
 			 

@@ -8,6 +8,7 @@ import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.soc.components.Attack;
 import com.soc.components.Movement;
 import com.soc.components.Bounds;
 import com.soc.components.Position;
@@ -20,6 +21,8 @@ public class AnimationSystem extends EntityProcessingSystem{
 	@Mapper
 	ComponentMapper<Movement> am;
 	@Mapper
+	ComponentMapper<Attack> atm;
+	@Mapper
 	ComponentMapper<State> sm;
 	@Mapper
 	ComponentMapper<Bounds> bm; 
@@ -29,7 +32,7 @@ public class AnimationSystem extends EntityProcessingSystem{
 	
 	@SuppressWarnings("unchecked")
 	public AnimationSystem(OrthographicCamera camera) {
-		super(Aspect.getAspectForAll(Movement.class, State.class, Position.class, Bounds.class));
+		super(Aspect.getAspectForAll(Movement.class, Attack.class, State.class, Position.class, Bounds.class));
 		this.camera = camera;
 		this.batch = new SpriteBatch();
 	}
@@ -45,6 +48,7 @@ public class AnimationSystem extends EntityProcessingSystem{
 		if (pm.has(e)) {
 			Position position = pm.getSafe(e);
 			Movement movement = am.get(e);
+			Attack attack = atm.get(e);
 			State state = sm.get(e);
 			Bounds bounds = bm.get(e);
 			
@@ -54,6 +58,12 @@ public class AnimationSystem extends EntityProcessingSystem{
 			}
 			if(state.state == State.IDLE){
 				frame = movement.animations[state.direction].getKeyFrame(0);
+			}
+			if(state.state == State.ATTACK){
+				frame = attack.animations[state.direction].getKeyFrame(state.statetime);
+				if(attack.animations[state.direction].isAnimationFinished(state.statetime)){
+					state.state = State.IDLE;
+				}
 			}
 			state.statetime += world.delta;
 
