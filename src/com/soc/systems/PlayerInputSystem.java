@@ -11,22 +11,24 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.soc.components.Player;
+import com.soc.components.State;
 import com.soc.components.Velocity;
 
 
 	public class PlayerInputSystem extends EntityProcessingSystem implements InputProcessor {
 		 @Mapper ComponentMapper<Velocity> vm;
+		 @Mapper ComponentMapper<State> sm;
+
 		  
 		 private OrthographicCamera camera;
 		 private Vector3 mouseVector;
 		  
-		 private int ax, ay;
-		 private int thruster = 400;
-		 private float drag = 0.4f;
+		 private int vx, vy;
+		 private int movement = 10000;
 		  
 		 @SuppressWarnings("unchecked")
 		 public PlayerInputSystem(OrthographicCamera camera) {
-		  super(Aspect.getAspectForAll(Velocity.class, Player.class));
+		  super(Aspect.getAspectForAll(Velocity.class, Player.class, State.class));
 		  this.camera=camera;
 		 }
 		  
@@ -42,26 +44,48 @@ import com.soc.components.Velocity;
 		   
 		  Velocity vel = vm.get(e);
 		   
-		  vel.vx += (ax - drag * vel.vx) * world.getDelta();
-		  vel.vy += (ay - drag * vel.vy) * world.getDelta();
-		 
+		  vel.vx = vx * world.getDelta();
+		  vel.vy = vy * world.getDelta();
+		  
+		  State state = sm.get(e);
+		  if(vx < 0 && state.state != State.WALK_WEST){
+			  state.state = State.WALK_WEST;
+			  state.statetime = 0;
+		  }
+		  if(vx > 0 && state.state != State.WALK_EAST){
+			  state.state = State.WALK_EAST;
+			  state.statetime = 0;
+		  }
+		  if(vy > 0 && state.state != State.WALK_NORTH ){
+			  state.state = State.WALK_NORTH;
+			  state.statetime = 0;
+		  }
+		  if(vy < 0 && state.state != State.WALK_SOUTH){
+			  state.state = State.WALK_SOUTH;
+			  state.statetime = 0;
+		  }
+		  if(vx == 0 && vy == 0 && state.state > 3){
+			  state.state -= 4;
+			  System.out.println(state.state);
+		  }
+		  
 		 }
 		 
 		 @Override
 		 public boolean keyDown(int keycode) {
-		  if (keycode == Input.Keys.UP) ay = thruster;
-		  if (keycode == Input.Keys.DOWN) ay = -thruster;
-		  if (keycode == Input.Keys.RIGHT) ax = thruster;
-		  if (keycode == Input.Keys.LEFT) ax = -thruster; 
+		  if (keycode == Input.Keys.UP) vy = movement;
+		  if (keycode == Input.Keys.DOWN) vy = -movement;
+		  if (keycode == Input.Keys.RIGHT) vx = movement;
+		  if (keycode == Input.Keys.LEFT) vx = -movement; 
 		  return false;
 		 }
 		 
 		 @Override
 		 public boolean keyUp(int keycode) {
-		  if (keycode == Input.Keys.UP) ay = 0;
-		  if (keycode == Input.Keys.DOWN) ay = 0;
-		  if (keycode == Input.Keys.RIGHT) ax = 0;
-		  if (keycode == Input.Keys.LEFT) ax = 0; 
+		  if (keycode == Input.Keys.UP) vy = 0;
+		  if (keycode == Input.Keys.DOWN) vy = 0;
+		  if (keycode == Input.Keys.RIGHT) vx = 0;
+		  if (keycode == Input.Keys.LEFT) vx = 0; 
 		  return false;
 		 }
 
