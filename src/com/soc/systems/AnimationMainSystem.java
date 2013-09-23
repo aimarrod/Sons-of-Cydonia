@@ -71,7 +71,7 @@ public class AnimationMainSystem extends EntityProcessingSystem{
 			}
 
 			batch.setColor(animation.r, animation.g, animation.b, animation.a);
-			batch.draw(animation.animations[state.direction].getKeyFrame(animation.time, false), position.x + animation.ox, position.y + animation.oy);
+			batch.draw(animation.animations[state.direction].getKeyFrame(animation.time, loop), position.x + animation.ox, position.y + animation.oy);
 		}
 	}
 	
