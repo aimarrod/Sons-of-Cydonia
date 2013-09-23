@@ -8,4 +8,9 @@ public class Constants {
 		 
 		 public static final int DAGGER_SPEED = 500;
 	}
+	
+	public class Characters{
+		public static final int WIDTH_PIXELS = 32;
+		public static final int HEIGHT_PIXELS = 50;
+	}
 }

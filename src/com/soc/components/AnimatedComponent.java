@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 public class AnimatedComponent extends Component{
 
 	public Animation[] animations;
+	public float ox = 0;
+	public float oy = 0;
 	public float r = 1;
 	public float g = 1;
 	public float b = 1;

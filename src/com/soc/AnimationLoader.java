@@ -7,9 +7,24 @@ import com.soc.components.AnimatedComponent;
 
 public class AnimationLoader {
 
-	public static void loadHumanoidSpriteSheet(Texture sheet, AnimatedComponent comp, float duration){
-		int hframes = sheet.getWidth()/CHAR_SIZE_HORIZONTAL;
-		int vframes = sheet.getHeight()/CHAR_FRAME_SIZE_VERTICAL;
+	public static void loadCharacterSpriteSheet(Texture sheet, AnimatedComponent comp, float duration, int hsize, int vsize){
+		int hframes = sheet.getWidth()/hsize;
+		int vframes = sheet.getHeight()/vsize;
+		
+		comp.animations = new Animation[vframes];
+		comp.ox = -(hsize-Constants.Characters.WIDTH_PIXELS)/2;
+		comp.oy = -(vsize-Constants.Characters.HEIGHT_PIXELS)/2;
+
+
+	   	TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth()/hframes, sheet.getHeight() / vframes);
+	   	for(int i = 0; i < tmp.length; i++){
+	   		comp.animations[i] = new Animation(duration/hframes, tmp[i]);
+	   	}
+	}
+	
+	public static void loadProjectileSpriteSheet(Texture sheet, AnimatedComponent comp, float duration, int hsize, int vsize){
+		int hframes = sheet.getWidth()/hsize;
+		int vframes = sheet.getHeight()/vsize;
 		
 		comp.animations = new Animation[vframes];
 
@@ -18,22 +33,4 @@ public class AnimationLoader {
 	   		comp.animations[i] = new Animation(duration/hframes, tmp[i]);
 	   	}
 	}
-	
-	public static void loadProjectileSpriteSheet(Texture sheet, AnimatedComponent comp, float duration){
-		int hframes = sheet.getWidth()/PROJ_SIZE_HORIZONTAL;
-		int vframes = sheet.getHeight()/PROJ_FRAME_SIZE_VERTICAL;
-		
-		comp.animations = new Animation[vframes];
-
-	   	TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth()/hframes, sheet.getHeight() / vframes);
-	   	for(int i = 0; i < tmp.length; i++){
-	   		comp.animations[i] = new Animation(duration/hframes, tmp[i]);
-	   	}
-	}
-	
-	
-	final static int CHAR_FRAME_SIZE_VERTICAL = 128;
-	final static int CHAR_SIZE_HORIZONTAL = 128;
-	final static int PROJ_FRAME_SIZE_VERTICAL = 64;
-	final static int PROJ_SIZE_HORIZONTAL = 64;
 }

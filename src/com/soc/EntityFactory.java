@@ -42,11 +42,11 @@ public class EntityFactory {
 	    
 	    Movement movement = new Movement();
 	    
-	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), movement, 1.0f);
+	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), movement, 1.0f, 64, 64);
 	   	e.addComponent(movement);
 	    
 	   	Attacker attack = new Attacker(range, damage);
-	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), attack, 0.4f);
+	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), attack, 0.4f, 64, 64);
 	   	e.addComponent(attack);
 	   	
 	    e.addToWorld();
@@ -65,11 +65,11 @@ public class EntityFactory {
 	    
 	    Movement movement = new Movement();
 	    
-	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), movement, 1.0f);
+	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), movement, 1.0f, 64, 64);
 	   	e.addComponent(movement);
 	    
 	   	Attacker attack = new Attacker(range,damage);
-	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), attack, 0.4f);
+	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), attack, 0.4f, 128, 128);
 	   	e.addComponent(attack);
 	   	
 	    e.addToWorld();
@@ -87,7 +87,7 @@ public class EntityFactory {
 		e.addComponent(v);
 		Bounds b=new Bounds(10,10);
 		e.addComponent(b); 
-	   	AnimationLoader.loadProjectileSpriteSheet(new Texture(Gdx.files.internal("resources/dagger-attack.png")), weaponAttack, 0.2f);		
+	   	AnimationLoader.loadProjectileSpriteSheet(new Texture(Gdx.files.internal("resources/dagger-attack.png")), weaponAttack, 0.2f, 64, 64);		
 	   	e.addComponent(new Flying());
 	   	e.addToWorld();
 	   	return e;

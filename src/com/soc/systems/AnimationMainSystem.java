@@ -8,6 +8,7 @@ import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.soc.components.AnimatedComponent;
 import com.soc.components.Attacker;
 import com.soc.components.Movement;
 import com.soc.components.Bounds;
@@ -47,29 +48,30 @@ public class AnimationMainSystem extends EntityProcessingSystem{
 	protected void process(Entity e) {
 		if (pm.has(e)) {
 			Position position = pm.getSafe(e);
-			Movement movement = am.get(e);
-			Attacker attack = atm.get(e);
 			State state = sm.get(e);
 			Bounds bounds = bm.get(e);
 			
-			TextureRegion frame = null;
+			AnimatedComponent animation = null;
+			boolean loop = true;
 			if(state.state == State.WALK){
-				frame = movement.animations[state.direction].getKeyFrame(movement.time, true);
-				movement.time += world.delta;
+				animation = am.get(e);
+				animation.time += world.delta;
 			}
 			if(state.state == State.IDLE){
-				frame = movement.animations[state.direction].getKeyFrame(0);
+				animation = am.get(e);
+				animation.time = 0;
 			}
 			if(state.state == State.ATTACK){
-				frame = attack.animations[state.direction].getKeyFrame(attack.time);
-				attack.time+=world.delta;
-				if(attack.animations[state.direction].isAnimationFinished(attack.time)){
+				animation = atm.get(e);
+				animation.time += world.delta;
+				loop = false;
+				if(animation.animations[state.direction].isAnimationFinished(animation.time)){
 					state.state = State.IDLE;
 				}
 			}
 
-			batch.setColor(movement.r, movement.g, movement.b, movement.a);
-			batch.draw(frame, position.x, position.y);
+			batch.setColor(animation.r, animation.g, animation.b, animation.a);
+			batch.draw(animation.animations[state.direction].getKeyFrame(animation.time, false), position.x + animation.ox, position.y + animation.oy);
 		}
 	}
 	
