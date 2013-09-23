@@ -118,5 +118,27 @@ public class EntityFactory {
 	   	return e;
 	}
 	
+	public Entity createSkeleton(float px, float py, int damage, float range){
+		Entity e = entityWorld.createEntity();
+	    e.addComponent(new Position(px,py));
+	    e.addComponent(new Velocity(0,0));
+	    e.addComponent(new Bounds(32, 32));
+	    e.addComponent(new State(0,0));
+	    Movement movement = new Movement();
+	    
+	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), movement, 1.0f, 64, 64);
+	   	e.addComponent(movement);
+	    
+	   	Attacker attack = new Attacker(range,damage);
+	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-attack.png")), attack, 0.4f, 64, 64);
+	   	e.addComponent(attack);
+	   	
+	    e.addToWorld();
+	    
+	    
+	    return e;
+	}
+	
+	
 
 }

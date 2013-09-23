@@ -1,6 +1,5 @@
 package com.soc;
 
-import com.artemis.Entity;
 import com.artemis.World;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -8,14 +7,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Vector2;
-import com.soc.components.Player;
-import com.soc.components.Position;
-import com.soc.components.Sprite;
-import com.soc.components.Velocity;
 import com.soc.systems.AnimationAttackSystem;
 import com.soc.systems.AnimationMainSystem;
 import com.soc.systems.CameraSystem;
+import com.soc.systems.EntitySpawningTimerSystem;
 import com.soc.systems.MapCollisionSystem;
 import com.soc.systems.MapRenderSystem;
 import com.soc.systems.MovementSystem;
@@ -48,6 +43,7 @@ public class GameSOC implements Screen {
 	    world.setSystem(new PlayerInputSystem(camera));
 	    world.setSystem(new MapCollisionSystem(map));
 	    world.setSystem(new MovementSystem());
+	    world.setSystem(new EntitySpawningTimerSystem());
 	    
 	    //Specially treated systems
 		spriteRenderSystem = world.setSystem( new SpriteRenderSystem(camera), true );
