@@ -92,7 +92,7 @@ public class EntityFactory {
 	   	e.addComponent(movement);
 	    
 	   	Attacker attack = new Attacker(range,damage);
-	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-attack.png")), attack, 0.4f, 128, 128);
+	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-attack.png")), attack, 0.4f, 64, 64);
 	   	e.addComponent(attack);
 	   	
 	    e.addToWorld();
