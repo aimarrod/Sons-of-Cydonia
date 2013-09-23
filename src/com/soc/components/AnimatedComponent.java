@@ -13,4 +13,5 @@ public class AnimatedComponent extends Component{
 	public float scaleX = 1;
 	public float scaleY = 1;
 	public float rotation;
+	public float time;
 }

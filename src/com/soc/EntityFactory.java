@@ -3,22 +3,14 @@ package com.soc;
 import com.artemis.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.soc.components.Attack;
-import com.soc.components.Movement;
+import com.soc.components.Attacker;
 import com.soc.components.Bounds;
+import com.soc.components.Movement;
 import com.soc.components.Player;
 import com.soc.components.Position;
-import com.soc.components.Sprite;
 import com.soc.components.State;
 import com.soc.components.Velocity;
+import com.soc.components.WeaponAttack;
 
 public class EntityFactory {
 	
@@ -38,7 +30,7 @@ public class EntityFactory {
 		return instance;
 	}
 
-	public Entity createArcher(float px, float py){
+	public Entity createArcher(float px, float py, float range, int damage){
 		Entity e = entityWorld.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
@@ -51,7 +43,7 @@ public class EntityFactory {
 	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), movement, 1.0f);
 	   	e.addComponent(movement);
 	    
-	   	Attack attack = new Attack();
+	   	Attacker attack = new Attacker(range, damage);
 	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), attack, 0.4f);
 	   	e.addComponent(attack);
 	   	
@@ -61,7 +53,7 @@ public class EntityFactory {
 	    return e;
 	}
 	
-	public Entity createWarrior(float px, float py){
+	public Entity createWarrior(float px, float py, int damage, float range){
 		Entity e = entityWorld.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
@@ -74,7 +66,7 @@ public class EntityFactory {
 	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), movement, 1.0f);
 	   	e.addComponent(movement);
 	    
-	   	Attack attack = new Attack();
+	   	Attacker attack = new Attacker(range,damage);
 	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), attack, 0.2f);
 	   	e.addComponent(attack);
 	   	
@@ -82,6 +74,20 @@ public class EntityFactory {
 	    
 	    
 	    return e;
+	}
+	public Entity createAttack(float x, float y, int attackType, int damage, float range){
+		Entity e=entityWorld.createEntity();
+		WeaponAttack weaponAttack=new WeaponAttack(range,damage);
+		e.addComponent(weaponAttack);
+		Position position=new Position(x,y);
+		e.addComponent(position);
+		Velocity v=new Velocity(100,100);
+		e.addComponent(v);
+		Bounds b=new Bounds(10,10);
+		e.addComponent(b); 
+	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/dague-attack.png")), weaponAttack, 0.2f);		
+	   	e.addToWorld();
+	   	return e;
 	}
 	
 

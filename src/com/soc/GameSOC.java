@@ -13,7 +13,8 @@ import com.soc.components.Player;
 import com.soc.components.Position;
 import com.soc.components.Sprite;
 import com.soc.components.Velocity;
-import com.soc.systems.AnimationSystem;
+import com.soc.systems.AnimationAttackSystem;
+import com.soc.systems.AnimationMainSystem;
 import com.soc.systems.CameraSystem;
 import com.soc.systems.MapCollisionSystem;
 import com.soc.systems.MapRenderSystem;
@@ -28,7 +29,8 @@ public class GameSOC implements Screen {
 	private Game game;
 	private World world;
 	private SpriteRenderSystem spriteRenderSystem;
-	private AnimationSystem animationSystem;
+	private AnimationMainSystem animationMainSystem;
+	private AnimationAttackSystem animationAttackSystem;
 	private CameraSystem cameraSystem;
 	private MapRenderSystem map;
 	
@@ -50,8 +52,8 @@ public class GameSOC implements Screen {
 	    //Specially treated systems
 		spriteRenderSystem = world.setSystem( new SpriteRenderSystem(camera), true );
 		cameraSystem = world.setSystem( new CameraSystem(camera), true);
-		animationSystem = world.setSystem( new AnimationSystem(camera), true );
-		
+		animationMainSystem = world.setSystem( new AnimationMainSystem(camera), true );
+		animationAttackSystem=world.setSystem(new AnimationAttackSystem(camera),true);
 
 		
 		this.map = new MapRenderSystem(map, camera);
@@ -60,7 +62,7 @@ public class GameSOC implements Screen {
 		
 		camera.setToOrtho(false, 1280, 900);
 		
-		EntityFactory.instance.createWarrior(2000, 300);
+		EntityFactory.instance.createWarrior(2000, 300,10,10);
 	}
 
 	@Override
@@ -74,9 +76,10 @@ public class GameSOC implements Screen {
 	     world.process();
 	     
 	     map.render();
-	     animationSystem.process();
+	     animationMainSystem.process();
 	     spriteRenderSystem.process();
 	     cameraSystem.process();
+	     animationAttackSystem.process();
 	}
 
 	@Override

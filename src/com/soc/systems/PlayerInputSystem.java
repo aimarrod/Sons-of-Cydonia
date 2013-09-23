@@ -7,10 +7,12 @@ import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
+import com.soc.EntityFactory;
+import com.soc.components.Attacker;
 import com.soc.components.Player;
+import com.soc.components.Position;
 import com.soc.components.State;
 import com.soc.components.Velocity;
 
@@ -18,6 +20,8 @@ import com.soc.components.Velocity;
 	public class PlayerInputSystem extends EntityProcessingSystem{
 		 @Mapper ComponentMapper<Velocity> vm;
 		 @Mapper ComponentMapper<State> sm;
+		 @Mapper ComponentMapper<Position>pm;
+		 @Mapper ComponentMapper<Attacker>am;
 
 		  
 		 private OrthographicCamera camera;
@@ -29,7 +33,7 @@ import com.soc.components.Velocity;
 		  
 		 @SuppressWarnings("unchecked")
 		 public PlayerInputSystem(OrthographicCamera camera) {
-			 super(Aspect.getAspectForAll(Velocity.class, Player.class, State.class));
+			 super(Aspect.getAspectForAll(Velocity.class, Player.class, State.class,Position.class));
 			 this.camera=camera;
 			 this.state = null;
 		 }
@@ -50,14 +54,16 @@ import com.soc.components.Velocity;
 			 vel.vy = vy * world.getDelta();
 			 
 			 state = sm.get(e);
+			 Position p=pm.get(e);
 			 
 			 if(state.state < State.BLOCKED){
 				
 				if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-					state.statetime = 0;
+					am.get(e).time = 0;
 					state.state = State.ATTACK;
 					vx = 0;
 					vy = 0;
+					EntityFactory.getInstance().createAttack(p.x,p.y,0,10,10);
 					return;
 				}
 				 
