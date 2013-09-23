@@ -55,17 +55,18 @@ public class AnimationMainSystem extends EntityProcessingSystem{
 			TextureRegion frame = null;
 			if(state.state == State.WALK){
 				frame = movement.animations[state.direction].getKeyFrame(movement.time, true);
+				movement.time += world.delta;
 			}
 			if(state.state == State.IDLE){
 				frame = movement.animations[state.direction].getKeyFrame(0);
 			}
 			if(state.state == State.ATTACK){
-				frame = attack.animations[state.direction].getKeyFrame(movement.time);
-				if(attack.animations[state.direction].isAnimationFinished(movement.time)){
+				frame = attack.animations[state.direction].getKeyFrame(attack.time);
+				attack.time+=world.delta;
+				if(attack.animations[state.direction].isAnimationFinished(attack.time)){
 					state.state = State.IDLE;
 				}
 			}
-			movement.time += world.delta;
 
 			batch.setColor(movement.r, movement.g, movement.b, movement.a);
 			batch.draw(frame, position.x, position.y);

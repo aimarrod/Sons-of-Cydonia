@@ -59,11 +59,13 @@ import com.soc.components.Velocity;
 			 if(state.state < State.BLOCKED){
 				
 				if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-					am.get(e).time = 0;
-					state.state = State.ATTACK;
-					vx = 0;
-					vy = 0;
-					EntityFactory.getInstance().createAttack(p.x,p.y,0,10,10);
+					if(state.state != State.ATTACK){
+						am.get(e).time = 0;
+						EntityFactory.getInstance().createAttack(p.x,p.y,0,10,10,state.getDirVector());
+						state.state = State.ATTACK;
+						vx = 0;
+						vy = 0;
+					}
 					return;
 				}
 				 

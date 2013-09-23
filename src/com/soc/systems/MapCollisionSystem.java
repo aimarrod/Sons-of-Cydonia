@@ -27,6 +27,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.soc.EntityFactory;
+import com.soc.components.Flying;
 import com.soc.components.Position;
 import com.soc.components.Bounds;
 import com.soc.components.Sprite;
@@ -47,7 +48,7 @@ public class MapCollisionSystem extends EntityProcessingSystem {
 	
 	@SuppressWarnings("unchecked")
 	public MapCollisionSystem(TiledMap map) {
-		super(Aspect.getAspectForAll(Position.class, Bounds.class, Velocity.class));
+		super(Aspect.getAspectForAll(Position.class, Bounds.class, Velocity.class).exclude(Flying.class));
 		this.layers = map.getLayers();
 		this.terrains = new Bag<Rectangle>();
 		retrieveCollisionObjects(layers.get("collision"));

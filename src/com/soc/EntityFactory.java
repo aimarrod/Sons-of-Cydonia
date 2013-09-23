@@ -3,8 +3,10 @@ package com.soc;
 import com.artemis.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.soc.components.Attacker;
 import com.soc.components.Bounds;
+import com.soc.components.Flying;
 import com.soc.components.Movement;
 import com.soc.components.Player;
 import com.soc.components.Position;
@@ -67,7 +69,7 @@ public class EntityFactory {
 	   	e.addComponent(movement);
 	    
 	   	Attacker attack = new Attacker(range,damage);
-	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), attack, 0.2f);
+	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), attack, 0.4f);
 	   	e.addComponent(attack);
 	   	
 	    e.addToWorld();
@@ -75,17 +77,18 @@ public class EntityFactory {
 	    
 	    return e;
 	}
-	public Entity createAttack(float x, float y, int attackType, int damage, float range){
+	public Entity createAttack(float x, float y, int attackType, int damage, float range, Vector2 dir){
 		Entity e=entityWorld.createEntity();
 		WeaponAttack weaponAttack=new WeaponAttack(range,damage);
 		e.addComponent(weaponAttack);
 		Position position=new Position(x,y);
 		e.addComponent(position);
-		Velocity v=new Velocity(100,100);
+		Velocity v=new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y);
 		e.addComponent(v);
 		Bounds b=new Bounds(10,10);
 		e.addComponent(b); 
-	   	AnimationLoader.loadHumanoidSpriteSheet(new Texture(Gdx.files.internal("resources/dague-attack.png")), weaponAttack, 0.2f);		
+	   	AnimationLoader.loadProjectileSpriteSheet(new Texture(Gdx.files.internal("resources/dagger-attack.png")), weaponAttack, 0.2f);		
+	   	e.addComponent(new Flying());
 	   	e.addToWorld();
 	   	return e;
 	}
