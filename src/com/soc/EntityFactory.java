@@ -77,6 +77,31 @@ public class EntityFactory {
 	    
 	    return e;
 	}
+	
+	public Entity createMage(float px, float py, int damage, float range){
+		Entity e = entityWorld.createEntity();
+	    e.addComponent(new Position(px,py));
+	    e.addComponent(new Player());
+	    e.addComponent(new Velocity(0,0));
+	    e.addComponent(new Bounds(32, 32));
+	    e.addComponent(new State(0,0));
+	    
+	    Movement movement = new Movement();
+	    
+	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), movement, 1.0f, 64, 64);
+	   	e.addComponent(movement);
+	    
+	   	Attacker attack = new Attacker(range,damage);
+	   	AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-attack.png")), attack, 0.4f, 128, 128);
+	   	e.addComponent(attack);
+	   	
+	    e.addToWorld();
+	    
+	    
+	    return e;
+	}
+	
+	
 	public Entity createAttack(float x, float y, int attackType, int damage, float range, Vector2 dir){
 		Entity e=entityWorld.createEntity();
 		WeaponAttack weaponAttack=new WeaponAttack(range,damage);
