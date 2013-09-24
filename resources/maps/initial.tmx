@@ -9,14 +9,12 @@
    <terrain name="Water" tile="16"/>
   </terraintypes>
  </tileset>
+ <tileset firstgid="61" name="Street" tilewidth="32" tileheight="32">
+  <image source="tiles/twosided/Street.png" width="160" height="192"/>
+ </tileset>
  <layer name="background" width="120" height="80">
   <data encoding="base64" compression="zlib">
-   eJztwwEJAAAMBKGr8P3LrsdQcNVUVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVHz4De32f
-  </data>
- </layer>
- <layer name="base" width="120" height="80">
-  <data encoding="base64" compression="zlib">
-   eJzt2O1qwjAYgNHcglegYx+wDTaRsd3/na1CC12WttRoTMM58P6yIOUxqU0IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPex64c27aKhLXFfjduS6qtzO/ZhvrHO27bUVudtW9NX4+15i+Y96NySz2iOwVpuSU5fjeu31Pc1/N/D4/2cesV9n8PfZ/BH4prU9dRpqtmwPl8mrtF4G5bajefQzcPEZxrXaU3fc8O59Txe957NdVjTd+0cR9+zv/2tkFCq75n3qfJy+h26+eon9VxO9fXeXFbu+nzsJ/Uepe/96du2nL35u5ufMP2ePJyFDbQtL2ftnsL8+Vbcl/L0bdulfYezjDXnHc48ysv5f3Xp72Ku8dM1b47ifYd9mzJ+AUQ4TPI=
+   eJzt20FOAjEYQOFegROIUUjURIwavYILceH9D+NMAiEpToUZyfR/fYu3g6TpBwz9BxYppYWN6rFr0/VUwVpMX9PX9G0lfdnpy05fdvqy05edvuz0ZacvO33Z6ctOX3b6stOXnb7s9GWnLzt92enLTl92+rLTl52+7PRlpy87fdnpy05fdhF874P3oG+xTfDm3NsIvq9Bu65gbyP4Rq2Gva1hDdRq2Nsa1kDtP/b2s2u760vfqtKX3X5vV2n82Sr3Pff5a30v7jul3DfiGY3aS5p+xsp9I57RbDivv+z0NX3bTV92+rLTl52+7PRlpy+7c2fgc/6WyMb7OqdmduoM3Dk1O6/T7PRlpy87fdnpy05fdnP6OmNh+zpjuVwfhfSN37ZQLb53yZk5yXeVmf01Q88fb4e+C83lm9/vWg88RuPTq+n7VallOtwL0Zjn2xuW3s/5fW69Y/lO+d/VVQX7rO/lfFsuqu8yHf9GQV+Ob7/em12/naP01beFIvouu9663tPwOVnfuL79Wp9Teb6lr74tFNF3P8s4Z97R6swjou+U10XJ+LYCD32n1drn9py+PxkH8dM=
   </data>
  </layer>
  <objectgroup name="collision" width="120" height="80">
@@ -39,5 +37,17 @@
   <object x="3808" y="0" width="32" height="2528"/>
   <object x="0" y="0" width="3808" height="32"/>
   <object x="0" y="32" width="32" height="2496"/>
+  <object x="2017" y="1184" width="12" height="223"/>
+  <object x="2132" y="1184" width="12" height="223"/>
+  <object x="1472" y="1248" width="544" height="96"/>
+  <object x="1472" y="1024" width="96" height="224"/>
+  <object x="0" y="1024" width="1472" height="96"/>
+  <object x="2144" y="1248" width="384" height="96"/>
+  <object x="2528" y="0" width="96" height="1728"/>
+  <object x="2624" y="1632" width="320" height="96"/>
+  <object x="2848" y="1728" width="96" height="256"/>
+  <object x="2848" y="2112" width="96" height="448"/>
+  <object x="2784" y="1984" width="223" height="12"/>
+  <object x="2784" y="2101" width="224" height="10"/>
  </objectgroup>
 </map>
