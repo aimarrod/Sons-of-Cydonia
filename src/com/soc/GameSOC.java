@@ -2,6 +2,7 @@ package com.soc;
 
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
+import com.artemis.managers.PlayerManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,6 +14,7 @@ import com.soc.systems.AttackRenderSystem;
 import com.soc.systems.AttackCollisionSystem;
 import com.soc.systems.CameraSystem;
 import com.soc.systems.CharacterRenderSystem;
+import com.soc.systems.EnemyActuatorSystem;
 import com.soc.systems.EntitySpawningTimerSystem;
 import com.soc.systems.MapCollisionSystem;
 import com.soc.systems.MapRenderSystem;
@@ -40,6 +42,7 @@ public class GameSOC implements Screen {
 		TiledMap map = MapLoader.loadMap("initial");
 
 		world.setManager(new GroupManager());
+		world.setManager(new PlayerManager());
 		
 		//Regular Systems
 	    world.setSystem(new PlayerInputSystem(camera));
@@ -47,6 +50,7 @@ public class GameSOC implements Screen {
 	    world.setSystem(new MovementSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new AttackCollisionSystem());
+	    world.setSystem(new EnemyActuatorSystem());
 	    
 	    //Specially treated systems
 	    

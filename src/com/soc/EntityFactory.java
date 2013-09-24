@@ -3,6 +3,7 @@ package com.soc;
 import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
+import com.artemis.managers.PlayerManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -10,6 +11,7 @@ import com.soc.components.Attack;
 import com.soc.components.Attacker;
 import com.soc.components.Bounds;
 import com.soc.components.CharacterAnimations;
+import com.soc.components.Enemy;
 import com.soc.components.Flying;
 import com.soc.components.Health;
 import com.soc.components.Movement;
@@ -57,7 +59,9 @@ public class EntityFactory {
 	    e.addComponent(animations);
 	   	
 	    e.addToWorld();
-	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER);   
+	    //world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER);  
+	    //El string no sé para que sirve la verdad 
+	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
 	}
 	
 	public void createWarrior(float px, float py, int damage, float range){
@@ -77,7 +81,8 @@ public class EntityFactory {
 	    e.addComponent(animations);
 	    
 	    e.addToWorld();
-	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER);
+//	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER);
+	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
 	}
 	
 	public Entity createMage(float px, float py, int damage, float range){
@@ -97,8 +102,8 @@ public class EntityFactory {
 	    e.addComponent(animations);
 	    
 	    e.addToWorld();
-	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER);
-	    
+//	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER);
+	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
 	    return e;
 	}
 	
@@ -124,12 +129,13 @@ public class EntityFactory {
 	public Entity createSkeleton(float px, float py, int damage, float range){
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
-	    e.addComponent(new Velocity(0,0));
+	    e.addComponent(new Velocity(10,10));
 	    e.addComponent(new Bounds(32, 32));
-	    e.addComponent(new State(0,0));
+	    e.addComponent(new State(1,0));
 	    e.addComponent(new Health(10));
 	    e.addComponent(new Movement());
 	    e.addComponent(new Attacker(range,damage, Constants.Attacks.SWORD_ATTACK));
+	    e.addComponent(new Enemy());
 	    
 	    CharacterAnimations animations = new CharacterAnimations();
 	    animations.idle = AnimationLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, false);
