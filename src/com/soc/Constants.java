@@ -13,4 +13,14 @@ public class Constants {
 		public static final int WIDTH_PIXELS = 32;
 		public static final int HEIGHT_PIXELS = 50;
 	}
+	
+	public class Groups{
+		public static final String PLAYER = "player";
+		public static final String ENEMY = "enemy";
+		public static final String PROJECTILE = "projectile";
+	}
+	
+	public class World{
+		public static final int TILE_SIZE = 32;
+	}
 }

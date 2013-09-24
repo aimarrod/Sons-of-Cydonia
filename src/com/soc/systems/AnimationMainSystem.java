@@ -68,6 +68,7 @@ public class AnimationMainSystem extends EntityProcessingSystem{
 				if(animation.animations[state.direction].isAnimationFinished(animation.time)){
 					state.state = State.IDLE;
 				}
+				
 			}
 
 			batch.setColor(animation.r, animation.g, animation.b, animation.a);

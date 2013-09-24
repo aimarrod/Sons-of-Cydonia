@@ -1,6 +1,8 @@
 package com.soc;
 
 import com.artemis.Entity;
+import com.artemis.World;
+import com.artemis.managers.GroupManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -17,14 +19,14 @@ import com.soc.components.WeaponAttack;
 public class EntityFactory {
 	
 	public static EntityFactory instance;
-	private com.artemis.World entityWorld;
+	private com.artemis.World world;
 	
-	private EntityFactory(com.artemis.World entityWorld){
-		this.entityWorld = entityWorld;
+	private EntityFactory(World world){
+		this.world = world;
 	}
 	
-	public static EntityFactory initialize(com.artemis.World entityWorld){
-		instance = new EntityFactory(entityWorld);
+	public static EntityFactory initialize(com.artemis.World world){
+		instance = new EntityFactory(world);
 		return instance;
 	}
 	
@@ -33,7 +35,7 @@ public class EntityFactory {
 	}
 
 	public Entity createArcher(float px, float py, float range, int damage){
-		Entity e = entityWorld.createEntity();
+		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0));
@@ -50,13 +52,13 @@ public class EntityFactory {
 	   	e.addComponent(attack);
 	   	
 	    e.addToWorld();
-	    
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER);   
 	    
 	    return e;
 	}
 	
 	public Entity createWarrior(float px, float py, int damage, float range){
-		Entity e = entityWorld.createEntity();
+		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0));
@@ -73,13 +75,13 @@ public class EntityFactory {
 	   	e.addComponent(attack);
 	   	
 	    e.addToWorld();
-	    
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER);
 	    
 	    return e;
 	}
 	
 	public Entity createMage(float px, float py, int damage, float range){
-		Entity e = entityWorld.createEntity();
+		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0));
@@ -96,14 +98,14 @@ public class EntityFactory {
 	   	e.addComponent(attack);
 	   	
 	    e.addToWorld();
-	    
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER);
 	    
 	    return e;
 	}
 	
 	
 	public Entity createAttack(float x, float y, int attackType, int damage, float range, Vector2 dir){
-		Entity e=entityWorld.createEntity();
+		Entity e=world.createEntity();
 		WeaponAttack weaponAttack=new WeaponAttack(range,damage);
 		e.addComponent(weaponAttack);
 		Position position=new Position(x,y);
@@ -115,11 +117,13 @@ public class EntityFactory {
 	   	AnimationLoader.loadProjectileSpriteSheet(new Texture(Gdx.files.internal("resources/dagger-attack.png")), weaponAttack, 0.2f, 64, 64);		
 	   	e.addComponent(new Flying());
 	   	e.addToWorld();
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.PROJECTILE);
+
 	   	return e;
 	}
 	
 	public Entity createSkeleton(float px, float py, int damage, float range){
-		Entity e = entityWorld.createEntity();
+		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Velocity(0,0));
 	    e.addComponent(new Bounds(32, 32));
@@ -134,7 +138,7 @@ public class EntityFactory {
 	   	e.addComponent(attack);
 	   	
 	    e.addToWorld();
-	    
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.ENEMY);
 	    
 	    return e;
 	}

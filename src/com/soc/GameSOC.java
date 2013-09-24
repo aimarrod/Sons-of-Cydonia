@@ -1,6 +1,7 @@
 package com.soc;
 
 import com.artemis.World;
+import com.artemis.managers.GroupManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -39,6 +40,8 @@ public class GameSOC implements Screen {
 		//CreateMap
 		TiledMap map = MapLoader.loadMap("initial");
 
+		world.setManager(new GroupManager());
+		
 		//Regular Systems
 	    world.setSystem(new PlayerInputSystem(camera));
 	    world.setSystem(new MapCollisionSystem(map));

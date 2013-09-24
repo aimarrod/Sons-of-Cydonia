@@ -21,7 +21,7 @@
  </layer>
  <objectgroup name="collision" width="120" height="80">
   <object x="0" y="1856" width="32" height="32"/>
-  <object x="0" y="1952" width="160" height="640"/>
+  <object x="0" y="1952" width="160" height="608"/>
   <object x="160" y="2080" width="32" height="480"/>
   <object x="192" y="2112" width="64" height="448"/>
   <object x="256" y="2048" width="256" height="512"/>
@@ -35,5 +35,9 @@
   <object x="928" y="2496" width="32" height="64"/>
   <object x="832" y="2208" width="32" height="32"/>
   <object x="1152" y="2496" width="32" height="32"/>
+  <object x="32" y="2528" width="3808" height="32"/>
+  <object x="3808" y="0" width="32" height="2528"/>
+  <object x="0" y="0" width="3808" height="32"/>
+  <object x="0" y="32" width="32" height="2496"/>
  </objectgroup>
 </map>
