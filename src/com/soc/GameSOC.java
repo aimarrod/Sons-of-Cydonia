@@ -7,16 +7,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.soc.systems.AnimationAttackSystem;
-import com.soc.systems.AnimationMainSystem;
+import com.soc.systems.AttackRenderSystem;
+import com.soc.systems.AttackCollisionSystem;
 import com.soc.systems.CameraSystem;
+import com.soc.systems.CharacterRenderSystem;
 import com.soc.systems.EntitySpawningTimerSystem;
 import com.soc.systems.MapCollisionSystem;
 import com.soc.systems.MapRenderSystem;
 import com.soc.systems.MovementSystem;
 import com.soc.systems.PlayerInputSystem;
-import com.soc.systems.SpriteRenderSystem;
 import com.soc.utils.MapLoader;
 
 public class GameSOC implements Screen {
@@ -24,18 +25,16 @@ public class GameSOC implements Screen {
 	private OrthographicCamera camera;
 	private Game game;
 	private World world;
-	private SpriteRenderSystem spriteRenderSystem;
-	private AnimationMainSystem animationMainSystem;
-	private AnimationAttackSystem animationAttackSystem;
+	private CharacterRenderSystem characterRenderSystem;
+	private AttackRenderSystem animationAttackSystem;
 	private CameraSystem cameraSystem;
-	private MapRenderSystem map;
+	private MapRenderSystem mapRenderSystem;
 	
 	public GameSOC(Game game) {
 		this.camera = new OrthographicCamera();
 		this.game=game;
 		
 		world = new World();
-		EntityFactory.initialize(world);
 		
 		//CreateMap
 		TiledMap map = MapLoader.loadMap("initial");
@@ -47,20 +46,20 @@ public class GameSOC implements Screen {
 	    world.setSystem(new MapCollisionSystem(map));
 	    world.setSystem(new MovementSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
+	    world.setSystem(new AttackCollisionSystem());
 	    
 	    //Specially treated systems
-		spriteRenderSystem = world.setSystem( new SpriteRenderSystem(camera), true );
+	    
+	    characterRenderSystem = world.setSystem( new CharacterRenderSystem(camera) , true );
+		mapRenderSystem = world.setSystem( new MapRenderSystem(map, camera), true );
 		cameraSystem = world.setSystem( new CameraSystem(camera), true);
-		animationMainSystem = world.setSystem( new AnimationMainSystem(camera), true );
-		animationAttackSystem=world.setSystem(new AnimationAttackSystem(camera),true);
-
-		
-		this.map = new MapRenderSystem(map, camera);
+		animationAttackSystem=world.setSystem(new AttackRenderSystem(camera),true);
 		
 		world.initialize();
 		
 		camera.setToOrtho(false, 1280, 900);
 		
+		EntityFactory.initialize(world);
 		EntityFactory.instance.createMage(2000, 300,10,10);
 	}
 
@@ -70,13 +69,12 @@ public class GameSOC implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-		camera.update();
+		 camera.update();
 		 world.setDelta(delta);
 	     world.process();
 	     
-	     map.render();
-	     animationMainSystem.process();
-	     spriteRenderSystem.process();
+	     mapRenderSystem.process();
+	     characterRenderSystem.process();
 	     cameraSystem.process();
 	     animationAttackSystem.process();
 	}

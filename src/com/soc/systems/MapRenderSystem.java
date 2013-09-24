@@ -1,10 +1,11 @@
 package com.soc.systems;
 
+import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-public class MapRenderSystem {
+public class MapRenderSystem extends VoidEntitySystem{
 	
 	private final static float UNITSCALE = 1/1f;
 
@@ -15,8 +16,9 @@ public class MapRenderSystem {
 		this.renderer = new OrthogonalTiledMapRenderer(map, UNITSCALE);
 		this.camera = camera;
 	}
-	
-	public void render() {
+
+	@Override
+	protected void processSystem() {
 		renderer.setView(camera);
 		renderer.render();
 	}

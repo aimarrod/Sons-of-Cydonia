@@ -72,12 +72,16 @@ public class MapCollisionSystem extends EntityProcessingSystem {
 
 			float px = pos.x + v.vx*world.delta;
 			float py = pos.y + v.vy*world.delta;
-			Rectangle poly = new Rectangle(px, py, bounds.height, bounds.width);
-			if(Intersector.overlaps(poly, terrains.get(i))){
-				System.out.println("Overlaps");
-				v.vx = 0;
+			Rectangle next_h = new Rectangle(px, pos.y, bounds.height, bounds.width);
+			Rectangle next_y = new Rectangle(pos.x, py, bounds.height, bounds.width);
+			Rectangle terrain = terrains.get(i);
+			if(Intersector.overlaps(next_h, terrain)){
+ 				v.vx = 0;
+			}
+			if(Intersector.overlaps(next_y, terrain)){
 				v.vy = 0;
 			}
+			
 		}
 	}
 }

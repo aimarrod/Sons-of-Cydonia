@@ -60,8 +60,7 @@ import com.soc.components.Velocity;
 				
 				if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
 					if(state.state != State.ATTACK){
-						am.get(e).time = 0;
-						EntityFactory.getInstance().createAttack(p.x,p.y,0,10,10,state.getDirVector());
+						EntityFactory.getInstance().createDaggerThrow(p.x,p.y,0,10,10,state.getDirVector());
 						state.state = State.ATTACK;
 						vx = 0;
 						vy = 0;
