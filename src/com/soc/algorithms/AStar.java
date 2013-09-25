@@ -4,7 +4,7 @@ import java.util.Collections;
 
 import com.artemis.utils.Bag;
 import com.badlogic.gdx.math.Vector2;
-import com.soc.Constants;
+import com.soc.utils.Constants;
 
 
 public class AStar {
