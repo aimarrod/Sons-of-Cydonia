@@ -45,7 +45,7 @@ public class EntityFactory {
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
-	    e.addComponent(new Velocity(0,0,15000));
+	    e.addComponent(new Velocity(0,0,400));
 	    e.addComponent(new Bounds(32, 32));
 	    e.addComponent(new State(0,0));
 	    e.addComponent(new Movement());
@@ -65,7 +65,7 @@ public class EntityFactory {
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
-	    e.addComponent(new Velocity(0,0,15000));
+	    e.addComponent(new Velocity(0,0,400));
 	    e.addComponent(new Bounds(32, 32));
 	    e.addComponent(new State(0,0));
 	    e.addComponent(new Movement());
@@ -85,7 +85,7 @@ public class EntityFactory {
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
-	    e.addComponent(new Velocity(0,0,15000));
+	    e.addComponent(new Velocity(0,0,400));
 	    e.addComponent(new Bounds(32, 32));
 	    e.addComponent(new State(0,0));
 	    e.addComponent(new Movement());
@@ -124,7 +124,7 @@ public class EntityFactory {
 	public Entity createSkeleton(float px, float py, int damage, float range){
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
-	    e.addComponent(new Velocity(0,0,10000));
+	    e.addComponent(new Velocity(0,0,400));
 	    e.addComponent(new Bounds(32, 32));
 	    e.addComponent(new State(1,0));
 	    e.addComponent(new Health(10));
@@ -149,7 +149,7 @@ public class EntityFactory {
 		
 		e.addComponent( new Position(x,y) );
 		e.addComponent( new Bounds(50,50) );
-		e.addComponent( new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y,20000) );
+		e.addComponent( new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(GraphicsLoader.loadDaggerThrow(), damage) );
  

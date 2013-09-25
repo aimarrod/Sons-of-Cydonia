@@ -10,35 +10,43 @@ import com.soc.utils.Constants;
 public class AStar {
 	
 	public static Node calculateAStar(Vector2 start, Vector2 goal){
-		Node finalNode;
+		//Graph
 		ArrayList<Node>closedSet=new ArrayList<Node>();
+		
+		//Frontier
 		ArrayList<Node>openSet=new ArrayList<Node>();
+		
+		//inicio, sin padre, g=0, f
 		Node startNode=new Node(start,null,0,calculateHeuristicValue(start,goal));
 		openSet.add(startNode);
+		
 		Node currentNode;
 		double tentative_g_score=0;
-		System.out.println("Antesd del while de Empty Set");
+		
 		while(!openSet.isEmpty()){
 			Collections.sort(openSet);
 			currentNode=openSet.get(0);
 			if(isGoal(currentNode.vector,goal)){
 				return currentNode;
 			}
-			System.out.println("CurrentNode: "+currentNode);
-			System.out.println("Despues del if");
-			System.out.println("Open set:"+openSet);
 			openSet.remove(currentNode);
 			closedSet.add(currentNode);
 			ArrayList<Node>neighbors=expandNode(currentNode,goal);
+			
 			for(int i=0;i<neighbors.size();i++){
 				Node neighbor=neighbors.get(i);
+				//Coste del successor
 				tentative_g_score=currentNode.g+calculateHeuristicValue(currentNode.vector, neighbor.vector);
+				
+				//Si hay algo mejor expandido pasa
 				if(closedSet.contains(neighbor)&&tentative_g_score>=neighbor.g){
 					continue;
 				}
+				
+				//Si no esta en la frontera O el g es mejor que el de la frontera
 				if(!openSet.contains(neighbor)|| tentative_g_score<neighbor.g){
-					neighbor.g=tentative_g_score;
-					neighbor.f=neighbor.g+calculateHeuristicValue(neighbor.vector, goal);
+					neighbor.g = tentative_g_score;
+					neighbor.f = neighbor.g+calculateHeuristicValue(neighbor.vector, goal);
 					if(!openSet.contains(neighbor)){
 						openSet.add(neighbor);
 					}
@@ -55,7 +63,7 @@ public class AStar {
 	public static boolean isGoal(Vector2 currentPosition, Vector2 goal){
 		float x=currentPosition.x-goal.x;
 		float y=currentPosition.y-goal.y;
-		if((Math.abs(x)<Constants.World.TILE_SIZE) ||(Math.abs(y)<Constants.World.TILE_SIZE)){
+		if((Math.abs(x)<Constants.World.TILE_SIZE) && (Math.abs(y)<Constants.World.TILE_SIZE)){
 			return true;
 		}
 		return false;

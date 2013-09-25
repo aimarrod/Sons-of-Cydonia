@@ -25,6 +25,7 @@ public class MusicPlayer {
 	}
 	
 	public void resume(){
+		current.setLooping(true);
 		current.play();
 	}
 	
@@ -32,6 +33,7 @@ public class MusicPlayer {
 		current.dispose();
 		current = music.pop();
 		if(current != null){
+			current.setLooping(true);
 			current.play();
 		}
 	}
@@ -40,6 +42,7 @@ public class MusicPlayer {
 		Music m = Gdx.audio.newMusic(Gdx.files.internal(BASE_DIR + file));
 		music.push(current);
 		current = m;
+		current.setLooping(true);
 		current.play();
 	}
 	

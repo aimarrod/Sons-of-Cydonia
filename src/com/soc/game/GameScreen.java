@@ -67,7 +67,7 @@ public class GameScreen implements Screen {
 		camera.setToOrtho(false, 1280, 900);
 		
 		EntityFactory.initialize(world);
-		EntityFactory.instance.createWarrior(2000, 300,10,10);
+		EntityFactory.instance.createArcher(2000, 300,10,10);
 	}
 
 	@Override

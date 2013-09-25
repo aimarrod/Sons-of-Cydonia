@@ -6,10 +6,12 @@ import java.util.Collections;
 import com.badlogic.gdx.math.Vector2;
 
 public class Node implements Comparable {
+	
 	public Vector2 vector;
 	public Node parent;
 	public double g;
 	public double f;
+	
 	public Node(Vector2 vector,Node parent,double g, double f){
 		this.vector=vector;
 		this.parent=parent;
