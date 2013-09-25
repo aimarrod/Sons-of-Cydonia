@@ -124,7 +124,7 @@ public class EntityFactory {
 	public Entity createSkeleton(float px, float py, int damage, float range){
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
-	    e.addComponent(new Velocity(0,0,400));
+	    e.addComponent(new Velocity(0,0,200));
 	    e.addComponent(new Bounds(32, 32));
 	    e.addComponent(new State(1,0));
 	    e.addComponent(new Health(10));
