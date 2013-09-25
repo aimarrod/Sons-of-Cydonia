@@ -31,14 +31,14 @@ public class EnemyActuatorSystem extends EntityProcessingSystem {
 			float xSubstracted=currentNode.vector.x -p.x;
 			float ySubstracted=currentNode.vector.y-p.y;
 			if(xSubstracted>0){
-				
+				v.vx=v.speed;
 			}else{
-				
+				v.vx=-v.speed;
 			}
 			if(ySubstracted>0){
-				
+				v.vy=v.speed;
 			}else{
-				
+				v.vy=-v.speed;
 			}
 			if(hasReached(new Vector2(p.x,p.y),currentNode.vector)){
 				enemy.path.remove(0);

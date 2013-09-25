@@ -30,4 +30,5 @@ public class Constants {
 		public static final String MAP_DIR = "resources/map/";
 		public static final String LEVEL_DIR = "resources/level/";
 	}
+	
 }

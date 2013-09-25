@@ -21,7 +21,7 @@ import com.soc.utils.Constants;
 public class PlanningSystem extends IntervalEntityProcessingSystem {
 	 @Mapper ComponentMapper<Position> pm;
 	 @Mapper ComponentMapper<Velocity> vm;
-	public PlanningSystem(Aspect aspect, float interval) {
+	public PlanningSystem() {
 		super(Aspect.getAspectForAll(Enemy.class), 0.5f);
 	}
 

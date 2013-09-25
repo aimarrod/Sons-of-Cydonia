@@ -1,7 +1,5 @@
 package com.soc.game;
 
-import org.lwjgl.Sys;
-
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.PlayerManager;
@@ -10,10 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTile.BlendMode;
 import com.soc.game.systems.AttackCollisionSystem;
 import com.soc.game.systems.AttackRenderSystem;
 import com.soc.game.systems.CameraSystem;
@@ -23,6 +18,7 @@ import com.soc.game.systems.EntitySpawningTimerSystem;
 import com.soc.game.systems.MapCollisionSystem;
 import com.soc.game.systems.MapRenderSystem;
 import com.soc.game.systems.MovementSystem;
+import com.soc.game.systems.PlanningSystem;
 import com.soc.game.systems.PlayerInputSystem;
 import com.soc.utils.EntityFactory;
 import com.soc.utils.MapLoader;
@@ -57,6 +53,7 @@ public class GameScreen implements Screen {
 	    world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new AttackCollisionSystem());
 	    world.setSystem(new EnemyActuatorSystem());
+	    world.setSystem(new PlanningSystem());
 	    
 	    //Specially treated systems
 	    
