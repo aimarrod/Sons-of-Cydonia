@@ -21,6 +21,6 @@ public class Constants {
 	}
 	
 	public class World{
-		public static final int TILE_SIZE = 32;
+		public static final float TILE_SIZE = 32f;
 	}
 }

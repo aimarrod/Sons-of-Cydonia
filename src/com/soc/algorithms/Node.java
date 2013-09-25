@@ -1,12 +1,15 @@
 package com.soc.algorithms;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import com.badlogic.gdx.math.Vector2;
 
 public class Node implements Comparable {
-	Vector2 vector;
-	Node parent;
-	double g;
-	double f;
+	public Vector2 vector;
+	public Node parent;
+	public double g;
+	public double f;
 	public Node(Vector2 vector,Node parent,double g, double f){
 		this.vector=vector;
 		this.parent=parent;
@@ -25,4 +28,22 @@ public class Node implements Comparable {
 			return 0;
 		}
 	}
+	
+	public String toString(){
+		return "X: "+vector.x+" Y: "+vector.y+" F:"+f;
+		//return "Valor: "+f;
+	}
+	
+//	public static void main(String []args){
+//		Node node=new Node(null, null, 0,20);
+//		Node node2=new Node(null, null, 0, 30);
+//		Node node3=new Node(null,null,0, 50);
+//		
+//		ArrayList<Node>lista=new ArrayList<Node>();
+//		lista.add(node2);
+//		lista.add(node);
+//		lista.add(node3);
+//		Collections.sort(lista);
+//		System.out.println(lista);
+//	}
 }
