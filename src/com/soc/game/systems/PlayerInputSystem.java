@@ -22,6 +22,7 @@ import com.soc.utils.EntityFactory;
 		 @Mapper ComponentMapper<State> sm;
 		 @Mapper ComponentMapper<Position>pm;
 		 @Mapper ComponentMapper<Attacker>am;
+		 @Mapper ComponentMapper<Player> plm;
 		  
 		 @SuppressWarnings("unchecked")
 		 public PlayerInputSystem() {
@@ -33,13 +34,17 @@ import com.soc.utils.EntityFactory;
 		   
 			 Velocity vel = vm.get(e);			 
 			 State state = sm.get(e);
-			 Position p=pm.get(e);
+			 Position pos=pm.get(e);
+			 Player player = plm.get(e);
+			 
+			 
+			 
 			 
 			 if(state.state < State.BLOCKED){
 				
-				if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+				if(Gdx.input.isKeyPressed(player.attack)){
 					if(state.state != State.ATTACK){
-						EntityFactory.getInstance().createDaggerThrow(p.x,p.y,0,10,10,state.getDirVector());
+						EntityFactory.getInstance().createDaggerThrow(pos.x,pos.y,0,10,10,state.getDirVector());
 						state.state = State.ATTACK;
 						vel.vx = 0;
 						vel.vy = 0;
@@ -49,11 +54,11 @@ import com.soc.utils.EntityFactory;
 				 
 				boolean moving = false;
 				 
-			 	if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+			 	if(Gdx.input.isKeyPressed(player.move_up)){
 				 	vel.vy = vel.speed;
 				 	state.direction = State.NORTH;
 				 	moving = true;
-			 	} else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+			 	} else if(Gdx.input.isKeyPressed(player.move_down)){
 				 	vel.vy = -vel.speed;
 				 	state.direction = State.SOUTH;
 				 	moving = true;
@@ -61,11 +66,11 @@ import com.soc.utils.EntityFactory;
 				 	vel.vy = 0;
 			 	}
 			 
-			 	if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+			 	if(Gdx.input.isKeyPressed(player.move_left)){
 				 	vel.vx = -vel.speed;
 				 	state.direction = State.WEST;
 				 	moving = true;
-			 	} else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+			 	} else if(Gdx.input.isKeyPressed(player.move_right)){
 				 	vel.vx = vel.speed;
 				 	state.direction = State.EAST;
 				 	moving = true;

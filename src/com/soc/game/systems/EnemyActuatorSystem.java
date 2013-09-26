@@ -32,23 +32,34 @@ public class EnemyActuatorSystem extends EntityProcessingSystem {
 		Velocity v=vm.get(e);
 		State s = sm.get(e);
 		if(!enemy.path.isEmpty()){
+			
 			Node currentNode=enemy.path.get(0);		
-			float xSubstracted=currentNode.vector.x -p.x;
-			float ySubstracted=currentNode.vector.y-p.y;
-			if(xSubstracted>0){
-				v.vx=v.speed;
-				s.direction = State.EAST;
-			}else{
-				v.vx=-v.speed;
-				s.direction = State.WEST;
+			float dstx=currentNode.vector.x-p.x;
+			float dsty=currentNode.vector.y-p.y;
+			
+			if(Math.abs(dstx)>16){
+				if(dstx>0){
+					v.vx=v.speed;
+					s.direction = State.EAST;
+				}else{
+					v.vx=-v.speed;
+					s.direction = State.WEST;
+				}
+			} else {
+				v.vx = 0;
 			}
-			if(ySubstracted>0){
-				v.vy=v.speed;
-				s.direction = State.NORTH;
-			}else{
-				v.vy=-v.speed;
-				s.direction = State.SOUTH;
+			if(Math.abs(dsty)>16){
+				if(dsty>0){
+					v.vy=v.speed;
+					s.direction = State.NORTH;
+				}else {
+					v.vy=-v.speed;
+					s.direction = State.SOUTH;
+				}
+			} else {
+				v.vy = 0;
 			}
+			
 			if(hasReached(new Vector2(p.x,p.y),currentNode.vector)){
 				enemy.path.remove(0);
 			}
@@ -59,9 +70,7 @@ public class EnemyActuatorSystem extends EntityProcessingSystem {
 	}
 	
 	public static boolean hasReached(Vector2 currentPosition, Vector2 goal){
-		return currentPosition.dst2(goal)<32;
-		
-		
+		return currentPosition.dst2(goal)<=16;	
 	}
 
 }

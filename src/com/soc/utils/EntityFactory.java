@@ -72,9 +72,9 @@ public class EntityFactory {
 	    e.addComponent(new Attacker(range,damage, Constants.Attacks.DAGGER_ATTACK));
 	   
 	    CharacterAnimations animations = new CharacterAnimations();
-	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 1.0f, 64, 64, false);
-	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 1.0f, 64, 64, true);
-	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), 0.4f, 128, 128, false);
+	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/female-warrior-walk.png")), 1.0f, 64, 64, false);
+	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/female-warrior-walk.png")), 1.0f, 64, 64, true);
+	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/female-warrior-lance.png")), 0.4f, 64, 64, false);
 	    e.addComponent(animations);
 	    
 	    e.addToWorld();
@@ -124,7 +124,7 @@ public class EntityFactory {
 	public Entity createSkeleton(float px, float py, int damage, float range){
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
-	    e.addComponent(new Velocity(0,0,400));
+	    e.addComponent(new Velocity(0,0,200));
 	    e.addComponent(new Bounds(32, 32));
 	    e.addComponent(new State(1,0));
 	    e.addComponent(new Health(10));
