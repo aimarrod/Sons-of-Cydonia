@@ -47,12 +47,12 @@ public class GameScreen implements Screen {
 		world.setManager(new PlayerManager());
 		
 		//Regular Systems
+	    world.setSystem(new EnemyActuatorSystem());
 	    world.setSystem(new PlayerInputSystem());
 	    world.setSystem(new MapCollisionSystem(map));
 	    world.setSystem(new MovementSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new AttackCollisionSystem());
-	    world.setSystem(new EnemyActuatorSystem());
 	    world.setSystem(new PlanningSystem());
 	    
 	    //Specially treated systems
