@@ -14,7 +14,6 @@ import com.soc.game.components.Attacker;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Movement;
 import com.soc.game.components.Position;
-import com.soc.game.components.Sprite;
 import com.soc.game.components.State;
 
 public class AttackRenderSystem extends EntityProcessingSystem{
@@ -47,7 +46,7 @@ public class AttackRenderSystem extends EntityProcessingSystem{
 			Position position = pm.getSafe(e);
 			Bounds bounds = bm.get(e);
 			Attack attack=am.get(e);		
-			batch.draw(attack.attack.frame(world.delta), position.x, position.y, bounds.width, bounds.height);
+			batch.draw(attack.renderer.frame(world.delta), position.x, position.y, bounds.width, bounds.height);
 		}
 	}
 	

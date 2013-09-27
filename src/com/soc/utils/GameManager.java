@@ -42,7 +42,7 @@ public class GameManager {
 			node = node.next;
 		}
 		MusicPlayer.instance.reset();
-		MusicPlayer.instance.play(music);
+		//MusicPlayer.instance.play(music);
 		game.setScreen(new GameScreen(game, map));
 	}
 	

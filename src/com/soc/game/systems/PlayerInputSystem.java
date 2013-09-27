@@ -36,15 +36,14 @@ import com.soc.utils.EntityFactory;
 			 State state = sm.get(e);
 			 Position pos=pm.get(e);
 			 Player player = plm.get(e);
+			 Attacker at = am.get(e);
 			 
-			 
-			 
-			 
+			  
 			 if(state.state < State.BLOCKED){
 				
 				if(Gdx.input.isKeyPressed(player.attack)){
 					if(state.state != State.ATTACK){
-						EntityFactory.getInstance().createDaggerThrow(pos.x,pos.y,0,10,10,state.getDirVector());
+						EntityFactory.getInstance().createAttack(pos.x,pos.y,at.type,10,10,state.getDirVector());
 						state.state = State.ATTACK;
 						vel.vx = 0;
 						vel.vy = 0;

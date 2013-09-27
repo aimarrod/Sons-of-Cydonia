@@ -53,13 +53,13 @@ public class GameScreen implements Screen {
 	    world.setSystem(new MovementSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new AttackCollisionSystem());
-	    world.setSystem(new PlanningSystem());
+	    //world.setSystem(new PlanningSystem());
 	    
 	    //Specially treated systems
 	    
+		cameraSystem = world.setSystem( new CameraSystem(camera), true);
 	    characterRenderSystem = world.setSystem( new CharacterRenderSystem(camera) , true );
 		mapRenderSystem = world.setSystem( new MapRenderSystem(map, camera), true );
-		cameraSystem = world.setSystem( new CameraSystem(camera), true);
 		animationAttackSystem=world.setSystem(new AttackRenderSystem(camera),true);
 		
 		world.initialize();
@@ -67,7 +67,7 @@ public class GameScreen implements Screen {
 		camera.setToOrtho(false, 1280, 900);
 		
 		EntityFactory.initialize(world);
-		EntityFactory.instance.createWarrior(2000, 300,10,10);
+		EntityFactory.instance.createMage(2000, 300,10,10);
 	}
 
 	@Override
@@ -82,8 +82,8 @@ public class GameScreen implements Screen {
 	     
 	     mapRenderSystem.process();
 	     characterRenderSystem.process();
-	     cameraSystem.process();
 	     animationAttackSystem.process();
+	     cameraSystem.process();
 	}
 
 	@Override

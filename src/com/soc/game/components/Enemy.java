@@ -7,4 +7,9 @@ import com.soc.algorithms.Node;
 
 public class Enemy extends Component{
 	public ArrayList<Node>path=new ArrayList<Node>();
+	public float vision;
+	
+	public Enemy(float vision){
+		this.vision = vision;
+	}
 }

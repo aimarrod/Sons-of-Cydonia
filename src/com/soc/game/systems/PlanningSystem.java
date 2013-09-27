@@ -30,7 +30,7 @@ public class PlanningSystem extends IntervalEntityProcessingSystem {
 		Entity player=world.getManager(PlayerManager.class).getEntitiesOfPlayer(Constants.Groups.PLAYER).get(0);
 		Position position=pm.get(e);  
 		Position positionPlayer=player.getComponent(Position.class);
-		ArrayList<Node> path=AStar.getPath(new Vector2(position.x,position.y), new Vector2(positionPlayer.x,positionPlayer.y));
+		ArrayList<Node> path=AStar.instance.getPath(new Vector2(position.x,position.y), new Vector2(positionPlayer.x,positionPlayer.y));
 		e.getComponent(Enemy.class).path=path;
 		
 	}

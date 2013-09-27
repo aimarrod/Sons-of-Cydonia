@@ -47,7 +47,7 @@
   <object x="2624" y="1632" width="320" height="96"/>
   <object x="2848" y="1728" width="96" height="256"/>
   <object x="2848" y="2112" width="96" height="448"/>
-  <object x="2784" y="1984" width="223" height="12"/>
-  <object x="2784" y="2101" width="224" height="10"/>
+  <object x="2784" y="1984" width="224" height="32"/>
+  <object x="2784" y="2080" width="224" height="32"/>
  </objectgroup>
 </map>

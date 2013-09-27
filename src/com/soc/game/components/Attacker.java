@@ -6,11 +6,11 @@ import com.soc.game.graphics.DirectionalAnimatedRenderer;
 public class Attacker extends Component{
 	public float range;
 	public int damage;
-	public int attack;
+	public int type;
 	
-	public Attacker(float range, int damage, int attack) {
+	public Attacker(float range, int damage, int type) {
 		this.range=range;
 		this.damage=damage;
-		this.attack = attack;
+		this.type = type;
 	}
 }

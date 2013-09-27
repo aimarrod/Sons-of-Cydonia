@@ -14,6 +14,7 @@ import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Health;
 import com.soc.game.components.Position;
+import com.soc.game.components.Velocity;
 import com.soc.utils.Constants;
 
 public class AttackCollisionSystem extends EntitySystem {
@@ -25,6 +26,8 @@ public class AttackCollisionSystem extends EntitySystem {
 	ComponentMapper<Health> hm;
 	@Mapper
 	ComponentMapper<Attack> am;
+	@Mapper
+	ComponentMapper<Velocity> vm;
 
 	private Bag<CollisionPair> attackCollisions;
 

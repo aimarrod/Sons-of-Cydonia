@@ -1,119 +1,143 @@
 package com.soc.algorithms;
+
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.PriorityQueue;
 
-import com.artemis.utils.Bag;
 import com.badlogic.gdx.math.Vector2;
-import com.soc.utils.Constants;
+import com.soc.utils.Constants.World;
 
-
-public class AStar {
-	
-	public static Node calculateAStar(Vector2 start, Vector2 goal){
-		//Graph
-		ArrayList<Node>closedSet=new ArrayList<Node>();
+	public class AStar {
+		 
+		public static AStar instance;
+		public int [][] tiles;
 		
-		//Frontier
-		ArrayList<Node>openSet=new ArrayList<Node>();
+		private AStar(int[][] tiles){
+			this.tiles=tiles;
+		}
 		
-		//inicio, sin padre, g=0, f
-		Node startNode=new Node(start,null,0,calculateHeuristicValue(start,goal));
-		openSet.add(startNode);
+		public static void initialize(int[][] tiles){
+			instance = new AStar(tiles);
+		}
 		
-		Node currentNode;
-		double tentative_g_score=0;
-		
-		while(!openSet.isEmpty()){
-			Collections.sort(openSet);
-			currentNode=openSet.get(0);
-			if(isGoal(currentNode.vector,goal)){
-				return currentNode;
-			}
-			openSet.remove(currentNode);
-			closedSet.add(currentNode);
-			ArrayList<Node>neighbors=expandNode(currentNode,goal);
+		public Node calculateAStar(Vector2 start, Vector2 goal){
 			
-			for(int i=0;i<neighbors.size();i++){
-				Node neighbor=neighbors.get(i);
-				//Coste del successor
-				tentative_g_score=currentNode.g+calculateHeuristicValue(currentNode.vector, neighbor.vector);
+			//Graph
+			HashMap<String, Node> expanded = new HashMap<String, Node>();
+			//Frontier
+			PriorityQueue<Node>frontier=new PriorityQueue<Node>();
+			
+			int goalx = (int) (goal.x*World.TILE_FACTOR);
+			int goaly = (int) (goal.y*World.TILE_FACTOR);
+			
+			//inicio, sin padre, g=0, f
+			Node node=new Node((int) (start.x*World.TILE_FACTOR), (int) (start.y*World.TILE_FACTOR), null, 0, calculateHeuristicValue((int) (start.x*World.TILE_FACTOR), (int) (start.y*World.TILE_FACTOR), goalx, goaly));
+			frontier.add(node);
+			
+			double tentative_g_score=0;
+			
+			while(!frontier.isEmpty()){
+				node=frontier.poll();
 				
-				//Si hay algo mejor expandido pasa
-				if(closedSet.contains(neighbor)&&tentative_g_score>=neighbor.g){
-					continue;
+				if((Math.abs(node.x-goalx)<1) && (Math.abs(node.y-goaly)<1d)){
+					System.out.println("END");
+					return node;
 				}
 				
-				//Si no esta en la frontera O el g es mejor que el de la frontera
-				if(!openSet.contains(neighbor)|| tentative_g_score<neighbor.g){
-					neighbor.g = tentative_g_score;
-					neighbor.f = neighbor.g+calculateHeuristicValue(neighbor.vector, goal);
-					if(!openSet.contains(neighbor)){
-						openSet.add(neighbor);
+				expanded.put(node.id(),node);
+				
+				List<Node>neighbors=expandNode(node, goalx, goaly);
+				for(int i=0;i<neighbors.size();i++){
+					
+					Node neighbor=neighbors.get(i);
+					tentative_g_score=neighbor.g;
+					
+					if(expanded.containsKey(neighbor.id())&& tentative_g_score >= expanded.get(neighbor.id()).g){
+						continue;
+					}
+					
+					if(!frontier.contains(neighbor) || (expanded.containsKey(neighbor.id()) && tentative_g_score < expanded.get(neighbor.id()).g)){
+						if(!frontier.contains(neighbor)){
+							frontier.add(neighbor);
+						} else {
+							neighbor = expanded.get(neighbor.id());
+							neighbor.parent = node;
+						}
+						neighbor.g = tentative_g_score;					
 					}
 				}
 			}
+			return null;	
 		}
-		return null;	
-	}
-	public static double calculateHeuristicValue(Vector2 start, Vector2 goal){
-		double value=start.dst2(goal);
-		return value;
-	}
-	
-	public static boolean isGoal(Vector2 currentPosition, Vector2 goal){
-		float x=currentPosition.x-goal.x;
-		float y=currentPosition.y-goal.y;
-		if((Math.abs(x)<Constants.World.TILE_SIZE) && (Math.abs(y)<Constants.World.TILE_SIZE)){
+		public double calculateHeuristicValue(int startx, int starty, int goalx, int goaly){
+			return 	Math.hypot(goalx-startx, goaly-starty); //Como SQRT pero mas rapido
+		}
+		
+		public boolean isGoal(int currx, int curry, int goalx, int goaly){
+			return (Math.abs(currx-goalx)<1) && (Math.abs(curry-goaly)<1);
+		}
+		
+		public List<Node> expandNode(Node n,int goalx, int goaly){
+			List<Node> nodes = new ArrayList<Node>();
+			addSafe(n, n.x+1, n.y+1, goalx, goaly, nodes, 2);
+			addSafe(n, n.x+1, n.y, goalx, goaly, nodes, 1);
+			addSafe(n, n.x+1, n.y-1, goalx, goaly, nodes, 2);
+			addSafe(n, n.x, n.y-1, goalx, goaly, nodes, 1);
+			addSafe(n, n.x-1, n.y-1, goalx, goaly, nodes, 2);
+			addSafe(n, n.x-1, n.y, goalx, goaly, nodes, 1);
+			addSafe(n, n.x-1, n.y+1, goalx, goaly, nodes, 2);
+			addSafe(n, n.x, n.y+1, goalx, goaly, nodes, 1);
+
+			return nodes;
+		}
+		
+		public void addSafe(Node parent, int x, int y, int goalx, int goaly, List<Node> nodes, int cost){
+			if((x>0 && x<tiles.length && y>0 && y<tiles[x].length && tiles[x][y]==0)){
+				nodes.add(new Node(x,y, parent, parent.g+cost, Math.hypot(goalx-x, goaly-y)));
+			}
+		}
+		
+		public ArrayList<Node> getPath (Vector2 start, Vector2 goal){
+			 ArrayList<Node>pathNodes=new ArrayList<Node>();
+			 long time = System.currentTimeMillis();
+			 Node path=calculateAStar(start, goal);
+			 System.out.println("Time: " + (System.currentTimeMillis() - time));
+			 Node currentNode=path;
+			 while(currentNode!=null){
+				  currentNode.x = (int) (currentNode.x*World.TILE_SIZE)+16;
+				  currentNode.y = (int) (currentNode.y*World.TILE_SIZE)+16;
+				  pathNodes.add(0,currentNode);
+				  currentNode=currentNode.parent;
+			 }
+			  return pathNodes;
+		}
+		
+		public boolean isDirectPath(int posx, int posy, int goalx, int goaly){
+			posx = (int) (posx*World.TILE_FACTOR);
+			posy = (int) (posy*World.TILE_FACTOR);
+			goalx = (int) (goalx*World.TILE_FACTOR); 
+			goaly = (int) (goaly*World.TILE_FACTOR);
+			
+			while(posx != goalx || posy != goaly){
+				if(posx > goalx){
+					posx--;
+				} else if(posx < goalx){
+					posx++;
+				}
+				if(tiles[posx][posy]!=0){
+					return false;
+				}
+				
+				if(posy > goaly){
+					posy--;
+				} else if(posy < goaly){
+					posy++;
+				}
+				if(tiles[posx][posy]!=0){
+					return false;
+				}
+			}
 			return true;
 		}
-		return false;
-		
 	}
-	
-	public static ArrayList<Node> expandNode(Node n,Vector2 goal){
-		ArrayList<Node>nodes=new ArrayList<Node>();
-		Vector2 vector1=new Vector2(n.vector.x+Constants.World.TILE_SIZE,n.vector.y);
-		Vector2 vector2=new Vector2(n.vector.x,n.vector.y+Constants.World.TILE_SIZE);
-		Vector2 vector3=new Vector2(n.vector.x-Constants.World.TILE_SIZE,n.vector.y);
-		Vector2 vector4=new Vector2(n.vector.x,n.vector.y-Constants.World.TILE_SIZE);
-		Vector2 vector5=new Vector2(n.vector.x+Constants.World.TILE_SIZE,n.vector.y+Constants.World.TILE_SIZE);
-		Vector2 vector6=new Vector2(n.vector.x-Constants.World.TILE_SIZE,n.vector.y+Constants.World.TILE_SIZE);
-		Vector2 vector7=new Vector2(n.vector.x+Constants.World.TILE_SIZE,n.vector.y-Constants.World.TILE_SIZE);
-		Vector2 vector8=new Vector2(n.vector.x-Constants.World.TILE_SIZE,n.vector.y-Constants.World.TILE_SIZE);
-		nodes.add(new Node(vector1,n,n.f+calculateHeuristicValue(n.vector,vector1),calculateHeuristicValue(vector1,goal)));
-		nodes.add(new Node(vector2,n,n.f+calculateHeuristicValue(n.vector,vector2),calculateHeuristicValue(vector2,goal)));;;
-		nodes.add(new Node(vector3,n,n.f+calculateHeuristicValue(n.vector,vector3),calculateHeuristicValue(vector3,goal)));
-		nodes.add(new Node(vector4,n,n.f+calculateHeuristicValue(n.vector,vector4),calculateHeuristicValue(vector4,goal)));
-		nodes.add(new Node(vector5,n,n.f+calculateHeuristicValue(n.vector,vector5),calculateHeuristicValue(vector5,goal)));
-		nodes.add(new Node(vector6,n,n.f+calculateHeuristicValue(n.vector,vector6),calculateHeuristicValue(vector6,goal)));
-		nodes.add(new Node(vector7,n,n.f+calculateHeuristicValue(n.vector,vector7),calculateHeuristicValue(vector7,goal)));
-		nodes.add(new Node(vector8,n,n.f+calculateHeuristicValue(n.vector,vector8),calculateHeuristicValue(vector8,goal)));
-
-		return nodes;
-		
-	}
-	
-	public static ArrayList<Node> getPath (Vector2 start, Vector2 goal){
-		 ArrayList<Node>pathNodes=new ArrayList<Node>();
-		 Node path=AStar.calculateAStar(start, goal);
-		  Node currentNode=path;
-		  while(currentNode!=null){
-			  pathNodes.add(0,currentNode);
-			  currentNode=currentNode.parent;
-		  }
-		  return pathNodes;
-	}
-	public static void main(String[]args){
-		float xgoal= 1837.5674f;
-		float ygoal=333.29614f;
-		Vector2 goal=new Vector2(xgoal, ygoal);
-		float x=2185.6772f;
-		float y=485.6722f;
-		Vector2 initialPostion=new Vector2(x, y);
-		
-		Node path=AStar.calculateAStar(initialPostion, goal);
-		System.out.println(path.parent);
-	}
-	
-	
-}

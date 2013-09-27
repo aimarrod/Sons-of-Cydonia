@@ -45,8 +45,8 @@ public class EntityFactory {
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
-	    e.addComponent(new Velocity(0,0,400));
-	    e.addComponent(new Bounds(32, 32));
+	    e.addComponent(new Velocity(0,0,200));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new State(0,0));
 	    e.addComponent(new Movement());
 	    e.addComponent(new Attacker(range, damage, Constants.Attacks.DAGGER_ATTACK));
@@ -65,8 +65,8 @@ public class EntityFactory {
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
-	    e.addComponent(new Velocity(0,0,400));
-	    e.addComponent(new Bounds(32, 32));
+	    e.addComponent(new Velocity(0,0,500));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new State(0,0));
 	    e.addComponent(new Movement());
 	    e.addComponent(new Attacker(range,damage, Constants.Attacks.DAGGER_ATTACK));
@@ -86,10 +86,10 @@ public class EntityFactory {
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,400));
-	    e.addComponent(new Bounds(32, 32));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new State(0,0));
 	    e.addComponent(new Movement());
-	    e.addComponent(new Attacker(range,damage, Constants.Attacks.DAGGER_ATTACK));
+	    e.addComponent(new Attacker(range,damage, Constants.Attacks.MAGIC_FIREBALL));
 	    
 	    CharacterAnimations animations = new CharacterAnimations();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, false);
@@ -102,35 +102,16 @@ public class EntityFactory {
 	    return e;
 	}
 	
-	
-//	public Entity createAttack(float x, float y, int attackType, int damage, float range, Vector2 dir){
-//		Entity e=world.createEntity();
-//		WeaponAttack weaponAttack=new WeaponAttack(range,damage);
-//		e.addComponent(weaponAttack);
-//		Position position=new Position(x,y);
-//		e.addComponent(position);
-//		Velocity v=new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y);
-//		e.addComponent(v);
-//		Bounds b=new Bounds(10,10);
-//		e.addComponent(b); 
-//	   	AnimationLoader.loadProjectileSpriteSheet(new Texture(Gdx.files.internal("resources/dagger-attack.png")), weaponAttack, 0.2f, 64, 64);		
-//	   	e.addComponent(new Flying());
-//	   	e.addToWorld();
-//	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
-//
-//	   	return e;
-//	}
-	
 	public Entity createSkeleton(float px, float py, int damage, float range){
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
-	    e.addComponent(new Velocity(0,0,200));
-	    e.addComponent(new Bounds(32, 32));
+	    e.addComponent(new Velocity(0,0,100));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new State(1,0));
 	    e.addComponent(new Health(10));
 	    e.addComponent(new Movement());
 	    e.addComponent(new Attacker(range,damage, Constants.Attacks.SWORD_ATTACK));
-	    e.addComponent(new Enemy());
+	    e.addComponent(new Enemy(600));
 	    
 	    CharacterAnimations animations = new CharacterAnimations();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, false);
@@ -144,17 +125,62 @@ public class EntityFactory {
 	    return e;
 	}
 	
-	public void createDaggerThrow(float x, float y, int attackType, int damage, float range, Vector2 dir){
+	public Entity createDaggerThrow(float x, float y, int damage, float range, Vector2 dir){
 		Entity e=world.createEntity();
 		
 		e.addComponent( new Position(x,y) );
-		e.addComponent( new Bounds(50,50) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(GraphicsLoader.loadDaggerThrow(), damage) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
+	   	
+	   	return e;
+	}
+	
+	public Entity createIcicle(float x, float y, int damage, float range, Vector2 dir){
+		Entity e=world.createEntity();
+		
+		e.addComponent( new Position(x,y) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
+		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
+	   	e.addComponent( new Flying());
+	   	e.addComponent( new Attack(GraphicsLoader.loadIcicle(dir), damage) );
+ 
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
+	   	e.addToWorld();
+	   	
+	   	return e;
+	}
+	
+	public Entity createFireball(float x, float y, int damage, float range, Vector2 dir){
+		Entity e=world.createEntity();
+		
+		e.addComponent( new Position(x,y) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
+		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
+	   	e.addComponent( new Flying());
+	   	e.addComponent( new Attack(GraphicsLoader.loadFireball(dir), damage) );
+ 
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
+	   	e.addToWorld();
+	   	
+	   	return e;
+	}
+	
+	public Entity createAttack(float x, float y, int type, int damage, float range, Vector2 dir){
+		if(type==Constants.Attacks.DAGGER_ATTACK){
+			return createDaggerThrow(x, y, damage, range, dir);
+		}
+		if(type==Constants.Attacks.MAGIC_ICICLE){
+			return createIcicle(x, y, damage, range, dir);
+		}
+		if(type==Constants.Attacks.MAGIC_FIREBALL){
+			return createFireball(x, y, damage, range, dir);
+		}
+		return null;
 	}
 	
 	
