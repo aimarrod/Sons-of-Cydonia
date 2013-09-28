@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.soc.game.components.Attacker;
 import com.soc.game.components.Bounds;
-import com.soc.game.components.CharacterAnimations;
+import com.soc.game.components.Character;
 import com.soc.game.components.Movement;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
@@ -22,7 +22,7 @@ import com.soc.game.graphics.DirectionalAnimatedRenderer;
 import com.soc.game.graphics.DirectionalRenderer;
 
 public class CharacterRenderSystem extends EntityProcessingSystem{
-	@Mapper ComponentMapper<CharacterAnimations> am;
+	@Mapper ComponentMapper<Character> am;
 	@Mapper ComponentMapper<State> sm;
 	@Mapper ComponentMapper<Position> pm;
 	@Mapper ComponentMapper<Bounds> bm;
@@ -31,7 +31,7 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 	
 	@SuppressWarnings("unchecked")
 	public CharacterRenderSystem(OrthographicCamera camera) {
-		super(Aspect.getAspectForAll(CharacterAnimations.class, State.class, Position.class));
+		super(Aspect.getAspectForAll(Character.class, State.class, Position.class));
 		this.batch = new SpriteBatch();
 		this.camera = camera;
 		shape = new ShapeRenderer();
@@ -50,7 +50,7 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 		State state = sm.get(e);
 		Position pos = pm.get(e);
 		Bounds bon = bm.get(e);
-		CharacterAnimations animations = am.get(e);
+		Character animations = am.get(e);
 		
 		DirectionalRenderer r = null;
 		if(state.state == State.ATTACK){

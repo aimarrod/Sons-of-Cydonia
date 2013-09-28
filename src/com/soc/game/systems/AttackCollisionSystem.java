@@ -12,10 +12,11 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
-import com.soc.game.components.Health;
 import com.soc.game.components.Position;
+import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.utils.Constants;
+import com.soc.utils.Constants.Groups;
 
 public class AttackCollisionSystem extends EntitySystem {
 	@Mapper
@@ -23,13 +24,13 @@ public class AttackCollisionSystem extends EntitySystem {
 	@Mapper
 	ComponentMapper<Bounds> bm;
 	@Mapper
-	ComponentMapper<Health> hm;
+	ComponentMapper<Stats> sm;
 	@Mapper
 	ComponentMapper<Attack> am;
 	@Mapper
 	ComponentMapper<Velocity> vm;
 
-	private Bag<CollisionPair> attackCollisions;
+	private Bag<Collisioner> attackCollisions;
 
 	public AttackCollisionSystem() {
 		super(Aspect.getAspectForAll(Position.class, Bounds.class));
@@ -37,15 +38,15 @@ public class AttackCollisionSystem extends EntitySystem {
 
 	@Override
 	public void initialize() {
-		attackCollisions = new Bag<CollisionPair>();
+		attackCollisions = new Bag<Collisioner>();
 
-		attackCollisions.add(new CollisionPair(
-				Constants.Groups.PLAYER_PROJECTILES, Constants.Groups.ENEMIES, new ProjectileCollisionHandler()));
+		attackCollisions.add(new ProjectileCollisions());
 	}
 
 	@Override
 	protected void processEntities(ImmutableBag<Entity> entities) {
 		for (int i = 0; attackCollisions.size() > i; i++) {
+			attackCollisions.get(i).process();
 			attackCollisions.get(i).checkForCollisions();
 		}
 	}
@@ -55,58 +56,50 @@ public class AttackCollisionSystem extends EntitySystem {
 		return true;
 	}
 
-	private class CollisionPair {
-		private ImmutableBag<Entity> groupEntitiesA;
-		private ImmutableBag<Entity> groupEntitiesB;
-		private CollisionHandler handler;
+	private interface Collisioner{
+		public void process();
+		public void checkForCollisions();
+	}
+	
+	private class ProjectileCollisions implements Collisioner{
+		private ImmutableBag<Entity> projectiles;
+		private ImmutableBag<Entity> enemies;
 
-		public CollisionPair(String group1, String group2,
-				CollisionHandler handler) {
-			groupEntitiesA = world.getManager(GroupManager.class).getEntities(
-					group1);
-			groupEntitiesB = world.getManager(GroupManager.class).getEntities(
-					group2);
-			this.handler = handler;
+		public ProjectileCollisions() {
+			projectiles = world.getManager(GroupManager.class).getEntities(
+					Groups.PLAYER_PROJECTILES);
+			enemies = world.getManager(GroupManager.class).getEntities(
+					Groups.ENEMIES);
 		}
 
-		public void checkForCollisions() {
-			for (int a = 0; groupEntitiesA.size() > a; a++) {
-				for (int b = 0; groupEntitiesB.size() > b; b++) {
-					Entity entityA = groupEntitiesA.get(a);
-					Entity entityB = groupEntitiesB.get(b);
-					if (collisionExists(entityA, entityB)) {
-						handler.handleCollision(entityA, entityB);
+		@Override
+		public void process() {
+			for (int a = 0; projectiles.size() > a; a++) {
+				Entity e = projectiles.get(a);
+				Position p = pm.get(e);
+				Bounds b = bm.get(e);
+				Velocity v = vm.get(e);
+				
+				am.get(e).processor.process(e, p, b, v, world.delta);
+			}
+		}
+		
+		@Override
+		public void checkForCollisions(){
+			for (int a = 0; projectiles.size() > a; a++) {
+				Entity proj = projectiles.get(a);
+				Attack attack = am.get(proj);
+				Bounds b1 = bm.get(proj);
+				Position p1 = pm.get(proj);
+				
+				for (int b = 0; enemies.size() > b; b++) {
+					Entity enemy = enemies.get(b);
+					if(attack.processor.collision(enemy, p1, b1, pm.get(enemy), bm.get(enemy))){
+						attack.processor.handle(enemy, attack, sm.get(enemy));
 					}
 				}
 			}
+
 		}
-
-		private boolean collisionExists(Entity e1, Entity e2) {
-			Position p1 = pm.get(e1);
-			Position p2 = pm.get(e2);
-
-			Bounds b1 = bm.get(e1);
-			Bounds b2 = bm.get(e2);
-
-			Rectangle r1 = new Rectangle(p1.x, p1.y, b1.width, b1.height);
-			Rectangle r2 = new Rectangle(p2.x, p2.y, b2.width, b2.height);
-
-			return Intersector.overlaps(r1, r2);
-		}
-	}
-
-	private interface CollisionHandler {
-		void handleCollision(Entity a, Entity b);
-	}
-	
-	private class ProjectileCollisionHandler implements CollisionHandler {
-
-		@Override
-		public void handleCollision(Entity attack, Entity enemy) {
-			Health health = hm.get(enemy);
-			health.health -= am.get(attack).damage;
-			attack.deleteFromWorld();			
-		}
-		
 	}
 }

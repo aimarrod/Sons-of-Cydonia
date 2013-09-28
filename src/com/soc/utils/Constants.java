@@ -19,6 +19,7 @@ public class Constants {
 	public class Groups{
 		public static final String PLAYER = "player";
 		public static final String ENEMIES = "enemy";
+		public static final String SKELETONS = "skeleton";
 		public static final String PLAYER_PROJECTILES = "projectile";
 	}
 	

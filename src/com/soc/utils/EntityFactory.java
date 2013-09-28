@@ -7,17 +7,19 @@ import com.artemis.managers.PlayerManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.soc.game.attacks.DaggerThrow;
+import com.soc.game.attacks.Icicle;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Attacker;
 import com.soc.game.components.Bounds;
-import com.soc.game.components.CharacterAnimations;
+import com.soc.game.components.Character;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Flying;
-import com.soc.game.components.Health;
 import com.soc.game.components.Movement;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
+import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.systems.CharacterRenderSystem;
 
@@ -51,7 +53,7 @@ public class EntityFactory {
 	    e.addComponent(new Movement());
 	    e.addComponent(new Attacker(range, damage, Constants.Attacks.DAGGER_ATTACK));
 	    
-	    CharacterAnimations animations = new CharacterAnimations();
+	    Character animations = new Character();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, false);
 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, true);
 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), 0.4f, 64, 64, false);
@@ -69,9 +71,9 @@ public class EntityFactory {
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new State(0,0));
 	    e.addComponent(new Movement());
-	    e.addComponent(new Attacker(range,damage, Constants.Attacks.DAGGER_ATTACK));
+	    e.addComponent(new Attacker(range, damage, Constants.Attacks.DAGGER_ATTACK));
 	   
-	    CharacterAnimations animations = new CharacterAnimations();
+	    Character animations = new Character();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/female-warrior-walk.png")), 1.0f, 64, 64, false);
 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/female-warrior-walk.png")), 1.0f, 64, 64, true);
 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/female-warrior-lance.png")), 0.4f, 64, 64, false);
@@ -91,7 +93,7 @@ public class EntityFactory {
 	    e.addComponent(new Movement());
 	    e.addComponent(new Attacker(range,damage, Constants.Attacks.MAGIC_FIREBALL));
 	    
-	    CharacterAnimations animations = new CharacterAnimations();
+	    Character animations = new Character();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, false);
 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, true);
 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-attack.png")), 0.4f, 64, 64, false);
@@ -108,12 +110,12 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,100));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new State(1,0));
-	    e.addComponent(new Health(10));
+	    e.addComponent(new Stats(10, 1, 1, 1, 1, 1, 1));
 	    e.addComponent(new Movement());
 	    e.addComponent(new Attacker(range,damage, Constants.Attacks.SWORD_ATTACK));
 	    e.addComponent(new Enemy(600));
 	    
-	    CharacterAnimations animations = new CharacterAnimations();
+	    Character animations = new Character();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, false);
 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, true);
 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-attack.png")), 0.4f, 64, 64, false);
@@ -121,6 +123,7 @@ public class EntityFactory {
 	    
 	    e.addToWorld();
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.ENEMIES);
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.SKELETONS);
 	    
 	    return e;
 	}
@@ -132,7 +135,7 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(GraphicsLoader.loadDaggerThrow(), damage) );
+	   	e.addComponent( new Attack(new DaggerThrow(600), damage) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
@@ -147,7 +150,7 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(GraphicsLoader.loadIcicle(dir), damage) );
+	   	e.addComponent( new Attack(new Icicle(dir, 600), damage) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
@@ -162,7 +165,7 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(GraphicsLoader.loadFireball(dir), damage) );
+	   	e.addComponent( new Attack(new Icicle(dir, 600), damage) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
