@@ -25,6 +25,7 @@ public class CameraSystem extends VoidEntitySystem{
 	@Override
 	protected void processSystem() {
 		camera.position.set(Globals.playerPosition.x, Globals.playerPosition.y, 0);
+		camera.update();
 	}
 
 }

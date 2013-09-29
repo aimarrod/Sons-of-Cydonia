@@ -74,14 +74,13 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-		 camera.update();
 		 world.setDelta(delta);
 	     world.process();
 	     
+	     cameraSystem.process();
 	     mapRenderSystem.process();
 	     characterRenderSystem.process();
 	     animationAttackSystem.process();
-	     cameraSystem.process();
 	}
 
 	@Override
