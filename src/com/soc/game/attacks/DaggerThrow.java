@@ -9,35 +9,53 @@ import com.soc.game.components.Position;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.graphics.AttackRenderer;
+import com.soc.utils.Globals;
 import com.soc.utils.GraphicsLoader;
 
 public class DaggerThrow implements AttackProcessor{
 	public Bag<Entity> hit;
 	public AttackRenderer renderer;
+	public Position source;
 	public float range;
-	public float traveled;
+	public boolean reached;
 	public boolean backing;
-
-	public DaggerThrow(float range) {
+	
+	public DaggerThrow(float range, Position source) {
 		this.hit = new Bag<Entity>();
 		this.renderer = GraphicsLoader.loadDaggerThrow();
 		this.range = range;
-		this.traveled = 0;;
 		this.backing = false;
+		this.source = source;
 	}
 
 	@Override 
 	public void process(Entity e, Position p, Bounds b, Velocity v, float delta) {
-		traveled += Math.abs(v.speed*delta);
-		if(traveled > range && !backing){
+		range -= Math.abs(v.speed*delta);
+		if(0 > range && !backing){
 			backing = true;
-			v.vx = -v.vx;
-			v.vy = -v.vy;
 			hit.clear();
-			traveled = 0;
-		} else if(traveled > range){
-			e.deleteFromWorld();
+			return;
 		}
+		if(backing){
+			reached = true;
+			range = source.x -p.x;
+			if(Math.abs(range) > 16){
+				v.vx=v.speed*Math.signum(range);
+				reached = false;
+			} else {
+				v.vx = 0;
+			}
+			range = source.y - p.y;
+			if(Math.abs(range) > 16){
+				v.vy=v.speed*Math.signum(range);
+				reached = false;
+			} else {
+				v.vy = 0;
+			}
+		}
+		
+		if(reached)
+			e.deleteFromWorld(); 
 	}
 
 	@Override

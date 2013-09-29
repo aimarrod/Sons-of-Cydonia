@@ -36,43 +36,36 @@ public class MapCollisionSystem extends EntityProcessingSystem {
 	ComponentMapper<Enemy> em;
 		
 	private MapLayers layers;
-	private Bag<Rectangle> obstacles;
 	private int[][] tiles;
 	
 	@SuppressWarnings("unchecked")
 	public MapCollisionSystem(TiledMap map) {
 		super(Aspect.getAspectForAll(Position.class, Bounds.class, Velocity.class).exclude(Flying.class));
 		this.layers = map.getLayers();
-		this.obstacles = new Bag<Rectangle>();
-		retrieveCollisionObjects(layers.get("collision"));
 		getTiles(map);
 	}
 	
 	protected void getTiles(TiledMap map){
 		TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
+		Iterator<MapObject> iter = map.getLayers().get("collision").getObjects().iterator();
+		Bag<Rectangle> obstacles = new Bag<Rectangle>();
+		
+		while(iter.hasNext()) obstacles.add( (((RectangleMapObject)iter.next()).getRectangle()) );
+		
 		tiles = new int[layer.getWidth()][layer.getHeight()];
 		for(int i = 0; i < layer.getWidth(); i++){
 			for(int j = 0; j < layer.getHeight(); j++){
 				Vector2 pos = new Vector2( (i*World.TILE_SIZE)+(World.TILE_SIZE/2),(j*World.TILE_SIZE)+(World.TILE_SIZE/2));
+				Rectangle tile = new Rectangle(pos.x, pos.y, World.TILE_SIZE, World.TILE_SIZE);
 				for(int m = 0; m < obstacles.size(); m++){
-					Rectangle rect = obstacles.get(m);
-					Rectangle tile = new Rectangle(pos.x, pos.y, World.TILE_SIZE, World.TILE_SIZE);
-					if(rect.overlaps(tile)){
+					if(tile.overlaps(obstacles.get(m))){
 						tiles[i][j]=1;
 						break;
 					}
 				}
 			}
 		}
-		System.out.println(tiles[87][65]);
 		AStar.initialize(tiles);
-	}
-	
-	protected void retrieveCollisionObjects(MapLayer layer){
-		Iterator<MapObject> i = layer.getObjects().iterator();
-		while(i.hasNext()){			
-			obstacles.add( (((RectangleMapObject)i.next()).getRectangle()) );
-		}
 	}
 
 	@Override

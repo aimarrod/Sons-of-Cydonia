@@ -1,6 +1,7 @@
 package com.soc.game.components;
 
 import com.artemis.Component;
+import com.artemis.Entity;
 import com.soc.game.attacks.AttackProcessor;
 import com.soc.game.graphics.AttackRenderer;
 
@@ -11,5 +12,9 @@ public class Attack extends Component{
 	public Attack(AttackProcessor processor, int damage){
 		this.processor = processor;
 		this.damage = damage;
+	}
+	
+	public void process(Entity e, Position p, Bounds b, Velocity v, float delta){
+		processor.process(e, p, b, v, delta);
 	}
 }

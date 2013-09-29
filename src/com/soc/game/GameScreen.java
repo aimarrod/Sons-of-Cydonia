@@ -1,5 +1,6 @@
 package com.soc.game;
 
+import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.PlayerManager;
@@ -9,11 +10,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.soc.game.systems.AttackCollisionSystem;
+import com.soc.game.systems.AttackProcessingSystem;
 import com.soc.game.systems.AttackRenderSystem;
 import com.soc.game.systems.CameraSystem;
 import com.soc.game.systems.CharacterRenderSystem;
 import com.soc.game.systems.EnemyActuatorSystem;
+import com.soc.game.systems.EntityCollisionSystem;
 import com.soc.game.systems.EntitySpawningTimerSystem;
 import com.soc.game.systems.MapCollisionSystem;
 import com.soc.game.systems.MapRenderSystem;
@@ -40,22 +42,18 @@ public class GameScreen implements Screen {
 		
 		world = new World();
 		
-		//CreateMap/home/obssidian/Development
 		TiledMap map = MapLoader.loadMap(mapName);
 
 		world.setManager(new GroupManager());
 		world.setManager(new PlayerManager());
 		
-		//Regular Systems
+		world.setSystem(new AttackProcessingSystem());
 	    world.setSystem(new EnemyActuatorSystem());
 	    world.setSystem(new PlayerInputSystem());
 	    world.setSystem(new MapCollisionSystem(map));
 	    world.setSystem(new MovementSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
-	    world.setSystem(new AttackCollisionSystem());
-	    //world.setSystem(new PlanningSystem());
-	    
-	    //Specially treated systems
+	    world.setSystem(new EntityCollisionSystem());	    
 	    
 		cameraSystem = world.setSystem( new CameraSystem(camera), true);
 	    characterRenderSystem = world.setSystem( new CharacterRenderSystem(camera) , true );
@@ -67,7 +65,7 @@ public class GameScreen implements Screen {
 		camera.setToOrtho(false, 1280, 900);
 		
 		EntityFactory.initialize(world);
-		EntityFactory.instance.createWarrior(2000, 300,1,10);
+		EntityFactory.instance.createWarrior(2000, 300,4,500);
 	}
 
 	@Override

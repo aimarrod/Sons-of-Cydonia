@@ -43,7 +43,7 @@ import com.soc.utils.EntityFactory;
 				
 				if(Gdx.input.isKeyPressed(player.attack)){
 					if(state.state != State.ATTACK){
-						EntityFactory.getInstance().createAttack(pos.x,pos.y,at.type,5,10,state.getDirVector());
+						EntityFactory.getInstance().createAttack(e, pos, state, at);
 						state.state = State.ATTACK;
 						vel.vx = 0;
 						vel.vy = 0;

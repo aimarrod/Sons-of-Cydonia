@@ -61,6 +61,7 @@ public class EntityFactory {
 	   	
 	    e.addToWorld();
 	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
+	    Globals.playerPosition = e.getComponent(Position.class);
 	}
 	
 	public void createWarrior(float px, float py, int damage, float range){
@@ -81,6 +82,7 @@ public class EntityFactory {
 	    
 	    e.addToWorld();
 	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
+	    Globals.playerPosition = e.getComponent(Position.class);
 	}
 	
 	public Entity createMage(float px, float py, int damage, float range){
@@ -101,6 +103,7 @@ public class EntityFactory {
 	    
 	    e.addToWorld();
 	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
+	    Globals.playerPosition = e.getComponent(Position.class);
 	    return e;
 	}
 	
@@ -128,14 +131,15 @@ public class EntityFactory {
 	    return e;
 	}
 	
-	public Entity createDaggerThrow(float x, float y, int damage, float range, Vector2 dir){
+	public Entity createDaggerThrow(Entity source, Position pos, State st, Attacker att){
 		Entity e=world.createEntity();
 		
-		e.addComponent( new Position(x,y) );
+		Vector2 dir = st.getDirVector();
+		e.addComponent( new Position(pos.x,pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new DaggerThrow(600), damage) );
+	   	e.addComponent( new Attack(new DaggerThrow(att.range, pos), att.damage) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
@@ -143,14 +147,15 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	public Entity createIcicle(float x, float y, int damage, float range, Vector2 dir){
+	public Entity createIcicle(Entity source, Position pos, State st, Attacker att){
 		Entity e=world.createEntity();
-		
-		e.addComponent( new Position(x,y) );
+				
+		Vector2 dir = st.getDirVector();
+		e.addComponent( new Position(pos.x,pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new Icicle(dir, 600), damage) );
+	   	e.addComponent( new Attack(new Icicle(dir, att.range), att.damage ) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
@@ -158,14 +163,16 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	public Entity createFireball(float x, float y, int damage, float range, Vector2 dir){
+	public Entity createFireball(Entity source, Position pos, State st, Attacker att){
 		Entity e=world.createEntity();
 		
-		e.addComponent( new Position(x,y) );
+		Vector2 dir = st.getDirVector();
+		
+		e.addComponent( new Position(pos.x, pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new Icicle(dir, 600), damage) );
+	   	e.addComponent( new Attack(new Icicle(dir, att.range), att.damage) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
@@ -173,15 +180,15 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	public Entity createAttack(float x, float y, int type, int damage, float range, Vector2 dir){
-		if(type==Constants.Attacks.DAGGER_ATTACK){
-			return createDaggerThrow(x, y, damage, range, dir);
+	public Entity createAttack(Entity source, Position pos, State st, Attacker att){
+		if(att.type==Constants.Attacks.DAGGER_ATTACK){
+			return createDaggerThrow(source, pos, st, att);
 		}
-		if(type==Constants.Attacks.MAGIC_ICICLE){
-			return createIcicle(x, y, damage, range, dir);
+		if(att.type==Constants.Attacks.MAGIC_ICICLE){
+			return createIcicle(source, pos, st, att);
 		}
-		if(type==Constants.Attacks.MAGIC_FIREBALL){
-			return createFireball(x, y, damage, range, dir);
+		if(att.type==Constants.Attacks.MAGIC_FIREBALL){
+			return createFireball(source, pos, st, att);
 		}
 		return null;
 	}
