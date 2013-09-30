@@ -43,69 +43,44 @@ public class EntityFactory {
 		return instance;
 	}
 
-	public void createArcher(float px, float py, float range, int damage){
+	public void createCharacter(float px, float py, float range, int damage, int type){
 		Entity e = world.createEntity();
+		Character animations = new Character();
+		
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,200));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new State(0,0));
 	    e.addComponent(new Movement());
-	    e.addComponent(new Attacker(range, damage, Constants.Attacks.DAGGER_ATTACK));
-	    
-	    Character animations = new Character();
-	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, false);
-	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, true);
-	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), 0.4f, 64, 64, false);
 	    e.addComponent(animations);
-	   	
+	    
+	    if(type == Constants.Classes.HUNTER){
+	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, false);
+		    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, true);
+		    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), 0.4f, 64, 64, false);
+		    e.addComponent(new Attacker(range, damage, Constants.Attacks.ARROW_ATTACK));
+	    } else if(type == Constants.Classes.WARRIOR){
+	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 1.0f, 64, 64, false);
+	 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 1.0f, 64, 64, true);
+	 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), 0.4f, 128, 128, false);
+		    e.addComponent(new Attacker(range, damage, Constants.Attacks.DAGGER_ATTACK));
+		    System.out.println(range);
+	    } else if(type == Constants.Classes.MAGE){
+	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, false);
+	 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, true);
+	 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-attack.png")), 0.4f, 64, 64, false);
+		    e.addComponent(new Attacker(range, damage, Constants.Attacks.MAGIC_FIREBALL));
+	    } else {
+	    	
+	    }
+	    
 	    e.addToWorld();
 	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
 	    Globals.playerPosition = e.getComponent(Position.class);
+	    Globals.playerStats = e.getComponent(Stats.class);
 	}
 	
-	public void createWarrior(float px, float py, int damage, float range){
-		Entity e = world.createEntity();
-	    e.addComponent(new Position(px,py));
-	    e.addComponent(new Player());
-	    e.addComponent(new Velocity(0,0,500));
-	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
-	    e.addComponent(new State(0,0));
-	    e.addComponent(new Movement());
-	    e.addComponent(new Attacker(range, damage, Constants.Attacks.DAGGER_ATTACK));
-	   
-	    Character animations = new Character();
-	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/female-warrior-walk.png")), 1.0f, 64, 64, false);
-	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/female-warrior-walk.png")), 1.0f, 64, 64, true);
-	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/female-warrior-lance.png")), 0.4f, 64, 64, false);
-	    e.addComponent(animations);
-	    
-	    e.addToWorld();
-	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
-	    Globals.playerPosition = e.getComponent(Position.class);
-	}
-	
-	public Entity createMage(float px, float py, int damage, float range){
-		Entity e = world.createEntity();
-	    e.addComponent(new Position(px,py));
-	    e.addComponent(new Player());
-	    e.addComponent(new Velocity(0,0,400));
-	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
-	    e.addComponent(new State(0,0));
-	    e.addComponent(new Movement());
-	    e.addComponent(new Attacker(range,damage, Constants.Attacks.MAGIC_FIREBALL));
-	    
-	    Character animations = new Character();
-	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, false);
-	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, true);
-	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-attack.png")), 0.4f, 64, 64, false);
-	    e.addComponent(animations);
-	    
-	    e.addToWorld();
-	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
-	    Globals.playerPosition = e.getComponent(Position.class);
-	    return e;
-	}
 	
 	public Entity createSkeleton(float px, float py, int damage, float range){
 		Entity e = world.createEntity();
@@ -147,7 +122,7 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	public Entity createIcicle(Entity source, Position pos, State st, Attacker att){
+	private Entity createIcicle(Entity source, Position pos, State st, Attacker att){
 		Entity e=world.createEntity();
 				
 		Vector2 dir = st.getDirVector();
@@ -163,7 +138,7 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	public Entity createFireball(Entity source, Position pos, State st, Attacker att){
+	private Entity createFireball(Entity source, Position pos, State st, Attacker att){
 		Entity e=world.createEntity();
 		
 		Vector2 dir = st.getDirVector();

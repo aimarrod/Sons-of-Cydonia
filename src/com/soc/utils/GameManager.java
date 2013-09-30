@@ -54,7 +54,6 @@ public class GameManager {
 	}
 	
 	public void openSplashScreen(){
-		game.screenStack.add(game.getScreen());
 		game.setScreen(new SplashScreen(game));
 	}
 	public void closeSplashScreen(){

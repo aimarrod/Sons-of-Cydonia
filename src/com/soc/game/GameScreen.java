@@ -1,6 +1,5 @@
 package com.soc.game;
 
-import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.PlayerManager;
@@ -20,8 +19,9 @@ import com.soc.game.systems.EntitySpawningTimerSystem;
 import com.soc.game.systems.MapCollisionSystem;
 import com.soc.game.systems.MapRenderSystem;
 import com.soc.game.systems.MovementSystem;
-import com.soc.game.systems.PlanningSystem;
 import com.soc.game.systems.PlayerInputSystem;
+import com.soc.hud.Hud;
+import com.soc.utils.Constants;
 import com.soc.utils.EntityFactory;
 import com.soc.utils.MapLoader;
 
@@ -34,6 +34,7 @@ public class GameScreen implements Screen {
 	private AttackRenderSystem animationAttackSystem;
 	private CameraSystem cameraSystem;
 	private MapRenderSystem mapRenderSystem;
+	private Hud hudSystem;
 	
 	public GameScreen(Game game, String mapName) {
 		
@@ -59,28 +60,31 @@ public class GameScreen implements Screen {
 	    characterRenderSystem = world.setSystem( new CharacterRenderSystem(camera) , true );
 		mapRenderSystem = world.setSystem( new MapRenderSystem(map, camera), true );
 		animationAttackSystem=world.setSystem(new AttackRenderSystem(camera),true);
+		hudSystem = world.setSystem(new Hud(camera));
 		
 		world.initialize();
 		
 		camera.setToOrtho(false, 1280, 900);
 		
 		EntityFactory.initialize(world);
-		EntityFactory.instance.createWarrior(2000, 300,4,500);
+		EntityFactory.instance.createCharacter(2000, 300, 500, 5, Constants.Classes.WARRIOR);
 	}
 
 	@Override
 	public void render(float delta) {
 
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-		 world.setDelta(delta);
-	     world.process();
+		world.setDelta(delta);
+	    world.process();
 	     
-	     cameraSystem.process();
-	     mapRenderSystem.process();
-	     characterRenderSystem.process();
-	     animationAttackSystem.process();
+	    cameraSystem.process();
+	    mapRenderSystem.process();
+	    characterRenderSystem.process();
+	    animationAttackSystem.process();
+	    hudSystem.process();
+
 	}
 
 	@Override

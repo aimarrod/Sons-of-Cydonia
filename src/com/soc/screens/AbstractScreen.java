@@ -18,11 +18,16 @@ public class AbstractScreen implements Screen{
 	}
 	@Override
 	public void render(float delta) {
+<<<<<<< HEAD
+		Gdx.gl.glClearColor( 5f, 100f, 0f, 1f );
+	    Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
+=======
 	       Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
 	        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	        //Update delta and draw the actors inside the stage
 	        stage.act( delta );
 	        stage.draw();
+>>>>>>> aec412c2fdcac46ac223118eee3aea38bd9dd7e2
 		
 	}
 
@@ -57,9 +62,13 @@ public class AbstractScreen implements Screen{
 
 	@Override
 	public void dispose() {
+<<<<<<< HEAD
+		batch.dispose();		
+=======
 		batch.dispose();
 		stage.dispose();
 		
+>>>>>>> aec412c2fdcac46ac223118eee3aea38bd9dd7e2
 	}
 
 }

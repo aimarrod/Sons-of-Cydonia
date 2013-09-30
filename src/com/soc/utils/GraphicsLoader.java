@@ -20,7 +20,7 @@ public class GraphicsLoader {
 		
 		renderer.animations = new Animation[vframes];
 		renderer.ox = -(hsize-Constants.Characters.WIDTH_PIXELS)*0.5f;
-		renderer.oy = (vsize-Constants.Characters.HEIGHT_PIXELS)*0.5f;
+		renderer.oy = -(vsize-Constants.Characters.HEIGHT_PIXELS)*0.5f;
 
 
 	   	TextureRegion[][] tmp = TextureRegion.split(sheet, hsize, vsize);
