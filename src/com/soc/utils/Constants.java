@@ -4,7 +4,7 @@ public class Constants {
 	public class Attacks{
 		 public static final int DAGGER_ATTACK = 0;
 		 public static final int SWORD_ATTACK=1;
-		 public static final int ARCH_ATTACK=2; 
+		 public static final int ARROW_ATTACK=2; 
 		 public static final int MAGIC_ICICLE = 3;
 		 public static final int MAGIC_FIREBALL = 4;
 		 
@@ -33,6 +33,13 @@ public class Constants {
 		public static final String MUSIC_DIR = "resources/music/";
 		public static final String MAP_DIR = "resources/map/";
 		public static final String LEVEL_DIR = "resources/level/";
+	}
+	
+	public class Classes{
+		public static final int NONE = 0;
+		public static final int WARRIOR = 1;
+		public static final int HUNTER = 2;
+		public static final int MAGE = 3;
 	}
 	
 }

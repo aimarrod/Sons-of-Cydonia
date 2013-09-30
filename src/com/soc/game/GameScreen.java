@@ -22,6 +22,7 @@ import com.soc.game.systems.MapRenderSystem;
 import com.soc.game.systems.MovementSystem;
 import com.soc.game.systems.PlanningSystem;
 import com.soc.game.systems.PlayerInputSystem;
+import com.soc.utils.Constants;
 import com.soc.utils.EntityFactory;
 import com.soc.utils.MapLoader;
 
@@ -65,22 +66,22 @@ public class GameScreen implements Screen {
 		camera.setToOrtho(false, 1280, 900);
 		
 		EntityFactory.initialize(world);
-		EntityFactory.instance.createWarrior(2000, 300,4,500);
+		EntityFactory.instance.createCharacter(2000, 300, 500, 5, Constants.Classes.WARRIOR);
 	}
 
 	@Override
 	public void render(float delta) {
 
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-		 world.setDelta(delta);
-	     world.process();
+		world.setDelta(delta);
+	    world.process();
 	     
-	     cameraSystem.process();
-	     mapRenderSystem.process();
-	     characterRenderSystem.process();
-	     animationAttackSystem.process();
+	    cameraSystem.process();
+	    mapRenderSystem.process();
+	    characterRenderSystem.process();
+	    animationAttackSystem.process();
 	}
 
 	@Override
