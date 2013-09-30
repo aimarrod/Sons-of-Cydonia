@@ -5,29 +5,52 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.soc.game.GameSOC;
 
 public class AbstractScreen implements Screen{
 	protected final GameSOC game;
-	protected final SpriteBatch batch;
 	protected final Stage stage;
+	private SpriteBatch batch;
+	private Skin skin;
+	private Table table;
 	public AbstractScreen(GameSOC game){
 		this.game=game;
 		this.batch=new SpriteBatch();
 		this.stage=new Stage(0,0,true);
+        Gdx.input.setInputProcessor(stage);
 	}
+	protected Skin getSkin()
+	{
+	        if( skin == null ) {
+	            skin = new Skin(  Gdx.files.internal( "resources/uiskin.json" ) );
+	        }
+	        return skin;
+	    }
+    protected Table getTable()
+    {
+        if( table == null ) {
+            table = new Table( getSkin() );
+            table.setFillParent( true );
+            stage.addActor( table );
+        }
+        return table;
+    }
+    public SpriteBatch getBatch()
+    {
+        if( batch == null ) {
+            batch = new SpriteBatch();
+        }
+        return batch;
+    }
 	@Override
 	public void render(float delta) {
-<<<<<<< HEAD
-		Gdx.gl.glClearColor( 5f, 100f, 0f, 1f );
-	    Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
-=======
 	       Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
 	        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	        //Update delta and draw the actors inside the stage
 	        stage.act( delta );
 	        stage.draw();
->>>>>>> aec412c2fdcac46ac223118eee3aea38bd9dd7e2
 		
 	}
 
@@ -62,13 +85,9 @@ public class AbstractScreen implements Screen{
 
 	@Override
 	public void dispose() {
-<<<<<<< HEAD
-		batch.dispose();		
-=======
-		batch.dispose();
 		stage.dispose();
-		
->>>>>>> aec412c2fdcac46ac223118eee3aea38bd9dd7e2
+        if( batch != null ) batch.dispose();
+        if( skin != null ) skin.dispose();
 	}
 
 }

@@ -20,7 +20,7 @@ public class GameSOC extends Game {
 		screenStack=new Stack<Screen>();
 		MusicPlayer.initialize();
 		GameManager.initialize(this);
-		GameManager.instance.load("initial");
+		//GameManager.instance.load("initial");
 		GameManager.instance.openSplashScreen();
 		//GameManager.instance.closeSplashScreen();
 	}
