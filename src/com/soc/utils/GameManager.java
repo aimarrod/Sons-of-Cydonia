@@ -1,16 +1,12 @@
 package com.soc.utils;
 
-import java.util.Stack;
-import java.util.jar.Attributes;
-
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.soc.game.GameSOC;
 import com.soc.game.GameScreen;
+import com.soc.screens.SplashScreen;
 
 public class GameManager {
 	
@@ -55,6 +51,15 @@ public class GameManager {
 		Screen menu = game.getScreen();
 		game.setScreen(game.screenStack.pop());
 		menu.dispose();
+	}
+	
+	public void openSplashScreen(){
+		game.setScreen(new SplashScreen(game));
+	}
+	public void closeSplashScreen(){
+		Screen splash = game.getScreen();
+		game.setScreen(game.screenStack.pop());
+		splash.dispose();
 	}
 	
 	

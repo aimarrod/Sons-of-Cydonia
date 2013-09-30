@@ -17,9 +17,12 @@ public class GameSOC extends Game {
 	
 	@Override
 	public void create() {
+		screenStack=new Stack<Screen>();
 		MusicPlayer.initialize();
 		GameManager.initialize(this);
 		GameManager.instance.load("initial");
+		//GameManager.instance.openSplashScreen();
+		//GameManager.instance.closeSplashScreen();
 	}
 
 	public static void main(String[] args) {
