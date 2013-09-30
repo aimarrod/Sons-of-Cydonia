@@ -21,7 +21,7 @@ public class GameSOC extends Game {
 		MusicPlayer.initialize();
 		GameManager.initialize(this);
 		GameManager.instance.load("initial");
-		//GameManager.instance.openSplashScreen();
+		GameManager.instance.openSplashScreen();
 		//GameManager.instance.closeSplashScreen();
 	}
 
