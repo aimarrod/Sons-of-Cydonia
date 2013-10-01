@@ -2,6 +2,7 @@ package com.soc.game.attacks;
 
 import com.artemis.Entity;
 import com.artemis.utils.Bag;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
@@ -65,13 +66,14 @@ public class DaggerThrow implements AttackProcessor{
 	}
 
 	@Override
-	public TextureRegion frame(float delta) {
-		return renderer.frame(delta);
-	}
-
-	@Override
 	public void handle(Entity e, Attack a, Stats s) {
 		hit.add(e);
 		s.health -= a.damage;
+	}
+
+	@Override
+	public void frame(float delta, SpriteBatch sprite, float x, float y) {
+		sprite.draw(renderer.frame(delta),x,y);
+		
 	}
 }

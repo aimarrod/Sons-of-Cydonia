@@ -41,7 +41,7 @@ public class AttackRenderSystem extends EntityProcessingSystem{
 		Position position = pm.get(e);
 		Bounds bounds = bm.get(e);
 		Attack attack=am.get(e);		
-		batch.draw(attack.processor.frame(world.delta), position.x, position.y, bounds.width, bounds.height);
+		attack.processor.frame(world.delta, batch,position.x, position.y);
 	}
 	
 	@Override

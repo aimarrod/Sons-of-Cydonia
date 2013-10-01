@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.game.attacks.DaggerThrow;
 import com.soc.game.attacks.Icicle;
+import com.soc.game.attacks.Punch;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
@@ -96,7 +97,7 @@ public class EntityFactory {
 	    Character animations = new Character();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, false);
 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, true);
-	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-attack.png")), 0.4f, 64, 64, false);
+	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-attack.png")), 1.0f, 64, 64, false);
 	    animations.death=GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-death.png")), 1.0f, 64, 64, false);
 	    e.addComponent(animations);
 	    
@@ -152,6 +153,19 @@ public class EntityFactory {
 	   	return e;
 	}
 	
+	private Entity createPunch(Entity source, Position pos, int damage, int range, Vector2 dir){
+		Entity e=world.createEntity();
+				
+		e.addComponent( new Position(pos.x, pos.y) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
+		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
+	   	e.addComponent( new Attack(new Punch(dir, range), damage) );
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
+	   	e.addToWorld();
+	   	
+	   	return e;
+	}
+	
 	public Entity createAttack(Entity source, Position pos, int damage, int range, Vector2 dir, int type){
 		if(type==Constants.Spells.DAGGER_THROW){
 			return createDaggerThrow(source, pos, damage, range, dir);
@@ -162,6 +176,8 @@ public class EntityFactory {
 		if(type==Constants.Spells.FIREBALL){
 			return createFireball(source, pos, damage, range, dir);
 		}
+		if(type==Constants.Spells.PUNCH)
+			return createPunch(source, pos, damage, range, dir);
 		return null;
 	}
 	
