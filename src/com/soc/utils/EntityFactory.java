@@ -91,7 +91,7 @@ public class EntityFactory {
 	    e.addComponent(new Stats(10, 1, 1, 1, 1, 1, 1));
 	    e.addComponent(new Movement());
 	    e.addComponent(new Attacker(range,damage, Constants.Attacks.SWORD_ATTACK));
-	    e.addComponent(new Enemy(600));
+	    e.addComponent(new Enemy(600,10));
 	    
 	    Character animations = new Character();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, false);
