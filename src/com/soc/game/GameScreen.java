@@ -59,7 +59,7 @@ public class GameScreen implements Screen {
 	    world.setSystem(new EntityCollisionSystem());	
 
 	    
-	    expiringSystem=world.setSystem(new ExpiringSystem(),true);
+	    expiringSystem=world.setSystem(new ExpiringSystem());
 		cameraSystem = world.setSystem( new CameraSystem(camera), true);
 	    characterRenderSystem = world.setSystem( new CharacterRenderSystem(camera) , true );
 		mapRenderSystem = world.setSystem( new MapRenderSystem(map, camera), true );
@@ -88,9 +88,6 @@ public class GameScreen implements Screen {
 	    characterRenderSystem.process();
 	    animationAttackSystem.process();
 	    hudSystem.process();
-	    System.out.println(expiringSystem.getActives().size());
-	    expiringSystem.process();
-	    
 
 	}
 

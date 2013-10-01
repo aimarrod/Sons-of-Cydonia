@@ -21,7 +21,6 @@ public class ExpiringSystem extends EntityProcessingSystem{
          if(exp.isExpiring){
          exp.delay -= world.getDelta();
          if (exp.delay <= 0) {
-            e.getComponent(State.class).state=State.DEATH;
             e.deleteFromWorld();
          }
          }
