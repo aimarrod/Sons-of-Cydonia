@@ -13,12 +13,15 @@ public class HudSystem extends VoidEntitySystem{
 	OrthographicCamera camera;
 	Stage stage;
 	StatusBar statusBar;
+	ActionBar actionBar;
 	
 	public HudSystem(OrthographicCamera camera){
 		this.camera = camera;
 		this.stage = new Stage();
-		statusBar = new StatusBar();
+		this.statusBar = new StatusBar();
+		this.actionBar = new ActionBar();
 		stage.addActor(statusBar);
+		stage.addActor(actionBar);
 	}
 
 	

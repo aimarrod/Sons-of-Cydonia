@@ -119,10 +119,8 @@ public class EnemyActuatorSystem extends EntitySystem {
 				} else {
 					if (dstx > 0) {
 						v.vx = v.speed;
-						state.direction = State.EAST;
 					} else {
 						v.vx = -v.speed;
-						state.direction = State.WEST;
 					}
 				}
 				if (Math.abs(dsty) < 16) {
@@ -130,12 +128,12 @@ public class EnemyActuatorSystem extends EntitySystem {
 				} else {
 					if (dsty > 0) {
 						v.vy = v.speed;
-						state.direction = State.NORTH;
 					} else {
 						v.vy = -v.speed;
-						state.direction = State.SOUTH;
 					}
 				}
+				p.direction.x = Math.signum(v.vx);
+				p.direction.y = Math.signum(v.vy);
 			}
 		}
 	}

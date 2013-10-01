@@ -111,7 +111,7 @@ public class EntityFactory {
 	public Entity createDaggerThrow(Entity source, Position pos, State st, Attacker att){
 		Entity e=world.createEntity();
 		
-		Vector2 dir = st.getDirVector();
+		Vector2 dir = pos.direction;
 		e.addComponent( new Position(pos.x,pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y,900) );
@@ -127,7 +127,7 @@ public class EntityFactory {
 	private Entity createIcicle(Entity source, Position pos, State st, Attacker att){
 		Entity e=world.createEntity();
 				
-		Vector2 dir = st.getDirVector();
+		Vector2 dir = pos.direction;
 		e.addComponent( new Position(pos.x,pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
@@ -143,7 +143,7 @@ public class EntityFactory {
 	private Entity createFireball(Entity source, Position pos, State st, Attacker att){
 		Entity e=world.createEntity();
 		
-		Vector2 dir = st.getDirVector();
+		Vector2 dir = pos.direction;
 		
 		e.addComponent( new Position(pos.x, pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );

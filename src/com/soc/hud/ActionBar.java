@@ -11,7 +11,7 @@ public class ActionBar extends Actor{
 	public Texture slot;
 	
 	public ActionBar(){
-		slot = new Texture(Gdx.files.internal("resources/spell-container.png"));
+		slot = new Texture(Gdx.files.internal("resources/spell-contaner.png"));
 	}
 	
 	@Override

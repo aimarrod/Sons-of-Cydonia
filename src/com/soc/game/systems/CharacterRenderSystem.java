@@ -70,9 +70,18 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 			r.time = Float.MAX_VALUE;
 		}
 		
-		r.direction = state.direction;
-//		shape.setColor(0, 0, 0, 1);
-//		shape.ellipse(pos.x, pos.y+5, bon.width, 10);
+		float angle = pos.direction.angle();
+		System.out.println(pos.direction.angle());
+		if(angle%90 != 0){
+			System.out.println("EI");
+			if(angle>90f){
+				angle=180f;
+			} else {
+				angle=0f;
+			}
+		}
+		r.direction = ((int) (pos.direction.angle())/90 + 3) % 4;
+
 
 		batch.setColor(r.r, r.g, r.b, r.a);
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);

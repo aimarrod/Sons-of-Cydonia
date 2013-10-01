@@ -59,11 +59,9 @@ import com.soc.utils.EntityFactory;
 				 
 			 	if(Gdx.input.isKeyPressed(player.move_up)){
 				 	vel.vy = vel.speed;
-				 	state.direction = State.NORTH;
 				 	moving = true;
 			 	} else if(Gdx.input.isKeyPressed(player.move_down)){
 				 	vel.vy = -vel.speed;
-				 	state.direction = State.SOUTH;
 				 	moving = true;
 			 	} else {
 				 	vel.vy = 0;
@@ -71,14 +69,17 @@ import com.soc.utils.EntityFactory;
 			 
 			 	if(Gdx.input.isKeyPressed(player.move_left)){
 				 	vel.vx = -vel.speed;
-				 	state.direction = State.WEST;
 				 	moving = true;
 			 	} else if(Gdx.input.isKeyPressed(player.move_right)){
 				 	vel.vx = vel.speed;
-				 	state.direction = State.EAST;
 				 	moving = true;
 			 	} else {
 				 	vel.vx = 0;
+			 	}
+			 	
+			 	if(moving){
+			 		pos.direction.x = Math.signum(vel.vx);
+					pos.direction.y = Math.signum(vel.vy);
 			 	}
 			 
 			 	if(moving){
