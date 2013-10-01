@@ -141,7 +141,8 @@ public class EnemyActuatorSystem extends EntitySystem {
 				}
 				if(Math.abs(dstx) < 16 && Math.abs(dsty) < 16 ){
 					state.state=State.ATTACK;
-					state.statetime=5000;
+					state.statetime=1000;
+					state.nextAttack=Constants.Spells.PUNCH;
 				}
 				p.direction.x = Math.signum(v.vx);
 				p.direction.y = Math.signum(v.vy);

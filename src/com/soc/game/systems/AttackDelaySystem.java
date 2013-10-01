@@ -20,6 +20,9 @@ public class AttackDelaySystem extends EntityProcessingSystem{
          state.statetime -= world.getDelta();
          if (state.statetime <=0) {
            state.state=State.IDLE;
+           //Aunque deberia ser el delay del ataque no?
+           state.statetime=1000;
+           //EntityFactory.createAttack(....);
          }
      }
 
