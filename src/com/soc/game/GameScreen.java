@@ -20,7 +20,7 @@ import com.soc.game.systems.MapCollisionSystem;
 import com.soc.game.systems.MapRenderSystem;
 import com.soc.game.systems.MovementSystem;
 import com.soc.game.systems.PlayerInputSystem;
-import com.soc.hud.Hud;
+import com.soc.hud.HudSystem;
 import com.soc.utils.Constants;
 import com.soc.utils.EntityFactory;
 import com.soc.utils.MapLoader;
@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
 	private AttackRenderSystem animationAttackSystem;
 	private CameraSystem cameraSystem;
 	private MapRenderSystem mapRenderSystem;
-	private Hud hudSystem;
+	private HudSystem hudSystem;
 	
 	public GameScreen(Game game, String mapName) {
 		
@@ -60,7 +60,7 @@ public class GameScreen implements Screen {
 	    characterRenderSystem = world.setSystem( new CharacterRenderSystem(camera) , true );
 		mapRenderSystem = world.setSystem( new MapRenderSystem(map, camera), true );
 		animationAttackSystem=world.setSystem(new AttackRenderSystem(camera),true);
-		hudSystem = world.setSystem(new Hud(camera));
+		hudSystem = world.setSystem(new HudSystem(camera));
 		
 		world.initialize();
 		
@@ -89,8 +89,8 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		System.out.println("Resize");
-
+		hudSystem.setViewport(width, height);
+		camera.setToOrtho(false, width, height);
 	}
 
 	@Override

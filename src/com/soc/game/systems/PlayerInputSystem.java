@@ -13,6 +13,7 @@ import com.soc.game.components.Attacker;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
+import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.utils.EntityFactory;
 
@@ -23,7 +24,8 @@ import com.soc.utils.EntityFactory;
 		 @Mapper ComponentMapper<Position>pm;
 		 @Mapper ComponentMapper<Attacker>am;
 		 @Mapper ComponentMapper<Player> plm;
-		  
+		 @Mapper ComponentMapper<Stats> stm;
+		 
 		 @SuppressWarnings("unchecked")
 		 public PlayerInputSystem() {
 			 super(Aspect.getAspectForAll(Velocity.class, Player.class, State.class,Position.class));
@@ -37,6 +39,7 @@ import com.soc.utils.EntityFactory;
 			 Position pos=pm.get(e);
 			 Player player = plm.get(e);
 			 Attacker at = am.get(e);
+			 Stats st = stm.get(e);
 			 
 			  
 			 if(state.state < State.BLOCKED){
@@ -44,6 +47,7 @@ import com.soc.utils.EntityFactory;
 				if(Gdx.input.isKeyPressed(player.attack)){
 					if(state.state != State.ATTACK){
 						EntityFactory.getInstance().createAttack(e, pos, state, at);
+						st.mana--;
 						state.state = State.ATTACK;
 						vel.vx = 0;
 						vel.vy = 0;

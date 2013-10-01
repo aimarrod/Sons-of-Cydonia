@@ -51,6 +51,7 @@ public class EntityFactory {
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,200));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
+	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1));
 	    e.addComponent(new State(0,0));
 	    e.addComponent(new Movement());
 	    e.addComponent(animations);
@@ -79,6 +80,7 @@ public class EntityFactory {
 	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
 	    Globals.playerPosition = e.getComponent(Position.class);
 	    Globals.playerStats = e.getComponent(Stats.class);
+	    Globals.playerControls = e.getComponent(Player.class);
 	}
 	
 	
@@ -88,7 +90,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,100));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new State(1,0));
-	    e.addComponent(new Stats(10, 1, 1, 1, 1, 1, 1));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1));
 	    e.addComponent(new Movement());
 	    e.addComponent(new Attacker(range,damage, Constants.Attacks.SWORD_ATTACK));
 	    e.addComponent(new Enemy(600));

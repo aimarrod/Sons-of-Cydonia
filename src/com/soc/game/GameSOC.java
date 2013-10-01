@@ -3,6 +3,7 @@ package com.soc.game;
 import java.util.Stack;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -16,12 +17,13 @@ public class GameSOC extends Game {
 	public Stack<Screen> screenStack;
 	
 	@Override
-	public void create() {
+	public void create() {		
+		Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 		screenStack=new Stack<Screen>();
 		MusicPlayer.initialize();
 		GameManager.initialize(this);
-		//GameManager.instance.load("initial");
-		GameManager.instance.openSplashScreen();
+		GameManager.instance.load("initial");
+		//GameManager.instance.openSplashScreen();
 		//GameManager.instance.closeSplashScreen();
 	}
 
@@ -30,6 +32,7 @@ public class GameSOC extends Game {
 		cfg.width = FRAME_WIDTH;
 		cfg.height = FRAME_HEIGHT;
 		cfg.useGL20 = true;
+		cfg.resizable = false;
 		cfg.title = "GameXYZ";
 		new LwjglApplication(new GameSOC(), cfg);
 	}
