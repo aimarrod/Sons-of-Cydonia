@@ -13,6 +13,7 @@ import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
 import com.soc.game.components.Enemy;
+import com.soc.game.components.Expires;
 import com.soc.game.components.Flying;
 import com.soc.game.components.Movement;
 import com.soc.game.components.Player;
@@ -51,7 +52,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,200));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1));
-	    e.addComponent(new State(0,0));
+	    e.addComponent(new State(0));
 	    e.addComponent(new Movement());
 	    e.addComponent(animations);
 	    
@@ -86,15 +87,17 @@ public class EntityFactory {
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Velocity(0,0,100));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
-	    e.addComponent(new State(1,0));
+	    e.addComponent(new State(1));
 	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1));
 	    e.addComponent(new Movement());
 	    e.addComponent(new Enemy(600,10));
+	    e.addComponent(new Expires(5,false));
 	    
 	    Character animations = new Character();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, false);
 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, true);
 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-attack.png")), 0.4f, 64, 64, false);
+	    animations.death=GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-death.png")), 1.0f, 64, 64, false);
 	    e.addComponent(animations);
 	    
 	    e.addToWorld();

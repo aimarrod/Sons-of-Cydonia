@@ -68,7 +68,10 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 			r = animations.idle;
 			r.time = Float.MAX_VALUE;
 		}
-		
+		if(state.state==State.DYING){
+			r=animations.death;
+		}
+		else{
 		float angle = pos.direction.angle();
 		if(angle%90 != 0){
 			if(angle<90f || angle>270f){
@@ -78,6 +81,7 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 			}
 		}
 		r.direction = ((int) angle/90 + 3) % 4;
+		}
 
 
 		batch.setColor(r.r, r.g, r.b, r.a);

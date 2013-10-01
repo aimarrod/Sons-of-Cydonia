@@ -10,16 +10,19 @@ import com.artemis.managers.PlayerManager;
 import com.artemis.systems.EntityProcessingSystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
+import com.artemis.utils.Timer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.soc.algorithms.AStar;
 import com.soc.algorithms.Node;
 import com.soc.game.components.Enemy;
+import com.soc.game.components.Expires;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.utils.Constants;
+import com.soc.utils.EntityFactory;
 
 public class EnemyActuatorSystem extends EntitySystem {
 	@Mapper
@@ -83,9 +86,12 @@ public class EnemyActuatorSystem extends EntitySystem {
 
 				float dstx = 0f;
 				float dsty = 0f;
-
+				if(state.state!=State.DYING){
 				if (stats.health <= 0) {
-					e.deleteFromWorld();
+					v.vx=0;
+					v.vy=0;
+					state.state=State.DYING;
+					e.getComponent(Expires.class).isExpiring=true;
 					player.getComponent(Stats.class).addExperience(enemy.expierence);
 					return;
 				}
@@ -134,6 +140,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 				}
 				p.direction.x = Math.signum(v.vx);
 				p.direction.y = Math.signum(v.vy);
+			}
 			}
 		}
 	}
