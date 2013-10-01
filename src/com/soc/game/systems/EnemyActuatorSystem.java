@@ -92,8 +92,6 @@ public class EnemyActuatorSystem extends EntitySystem {
 					v.vy=0;
 					state.state=State.DYING;
 					e.getComponent(Expires.class).isExpiring=true;
-					System.out.println("componente a–adido");
-					//e.deleteFromWorld();
 					player.getComponent(Stats.class).addExperience(enemy.expierence);
 					return;
 				}
