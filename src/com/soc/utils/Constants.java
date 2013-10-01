@@ -1,16 +1,7 @@
 package com.soc.utils;
 
 public class Constants {
-	public class Attacks{
-		 public static final int DAGGER_ATTACK = 0;
-		 public static final int SWORD_ATTACK=1;
-		 public static final int ARROW_ATTACK=2; 
-		 public static final int MAGIC_ICICLE = 3;
-		 public static final int MAGIC_FIREBALL = 4;
-		 
-		 public static final int DAGGER_SPEED = 1000;
-	}
-	
+
 	public class Characters{
 		public static final int WIDTH_PIXELS = 32;
 		public static final int HEIGHT_PIXELS = 50;
@@ -48,8 +39,10 @@ public class Constants {
 		public static final int ICICLE = 2;
 		public static final int FIREBALL = 3;
 		public static final int ICEBLAST = 4;
+		public static final int PUNCH=5;
 		
-		public static final int SPELL_NUMBER = 5;
+		public static final int SPELL_NUMBER = 6;
+		public static final int DAGGER_SPEED=900;
 	}
 	
 }

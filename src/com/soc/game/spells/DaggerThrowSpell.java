@@ -19,6 +19,6 @@ public class DaggerThrowSpell extends Spell{
 
 	@Override
 	public void create(Entity source, Position pos, Stats stats) {
-		EntityFactory.instance.createAttack(source, pos, stats.strength, 600, pos.direction, Constants.Attacks.DAGGER_ATTACK);
+		EntityFactory.instance.createAttack(source, pos, stats.strength, 600, pos.direction, Constants.Spells.DAGGER_THROW);
 	}
 }

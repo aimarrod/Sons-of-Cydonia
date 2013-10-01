@@ -112,7 +112,7 @@ public class EntityFactory {
 		
 		e.addComponent( new Position(pos.x,pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
-		e.addComponent( new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y,900) );
+		e.addComponent( new Velocity(Constants.Spells.DAGGER_SPEED*dir.x, Constants.Spells.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new DaggerThrow(range, pos), damage) );
  
@@ -127,7 +127,7 @@ public class EntityFactory {
 				
 		e.addComponent( new Position(pos.x,pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
-		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
+		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new Icicle(dir, range), damage ) );
  
@@ -142,7 +142,7 @@ public class EntityFactory {
 				
 		e.addComponent( new Position(pos.x, pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
-		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
+		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new Icicle(dir, range), damage) );
  
@@ -153,13 +153,13 @@ public class EntityFactory {
 	}
 	
 	public Entity createAttack(Entity source, Position pos, int damage, int range, Vector2 dir, int type){
-		if(type==Constants.Attacks.DAGGER_ATTACK){
+		if(type==Constants.Spells.DAGGER_THROW){
 			return createDaggerThrow(source, pos, damage, range, dir);
 		}
-		if(type==Constants.Attacks.MAGIC_ICICLE){
+		if(type==Constants.Spells.ICICLE){
 			return createIcicle(source, pos, damage, range, dir);
 		}
-		if(type==Constants.Attacks.MAGIC_FIREBALL){
+		if(type==Constants.Spells.FIREBALL){
 			return createFireball(source, pos, damage, range, dir);
 		}
 		return null;
