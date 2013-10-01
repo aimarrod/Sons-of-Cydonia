@@ -84,6 +84,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 						.getEntitiesOfPlayer(Constants.Groups.PLAYER).get(0);
 				Position playp = pm.get(player);
 
+				//if(state.state>=State.BLOCKED) return;
 				float dstx = 0f;
 				float dsty = 0f;
 				if(state.state!=State.DYING){
@@ -139,7 +140,8 @@ public class EnemyActuatorSystem extends EntitySystem {
 					}
 				}
 				if(Math.abs(dstx) < 16 && Math.abs(dsty) < 16 ){
-					state.state=state.ATTACK;
+					state.state=State.ATTACK;
+					state.statetime=5000;
 				}
 				p.direction.x = Math.signum(v.vx);
 				p.direction.y = Math.signum(v.vy);
