@@ -15,6 +15,8 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.spells.DaggerThrowSpell;
+import com.soc.utils.Constants;
 import com.soc.utils.EntityFactory;
 
 
@@ -46,7 +48,7 @@ import com.soc.utils.EntityFactory;
 				
 				if(Gdx.input.isKeyPressed(player.attack)){
 					if(state.state != State.ATTACK){
-						EntityFactory.getInstance().createAttack(e, pos, state, at);
+						new DaggerThrowSpell().create(e, pos, st);
 						st.mana--;
 						state.state = State.ATTACK;
 						vel.vx = 0;
