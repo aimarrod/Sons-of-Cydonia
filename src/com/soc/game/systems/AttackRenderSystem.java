@@ -8,11 +8,8 @@ import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.soc.game.components.Attack;
-import com.soc.game.components.Attacker;
 import com.soc.game.components.Bounds;
-import com.soc.game.components.Movement;
 import com.soc.game.components.Position;
 
 public class AttackRenderSystem extends EntityProcessingSystem{

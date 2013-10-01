@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.soc.game.attacks.DaggerThrow;
 import com.soc.game.attacks.Icicle;
 import com.soc.game.components.Attack;
-import com.soc.game.components.Attacker;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
 import com.soc.game.components.Enemy;
@@ -60,18 +59,15 @@ public class EntityFactory {
 	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, false);
 		    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, true);
 		    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), 0.4f, 64, 64, false);
-		    e.addComponent(new Attacker(range, damage, Constants.Attacks.ARROW_ATTACK));
 	    } else if(type == Constants.Classes.WARRIOR){
 	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 1.0f, 64, 64, false);
 	 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 1.0f, 64, 64, true);
 	 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), 0.4f, 128, 128, false);
-		    e.addComponent(new Attacker(range, damage, Constants.Attacks.DAGGER_ATTACK));
 		    System.out.println(range);
 	    } else if(type == Constants.Classes.MAGE){
 	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, false);
 	 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, true);
 	 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-attack.png")), 0.4f, 64, 64, false);
-		    e.addComponent(new Attacker(range, damage, Constants.Attacks.MAGIC_FIREBALL));
 	    } else {
 	    	
 	    }
@@ -81,6 +77,7 @@ public class EntityFactory {
 	    Globals.playerPosition = e.getComponent(Position.class);
 	    Globals.playerStats = e.getComponent(Stats.class);
 	    Globals.playerControls = e.getComponent(Player.class);
+	    Globals.initializeSpells();
 	}
 	
 	
@@ -92,7 +89,6 @@ public class EntityFactory {
 	    e.addComponent(new State(1,0));
 	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1));
 	    e.addComponent(new Movement());
-	    e.addComponent(new Attacker(range,damage, Constants.Attacks.SWORD_ATTACK));
 	    e.addComponent(new Enemy(600,10));
 	    
 	    Character animations = new Character();

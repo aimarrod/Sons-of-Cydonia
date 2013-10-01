@@ -42,4 +42,14 @@ public class Constants {
 		public static final int MAGE = 3;
 	}
 	
+	public class Spells{
+		public static final int ARROW = 0;
+		public static final int DAGGER_THROW = 1;
+		public static final int ICICLE = 2;
+		public static final int FIREBALL = 3;
+		public static final int ICEBLAST = 4;
+		
+		public static final int SPELL_NUMBER = 5;
+	}
+	
 }

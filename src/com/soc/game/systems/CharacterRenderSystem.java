@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.physics.box2d.Shape;
-import com.soc.game.components.Attacker;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
 import com.soc.game.components.Movement;

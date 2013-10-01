@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.soc.utils.GameManager;
+import com.soc.utils.Globals;
 import com.soc.utils.MusicPlayer;
 
 public class GameSOC extends Game {
@@ -18,6 +19,7 @@ public class GameSOC extends Game {
 	
 	@Override
 	public void create() {		
+		Globals.initializeSpells();
 		Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 		screenStack=new Stack<Screen>();
 		MusicPlayer.initialize();

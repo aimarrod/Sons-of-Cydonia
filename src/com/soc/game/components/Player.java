@@ -10,7 +10,6 @@ public class Player extends Component {
 	public int move_right;
 	public int attack;
 	public int [] spellkeys;
-	public int [] spells;
 
 	public Player(){
 		move_up = Input.Keys.W;
@@ -19,6 +18,5 @@ public class Player extends Component {
 		move_right = Input.Keys.D;
 		attack = Input.Keys.SPACE;
 		spellkeys = new int[]{Input.Keys.NUM_1, Input.Keys.NUM_2, Input.Keys.NUM_3, Input.Keys.NUM_4};
-		spells = new int[4];
 	}
 }

@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
-import com.soc.game.components.Attacker;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
@@ -24,7 +23,6 @@ import com.soc.utils.EntityFactory;
 		 @Mapper ComponentMapper<Velocity> vm;
 		 @Mapper ComponentMapper<State> sm;
 		 @Mapper ComponentMapper<Position>pm;
-		 @Mapper ComponentMapper<Attacker>am;
 		 @Mapper ComponentMapper<Player> plm;
 		 @Mapper ComponentMapper<Stats> stm;
 		 
@@ -40,7 +38,6 @@ import com.soc.utils.EntityFactory;
 			 State state = sm.get(e);
 			 Position pos=pm.get(e);
 			 Player player = plm.get(e);
-			 Attacker at = am.get(e);
 			 Stats st = stm.get(e);
 			 
 			  

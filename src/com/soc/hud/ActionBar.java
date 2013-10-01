@@ -9,14 +9,17 @@ import com.soc.utils.Globals;
 public class ActionBar extends Actor{
 
 	public Texture slot;
+	int[] spells;
 	
 	public ActionBar(){
-		slot = new Texture(Gdx.files.internal("resources/spell-contaner.png"));
+		slot = new Texture(Gdx.files.internal("resources/spell-container.png"));
 	}
 	
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		for(int i = 0; i < Globals.playerControls.spells.length; i++){
+		spells = Globals.playerStats.spells;
+		for(int i = 0; i < spells.length; i++){
+			batch.draw(Globals.spells[spells[i]].icon, getX()+(i*slot.getHeight()+2)+3, getY()+5);
 			batch.draw(slot, getX()+(i*slot.getHeight()+2), getY());
 		}
 	}

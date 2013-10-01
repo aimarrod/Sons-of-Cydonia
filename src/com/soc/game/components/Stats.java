@@ -1,6 +1,9 @@
 package com.soc.game.components;
 
 import com.artemis.Component;
+import com.soc.game.attacks.DaggerThrow;
+import com.soc.game.spells.Spell;
+import com.soc.utils.Constants;
 
 public class Stats extends Component{
 	public int health;
@@ -16,6 +19,9 @@ public class Stats extends Component{
 	public int strength;
 	public int agility;
 	public int intelligence;
+	
+	public int[] spells;
+	
 	public Stats(int health, int mana, int experience, int maxHealth,
 			int maxMana, int maxExperience, int level, int armor, int strength,
 			int agility, int intelligence) {
@@ -30,6 +36,7 @@ public class Stats extends Component{
 		this.strength = strength;
 		this.agility = agility;
 		this.intelligence = intelligence;
+		this.spells = new int[]{Constants.Spells.DAGGER_THROW};
 	}
 	
 	public boolean addExperience(int expGained){
