@@ -108,15 +108,14 @@ public class EntityFactory {
 	    return e;
 	}
 	
-	public Entity createDaggerThrow(Entity source, Position pos, State st, Attacker att){
+	public Entity createDaggerThrow(Entity source, Position pos, int damage, int range, Vector2 dir){
 		Entity e=world.createEntity();
 		
-		Vector2 dir = pos.direction;
 		e.addComponent( new Position(pos.x,pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(Constants.Attacks.DAGGER_SPEED*dir.x, Constants.Attacks.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new DaggerThrow(att.range, pos), att.damage) );
+	   	e.addComponent( new Attack(new DaggerThrow(range, pos), damage) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
@@ -124,15 +123,14 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	private Entity createIcicle(Entity source, Position pos, State st, Attacker att){
+	private Entity createIcicle(Entity source, Position pos, int damage, int range, Vector2 dir){
 		Entity e=world.createEntity();
 				
-		Vector2 dir = pos.direction;
 		e.addComponent( new Position(pos.x,pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new Icicle(dir, att.range), att.damage ) );
+	   	e.addComponent( new Attack(new Icicle(dir, range), damage ) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
@@ -140,16 +138,14 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	private Entity createFireball(Entity source, Position pos, State st, Attacker att){
+	private Entity createFireball(Entity source, Position pos, int damage, int range, Vector2 dir){
 		Entity e=world.createEntity();
-		
-		Vector2 dir = pos.direction;
-		
+				
 		e.addComponent( new Position(pos.x, pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Attacks.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new Icicle(dir, att.range), att.damage) );
+	   	e.addComponent( new Attack(new Icicle(dir, range), damage) );
  
 	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
 	   	e.addToWorld();
@@ -157,15 +153,15 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	public Entity createAttack(Entity source, Position pos, State st, Attacker att){
-		if(att.type==Constants.Attacks.DAGGER_ATTACK){
-			return createDaggerThrow(source, pos, st, att);
+	public Entity createAttack(Entity source, Position pos, int damage, int range, Vector2 dir, int type){
+		if(type==Constants.Attacks.DAGGER_ATTACK){
+			return createDaggerThrow(source, pos, damage, range, dir);
 		}
-		if(att.type==Constants.Attacks.MAGIC_ICICLE){
-			return createIcicle(source, pos, st, att);
+		if(type==Constants.Attacks.MAGIC_ICICLE){
+			return createIcicle(source, pos, damage, range, dir);
 		}
-		if(att.type==Constants.Attacks.MAGIC_FIREBALL){
-			return createFireball(source, pos, st, att);
+		if(type==Constants.Attacks.MAGIC_FIREBALL){
+			return createFireball(source, pos, damage, range, dir);
 		}
 		return null;
 	}

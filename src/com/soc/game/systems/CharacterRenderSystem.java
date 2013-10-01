@@ -71,7 +71,6 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 		}
 		
 		float angle = pos.direction.angle();
-		System.out.println(angle);
 		if(angle%90 != 0){
 			if(angle<90f || angle>270f){
 				angle=0f;

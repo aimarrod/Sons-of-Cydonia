@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
 	    world.setSystem(new PlayerInputSystem());
 	    world.setSystem(new MapCollisionSystem(map));
 	    world.setSystem(new MovementSystem());
-	    //world.setSystem(new EntitySpawningTimerSystem());
+	    world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new EntityCollisionSystem());	    
 	    
 		cameraSystem = world.setSystem( new CameraSystem(camera), true);
