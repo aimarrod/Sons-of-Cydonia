@@ -8,4 +8,5 @@ public class Character extends Component{
 	public DirectionalRenderer movement;
 	public DirectionalRenderer attack;
 	public DirectionalRenderer idle;
+	public DirectionalRenderer death;
 }

@@ -16,6 +16,7 @@ import com.soc.game.systems.CharacterRenderSystem;
 import com.soc.game.systems.EnemyActuatorSystem;
 import com.soc.game.systems.EntityCollisionSystem;
 import com.soc.game.systems.EntitySpawningTimerSystem;
+import com.soc.game.systems.ExpiringSystem;
 import com.soc.game.systems.MapCollisionSystem;
 import com.soc.game.systems.MapRenderSystem;
 import com.soc.game.systems.MovementSystem;
@@ -35,6 +36,7 @@ public class GameScreen implements Screen {
 	private CameraSystem cameraSystem;
 	private MapRenderSystem mapRenderSystem;
 	private HudSystem hudSystem;
+	private ExpiringSystem expiringSystem;
 	
 	public GameScreen(Game game, String mapName) {
 		
@@ -53,9 +55,10 @@ public class GameScreen implements Screen {
 	    world.setSystem(new PlayerInputSystem());
 	    world.setSystem(new MapCollisionSystem(map));
 	    world.setSystem(new MovementSystem());
-	    //world.setSystem(new EntitySpawningTimerSystem());
-	    world.setSystem(new EntityCollisionSystem());	    
+	    world.setSystem(new EntitySpawningTimerSystem());
+	    world.setSystem(new EntityCollisionSystem());	
 	    
+	    expiringSystem=world.setSystem(new ExpiringSystem(),true);
 		cameraSystem = world.setSystem( new CameraSystem(camera), true);
 	    characterRenderSystem = world.setSystem( new CharacterRenderSystem(camera) , true );
 		mapRenderSystem = world.setSystem( new MapRenderSystem(map, camera), true );
@@ -84,6 +87,9 @@ public class GameScreen implements Screen {
 	    characterRenderSystem.process();
 	    animationAttackSystem.process();
 	    hudSystem.process();
+	    System.out.println(expiringSystem.getActives().size());
+	    expiringSystem.process();
+	    
 
 	}
 
