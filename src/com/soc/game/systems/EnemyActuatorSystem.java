@@ -86,6 +86,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 
 				if (stats.health <= 0) {
 					e.deleteFromWorld();
+					player.getComponent(Stats.class).addExperience(enemy.expierence);
 					return;
 				}
 

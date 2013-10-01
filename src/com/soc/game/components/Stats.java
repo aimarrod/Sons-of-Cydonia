@@ -31,6 +31,26 @@ public class Stats extends Component{
 		this.agility = agility;
 		this.intelligence = intelligence;
 	}
-
-
+	
+	public boolean addExperience(int expGained){
+		experience+=expGained;
+		if(experience>=maxExperience){
+			increaseLevel();
+			calculateNextLevel();
+			return true;
+		}
+		return false;
+	}	
+	private void increaseLevel(){
+		level++;
+		armor+=2.5;
+		strength+=5;
+		agility+=5;
+		intelligence+=5;
+	}
+	
+	private void calculateNextLevel(){
+		experience=0;
+		maxExperience*=1.5;
+	}
 }
