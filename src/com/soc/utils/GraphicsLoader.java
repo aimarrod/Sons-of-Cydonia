@@ -17,6 +17,7 @@ public class GraphicsLoader {
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		DirectionalAnimatedRenderer death = new DirectionalAnimatedRenderer(false);
 		attack.ox = -48;
 		attack.oy = -32;
 		movement.ox -= 16;
@@ -33,9 +34,14 @@ public class GraphicsLoader {
 	   		movement.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
+		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/warrior-death.png")), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		death.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+	   	}
 		character.attack = attack;
 		character.idle = idle;
-		character.movement = movement;		
+		character.movement = movement;	
+		character.death = death;
 	}
 	
 	public static DirectionalAnimatedRenderer loadCharacterSpriteSheet(Texture sheet, float duration, int hsize, int vsize, boolean loops){
