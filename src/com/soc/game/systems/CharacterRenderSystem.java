@@ -43,7 +43,6 @@ public class CharacterRenderSystem extends EntitySystem{
 	}
 	@Override
 	 public void processEntities(ImmutableBag<Entity> entities) {
-		System.out.println("ProcessEntities");
 		for(int i=entities.size()-1;i>=0;i--){
 			this.process(entities.get(i));
 		}
@@ -84,7 +83,6 @@ public class CharacterRenderSystem extends EntitySystem{
 		r.direction = ((int) angle/90 + 3) % 4;
 		}
 
-		System.out.println("dibujo");
 		batch.setColor(r.r, r.g, r.b, r.a);
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);
 	}
