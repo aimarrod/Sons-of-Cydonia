@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.soc.game.GameSOC;
 import com.soc.game.GameScreen;
+import com.soc.screens.GameOverScreen;
 import com.soc.screens.SplashScreen;
 
 public class GameManager {
@@ -60,6 +61,9 @@ public class GameManager {
 		Screen splash = game.getScreen();
 		game.setScreen(game.screenStack.pop());
 		splash.dispose();
+	}
+	public void openGameOverScren(){
+		game.setScreen(new GameOverScreen(game));
 	}
 	
 	

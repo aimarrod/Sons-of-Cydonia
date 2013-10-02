@@ -12,6 +12,7 @@ import com.soc.game.components.Expires;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.utils.GameManager;
 
 public class DamageProcessingSystem extends EntityProcessingSystem {
 

@@ -96,6 +96,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 				if (Math.hypot(playp.x - p.x, playp.y - p.y) > enemy.vision) {
 					v.vx = 0;
 					v.vy = 0;
+					state.state=State.IDLE;
 				} else {
 					dstModified=true;
 					if (AStar.instance.isDirectPath((int) p.x, (int) p.y,
