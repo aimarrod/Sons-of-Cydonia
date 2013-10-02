@@ -9,6 +9,7 @@ public class DirectionalAnimatedRenderer extends DirectionalRenderer{
 	
 	public DirectionalAnimatedRenderer(boolean loops){
 		this.loops = loops;
+		this.animations = new Animation[4];
 	}
 	
 	@Override

@@ -5,10 +5,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class DirectionalStaticRenderer extends DirectionalRenderer {
-	public Sprite[] sprite;
+	public TextureRegion[] sprites;
+	
+	public DirectionalStaticRenderer(){
+		sprites = new TextureRegion[4];
+	}
 	
 	@Override
 	public TextureRegion frame(float delta) {
-		return sprite[direction];
+		return sprites[direction];
 	}
 }

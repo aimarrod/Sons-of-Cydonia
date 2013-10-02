@@ -15,6 +15,7 @@ import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
+import com.soc.game.components.Feet;
 import com.soc.game.components.Flying;
 import com.soc.game.components.Movement;
 import com.soc.game.components.Player;
@@ -51,10 +52,11 @@ public class EntityFactory {
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,200));
-	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.DAGGER_THROW, new int[]{}));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Movement());
+	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(animations);
 	    
 	    if(type == Constants.Classes.HUNTER){
@@ -62,10 +64,7 @@ public class EntityFactory {
 		    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, true);
 		    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), 0.4f, 64, 64, false);
 	    } else if(type == Constants.Classes.WARRIOR){
-	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 1.0f, 64, 64, false);
-	 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 1.0f, 64, 64, true);
-	 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/warrior-attack.png")), 0.4f, 128, 128, false);
-		    System.out.println(range);
+	    	GraphicsLoader.loadWarrior(animations);
 	    } else if(type == Constants.Classes.MAGE){
 	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, false);
 	 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, true);
@@ -87,7 +86,7 @@ public class EntityFactory {
 		Entity e = world.createEntity();
 	    e.addComponent(new Position(px,py));
 	    e.addComponent(new Velocity(0,0,100));
-	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(1));
 	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}));
 	    e.addComponent(new Movement());
@@ -111,7 +110,7 @@ public class EntityFactory {
 		Entity e=world.createEntity();
 		
 		e.addComponent( new Position(pos.x,pos.y) );
-		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(Constants.Spells.DAGGER_SPEED*dir.x, Constants.Spells.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new DaggerThrow(range, pos), damage) );
@@ -126,7 +125,7 @@ public class EntityFactory {
 		Entity e=world.createEntity();
 				
 		e.addComponent( new Position(pos.x,pos.y) );
-		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new Icicle(dir, range), damage ) );
@@ -141,7 +140,7 @@ public class EntityFactory {
 		Entity e=world.createEntity();
 				
 		e.addComponent( new Position(pos.x, pos.y) );
-		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new Icicle(dir, range), damage) );
@@ -156,7 +155,7 @@ public class EntityFactory {
 		Entity e=world.createEntity();
 				
 		e.addComponent( new Position(pos.x, pos.y) );
-		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Attack(new Punch(dir, range), damage) );
 	   	

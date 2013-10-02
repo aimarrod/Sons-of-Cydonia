@@ -65,7 +65,6 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 		
 		if(state.state == State.IDLE){
 			r = animations.idle;
-			r.time = Float.MAX_VALUE;
 		}
 		if(state.state==State.DYING){
 			r=animations.death;
