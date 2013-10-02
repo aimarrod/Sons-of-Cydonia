@@ -23,9 +23,10 @@ public class ExpiringSystem extends EntityProcessingSystem{
          exp.delay -= world.delta;
          if (exp.delay <= 0) {
             e.deleteFromWorld();
+            if(pm.has(e)){
+    			GameManager.instance.openGameOverScren();
+             }
          }
-         if(pm.has(e)){
-        	GameManager.instance.openMenu();
-         }
+
      }
 }
