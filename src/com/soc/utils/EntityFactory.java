@@ -4,6 +4,7 @@ import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.PlayerManager;
+import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -76,6 +77,8 @@ public class EntityFactory {
 	    
 	    e.addToWorld();
 	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYERS);
+	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYERS);
+	    world.getManager(TagManager.class).register("PLAYER", e);
 	    Globals.playerPosition = e.getComponent(Position.class);
 	    Globals.playerStats = e.getComponent(Stats.class);
 	    Globals.playerControls = e.getComponent(Player.class);

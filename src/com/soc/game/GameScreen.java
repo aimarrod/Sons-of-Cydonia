@@ -3,6 +3,7 @@ package com.soc.game;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.PlayerManager;
+import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,6 +15,7 @@ import com.soc.game.systems.AttackProcessingSystem;
 import com.soc.game.systems.AttackRenderSystem;
 import com.soc.game.systems.CameraSystem;
 import com.soc.game.systems.CharacterRenderSystem;
+import com.soc.game.systems.DamageProcessingSystem;
 import com.soc.game.systems.EnemyActuatorSystem;
 import com.soc.game.systems.EntityCollisionSystem;
 import com.soc.game.systems.EntitySpawningTimerSystem;
@@ -25,6 +27,7 @@ import com.soc.game.systems.PlayerInputSystem;
 import com.soc.hud.HudSystem;
 import com.soc.utils.Constants;
 import com.soc.utils.EntityFactory;
+import com.soc.utils.Globals;
 import com.soc.utils.MapLoader;
 
 public class GameScreen implements Screen {
@@ -50,6 +53,7 @@ public class GameScreen implements Screen {
 
 		world.setManager(new GroupManager());
 		world.setManager(new PlayerManager());
+		world.setManager(new TagManager());
 		
 		world.setSystem(new AttackDelaySystem());
 		world.setSystem(new AttackProcessingSystem());
@@ -57,8 +61,9 @@ public class GameScreen implements Screen {
 	    world.setSystem(new PlayerInputSystem());
 	    world.setSystem(new MapCollisionSystem(map));
 	    world.setSystem(new MovementSystem());
-	   // world.setSystem(new EntitySpawningTimerSystem());
+	    world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new EntityCollisionSystem());	
+	    world.setSystem(new DamageProcessingSystem());
 
 	    
 	    expiringSystem=world.setSystem(new ExpiringSystem());
@@ -69,6 +74,7 @@ public class GameScreen implements Screen {
 		hudSystem = world.setSystem(new HudSystem(camera));
 		
 		world.initialize();
+		Globals.world=world;
 		
 		camera.setToOrtho(false, 1280, 900);
 		

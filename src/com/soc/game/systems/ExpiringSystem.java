@@ -15,8 +15,7 @@ public class ExpiringSystem extends EntityProcessingSystem{
      public ExpiringSystem() {
              super(Aspect.getAspectForAll(Expires.class));
      }
-     protected void process(Entity e) {
-    	 
+     protected void process(Entity e) {	 
          Expires exp = em.get(e);
          exp.delay -= world.delta;
          if (exp.delay <= 0) {

@@ -88,13 +88,15 @@ public class EnemyActuatorSystem extends EntitySystem {
 				//if(state.state>=State.BLOCKED) return;
 				float dstx = 0f;
 				float dsty = 0f;
-				if(state.state!=State.DYING){
-				if (stats.health <= 0) {
-					state.state=State.DYING;
-					e.addComponent(new Expires(1));
-					e.changedInWorld();
-					stm.get(player).addExperience(enemy.expierence);
-				}
+				//if(state.state!=State.DYING){
+//				if (stats.health <= 0) {
+//					state.state=State.DYING;
+//					e.addComponent(new Expires(1));
+//					e.changedInWorld();
+//					stm.get(player).addExperience(enemy.expierence);
+//					v.vx=0;
+//					v.vy=0;
+//				}
 				
 				if(state.state >= State.BLOCKED){
 					continue;
@@ -151,7 +153,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 				}
 				p.direction.x = Math.signum(v.vx);
 				p.direction.y = Math.signum(v.vy);
-			}
+			//}
 			}
 		}
 	}

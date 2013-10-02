@@ -58,7 +58,6 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 				r.time = 0;
 			}
 		}
-		
 		if(state.state == State.WALK){
 			r = animations.movement;
 		}

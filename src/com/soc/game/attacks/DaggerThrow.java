@@ -1,11 +1,14 @@
 package com.soc.game.attacks;
 
+import com.artemis.ComponentMapper;
 import com.artemis.Entity;
+import com.artemis.annotations.Mapper;
 import com.artemis.utils.Bag;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.DamageReceived;
 import com.soc.game.components.Position;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
@@ -20,6 +23,8 @@ public class DaggerThrow implements AttackProcessor{
 	public float range;
 	public boolean reached;
 	public boolean backing;
+	@Mapper
+	ComponentMapper<DamageReceived> dm = Globals.world.getMapper(DamageReceived.class);
 	
 	public DaggerThrow(float range, Position source) {
 		this.hit = new Bag<Entity>();
@@ -68,7 +73,12 @@ public class DaggerThrow implements AttackProcessor{
 	@Override
 	public void handle(Entity e, Attack a, Stats s) {
 		hit.add(e);
-		s.health -= a.damage;
+		if(dm.has(e)){
+			dm.get(e).damage+=a.damage;
+		}else{
+			e.addComponent(new DamageReceived(a.damage));
+			e.changedInWorld();
+		}
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public class PlanningSystem extends IntervalEntityProcessingSystem {
 
 	@Override
 	protected void process(Entity e) {
-		Entity player=world.getManager(PlayerManager.class).getEntitiesOfPlayer(Constants.Groups.PLAYER).get(0);
+		Entity player=world.getManager(PlayerManager.class).getEntitiesOfPlayer(Constants.Groups.PLAYERS).get(0);
 		Position position=pm.get(e);  
 		Position positionPlayer=player.getComponent(Position.class);
 		ArrayList<Node> path=AStar.instance.getPath(new Vector2(position.x,position.y), new Vector2(positionPlayer.x,positionPlayer.y));

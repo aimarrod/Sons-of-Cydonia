@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.DamageReceived;
 import com.soc.game.components.Position;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
@@ -47,7 +48,12 @@ public class Icicle implements AttackProcessor {
 	@Override
 	public void handle(Entity e, Attack a, Stats s) {
 		hit.add(e);
-		s.health -= a.damage;
+		DamageReceived damageReceived=e.getComponent(DamageReceived.class);
+		if(damageReceived==null){
+			e.addComponent(new DamageReceived(a.damage));
+		}else{
+			damageReceived.damage+=a.damage;
+		}
 	}
 
 }
