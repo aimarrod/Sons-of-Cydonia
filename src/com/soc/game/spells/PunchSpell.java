@@ -11,9 +11,10 @@ public class PunchSpell extends Spell{
 	public PunchSpell(){
 		this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/punch-icon.png")), 64, 64);
 		this.tooltip = "Punch in the face!";
+		this.cast = 1f;
 	}
 	@Override
-	public void create(Entity source, Position pos, Stats stats) {
+	public void create(String group, Position pos, Stats stats) {
 		// TODO Auto-generated method stub
 		
 	}

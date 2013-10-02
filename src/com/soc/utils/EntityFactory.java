@@ -52,7 +52,7 @@ public class EntityFactory {
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,200));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
-	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1));
+	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.DAGGER_THROW, new int[]{}));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Movement());
 	    e.addComponent(animations);
@@ -75,7 +75,7 @@ public class EntityFactory {
 	    }
 	    
 	    e.addToWorld();
-	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYER);
+	    world.getManager(PlayerManager.class).setPlayer(e, Constants.Groups.PLAYERS);
 	    Globals.playerPosition = e.getComponent(Position.class);
 	    Globals.playerStats = e.getComponent(Stats.class);
 	    Globals.playerControls = e.getComponent(Player.class);
@@ -89,10 +89,9 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,100));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS));
 	    e.addComponent(new State(1));
-	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}));
 	    e.addComponent(new Movement());
 	    e.addComponent(new Enemy(600,10));
-	    e.addComponent(new Expires(5,false));
 	    
 	    Character animations = new Character();
 	    animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/skeleton-walk.png")), 1.0f, 64, 64, false);
@@ -108,7 +107,7 @@ public class EntityFactory {
 	    return e;
 	}
 	
-	public Entity createDaggerThrow(Entity source, Position pos, int damage, int range, Vector2 dir){
+	public Entity createDaggerThrow(String group, Position pos, int damage, int range, Vector2 dir){
 		Entity e=world.createEntity();
 		
 		e.addComponent( new Position(pos.x,pos.y) );
@@ -117,13 +116,13 @@ public class EntityFactory {
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new DaggerThrow(range, pos), damage) );
  
-	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
+	    world.getManager(GroupManager.class).add(e, group);
 	   	e.addToWorld();
 	   	
 	   	return e;
 	}
 	
-	private Entity createIcicle(Entity source, Position pos, int damage, int range, Vector2 dir){
+	public Entity createIcicle(String group ,Position pos, int damage, int range, Vector2 dir){
 		Entity e=world.createEntity();
 				
 		e.addComponent( new Position(pos.x,pos.y) );
@@ -132,13 +131,13 @@ public class EntityFactory {
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new Icicle(dir, range), damage ) );
  
-	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
+	    world.getManager(GroupManager.class).add(e, group);
 	   	e.addToWorld();
 	   	
 	   	return e;
 	}
 	
-	private Entity createFireball(Entity source, Position pos, int damage, int range, Vector2 dir){
+	public Entity createFireball(String group, Position pos, int damage, int range, Vector2 dir){
 		Entity e=world.createEntity();
 				
 		e.addComponent( new Position(pos.x, pos.y) );
@@ -147,40 +146,23 @@ public class EntityFactory {
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new Icicle(dir, range), damage) );
  
-	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
+	    world.getManager(GroupManager.class).add(e, group);
 	   	e.addToWorld();
 	   	
 	   	return e;
 	}
 	
-	private Entity createPunch(Entity source, Position pos, int damage, int range, Vector2 dir){
+	public Entity createPunch(String group, Position pos, int damage, int range, Vector2 dir){
 		Entity e=world.createEntity();
 				
 		e.addComponent( new Position(pos.x, pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH_PIXELS, Constants.Characters.HEIGHT_PIXELS) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Attack(new Punch(dir, range), damage) );
-	    world.getManager(GroupManager.class).add(e, Constants.Groups.PLAYER_PROJECTILES);
+	   	
+	    world.getManager(GroupManager.class).add(e, group);
 	   	e.addToWorld();
 	   	
 	   	return e;
 	}
-	
-	public Entity createAttack(Entity source, Position pos, int damage, int range, Vector2 dir, int type){
-		if(type==Constants.Spells.DAGGER_THROW){
-			return createDaggerThrow(source, pos, damage, range, dir);
-		}
-		if(type==Constants.Spells.ICICLE){
-			return createIcicle(source, pos, damage, range, dir);
-		}
-		if(type==Constants.Spells.FIREBALL){
-			return createFireball(source, pos, damage, range, dir);
-		}
-		if(type==Constants.Spells.PUNCH)
-			return createPunch(source, pos, damage, range, dir);
-		return null;
-	}
-	
-	
-
 }

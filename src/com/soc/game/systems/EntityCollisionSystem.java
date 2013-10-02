@@ -40,7 +40,8 @@ public class EntityCollisionSystem extends VoidEntitySystem {
 	@Override
 	public void initialize() {
 		collisionGroups = new Bag<CollisionGroup>();
-		collisionGroups.add(new AttackCollision(Constants.Groups.PLAYER_PROJECTILES, Constants.Groups.ENEMIES));
+		collisionGroups.add(new AttackCollision(Constants.Groups.PLAYER_ATTACKS, Constants.Groups.ENEMIES));
+		collisionGroups.add(new AttackCollision(Constants.Groups.ENEMY_ATTACKS, Constants.Groups.PLAYERS));
 	}
 
 	

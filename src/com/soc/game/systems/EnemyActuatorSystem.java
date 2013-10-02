@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.soc.algorithms.AStar;
 import com.soc.algorithms.Node;
+import com.soc.game.components.Delay;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Position;
@@ -81,7 +82,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 				State state = sm.get(e);
 				Stats stats = stm.get(e);
 				Entity player = world.getManager(PlayerManager.class)
-						.getEntitiesOfPlayer(Constants.Groups.PLAYER).get(0);
+						.getEntitiesOfPlayer(Constants.Groups.PLAYERS).get(0);
 				Position playp = pm.get(player);
 
 				//if(state.state>=State.BLOCKED) return;
@@ -89,13 +90,16 @@ public class EnemyActuatorSystem extends EntitySystem {
 				float dsty = 0f;
 				if(state.state!=State.DYING){
 				if (stats.health <= 0) {
-					v.vx=0;
-					v.vy=0;
 					state.state=State.DYING;
-					e.getComponent(Expires.class).isExpiring=true;
-					player.getComponent(Stats.class).addExperience(enemy.expierence);
-					return;
+					e.addComponent(new Expires(1));
+					e.changedInWorld();
+					stm.get(player).addExperience(enemy.expierence);
 				}
+				
+				if(state.state >= State.BLOCKED){
+					continue;
+				}
+				
 
 				if (Math.hypot(playp.x - p.x, playp.y - p.y) > enemy.vision) {
 					v.vx = 0;
@@ -140,8 +144,9 @@ public class EnemyActuatorSystem extends EntitySystem {
 					}
 				}
 				if(Math.abs(dstx) < 16 && Math.abs(dsty) < 16 ){
-					state.state=State.ATTACK;
-					state.statetime=5000;
+					state.state = State.ATTACK;
+					e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,0.3f, 1, Constants.Spells.PUNCH));
+					e.changedInWorld();
 				}
 				p.direction.x = Math.signum(v.vx);
 				p.direction.y = Math.signum(v.vy);

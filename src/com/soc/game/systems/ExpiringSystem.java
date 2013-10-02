@@ -16,12 +16,11 @@ public class ExpiringSystem extends EntityProcessingSystem{
              super(Aspect.getAspectForAll(Expires.class));
      }
      protected void process(Entity e) {
+    	 
          Expires exp = em.get(e);
-         if(exp.isExpiring){
-         exp.delay -= world.getDelta();
+         exp.delay -= world.delta;
          if (exp.delay <= 0) {
             e.deleteFromWorld();
-         }
          }
      }
 }

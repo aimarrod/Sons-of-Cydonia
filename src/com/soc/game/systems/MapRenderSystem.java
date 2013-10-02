@@ -16,6 +16,10 @@ public class MapRenderSystem extends VoidEntitySystem{
 		this.renderer = new OrthogonalTiledMapRenderer(map, UNITSCALE);
 		this.camera = camera;
 	}
+	
+	public void changeMap(TiledMap map){
+		this.renderer = new OrthogonalTiledMapRenderer(map, UNITSCALE);
+	}
 
 	@Override
 	protected void processSystem() {

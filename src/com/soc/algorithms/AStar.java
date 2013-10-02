@@ -7,17 +7,18 @@ import java.util.PriorityQueue;
 
 import com.badlogic.gdx.math.Vector2;
 import com.soc.utils.Constants.World;
+import com.soc.utils.Tile;
 
 	public class AStar {
 		 
 		public static AStar instance;
-		public int [][] tiles;
+		public Tile [][] tiles;
 		
-		private AStar(int[][] tiles){
+		private AStar(Tile[][] tiles){
 			this.tiles=tiles;
 		}
 		
-		public static void initialize(int[][] tiles){
+		public static void initialize(Tile[][] tiles){
 			instance = new AStar(tiles);
 		}
 		
@@ -93,7 +94,7 @@ import com.soc.utils.Constants.World;
 		}
 		
 		public void addSafe(Node parent, int x, int y, int goalx, int goaly, List<Node> nodes, int cost){
-			if((x>0 && x<tiles.length && y>0 && y<tiles[x].length && tiles[x][y]==0)){
+			if((x>0 && x<tiles.length && y>0 && y<tiles[x].length && tiles[x][y].type==0)){
 				nodes.add(new Node(x,y, parent, parent.g+cost, Math.hypot(goalx-x, goaly-y)));
 			}
 		}
@@ -110,7 +111,7 @@ import com.soc.utils.Constants.World;
 				  pathNodes.add(0,currentNode);
 				  currentNode=currentNode.parent;
 			 }
-			  return pathNodes;
+			 return pathNodes;
 		}
 		
 		public boolean isDirectPath(int posx, int posy, int goalx, int goaly){
@@ -125,7 +126,7 @@ import com.soc.utils.Constants.World;
 				} else if(posx < goalx){
 					posx++;
 				}
-				if(tiles[posx][posy]!=0){
+				if(tiles[posx][posy].type!=0){
 					return false;
 				}
 				
@@ -134,7 +135,7 @@ import com.soc.utils.Constants.World;
 				} else if(posy < goaly){
 					posy++;
 				}
-				if(tiles[posx][posy]!=0){
+				if(tiles[posx][posy].type!=0){
 					return false;
 				}
 			}

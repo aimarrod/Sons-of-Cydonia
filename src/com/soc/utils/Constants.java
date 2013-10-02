@@ -8,15 +8,20 @@ public class Constants {
 	}
 	
 	public class Groups{
-		public static final String PLAYER = "player";
+		public static final String PLAYERS = "player";
 		public static final String ENEMIES = "enemy";
 		public static final String SKELETONS = "skeleton";
-		public static final String PLAYER_PROJECTILES = "projectile";
+		public static final String ENEMY_ATTACKS = "enemyattack";
+		public static final String PLAYER_ATTACKS = "playerattack";
 	}
 	
 	public class World{
 		public static final float TILE_SIZE = 32f;
 		public static final float TILE_FACTOR = 0.03125f;
+		public static final int TILE_WALKABLE = 0;
+		public static final int TILE_OBSTACLE = 1;
+		public static final int TILE_MAP_CHANGE = 2;
+		public static final int TILE_LEVEL_CHANGE = 3;
 	}
 	
 	public class Configuration{

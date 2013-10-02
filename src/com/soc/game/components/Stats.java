@@ -20,11 +20,12 @@ public class Stats extends Component{
 	public int agility;
 	public int intelligence;
 	
+	public int attack;
 	public int[] spells;
 	
 	public Stats(int health, int mana, int experience, int maxHealth,
 			int maxMana, int maxExperience, int level, int armor, int strength,
-			int agility, int intelligence) {
+			int agility, int intelligence, int attack, int[] spells) {
 		this.health = health;
 		this.mana = mana;
 		this.experience = experience;
@@ -36,6 +37,7 @@ public class Stats extends Component{
 		this.strength = strength;
 		this.agility = agility;
 		this.intelligence = intelligence;
+		this.attack = attack;
 		this.spells = new int[]{Constants.Spells.DAGGER_THROW};
 	}
 	

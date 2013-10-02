@@ -9,6 +9,7 @@ public abstract class Spell {
 	
 	public TextureRegion icon;
 	public String tooltip;
+	public float cast;
 	
-	public abstract void create(Entity source, Position pos, Stats stats);
+	public abstract void create(String group, Position pos, Stats stats);
 }

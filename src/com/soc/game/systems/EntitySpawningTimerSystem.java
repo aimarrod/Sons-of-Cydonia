@@ -8,7 +8,7 @@ public class EntitySpawningTimerSystem extends VoidEntitySystem{
 	private Timer timer;
 	public EntitySpawningTimerSystem(){
 		//Delay and repeat
-		  timer = new Timer(0.2f, true) {
+		  timer = new Timer(2.5f, true) {
 			   @Override
 			   public void execute() {
 			    EntityFactory.getInstance().createSkeleton(2000,300,10,10);

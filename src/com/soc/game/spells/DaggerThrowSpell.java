@@ -15,10 +15,11 @@ public class DaggerThrowSpell extends Spell{
 	public DaggerThrowSpell(){
 		this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/dagger.png")), 64, 64);
 		this.tooltip = "Hurls a dagger to the front, which returns to the character after a certain distance is traveled";
+		this.cast = 0.2f;
 	}
 
 	@Override
-	public void create(Entity source, Position pos, Stats stats) {
-		EntityFactory.instance.createAttack(source, pos, stats.strength, 600, pos.direction, Constants.Spells.DAGGER_THROW);
+	public void create(String group, Position pos, Stats stats) {
+		EntityFactory.instance.createDaggerThrow(group, pos, stats.strength, 600, pos.direction);
 	}
 }

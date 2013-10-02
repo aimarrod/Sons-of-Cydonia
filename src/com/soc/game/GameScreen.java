@@ -9,6 +9,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.soc.game.systems.AttackDelaySystem;
 import com.soc.game.systems.AttackProcessingSystem;
 import com.soc.game.systems.AttackRenderSystem;
 import com.soc.game.systems.CameraSystem;
@@ -50,12 +51,13 @@ public class GameScreen implements Screen {
 		world.setManager(new GroupManager());
 		world.setManager(new PlayerManager());
 		
+		world.setSystem(new AttackDelaySystem());
 		world.setSystem(new AttackProcessingSystem());
 	    world.setSystem(new EnemyActuatorSystem());
 	    world.setSystem(new PlayerInputSystem());
 	    world.setSystem(new MapCollisionSystem(map));
 	    world.setSystem(new MovementSystem());
-	    world.setSystem(new EntitySpawningTimerSystem());
+	   // world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new EntityCollisionSystem());	
 
 	    

@@ -56,7 +56,6 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 			r = animations.attack;
 			if(((DirectionalAnimatedRenderer)r).isFinished()){
 				r.time = 0;
-				state.state = State.IDLE;
 			}
 		}
 		

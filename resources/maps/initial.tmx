@@ -33,7 +33,6 @@
   <object x="928" y="2496" width="32" height="64"/>
   <object x="832" y="2208" width="32" height="32"/>
   <object x="1152" y="2496" width="32" height="32"/>
-  <object x="32" y="2528" width="3808" height="32"/>
   <object x="3808" y="0" width="32" height="2528"/>
   <object x="0" y="0" width="3808" height="32"/>
   <object x="0" y="32" width="32" height="2496"/>
@@ -49,5 +48,17 @@
   <object x="2848" y="2112" width="96" height="448"/>
   <object x="2784" y="1984" width="224" height="32"/>
   <object x="2784" y="2080" width="224" height="32"/>
+  <object x="0" y="2528" width="1472" height="32"/>
+  <object x="1568" y="2528" width="2272" height="32"/>
+ </objectgroup>
+ <objectgroup name="border" width="120" height="80">
+  <object x="1472" y="2528" width="96" height="32">
+   <properties>
+    <property name="map" value="initial"/>
+   </properties>
+  </object>
+  <object x="1504" y="2560"/>
+  <object x="3328" y="1344"/>
+  <object x="2240" y="1664"/>
  </objectgroup>
 </map>
