@@ -13,8 +13,4 @@ public class Attack extends Component{
 		this.processor = processor;
 		this.damage = damage;
 	}
-	
-	public void process(Entity e, Position p, Bounds b, Velocity v, float delta){
-		processor.process(e, p, b, v, delta);
-	}
 }

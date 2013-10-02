@@ -8,8 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
-import com.soc.game.components.DamageReceived;
+import com.soc.game.components.Damage;
 import com.soc.game.components.Position;
+import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.graphics.AttackRenderer;
@@ -24,8 +25,6 @@ public class DaggerThrowProcessor implements AttackProcessor{
 	public float range;
 	public boolean reached;
 	public boolean backing;
-	@Mapper
-	ComponentMapper<DamageReceived> dm = Globals.world.getMapper(DamageReceived.class);
 	
 	public DaggerThrowProcessor(float range, Position source) {
 		this.hit = new Bag<Entity>();
@@ -38,9 +37,13 @@ public class DaggerThrowProcessor implements AttackProcessor{
 	}
 
 	@Override 
-	public void process(Entity e, Position p, Bounds b, Velocity v, float delta) {
+	public void process(Entity attack) {
 		
-		range -= Math.abs(v.speed*delta);
+		Position p = Globals.positionmapper.get(attack);
+		Velocity v = Globals.velocitymapper.get(attack);
+		
+		range -= Math.abs(v.speed*Globals.world.delta);
+		
 		if(0 > range && !backing){
 			backing = true;
 			hit.clear();
@@ -65,29 +68,39 @@ public class DaggerThrowProcessor implements AttackProcessor{
 		}
 		
 		if(reached)
-			e.deleteFromWorld(); 
+			attack.deleteFromWorld(); 
 	}
 
 	@Override
-	public boolean collision(Entity e, Position mypos, Bounds mybounds, Position otherpos,
-			Bounds otherbounds) {
-		return (!hit.contains(e) && mypos.x < otherpos.x + otherbounds.width && mypos.x + mybounds.height > otherpos.x && mypos.y < otherpos.y + otherbounds.height && mypos.y + mybounds.height > otherpos.y);
+	public boolean collision(Entity attack, Entity victim) {
+		Position attackpos = Globals.positionmapper.get(attack);
+		Position victimpos = Globals.positionmapper.get(victim);
+		Bounds attackbounds = Globals.boundsmapper.get(attack);
+		Bounds victimbounds = Globals.boundsmapper.get(victim);
+		State state = Globals.statemapper.get(victim);
+		
+		return (!hit.contains(victim) && state.state != State.DYING && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	}
 
 	@Override
-	public void handle(Entity e, Attack a, Stats s) {
-		hit.add(e);
-		if(dm.has(e)){
-			dm.get(e).damage+=a.damage;
+	public void handle(Entity attack, Entity victim) {
+		
+		Attack a = Globals.attackmapper.get(attack);
+		hit.add(victim);
+		if(Globals.damagemapper.has(victim)){
+			Globals.damagemapper.get(victim).damage+=a.damage;
 		}else{
-			e.addComponent(new DamageReceived(a.damage));
-			e.changedInWorld();
+			victim.addComponent(new Damage(a.damage));
+			victim.changedInWorld();
 		}
 	}
 
 	@Override
-	public void frame(float delta, SpriteBatch sprite, float x, float y) {
-		sprite.draw(renderer.frame(delta),x,y);
+	public void frame(Entity attack, SpriteBatch sprite) {
+		Position pos = Globals.positionmapper.get(attack);
+		Bounds bounds = Globals.boundsmapper.get(attack);
+
+		sprite.draw(renderer.frame(Globals.world.delta),pos.x,pos.y,bounds.width, bounds.height);
 		
 	}
 }

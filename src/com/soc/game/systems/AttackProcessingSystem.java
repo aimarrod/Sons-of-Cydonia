@@ -25,7 +25,7 @@ public class AttackProcessingSystem extends EntityProcessingSystem{
 
 	@Override
 	protected void process(Entity e) {		
-		am.get(e).processor.process(e, pm.get(e), bm.get(e), vm.get(e), world.delta);
+		am.get(e).processor.process(e);
 	}
 
 }

@@ -6,7 +6,7 @@ import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.managers.TagManager;
 import com.artemis.systems.EntityProcessingSystem;
-import com.soc.game.components.DamageReceived;
+import com.soc.game.components.Damage;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.State;
@@ -17,7 +17,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 
 
 	@Mapper ComponentMapper<Stats> sm;
-	@Mapper ComponentMapper<DamageReceived> dm;
+	@Mapper ComponentMapper<Damage> dm;
 	@Mapper ComponentMapper<State> stm;
 	@Mapper ComponentMapper<Velocity> vm;
 	@Mapper ComponentMapper<Enemy> em;
@@ -27,13 +27,13 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 	
 	@SuppressWarnings("unchecked")
 	public DamageProcessingSystem() {
-		super(Aspect.getAspectForAll(DamageReceived.class));
+		super(Aspect.getAspectForAll(Damage.class));
 	}
 
 	@Override
 	protected void process(Entity e) {		
 		Stats stats=sm.get(e);
-		DamageReceived dr=dm.get(e);
+		Damage dr=dm.get(e);
 		State state=stm.get(e);
 		Velocity velocity=vm.get(e);
 		stats.health-=dr.damage;

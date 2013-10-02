@@ -4,6 +4,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.World;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.Damage;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
@@ -37,6 +38,8 @@ public class Globals {
 	public static ComponentMapper<Velocity> velocitymapper;
 	public static ComponentMapper<Delay> delaymapper;
 	public static ComponentMapper<Attack> attackmapper;
+	public static ComponentMapper<Damage> damagemapper;
+
 	//public static ComponentMapper<Component>
 	
 	public static Spell[] spells;
@@ -60,5 +63,6 @@ public class Globals {
 		velocitymapper = world.getMapper(Velocity.class);
 		delaymapper = world.getMapper(Delay.class);
 		attackmapper = world.getMapper(Attack.class);
+		damagemapper = world.getMapper(Damage.class);
 	}
 }

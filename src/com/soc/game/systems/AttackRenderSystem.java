@@ -38,10 +38,8 @@ public class AttackRenderSystem extends EntityProcessingSystem{
 
 	@Override
 	protected void process(Entity e) {
-		Position position = pm.get(e);
-		Bounds bounds = bm.get(e);
 		Attack attack=am.get(e);		
-		attack.processor.frame(world.delta, batch,position.x, position.y);
+		attack.processor.frame(e, batch);
 	}
 	
 	@Override

@@ -9,9 +9,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
-import com.soc.game.components.DamageReceived;
+import com.soc.game.components.Damage;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Position;
+import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.utils.Globals;
@@ -20,43 +21,43 @@ public class PunchProcessor implements AttackProcessor{
 	public Bag<Entity> hit;
 	public float range;
 	@Mapper
-	ComponentMapper<DamageReceived> dm = Globals.world.getMapper(DamageReceived.class);
+	ComponentMapper<Damage> dm = Globals.world.getMapper(Damage.class);
 	public PunchProcessor(Vector2 dir, float range) {
 		hit = new Bag<Entity>();
 		this.range = range;
 	}
 
 	@Override 
-	public void process(Entity e, Position p, Bounds b, Velocity v, float delta) {
+	public void process(Entity attack) {
+		attack.deleteFromWorld();
 	}
 
 	@Override
-	public boolean collision(Entity e, Position mypos, Bounds mybounds, Position otherpos,
-			Bounds otherbounds) {
-		return (!hit.contains(e) && mypos.x < otherpos.x + otherbounds.width && mypos.x + mybounds.height > otherpos.x && mypos.y < otherpos.y + otherbounds.height && mypos.y + mybounds.height > otherpos.y);
+	public boolean collision(Entity attack, Entity victim) {
+		Position attackpos = Globals.positionmapper.get(attack);
+		Position victimpos = Globals.positionmapper.get(victim);
+		Bounds attackbounds = Globals.boundsmapper.get(attack);
+		Bounds victimbounds = Globals.boundsmapper.get(victim);
+		State state = Globals.statemapper.get(victim);
+		
+		return (!hit.contains(victim) && state.state !=State.DYING && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	}
 
-
 	@Override
-	public void handle(Entity e, Attack a, Stats s) {
-		hit.add(e);
-		//s.health -= a.damage;
-		//DamageReceived damageReceived=e.getComponent(DamageReceived.class);
-		//if(damageReceived==null){
-		if(dm.has(e)){
-			dm.get(e).damage+=a.damage;
+	public void handle(Entity attack, Entity victim) {
+		Attack a = Globals.attackmapper.get(attack);
+		hit.add(victim);
+		if(Globals.damagemapper.has(victim)){
+			Globals.damagemapper.get(victim).damage+=a.damage;
 		}else{
-			e.addComponent(new DamageReceived(a.damage));
-			e.changedInWorld();
+			victim.addComponent(new Damage(a.damage));
+			victim.changedInWorld();
 		}
-		//}else{
-		//	damageReceived.damage+=a.damage;
-		//}
+		
 	}
 
 	@Override
-	public void frame(float delta, SpriteBatch sprite, float posX, float posY) {
-		// TODO Auto-generated method stub
+	public void frame(Entity attack, SpriteBatch sprite) {
 		
 	}
 }

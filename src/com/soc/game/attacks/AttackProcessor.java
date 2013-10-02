@@ -10,8 +10,8 @@ import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 
 public interface AttackProcessor {
-	public void process(Entity e, Position p, Bounds b, Velocity v, float delta);
-	public boolean collision(Entity other, Position myp, Bounds myb, Position otherp, Bounds otherb);
-	public void frame(float delta, SpriteBatch sprite, float posX, float posY);
-	public void handle(Entity e, Attack a, Stats s);
+	public void process(Entity attack);
+	public boolean collision(Entity attack, Entity victim);
+	public void frame(Entity attack, SpriteBatch sprite);
+	public void handle(Entity attack, Entity enemy);
 }
