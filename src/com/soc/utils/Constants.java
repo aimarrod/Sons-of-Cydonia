@@ -3,8 +3,10 @@ package com.soc.utils;
 public class Constants {
 
 	public class Characters{
-		public static final int WIDTH_PIXELS = 32;
-		public static final int HEIGHT_PIXELS = 50;
+		public static final int WIDTH = 32;
+		public static final int HEIGHT = 50;
+		public static final int FEET_WIDTH = 32;
+		public static final int FEET_HEIGTH = 10;
 	}
 	
 	public class Groups{
