@@ -1,17 +1,16 @@
 package com.soc.game.systems;
 
-import java.util.HashMap;
-
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
+import com.artemis.EntitySystem;
 import com.artemis.annotations.Mapper;
-import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.utils.Bag;
+import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
 import com.soc.game.components.Position;
@@ -19,12 +18,12 @@ import com.soc.game.components.State;
 import com.soc.game.graphics.DirectionalAnimatedRenderer;
 import com.soc.game.graphics.DirectionalRenderer;
 
-public class CharacterRenderSystem extends EntityProcessingSystem{
+public class CharacterRenderSystem extends EntitySystem{
 	@Mapper ComponentMapper<Character> am;
 	@Mapper ComponentMapper<State> sm;
 	@Mapper ComponentMapper<Position> pm;
 	@Mapper ComponentMapper<Bounds> bm;
-
+	Bag<Entity>sortedEntities;
 	
 	
 	@SuppressWarnings("unchecked")
@@ -42,8 +41,13 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 		shape.setProjectionMatrix(camera.combined);
 		shape.begin(ShapeType.Filled);
 	}
-
 	@Override
+	 public void processEntities(ImmutableBag<Entity> entities) {
+		for(int i=entities.size()-1;i>=0;i--){
+			this.process(entities.get(i));
+		}
+	 }
+
 	protected void process(Entity e) {
 		State state = sm.get(e);
 		Position pos = pm.get(e);
@@ -79,7 +83,6 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 		r.direction = ((int) angle/90 + 3) % 4;
 		}
 
-
 		batch.setColor(r.r, r.g, r.b, r.a);
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);
 	}
@@ -93,4 +96,11 @@ public class CharacterRenderSystem extends EntityProcessingSystem{
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
 	private OrthographicCamera camera;
+
+
+	@Override
+	protected boolean checkProcessing() {
+		return true;
+	}
+
 }
