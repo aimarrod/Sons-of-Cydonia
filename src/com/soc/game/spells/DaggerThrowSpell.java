@@ -1,12 +1,14 @@
 package com.soc.game.spells;
 
 import com.artemis.Entity;
+import com.artemis.managers.GroupManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
+import com.soc.core.SoC;
 import com.soc.game.components.Position;
 import com.soc.game.components.Stats;
 
@@ -20,6 +22,8 @@ public class DaggerThrowSpell extends Spell{
 
 	@Override
 	public void create(String group, Position pos, Stats stats) {
-		EntityFactory.createDaggerThrow(group, pos, stats.strength, 600, pos.direction);
+		Entity e = EntityFactory.createDaggerThrow(group, pos, stats.strength, 600, pos.direction);
+	    SoC.game.world.getManager(GroupManager.class).add(e, group);
+	   	e.addToWorld();
 	}
 }
