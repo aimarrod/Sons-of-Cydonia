@@ -9,7 +9,6 @@ import com.soc.game.components.Character;
 import com.soc.game.graphics.AttackRenderer;
 import com.soc.game.graphics.DirectionalAnimatedRenderer;
 import com.soc.game.graphics.DirectionalStaticRenderer;
-import com.soc.utils.Constants.Characters;
 
 public class GraphicsLoader {
 
@@ -24,6 +23,8 @@ public class GraphicsLoader {
 		movement.oy -= 0;
 		idle.ox -= 16;
 		idle.oy -= 0;
+		death.ox -= 16;
+		death.oy -= 0;
 		
 		TextureRegion[][] tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/warrior-attack.png")), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
@@ -36,7 +37,7 @@ public class GraphicsLoader {
 	   	}
 		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/warrior-death.png")), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
-	   		death.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+	   		death.animations[i]= new Animation(1f/tmp[i].length, tmp[i]);
 	   	}
 		character.attack = attack;
 		character.idle = idle;
