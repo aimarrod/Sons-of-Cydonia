@@ -79,14 +79,11 @@ public class EntityCollisionSystem extends VoidEntitySystem {
 				Attack attack = am.get(atk);
 				Bounds b1 = bm.get(atk);
 				Position p1 = pm.get(atk);
-				System.out.println("Hay ataques");
 				
 				for (int b = 0; receivers.size() > b; b++) {
-					System.out.println("Paso por receivers");
 					Entity enemy = receivers.get(b);
 					if(attack.processor.collision(enemy, p1, b1, pm.get(enemy), bm.get(enemy))){
 						attack.processor.handle(enemy, attack, sm.get(enemy));
-						System.out.println("Collision");
 					}
 				}
 				

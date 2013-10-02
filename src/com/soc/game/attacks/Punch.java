@@ -28,6 +28,7 @@ public class Punch implements AttackProcessor{
 
 	@Override 
 	public void process(Entity e, Position p, Bounds b, Velocity v, float delta) {
+		e.deleteFromWorld();
 	}
 
 	@Override

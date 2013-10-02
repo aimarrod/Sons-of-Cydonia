@@ -85,19 +85,9 @@ public class EnemyActuatorSystem extends EntitySystem {
 						.getEntitiesOfPlayer(Constants.Groups.PLAYERS).get(0);
 				Position playp = pm.get(player);
 
-				//if(state.state>=State.BLOCKED) return;
 				float dstx = 0f;
 				float dsty = 0f;
-				//if(state.state!=State.DYING){
-//				if (stats.health <= 0) {
-//					state.state=State.DYING;
-//					e.addComponent(new Expires(1));
-//					e.changedInWorld();
-//					stm.get(player).addExperience(enemy.expierence);
-//					v.vx=0;
-//					v.vy=0;
-//				}
-				
+				boolean dstModified=false;
 				if(state.state >= State.BLOCKED){
 					continue;
 				}
@@ -107,6 +97,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 					v.vx = 0;
 					v.vy = 0;
 				} else {
+					dstModified=true;
 					if (AStar.instance.isDirectPath((int) p.x, (int) p.y,
 							(int) playp.x, (int) playp.y)) {
 						enemy.path.clear();
@@ -145,7 +136,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 						v.vy = -v.speed;
 					}
 				}
-				if(Math.abs(dstx) < 16 && Math.abs(dsty) < 16 ){
+				if(dstModified && (Math.abs(dstx) < 16 && Math.abs(dsty) < 16 )){
 					state.state = State.ATTACK;
 					e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,0.3f, 1, Constants.Spells.PUNCH));
 					e.changedInWorld();
@@ -153,7 +144,6 @@ public class EnemyActuatorSystem extends EntitySystem {
 				}
 				p.direction.x = Math.signum(v.vx);
 				p.direction.y = Math.signum(v.vy);
-			//}
 			}
 		}
 	}

@@ -7,6 +7,7 @@ import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -41,12 +42,13 @@ public class GameScreen implements Screen {
 	private MapRenderSystem mapRenderSystem;
 	private HudSystem hudSystem;
 	private ExpiringSystem expiringSystem;
+	private FPSLogger fps;
 	
 	public GameScreen(Game game, String mapName) {
 		
 		this.camera = new OrthographicCamera();
 		this.game=game;
-		
+		fps=new FPSLogger();
 		world = new World();
 		
 		TiledMap map = MapLoader.loadMap(mapName);
@@ -96,6 +98,7 @@ public class GameScreen implements Screen {
 	    characterRenderSystem.process();
 	    animationAttackSystem.process();
 	    hudSystem.process();
+	    fps.log();
 
 	}
 
