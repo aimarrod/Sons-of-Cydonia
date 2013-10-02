@@ -76,7 +76,7 @@ public class GameScreen implements Screen {
 		hudSystem = world.setSystem(new HudSystem(camera));
 		
 		world.initialize();
-		Globals.world=world;
+		Globals.initializeWorld(world);
 		
 		camera.setToOrtho(false, 1280, 900);
 		

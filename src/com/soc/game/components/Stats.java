@@ -1,7 +1,7 @@
 package com.soc.game.components;
 
 import com.artemis.Component;
-import com.soc.game.attacks.DaggerThrow;
+import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.spells.Spell;
 import com.soc.utils.Constants;
 
