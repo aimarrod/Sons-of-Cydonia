@@ -8,9 +8,9 @@ import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.soc.game.attacks.DaggerThrow;
-import com.soc.game.attacks.Icicle;
-import com.soc.game.attacks.Punch;
+import com.soc.game.attacks.DaggerThrowProcessor;
+import com.soc.game.attacks.IcicleProcessor;
+import com.soc.game.attacks.PunchProcessor;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
@@ -18,7 +18,6 @@ import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Feet;
 import com.soc.game.components.Flying;
-import com.soc.game.components.Movement;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
@@ -56,7 +55,6 @@ public class EntityFactory {
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.DAGGER_THROW, new int[]{}));
 	    e.addComponent(new State(0));
-	    e.addComponent(new Movement());
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(animations);
 	    
@@ -92,7 +90,6 @@ public class EntityFactory {
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(1));
 	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}));
-	    e.addComponent(new Movement());
 	    e.addComponent(new Enemy(600,10));
 	    
 	    Character animations = new Character();
@@ -116,7 +113,7 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(Constants.Spells.DAGGER_SPEED*dir.x, Constants.Spells.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new DaggerThrow(range, pos), damage) );
+	   	e.addComponent( new Attack(new DaggerThrowProcessor(range, pos), damage) );
  
 	    world.getManager(GroupManager.class).add(e, group);
 	   	e.addToWorld();
@@ -131,7 +128,7 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new Icicle(dir, range), damage ) );
+	   	e.addComponent( new Attack(new IcicleProcessor(dir, range), damage ) );
  
 	    world.getManager(GroupManager.class).add(e, group);
 	   	e.addToWorld();
@@ -146,7 +143,7 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new Icicle(dir, range), damage) );
+	   	e.addComponent( new Attack(new IcicleProcessor(dir, range), damage) );
  
 	    world.getManager(GroupManager.class).add(e, group);
 	   	e.addToWorld();
@@ -160,7 +157,7 @@ public class EntityFactory {
 		e.addComponent( new Position(pos.x, pos.y) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
-	   	e.addComponent( new Attack(new Punch(dir, range), damage) );
+	   	e.addComponent( new Attack(new PunchProcessor(dir, range), damage) );
 	   	
 	    world.getManager(GroupManager.class).add(e, group);
 	   	e.addToWorld();
