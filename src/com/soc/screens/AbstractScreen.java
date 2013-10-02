@@ -7,15 +7,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.soc.game.GameSOC;
+import com.soc.core.SoC;
 
 public class AbstractScreen implements Screen{
-	protected final GameSOC game;
+	protected final SoC game;
 	protected final Stage stage;
 	private SpriteBatch batch;
 	private Skin skin;
 	private Table table;
-	public AbstractScreen(GameSOC game){
+	public AbstractScreen(SoC game){
 		this.game=game;
 		this.batch=new SpriteBatch();
 		this.stage=new Stage(0,0,true);

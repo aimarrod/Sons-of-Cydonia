@@ -2,7 +2,7 @@ package com.soc.game.systems;
 
 import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Timer;
-import com.soc.utils.EntityFactory;
+import com.soc.core.EntityFactory;
 
 public class EntitySpawningTimerSystem extends VoidEntitySystem{
 	private Timer timer;
@@ -11,7 +11,7 @@ public class EntitySpawningTimerSystem extends VoidEntitySystem{
 		  timer = new Timer(1.0f, true) {
 			   @Override
 			   public void execute() {
-			    EntityFactory.getInstance().createSkeleton(2000,300,10,10);
+			    EntityFactory.createSkeleton(2000,300,10,10);
 			   }
 			  };
 	}

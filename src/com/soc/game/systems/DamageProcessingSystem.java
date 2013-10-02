@@ -6,13 +6,13 @@ import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.managers.TagManager;
 import com.artemis.systems.EntityProcessingSystem;
+import com.soc.core.Constants;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.utils.GameManager;
 
 public class DamageProcessingSystem extends EntityProcessingSystem {
 
@@ -48,7 +48,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 			velocity.vy=0;
 			if(em.has(e)){
 				Enemy enemy=em.get(e);
-				Entity player=world.getManager(TagManager.class).getEntity("PLAYER");
+				Entity player=world.getManager(TagManager.class).getEntity(Constants.Tags.PLAYER);
 				sm.get(player).addExperience(enemy.expierence);
 			}
 			

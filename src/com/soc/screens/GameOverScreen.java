@@ -4,11 +4,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.soc.game.GameSOC;
-import com.soc.utils.GameManager;
+import com.soc.core.SoC;
 
 public class GameOverScreen extends AbstractScreen{
-	public GameOverScreen(GameSOC game) {
+	public GameOverScreen(SoC game) {
 		super(game);
 	}
     @Override
@@ -36,7 +35,7 @@ public class GameOverScreen extends AbstractScreen{
                 int pointer,
                 int button )
             {
-                GameManager.instance.load("initial");
+                SoC.game.load("initial");
             }
 
         } );

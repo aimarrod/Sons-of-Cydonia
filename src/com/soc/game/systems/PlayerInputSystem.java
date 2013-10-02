@@ -6,9 +6,8 @@ import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector3;
+import com.soc.core.Constants;
+import com.soc.core.SoC;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
@@ -16,8 +15,6 @@ import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.components.Character;
-import com.soc.utils.Constants;
-import com.soc.utils.Globals;
 
 
 	public class PlayerInputSystem extends EntityProcessingSystem{
@@ -49,8 +46,7 @@ import com.soc.utils.Globals;
 					if(state.state != State.ATTACK){
 						st.mana--;
 						state.state = State.ATTACK;
-						System.out.println(st.attack);
-						e.addComponent(new Delay(Constants.Groups.PLAYER_ATTACKS, Globals.spells[st.attack].cast, 0.4f, st.attack));
+						e.addComponent(new Delay(Constants.Groups.PLAYER_ATTACKS, SoC.game.spells[st.attack].cast, 0.4f, st.attack));
 						e.changedInWorld();
 						vel.vx = 0;
 						vel.vy = 0;

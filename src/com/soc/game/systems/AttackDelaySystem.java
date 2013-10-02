@@ -5,11 +5,11 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
+import com.soc.core.SoC;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
-import com.soc.utils.Globals;
 
 public class AttackDelaySystem extends EntityProcessingSystem{
 
@@ -27,7 +27,7 @@ public class AttackDelaySystem extends EntityProcessingSystem{
          del.delay -= world.delta;
          del.expiration -= world.delta;
          if(del.delay <= 0 && !del.attacked){
-        	 Globals.spells[del.attack].create(del.group, pm.get(e), stm.get(e));
+        	 SoC.game.spells[del.attack].create(del.group, pm.get(e), stm.get(e));
         	 del.attacked = true;
         	 return;
          }

@@ -16,6 +16,9 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.algorithms.AStar;
+import com.soc.core.Constants;
+import com.soc.core.Constants.World;
+import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Feet;
@@ -23,9 +26,7 @@ import com.soc.game.components.Flying;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.Velocity;
-import com.soc.utils.Constants;
 import com.soc.utils.Gate;
-import com.soc.utils.Constants.World;
 import com.soc.utils.MapLoader;
 import com.soc.utils.Tile;
 
@@ -48,12 +49,11 @@ public class MapCollisionSystem extends EntityProcessingSystem {
 	private Tile[][] tiles;
 	
 	@SuppressWarnings("unchecked")
-	public MapCollisionSystem(TiledMap map) {
+	public MapCollisionSystem() {
 		super(Aspect.getAspectForAll(Position.class, Bounds.class, Velocity.class, Feet.class).exclude(Flying.class));
-		loadTiles(map);
 	}
 	
-	protected void loadTiles(TiledMap map){
+	public void loadTiles(TiledMap map){
 		TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
 		Iterator<MapObject> collision = map.getLayers().get("collision").getObjects().iterator();
 		Iterator<MapObject> border = map.getLayers().get("border").getObjects().iterator();
@@ -126,13 +126,11 @@ public class MapCollisionSystem extends EntityProcessingSystem {
 		
 		if(plm.has(e)){
 			if(tiles[centerx][centery].type == World.TILE_MAP_CHANGE){
-				Gate t = (Gate) tiles[centerx][centery];
-				TiledMap map = MapLoader.loadMap(t.destination);
-				this.loadTiles(map);
-				world.getSystem(MapRenderSystem.class).changeMap(map);
-				pos.x = t.x*World.TILE_SIZE;
-				pos.y = t.y*World.TILE_SIZE;
-			
+				SoC.game.getScreen().pause();
+				Gate gate = (Gate) tiles[centerx][centery];
+				SoC.game.resetWorld();
+				pos.x = gate.x * Constants.World.TILE_SIZE;
+				pos.y = gate.y * Constants.World.TILE_SIZE;
 			}
 		}
 		

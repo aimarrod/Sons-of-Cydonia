@@ -1,9 +1,9 @@
 package com.soc.game.components;
 
 import com.artemis.Component;
+import com.soc.core.Constants;
 import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.spells.Spell;
-import com.soc.utils.Constants;
 
 public class Stats extends Component{
 	public int health;

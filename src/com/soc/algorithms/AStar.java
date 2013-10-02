@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import com.badlogic.gdx.math.Vector2;
-import com.soc.utils.Constants.World;
+import com.soc.core.Constants;
+import com.soc.core.Constants.World;
 import com.soc.utils.Tile;
 
 	public class AStar {
@@ -42,7 +43,6 @@ import com.soc.utils.Tile;
 				node=frontier.poll();
 				
 				if((Math.abs(node.x-goalx)<1) && (Math.abs(node.y-goaly)<1d)){
-					System.out.println("END");
 					return node;
 				}
 				
@@ -94,16 +94,14 @@ import com.soc.utils.Tile;
 		}
 		
 		public void addSafe(Node parent, int x, int y, int goalx, int goaly, List<Node> nodes, int cost){
-			if((x>0 && x<tiles.length && y>0 && y<tiles[x].length && tiles[x][y].type==0)){
+			if((x>0 && x<tiles.length && y>0 && y<tiles[x].length && tiles[x][y].type!=Constants.World.TILE_OBSTACLE)){
 				nodes.add(new Node(x,y, parent, parent.g+cost, Math.hypot(goalx-x, goaly-y)));
 			}
 		}
 		
 		public ArrayList<Node> getPath (Vector2 start, Vector2 goal){
 			 ArrayList<Node>pathNodes=new ArrayList<Node>();
-			 long time = System.currentTimeMillis();
 			 Node path=calculateAStar(start, goal);
-			 System.out.println("Time: " + (System.currentTimeMillis() - time));
 			 Node currentNode=path;
 			 while(currentNode!=null){
 				  currentNode.x = (int) (currentNode.x*World.TILE_SIZE)+16;
@@ -126,7 +124,7 @@ import com.soc.utils.Tile;
 				} else if(posx < goalx){
 					posx++;
 				}
-				if(tiles[posx][posy].type!=0){
+				if(tiles[posx][posy].type==Constants.World.TILE_OBSTACLE){
 					return false;
 				}
 				
@@ -135,7 +133,7 @@ import com.soc.utils.Tile;
 				} else if(posy < goaly){
 					posy++;
 				}
-				if(tiles[posx][posy].type!=0){
+				if(tiles[posx][posy].type==Constants.World.TILE_OBSTACLE){
 					return false;
 				}
 			}

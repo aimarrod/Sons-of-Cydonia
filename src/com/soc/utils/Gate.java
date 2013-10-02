@@ -1,5 +1,7 @@
 package com.soc.utils;
 
+import com.soc.core.Constants;
+
 public class Gate extends Tile{
 	
 	public String destination;

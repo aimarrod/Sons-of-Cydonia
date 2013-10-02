@@ -4,9 +4,9 @@ import com.artemis.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.soc.core.EntityFactory;
 import com.soc.game.components.Position;
 import com.soc.game.components.Stats;
-import com.soc.utils.EntityFactory;
 
 public class PunchSpell extends Spell{
 	public PunchSpell(){
@@ -16,7 +16,7 @@ public class PunchSpell extends Spell{
 	}
 	@Override
 	public void create(String group, Position pos, Stats stats) {
-		EntityFactory.getInstance().createPunch(group, pos, stats.strength, 16, pos.direction);	
+		EntityFactory.createPunch(group, pos, stats.strength, 16, pos.direction);	
 	}
 
 }

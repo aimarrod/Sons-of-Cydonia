@@ -7,6 +7,7 @@ import com.artemis.EntitySystem;
 import com.artemis.annotations.Mapper;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.PlayerManager;
+import com.artemis.managers.TagManager;
 import com.artemis.systems.EntityProcessingSystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
@@ -15,6 +16,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.soc.algorithms.AStar;
 import com.soc.algorithms.Node;
+import com.soc.core.Constants;
+import com.soc.core.EntityFactory;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
@@ -22,8 +25,6 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.utils.Constants;
-import com.soc.utils.EntityFactory;
 
 public class EnemyActuatorSystem extends EntitySystem {
 	@Mapper
@@ -81,8 +82,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 				Velocity v = vm.get(e);
 				State state = sm.get(e);
 				Stats stats = stm.get(e);
-				Entity player = world.getManager(PlayerManager.class)
-						.getEntitiesOfPlayer(Constants.Groups.PLAYERS).get(0);
+				Entity player = world.getManager(TagManager.class).getEntity(Constants.Tags.PLAYER);
 				Position playp = pm.get(player);
 
 				float dstx = 0f;

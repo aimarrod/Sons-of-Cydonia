@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.soc.utils.Globals;
+import com.soc.core.SoC;
+import com.soc.game.components.Stats;
 
 public class StatusBar extends Actor{
 	
@@ -24,10 +25,13 @@ public class StatusBar extends Actor{
 
 	@Override
 	public void draw (SpriteBatch batch, float parentAlpha) {
-        batch.draw(container, getX(),  getY());
-		float proportion = (float)Globals.playerStats.health / (float)Globals.playerStats.maxHealth;
+        Stats stats = SoC.game.statsmapper.get(SoC.game.player);
+		
+		batch.draw(container, getX(),  getY());
+        
+		float proportion = (float)stats.health / (float)stats.maxHealth;
         batch.draw(bars, getX() +3, getY() + 34, 0, 0, (int)(bars.getWidth()*proportion), (int)(bars.getHeight()*0.5));
-		proportion = (float)Globals.playerStats.mana / (float)Globals.playerStats.maxMana;
+		proportion = (float)stats.mana / (float)stats.maxMana;
         batch.draw(bars, getX() +3, getY() + 9, 0, (int)(0+bars.getHeight()*0.5f), (int)(bars.getWidth()*proportion), (int)(bars.getHeight()*0.5));
 	}
 }

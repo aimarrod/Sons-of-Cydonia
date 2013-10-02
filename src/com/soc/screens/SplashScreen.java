@@ -12,11 +12,11 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 
-import com.soc.game.GameSOC;
+import com.soc.core.SoC;
 
 public class SplashScreen extends AbstractScreen{
 	private Texture splashTexture;
-	public SplashScreen(GameSOC game) {
+	public SplashScreen(SoC game) {
 		super(game);
 	}
 	

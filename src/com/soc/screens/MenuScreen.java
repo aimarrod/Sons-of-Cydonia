@@ -5,12 +5,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.soc.game.GameSOC;
-import com.soc.utils.GameManager;
+import com.soc.core.SoC;
 
 public class MenuScreen extends AbstractScreen{
 
-	public MenuScreen(GameSOC game) {
+	public MenuScreen(SoC game) {
 		super(game);
 	}
     @Override
@@ -38,7 +37,7 @@ public class MenuScreen extends AbstractScreen{
                 int pointer,
                 int button )
             {
-                GameManager.instance.load("initial");
+                SoC.game.load("initial");
             }
 
         } );
