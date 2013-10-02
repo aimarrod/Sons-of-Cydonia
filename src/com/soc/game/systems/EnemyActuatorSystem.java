@@ -147,6 +147,7 @@ public class EnemyActuatorSystem extends EntitySystem {
 					state.state = State.ATTACK;
 					e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,0.3f, 1, Constants.Spells.PUNCH));
 					e.changedInWorld();
+
 				}
 				p.direction.x = Math.signum(v.vx);
 				p.direction.y = Math.signum(v.vy);
