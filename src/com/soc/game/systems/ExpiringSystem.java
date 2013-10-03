@@ -21,9 +21,11 @@ public class ExpiringSystem extends EntityProcessingSystem{
          Expires exp = em.get(e);
          exp.delay -= world.delta;
          if (exp.delay <= 0) {
-            e.deleteFromWorld();
             if(pm.has(e)){
+            	e.removeComponent(exp);
     			SoC.game.openGameOverScren();
+            } else {
+                 e.deleteFromWorld();
              }
          }
 

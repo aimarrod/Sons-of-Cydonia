@@ -23,7 +23,8 @@ public class DaggerThrowSpell extends Spell{
 	@Override
 	public void create(String group, Position pos, Stats stats) {
 		Entity e = EntityFactory.createDaggerThrow(group, pos, stats.strength, 600, pos.direction);
-	    SoC.game.world.getManager(GroupManager.class).add(e, group);
+	    SoC.game.groupmanager.add(e, group);
+	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	   	e.addToWorld();
 	}
 }

@@ -28,7 +28,7 @@ public class StatusBar extends Actor{
         Stats stats = SoC.game.statsmapper.get(SoC.game.player);
 		
 		batch.draw(container, getX(),  getY());
-        
+		
 		float proportion = (float)stats.health / (float)stats.maxHealth;
         batch.draw(bars, getX() +3, getY() + 34, 0, 0, (int)(bars.getWidth()*proportion), (int)(bars.getHeight()*0.5));
 		proportion = (float)stats.mana / (float)stats.maxMana;

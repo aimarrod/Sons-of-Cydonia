@@ -16,8 +16,9 @@ public class EntitySpawningTimerSystem extends VoidEntitySystem{
 			   @Override
 			   public void execute() {
 			    Entity e = EntityFactory.createSkeleton(2000,300,10,10);
-			    SoC.game.world.getManager(GroupManager.class).add(e, Constants.Groups.ENEMIES);
-			    SoC.game.world.getManager(GroupManager.class).add(e, Constants.Groups.SKELETONS);
+			    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
+			    SoC.game.groupmanager.add(e, Constants.Groups.SKELETONS);
+			    SoC.game.groupmanager.add(e, Constants.Groups.ENEMIES);
 			    e.addToWorld();
 			   }
 			  };

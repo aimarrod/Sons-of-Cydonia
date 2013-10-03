@@ -126,12 +126,7 @@ public class MapCollisionSystem extends EntityProcessingSystem {
 		
 		if(plm.has(e)){
 			if(tiles[centerx][centery].type == World.TILE_MAP_CHANGE){
-				SoC.game.getScreen().pause();
-				Gate gate = (Gate) tiles[centerx][centery];
-				SoC.game.resetWorld();
-				pos.x = gate.x * Constants.World.TILE_SIZE;
-				pos.y = gate.y * Constants.World.TILE_SIZE;
-			}
+ 			}
 		}
 		
 	}

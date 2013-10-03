@@ -19,6 +19,11 @@ public class MapRenderSystem extends VoidEntitySystem{
 	public void changeMap(TiledMap map){
 		this.renderer = new OrthogonalTiledMapRenderer(map, UNITSCALE);
 	}
+	
+	public void render(){
+		
+		renderer.render(new int[]{0,1});
+	}
 
 	@Override
 	protected void processSystem() {

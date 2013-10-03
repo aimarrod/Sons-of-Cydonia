@@ -15,6 +15,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.soc.core.Constants.Attributes;
@@ -51,6 +52,7 @@ import com.soc.game.systems.PlayerInputSystem;
 import com.soc.hud.HudSystem;
 import com.soc.screens.GameOverScreen;
 import com.soc.screens.SplashScreen;
+import com.soc.utils.MapLoader;
 import com.soc.utils.MusicPlayer;
 
 public class SoC extends Game {
@@ -76,6 +78,9 @@ public class SoC extends Game {
 	public ComponentMapper<Delay> delaymapper;
 	public ComponentMapper<Attack> attackmapper;
 	public ComponentMapper<Damage> damagemapper;
+	
+	public GroupManager groupmanager;
+	public TagManager tagmanager;
 	
 	public HudSystem hudSystem;
 	public AttackRenderSystem attackRenderSystem;
@@ -113,10 +118,12 @@ public class SoC extends Game {
 		
 		camera = new OrthographicCamera();
 		
-		player = EntityFactory.createCharacter(2000, 200, 200, 0, Constants.Classes.WARRIOR);
+		groupmanager = new GroupManager();
+		tagmanager = new TagManager();
+		world.setManager(groupmanager);
+		world.setManager(tagmanager);
 		
-		world.setManager(new GroupManager());
-		world.setManager(new TagManager());
+		player = EntityFactory.createCharacter(2000, 200, 200, 0, Constants.Classes.WARRIOR);
 		
 		world.setSystem(new AttackDelaySystem());
 		world.setSystem(new AttackProcessingSystem());
@@ -145,13 +152,19 @@ public class SoC extends Game {
 		//GameManager.instance.closeSplashScreen();
 	}
 	
-	public static void openMenu(){
+	public void openMenu(){
 		SoC.game.screens.push(SoC.game.getScreen());
 		//TODO: Open Menu
 	}
 	
+	public void changeMap(String name){
+		TiledMap map = MapLoader.loadMap(name);
+		world.getSystem(MapRenderSystem.class).changeMap(map);
+		world.getSystem(MapCollisionSystem.class).loadTiles(map);
+	}
+	
 	public void resetWorld(){
-		ImmutableBag<Entity> enemies = world.getManager(GroupManager.class).getEntities(Constants.Groups.ENEMIES);
+		ImmutableBag<Entity> enemies = world.getManager(GroupManager.class).getEntities(Constants.Groups.MAP_BOUND);
 		for(int i = 0; i < enemies.size(); i++){
 			enemies.get(i).deleteFromWorld();
 		}
