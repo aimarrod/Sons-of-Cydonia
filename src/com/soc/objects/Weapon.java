@@ -1,12 +1,9 @@
 package com.soc.objects;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.soc.core.SoC;
 import com.soc.game.components.Stats;
 
-public class Weapon {
+public class Weapon extends Item {
 	public TextureRegion icon;
 	public String tooltip;
 	public int gainStrenght;
@@ -16,9 +13,7 @@ public class Weapon {
 	private Stats stats;
 	
 	public Weapon(String name,String iconPath ,String tooltip, int gainStrenght, int gainAgility, int gainIntelligence){
-		this.name=name;
-		this.icon=new TextureRegion(new Texture(Gdx.files.internal(iconPath)), 64, 64);
-		this.tooltip=tooltip;
+		super(name,iconPath,tooltip);
 		this.gainStrenght=gainStrenght;
 		this.gainIntelligence=gainIntelligence;
 		this.gainAgility=gainAgility;
@@ -28,10 +23,14 @@ public class Weapon {
 		stats.strength+=gainStrenght;
 		stats.intelligence+=gainIntelligence;
 		stats.agility+=gainAgility;
+		player.removeFromInventary(this);
+		player.weapon=this;
 	}
 	public void remove(){
 		stats.strength-=gainStrenght;
 		stats.intelligence-=gainIntelligence;
 		stats.agility-=gainAgility;
+		player.addToInventary(this);
+		player.weapon=null;
 	}
 }

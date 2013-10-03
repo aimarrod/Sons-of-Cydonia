@@ -1,29 +1,29 @@
 package com.soc.objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.soc.core.SoC;
 import com.soc.game.components.Stats;
 
-public class Armor {
+public class Armor extends Item{
 	public TextureRegion icon;
 	public String tooltip;
-	public float gainArmor;
 	public String name;
+	public float gainArmor;
 	private Stats stats;
 	
 	public Armor(String name,String iconPath ,String tooltip, float gainArmor){
-		this.name=name;
-		this.icon=new TextureRegion(new Texture(Gdx.files.internal(iconPath)), 64, 64);
-		this.tooltip=tooltip;
+		super(name, iconPath,tooltip);
 		this.gainArmor=gainArmor;
 		stats=SoC.game.statsmapper.get(SoC.game.player);
 	}
 	public void equip(){
 		stats.armor+=gainArmor;
+		player.removeFromInventary(this);
+		player.armor=this;
 	}
 	public void remove(){
 		stats.armor-=gainArmor;
+		player.addToInventary(this);
+		player.armor=null;
 	}
 }

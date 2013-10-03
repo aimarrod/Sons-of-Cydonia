@@ -6,18 +6,20 @@ import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
+import com.soc.game.components.Character;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.game.components.Character;
+import com.soc.hud.HudSystem;
 
 
-	public class PlayerInputSystem extends EntityProcessingSystem{
+	public class PlayerInputSystem extends EntityProcessingSystem implements InputProcessor{
 		 @Mapper ComponentMapper<Velocity> vm;
 		 @Mapper ComponentMapper<State> sm;
 		 @Mapper ComponentMapper<Position>pm;
@@ -29,7 +31,12 @@ import com.soc.game.components.Character;
 		 public PlayerInputSystem() {
 			 super(Aspect.getAspectForAll(Velocity.class, Player.class, State.class,Position.class));
 		 }
-		   
+		  
+		 @Override
+		 protected void initialize() {
+		  Gdx.input.setInputProcessor(this);
+		 }
+		 
 		 @Override
 		 protected void process(Entity e) {
 		   
@@ -41,7 +48,6 @@ import com.soc.game.components.Character;
 			 
 			  
 			 if(state.state < State.BLOCKED){
-				
 				if(Gdx.input.isKeyPressed(player.attack)){
 					if(state.state != State.ATTACK){
 						st.mana--;
@@ -53,6 +59,7 @@ import com.soc.game.components.Character;
 					}
 					return;
 				}
+				
 				 
 				boolean moving = false;
 				 
@@ -88,6 +95,56 @@ import com.soc.game.components.Character;
 			 	}
 			 }
 			 			 
-			 
 		 }
+
+		@Override
+		public boolean keyDown(int keycode) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean keyUp(int keycode) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean keyTyped(char character) {
+			if(Gdx.input.isKeyPressed(plm.get(SoC.game.player).inventory)){
+				world.getSystem(HudSystem.class).toggleInventory();
+			}
+			return false;
+		}
+
+		@Override
+		public boolean touchDown(int screenX, int screenY, int pointer,
+				int button) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean touchDragged(int screenX, int screenY, int pointer) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean mouseMoved(int screenX, int screenY) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean scrolled(int amount) {
+			// TODO Auto-generated method stub
+			return false;
+		}
 	}

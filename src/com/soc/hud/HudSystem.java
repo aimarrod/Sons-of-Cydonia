@@ -14,14 +14,17 @@ public class HudSystem extends VoidEntitySystem{
 	Stage stage;
 	StatusBar statusBar;
 	ActionBar actionBar;
+	Inventory inventory;
 	
 	public HudSystem(OrthographicCamera camera){
 		this.camera = camera;
 		this.stage = new Stage();
 		this.statusBar = new StatusBar();
 		this.actionBar = new ActionBar();
+		this.inventory=new Inventory();
 		stage.addActor(statusBar);
 		stage.addActor(actionBar);
+		//stage.addActor(inventory);
 	}
 
 	
@@ -35,6 +38,15 @@ public class HudSystem extends VoidEntitySystem{
 		stage.setViewport(width, height, true);
 		statusBar.setPosition(10, height - 65);
 	}
+	public void toggleInventory(){
+		boolean isHidden=inventory.hasParent();
+		if(!isHidden){
+			stage.addActor(inventory);
+		}else{
+			inventory.remove();
+		}
+	}
+	
 
 	
 }

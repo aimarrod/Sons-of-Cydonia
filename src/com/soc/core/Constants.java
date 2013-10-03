@@ -65,5 +65,8 @@ public class Constants {
 		public final static String PLAYER = "player";
 	}
 	
+	public static class Items{
+		public final static int INVENTORY_SIZE=20;
+	}
 	
 }
