@@ -4,13 +4,13 @@ import java.util.Stack;
 
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
-import com.artemis.EntityManager;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -82,6 +82,7 @@ public class SoC extends Game {
 	public MapRenderSystem mapRenderSystem;
 	public CharacterRenderSystem characterRenderSystem;
 	public CameraSystem cameraSystem;
+	public InputMultiplexer inputMultiplexer;
 	
 
 	
@@ -106,6 +107,9 @@ public class SoC extends Game {
 		delaymapper = world.getMapper(Delay.class);
 		attackmapper = world.getMapper(Attack.class);
 		damagemapper = world.getMapper(Damage.class);
+		
+		inputMultiplexer=new InputMultiplexer();
+		Gdx.input.setInputProcessor(inputMultiplexer);
 		
 		spells = new Spell[Constants.Spells.SPELL_NUMBER];
 		spells[Constants.Spells.DAGGER_THROW] = new DaggerThrowSpell(); 

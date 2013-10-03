@@ -34,7 +34,8 @@ import com.soc.hud.HudSystem;
 		  
 		 @Override
 		 protected void initialize() {
-		  Gdx.input.setInputProcessor(this);
+		  //Gdx.input.setInputProcessor(this);
+			 SoC.game.inputMultiplexer.addProcessor(this);
 		 }
 		 
 		 @Override

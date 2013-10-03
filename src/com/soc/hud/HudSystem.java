@@ -37,6 +37,7 @@ public class HudSystem extends VoidEntitySystem{
 	public void setViewport(int width, int height){
 		stage.setViewport(width, height, true);
 		statusBar.setPosition(10, height - 65);
+		inventory.updateRes(width, height);
 	}
 	public void toggleInventory(){
 		boolean isHidden=inventory.hasParent();
