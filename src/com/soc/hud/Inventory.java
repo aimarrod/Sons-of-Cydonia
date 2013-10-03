@@ -12,7 +12,7 @@ public class Inventory extends Actor{
 	public Texture weaponSlot;
 	public Inventory(){
 		slot=new Texture(Gdx.files.internal("resources/slot.png"));
-		armorSlot=new Texture(Gdx.files.internal("resources/armor-slot.png"));
+		armorSlot=new Texture(Gdx.files.internal("resources/slot-armor.png"));
 		weaponSlot=new Texture(Gdx.files.internal("resources/slot-weapon.png"));
 	}
 	
