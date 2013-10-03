@@ -118,7 +118,7 @@ public class SoC extends Game {
 		camera = new OrthographicCamera();
 		
 		player = EntityFactory.createCharacter(2000, 200, 200, 0, Constants.Classes.WARRIOR);
-		
+		System.out.println("Primerpo por aqui ");
 		world.setManager(new GroupManager());
 		world.setManager(new TagManager());
 		

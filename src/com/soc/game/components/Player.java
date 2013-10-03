@@ -27,6 +27,10 @@ public class Player extends Component {
 		inventory=Input.Keys.I;
 		spellkeys = new int[]{Input.Keys.NUM_1, Input.Keys.NUM_2, Input.Keys.NUM_3, Input.Keys.NUM_4};
 		inventary=new Item[Constants.Items.INVENTORY_SIZE];
+		inventary[0]=new Weapon("Axe","resources/axe.png","Best Axe Ever!",100,10,10);
+		inventary[1]=new Armor("Armor","resources/armor.png", "Best Armor Ever!",100f);
+		weapon=null;
+		armor=null;
 	}
 	public boolean addToInventary(Item item){
 		boolean inserted=false;

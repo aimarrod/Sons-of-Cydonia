@@ -5,25 +5,22 @@ import com.soc.core.SoC;
 import com.soc.game.components.Stats;
 
 public class Armor extends Item{
-	public TextureRegion icon;
-	public String tooltip;
-	public String name;
 	public float gainArmor;
-	private Stats stats;
 	
 	public Armor(String name,String iconPath ,String tooltip, float gainArmor){
 		super(name, iconPath,tooltip);
 		this.gainArmor=gainArmor;
-		stats=SoC.game.statsmapper.get(SoC.game.player);
 	}
 	public void equip(){
+		Stats stats=SoC.game.statsmapper.get(SoC.game.player);
 		stats.armor+=gainArmor;
-		player.removeFromInventary(this);
-		player.armor=this;
+		SoC.game.playermapper.get(SoC.game.player).armor=this;
+		SoC.game.playermapper.get(SoC.game.player).removeFromInventary(this);
 	}
 	public void remove(){
+		Stats stats=SoC.game.statsmapper.get(SoC.game.player);
 		stats.armor-=gainArmor;
-		player.addToInventary(this);
-		player.armor=null;
+		SoC.game.playermapper.get(SoC.game.player).addToInventary(this);
+		SoC.game.playermapper.get(SoC.game.player).armor=null;
 	}
 }
