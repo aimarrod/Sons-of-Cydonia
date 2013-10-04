@@ -45,7 +45,6 @@ public class Inventory extends Actor implements InputProcessor{
 		batch.draw(armorSlot, 128, 512,  64, 64 );
 		Armor armor=SoC.game.playermapper.get(SoC.game.player).armor;
 		if(armor!=null){
-			System.out.println("Armor: "+armor.gainArmor);
 			batch.draw(armor.icon,128+5,512+15,55,45);
 		}
 		batch.draw(weaponSlot,192,512,64,64);
@@ -87,7 +86,6 @@ public class Inventory extends Actor implements InputProcessor{
 				boolean foundSlot=false;
 				for(int i=1;i<=Constants.Items.INVENTORY_SIZE &&!foundSlot;i++){
 					if(screenX>posX && screenX<posX+64 && screenY<posY && screenY>posY-64){
-						System.out.println("Lugar: "+i);
 						foundSlot=true;
 						Item item=SoC.game.playermapper.get(SoC.game.player).inventary[i-1];
 						if(item!=null){
@@ -106,6 +104,21 @@ public class Inventory extends Actor implements InputProcessor{
 						posX=0;
 					}
 				}
+			}else{
+				if(screenX>128 && screenX<192 && screenY<height-512 && screenY>height-576){
+					Armor armor=SoC.game.playermapper.get(SoC.game.player).armor;
+					if(armor!=null){
+						armor.remove();
+					}
+				}else{
+					if(screenX>192 && screenX<256 && screenY<height-512 && screenY>height-576){
+						Weapon weapon=SoC.game.playermapper.get(SoC.game.player).weapon;
+						if(weapon!=null){
+							weapon.remove();
+						}
+					}
+				}
+				
 			}
 		}
 		return false;

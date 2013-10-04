@@ -34,7 +34,7 @@ public class Player extends Component {
 	}
 	public boolean addToInventary(Item item){
 		boolean inserted=false;
-		for(int i=0;i<inventary.length;i++){
+		for(int i=0;i<inventary.length&&!inserted;i++){
 			if(inventary[i]==null){
 				inventary[i]=item;
 				inserted=true;
@@ -45,7 +45,7 @@ public class Player extends Component {
 	
 	public boolean removeFromInventary(Item item){
 		boolean removed=false;
-		for(int i=0;i<inventary.length;i++){
+		for(int i=0;i<inventary.length&&!removed;i++){
 			if(inventary[i]==item){
 				inventary[i]=null;
 				removed=true;
