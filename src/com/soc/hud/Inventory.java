@@ -22,7 +22,6 @@ public class Inventory extends Actor implements InputProcessor{
 		slot=new Texture(Gdx.files.internal("resources/slot.png"));
 		armorSlot=new Texture(Gdx.files.internal("resources/slot-armor.png"));
 		weaponSlot=new Texture(Gdx.files.internal("resources/slot-weapon.png"));
-		SoC.game.inputMultiplexer.addProcessor(this);
 		this.width=1280;
 		this.height=900;
 	}
