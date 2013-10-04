@@ -54,5 +54,15 @@ public class Player extends Component {
 		return removed;
 	}
 	
+	public int numFreeSlots(){
+		int freeSlots=0;
+		for(int i=0;i<inventary.length;i++){
+			if(inventary[i]==null){
+				freeSlots++;
+			}
+		}
+		return freeSlots;
+	}
+	
 	
 }

@@ -25,10 +25,12 @@ public class Weapon extends Item {
 	}
 	public void remove(){
 		Stats stats=SoC.game.statsmapper.get(SoC.game.player);
-		stats.strength-=gainStrenght;
-		stats.intelligence-=gainIntelligence;
-		stats.agility-=gainAgility;
-		SoC.game.playermapper.get(SoC.game.player).addToInventary(this);
-		SoC.game.playermapper.get(SoC.game.player).weapon=null;
+		if(SoC.game.playermapper.get(SoC.game.player).numFreeSlots()>0){
+			stats.strength-=gainStrenght;
+			stats.intelligence-=gainIntelligence;
+			stats.agility-=gainAgility;
+			SoC.game.playermapper.get(SoC.game.player).addToInventary(this);
+			SoC.game.playermapper.get(SoC.game.player).weapon=null;
+		}
 	}
 }

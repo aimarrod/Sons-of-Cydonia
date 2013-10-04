@@ -19,8 +19,10 @@ public class Armor extends Item{
 	}
 	public void remove(){
 		Stats stats=SoC.game.statsmapper.get(SoC.game.player);
-		stats.armor-=gainArmor;
-		SoC.game.playermapper.get(SoC.game.player).addToInventary(this);
-		SoC.game.playermapper.get(SoC.game.player).armor=null;
+		if(SoC.game.playermapper.get(SoC.game.player).numFreeSlots()>0){
+			stats.armor-=gainArmor;
+			SoC.game.playermapper.get(SoC.game.player).addToInventary(this);
+			SoC.game.playermapper.get(SoC.game.player).armor=null;
+		}
 	}
 }
