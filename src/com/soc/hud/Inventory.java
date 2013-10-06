@@ -2,6 +2,7 @@ package com.soc.hud;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,12 +28,12 @@ public class Inventory extends Actor implements InputProcessor{
 		focusSlot=new Texture(Gdx.files.internal("resources/slot-weapon.png"));
 		this.width=1280;
 		this.height=900;
-		focusedSlot=20;
+		focusedSlot=16;
 	}
 	
 	public void draw(SpriteBatch batch, float partenAlpha){
 		int posX=0;
-		int posY=256;
+		int posY=448;
 		int posFocusX=0;
 		int posFocusY=0;
 		boolean existsFocus=false;
@@ -55,7 +56,7 @@ public class Inventory extends Actor implements InputProcessor{
 			}
 				posX+=64;
 				if(i % 5==0){
-					posY+=64;
+					posY-=64;
 					posX=0;
 				}
 		}
@@ -96,16 +97,27 @@ public class Inventory extends Actor implements InputProcessor{
 
 	@Override
 	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
+		if(Gdx.input.isKeyPressed(Keys.TAB)){
+			System.out.println("asda");
+			if(focusedSlot==20){
+				focusedSlot=1;
+			}else{
+				focusedSlot++;
+			}
+		}else{
+			if(Gdx.input.isKeyPressed(Keys.X))
+				System.out.println("Holaxxxxxx");
+		}
+		return true;
 	}
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)){
 			if(screenX>0 && screenX<320 && screenY<height-256 && screenY>height-512){
 				int posX=0;
-				int posY=height-256;
+				int posY=height-448;
 				boolean foundSlot=false;
 				for(int i=1;i<=Constants.Items.INVENTORY_SIZE &&!foundSlot;i++){
 					if(screenX>posX && screenX<posX+64 && screenY<posY && screenY>posY-64){
@@ -123,7 +135,7 @@ public class Inventory extends Actor implements InputProcessor{
 					}
 					posX+=64;
 					if(i % 5==0){
-						posY-=64;
+						posY+=64;
 						posX=0;
 					}
 				}
@@ -164,7 +176,7 @@ public class Inventory extends Actor implements InputProcessor{
 	public boolean mouseMoved(int screenX, int screenY) {
 		if(screenX>0 && screenX<320 && screenY<height-256 && screenY>height-512){
 			int posX=0;
-			int posY=height-256;
+			int posY=height-448;
 			boolean foundSlot=false;
 			for(int i=1;i<=Constants.Items.INVENTORY_SIZE &&!foundSlot;i++){
 				if(screenX>posX && screenX<posX+64 && screenY<posY && screenY>posY-64){
@@ -173,7 +185,7 @@ public class Inventory extends Actor implements InputProcessor{
 				}
 				posX+=64;
 				if(i % 5==0){
-					posY-=64;
+					posY+=64;
 					posX=0;
 				}
 			}

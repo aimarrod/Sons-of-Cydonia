@@ -114,8 +114,9 @@ import com.soc.hud.HudSystem;
 		public boolean keyTyped(char character) {
 			if(Gdx.input.isKeyPressed(plm.get(SoC.game.player).inventory)){
 				world.getSystem(HudSystem.class).toggleInventory();
+				return true;
 			}
-			return true;
+			return false;
 		}
 
 		@Override
