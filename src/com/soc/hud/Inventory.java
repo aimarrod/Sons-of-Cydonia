@@ -28,7 +28,7 @@ public class Inventory extends Actor implements InputProcessor{
 		focusSlot=new Texture(Gdx.files.internal("resources/slot-weapon.png"));
 		this.width=1280;
 		this.height=900;
-		focusedSlot=16;
+		focusedSlot=1;
 	}
 	
 	public void draw(SpriteBatch batch, float partenAlpha){
@@ -98,15 +98,25 @@ public class Inventory extends Actor implements InputProcessor{
 	@Override
 	public boolean keyTyped(char character) {
 		if(Gdx.input.isKeyPressed(Keys.TAB)){
-			System.out.println("asda");
 			if(focusedSlot==20){
 				focusedSlot=1;
 			}else{
 				focusedSlot++;
 			}
 		}else{
-			if(Gdx.input.isKeyPressed(Keys.X))
-				System.out.println("Holaxxxxxx");
+			if(Gdx.input.isKeyPressed(Keys.E)){
+				Item item=SoC.game.playermapper.get(SoC.game.player).inventary[focusedSlot-1];
+				if(item!=null){
+					if(item instanceof Weapon){
+						((Weapon)item).equip();
+					}else{
+						if(item instanceof Armor){
+							((Armor)item).equip();
+						}
+					}
+				}
+			}
+				
 		}
 		return true;
 	}
