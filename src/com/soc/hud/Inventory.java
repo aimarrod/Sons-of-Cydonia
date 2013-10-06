@@ -7,6 +7,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.objects.Armor;
@@ -201,6 +203,12 @@ public class Inventory extends Actor implements InputProcessor{
 				if(screenX>posX && screenX<posX+64 && screenY<posY && screenY>posY-64){
 					foundSlot=true;
 					focusedSlot=i;
+					Item item=SoC.game.playermapper.get(SoC.game.player).inventary[i-1];
+					if(item!=null){
+						SoC.game.world.getSystem(HudSystem.class).toggleTextButton(item.tooltip,posX,posY);
+					}else{
+						SoC.game.world.getSystem(HudSystem.class).toggleTextButton(null, 0,0);
+					}
 				}
 				posX+=64;
 				if(i % 5==0){
@@ -211,6 +219,7 @@ public class Inventory extends Actor implements InputProcessor{
 		}
 		else{
 			focusedSlot=0;
+			SoC.game.world.getSystem(HudSystem.class).toggleTextButton(null, 0,0);
 		}
 		return false;
 	}
