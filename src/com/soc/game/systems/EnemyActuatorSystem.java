@@ -99,14 +99,12 @@ public class EnemyActuatorSystem extends EntitySystem {
 					state.state=State.IDLE;
 				} else {
 					dstModified=true;
-					if (AStar.instance.isDirectPath((int) p.x, (int) p.y,
-							(int) playp.x, (int) playp.y)) {
+					if (AStar.instance.isDirectPath(p, playp)) {
 						enemy.path.clear();
 						dstx = playp.x - p.x;
 						dsty = playp.y - p.y;
 					} else if (enemy.path.isEmpty()) {
-						enemy.path = AStar.instance.getPath(new Vector2(p.x,
-								p.y), new Vector2(playp.x, playp.y));
+						enemy.path = AStar.instance.getPath(p, playp);
 					}
 
 					if (!enemy.path.isEmpty()) {

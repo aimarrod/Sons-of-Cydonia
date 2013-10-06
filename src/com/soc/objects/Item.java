@@ -10,12 +10,10 @@ public abstract class Item {
 	public TextureRegion icon;
 	public String tooltip;
 	public String name;
-	public Player player;
 	
 	public Item(String name, String iconPath, String tooltip){
 		this.name=name;
 		this.icon=new TextureRegion(new Texture(Gdx.files.internal(iconPath)), 64, 64);
 		this.tooltip=tooltip;
-		this.player=SoC.game.playermapper.get(SoC.game.player);
 	}
 }

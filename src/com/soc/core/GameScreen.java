@@ -8,12 +8,12 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.soc.game.systems.AttackRenderSystem;
+import com.soc.game.graphics.Renderer;
+import com.soc.game.map.Map;
 import com.soc.game.systems.CameraSystem;
-import com.soc.game.systems.CharacterRenderSystem;
-import com.soc.game.systems.MapCollisionSystem;
-import com.soc.game.systems.MapRenderSystem;
+import com.soc.game.systems.RenderSystem;
 import com.soc.hud.HudSystem;
+import com.soc.utils.LevelManager;
 import com.soc.utils.MapLoader;
 
 public class GameScreen implements Screen {
@@ -25,13 +25,13 @@ public class GameScreen implements Screen {
 		camera = SoC.game.camera;
 		fps=new FPSLogger();
 		
-		TiledMap map = MapLoader.loadMap(mapName);
-		SoC.game.world.getSystem(MapRenderSystem.class).changeMap(map);
-		SoC.game.world.getSystem(MapCollisionSystem.class).loadTiles(map);
+		MapLoader.loadMap(mapName);
 				
 		camera.setToOrtho(false, 1280, 900);
 		
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.PLAYERS);
+		SoC.game.world.getManager(LevelManager.class).setLevel(SoC.game.player, Constants.Groups.LEVEL+"0");
+		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.CHARACTERS);
 		SoC.game.world.getManager(TagManager.class).register(Constants.Tags.PLAYER, SoC.game.player);
 		SoC.game.world.addEntity(SoC.game.player);
 	}
@@ -46,9 +46,7 @@ public class GameScreen implements Screen {
 	    SoC.game.world.process();
 	     
 	    SoC.game.cameraSystem.process();
-	    SoC.game.mapRenderSystem.process();
-	    SoC.game.characterRenderSystem.process();
-	    SoC.game.attackRenderSystem.process();
+	    SoC.game.renderSystem.process();
 	    SoC.game.hudSystem.process();
 
 	}

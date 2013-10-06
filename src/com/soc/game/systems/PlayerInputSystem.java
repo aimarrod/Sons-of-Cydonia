@@ -34,7 +34,7 @@ import com.soc.hud.HudSystem;
 		  
 		 @Override
 		 protected void initialize() {
-		  Gdx.input.setInputProcessor(this);
+			 SoC.game.inputMultiplexer.addProcessor(this);
 		 }
 		 
 		 @Override
@@ -114,7 +114,7 @@ import com.soc.hud.HudSystem;
 			if(Gdx.input.isKeyPressed(plm.get(SoC.game.player).inventory)){
 				world.getSystem(HudSystem.class).toggleInventory();
 			}
-			return false;
+			return true;
 		}
 
 		@Override

@@ -1,16 +1,18 @@
 package com.soc.core;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
-import com.artemis.EntityManager;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -32,26 +34,25 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.map.Map;
 import com.soc.game.spells.DaggerThrowSpell;
 import com.soc.game.spells.PunchSpell;
 import com.soc.game.spells.Spell;
 import com.soc.game.systems.AttackDelaySystem;
 import com.soc.game.systems.AttackProcessingSystem;
-import com.soc.game.systems.AttackRenderSystem;
 import com.soc.game.systems.CameraSystem;
-import com.soc.game.systems.CharacterRenderSystem;
 import com.soc.game.systems.DamageProcessingSystem;
 import com.soc.game.systems.EnemyActuatorSystem;
-import com.soc.game.systems.EntityCollisionSystem;
+import com.soc.game.systems.CollisionSystem;
 import com.soc.game.systems.EntitySpawningTimerSystem;
 import com.soc.game.systems.ExpiringSystem;
-import com.soc.game.systems.MapCollisionSystem;
-import com.soc.game.systems.MapRenderSystem;
+import com.soc.game.systems.RenderSystem;
 import com.soc.game.systems.MovementSystem;
 import com.soc.game.systems.PlayerInputSystem;
 import com.soc.hud.HudSystem;
 import com.soc.screens.GameOverScreen;
 import com.soc.screens.SplashScreen;
+import com.soc.utils.LevelManager;
 import com.soc.utils.MapLoader;
 import com.soc.utils.MusicPlayer;
 
@@ -81,17 +82,17 @@ public class SoC extends Game {
 	
 	public GroupManager groupmanager;
 	public TagManager tagmanager;
+	public LevelManager levelmanager;
 	
 	public HudSystem hudSystem;
-	public AttackRenderSystem attackRenderSystem;
-	public MapRenderSystem mapRenderSystem;
-	public CharacterRenderSystem characterRenderSystem;
+	public RenderSystem renderSystem;
 	public CameraSystem cameraSystem;
+	public InputMultiplexer inputMultiplexer;
 	
-
+	public Map map;
 	
 	public Stack<Screen> screens;
-	
+		
 	
 	
 	@Override
@@ -112,34 +113,37 @@ public class SoC extends Game {
 		attackmapper = world.getMapper(Attack.class);
 		damagemapper = world.getMapper(Damage.class);
 		
+		inputMultiplexer=new InputMultiplexer();
+		Gdx.input.setInputProcessor(inputMultiplexer);
+		
 		spells = new Spell[Constants.Spells.SPELL_NUMBER];
 		spells[Constants.Spells.DAGGER_THROW] = new DaggerThrowSpell(); 
 		spells[Constants.Spells.PUNCH]=new PunchSpell();
 		
 		camera = new OrthographicCamera();
 		
+		player = EntityFactory.createCharacter(2000, 800, 0, 200, 0, Constants.Classes.WARRIOR);
+
 		groupmanager = new GroupManager();
 		tagmanager = new TagManager();
+		levelmanager = new LevelManager();
+
 		world.setManager(groupmanager);
 		world.setManager(tagmanager);
-		
-		player = EntityFactory.createCharacter(2000, 200, 200, 0, Constants.Classes.WARRIOR);
+		world.setManager(levelmanager);
 		
 		world.setSystem(new AttackDelaySystem());
 		world.setSystem(new AttackProcessingSystem());
 	    world.setSystem(new EnemyActuatorSystem());
 	    world.setSystem(new PlayerInputSystem());
-	    world.setSystem(new MapCollisionSystem());
-	    world.setSystem(new MovementSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
-	    world.setSystem(new EntityCollisionSystem());	
-	    world.setSystem(new DamageProcessingSystem()); 
+	    world.setSystem(new CollisionSystem());	
+	    world.setSystem(new DamageProcessingSystem());
+	    world.setSystem(new MovementSystem());
 	    world.setSystem(new ExpiringSystem());
 	    
 		cameraSystem = SoC.game.world.setSystem( new CameraSystem(camera), true);
-	    characterRenderSystem = SoC.game.world.setSystem( new CharacterRenderSystem(camera) , true );
-		mapRenderSystem = SoC.game.world.setSystem( new MapRenderSystem(camera), true );
-		attackRenderSystem = SoC.game.world.setSystem(new AttackRenderSystem(camera),true);
+		renderSystem = SoC.game.world.setSystem( new RenderSystem(camera), true );
 		hudSystem = SoC.game.world.setSystem(new HudSystem(camera));
 		
 		SoC.game.world.initialize();
@@ -150,6 +154,7 @@ public class SoC extends Game {
 		load("initial");
 		//GameManager.instance.openSplashScreen();
 		//GameManager.instance.closeSplashScreen();
+		
 	}
 	
 	public void openMenu(){
@@ -158,9 +163,7 @@ public class SoC extends Game {
 	}
 	
 	public void changeMap(String name){
-		TiledMap map = MapLoader.loadMap(name);
-		world.getSystem(MapRenderSystem.class).changeMap(map);
-		world.getSystem(MapCollisionSystem.class).loadTiles(map);
+		MapLoader.loadMap(name);
 	}
 	
 	public void resetWorld(){

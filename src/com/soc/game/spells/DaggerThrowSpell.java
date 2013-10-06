@@ -25,6 +25,8 @@ public class DaggerThrowSpell extends Spell{
 		Entity e = EntityFactory.createDaggerThrow(group, pos, stats.strength, 600, pos.direction);
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
+	    SoC.game.groupmanager.add(e, Constants.Groups.PROJECTILES);
+	    SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);
 	   	e.addToWorld();
 	}
 }

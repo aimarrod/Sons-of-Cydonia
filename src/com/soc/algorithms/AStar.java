@@ -8,22 +8,23 @@ import java.util.PriorityQueue;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.core.Constants;
 import com.soc.core.Constants.World;
-import com.soc.utils.Tile;
+import com.soc.game.components.Position;
+import com.soc.game.map.Tile;
 
 	public class AStar {
 		 
 		public static AStar instance;
-		public Tile [][] tiles;
+		public Tile [][][] tiles;
 		
-		private AStar(Tile[][] tiles){
+		private AStar(Tile[][][] tiles){
 			this.tiles=tiles;
 		}
 		
-		public static void initialize(Tile[][] tiles){
+		public static void initialize(Tile[][][] tiles){
 			instance = new AStar(tiles);
 		}
 		
-		public Node calculateAStar(Vector2 start, Vector2 goal){
+		public Node calculateAStar(Position start, Position goal){
 			
 			//Graph
 			HashMap<String, Node> expanded = new HashMap<String, Node>();
@@ -48,7 +49,7 @@ import com.soc.utils.Tile;
 				
 				expanded.put(node.id(),node);
 				
-				List<Node>neighbors=expandNode(node, goalx, goaly);
+				List<Node>neighbors=expandNode(node, goalx, goaly, start.z);
 				for(int i=0;i<neighbors.size();i++){
 					
 					Node neighbor=neighbors.get(i);
@@ -79,27 +80,27 @@ import com.soc.utils.Tile;
 			return (Math.abs(currx-goalx)<1) && (Math.abs(curry-goaly)<1);
 		}
 		
-		public List<Node> expandNode(Node n,int goalx, int goaly){
+		public List<Node> expandNode(Node n,int goalx, int goaly, int z){
 			List<Node> nodes = new ArrayList<Node>();
-			addSafe(n, n.x+1, n.y+1, goalx, goaly, nodes, 2);
-			addSafe(n, n.x+1, n.y, goalx, goaly, nodes, 1);
-			addSafe(n, n.x+1, n.y-1, goalx, goaly, nodes, 2);
-			addSafe(n, n.x, n.y-1, goalx, goaly, nodes, 1);
-			addSafe(n, n.x-1, n.y-1, goalx, goaly, nodes, 2);
-			addSafe(n, n.x-1, n.y, goalx, goaly, nodes, 1);
-			addSafe(n, n.x-1, n.y+1, goalx, goaly, nodes, 2);
-			addSafe(n, n.x, n.y+1, goalx, goaly, nodes, 1);
+			addSafe(n, n.x+1, n.y+1, z, goalx, goaly, nodes, 2);
+			addSafe(n, n.x+1, n.y, z, goalx, goaly, nodes, 1);
+			addSafe(n, n.x+1, n.y-1, z, goalx, goaly, nodes, 2);
+			addSafe(n, n.x, n.y-1, z, goalx, goaly, nodes, 1);
+			addSafe(n, n.x-1, n.y-1, z, goalx, goaly, nodes, 2);
+			addSafe(n, n.x-1, n.y, z, goalx, goaly, nodes, 1);
+			addSafe(n, n.x-1, n.y+1, z, goalx, goaly, nodes, 2);
+			addSafe(n, n.x, n.y+1, z, goalx, goaly, nodes, 1);
 
 			return nodes;
 		}
 		
-		public void addSafe(Node parent, int x, int y, int goalx, int goaly, List<Node> nodes, int cost){
-			if((x>0 && x<tiles.length && y>0 && y<tiles[x].length && tiles[x][y].type!=Constants.World.TILE_OBSTACLE)){
+		public void addSafe(Node parent, int x, int y, int z, int goalx, int goaly, List<Node> nodes, int cost){
+			if((x>0 && x<tiles[z].length && y>0 && y<tiles[z][x].length && tiles[z][x][y].type!=Constants.World.TILE_OBSTACLE)){
 				nodes.add(new Node(x,y, parent, parent.g+cost, Math.hypot(goalx-x, goaly-y)));
 			}
 		}
 		
-		public ArrayList<Node> getPath (Vector2 start, Vector2 goal){
+		public ArrayList<Node> getPath (Position start, Position goal){
 			 ArrayList<Node>pathNodes=new ArrayList<Node>();
 			 Node path=calculateAStar(start, goal);
 			 Node currentNode=path;
@@ -112,11 +113,12 @@ import com.soc.utils.Tile;
 			 return pathNodes;
 		}
 		
-		public boolean isDirectPath(int posx, int posy, int goalx, int goaly){
-			posx = (int) (posx*World.TILE_FACTOR);
-			posy = (int) (posy*World.TILE_FACTOR);
-			goalx = (int) (goalx*World.TILE_FACTOR); 
-			goaly = (int) (goaly*World.TILE_FACTOR);
+		public boolean isDirectPath(Position pos, Position goal){
+			if(pos.z != goal.z) return false;
+			int posx = (int) (pos.x*World.TILE_FACTOR);
+			int posy = (int) (pos.y*World.TILE_FACTOR);
+			int goalx = (int) (goal.x*World.TILE_FACTOR); 
+			int goaly = (int) (goal.y*World.TILE_FACTOR);
 			
 			while(posx != goalx || posy != goaly){
 				if(posx > goalx){
@@ -124,7 +126,7 @@ import com.soc.utils.Tile;
 				} else if(posx < goalx){
 					posx++;
 				}
-				if(tiles[posx][posy].type==Constants.World.TILE_OBSTACLE){
+				if(tiles[pos.z][posx][posy].type==Constants.World.TILE_OBSTACLE){
 					return false;
 				}
 				
@@ -133,7 +135,7 @@ import com.soc.utils.Tile;
 				} else if(posy < goaly){
 					posy++;
 				}
-				if(tiles[posx][posy].type==Constants.World.TILE_OBSTACLE){
+				if(tiles[pos.z][posx][posy].type==Constants.World.TILE_OBSTACLE){
 					return false;
 				}
 			}

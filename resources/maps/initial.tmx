@@ -52,11 +52,11 @@
   <object x="1568" y="2528" width="2272" height="32"/>
  </objectgroup>
  <objectgroup name="border" width="120" height="80">
-  <object x="1472" y="2496" width="96" height="32">
+  <object x="1184" y="2496" width="96" height="32">
    <properties>
-    <property name="map" value="initial.tmx"/>
-    <property name="x" value="40"/>
-    <property name="y" value="40"/>
+    <property name="map" value="second.tmx"/>
+    <property name="x" value="39"/>
+    <property name="y" value="5"/>
    </properties>
   </object>
   <object x="3328" y="1344"/>
