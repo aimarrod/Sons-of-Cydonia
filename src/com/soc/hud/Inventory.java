@@ -11,6 +11,7 @@ import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.objects.Armor;
 import com.soc.objects.Item;
+import com.soc.objects.Potion;
 import com.soc.objects.Weapon;
 
 public class Inventory extends Actor implements InputProcessor{
@@ -112,6 +113,10 @@ public class Inventory extends Actor implements InputProcessor{
 					}else{
 						if(item instanceof Armor){
 							((Armor)item).equip();
+						}else{
+							if(item instanceof Potion){
+								((Potion)item).use();
+							}
 						}
 					}
 				}
@@ -139,6 +144,10 @@ public class Inventory extends Actor implements InputProcessor{
 							}else{
 								if(item instanceof Armor){
 									((Armor)item).equip();
+								}else{
+									if(item instanceof Potion){
+										((Potion)item).use();
+									}
 								}
 							}
 						}
