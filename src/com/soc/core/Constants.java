@@ -19,15 +19,22 @@ public class Constants {
 		public static final String SKELETONS = "skeleton";
 		public static final String ENEMY_ATTACKS = "enemyattack";
 		public static final String PLAYER_ATTACKS = "playerattack";
+		public static final String MAP_BOUND = "mapbound"; //The ones which dissapear with the map
+		public static final String LEVEL = "level";
+		public static final String CHARACTERS = "characters";
+		public static final String PROJECTILES = "projectiles";
 	}
 	
 	public static class World{
 		public static final float TILE_SIZE = 32f;
 		public static final float TILE_FACTOR = 0.03125f;
 		public static final int TILE_WALKABLE = 0;
-		public static final int TILE_OBSTACLE = 1;
+		public static final int TILE_OBSTACLE = 1; 
 		public static final int TILE_MAP_CHANGE = 2;
 		public static final int TILE_LEVEL_CHANGE = 3;
+		public static final int TILE_STAIRS = 4;
+		public static final int TILE_UNWALKABLE = 5;
+		public static final int LAYERS_PER_LEVEL = 4;
 	}
 	
 	public static class Configuration{
@@ -64,7 +71,7 @@ public class Constants {
 	public static class Tags{
 		public final static String PLAYER = "player";
 	}
-	
+		
 	public static class Items{
 		public final static int INVENTORY_SIZE=20;
 	}

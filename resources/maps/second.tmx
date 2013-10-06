@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="120" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="sand" tilewidth="32" tileheight="32">
+  <image source="tiles/twosided/sand.png" width="160" height="192"/>
+ </tileset>
+ <layer name="background" width="120" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6GzUP9m95kMSFg1VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf0HGAUdDg==
+  </data>
+ </layer>
+ <layer name="foreground" width="120" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt271qwmAAhlHRQaEWTAfv/1KbQdqlUZr4l4dz4CXTh+ITIUs2GwAAAABYj+Fy3Y4721tv91fAG4bLvmac5XmWNNJ3HfRt07dN3zZ92+Y08vy8HnP7zj3Lc+nbpm+bvm36tnl+btO3Td+2JY30fX/6tunbpm+bvm36tunbpm+bvm36tunbpm+bvm36tunbpm+bvm36tunbpm+bvm3eD23z/23Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G3Tt03fNn3b9G1b0mg/7vyifU58p49xR/vZYeJ3+q/hyh5h6r48Pejz+HWt9b166/tatxov7axvm75t+rbpez/fwNseSA==
+  </data>
+ </layer>
+ <objectgroup name="collision" width="120" height="100">
+  <object x="0" y="2976" width="1216" height="256"/>
+  <object x="1376" y="2976" width="2496" height="256"/>
+  <object x="3552" y="0" width="288" height="2976"/>
+  <object x="0" y="0" width="224" height="2976"/>
+ </objectgroup>
+ <objectgroup name="border" width="120" height="100">
+  <object x="1216" y="3104" width="160" height="32">
+   <properties>
+    <property name="map" value="initial.tmx"/>
+    <property name="x" value="30"/>
+    <property name="y" value="5"/>
+   </properties>
+  </object>
+  <object x="640" y="2368"/>
+ </objectgroup>
+</map>

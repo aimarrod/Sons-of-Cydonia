@@ -18,6 +18,7 @@ import com.soc.game.components.Feet;
 import com.soc.game.components.Flying;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
+import com.soc.game.components.Spawner;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
@@ -27,11 +28,11 @@ import com.soc.utils.GraphicsLoader;
 public class EntityFactory {
 	
 
-	public static Entity createCharacter(float px, float py, float range, int damage, int type){
+	public static Entity createCharacter(float px, float py, int pz,float range, int damage, int type){
 		Entity e = SoC.game.world.createEntity();
 		Character animations = new Character();
 		
-	    e.addComponent(new Position(px,py));
+	    e.addComponent(new Position(px,py, pz));
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,200));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
@@ -58,9 +59,9 @@ public class EntityFactory {
 	}
 	
 	
-	public static Entity createSkeleton(float px, float py, int damage, float range){
+	public static Entity createSkeleton(float px, float py, int pz,int damage, float range){
 		Entity e = SoC.game.world.createEntity();
-	    e.addComponent(new Position(px,py));
+	    e.addComponent(new Position(px,py, pz));
 	    e.addComponent(new Velocity(0,0,100));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(1));
@@ -81,7 +82,7 @@ public class EntityFactory {
 	public static Entity createDaggerThrow(String group, Position pos, int damage, int range, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
 		
-		e.addComponent( new Position(pos.x,pos.y) );
+		e.addComponent( new Position(pos.x,pos.y, pos.z) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(Constants.Spells.DAGGER_SPEED*dir.x, Constants.Spells.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying());
@@ -93,7 +94,7 @@ public class EntityFactory {
 	public static Entity createIcicle(String group ,Position pos, int damage, int range, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
 				
-		e.addComponent( new Position(pos.x,pos.y) );
+		e.addComponent( new Position(pos.x,pos.y, pos.z) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
@@ -105,7 +106,7 @@ public class EntityFactory {
 	public static Entity createFireball(String group, Position pos, int damage, int range, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
 				
-		e.addComponent( new Position(pos.x, pos.y) );
+		e.addComponent( new Position(pos.x, pos.y, pos.z) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
@@ -117,11 +118,21 @@ public class EntityFactory {
 	public static Entity createPunch(String group, Position pos, int damage, int range, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
 				
-		e.addComponent( new Position(pos.x, pos.y) );
+		e.addComponent( new Position(pos.x, pos.y, pos.z) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Attack(new PunchProcessor(dir, range), damage) );
 	   	
 	   	return e;
+	}
+	
+	public static Entity createSpawner(float x, float y, int z, int width, int height, String type, int max, int range, float interval){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z) );
+		e.addComponent( new Bounds(width, height));
+		e.addComponent( new Spawner(type, max, range, interval));
+		
+		return e;
 	}
 }

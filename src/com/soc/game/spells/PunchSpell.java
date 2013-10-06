@@ -5,6 +5,7 @@ import com.artemis.managers.GroupManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.game.components.Position;
@@ -19,7 +20,8 @@ public class PunchSpell extends Spell{
 	@Override
 	public void create(String group, Position pos, Stats stats) {
 		Entity e = EntityFactory.createPunch(group, pos, stats.strength, 16, pos.direction);	
-	    SoC.game.world.getManager(GroupManager.class).add(e, group);
+	    SoC.game.groupmanager.add(e, group);
+	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	   	e.addToWorld();
 	}
 

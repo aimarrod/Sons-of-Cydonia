@@ -1,23 +1,152 @@
 package com.soc.utils;
 
-import com.badlogic.gdx.maps.MapLayer;
+import java.util.Iterator;
+
+import com.artemis.utils.Bag;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile.BlendMode;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.soc.algorithms.AStar;
+import com.soc.core.Constants;
+import com.soc.core.EntityFactory;
+import com.soc.core.SoC;
+import com.soc.core.Constants.World;
+import com.soc.game.map.Gate;
+import com.soc.game.map.Map;
+import com.soc.game.map.Stairs;
+import com.soc.game.map.Tile;
+import com.soc.game.systems.RenderSystem;
 
 public class MapLoader {
 	private final static String BASE_DIR = "resources/maps/";
 
-	public static TiledMap loadMap(String name){
-		TiledMap map =  new TmxMapLoader().load(BASE_DIR + name);
-		TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("background");
-		for(int i = 0; i < layer.getWidth(); i++){
-			for(int j = 0; j < layer.getHeight(); j++){
-				layer.getCell(i,j).getTile().setBlendMode(BlendMode.NONE);
-			}
-		}
+	public static TiledMap loadMap(String name) {
+		TiledMap map = new TmxMapLoader().load(BASE_DIR + name);
+		SoC.game.map = new Map();
+		MapLoader.loadTiles(map);
+		MapLoader.loadSpawners(map);
+		SoC.game.world.getSystem(RenderSystem.class).changeMap(map);
 		return map;
 	}
+
+	public static void loadTiles(TiledMap map) {
+		int layers = Integer.parseInt(map.getProperties().get("layers",
+				String.class));
+		int height = map.getProperties().get("height", Integer.class);
+		int width = map.getProperties().get("width", Integer.class);
+
+		SoC.game.map.tiles = new Tile[layers][width][height];
+
+		for (int l = 0; l < layers; l++) {
+
+			Iterator<MapObject> obstacle = map.getLayers()
+					.get("level" + l + "-obstacle").getObjects().iterator();
+			Iterator<MapObject> unwalkable = map.getLayers()
+					.get("level" + l + "-unwalkable").getObjects().iterator();
+			Iterator<MapObject> spec = map.getLayers()
+					.get("level" + l + "-special").getObjects().iterator();
+
+			Bag<Rectangle> unwalkables = new Bag<Rectangle>();
+			Bag<Rectangle> obstacles = new Bag<Rectangle>();
+			Bag<RectangleMapObject> special = new Bag<RectangleMapObject>();
+
+			while (obstacle.hasNext())
+				obstacles.add((((RectangleMapObject) obstacle.next())
+						.getRectangle()));
+			while (spec.hasNext())
+				special.add((((RectangleMapObject) spec.next())));
+			while (unwalkable.hasNext())
+				unwalkables.add(((((RectangleMapObject) unwalkable.next())
+						.getRectangle())));
+
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+
+					Vector2 pos = new Vector2((i * World.TILE_SIZE),
+							(j * World.TILE_SIZE));
+					Rectangle tile = new Rectangle(pos.x, pos.y,
+							World.TILE_SIZE, World.TILE_SIZE);
+
+					for (int m = 0; m < obstacles.size(); m++) {
+						if (tile.overlaps(obstacles.get(m))) {
+							SoC.game.map.tiles[l][i][j] = new Tile(
+									World.TILE_OBSTACLE);
+							break;
+						}
+					}
+
+					for (int m = 0; m < unwalkables.size(); m++) {
+						if (tile.overlaps(unwalkables.get(m))) {
+							SoC.game.map.tiles[l][i][j] = new Tile(
+									World.TILE_UNWALKABLE);
+							break;
+						}
+					}
+
+					for (int m = 0; m < special.size(); m++) {
+						if (tile.overlaps(special.get(m).getRectangle())) {
+							MapProperties obj = special.get(m).getProperties();
+							String type = obj.get("type", String.class);
+							if (type.equals("stairs")) {
+								SoC.game.map.tiles[l][i][j] = new Stairs(
+										Integer.parseInt(obj.get("level",
+												String.class)));
+							} else if (type.equals("gate")) {
+								SoC.game.map.tiles[l][i][j] = new Gate(obj.get(
+										"map", String.class),
+										Integer.parseInt(obj.get("x",
+												String.class)),
+										Integer.parseInt(obj.get("y",
+												String.class)), false);
+							}
+							break;
+						}
+					}
+
+					if (SoC.game.map.tiles[l][i][j] == null) {
+						SoC.game.map.tiles[l][i][j] = new Tile(
+								Constants.World.TILE_WALKABLE);
+					}
+
+				}
+			}
+		}
+		AStar.initialize(SoC.game.map.tiles);
+	}
+
+	public static void loadSpawners(TiledMap map) {
+		int layers = Integer.parseInt(map.getProperties().get("layers",
+				String.class));
+		for (int i = 0; i < layers; i++) {
+			Iterator<MapObject> spawners = map.getLayers()
+					.get("level" + i + "-spawners").getObjects().iterator();
+			while (spawners.hasNext()) {
+				RectangleMapObject spawner = (RectangleMapObject) spawners
+						.next();
+				Rectangle rect = spawner.getRectangle();
+				EntityFactory
+						.createSpawner(
+								rect.getX(),
+								rect.getY(),
+								i,
+								(int) rect.getWidth(),
+								(int) rect.getHeight(),
+								spawner.getProperties().get("type",
+										String.class),
+								Integer.parseInt(spawner.getProperties().get(
+										"max", String.class)),
+								Integer.parseInt(spawner.getProperties().get(
+										"range", String.class)),
+								Float.parseFloat(spawner.getProperties().get(
+										"interval", String.class)))
+										.addToWorld();;
+				
+			}
+		}
+	}
+
 }
