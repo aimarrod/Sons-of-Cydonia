@@ -14,31 +14,55 @@ import com.soc.objects.Weapon;
 
 public class Inventory extends Actor implements InputProcessor{
 	public Texture slot;
+	public Texture focusSlot;
 	public Texture armorSlot;
 	public Texture weaponSlot;
 	public int width;
 	public int height;
+	public int focusedSlot;
 	public Inventory(){
 		slot=new Texture(Gdx.files.internal("resources/slot.png"));
 		armorSlot=new Texture(Gdx.files.internal("resources/slot-armor.png"));
 		weaponSlot=new Texture(Gdx.files.internal("resources/slot-weapon.png"));
+		focusSlot=new Texture(Gdx.files.internal("resources/slot-weapon.png"));
 		this.width=1280;
 		this.height=900;
+		focusedSlot=20;
 	}
 	
 	public void draw(SpriteBatch batch, float partenAlpha){
 		int posX=0;
 		int posY=256;
+		int posFocusX=0;
+		int posFocusY=0;
+		boolean existsFocus=false;
+		Item itemFocused=null;
 		for(int i=1;i<=Constants.Items.INVENTORY_SIZE;i++){
-		batch.draw(slot, posX, posY,  64, 64 );
-		Item item=SoC.game.playermapper.get(SoC.game.player).inventary[i-1];
-		if(item!=null){
-			batch.draw(item.icon,posX+5,posY+15,55,45);
+			if(i==focusedSlot){
+				posFocusX=posX;
+				posFocusY=posY;
+				existsFocus=true;
+			}else{
+				batch.draw(slot, posX, posY,  64, 64 );
+			}
+			Item item=SoC.game.playermapper.get(SoC.game.player).inventary[i-1];
+			if(item!=null){
+				if(i==focusedSlot){
+					itemFocused=item;
+				}
+				else
+					batch.draw(item.icon,posX+5,posY+15,55,45);
+			}
+				posX+=64;
+				if(i % 5==0){
+					posY+=64;
+					posX=0;
+				}
 		}
-			posX+=64;
-			if(i % 5==0){
-				posY+=64;
-				posX=0;
+		if(existsFocus){
+			batch.draw(slot, posFocusX, posFocusY,  70, 70 );
+			if(itemFocused!=null){
+				batch.draw(itemFocused.icon,posFocusX+5,posFocusY+15,61,51);
 			}
 		}
 		batch.draw(armorSlot, 128, 512,  64, 64 );
@@ -125,7 +149,7 @@ public class Inventory extends Actor implements InputProcessor{
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		
+
 		return false;
 	}
 
@@ -138,7 +162,25 @@ public class Inventory extends Actor implements InputProcessor{
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
+		if(screenX>0 && screenX<320 && screenY<height-256 && screenY>height-512){
+			int posX=0;
+			int posY=height-256;
+			boolean foundSlot=false;
+			for(int i=1;i<=Constants.Items.INVENTORY_SIZE &&!foundSlot;i++){
+				if(screenX>posX && screenX<posX+64 && screenY<posY && screenY>posY-64){
+					foundSlot=true;
+					focusedSlot=i;
+				}
+				posX+=64;
+				if(i % 5==0){
+					posY-=64;
+					posX=0;
+				}
+			}
+		}
+		else{
+			focusedSlot=0;
+		}
 		return false;
 	}
 

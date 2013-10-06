@@ -1,3 +1,4 @@
+
 package com.soc.game.systems;
 
 import com.artemis.Aspect;
