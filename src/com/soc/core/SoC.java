@@ -31,6 +31,7 @@ import com.soc.game.components.Expires;
 import com.soc.game.components.Feet;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
+import com.soc.game.components.Spawner;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
@@ -55,6 +56,7 @@ import com.soc.screens.SplashScreen;
 import com.soc.utils.LevelManager;
 import com.soc.utils.MapLoader;
 import com.soc.utils.MusicPlayer;
+import com.soc.utils.SpawnerManager;
 
 public class SoC extends Game {
 	public static final int FRAME_WIDTH = 1440;
@@ -79,10 +81,12 @@ public class SoC extends Game {
 	public ComponentMapper<Delay> delaymapper;
 	public ComponentMapper<Attack> attackmapper;
 	public ComponentMapper<Damage> damagemapper;
+	public ComponentMapper<Spawner> spawnermapper;
 	
 	public GroupManager groupmanager;
 	public TagManager tagmanager;
 	public LevelManager levelmanager;
+	public SpawnerManager spawnermanager;
 	
 	public HudSystem hudSystem;
 	public RenderSystem renderSystem;
@@ -112,6 +116,7 @@ public class SoC extends Game {
 		delaymapper = world.getMapper(Delay.class);
 		attackmapper = world.getMapper(Attack.class);
 		damagemapper = world.getMapper(Damage.class);
+		spawnermapper = world.getMapper(Spawner.class);
 		
 		inputMultiplexer=new InputMultiplexer();
 		Gdx.input.setInputProcessor(inputMultiplexer);
@@ -127,7 +132,9 @@ public class SoC extends Game {
 		groupmanager = new GroupManager();
 		tagmanager = new TagManager();
 		levelmanager = new LevelManager();
-
+		spawnermanager = new SpawnerManager();
+		
+		world.setManager(spawnermanager);
 		world.setManager(groupmanager);
 		world.setManager(tagmanager);
 		world.setManager(levelmanager);

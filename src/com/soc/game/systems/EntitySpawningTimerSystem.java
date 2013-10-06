@@ -26,15 +26,16 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 	}
 
 	@Override
-	protected void process(Entity e) {
-		Spawner spawn = sm.get(e);
-		Position pos = pm.get(e);
-		Bounds boun = bm.get(e);
+	protected void process(Entity spawner) {
+		Spawner spawn = sm.get(spawner);
+		Position pos = pm.get(spawner);
+		Bounds boun = bm.get(spawner);
 		Position playerpos = pm.get(SoC.game.player);
 		
-		if(spawn.max > 0 && Math.hypot(pos.x-playerpos.x, pos.y-playerpos.y) <= spawn.range){
+		if(spawn.max > 0 && playerpos.z == pos.z && Math.hypot(pos.x-playerpos.x, pos.y-playerpos.y) <= spawn.range){
 			if(spawn.time <= 0){
 				spawn.time = spawn.interval;
+				spawn.max -= 1;
 				
 				Entity spawned = EntityFactory.createSkeleton(pos.x, pos.y, 0,10,10);
 			    SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
@@ -42,6 +43,7 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 			    SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
 			    SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				SoC.game.spawnermanager.spawn(spawner, spawned);
 			    spawned.addToWorld();
 			} else {
 				System.out.println(spawn.time);
