@@ -33,13 +33,17 @@ public class ChargeProcessor implements AttackProcessor{
 		Position p = SoC.game.positionmapper.get(SoC.game.player);
 		range -= Math.abs(vAttack.speed*SoC.game.world.delta);
 		if(range>0){
-	 		//p.direction.x = Math.signum(vPlayer.vx);
-			//p.direction.y = Math.signum(vPlayer.vy);
-			vPlayer.speed=vAttack.speed;
-			//vPlayer.vx = vAttack.speed;
-			//vPlayer.vy = vAttack.speed;
+			vPlayer.vx=vAttack.speed*p.direction.x;
+			vPlayer.vy=vAttack.speed*p.direction.y;
+			  if(vPlayer.vx != 0 && vPlayer.vy != 0){
+				  p.x += (vPlayer.vx*0.65)*SoC.game.world.delta;
+				  p.y += (vPlayer.vy*0.65)*SoC.game.world.delta;
+				  return;
+			  }
+			  
+			  p.x += vPlayer.vx*SoC.game.world.delta;
+			  p.y += vPlayer.vy*SoC.game.world.delta;
 		}else{
-			System.out.println("Deleteo w");
 			attack.deleteFromWorld();
 			vPlayer.speed=Constants.Characters.VELOCITY;
 		}
