@@ -13,14 +13,14 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.game.graphics.AttackRenderer;
+import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.components.Attack;
 import com.soc.utils.GraphicsLoader;
 
 public class IcicleProcessor implements AttackProcessor {
 
 	public Bag<Entity> hit;
-	public AttackRenderer renderer;
+	public AnimatedRenderer renderer;
 	public float range;
 
 	public IcicleProcessor(Vector2 dir, float range) {
@@ -67,6 +67,12 @@ public class IcicleProcessor implements AttackProcessor {
 			victim.addComponent(new Damage(a.damage));
 			victim.changedInWorld();
 		}
+		
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
 		
 	}
 

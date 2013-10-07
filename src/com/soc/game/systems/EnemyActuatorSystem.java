@@ -18,6 +18,7 @@ import com.soc.algorithms.AStar;
 import com.soc.algorithms.Node;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
+import com.soc.core.SoC;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
@@ -25,6 +26,8 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.spells.Spell;
+import com.soc.utils.EffectsPlayer;
 
 public class EnemyActuatorSystem extends EntitySystem {
 	@Mapper
@@ -136,8 +139,10 @@ public class EnemyActuatorSystem extends EntitySystem {
 					}
 				}
 				if(dstModified && (Math.abs(dstx) < 16 && Math.abs(dsty) < 16 )){
-					state.state = State.ATTACK;
-					e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,0.3f, 1, Constants.Spells.PUNCH));
+					Spell spell = SoC.game.spells[Constants.Spells.PUNCH];
+					state.state = spell.state;
+					EffectsPlayer.play("skeleton-attack.ogg");
+					e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.PUNCH));
 					e.changedInWorld();
 
 				}

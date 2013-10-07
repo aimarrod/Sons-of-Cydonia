@@ -14,4 +14,5 @@ public interface AttackProcessor {
 	public boolean collision(Entity attack, Entity victim);
 	public void frame(Entity attack, SpriteBatch sprite);
 	public void handle(Entity attack, Entity enemy);
+	public void delete();
 }

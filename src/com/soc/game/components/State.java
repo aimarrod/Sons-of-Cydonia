@@ -19,6 +19,9 @@ public class State extends Component{
 	final public static int WALK = 1;
 	final public static int ATTACK = 2;
 	final public static int DYING=3;
+	final public static int CHARGING=4;
+	
+	final public static int STATENUM = 5;
 	
 	
 	final public static int BLOCKED = 2;

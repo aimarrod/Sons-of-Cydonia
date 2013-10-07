@@ -140,14 +140,21 @@ public class CollisionSystem extends VoidEntitySystem {
 
 		public void process(Entity e) {
 			Position pos = pm.get(e);
-			Velocity v = vm.get(e);
 			Bounds b = bm.get(e);
+			Attack a = am.get(e);
 
 			int centerx = (int) ((pos.x + b.width * 0.5) * World.TILE_FACTOR);
 			int centery = (int) ((pos.y + b.height * 0.5) * World.TILE_FACTOR);
 
 			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_OBSTACLE) {
 				e.deleteFromWorld();
+				a.processor.delete();
+				return;
+			}
+			
+			if (!flm.has(e) && SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_UNWALKABLE) {
+				e.deleteFromWorld();
+				a.processor.delete();
 				return;
 			}
 

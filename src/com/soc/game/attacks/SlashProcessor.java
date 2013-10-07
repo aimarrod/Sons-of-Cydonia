@@ -17,6 +17,7 @@ import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
+import com.soc.utils.EffectsPlayer;
 
 public class SlashProcessor implements AttackProcessor {
 	public Bag<Entity> hit;
@@ -61,16 +62,22 @@ public class SlashProcessor implements AttackProcessor {
 
 	@Override
 	public void frame(Entity attack, SpriteBatch sprite) {
-		ShapeRenderer shapes = new ShapeRenderer();
-		shapes.setProjectionMatrix(SoC.game.camera.combined);
-		shapes.begin(ShapeType.Filled);
+//		ShapeRenderer shapes = new ShapeRenderer();
+//		shapes.setProjectionMatrix(SoC.game.camera.combined);
+//		shapes.begin(ShapeType.Filled);
+//		
+//		Rectangle rect;
+//		Position attackpos = SoC.game.positionmapper.get(attack);
+//		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
+//		rect = new Rectangle(attackpos.x, attackpos.y, attackbounds.width, attackbounds.height);
+//		shapes.rect(rect.x, rect.y, rect.width, rect.height);
+//		shapes.end();
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
 		
-		Rectangle rect;
-		Position attackpos = SoC.game.positionmapper.get(attack);
-		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
-		rect = new Rectangle(attackpos.x, attackpos.y, attackbounds.width, attackbounds.height);
-		shapes.rect(rect.x, rect.y, rect.width, rect.height);
-		shapes.end();
 	}
 
 }

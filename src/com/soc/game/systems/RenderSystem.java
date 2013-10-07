@@ -27,7 +27,7 @@ import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.graphics.DirectionalAnimatedRenderer;
-import com.soc.game.graphics.DirectionalRenderer;
+import com.soc.game.graphics.Renderer;
 
 public class RenderSystem extends VoidEntitySystem{
 	
@@ -106,24 +106,8 @@ public class RenderSystem extends VoidEntitySystem{
 		Bounds bon = bm.get(e);
 		Character animations = cm.get(e);
 		
-		DirectionalRenderer r = null;
-		if(state.state == State.ATTACK){
-			r = animations.attack;
-			if(((DirectionalAnimatedRenderer)r).isFinished()){
-				r.time = 0;
-			}
-		}
-		if(state.state == State.WALK){
-			r = animations.movement;
-		}
+		Renderer r = animations.renderers[state.state];
 		
-		if(state.state == State.IDLE){
-			r = animations.idle;
-		}
-		if(state.state==State.DYING){
-			r=animations.death;
-		}
-		else{
 		float angle = pos.direction.angle();
 		if(angle%90 != 0){
 			if(angle<90f || angle>270f){
@@ -133,8 +117,7 @@ public class RenderSystem extends VoidEntitySystem{
 			}
 		}
 		r.direction = ((int) angle/90 + 3) % 4;
-		}
-
+		
 		batch.setColor(r.r, r.g, r.b, r.a);
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);
 	}

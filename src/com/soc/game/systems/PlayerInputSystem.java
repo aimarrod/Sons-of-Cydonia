@@ -1,3 +1,4 @@
+
 package com.soc.game.systems;
 
 import com.artemis.Aspect;
@@ -5,7 +6,9 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
@@ -16,10 +19,12 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.spells.Spell;
 import com.soc.hud.HudSystem;
+import com.soc.utils.EffectsPlayer;
 
 
-	public class PlayerInputSystem extends EntityProcessingSystem implements InputProcessor{
+	public class PlayerInputSystem extends VoidEntitySystem implements InputProcessor{
 		 @Mapper ComponentMapper<Velocity> vm;
 		 @Mapper ComponentMapper<State> sm;
 		 @Mapper ComponentMapper<Position>pm;
@@ -27,9 +32,8 @@ import com.soc.hud.HudSystem;
 		 @Mapper ComponentMapper<Stats> stm;
 		 @Mapper ComponentMapper<Character> cm;
 		 
-		 @SuppressWarnings("unchecked")
 		 public PlayerInputSystem() {
-			 super(Aspect.getAspectForAll(Velocity.class, Player.class, State.class,Position.class));
+			 super();
 		 }
 		  
 		 @Override
@@ -38,28 +42,16 @@ import com.soc.hud.HudSystem;
 		 }
 		 
 		 @Override
-		 protected void process(Entity e) {
+		 protected void processSystem() {
 		   
-			 Velocity vel = vm.get(e);			 
-			 State state = sm.get(e);
-			 Position pos=pm.get(e);
-			 Player player = plm.get(e);
-			 Stats st = stm.get(e);
+			 Velocity vel = vm.get(SoC.game.player);			 
+			 State state = sm.get(SoC.game.player);
+			 Position pos=pm.get(SoC.game.player);
+			 Player player = plm.get(SoC.game.player);
+			 Stats st = stm.get(SoC.game.player);
 			 
 			  
 			 if(state.state < State.BLOCKED){
-				if(Gdx.input.isKeyPressed(player.attack)){
-					if(state.state != State.ATTACK){
-						st.mana--;
-						state.state = State.ATTACK;
-						e.addComponent(new Delay(Constants.Groups.PLAYER_ATTACKS, SoC.game.spells[st.attack].cast, 0.4f, st.attack));
-						e.changedInWorld();
-						vel.vx = 0;
-						vel.vy = 0;
-					}
-					return;
-				}
-				
 				 
 				boolean moving = false;
 				 
@@ -105,7 +97,38 @@ import com.soc.hud.HudSystem;
 
 		@Override
 		public boolean keyUp(int keycode) {
-			// TODO Auto-generated method stub
+			
+			Entity player = SoC.game.player;
+			State state = sm.get(player);
+			Player controls = plm.get(player);
+			Velocity vel = vm.get(player);
+			
+			if(state.state >= State.BLOCKED) return false;
+			
+			if(keycode == controls.attack){
+				int spellnum = stm.get(player).attack;
+				Spell spell = SoC.game.spells[spellnum];
+				state.state = spell.state;
+				player.addComponent(new Delay(Constants.Groups.PLAYER_ATTACKS, spell.cast, spell.blocking, spellnum));
+				player.changedInWorld();
+				vel.vx = 0;
+				vel.vy = 0;
+				return true;
+			}
+			
+			for(int i = 0; i < controls.spellkeys.length; i++){
+				if(keycode == controls.spellkeys[i]){
+					int spellnum = stm.get(player).spells[i];
+					Spell spell = SoC.game.spells[spellnum];
+					state.state = spell.state;
+					player.addComponent(new Delay(Constants.Groups.PLAYER_ATTACKS, spell.cast, spell.blocking, spellnum));
+					player.changedInWorld();
+					vel.vx = 0;
+					vel.vy = 0;
+					return true;
+				}
+			}
+			
 			return false;
 		}
 
@@ -113,8 +136,9 @@ import com.soc.hud.HudSystem;
 		public boolean keyTyped(char character) {
 			if(Gdx.input.isKeyPressed(plm.get(SoC.game.player).inventory)){
 				world.getSystem(HudSystem.class).toggleInventory();
+				return true;
 			}
-			return true;
+			return false;
 		}
 
 		@Override

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class DirectionalStaticRenderer extends DirectionalRenderer {
+public class DirectionalStaticRenderer extends Renderer {
 	public TextureRegion[] sprites;
 	
 	public DirectionalStaticRenderer(){

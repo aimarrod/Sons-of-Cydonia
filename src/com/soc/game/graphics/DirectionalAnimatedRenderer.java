@@ -3,7 +3,7 @@ package com.soc.game.graphics;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class DirectionalAnimatedRenderer extends DirectionalRenderer{
+public class DirectionalAnimatedRenderer extends Renderer{
 	public Animation[] animations;
 	public boolean loops;
 	

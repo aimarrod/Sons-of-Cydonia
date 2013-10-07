@@ -10,6 +10,8 @@ import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
+import com.soc.game.components.Character;
+import com.soc.utils.EffectsPlayer;
 
 public class AttackDelaySystem extends EntityProcessingSystem{
 
@@ -17,6 +19,8 @@ public class AttackDelaySystem extends EntityProcessingSystem{
 	 @Mapper ComponentMapper<Delay> dm;
 	 @Mapper ComponentMapper<Stats> stm;
 	 @Mapper ComponentMapper<Position> pm;
+	 @Mapper ComponentMapper<Character> cm;
+
 	 
      @SuppressWarnings("unchecked")
      public AttackDelaySystem() {
@@ -27,7 +31,7 @@ public class AttackDelaySystem extends EntityProcessingSystem{
          del.delay -= world.delta;
          del.expiration -= world.delta;
          if(del.delay <= 0 && !del.attacked){
-        	 SoC.game.spells[del.attack].create(del.group, pm.get(e), stm.get(e));
+        	 SoC.game.spells[del.attack].create(e ,del.group, pm.get(e), stm.get(e));
         	 del.attacked = true;
         	 return;
          }
@@ -35,6 +39,7 @@ public class AttackDelaySystem extends EntityProcessingSystem{
         	 e.removeComponent(del);
         	 e.changedInWorld();
         	 sm.get(e).state = State.IDLE;
+        	 cm.get(e).renderers[State.ATTACK].time = 0;
          }
      }
 

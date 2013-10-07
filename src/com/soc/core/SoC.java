@@ -36,6 +36,7 @@ import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.map.Map;
+import com.soc.game.spells.ChargeSpell;
 import com.soc.game.spells.DaggerThrowSpell;
 import com.soc.game.spells.PunchSpell;
 import com.soc.game.spells.SlashSpell;
@@ -54,6 +55,7 @@ import com.soc.game.systems.PlayerInputSystem;
 import com.soc.hud.HudSystem;
 import com.soc.screens.GameOverScreen;
 import com.soc.screens.SplashScreen;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.LevelManager;
 import com.soc.utils.MapLoader;
 import com.soc.utils.MusicPlayer;
@@ -126,6 +128,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.DAGGER_THROW] = new DaggerThrowSpell(); 
 		spells[Constants.Spells.PUNCH]=new PunchSpell();
 		spells[Constants.Spells.SLASH]=new SlashSpell();
+		spells[Constants.Spells.CHARGE]=new ChargeSpell();
 		
 		camera = new OrthographicCamera();
 		
@@ -141,10 +144,10 @@ public class SoC extends Game {
 		world.setManager(tagmanager);
 		world.setManager(levelmanager);
 		
+	    world.setSystem(new PlayerInputSystem());
 		world.setSystem(new AttackDelaySystem());
 		world.setSystem(new AttackProcessingSystem());
 	    world.setSystem(new EnemyActuatorSystem());
-	    world.setSystem(new PlayerInputSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new CollisionSystem());	
 	    world.setSystem(new DamageProcessingSystem());
@@ -160,6 +163,7 @@ public class SoC extends Game {
 		//Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 		screens=new Stack<Screen>();
 		MusicPlayer.initialize();
+		EffectsPlayer.initialize();
 		load("initial");
 		//GameManager.instance.openSplashScreen();
 		//GameManager.instance.closeSplashScreen();

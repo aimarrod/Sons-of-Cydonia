@@ -3,7 +3,7 @@ package com.soc.game.components;
 import com.artemis.Component;
 import com.artemis.Entity;
 import com.soc.game.attacks.AttackProcessor;
-import com.soc.game.graphics.AttackRenderer;
+import com.soc.game.graphics.AnimatedRenderer;
 
 public class Attack extends Component{
 	public AttackProcessor processor;

@@ -38,7 +38,7 @@ public class Stats extends Component{
 		this.agility = agility;
 		this.intelligence = intelligence;
 		this.attack = attack;
-		this.spells = new int[]{Constants.Spells.DAGGER_THROW};
+		this.spells = spells;
 	}
 	
 	public boolean addExperience(int expGained){

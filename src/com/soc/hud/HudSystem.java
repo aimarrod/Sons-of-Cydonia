@@ -1,12 +1,12 @@
 package com.soc.hud;
 
 import com.artemis.systems.VoidEntitySystem;
-import com.artemis.utils.Bag;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.soc.core.SoC;
 
 public class HudSystem extends VoidEntitySystem{
@@ -16,6 +16,7 @@ public class HudSystem extends VoidEntitySystem{
 	StatusBar statusBar;
 	ActionBar actionBar;
 	Inventory inventory;
+	TextButton textButton;
 	
 	public HudSystem(OrthographicCamera camera){
 		this.camera = camera;
@@ -23,6 +24,8 @@ public class HudSystem extends VoidEntitySystem{
 		this.statusBar = new StatusBar();
 		this.actionBar = new ActionBar();
 		this.inventory=new Inventory();
+		//Deberias er cargado al principio el world y luego referenciarlo
+		this.textButton=new TextButton("", new Skin(  Gdx.files.internal( "resources/uiskin.json" ) ));
 		stage.addActor(statusBar);
 		stage.addActor(actionBar);
 		//stage.addActor(inventory);
@@ -51,6 +54,17 @@ public class HudSystem extends VoidEntitySystem{
 		}
 	}
 	
+	public void toggleTextButton(String tooltip, int x, int y){
+		boolean isHidden=textButton.hasParent();
+		if(!isHidden){
+			textButton.setText(tooltip);
+			textButton.setPosition(x, y);
+			stage.addActor(textButton);
+		}else{
+			textButton.remove();
+		}
+	}
+
 
 	
 }

@@ -56,4 +56,10 @@ public class PunchProcessor implements AttackProcessor{
 	public void frame(Entity attack, SpriteBatch sprite) {
 		
 	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
 }

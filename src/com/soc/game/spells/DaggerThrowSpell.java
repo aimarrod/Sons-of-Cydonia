@@ -10,6 +10,7 @@ import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.game.components.Position;
+import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 
 public class DaggerThrowSpell extends Spell{
@@ -18,10 +19,12 @@ public class DaggerThrowSpell extends Spell{
 		this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/dagger.png")), 64, 64);
 		this.tooltip = "Hurls a dagger to the front, which returns to the character after a certain distance is traveled";
 		this.cast = 0.2f;
+		this.blocking = 0.4f;
+		this.state = State.ATTACK;
 	}
 
 	@Override
-	public void create(String group, Position pos, Stats stats) {
+	public void create(Entity source, String group, Position pos, Stats stats) {
 		Entity e = EntityFactory.createDaggerThrow(group, pos, stats.strength, 600, pos.direction);
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);

@@ -14,13 +14,13 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.game.graphics.AttackRenderer;
+import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.utils.GraphicsLoader;
 
 public class DaggerThrowProcessor implements AttackProcessor{
 	
 	public Bag<Entity> hit;
-	public AttackRenderer renderer;
+	public AnimatedRenderer renderer;
 	public Position source;
 	public float range;
 	public boolean reached;
@@ -101,6 +101,12 @@ public class DaggerThrowProcessor implements AttackProcessor{
 		Bounds bounds = SoC.game.boundsmapper.get(attack);
 
 		sprite.draw(renderer.frame(SoC.game.world.delta),pos.x,pos.y,bounds.width, bounds.height);
+		
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
 		
 	}
 }
