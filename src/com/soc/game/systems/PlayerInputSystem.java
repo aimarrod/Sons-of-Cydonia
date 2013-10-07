@@ -7,6 +7,7 @@ import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
@@ -59,6 +60,14 @@ import com.soc.hud.HudSystem;
 						vel.vy = 0;
 					}
 					return;
+				}else{
+					if(Gdx.input.isKeyPressed(Input.Keys.C)){
+						state.state = State.ATTACK;
+						e.addComponent(new Delay(Constants.Groups.PLAYER_ATTACKS, SoC.game.spells[Constants.Spells.CHARGE].cast, 0.4f, Constants.Spells.CHARGE));
+						e.changedInWorld();
+						vel.vx=0;
+						vel.vy=0;
+					}
 				}
 				
 				 

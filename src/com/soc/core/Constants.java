@@ -11,6 +11,7 @@ public class Constants {
 		public static final int HEIGHT = 50;
 		public static final int FEET_WIDTH = 32;
 		public static final int FEET_HEIGTH = 10;
+		public static final int VELOCITY=200;
 	}
 	
 	public static class Groups{
@@ -58,8 +59,9 @@ public class Constants {
 		public static final int FIREBALL = 3;
 		public static final int ICEBLAST = 4;
 		public static final int PUNCH=5;
+		public static final int CHARGE=6;
 		
-		public static final int SPELL_NUMBER = 6;
+		public static final int SPELL_NUMBER = 7;
 		public static final int DAGGER_SPEED=900;
 	}
 	

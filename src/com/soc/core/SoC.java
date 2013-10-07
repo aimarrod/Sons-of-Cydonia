@@ -36,6 +36,7 @@ import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.map.Map;
+import com.soc.game.spells.ChargeSpell;
 import com.soc.game.spells.DaggerThrowSpell;
 import com.soc.game.spells.PunchSpell;
 import com.soc.game.spells.Spell;
@@ -124,6 +125,7 @@ public class SoC extends Game {
 		spells = new Spell[Constants.Spells.SPELL_NUMBER];
 		spells[Constants.Spells.DAGGER_THROW] = new DaggerThrowSpell(); 
 		spells[Constants.Spells.PUNCH]=new PunchSpell();
+		spells[Constants.Spells.CHARGE]=new ChargeSpell();
 		
 		camera = new OrthographicCamera();
 		

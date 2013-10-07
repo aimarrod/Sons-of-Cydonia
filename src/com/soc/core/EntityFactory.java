@@ -1,12 +1,10 @@
 package com.soc.core;
 
 import com.artemis.Entity;
-import com.artemis.managers.GroupManager;
-import com.artemis.managers.PlayerManager;
-import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.soc.game.attacks.ChargeProcessor;
 import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.attacks.IcicleProcessor;
 import com.soc.game.attacks.PunchProcessor;
@@ -34,7 +32,7 @@ public class EntityFactory {
 		
 	    e.addComponent(new Position(px,py, pz));
 	    e.addComponent(new Player());
-	    e.addComponent(new Velocity(0,0,200));
+	    e.addComponent(new Velocity(0,0,Constants.Characters.VELOCITY));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.DAGGER_THROW, new int[]{}));
 	    e.addComponent(new State(0));
@@ -122,6 +120,17 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Attack(new PunchProcessor(dir, range), damage) );
+	   	
+	   	return e;
+	}
+	
+	public static Entity createCharge(String group, Position pos, int damage, int range, Vector2 dir){
+		Entity e=SoC.game.world.createEntity();
+				
+		e.addComponent( new Position(pos.x, pos.y, pos.z) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
+		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
+	   	e.addComponent( new Attack(new ChargeProcessor(dir, range), damage) );
 	   	
 	   	return e;
 	}
