@@ -19,7 +19,7 @@ public class PunchSpell extends Spell{
 	}
 	@Override
 	public void create(String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createPunch(group, pos, stats.strength, 16, pos.direction);	
+		Entity e = EntityFactory.createPunch(group, pos, stats.strength, 16);	
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	   	e.addToWorld();

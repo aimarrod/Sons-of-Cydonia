@@ -11,6 +11,13 @@ public class Position extends Component {
 		direction = new Vector2(0, 1);
 	}
 
+	public Position(float x, float y, int z, Vector2 direction) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.direction = direction.cpy();
+	}
+
 	public float x, y;
 	public int z;
 	public Vector2 direction;

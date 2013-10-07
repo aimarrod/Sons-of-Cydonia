@@ -57,9 +57,10 @@ public class Constants {
 		public static final int ICICLE = 2;
 		public static final int FIREBALL = 3;
 		public static final int ICEBLAST = 4;
-		public static final int PUNCH=5;
+		public static final int PUNCH= 5;
+		public static final int SLASH = 6;
 		
-		public static final int SPELL_NUMBER = 6;
+		public static final int SPELL_NUMBER = 7;
 		public static final int DAGGER_SPEED=900;
 	}
 	

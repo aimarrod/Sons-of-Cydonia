@@ -6,10 +6,13 @@ import com.artemis.managers.PlayerManager;
 import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.soc.core.Constants.World;
 import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.attacks.IcicleProcessor;
 import com.soc.game.attacks.PunchProcessor;
+import com.soc.game.attacks.SlashProcessor;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
@@ -36,7 +39,7 @@ public class EntityFactory {
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,200));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
-	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.DAGGER_THROW, new int[]{}));
+	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.SLASH, new int[]{}));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(animations);
@@ -115,13 +118,13 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	public static Entity createPunch(String group, Position pos, int damage, int range, Vector2 dir){
+	public static Entity createPunch(String group, Position pos, int damage, int range){
 		Entity e=SoC.game.world.createEntity();
 				
 		e.addComponent( new Position(pos.x, pos.y, pos.z) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
-	   	e.addComponent( new Attack(new PunchProcessor(dir, range), damage) );
+	   	e.addComponent( new Attack(new PunchProcessor(pos.direction, range), damage) );
 	   	
 	   	return e;
 	}
@@ -134,5 +137,27 @@ public class EntityFactory {
 		e.addComponent( new Spawner(type, max, range, interval));
 		
 		return e;
+	}
+
+
+	public static Entity createSlash(String group, Position pos, int damage,
+			int i) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
+		float centerx = pos.x + Constants.Characters.WIDTH*0.5f;
+		float centery = pos.y + Constants.Characters.HEIGHT*0.5f;
+		if(pos.direction.x != 0){
+			e.addComponent( new Position(centerx, pos.y, pos.z, pos.direction) );
+			e.addComponent( new Bounds((int) ((int) World.TILE_SIZE*Math.signum(pos.direction.x)*2.2f), (int) World.TILE_SIZE*2) );
+
+		} else {
+			e.addComponent( new Position(centerx-World.TILE_SIZE, centery, pos.z, pos.direction) );
+			e.addComponent( new Bounds((int)World.TILE_SIZE*3, (int) (World.TILE_SIZE*((pos.direction.y<0)?1.2f:1.6f)*Math.signum(pos.direction.y))));
+
+		}
+	   	e.addComponent( new Attack(new SlashProcessor(), damage) );
+	   	
+	   	return e;		
 	}
 }

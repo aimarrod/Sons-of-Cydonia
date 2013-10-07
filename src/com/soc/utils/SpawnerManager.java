@@ -1,17 +1,12 @@
 package com.soc.utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.Manager;
 import com.artemis.utils.Bag;
 import com.soc.core.SoC;
-import com.soc.game.components.Position;
 
 public class SpawnerManager extends Manager{
 	public Map<Entity, Bag<Entity>> entitiesBySpawner;
