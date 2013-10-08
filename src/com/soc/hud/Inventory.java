@@ -218,7 +218,7 @@ public class Inventory extends Actor implements InputProcessor{
 			}
 		}
 		else{
-			focusedSlot=0;
+			focusedSlot=1;
 			SoC.game.world.getSystem(HudSystem.class).toggleTextButton(null, 0,0);
 		}
 		return false;
