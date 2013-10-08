@@ -22,6 +22,7 @@ import com.soc.game.components.Velocity;
 import com.soc.game.spells.Spell;
 import com.soc.hud.HudSystem;
 import com.soc.utils.EffectsPlayer;
+import com.soc.utils.FloatingText;
 
 
 	public class PlayerInputSystem extends VoidEntitySystem implements InputProcessor{
@@ -99,7 +100,9 @@ import com.soc.utils.EffectsPlayer;
 		public boolean keyUp(int keycode) {
 			
 			Entity player = SoC.game.player;
+			Position pos = pm.get(player);
 			State state = sm.get(player);
+			Stats stats = stm.get(player);
 			Player controls = plm.get(player);
 			Velocity vel = vm.get(player);
 			
@@ -120,6 +123,11 @@ import com.soc.utils.EffectsPlayer;
 				if(keycode == controls.spellkeys[i]){
 					int spellnum = stm.get(player).spells[i];
 					Spell spell = SoC.game.spells[spellnum];
+					if(stats.mana < spell.mana){
+						SoC.game.renderSystem.texts.add(new FloatingText("No Mana!", Constants.Configuration.LABEL_DURATION, pos.x, pos.y, Constants.Configuration.LABEL_SPEED));
+						return true;
+					}
+					stats.mana -= spell.mana;
 					state.state = spell.state;
 					player.addComponent(new Delay(Constants.Groups.PLAYER_ATTACKS, spell.cast, spell.blocking, spellnum));
 					player.changedInWorld();

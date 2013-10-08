@@ -20,6 +20,7 @@ public class SlashSpell extends Spell{
 			this.state = State.ATTACK;
 			this.sound = "sword-swing.wav";
 			this.sounddelay = 0.1f;
+			this.mana = 0;
 		}
 		@Override
 		public void create(Entity source, String group, Position pos, Stats stats) {

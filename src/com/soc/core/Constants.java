@@ -43,6 +43,8 @@ public class Constants {
 		public static final String MUSIC_DIR = "resources/music/";
 		public static final String MAP_DIR = "resources/map/";
 		public static final String LEVEL_DIR = "resources/level/";
+		public static final float LABEL_SPEED = 50;
+		public static final float LABEL_DURATION = 0.6f;
 	}
 	
 	public static class Classes{

@@ -21,6 +21,7 @@ public class ChargeSpell extends Spell{
 		this.cast = 0f;
 		this.blocking = Constants.Spells.CHARGE_DURATION+this.cast;
 		this.state = State.CHARGING;
+		this.mana = 30;
 	}
 	
 	@Override

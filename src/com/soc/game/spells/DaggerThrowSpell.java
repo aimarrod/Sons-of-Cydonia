@@ -21,6 +21,7 @@ public class DaggerThrowSpell extends Spell{
 		this.cast = 0.2f;
 		this.blocking = 0.4f;
 		this.state = State.ATTACK;
+		this.mana = 10;
 	}
 
 	@Override

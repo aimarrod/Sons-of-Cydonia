@@ -11,7 +11,9 @@ import com.artemis.annotations.Mapper;
 import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -28,6 +30,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.graphics.DirectionalAnimatedRenderer;
 import com.soc.game.graphics.Renderer;
+import com.soc.utils.FloatingText;
 
 public class RenderSystem extends VoidEntitySystem{
 	
@@ -45,12 +48,18 @@ public class RenderSystem extends VoidEntitySystem{
 	private OrthographicCamera camera;
 	private int layers;
 	private SpriteBatch batch;
+	private BitmapFont font;
+	
+	public Bag<FloatingText> texts;
+	
 	
 
 	
 	public RenderSystem(OrthographicCamera camera){
 		this.camera = camera;
-		batch = new SpriteBatch();
+		this.batch = new SpriteBatch();
+		this.font = new BitmapFont();
+		this.texts = new Bag<FloatingText>();
 	}
 	
 	public void changeMap(TiledMap map){
@@ -60,7 +69,6 @@ public class RenderSystem extends VoidEntitySystem{
 	}
 	
 	public void render(){
-		
 		renderer.render(new int[]{0,1});
 	}
 	
@@ -91,9 +99,19 @@ public class RenderSystem extends VoidEntitySystem{
 				}
 			}
 			batch.end();
-			
 			renderer.render(new int[]{current+3});
 		}
+		batch.begin();
+		font.setColor(0, 0, 0, 1);
+		for(int i = 0; i < texts.size(); i++){
+			FloatingText text = texts.get(i);
+			if(text.draw(batch, font)){
+				texts.remove(i);
+				i--;
+			}
+		}
+		batch.end();
+		
 	}
 	
 	@Override

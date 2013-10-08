@@ -21,6 +21,7 @@ public class PunchSpell extends Spell{
 		this.blocking = 1f;
 		this.state = State.ATTACK;
 		this.sounddelay = 0.2f;
+		this.mana = 0;
 	}
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {

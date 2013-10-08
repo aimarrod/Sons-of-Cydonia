@@ -22,6 +22,7 @@ import com.soc.game.components.Feet;
 import com.soc.game.components.Flying;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
+import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.map.Map;
@@ -35,6 +36,8 @@ public class CollisionSystem extends VoidEntitySystem {
 	ComponentMapper<Bounds> bm;
 	@Mapper
 	ComponentMapper<Stats> sm;
+	@Mapper
+	ComponentMapper<State> stm;
 	@Mapper
 	ComponentMapper<Attack> am;
 	@Mapper
@@ -100,7 +103,7 @@ public class CollisionSystem extends VoidEntitySystem {
 		}
 
 		public void process(Entity e, Entity other) {
-			if (e == other)
+			if (e == other || stm.get(e).state == State.CHARGING)
 				return;
 			Position pos = pm.get(e);
 			Velocity v = vm.get(e);
@@ -112,6 +115,7 @@ public class CollisionSystem extends VoidEntitySystem {
 					feet.width, feet.heigth);
 			Rectangle nextx = new Rectangle(pos.x + v.vx * world.delta, pos.y,
 					feet.width, feet.heigth);
+			Rectangle current = new Rectangle(pos.x, pos.y, feet.width, feet.heigth);
 			Rectangle otherrect = new Rectangle(otherpos.x, otherpos.y,
 					otherfeet.width, otherfeet.heigth);
 			if (nexty.overlaps(otherrect)) {

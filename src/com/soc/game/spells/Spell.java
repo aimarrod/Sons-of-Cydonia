@@ -14,6 +14,7 @@ public abstract class Spell {
 	public float sounddelay;
 	public int state;
 	public String sound;
+	public int mana;
 	
 	public abstract void create(Entity source, String group, Position pos, Stats stats);
 }
