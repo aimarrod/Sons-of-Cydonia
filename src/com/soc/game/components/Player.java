@@ -30,8 +30,8 @@ public class Player extends Component {
 		inventary=new Item[Constants.Items.INVENTORY_SIZE];
 		inventary[0]=new Weapon("Axe","resources/axe.png","Best Axe Ever!",100,10,10);
 		inventary[1]=new Armor("Armor","resources/armor.png", "Best Armor Ever!",100f);
-		//inventary[2]=new Potion("PotionHealth","resources/potion_health.png","Small Health Potion",100,0);
-		//inventary[3]=new Potion("ManaHealth","resources/potion_mana.png","Small Mana Potion",0,100);
+		inventary[2]=new Potion("PotionHealth","resources/potion_health.png","Small Health Potion",100,0);
+		inventary[3]=new Potion("ManaHealth","resources/potion_mana.png","Small Mana Potion",0,100);
 		weapon=null;
 		armor=null;
 	}
