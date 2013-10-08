@@ -98,6 +98,35 @@ public class GraphicsLoader {
 		character.renderers[State.WALK] = movement;
 	}
 	
+	public static void loadBallista(Character character){
+		//False repeat at the end
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		StaticRenderer death = new StaticRenderer();
+		
+		character.renderers = new Renderer[State.STATENUM];
+		attack.ox = -16;
+		attack.oy = 0;
+		idle.ox -= 16;
+		idle.oy -= 0;
+		death.ox -= 16;
+		death.oy -= 0;
+		
+		TextureRegion[][] tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/ballista-attack.png")), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/ballista-death.png")), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		death.sprite = tmp[i][0];
+	   	}
+		character.renderers = new Renderer[State.STATENUM];
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+	}
+	
 	public static DirectionalAnimatedRenderer loadCharacterSpriteSheet(Texture sheet, float duration, int hsize, int vsize, boolean loops){
 		int hframes = sheet.getWidth()/hsize;
 		int vframes = sheet.getHeight()/vsize;

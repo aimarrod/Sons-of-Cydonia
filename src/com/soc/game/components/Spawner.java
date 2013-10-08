@@ -8,12 +8,14 @@ public class Spawner extends Component{
 	public int max, range;
 	public float interval;
 	public float time;
+	public boolean respawn;
 	
-	public Spawner(String type, int max, int range, float interval){
+	public Spawner(String type, int max, int range, float interval, boolean respawn){
 		this.type = type;
 		this.max = max;
 		this.interval = interval;
 		this.range = range;
 		this.time = 0;
+		this.respawn=respawn;
 	}
 }

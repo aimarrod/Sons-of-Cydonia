@@ -7,6 +7,7 @@ import com.artemis.Entity;
 import com.artemis.Manager;
 import com.artemis.utils.Bag;
 import com.soc.core.SoC;
+import com.soc.game.components.Spawner;
 
 public class SpawnerManager extends Manager{
 	public Map<Entity, Bag<Entity>> entitiesBySpawner;
@@ -33,7 +34,9 @@ public class SpawnerManager extends Manager{
     	Entity spawner = spawnersByEntity.remove(e);
     	if(spawner != null){
     		entitiesBySpawner.get(spawner).remove(e);
-    		SoC.game.spawnermapper.get(spawner).max += 1;
+    		Spawner spawnerComponent=SoC.game.spawnermapper.get(spawner);
+    		if(spawnerComponent.respawn)
+    			SoC.game.spawnermapper.get(spawner).max += 1;
     	}     	
     }
     

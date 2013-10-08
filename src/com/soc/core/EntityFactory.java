@@ -61,7 +61,24 @@ public class EntityFactory {
 	}
 	
 	
-	public static Entity createSkeleton(float px, float py, int pz,int damage, float range){
+	public static Entity createSkeleton(float px, float py, int pz,int damage){
+		Entity e = SoC.game.world.createEntity();
+	    e.addComponent(new Position(px,py, pz));
+	    e.addComponent(new Velocity(0,0,100));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+	    e.addComponent(new State(1));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}));
+	    e.addComponent(new Feet(32, 10));
+	    e.addComponent(new Enemy(600,10));
+	    
+	    Character animations = new Character();
+	    GraphicsLoader.loadSkeleton(animations);
+	    e.addComponent(animations);
+	    
+	    return e;
+	}
+	
+	public static Entity createBallista(float px, float py, int pz,int damage){
 		Entity e = SoC.game.world.createEntity();
 	    e.addComponent(new Position(px,py, pz));
 	    e.addComponent(new Velocity(0,0,100));
@@ -136,12 +153,12 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	public static Entity createSpawner(float x, float y, int z, int width, int height, String type, int max, int range, float interval){
+	public static Entity createSpawner(float x, float y, int z, int width, int height, String type, int max, int range, float interval,boolean respawn){
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent( new Position(x, y, z) );
 		e.addComponent( new Bounds(width, height));
-		e.addComponent( new Spawner(type, max, range, interval));
+		e.addComponent( new Spawner(type, max, range, interval,respawn));
 		
 		return e;
 	}

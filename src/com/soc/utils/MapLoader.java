@@ -119,12 +119,14 @@ public class MapLoader {
 	}
 
 	public static void loadSpawners(TiledMap map) {
+		//Number of levels of the map. The first map has 2 levels.
 		int layers = Integer.parseInt(map.getProperties().get("layers",
 				String.class));
 		for (int i = 0; i < layers; i++) {
 			Iterator<MapObject> spawners = map.getLayers()
 					.get("level" + i + "-spawners").getObjects().iterator();
 			while (spawners.hasNext()) {
+				//The position and the bounds of the spawner
 				RectangleMapObject spawner = (RectangleMapObject) spawners
 						.next();
 				Rectangle rect = spawner.getRectangle();
@@ -142,8 +144,8 @@ public class MapLoader {
 								Integer.parseInt(spawner.getProperties().get(
 										"range", String.class)),
 								Float.parseFloat(spawner.getProperties().get(
-										"interval", String.class)))
-										.addToWorld();;
+										"interval", String.class)), Boolean.parseBoolean(spawner.getProperties().get("respawn",String.class)))
+										.addToWorld();
 				
 			}
 		}
