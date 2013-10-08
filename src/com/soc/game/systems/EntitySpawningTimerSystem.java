@@ -36,24 +36,26 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 			if(spawn.time <= 0){
 				spawn.time = spawn.interval;
 				spawn.max -= 1;
-				
-				Entity spawned = EntityFactory.createSkeleton(pos.x, pos.y, 0,10,10);
-			    SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-			    SoC.game.groupmanager.add(spawned, Constants.Groups.SKELETONS);
-			    SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
-			    SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				SoC.game.spawnermanager.spawn(spawner, spawned);
-			    spawned.addToWorld();
+				Entity spawned=null;
+				if(spawn.type.equals(Constants.Groups.SKELETONS))
+					spawned = EntityFactory.createSkeleton(pos.x, pos.y, 0,10);
+				else{
+					if(spawn.type.equals(Constants.Groups.BALLISTAS))
+						spawned = EntityFactory.createBallista(pos.x, pos.y, 0,10);
+					}
+				    SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+				    SoC.game.groupmanager.add(spawned, spawn.type);
+				    SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
+				    SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+				    //All the stuf that can collided between them.
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+					SoC.game.spawnermanager.spawn(spawner, spawned);
+					spawned.addToWorld();
+				}
 			} else {
 				System.out.println(spawn.time);
 				spawn.time -= world.delta;
 			}
 		}
-		
-
-	}
-	
-
 	
 }
