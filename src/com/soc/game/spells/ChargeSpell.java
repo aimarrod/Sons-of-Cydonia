@@ -26,7 +26,7 @@ public class ChargeSpell extends Spell{
 	
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createCharge(source ,group, pos, stats.strength);	
+		Entity e = EntityFactory.createCharge(source ,group, pos, (int)(stats.strength*0.66f));	
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	    SoC.game.groupmanager.add(e, Constants.Groups.PROJECTILES);

@@ -54,7 +54,7 @@ public class SlashProcessor implements AttackProcessor {
 		if(SoC.game.damagemapper.has(victim)){
 			SoC.game.damagemapper.get(victim).damage+=a.damage;
 		}else{
-			victim.addComponent(new Damage(2000));
+			victim.addComponent(new Damage(a.damage));
 			victim.changedInWorld();
 		}
 		

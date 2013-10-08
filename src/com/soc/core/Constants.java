@@ -66,7 +66,10 @@ public class Constants {
 		public static final int CHARGE=6;
 		
 		public static final int SPELL_NUMBER = 7;
+		
+		public static final int BALLISTA_FIRE_RATE = 1;
 		public static final int DAGGER_SPEED = 900;
+		public static final int DAGGER_RANGE = 700;
 		public static final int CHARGE_SPEED = 700;
 		public static final float CHARGE_DURATION = 1.5f;
 		public static final int CHARGE_BOX = 70;

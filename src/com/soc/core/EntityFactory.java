@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.soc.ai.BallistaAI;
+import com.soc.ai.SkeletonAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
 import com.soc.game.attacks.ChargeProcessor;
@@ -69,7 +71,7 @@ public class EntityFactory {
 	    e.addComponent(new State(1));
 	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}));
 	    e.addComponent(new Feet(32, 10));
-	    e.addComponent(new Enemy(600,10));
+	    e.addComponent(new Enemy(600,10, new SkeletonAI()));
 	    
 	    Character animations = new Character();
 	    GraphicsLoader.loadSkeleton(animations);
@@ -85,8 +87,8 @@ public class EntityFactory {
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}));
+	    e.addComponent(new Enemy(600,10, new BallistaAI()));
 	    e.addComponent(new Feet(25, 25));
-	    e.addComponent(new Enemy(600,10));
 	    
 	    Character animations = new Character();
 	    GraphicsLoader.loadBallista(animations);
@@ -95,14 +97,14 @@ public class EntityFactory {
 	    return e;
 	}
 	
-	public static Entity createDaggerThrow(String group, Position pos, int damage, int range, Vector2 dir){
+	public static Entity createDaggerThrow(String group, Position pos, int damage, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
 		
 		e.addComponent( new Position(pos.x,pos.y, pos.z) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(Constants.Spells.DAGGER_SPEED*dir.x, Constants.Spells.DAGGER_SPEED*dir.y,900) );
 	   	e.addComponent( new Flying() );
-	   	e.addComponent( new Attack(new DaggerThrowProcessor(range, pos), damage) );
+	   	e.addComponent( new Attack(new DaggerThrowProcessor(pos), damage) );
 	   	
 	   	return e;
 	}
@@ -164,8 +166,7 @@ public class EntityFactory {
 	}
 
 
-	public static Entity createSlash(String group, Position pos, int damage,
-			int i) {
+	public static Entity createSlash(String group, Position pos, int damage) {
 		Entity e=SoC.game.world.createEntity();
 		
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );

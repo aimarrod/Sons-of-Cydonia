@@ -120,6 +120,7 @@ public class SoC extends Game {
 		attackmapper = world.getMapper(Attack.class);
 		damagemapper = world.getMapper(Damage.class);
 		spawnermapper = world.getMapper(Spawner.class);
+		enemymapper = world.getMapper(Enemy.class);
 		
 		inputMultiplexer=new InputMultiplexer();
 		Gdx.input.setInputProcessor(inputMultiplexer);
