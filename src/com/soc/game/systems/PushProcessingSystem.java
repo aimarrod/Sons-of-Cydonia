@@ -16,6 +16,7 @@ public class PushProcessingSystem extends EntityProcessingSystem{
 	@Mapper ComponentMapper<Velocity> vm;
 
 	
+	@SuppressWarnings("unchecked")
 	public PushProcessingSystem() {
 		super(Aspect.getAspectForAll(Push.class));
 	}
@@ -35,6 +36,4 @@ public class PushProcessingSystem extends EntityProcessingSystem{
 			  e.changedInWorld();
 		  }
 	}
-	
-
 }

@@ -110,7 +110,7 @@ public class EntityFactory {
 	public static Entity createArrow(String group, Position pos, int damage, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
 		
-		e.addComponent( new Position(pos.x,pos.y, pos.z) );
+		e.addComponent( new Position(pos.x,pos.y, pos.z, pos.direction) );
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(Constants.Spells.ARROW_SPEED*dir.x, Constants.Spells.ARROW_SPEED*dir.y,Constants.Spells.ARROW_SPEED) );
 	   	e.addComponent( new Flying() );

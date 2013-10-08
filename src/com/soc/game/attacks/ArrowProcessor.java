@@ -45,8 +45,18 @@ public class ArrowProcessor implements AttackProcessor {
 	public void frame(Entity attack, SpriteBatch sprite) {
 		Position pos = SoC.game.positionmapper.get(attack);
 		Bounds bounds = SoC.game.boundsmapper.get(attack);
+		
+		float angle = pos.direction.angle();
+		if(angle%90 != 0){
+			if(angle<90f || angle>270f){
+				angle=0f;
+			} else {
+				angle=180f;
+			}
+		}
+		renderer.direction = ((int) angle/90 + 3) % 4;
+		
 		sprite.draw(renderer.frame(SoC.game.world.delta),pos.x,pos.y,bounds.width, bounds.height);
-		System.out.println("LLAMO");
 	}
 
 	@Override
