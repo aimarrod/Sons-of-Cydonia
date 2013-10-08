@@ -19,6 +19,7 @@ public class Constants {
 		public static final String ENEMIES = "enemy";
 		public static final String SKELETONS = "skeleton";
 		public static final String BALLISTAS= "ballista";
+		public static final String HARMFUL_CHARACTERS = "harmful";
 		public static final String ENEMY_ATTACKS = "enemyattack";
 		public static final String PLAYER_ATTACKS = "playerattack";
 		public static final String MAP_BOUND = "mapbound"; //The ones which dissapear with the map

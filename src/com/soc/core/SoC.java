@@ -49,6 +49,7 @@ import com.soc.game.systems.EnemyActuatorSystem;
 import com.soc.game.systems.CollisionSystem;
 import com.soc.game.systems.EntitySpawningTimerSystem;
 import com.soc.game.systems.ExpiringSystem;
+import com.soc.game.systems.PushProcessingSystem;
 import com.soc.game.systems.RenderSystem;
 import com.soc.game.systems.MovementSystem;
 import com.soc.game.systems.PlayerInputSystem;
@@ -152,6 +153,7 @@ public class SoC extends Game {
 	    world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new CollisionSystem());	
 	    world.setSystem(new DamageProcessingSystem());
+	    world.setSystem(new PushProcessingSystem());
 	    world.setSystem(new MovementSystem());
 	    world.setSystem(new ExpiringSystem());
 	    

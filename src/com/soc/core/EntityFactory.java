@@ -80,7 +80,7 @@ public class EntityFactory {
 	    return e;
 	}
 	
-	public static Entity createBallista(float px, float py, int pz,int damage){
+	public static Entity createBallista(float px, float py, int pz, int damage){
 		Entity e = SoC.game.world.createEntity();
 	    e.addComponent(new Position(px,py, pz));
 	    e.addComponent(new Velocity(0,0,0));
@@ -96,7 +96,7 @@ public class EntityFactory {
 	    
 	    return e;
 	}
-	
+		
 	public static Entity createDaggerThrow(String group, Position pos, int damage, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
 		

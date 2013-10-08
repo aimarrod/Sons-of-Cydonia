@@ -17,9 +17,11 @@ import com.soc.core.Constants.Groups;
 import com.soc.core.Constants.World;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.Damage;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Feet;
 import com.soc.game.components.Flying;
+import com.soc.game.components.Harmful;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
@@ -50,6 +52,8 @@ public class CollisionSystem extends VoidEntitySystem {
 	ComponentMapper<Player> plm;
 	@Mapper
 	ComponentMapper<Flying> flm;
+	@Mapper
+	ComponentMapper<Harmful> hm;
 
 	private Bag<CollisionGroup> collisionGroups;
 
@@ -67,6 +71,7 @@ public class CollisionSystem extends VoidEntitySystem {
 		collisionGroups.add(new CharacterMapCollision());
 		collisionGroups.add(new ProjectileMapCollision());
 		collisionGroups.add(new CharacterCollision());
+		collisionGroups.add(new HarmfulCharacterCollision());
 	}
 
 	@Override
@@ -83,6 +88,43 @@ public class CollisionSystem extends VoidEntitySystem {
 
 	private interface CollisionGroup {
 		public void processCollisions();
+	}
+	
+	private class HarmfulCharacterCollision implements CollisionGroup {
+		private ImmutableBag<Entity> characters;
+		private Entity player;
+
+		public HarmfulCharacterCollision() {
+			characters = SoC.game.groupmanager
+					.getEntities(Constants.Groups.HARMFUL_CHARACTERS);
+			player = SoC.game.player;
+		}
+
+		@Override
+		public void processCollisions() {
+			for (int i = 0; i < characters.size(); i++) {
+					process(characters.get(i));
+			}
+			
+		}
+
+		public void process(Entity e) {
+			if (stm.get(player).state == State.CHARGING) return;
+			Position pos = pm.get(e);
+			Velocity v = vm.get(e);
+			Feet feet = fm.get(e);
+			Position otherpos = pm.get(player);
+			Feet otherfeet = fm.get(player);
+
+			Rectangle current = new Rectangle(pos.x, pos.y, feet.width, feet.heigth);
+			Rectangle otherrect = new Rectangle(otherpos.x, otherpos.y,
+					otherfeet.width, otherfeet.heigth);
+			
+			if(current.overlaps(otherrect)){
+				player.addComponent(new Damage(hm.get(e).damage));
+			}
+			
+		}
 	}
 
 	private class CharacterCollision implements CollisionGroup {
