@@ -102,14 +102,14 @@ public class GraphicsLoader {
 		//False repeat at the end
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
-		StaticRenderer death = new StaticRenderer();
+		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		character.renderers = new Renderer[State.STATENUM];
-		attack.ox = -16;
+		attack.ox = -0;
 		attack.oy = 0;
-		idle.ox -= 16;
+		idle.ox -= -0;
 		idle.oy -= 0;
-		death.ox -= 16;
+		death.ox -=20;
 		death.oy -= 0;
 		
 		TextureRegion[][] tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/ballista-attack.png")), 64, 64);
@@ -117,10 +117,17 @@ public class GraphicsLoader {
 	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
-		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/ballista-death.png")), 64, 64);
-		for(int i = 0; i < tmp.length; i++){
-	   		death.sprite = tmp[i][0];
-	   	}
+		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/ballista-death.png")), 128, 64);
+        TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+        //0.4f duration of the whole animation so divided in the total of frames.
+	   death.animation = new Animation(0.4f/deathFrames.length, deathFrames);
+
 		character.renderers = new Renderer[State.STATENUM];
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;

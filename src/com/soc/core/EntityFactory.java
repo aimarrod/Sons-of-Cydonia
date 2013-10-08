@@ -83,15 +83,15 @@ public class EntityFactory {
 	public static Entity createBallista(float px, float py, int pz,int damage){
 		Entity e = SoC.game.world.createEntity();
 	    e.addComponent(new Position(px,py, pz));
-	    e.addComponent(new Velocity(0,0,100));
+	    e.addComponent(new Velocity(0,0,0));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
-	    e.addComponent(new State(1));
+	    e.addComponent(new State(0));
 	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}));
-	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new Enemy(600,10, new BallistaAI()));
+	    e.addComponent(new Feet(25, 25));
 	    
 	    Character animations = new Character();
-	    GraphicsLoader.loadSkeleton(animations);
+	    GraphicsLoader.loadBallista(animations);
 	    e.addComponent(animations);
 	    
 	    return e;

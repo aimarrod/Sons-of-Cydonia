@@ -133,7 +133,7 @@ public class SoC extends Game {
 		
 		camera = new OrthographicCamera();
 		
-		player = EntityFactory.createCharacter(2000, 800, 0, 200, 0, Constants.Classes.WARRIOR);
+		player = EntityFactory.createCharacter(1400, 3000, 1, 200, 0, Constants.Classes.WARRIOR);
 
 		groupmanager = new GroupManager();
 		tagmanager = new TagManager();
