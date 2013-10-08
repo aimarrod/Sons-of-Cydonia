@@ -6,6 +6,7 @@ import com.artemis.annotations.Mapper;
 import com.artemis.utils.Bag;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
@@ -26,10 +27,10 @@ public class DaggerThrowProcessor implements AttackProcessor{
 	public boolean reached;
 	public boolean backing;
 	
-	public DaggerThrowProcessor(float range, Position source) {
+	public DaggerThrowProcessor(Position source) {
 		this.hit = new Bag<Entity>();
 		this.renderer = GraphicsLoader.loadDaggerThrow();
-		this.range = range;
+		this.range = Constants.Spells.DAGGER_RANGE;
 		this.backing = false;
 		this.source = source;
 		

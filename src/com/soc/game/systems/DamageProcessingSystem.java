@@ -25,8 +25,6 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 	@Mapper ComponentMapper<Velocity> vm;
 	@Mapper ComponentMapper<Enemy> em;
 	@Mapper ComponentMapper<Position> pm;
-	
-
 
 	
 	@SuppressWarnings("unchecked")
