@@ -19,7 +19,7 @@ import com.soc.game.components.Velocity;
 public class ChargeProcessor implements AttackProcessor{
 
 	public Bag<Entity> hit;
-	public float range;
+	public float duration;
 	public Entity source;
 	
 	@Mapper
@@ -27,7 +27,7 @@ public class ChargeProcessor implements AttackProcessor{
 	public ChargeProcessor(Entity source, float duration) {
 		this.source = source;
 		hit = new Bag<Entity>();
-		this.range = duration;
+		this.duration = duration;
 	}
 
 	@Override 
@@ -35,8 +35,8 @@ public class ChargeProcessor implements AttackProcessor{
 		Velocity vAttack = SoC.game.velocitymapper.get(attack);
 		Position p = SoC.game.positionmapper.get(attack);
 		Velocity vSource = SoC.game.velocitymapper.get(source);
-		range -= SoC.game.world.delta;
-		if(range>0){
+		duration-= SoC.game.world.delta;
+		if(duration>0){
 			vAttack.vx=vAttack.speed*p.direction.x;
 			vAttack.vy=vAttack.speed*p.direction.y;
 			vSource.vx=vAttack.speed*p.direction.x;

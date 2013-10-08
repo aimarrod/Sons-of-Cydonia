@@ -1,14 +1,12 @@
 package com.soc.core;
 
 import com.artemis.Entity;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.BallistaAI;
 import com.soc.ai.SkeletonAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
+import com.soc.game.attacks.ArrowProcessor;
 import com.soc.game.attacks.ChargeProcessor;
 import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.attacks.IcicleProcessor;
@@ -109,6 +107,17 @@ public class EntityFactory {
 	   	return e;
 	}
 	
+	public static Entity createArrow(String group, Position pos, int damage, Vector2 dir){
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(pos.x,pos.y, pos.z) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
+		e.addComponent( new Velocity(Constants.Spells.ARROW_SPEED*dir.x, Constants.Spells.ARROW_SPEED*dir.y,Constants.Spells.ARROW_SPEED) );
+	   	e.addComponent( new Flying() );
+	   	e.addComponent( new Attack(new ArrowProcessor(), damage) );
+	   	
+	   	return e;
+	}
 	public static Entity createIcicle(String group ,Position pos, int damage, int range, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
 				

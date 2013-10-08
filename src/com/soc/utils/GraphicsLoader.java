@@ -161,6 +161,15 @@ public class GraphicsLoader {
 	   	
 	}
 
+	public static DirectionalStaticRenderer loadArrow(){
+		DirectionalStaticRenderer renderer=new DirectionalStaticRenderer();
+		TextureRegion[][] tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/hunter-arrow.png")), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		renderer.sprites[i] = tmp[i][0];
+	   	}
+		return renderer;
+	   	
+	}
 	public static AnimatedRenderer loadIcicle(Vector2 dir) {
 		AnimatedRenderer icicle = new AnimatedRenderer(true);
 		Texture sheet = new Texture(Gdx.files.internal("resources/magic-icicle.png"));
