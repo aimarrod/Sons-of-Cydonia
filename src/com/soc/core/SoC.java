@@ -126,10 +126,10 @@ public class SoC extends Game {
 		
 		spells = new Spell[Constants.Spells.SPELL_NUMBER];
 		spells[Constants.Spells.DAGGER_THROW] = new DaggerThrowSpell(); 
-		spells[Constants.Spells.PUNCH]=new PunchSpell();
-		spells[Constants.Spells.SLASH]=new SlashSpell();
-		spells[Constants.Spells.CHARGE]=new ChargeSpell();
-		spells[Constants.Spells.ARROW]=new ArrowSpell();
+		spells[Constants.Spells.PUNCH] = new PunchSpell();
+		spells[Constants.Spells.SLASH] = new SlashSpell();
+		spells[Constants.Spells.CHARGE] = new ChargeSpell();
+		spells[Constants.Spells.ARROW] = new ArrowSpell();
 		
 		camera = new OrthographicCamera();
 		
@@ -150,9 +150,9 @@ public class SoC extends Game {
 		world.setSystem(new AttackProcessingSystem());
 	    world.setSystem(new EnemyActuatorSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
-	    world.setSystem(new CollisionSystem());	
-	    world.setSystem(new DamageProcessingSystem());
 	    world.setSystem(new PushProcessingSystem());
+	    world.setSystem(new DamageProcessingSystem());
+	    world.setSystem(new CollisionSystem());	
 	    world.setSystem(new MovementSystem());
 	    world.setSystem(new ExpiringSystem());
 	    
