@@ -89,7 +89,7 @@ public class EntityFactory {
 	    e.addComponent(new Enemy(600,10));
 	    
 	    Character animations = new Character();
-	    GraphicsLoader.loadSkeleton(animations);
+	    GraphicsLoader.loadBallista(animations);
 	    e.addComponent(animations);
 	    
 	    return e;

@@ -117,10 +117,10 @@ public class GraphicsLoader {
 	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
-		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/ballista-death.png")), 64, 64);
-		for(int i = 0; i < tmp.length; i++){
-	   		death.sprite = tmp[i][0];
-	   	}
+//		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/ballista-death.png")), 64, 64);
+//		for(int i = 0; i < tmp.length; i++){
+//	   		death.sprite = tmp[i][0];
+//	   	}
 		character.renderers = new Renderer[State.STATENUM];
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;
