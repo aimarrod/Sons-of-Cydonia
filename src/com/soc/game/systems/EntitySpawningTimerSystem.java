@@ -38,9 +38,9 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				spawn.max -= 1;
 				Entity spawned=null;
 				if(spawn.type.equals(Constants.Groups.SKELETONS))
-					spawned = EntityFactory.createSkeleton(pos.x, pos.y, 0,10);
+					spawned = EntityFactory.createSkeleton(pos.x, pos.y, pos.z,10);
 				else if(spawn.type.equals(Constants.Groups.BALLISTAS))
-					spawned = EntityFactory.createBallista(pos.x, pos.y, 0,10);
+					spawned = EntityFactory.createBallista(pos.x, pos.y, pos.z,10);
 					
 				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 				SoC.game.groupmanager.add(spawned, spawn.type);

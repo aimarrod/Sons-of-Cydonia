@@ -100,7 +100,6 @@ public class DaggerThrowProcessor implements AttackProcessor{
 	public void frame(Entity attack, SpriteBatch sprite) {
 		Position pos = SoC.game.positionmapper.get(attack);
 		Bounds bounds = SoC.game.boundsmapper.get(attack);
-
 		sprite.draw(renderer.frame(SoC.game.world.delta),pos.x,pos.y,bounds.width, bounds.height);
 		
 	}

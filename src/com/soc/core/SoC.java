@@ -1,7 +1,5 @@
 package com.soc.core;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
 import java.util.Stack;
 
 import com.artemis.ComponentMapper;
@@ -17,7 +15,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.soc.core.Constants.Attributes;
@@ -36,6 +33,7 @@ import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.map.Map;
+import com.soc.game.spells.ArrowSpell;
 import com.soc.game.spells.ChargeSpell;
 import com.soc.game.spells.DaggerThrowSpell;
 import com.soc.game.spells.PunchSpell;
@@ -44,9 +42,9 @@ import com.soc.game.spells.Spell;
 import com.soc.game.systems.AttackDelaySystem;
 import com.soc.game.systems.AttackProcessingSystem;
 import com.soc.game.systems.CameraSystem;
+import com.soc.game.systems.CollisionSystem;
 import com.soc.game.systems.DamageProcessingSystem;
 import com.soc.game.systems.EnemyActuatorSystem;
-import com.soc.game.systems.CollisionSystem;
 import com.soc.game.systems.EntitySpawningTimerSystem;
 import com.soc.game.systems.ExpiringSystem;
 import com.soc.game.systems.PushProcessingSystem;
@@ -131,6 +129,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.PUNCH]=new PunchSpell();
 		spells[Constants.Spells.SLASH]=new SlashSpell();
 		spells[Constants.Spells.CHARGE]=new ChargeSpell();
+		spells[Constants.Spells.ARROW]=new ArrowSpell();
 		
 		camera = new OrthographicCamera();
 		
