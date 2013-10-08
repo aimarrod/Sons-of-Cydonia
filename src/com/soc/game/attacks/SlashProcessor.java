@@ -42,9 +42,9 @@ public class SlashProcessor implements AttackProcessor {
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
 		State state = SoC.game.statemapper.get(victim);
 		
-		if(attackbounds.height < 0) return (!hit.contains(victim) && state.state !=State.DYING && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y + attackbounds.height < victimpos.y + victimbounds.height && attackpos.y > victimpos.y);	
-		else if(attackbounds.width < 0) return (!hit.contains(victim) && state.state !=State.DYING && attackpos.x  + attackbounds.width < victimpos.x + victimbounds.width && attackpos.x > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
-		else return (!hit.contains(victim) && state.state !=State.DYING && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		if(attackbounds.height < 0) return (!hit.contains(victim) && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y + attackbounds.height < victimpos.y + victimbounds.height && attackpos.y > victimpos.y);	
+		else if(attackbounds.width < 0) return (!hit.contains(victim) && attackpos.x  + attackbounds.width < victimpos.x + victimbounds.width && attackpos.x > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		else return (!hit.contains(victim) && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 		
 	}
 

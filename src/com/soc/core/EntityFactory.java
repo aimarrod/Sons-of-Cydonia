@@ -84,7 +84,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,0));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(0));
-	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 100, 1, Constants.Spells.PUNCH, new int[]{}));
 	    e.addComponent(new Enemy(600,10, new BallistaAI()));
 	    e.addComponent(new Feet(25, 25));
 	    
@@ -109,9 +109,16 @@ public class EntityFactory {
 	
 	public static Entity createArrow(String group, Position pos, int damage, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
-		
-		e.addComponent( new Position(pos.x,pos.y, pos.z, pos.direction) );
-		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
+		int addX=0;
+		int addY=0;
+		if(Math.abs(pos.direction.x)>0){
+			addY=26;
+		}if(Math.abs(pos.direction.y)>0){
+			addX=26;	
+		}
+
+		e.addComponent( new Position(pos.x+addX,pos.y+addY, pos.z, pos.direction) );
+		e.addComponent( new Bounds(1,1));
 		e.addComponent( new Velocity(Constants.Spells.ARROW_SPEED*dir.x, Constants.Spells.ARROW_SPEED*dir.y,Constants.Spells.ARROW_SPEED) );
 	   	e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new ArrowProcessor(), damage) );

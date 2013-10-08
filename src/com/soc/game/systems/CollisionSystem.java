@@ -64,6 +64,7 @@ public class CollisionSystem extends VoidEntitySystem {
 	@Override
 	public void initialize() {
 		collisionGroups = new Bag<CollisionGroup>();
+		collisionGroups.add(new AttackDestroyableProjectileCollision());
 		collisionGroups.add(new AttackCollision(
 				Constants.Groups.PLAYER_ATTACKS, Constants.Groups.ENEMIES));
 		collisionGroups.add(new AttackCollision(Constants.Groups.ENEMY_ATTACKS,
@@ -72,6 +73,7 @@ public class CollisionSystem extends VoidEntitySystem {
 		collisionGroups.add(new ProjectileMapCollision());
 		collisionGroups.add(new CharacterCollision());
 		collisionGroups.add(new HarmfulCharacterCollision());
+		
 	}
 
 	@Override
@@ -308,8 +310,38 @@ public class CollisionSystem extends VoidEntitySystem {
 
 				for (int b = 0; receivers.size() > b; b++) {
 					Entity enemy = receivers.get(b);
-					if (attack.processor.collision(atk, enemy)) {
+					if (stm.get(enemy).state != State.DYING &&  attack.processor.collision(atk, enemy)) {
 						attack.processor.handle(atk, enemy);
+					}
+				}
+
+			}
+
+		}
+	}
+	
+	private class AttackDestroyableProjectileCollision implements CollisionGroup {
+		private ImmutableBag<Entity> attacks;
+		private ImmutableBag<Entity> receivers;
+
+		public AttackDestroyableProjectileCollision() {
+			attacks = world.getManager(GroupManager.class).getEntities(
+					Constants.Groups.PLAYER_ATTACKS);
+			receivers = world.getManager(GroupManager.class).getEntities(
+					Constants.Groups.DESTROYABLE_PROJECTILES);
+		}
+
+		@Override
+		public void processCollisions() {
+			for (int a = 0; attacks.size() > a; a++) {
+
+				Entity atk = attacks.get(a);
+				Attack attack = am.get(atk);
+
+				for (int b = 0; receivers.size() > b; b++) {
+					Entity enemy = receivers.get(b);
+					if (attack.processor.collision(atk, enemy)) {
+						enemy.deleteFromWorld();
 					}
 				}
 

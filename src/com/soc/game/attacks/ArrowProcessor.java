@@ -36,9 +36,8 @@ public class ArrowProcessor implements AttackProcessor {
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
-		State state = SoC.game.statemapper.get(victim);
 		
-		return (!hit && state.state != State.DYING && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		return (!hit && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class ArrowProcessor implements AttackProcessor {
 		}
 		renderer.direction = ((int) angle/90 + 3) % 4;
 		
-		sprite.draw(renderer.frame(SoC.game.world.delta),pos.x,pos.y,bounds.width, bounds.height);
+		sprite.draw(renderer.frame(SoC.game.world.delta),pos.x+renderer.ox,pos.y+renderer.oy,64, 64);
 	}
 
 	@Override
