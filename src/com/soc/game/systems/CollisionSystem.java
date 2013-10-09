@@ -275,6 +275,8 @@ public class CollisionSystem extends VoidEntitySystem {
 					v.vy = 0;
 				}
 			}
+			
+			System.out.println(pos.z + " " + centerx + " " + centery);
 
 			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_STAIRS) {
 				pos.z = ((Stairs) SoC.game.map.tiles[pos.z][centerx][centery]).level - 1;

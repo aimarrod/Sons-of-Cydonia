@@ -169,7 +169,6 @@ public class SoC extends Game {
 		EffectsPlayer.initialize();
 		//Save, New, Load game handler.
 		GameLoader.initialize();
-		//setScreen(new SavesScreen(this));
 		setScreen(new MenuScreen(this));
 	}
 	
