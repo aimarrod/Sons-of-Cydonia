@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="200" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="layers" value="1"/>
+ </properties>
  <tileset firstgid="1" name="base_out_atlas" tilewidth="32" tileheight="32">
-  <image source="../Downloads/base_out_atlas.png" width="1024" height="1024"/>
+  <image source="tiles/base_out_atlas.png" width="1024" height="1024"/>
  </tileset>
  <tileset firstgid="1025" name="terrain_atlas" tilewidth="32" tileheight="32">
-  <image source="../Downloads/terrain_atlas.png" width="1024" height="1024"/>
+  <image source="tiles/terrain_atlas.png" width="1024" height="1024"/>
  </tileset>
  <layer name="level0-low" width="100" height="200">
   <data encoding="base64" compression="zlib">
@@ -18,12 +21,12 @@
  </layer>
  <layer name="level0-object-low" width="100" height="200">
   <data encoding="base64" compression="zlib">
-   eJzt3EFugzAQBVAWpafoSapeDHKp9ibpvodJt3VtIlW1+YH3JAtlE0/4GgwR8jQBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjPMy1wfjvc7bg7HkkUUeWeSRRR5Z5JFFHlnkkUUeWeSRRR5Z5JFFHlnkkefrqT4AAAAAAAAAAAAAHlFtH4K3gPdUW3sk9NwrYe99GVLfHb5XV4/6Es5FQg1/qevoeayheSwnzeMR+mOp5NN7zos8mnXVeqX3nPpju67R/ZGQxxqUh/Ujqz/KPEb2x0Uev+raoz/KHPbIYw3No+yNM64faXks8ojKY8/+8Pxxv65lYB7642ddZU+Un3vMmZjHGpKH/sjqj5H1JZyLWk8k5VFeq3rnUT57WM/bdfk/cUwNLa09dnrutZOwr8+oGq7P2yPtewEA0rkPAgDgyI5wv/s+T9PH3O/Ya/6jun7/ts+537HX/JzXEa6DAAAAAAAAAP/pBmseD/0=
+   eJzt3MtNw0AUBdBZYNIElSDaQNRipw5EG6GTsKcY2DI4joSY8Y19jmRZ2WRefPX8U/RKAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOjj+VDKwzC/vRzWrm5/Hofljb7kkUUeWeSRRR5Z5JFFHlnkkUUeWeSRRR5Z5JFFHlnkkeX1UMrn3fz25n07AAAAAAAAAAAAcGMuzSJ4WnkWwdKMhFazEhLmMqT+d/haXS3qSzgWCTX8pa6t5zGF5jHuNI9b6I9xJp/Wax7lcbGuuV5pvab+WK6rd38k5DEF5eH6kdUfdR49++Moj191rdEfdQ5r5DGF5lH3xh6vH2l5jPKIymPN/vD8cb2usWMe+uNnXXVP1J9brJmYxxSSh/7I6o+e9SUci7meSMqjPle1zqN+9nA9v1yX94l9apizNGOn1aydhLk+PWs43y9vad8LAJDOfRAAAFu2hfvd01DK+9Bu32r9rTp//7aPod2+1frs1xbOgwAAAAAAAAD/6QtCTRfN
   </data>
  </layer>
  <layer name="level0-object-high" width="100" height="200">
   <data encoding="base64" compression="zlib">
-   eJzt3DEKwlAURNE06grFlYjb0ELchku0Clg8PwiJbwzngFgEdPgXJIVkmgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB+43j4fO00uMY6zoMzv+jxc3pk0SOLHln0yKJHFj2y6JFFjyx6ZNEjix5Z9MiiR5b74MwfegAAAAAAAAAAAAB/JvVZBKNds6X3JZxF6n+HR7tmS+9LOIuEDRU9+jZU9OjbUNGjb0NFj74NFT36NlT06NtQ0aNvQ0WPvg0VPfo2VPTo21DRo29DRY++DRU9+jZU9OjbUNGjb0NFj74NFT3W3/Dcj1/vRs/Ymc3P2vnmc0cSnuuTsAEA+B9L3QcBAECiLdzvXnfTdNut977W9wMZtvA7CAAAAAAAAMB2vQBr833U
+   eJzt2jEKwlAURNE00RWL29CduEQruzGVnzfEc0BSfDBDLkgKtw0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAf3S7fj+7H5yxhh5d9OiiRxc9uujRRY8uenTRo4seXfTookcXPbroAQAAAAAAAAAAAAD/ofW/w0e7Pn69r+FZNGxI9JjbkOgxtyHRY25DosfchkSPuQ2JHnMbEj3mNiR6zG1I9JjbkOgxtyHRY25DosfchkSPuQ2JHnMbEj3mNiR6zG1I9Fi/4XU5/rR9LwBAO+9BAACc2Rnedx/7tj33dddV9wc6nOF3EAAAAAAAAIDzegOUxHYE
   </data>
  </layer>
  <objectgroup name="level0-unwalkable" width="100" height="200">
@@ -33,13 +36,13 @@
   <object x="768" y="4640" width="32" height="640"/>
  </objectgroup>
  <objectgroup name="level0-obstacle" width="100" height="200">
-  <object x="832" y="5248" width="256" height="64"/>
-  <object x="128" y="5248" width="256" height="64"/>
-  <object x="128" y="5440" width="256" height="64"/>
-  <object x="128" y="5664" width="256" height="64"/>
-  <object x="832" y="5760" width="256" height="64"/>
-  <object x="1696" y="5664" width="768" height="96"/>
-  <object x="2720" y="5664" width="448" height="96"/>
+  <object x="832" y="5280" width="256" height="32"/>
+  <object x="128" y="5280" width="256" height="32"/>
+  <object x="128" y="5472" width="256" height="32"/>
+  <object x="128" y="5696" width="256" height="32"/>
+  <object x="832" y="5792" width="256" height="32"/>
+  <object x="1696" y="5696" width="768" height="64"/>
+  <object x="2720" y="5696" width="448" height="64"/>
   <object x="2464" y="4608" width="32" height="672"/>
   <object x="2688" y="4608" width="32" height="672"/>
   <object x="1632" y="4640" width="32" height="640"/>
@@ -262,4 +265,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="level0-spawners" width="100" height="200"/>
 </map>

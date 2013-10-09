@@ -46,6 +46,29 @@ public class MenuScreen extends AbstractScreen{
         table.row();
 
         // register the button "options"
+        TextButton loadGameButton = new TextButton( "Load Game", getSkin() );
+        loadGameButton.addListener( new InputListener() {
+            @Override
+            public void touchUp(
+                InputEvent event,
+                float x,
+                float y,
+                int pointer,
+                int button )
+            {
+                super.touchUp( event, x, y, pointer, button );
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
+            {
+                System.out.println("touchdown");
+                return true;
+            }
+        } );
+        table.add( loadGameButton ).uniform().fill().spaceBottom( 10 );
+        table.row();
+
+        // register the button "high scores"
         TextButton optionsButton = new TextButton( "Options", getSkin() );
         optionsButton.addListener( new InputListener() {
             @Override
@@ -65,12 +88,11 @@ public class MenuScreen extends AbstractScreen{
                 return true;
             }
         } );
-        table.add( optionsButton ).uniform().fill().spaceBottom( 10 );
+        table.add( optionsButton ).uniform().fill().spaceBottom(10);
         table.row();
-
         // register the button "high scores"
-        TextButton highScoresButton = new TextButton( "High Scores", getSkin() );
-        highScoresButton.addListener( new InputListener() {
+        TextButton exitButton = new TextButton( "Options", getSkin() );
+        exitButton.addListener( new InputListener() {
             @Override
             public void touchUp(
                 InputEvent event,
@@ -84,10 +106,10 @@ public class MenuScreen extends AbstractScreen{
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
             {
-                System.out.println("touchdown");
+                SoC.game.dispose();
                 return true;
             }
         } );
-        table.add( highScoresButton ).uniform().fill();
+        table.add( exitButton ).uniform().fill();
     }
 }
