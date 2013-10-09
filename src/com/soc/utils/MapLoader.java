@@ -27,12 +27,13 @@ public class MapLoader {
 	public static TiledMap loadMap(String name) {
 		TiledMap map = new TmxMapLoader().load(BASE_DIR + name);
 		SoC.game.map = new Map();
+		SoC.game.map.name = name;
 		MapLoader.loadTiles(map);
 		MapLoader.loadSpawners(map);
 		SoC.game.world.getSystem(RenderSystem.class).changeMap(map);
 		return map;
 	}
-
+	
 	public static void loadTiles(TiledMap map) {
 		int layers = Integer.parseInt(map.getProperties().get("layers",
 				String.class));
@@ -144,7 +145,8 @@ public class MapLoader {
 								Integer.parseInt(spawner.getProperties().get(
 										"range", String.class)),
 								Float.parseFloat(spawner.getProperties().get(
-										"interval", String.class)), Boolean.parseBoolean(spawner.getProperties().get("respawn",String.class)))
+										"interval", String.class)), 
+								Boolean.parseBoolean(spawner.getProperties().get("respawn",String.class)))
 										.addToWorld();
 				
 			}

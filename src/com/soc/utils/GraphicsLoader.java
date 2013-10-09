@@ -167,6 +167,8 @@ public class GraphicsLoader {
 		for(int i = 0; i < tmp.length; i++){
 	   		renderer.sprites[i] = tmp[i][0];
 	   	}
+		renderer.ox=-32;
+		renderer.oy=-32;
 		return renderer;
 	   	
 	}

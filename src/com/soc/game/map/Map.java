@@ -49,5 +49,6 @@ public class Map{
 	
 	
 	public Tile[][][] tiles;
+	public String name;
 }
 	

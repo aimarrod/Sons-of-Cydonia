@@ -29,6 +29,7 @@ public class ArrowSpell extends Spell{
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	    SoC.game.groupmanager.add(e, Constants.Groups.PROJECTILES);
+	    SoC.game.groupmanager.add(e, Constants.Groups.DESTROYABLE_PROJECTILES);
 	    SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);
 	   	e.addToWorld();
 	}

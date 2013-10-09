@@ -8,11 +8,11 @@ public class Constants {
 
 	public static class Characters{
 		public static final int WIDTH = 32;
-		public static final int HEIGHT = 50;
+		public static final int HEIGHT = 47;
 		public static final int FEET_WIDTH = 32;
 		public static final int FEET_HEIGTH = 10;
 		public static final int VELOCITY=150;
-		public static final Object WARRIOR = "warrior";
+		public static final String WARRIOR = "warrior";
 	}
 	
 	public static class Groups{
@@ -27,6 +27,7 @@ public class Constants {
 		public static final String LEVEL = "level";
 		public static final String CHARACTERS = "characters";
 		public static final String PROJECTILES = "projectiles";
+		public static final String DESTROYABLE_PROJECTILES="destroyable_projectiles";
 	}
 	
 	public static class World{

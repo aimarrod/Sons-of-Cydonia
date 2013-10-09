@@ -1,6 +1,8 @@
 
 package com.soc.game.systems;
 
+import java.io.IOException;
+
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
@@ -23,6 +25,7 @@ import com.soc.game.spells.Spell;
 import com.soc.hud.HudSystem;
 import com.soc.utils.EffectsPlayer;
 import com.soc.utils.FloatingText;
+import com.soc.utils.GameLoader;
 
 
 	public class PlayerInputSystem extends VoidEntitySystem implements InputProcessor{
@@ -92,7 +95,14 @@ import com.soc.utils.FloatingText;
 
 		@Override
 		public boolean keyDown(int keycode) {
-			// TODO Auto-generated method stub
+			if(keycode == Input.Keys.ESCAPE){
+				try {
+					GameLoader.saveGame(1);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			return false;
 		}
 

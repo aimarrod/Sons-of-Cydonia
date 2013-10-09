@@ -54,6 +54,7 @@ import com.soc.game.systems.PlayerInputSystem;
 import com.soc.hud.HudSystem;
 import com.soc.screens.GameOverScreen;
 import com.soc.screens.MenuScreen;
+import com.soc.screens.SavesScreen;
 import com.soc.screens.SplashScreen;
 import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GameLoader;
@@ -167,7 +168,8 @@ public class SoC extends Game {
 		MusicPlayer.initialize();
 		EffectsPlayer.initialize();
 		GameLoader.initialize();
-		setScreen(new MenuScreen(this));
+		setScreen(new SavesScreen(this));
+		//setScreen(new MenuScreen(game));
 	}
 	
 	public void openMenu(){
