@@ -159,7 +159,7 @@ public class SoC extends Game {
 	    
 		cameraSystem = SoC.game.world.setSystem( new CameraSystem(camera), true);
 		renderSystem = SoC.game.world.setSystem( new RenderSystem(camera), true );
-		hudSystem = SoC.game.world.setSystem(new HudSystem(camera));
+		hudSystem = SoC.game.world.setSystem(new HudSystem(camera),true);
 		
 		SoC.game.world.initialize();
 		
@@ -167,9 +167,10 @@ public class SoC extends Game {
 		screens=new Stack<Screen>();
 		MusicPlayer.initialize();
 		EffectsPlayer.initialize();
+		//Save, New, Load game handler.
 		GameLoader.initialize();
-		setScreen(new SavesScreen(this));
-		//setScreen(new MenuScreen(game));
+		//setScreen(new SavesScreen(this));
+		setScreen(new MenuScreen(this));
 	}
 	
 	public void openMenu(){

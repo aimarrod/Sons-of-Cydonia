@@ -28,10 +28,10 @@ public class Stats extends Component{
 			int agility, int intelligence, int attack, int[] spells) {
 		this.health = health;
 		this.mana = mana;
-		this.experience = experience;
+		this.experience = 50;
 		this.maxHealth = maxHealth;
 		this.maxMana = maxMana;
-		this.maxExperience = maxExperience;
+		this.maxExperience = 100;
 		this.level = level;
 		this.armor = armor;
 		this.strength = strength;
