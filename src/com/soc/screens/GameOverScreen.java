@@ -36,7 +36,7 @@ public class GameOverScreen extends AbstractScreen{
                 int button )
             {
             	SoC.game.resetWorld();
-                SoC.game.load("initial");
+                //SoC.game.load("initial");
             }
 
         } );

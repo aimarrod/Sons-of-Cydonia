@@ -29,6 +29,25 @@ import com.soc.utils.GraphicsLoader;
 
 public class EntityFactory {
 	
+	public static Entity loadCharacter(Position pos, Stats st, String clazz){
+		Entity e = SoC.game.world.createEntity();
+		
+		Character animations = new Character();
+		e.addComponent(pos);
+		e.addComponent(st);
+	    e.addComponent(animations);
+		e.addComponent(new Velocity(0,0,Constants.Characters.VELOCITY));
+		e.addComponent(new Player());
+		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+	    e.addComponent(new Feet(32, 10));
+	    e.addComponent(new State(0));
+
+	    if(clazz.equals(Constants.Characters.WARRIOR)){
+	    	GraphicsLoader.loadWarrior(animations);
+	    }
+	    
+		return e;
+	}
 
 	public static Entity createCharacter(float px, float py, int pz,float range, int damage, int type){
 		Entity e = SoC.game.world.createEntity();

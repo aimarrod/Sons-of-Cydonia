@@ -29,6 +29,7 @@ public class PushProcessingSystem extends EntityProcessingSystem{
 		  vel.vx = pus.speed*Math.signum(pus.direction.x);
 		  vel.vy = pus.speed*Math.signum(pus.direction.y);
 		  
+		  
 		  pus.distance -= Math.abs(vel.vx*world.delta)+Math.abs(vel.vy*world.delta);
 		  
 		  if(pus.distance <= 0){

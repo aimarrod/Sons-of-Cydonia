@@ -13,6 +13,7 @@ import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
+import com.soc.game.components.Push;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
 
@@ -60,14 +61,23 @@ public class ChargeProcessor implements AttackProcessor{
 	@Override
 	public void handle(Entity attack, Entity victim) {
 		Attack a = SoC.game.attackmapper.get(attack);
+		Position pos1 = SoC.game.positionmapper.get(attack);
+		Position pos2 = SoC.game.positionmapper.get(victim	);
 		hit.add(victim);
 		if(SoC.game.damagemapper.has(victim)){
 			SoC.game.damagemapper.get(victim).damage+=a.damage;
 		}else{
 			victim.addComponent(new Damage(a.damage));
-			victim.changedInWorld();
 		}
-		
+		Vector2 pushdirection = new Vector2();
+		if(pos1.direction.x != 0){
+			pushdirection.y = Math.signum(pos2.y - pos1.y);
+		}
+		if(pos1.direction.y != 0){
+			pushdirection.x = Math.signum(pos2.x - pos1.x);
+		}
+		victim.addComponent(new Push(pushdirection, 300, 200));
+		victim.changedInWorld();
 	}
 
 	@Override

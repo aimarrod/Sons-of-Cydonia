@@ -11,7 +11,8 @@ public class Constants {
 		public static final int HEIGHT = 50;
 		public static final int FEET_WIDTH = 32;
 		public static final int FEET_HEIGTH = 10;
-		public static final int VELOCITY=200;
+		public static final int VELOCITY=150;
+		public static final Object WARRIOR = "warrior";
 	}
 	
 	public static class Groups{
@@ -80,6 +81,10 @@ public class Constants {
 	public static class Attributes{
 		public final static String MAP = "map"; 
 		public final static String MUSIC = "music";
+		public final static String POSITION = "position";
+		public final static String INVENTORY = "inventory";
+		public final static String STATS = "music";
+		public final static String CLASS = "class";
 	}
 	
 	public static class Tags{

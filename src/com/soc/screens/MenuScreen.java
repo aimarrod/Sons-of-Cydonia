@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.soc.core.SoC;
+import com.soc.utils.GameLoader;
 
 public class MenuScreen extends AbstractScreen{
 
@@ -37,7 +38,7 @@ public class MenuScreen extends AbstractScreen{
                 int pointer,
                 int button )
             {
-                SoC.game.load("initial");
+                GameLoader.newGame("warrior");
             }
 
         } );

@@ -41,6 +41,9 @@ public class Stats extends Component{
 		this.spells = spells;
 	}
 	
+	public Stats() {
+	}
+
 	public boolean addExperience(int expGained){
 		experience+=expGained;
 		if(experience>=maxExperience){

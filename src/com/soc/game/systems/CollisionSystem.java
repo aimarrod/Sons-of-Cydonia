@@ -308,7 +308,7 @@ public class CollisionSystem extends VoidEntitySystem {
 
 				for (int b = 0; receivers.size() > b; b++) {
 					Entity enemy = receivers.get(b);
-					if (attack.processor.collision(atk, enemy)) {
+					if(!(stm.get(enemy).state == State.DYING) && attack.processor.collision(atk, enemy)) {
 						attack.processor.handle(atk, enemy);
 					}
 				}

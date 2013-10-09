@@ -42,7 +42,7 @@ public class GraphicsLoader {
 	   	}
 		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
-	   		movement.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
 		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/warrior-charge.png")), 128, 128);

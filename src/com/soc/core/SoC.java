@@ -53,8 +53,10 @@ import com.soc.game.systems.MovementSystem;
 import com.soc.game.systems.PlayerInputSystem;
 import com.soc.hud.HudSystem;
 import com.soc.screens.GameOverScreen;
+import com.soc.screens.MenuScreen;
 import com.soc.screens.SplashScreen;
 import com.soc.utils.EffectsPlayer;
+import com.soc.utils.GameLoader;
 import com.soc.utils.LevelManager;
 import com.soc.utils.MapLoader;
 import com.soc.utils.MusicPlayer;
@@ -133,8 +135,6 @@ public class SoC extends Game {
 		
 		camera = new OrthographicCamera();
 		
-		player = EntityFactory.createCharacter(1400, 3000, 1, 200, 0, Constants.Classes.WARRIOR);
-
 		groupmanager = new GroupManager();
 		tagmanager = new TagManager();
 		levelmanager = new LevelManager();
@@ -166,10 +166,8 @@ public class SoC extends Game {
 		screens=new Stack<Screen>();
 		MusicPlayer.initialize();
 		EffectsPlayer.initialize();
-		load("initial");
-		//GameManager.instance.openSplashScreen();
-		//GameManager.instance.closeSplashScreen();
-		
+		GameLoader.initialize();
+		setScreen(new MenuScreen(this));
 	}
 	
 	public void openMenu(){
@@ -204,24 +202,6 @@ public class SoC extends Game {
 	}
 	public void openGameOverScren(){
 		game.setScreen(new GameOverScreen(game));
-	}
-	
-	public void load(String level){
-		String map = "";
-		String music = "";
-		JsonReader json = new JsonReader();
-		JsonValue node = json.parse(Gdx.files.internal(Constants.Configuration.LEVEL_DIR + level + ".json")).child;
-		while(node != null){
-			if(node.name.equals(Attributes.MAP)){
-				map = node.asString();
-			}
-			if(node.name.equals(Attributes.MUSIC)){
-				music = node.asString();
-			}
-			node = node.next;
-		}
-		MusicPlayer.instance.reset();
-		setScreen(new GameScreen(map));
 	}
 
 	public static void main(String[] args) {

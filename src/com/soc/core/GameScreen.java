@@ -18,22 +18,11 @@ import com.soc.utils.MapLoader;
 
 public class GameScreen implements Screen {
 
-	private OrthographicCamera camera;
 	private FPSLogger fps;
 	
-	public GameScreen(String mapName) {
-		camera = SoC.game.camera;
+	public GameScreen() {
 		fps=new FPSLogger();
-		
-		MapLoader.loadMap(mapName);
-				
-		camera.setToOrtho(false, 1280, 900);
-		
-		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.PLAYERS);
-		SoC.game.world.getManager(LevelManager.class).setLevel(SoC.game.player, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);
-		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.CHARACTERS);
-		SoC.game.world.getManager(TagManager.class).register(Constants.Tags.PLAYER, SoC.game.player);
-		SoC.game.world.addEntity(SoC.game.player);
+		Gdx.input.setInputProcessor(SoC.game.inputMultiplexer);
 	}
 
 	@Override
@@ -55,7 +44,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void resize(int width, int height) {
 		SoC.game.hudSystem.setViewport(width, height);
-		camera.setToOrtho(false, width, height);
+		SoC.game.camera.setToOrtho(false, width, height);
 	}
 
 	@Override
