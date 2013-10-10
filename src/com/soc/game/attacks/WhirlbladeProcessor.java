@@ -86,8 +86,8 @@ public class WhirlbladeProcessor implements AttackProcessor {
 		Position pos1 = SoC.game.positionmapper.get(attack);
 		Position pos2 = SoC.game.positionmapper.get(victim);
 		Push p = new Push(new Vector2(), 50, 400);
-		p.direction.y = Math.signum(pos2.x - pos1.x);
-		p.direction.x = Math.signum(pos2.y - pos1.y);
+		p.direction.x = Math.signum(pos2.x - pos1.x);
+		p.direction.y = Math.signum(pos2.y - pos1.y);
 
 		victim.addComponent(p);
 		victim.changedInWorld();

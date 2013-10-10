@@ -3,6 +3,7 @@ package com.soc.core;
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.BallistaAI;
+import com.soc.ai.ZombieAI;
 import com.soc.ai.SkeletonAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
@@ -64,15 +65,10 @@ public class EntityFactory {
 	    e.addComponent(animations);
 	    
 	    if(type == Constants.Classes.HUNTER){
-//	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, false);
-//		    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-walk.png")), 1.0f, 64, 64, true);
-//		    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/archer-attack.png")), 0.4f, 64, 64, false);
 	    } else if(type == Constants.Classes.WARRIOR){
 	    	GraphicsLoader.loadWarrior(animations);
 	    } else if(type == Constants.Classes.MAGE){
-//	    	animations.idle = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, false);
-//	 	    animations.movement = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-walk.png")), 1.0f, 64, 64, true);
-//	 	    animations.attack = GraphicsLoader.loadCharacterSpriteSheet(new Texture(Gdx.files.internal("resources/mage-attack.png")), 0.4f, 64, 64, false);
+	    	
 	    } else {
 	    	
 	    }
@@ -80,6 +76,9 @@ public class EntityFactory {
 	    return e;
 	}
 	
+	/*
+	 * ENEMIES
+	 */
 	
 	public static Entity createSkeleton(float px, float py, int pz,int damage){
 		Entity e = SoC.game.world.createEntity();
@@ -114,6 +113,37 @@ public class EntityFactory {
 	    
 	    return e;
 	}
+	
+//	public static Entity createMaggot(float px, float py, int pz){
+//		Entity e = SoC.game.world.createEntity();
+//		e.addComponent(new Position(px, py, pz));
+//		e.addComponent(new Velocity(0,0,0));
+//		e.addComponent(new Bounds(25, 25));
+//		e.addComponent(new State(0));
+//		//e.addComponent(new Attack(processor, damage));
+//		e.addComponent(new Feet(25, 25));
+//		e.addComponent(new Enemy(1000, 5, new ZombieAI()));
+//		e.addComponent(new Stats(
+//				1, 
+//				0, 
+//				0, 
+//				0, 
+//				0, 
+//				0, 
+//				1, 
+//				0, 
+//				0, 
+//				0, 
+//				0, 
+//				0, 
+//				null));
+//		
+//		
+//	}
+	
+	/*
+	 * ATTACKS
+	 */
 		
 	public static Entity createDaggerThrow(String group, Position pos, int damage, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();

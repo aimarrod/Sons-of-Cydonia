@@ -1,5 +1,8 @@
 package com.soc.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -15,6 +18,29 @@ import com.soc.game.graphics.Renderer;
 import com.soc.game.graphics.StaticRenderer;
 
 public class GraphicsLoader {
+	
+	public static GraphicsLoader instance;
+	
+	public Map<String,Texture> loaded;
+	
+	
+	public static void initialize(){
+		GraphicsLoader.instance = new GraphicsLoader();
+	}
+	
+	private GraphicsLoader(){
+		loaded = new HashMap<String, Texture>();
+	}
+	
+	public static Texture load(String texture){
+		Texture tex = instance.loaded.get(texture);
+		if(tex == null){
+			tex = new Texture(Gdx.files.internal(Constants.Configuration.RESOURCE_DIR + texture));
+			instance.loaded.put(texture, tex);
+		}
+		return tex;
+	}
+
 
 	public static void loadWarrior(Character character){
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
@@ -39,11 +65,11 @@ public class GraphicsLoader {
 		spin.ox = -48;
 		spin.oy = -32;
 		
-		TextureRegion[][] tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/warrior-attack.png")), 128, 128);
+		TextureRegion[][] tmp = TextureRegion.split(load("warrior-attack.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
 	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
 	   	}
-		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/warrior-walk.png")), 64, 64);
+		tmp = TextureRegion.split(load("warrior-walk.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
 	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
@@ -67,6 +93,10 @@ public class GraphicsLoader {
 		character.renderers[State.CHARGING] = charge;
 		character.renderers[State.SPINNING] = spin;
 	}
+	
+//	public static void loadMaggor(Character character){
+//		Direc
+//	}
 	
 	public static void loadSkeleton(Character character){
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);

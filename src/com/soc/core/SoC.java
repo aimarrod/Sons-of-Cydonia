@@ -59,6 +59,7 @@ import com.soc.screens.SavesScreen;
 import com.soc.screens.SplashScreen;
 import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GameLoader;
+import com.soc.utils.GraphicsLoader;
 import com.soc.utils.LevelManager;
 import com.soc.utils.MapLoader;
 import com.soc.utils.MusicPlayer;
@@ -167,8 +168,10 @@ public class SoC extends Game {
 		
 		//Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 		screens=new Stack<Screen>();
+		GraphicsLoader.initialize();
 		MusicPlayer.initialize();
 		EffectsPlayer.initialize();
+		
 		//Save, New, Load game handler.
 		GameLoader.initialize();
 		setScreen(new MenuScreen(this));
