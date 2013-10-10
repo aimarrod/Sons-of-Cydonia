@@ -67,8 +67,9 @@ public class Constants {
 		public static final int PUNCH= 5;
 		public static final int CHARGE=6;
 		public static final int ARROW=7;
+		public static final int WHIRLBLADE=8;
 		
-		public static final int SPELL_NUMBER = 8;
+		public static final int SPELL_NUMBER = 9;
 		
 		public static final int BALLISTA_FIRE_RATE = 1;
 		public static final int DAGGER_SPEED = 900;
@@ -77,6 +78,8 @@ public class Constants {
 		public static final int CHARGE_SPEED = 700;
 		public static final float CHARGE_DURATION = 1.5f;
 		public static final int CHARGE_BOX = 70;
+		public static final float SPIN_DURATION = 3.5f;
+		public static final float SPIN_RADIUS = 75f;
 	}
 	
 	public static class Attributes{

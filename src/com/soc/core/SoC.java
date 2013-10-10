@@ -39,6 +39,7 @@ import com.soc.game.spells.DaggerThrowSpell;
 import com.soc.game.spells.PunchSpell;
 import com.soc.game.spells.SlashSpell;
 import com.soc.game.spells.Spell;
+import com.soc.game.spells.WhirlbladeSpell;
 import com.soc.game.systems.AttackDelaySystem;
 import com.soc.game.systems.AttackProcessingSystem;
 import com.soc.game.systems.CameraSystem;
@@ -133,6 +134,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.SLASH] = new SlashSpell();
 		spells[Constants.Spells.CHARGE] = new ChargeSpell();
 		spells[Constants.Spells.ARROW] = new ArrowSpell();
+		spells[Constants.Spells.WHIRLBLADE] = new WhirlbladeSpell();
 		
 		camera = new OrthographicCamera();
 		

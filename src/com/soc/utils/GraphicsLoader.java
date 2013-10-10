@@ -22,6 +22,7 @@ public class GraphicsLoader {
 		DirectionalStaticRenderer charge = new DirectionalStaticRenderer();
 		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
+		AnimatedRenderer spin = new AnimatedRenderer(true);
 		
 		attack.ox = -48;
 		attack.oy = -32;
@@ -35,6 +36,8 @@ public class GraphicsLoader {
 		movement.oy = 0;
 		charge.ox -= 16;
 		charge.oy -= 0;
+		spin.ox = -48;
+		spin.oy = -32;
 		
 		TextureRegion[][] tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/warrior-attack.png")), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
@@ -53,6 +56,8 @@ public class GraphicsLoader {
 		for(int i = 0; i < tmp.length; i++){
 	   		death.animation = new Animation(1f/tmp[i].length, tmp[i]);
 	   	}
+		tmp = TextureRegion.split(new Texture(Gdx.files.internal("resources/warrior-spin.png")), 128, 128);
+	   	spin.animation = new Animation(0.2f/tmp[0].length, tmp[0]);
 		
 		character.renderers = new Renderer[State.STATENUM];
 		character.renderers[State.IDLE] = idle;
@@ -60,6 +65,7 @@ public class GraphicsLoader {
 		character.renderers[State.ATTACK] = attack;
 		character.renderers[State.WALK] = movement;
 		character.renderers[State.CHARGING] = charge;
+		character.renderers[State.SPINNING] = spin;
 	}
 	
 	public static void loadSkeleton(Character character){
