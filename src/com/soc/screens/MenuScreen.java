@@ -1,6 +1,7 @@
 package com.soc.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
@@ -72,8 +73,10 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int pointer,
                 int button )
             {
+            	if (button==0){
                 GameLoader.newGame("warrior");
                 startGameButton.removeListener(this);
+            	}
             }
 
         } );
@@ -104,7 +107,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int pointer,
                 int button )
             {
-                super.touchUp( event, x, y, pointer, button );
+            	if (button==0){
+            		
+            	}
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
@@ -140,7 +145,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int pointer,
                 int button )
             {
-                super.touchUp( event, x, y, pointer, button );
+            	if (button==0){
+            		
+            	}
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
@@ -175,7 +182,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int pointer,
                 int button )
             {
-                super.touchUp( event, x, y, pointer, button );
+            	if (button==0){
+            		
+            	}
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
