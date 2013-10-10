@@ -1,8 +1,8 @@
 package com.soc.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -10,12 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.soc.core.SoC;
-import com.soc.objects.Armor;
-import com.soc.objects.Item;
-import com.soc.objects.Potion;
-import com.soc.objects.Weapon;
 import com.soc.utils.GameLoader;
 
 public class MenuScreen extends AbstractScreen implements InputProcessor{
@@ -28,15 +25,25 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 	private TextButton optionsButton;
 	private TextButton exitButton;
 	private TextButton []buttons;
+	private TextButtonStyle normalStyle;
+	private TextButtonStyle focusedStyle;
 	public MenuScreen(SoC game) {
 		super(game);
 		background=new Texture(Gdx.files.internal("resources/background.jpg"));
 		hand=new Image(new Texture(Gdx.files.internal("resources/hand.png")));
 		handT=new Texture(Gdx.files.internal("resources/hand.png"));
-		startGameButton = new TextButton( "Start game", getSkin() );
-		loadGameButton = new TextButton( "Load Game", getSkin() );
-		optionsButton = new TextButton( "Options", getSkin() );
-		exitButton = new TextButton( "Exit", getSkin() );
+		normalStyle=new TextButtonStyle();
+		normalStyle.font=getSkin().getFont("gameFont");
+		normalStyle.up=getSkin().getDrawable("normal-button");
+		normalStyle.down=getSkin().getDrawable("pushed-button");
+		focusedStyle=new TextButtonStyle();
+		focusedStyle.font=getSkin().getFont("gameFont");
+		focusedStyle.up=getSkin().getDrawable("focused-button");
+		focusedStyle.down=getSkin().getDrawable("pushed-button");
+		startGameButton = new TextButton( "Start game", normalStyle);
+		loadGameButton = new TextButton( "Load Game", normalStyle);
+		optionsButton = new TextButton( "Options", normalStyle);
+		exitButton = new TextButton( "Exit", normalStyle );
 		buttons=new TextButton[4];
 		buttons[0]=startGameButton;
 		buttons[1]=loadGameButton;
@@ -75,6 +82,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
         	public boolean mouseMoved(InputEvent event,
                     float x,
                     float y){
+        		if(focusedBotton!=1){
+        			buttons[focusedBotton-1].setStyle(normalStyle);
+        		}
         		focusedBotton=1;
         		return true;
         		
@@ -108,6 +118,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
         	public boolean mouseMoved(InputEvent event,
                     float x,
                     float y){
+        		if(focusedBotton!=2){
+        			buttons[focusedBotton-1].setStyle(normalStyle);
+        		}
         		focusedBotton=2;
         		return true;
         		
@@ -141,6 +154,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
         	public boolean mouseMoved(InputEvent event,
                     float x,
                     float y){
+        		if(focusedBotton!=3){
+        			buttons[focusedBotton-1].setStyle(normalStyle);
+        		}
         		focusedBotton=3;
         		return true;
         		
@@ -173,6 +189,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
         	public boolean mouseMoved(InputEvent event,
                     float x,
                     float y){
+        		if(focusedBotton!=4){
+        			buttons[focusedBotton-1].setStyle(normalStyle);
+        		}
         		focusedBotton=4;
         		return true;
         		
@@ -187,7 +206,8 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 	        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	        batch.begin();
 	        batch.draw(background, 0, 0, Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
-	        	batch.draw(handT, buttons[focusedBotton-1].getX()-20, buttons[focusedBotton-1].getY()+13, 0,0,20,20);
+	        batch.draw(handT, buttons[focusedBotton-1].getX()-20, buttons[focusedBotton-1].getY()+13, 0,0,20,20);
+	        buttons[focusedBotton-1].setStyle(focusedStyle);
 	        //Update delta and draw the actors inside the stage
 	        batch.end();
 	        stage.act( delta );
@@ -205,6 +225,7 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 	@Override
 	public boolean keyTyped(char character) {
 		if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)){
+			buttons[focusedBotton-1].setStyle(normalStyle);
 			if(focusedBotton==1)
 				focusedBotton=4;
 			else
@@ -212,6 +233,7 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 			return true;
 		}else{
 			if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)){
+				buttons[focusedBotton-1].setStyle(normalStyle);
 				if(focusedBotton==4)
 					focusedBotton=1;
 				else
