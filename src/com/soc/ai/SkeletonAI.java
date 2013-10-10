@@ -95,4 +95,10 @@ public class SkeletonAI implements AI {
 			p.direction.x = Math.signum(v.vx);
 			p.direction.y = Math.signum(v.vy);
 		}
+
+	@Override
+	public void death(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

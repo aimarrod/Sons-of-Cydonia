@@ -12,11 +12,12 @@ import com.soc.core.SoC;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
+import com.soc.utils.GraphicsLoader;
 
 public class DaggerThrowSpell extends Spell{
 	
 	public DaggerThrowSpell(){
-		this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/dagger.png")), 64, 64);
+		this.icon = GraphicsLoader.load("dagger-throw-icon.png");
 		this.tooltip = "Hurls a dagger to the front, which returns to the character after a certain distance is traveled";
 		this.cast = 0.2f;
 		this.blocking = 0.4f;

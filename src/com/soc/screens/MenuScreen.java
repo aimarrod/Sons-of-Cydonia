@@ -3,6 +3,7 @@ package com.soc.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -50,12 +51,14 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 		buttons[2]=optionsButton;
 		buttons[3]=exitButton;
 		focusedBotton=1;
+		SoC.game.inputMultiplexer.addProcessor(this);
 	}
     @Override
     public void show()
     {
         super.show();
         // retrieve the default table actor
+        final MenuScreen menu = this;
         Table table = super.getTable();
         // register the button "start game"
         startGameButton.addListener( new InputListener() {
@@ -72,8 +75,8 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int pointer,
                 int button )
             {
+                SoC.game.clearProcessors();
                 GameLoader.newGame("warrior");
-                startGameButton.removeListener(this);
             }
 
         } );
@@ -105,11 +108,12 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int button )
             {
                 super.touchUp( event, x, y, pointer, button );
+                SoC.game.clearProcessors();
+                SoC.game.setScreen(new SavesScreen(game));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
             {
-                System.out.println("touchdown");
                 return true;
             }
         } );

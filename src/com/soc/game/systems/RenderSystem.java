@@ -121,7 +121,6 @@ public class RenderSystem extends VoidEntitySystem{
 	private void renderCharacter(Entity e){
 		State state = sm.get(e);
 		Position pos = pm.get(e);
-		Bounds bon = bm.get(e);
 		Character animations = cm.get(e);
 		
 		Renderer r = animations.renderers[state.state];

@@ -12,11 +12,12 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.utils.GraphicsLoader;
 
 public class ChargeSpell extends Spell{
 	
 	public ChargeSpell(){
-		this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/dagger.png")), 64, 64);
+		this.icon = GraphicsLoader.load("charge-icon.png");
 		this.tooltip = "Charges Forward";
 		this.cast = 0f;
 		this.blocking = Constants.Spells.CHARGE_DURATION+this.cast;

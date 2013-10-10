@@ -17,4 +17,5 @@ import com.soc.utils.EffectsPlayer;
 
 public interface AI {
 	public void process(Entity e);
+	public void death(Entity e);
 }

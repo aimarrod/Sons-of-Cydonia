@@ -10,10 +10,11 @@ import com.soc.core.SoC;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
+import com.soc.utils.GraphicsLoader;
 
 public class SlashSpell extends Spell{
 		public SlashSpell(){
-			this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/slash-icon.png")), 64, 64);
+			this.icon = GraphicsLoader.load("slash-icon.png");
 			this.tooltip = "Slash your evil foe with your mighty sword!";
 			this.cast = 0.3f;
 			this.blocking = 0.4f;

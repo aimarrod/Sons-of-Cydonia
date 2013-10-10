@@ -11,10 +11,11 @@ import com.soc.core.SoC;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
+import com.soc.utils.GraphicsLoader;
 
 public class PunchSpell extends Spell{
 	public PunchSpell(){
-		this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/punch-icon.png")), 64, 64);
+		this.icon = GraphicsLoader.load("punch-icon.png");
 		this.tooltip = "Punch in the face!";
 		this.cast = 1f;
 		this.sound = "punch-swing.wav";

@@ -3,13 +3,15 @@ package com.soc.core;
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.BallistaAI;
-import com.soc.ai.ZombieAI;
+import com.soc.ai.MaggotAI;
 import com.soc.ai.SkeletonAI;
+import com.soc.ai.SlimeAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
 import com.soc.game.attacks.ArrowProcessor;
 import com.soc.game.attacks.ChargeProcessor;
 import com.soc.game.attacks.DaggerThrowProcessor;
+import com.soc.game.attacks.HarmfulEnemyProcessor;
 import com.soc.game.attacks.IcicleProcessor;
 import com.soc.game.attacks.PunchProcessor;
 import com.soc.game.attacks.SlashProcessor;
@@ -114,32 +116,67 @@ public class EntityFactory {
 	    return e;
 	}
 	
-//	public static Entity createMaggot(float px, float py, int pz){
-//		Entity e = SoC.game.world.createEntity();
-//		e.addComponent(new Position(px, py, pz));
-//		e.addComponent(new Velocity(0,0,0));
-//		e.addComponent(new Bounds(25, 25));
-//		e.addComponent(new State(0));
-//		//e.addComponent(new Attack(processor, damage));
-//		e.addComponent(new Feet(25, 25));
-//		e.addComponent(new Enemy(1000, 5, new ZombieAI()));
-//		e.addComponent(new Stats(
-//				1, 
-//				0, 
-//				0, 
-//				0, 
-//				0, 
-//				0, 
-//				1, 
-//				0, 
-//				0, 
-//				0, 
-//				0, 
-//				0, 
-//				null));
-//		
-//		
-//	}
+	public static Entity createMaggot(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,200));
+		e.addComponent(new Bounds(25, 25));
+		e.addComponent(new State(1));
+		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 10));
+		e.addComponent(new Feet(25, 25));
+		e.addComponent(new Enemy(1000, 5, new MaggotAI()));
+		e.addComponent(new Stats(
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Character animations = new Character();
+		GraphicsLoader.loadMaggot(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createSlime(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Bounds(64, 64));
+		e.addComponent(new State(1));
+		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 10));
+		e.addComponent(new Feet(30, 15));
+		e.addComponent(new Enemy(1000, 5, new SlimeAI()));
+		e.addComponent(new Stats(
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Character animations = new Character();
+		GraphicsLoader.loadSlime(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
 	
 	/*
 	 * ATTACKS

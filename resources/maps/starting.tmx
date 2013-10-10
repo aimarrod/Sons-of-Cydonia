@@ -301,13 +301,13 @@
   <object x="2336" y="224" width="32" height="224"/>
  </objectgroup>
  <objectgroup name="level0-spawners" width="100" height="200">
-  <object x="1888" y="4256" width="64" height="64">
+  <object x="2240" y="5248" width="64" height="64">
    <properties>
     <property name="interval" value="2.5"/>
     <property name="max" value="1"/>
     <property name="range" value="100"/>
     <property name="respawn" value="true"/>
-    <property name="type" value="skeleton"/>
+    <property name="type" value="slime"/>
    </properties>
   </object>
  </objectgroup>

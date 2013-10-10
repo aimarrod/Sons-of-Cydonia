@@ -10,12 +10,13 @@ import com.soc.core.SoC;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
+import com.soc.utils.GraphicsLoader;
 
 public class ArrowSpell extends Spell{
 
 	
 	public ArrowSpell(){
-		this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/hunter-arrow.png")), 64, 64);
+		this.icon = GraphicsLoader.load("arrow-icon.png");
 		this.tooltip = "Shoot an arrow";
 		this.cast = 0.3f;
 		this.blocking = 0.4f;

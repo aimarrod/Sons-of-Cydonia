@@ -21,6 +21,7 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 	@Mapper ComponentMapper<Bounds> bm;
 	
 	
+	@SuppressWarnings("unchecked")
 	public EntitySpawningTimerSystem() {
 		super(Aspect.getAspectForAll(Spawner.class));
 	}
@@ -37,16 +38,25 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				spawn.time = spawn.interval;
 				spawn.max -= 1;
 				Entity spawned=null;
-				if(spawn.type.equals(Constants.Groups.SKELETONS))
+				if(spawn.type.equals(Constants.Groups.SKELETONS)){
 					spawned = EntityFactory.createSkeleton(pos.x, pos.y, pos.z,10);
-				else if(spawn.type.equals(Constants.Groups.BALLISTAS))
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				}
+				else if(spawn.type.equals(Constants.Groups.BALLISTAS)){
 					spawned = EntityFactory.createBallista(pos.x, pos.y, pos.z,10);
-					
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				}
+				else if(spawn.type.equals(Constants.Groups.MAGGOTS)){
+					spawned = EntityFactory.createMaggot(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+				}
+				else if(spawn.type.equals(Constants.Groups.SLIMES)){
+					spawned = EntityFactory.createSlime(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+				}
 				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-				SoC.game.groupmanager.add(spawned, spawn.type);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
 				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
 				SoC.game.spawnermanager.spawn(spawner, spawned);
 				spawned.addToWorld();
 			} else {

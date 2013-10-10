@@ -11,6 +11,7 @@ import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -103,12 +104,25 @@ public class SoC extends Game {
 	public Map map;
 	
 	public Stack<Screen> screens;
+	public Stack<InputProcessor> processors;
 		
 	
 	
 	@Override
 	public void create() {		
 		SoC.game = this;
+		GraphicsLoader.initialize();
+		MusicPlayer.initialize();
+		EffectsPlayer.initialize();
+		GameLoader.initialize();
+		
+		spells = new Spell[Constants.Spells.SPELL_NUMBER];
+		spells[Constants.Spells.DAGGER_THROW] = new DaggerThrowSpell(); 
+		spells[Constants.Spells.PUNCH] = new PunchSpell();
+		spells[Constants.Spells.SLASH] = new SlashSpell();
+		spells[Constants.Spells.CHARGE] = new ChargeSpell();
+		spells[Constants.Spells.ARROW] = new ArrowSpell();
+		spells[Constants.Spells.WHIRLBLADE] = new WhirlbladeSpell();
 		
 		world = new World();
 		positionmapper = world.getMapper(Position.class);
@@ -128,14 +142,6 @@ public class SoC extends Game {
 		
 		inputMultiplexer=new InputMultiplexer();
 		Gdx.input.setInputProcessor(inputMultiplexer);
-		
-		spells = new Spell[Constants.Spells.SPELL_NUMBER];
-		spells[Constants.Spells.DAGGER_THROW] = new DaggerThrowSpell(); 
-		spells[Constants.Spells.PUNCH] = new PunchSpell();
-		spells[Constants.Spells.SLASH] = new SlashSpell();
-		spells[Constants.Spells.CHARGE] = new ChargeSpell();
-		spells[Constants.Spells.ARROW] = new ArrowSpell();
-		spells[Constants.Spells.WHIRLBLADE] = new WhirlbladeSpell();
 		
 		camera = new OrthographicCamera();
 		
@@ -163,19 +169,13 @@ public class SoC extends Game {
 		cameraSystem = SoC.game.world.setSystem( new CameraSystem(camera), true);
 		renderSystem = SoC.game.world.setSystem( new RenderSystem(camera), true );
 		hudSystem = SoC.game.world.setSystem(new HudSystem(camera),true);
-		
-		SoC.game.world.initialize();
-		
+				
 		//Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 		screens=new Stack<Screen>();
-		GraphicsLoader.initialize();
-		MusicPlayer.initialize();
-		EffectsPlayer.initialize();
+		processors = new Stack<InputProcessor>();
 		
 		//Save, New, Load game handler.
-		GameLoader.initialize();
 		MenuScreen menu=new MenuScreen(this);
-		inputMultiplexer.addProcessor(menu);
 		setScreen(menu);
 	}
 	
@@ -221,6 +221,22 @@ public class SoC extends Game {
 		//cfg.resizable = false;
 		cfg.title = "GameXYZ";
 		new LwjglApplication(new SoC(), cfg);
+	}
+
+	public void restoreInputProcessors() {
+		inputMultiplexer.clear();
+		while(!processors.isEmpty()){
+			inputMultiplexer.addProcessor(processors.pop());
+		}
+	}
+	
+	public void clearProcessors(){
+		processors.empty();
+		inputMultiplexer.clear();
+	}
+	
+	public void clearScreens(){
+		screens.empty();
 	}
 
 }

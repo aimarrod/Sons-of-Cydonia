@@ -6,12 +6,15 @@ import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
 import com.soc.core.SoC;
+import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Player;
 
 public class ExpiringSystem extends EntityProcessingSystem{
 	 @Mapper ComponentMapper<Expires> em;
 	 @Mapper ComponentMapper<Player> pm;
+	 @Mapper ComponentMapper<Enemy> enm;
+
 	 
      @SuppressWarnings("unchecked")
      public ExpiringSystem() {
@@ -25,6 +28,7 @@ public class ExpiringSystem extends EntityProcessingSystem{
             	e.removeComponent(exp);
     			SoC.game.openGameOverScren();
             } else {
+            	 if(enm.has(e)) enm.get(e).processor.death(e);
                  e.deleteFromWorld();
              }
          }

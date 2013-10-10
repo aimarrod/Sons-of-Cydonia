@@ -22,7 +22,16 @@ public class GameLoader {
 	}
 	
 	public static FileHandle[] getHandles(){
-		return Gdx.files.external("saves").list();
+		FileHandle[] handles = new FileHandle[3]; 
+		FileHandle[] list = Gdx.files.external("saves").list();
+		for(int i = 0; i < handles.length; i++){
+			if(i < list.length){
+				handles[i] = list[i];
+			} else {
+				handles[i] = null;
+			}
+		}
+		return handles;
 	}
 	
 	public static void saveGame(int slotNum) throws IOException{
@@ -44,13 +53,13 @@ public class GameLoader {
 	
 	public static void newGame(String clazz){
 		SoC.game.player = EntityFactory.createCharacter(2300, 650, 0, 0, 0, Constants.Classes.WARRIOR);
+		SoC.game.setScreen(new GameScreen());
 		MapLoader.loadMap("starting.tmx");
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.PLAYERS);
 		SoC.game.world.getManager(LevelManager.class).setLevel(SoC.game.player, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.CHARACTERS);
 		SoC.game.world.getManager(TagManager.class).register(Constants.Tags.PLAYER, SoC.game.player);
 		SoC.game.world.addEntity(SoC.game.player);
-		SoC.game.setScreen(new GameScreen());
 		
 	}
 	
@@ -62,13 +71,13 @@ public class GameLoader {
 		
 		
 		SoC.game.player = EntityFactory.loadCharacter(save.position, save.stats, Constants.Characters.WARRIOR);
+		SoC.game.setScreen(new GameScreen());
 		MapLoader.loadMap(save.map);
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.PLAYERS);
 		SoC.game.world.getManager(LevelManager.class).setLevel(SoC.game.player, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.CHARACTERS);
 		SoC.game.world.getManager(TagManager.class).register(Constants.Tags.PLAYER, SoC.game.player);
 		SoC.game.world.addEntity(SoC.game.player);
-		SoC.game.setScreen(new GameScreen());
 	}
 }
 

@@ -10,12 +10,13 @@ import com.soc.core.SoC;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
+import com.soc.utils.GraphicsLoader;
 
 public class WhirlbladeSpell extends Spell{
 
 	
 	public WhirlbladeSpell(){
-		this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/hunter-arrow.png")), 64, 64);
+		this.icon = GraphicsLoader.load("whirlblade-icon.png");
 		this.tooltip = "Spin around you, hitting and pushing foes on your way. Damage increases with strength and agility";
 		this.cast = 0.0f;
 		this.blocking = Constants.Spells.SPIN_DURATION;

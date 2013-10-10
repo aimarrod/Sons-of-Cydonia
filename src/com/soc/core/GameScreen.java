@@ -24,6 +24,7 @@ public class GameScreen implements Screen {
 	public GameScreen() {
 		fps=new FPSLogger();
 		SoC.game.inputMultiplexer.addProcessor(SoC.game.world.getSystem(PlayerInputSystem.class));
+		SoC.game.world.initialize();
 	}
 
 	@Override

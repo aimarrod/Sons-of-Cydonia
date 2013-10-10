@@ -45,4 +45,10 @@ public class BallistaAI implements AI{
 		}
 	}
 
+	@Override
+	public void death(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

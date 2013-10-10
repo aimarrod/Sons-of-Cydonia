@@ -11,28 +11,32 @@ import com.soc.core.SoC;
 
 public class HudSystem extends VoidEntitySystem{
 
-	OrthographicCamera camera;
-	Stage stage;
-	StatusBar statusBar;
-	ActionBar actionBar;
-	Inventory inventory;
-	CharacterMenu characterMenu;
-	TextButton textButton;
+	public OrthographicCamera camera;
+	public Stage stage;
+	public StatusBar statusBar;
+	public ActionBar actionBar;
+	public Inventory inventory;
+	public CharacterMenu characterMenu;
+	public TextButton textButton;
 	
 	
 	public HudSystem(OrthographicCamera camera){
 		this.camera = camera;
 		this.stage = new Stage();
 		this.statusBar = new StatusBar();
-		this.actionBar = new ActionBar();
+		this.actionBar = new ActionBar(stage);
 		this.inventory=new Inventory();
 		this.characterMenu = new CharacterMenu();
 		//Deberias er cargado al principio el world y luego referenciarlo
 		this.textButton=new TextButton("", new Skin(  Gdx.files.internal( "resources/uiskin.json" ) ));
 		stage.addActor(statusBar);
-		stage.addActor(actionBar);
 		stage.addActor(characterMenu);
 		//stage.addActor(inventory);
+	}
+	
+	@Override
+	protected void initialize(){
+		SoC.game.inputMultiplexer.addProcessor(actionBar);
 	}
 
 	
