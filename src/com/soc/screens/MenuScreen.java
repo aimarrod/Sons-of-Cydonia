@@ -1,6 +1,8 @@
 package com.soc.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -10,19 +12,36 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.soc.core.SoC;
+import com.soc.objects.Armor;
+import com.soc.objects.Item;
+import com.soc.objects.Potion;
+import com.soc.objects.Weapon;
 import com.soc.utils.GameLoader;
 
-public class MenuScreen extends AbstractScreen{
+public class MenuScreen extends AbstractScreen implements InputProcessor{
 	private Texture background;
 	private Image hand;
 	private int focusedBotton;
 	private Texture handT;
-	TextButton startGameButton;
+	private TextButton startGameButton;
+	private TextButton loadGameButton;
+	private TextButton optionsButton;
+	private TextButton exitButton;
+	private TextButton []buttons;
 	public MenuScreen(SoC game) {
 		super(game);
 		background=new Texture(Gdx.files.internal("resources/background.jpg"));
 		hand=new Image(new Texture(Gdx.files.internal("resources/hand.png")));
 		handT=new Texture(Gdx.files.internal("resources/hand.png"));
+		startGameButton = new TextButton( "Start game", getSkin() );
+		loadGameButton = new TextButton( "Load Game", getSkin() );
+		optionsButton = new TextButton( "Options", getSkin() );
+		exitButton = new TextButton( "Exit", getSkin() );
+		buttons=new TextButton[4];
+		buttons[0]=startGameButton;
+		buttons[1]=loadGameButton;
+		buttons[2]=optionsButton;
+		buttons[3]=exitButton;
 		focusedBotton=1;
 	}
     @Override
@@ -31,10 +50,7 @@ public class MenuScreen extends AbstractScreen{
         super.show();
         // retrieve the default table actor
         Table table = super.getTable();
-        table.add( "Welcome to Tyrian for Android!" ).spaceBottom( 50 );
-        table.row();
         // register the button "start game"
-        startGameButton = new TextButton( "Start game", getSkin() );
         startGameButton.addListener( new InputListener() {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
@@ -50,6 +66,7 @@ public class MenuScreen extends AbstractScreen{
                 int button )
             {
                 GameLoader.newGame("warrior");
+                startGameButton.removeListener(this);
             }
 
         } );
@@ -58,15 +75,6 @@ public class MenuScreen extends AbstractScreen{
         	public boolean mouseMoved(InputEvent event,
                     float x,
                     float y){
-//        		System.out.println("X: "+x);
-//        		System.out.println("Y:" +y);
-//        		System.out.println("Boton x:"+startGameButton.getX());
-//        		System.out.println("Boton y:"+startGameButton.getY());
-//        		System.out.println("Height: "+startGameButton.getHeight());
-//        		System.out.println("Width: "+startGameButton.getWidth());
-//        		if(x>startGameButton.getX() && x<startGameButton.getX()+startGameButton.getWidth() && y<startGameButton.getY()+startGameButton.getHeight() &&y>startGameButton.getX())
-//					System.out.println("paso");	
-//        			return true;
         		focusedBotton=1;
         		return true;
         		
@@ -77,7 +85,6 @@ public class MenuScreen extends AbstractScreen{
         table.row();
 
         // register the button "options"
-        TextButton loadGameButton = new TextButton( "Load Game", getSkin() );
         loadGameButton.addListener( new InputListener() {
             @Override
             public void touchUp(
@@ -101,15 +108,6 @@ public class MenuScreen extends AbstractScreen{
         	public boolean mouseMoved(InputEvent event,
                     float x,
                     float y){
-//        		System.out.println("X: "+x);
-//        		System.out.println("Y:" +y);
-//        		System.out.println("Boton x:"+startGameButton.getX());
-//        		System.out.println("Boton y:"+startGameButton.getY());
-//        		System.out.println("Height: "+startGameButton.getHeight());
-//        		System.out.println("Width: "+startGameButton.getWidth());
-//        		if(x>startGameButton.getX() && x<startGameButton.getX()+startGameButton.getWidth() && y<startGameButton.getY()+startGameButton.getHeight() &&y>startGameButton.getX())
-//					System.out.println("paso");	
-//        			return true;
         		focusedBotton=2;
         		return true;
         		
@@ -120,7 +118,6 @@ public class MenuScreen extends AbstractScreen{
         table.row();
 
         // register the button "high scores"
-        TextButton optionsButton = new TextButton( "Options", getSkin() );
         optionsButton.addListener( new InputListener() {
             @Override
             public void touchUp(
@@ -139,10 +136,20 @@ public class MenuScreen extends AbstractScreen{
                 return true;
             }
         } );
+        
+        optionsButton.addListener(new ClickListener(){
+        	public boolean mouseMoved(InputEvent event,
+                    float x,
+                    float y){
+        		focusedBotton=3;
+        		return true;
+        		
+        	}
+
+        });
         table.add( optionsButton ).uniform().fill().spaceBottom(10);
         table.row();
         // register the button "high scores"
-        TextButton exitButton = new TextButton( "Options", getSkin() );
         exitButton.addListener( new InputListener() {
             @Override
             public void touchUp(
@@ -161,6 +168,17 @@ public class MenuScreen extends AbstractScreen{
                 return true;
             }
         } );
+        
+        exitButton.addListener(new ClickListener(){
+        	public boolean mouseMoved(InputEvent event,
+                    float x,
+                    float y){
+        		focusedBotton=4;
+        		return true;
+        		
+        	}
+
+        });
         table.add( exitButton ).uniform().fill();
     }
     
@@ -169,12 +187,58 @@ public class MenuScreen extends AbstractScreen{
 	        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	        batch.begin();
 	        batch.draw(background, 0, 0, Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
-	        if(focusedBotton==1)
-	        	batch.draw(handT, startGameButton.getX()-20, startGameButton.getY(), 0,0,20,20);
+	        	batch.draw(handT, buttons[focusedBotton-1].getX()-20, buttons[focusedBotton-1].getY()+13, 0,0,20,20);
 	        //Update delta and draw the actors inside the stage
 	        batch.end();
 	        stage.act( delta );
 	        stage.draw();
 		
+	}
+	@Override
+	public boolean keyDown(int keycode) {
+		return false;
+	}
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
+	}
+	@Override
+	public boolean keyTyped(char character) {
+		if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)){
+			if(focusedBotton==1)
+				focusedBotton=4;
+			else
+				focusedBotton--;
+			return true;
+		}else{
+			if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)){
+				if(focusedBotton==4)
+					focusedBotton=1;
+				else
+					focusedBotton++;
+				return true;
+			}
+		}		
+		return false;
+	}
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
+	}
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
+	}
+	@Override
+	public boolean scrolled(int amount) {
+		return false;
 	}
 }

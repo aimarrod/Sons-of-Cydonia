@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.soc.core.SoC;
 import com.soc.game.components.Player;
 import com.soc.game.components.Stats;
@@ -14,10 +15,13 @@ public class CharacterMenu extends Actor{
 	
 	Texture container;
 	BitmapFont font;
+	Skin skin;
 	
 	public CharacterMenu(){
 		container = new Texture(Gdx.files.internal("resources/character-menu.png"));
-		font = new BitmapFont(Gdx.files.internal("resources/fonts/font.fnt"));
+		skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
+		font =skin.getFont("gameFont");
+
 	}
 	
 	@Override
@@ -33,6 +37,7 @@ public class CharacterMenu extends Actor{
         font.setScale(0.55f);
         font.setColor(Color.RED);
         font.draw(batch, ""+stats.maxHealth, getX()+70, getY()+190);
+        font.setColor(skin.getColor("red"));
         
         font.setScale(0.5f);
         font.setColor(Color.DARK_GRAY);

@@ -174,7 +174,9 @@ public class SoC extends Game {
 		
 		//Save, New, Load game handler.
 		GameLoader.initialize();
-		setScreen(new MenuScreen(this));
+		MenuScreen menu=new MenuScreen(this);
+		inputMultiplexer.addProcessor(menu);
+		setScreen(menu);
 	}
 	
 	public void openMenu(){
