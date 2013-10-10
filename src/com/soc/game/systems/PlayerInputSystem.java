@@ -98,14 +98,20 @@ import com.soc.utils.GameLoader;
 
 		@Override
 		public boolean keyDown(int keycode) {
-			if(keycode == Input.Keys.ESCAPE){
-				try {
-					GameLoader.saveGame(1);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			if(keycode==plm.get(SoC.game.player).inventory){
+				world.getSystem(HudSystem.class).toggleInventory();
+				return true;
 			}
+			if(keycode==plm.get(SoC.game.player).characterMenu){
+				world.getSystem(HudSystem.class).toogleCharacterMenu();
+				return true;
+			}
+			if(keycode==plm.get(SoC.game.player).gameMenu){
+				world.getSystem(HudSystem.class).toogleGameMenu();
+				return true;
+			}
+			
+			
 			return false;
 		}
 
@@ -155,13 +161,8 @@ import com.soc.utils.GameLoader;
 
 		@Override
 		public boolean keyTyped(char character) {
-			if(Gdx.input.isKeyPressed(plm.get(SoC.game.player).inventory)){
-				world.getSystem(HudSystem.class).toggleInventory();
-				return true;
-			}
-			if(Gdx.input.isKeyPressed(plm.get(SoC.game.player).characterMenu)){
-				world.getSystem(HudSystem.class).toogleCharacterMenu();
-			}
+
+			
 			return false;
 		}
 

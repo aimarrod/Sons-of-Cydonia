@@ -122,10 +122,11 @@ public class Inventory extends Actor implements InputProcessor{
 						}
 					}
 				}
+				return true;
 			}
 				
 		}
-		return true;
+		return false;
 	}
 
 	@Override

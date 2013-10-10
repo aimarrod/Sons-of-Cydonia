@@ -12,12 +12,14 @@ import com.soc.core.SoC;
 public class HudSystem extends VoidEntitySystem{
 
 	OrthographicCamera camera;
-	Stage stage;
+	public Stage stage;
 	StatusBar statusBar;
 	ActionBar actionBar;
 	Inventory inventory;
 	CharacterMenu characterMenu;
 	TextButton textButton;
+	GameMenu gameMenu;
+	Skin skin;
 	
 	
 	public HudSystem(OrthographicCamera camera){
@@ -27,11 +29,16 @@ public class HudSystem extends VoidEntitySystem{
 		this.actionBar = new ActionBar();
 		this.inventory=new Inventory();
 		this.characterMenu = new CharacterMenu();
+		skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
+		this.gameMenu=new GameMenu(skin,stage);
+		
+		
 		//Deberias er cargado al principio el world y luego referenciarlo
 		this.textButton=new TextButton("", new Skin(  Gdx.files.internal( "resources/uiskin.json" ) ));
 		stage.addActor(statusBar);
 		stage.addActor(actionBar);
 		stage.addActor(characterMenu);
+		//stage.addActor(gameMenu);
 		//stage.addActor(inventory);
 	}
 
@@ -47,6 +54,8 @@ public class HudSystem extends VoidEntitySystem{
 		statusBar.setPosition(10, height - 65);
 		inventory.updateRes(width, height);
 		characterMenu.setPosition(10, height-280);
+		gameMenu.setPosition(width/2,height/2+50 );
+		gameMenu.setViewport(height);
 	}
 	public void toggleInventory(){
 		if(!inventory.hasParent()){
@@ -63,6 +72,16 @@ public class HudSystem extends VoidEntitySystem{
 			stage.addActor(characterMenu);
 		} else {
 			characterMenu.remove();
+		}
+	}
+	
+	public void toogleGameMenu(){
+		if(!gameMenu.hasParent()){
+			stage.addActor(gameMenu);
+			SoC.game.inputMultiplexer.addProcessor(gameMenu);
+		}else{
+			gameMenu.remove();
+			SoC.game.inputMultiplexer.removeProcessor(gameMenu);
 		}
 	}
 	public void toggleTextButton(String tooltip, int x, int y){
