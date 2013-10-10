@@ -16,8 +16,7 @@ com.badlogic.gdx.graphics.Color: {
 	orange_half_alpha: { a:0.5, b:0, g: 0.7, r: 1 },
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: { down: default-round-down, up: default-round, font: gameFont, fontColor: green },
-	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: gameFont, fontColor: black, downFontColor: red }
-},
+	default: { down: pushed-button, up: normal-button, font: gameFont, fontColor: green }
+}
 
 }
