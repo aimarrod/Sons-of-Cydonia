@@ -1,0 +1,23 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	gameFont: {
+		file: "fonts/font.fnt"
+	},
+
+},
+com.badlogic.gdx.graphics.Color: {
+	green: { a: 1, b: 0, g: 1, r: 0 },
+	white: { a: 1, b: 1, g: 1, r: 1 },
+	red: { a: 1, b: 0, g: 0, r: 1 },
+	black: { a: 1, b: 0, g: 0, r: 0 },
+	blue: { a: 1, b: 1, g: 0, r: 0 },
+	orange: { a: 1, b: 0, g: 0.8, r: 1 },
+	orange_light: { a: 1, b: 0.1, g: 0.85, r: 1 },
+	orange_half_alpha: { a:0.5, b:0, g: 0.7, r: 1 },
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: { down: default-round-down, up: default-round, font: gameFont, fontColor: green },
+	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: gameFont, fontColor: black, downFontColor: red }
+},
+
+}
