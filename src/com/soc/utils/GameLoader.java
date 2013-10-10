@@ -1,23 +1,16 @@
 package com.soc.utils;
 
-import java.io.File;
 import java.io.IOException;
 
-import com.artemis.Entity;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.GameScreen;
-import com.soc.core.Constants.Attributes;
 import com.soc.core.SoC;
-import com.soc.game.components.Position;
-import com.soc.game.components.Stats;
 
 public class GameLoader {
 	
