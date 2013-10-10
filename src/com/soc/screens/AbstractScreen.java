@@ -20,7 +20,7 @@ public class AbstractScreen implements Screen{
 		this.game=game;
 		this.batch=new SpriteBatch();
 		this.stage=new Stage(0,0,true);
-        Gdx.input.setInputProcessor(stage);
+        SoC.game.inputMultiplexer.addProcessor(stage);
 	}
 	protected Skin getSkin()
 	{

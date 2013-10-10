@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.soc.game.graphics.Renderer;
 import com.soc.game.map.Map;
 import com.soc.game.systems.CameraSystem;
+import com.soc.game.systems.PlayerInputSystem;
 import com.soc.game.systems.RenderSystem;
 import com.soc.hud.HudSystem;
 import com.soc.utils.LevelManager;
@@ -22,7 +23,7 @@ public class GameScreen implements Screen {
 	
 	public GameScreen() {
 		fps=new FPSLogger();
-		Gdx.input.setInputProcessor(SoC.game.inputMultiplexer);
+		SoC.game.inputMultiplexer.addProcessor(SoC.game.world.getSystem(PlayerInputSystem.class));
 	}
 
 	@Override

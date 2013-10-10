@@ -42,7 +42,7 @@ import com.soc.utils.GameLoader;
 		  
 		 @Override
 		 protected void initialize() {
-			 SoC.game.inputMultiplexer.addProcessor(this);
+			 //SoC.game.inputMultiplexer.addProcessor(this);
 		 }
 		 
 		 @Override
