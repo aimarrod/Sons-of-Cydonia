@@ -70,13 +70,17 @@ public class CharacterMenu extends Actor{
         
         font.setColor(Color.DARK_GRAY);
         font.draw(batch, "Weapon: ", getX()+15, getY()+60);
-        if(player.weapon != null)
-        batch.draw(player.weapon.icon, getX()+85, getY()+38, 25, 25);
+        if(player.weapon != null){
+        	batch.setColor(1,1,1,1);
+        	batch.draw(player.weapon.icon, getX()+85, getY()+38, 25, 25);
+        }
         
         font.setColor(Color.DARK_GRAY);
         font.draw(batch, "Armor: ", getX()+15, getY()+30);
-        if(player.armor != null)
-        batch.draw(player.armor.icon, getX()+85, getY()+8, 25, 25);
+        if(player.armor != null){
+        	batch.setColor(1,1,1,1);
+        	batch.draw(player.armor.icon, getX()+85, getY()+8, 25, 25);
+        }
 		
         batch.setColor(1, 1, 1, 1);
 	}

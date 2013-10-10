@@ -12,6 +12,7 @@ import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.attacks.IcicleProcessor;
 import com.soc.game.attacks.PunchProcessor;
 import com.soc.game.attacks.SlashProcessor;
+import com.soc.game.attacks.WhirlbladeProcessor;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
@@ -57,7 +58,7 @@ public class EntityFactory {
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,Constants.Characters.VELOCITY));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
-	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.SLASH, new int[]{Constants.Spells.DAGGER_THROW, Constants.Spells.CHARGE}));
+	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.SLASH, new int[]{Constants.Spells.DAGGER_THROW, Constants.Spells.CHARGE, Constants.Spells.WHIRLBLADE}));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(animations);
@@ -201,7 +202,7 @@ public class EntityFactory {
 	}
 
 
-	public static Entity createSlash(String group, Position pos, int damage) {
+	public static Entity createSlash(Position pos, int damage) {
 		Entity e=SoC.game.world.createEntity();
 		
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
@@ -217,6 +218,16 @@ public class EntityFactory {
 
 		}
 	   	e.addComponent( new Attack(new SlashProcessor(), damage) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createWhirlblade(Position pos, Bounds bon,int damage) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
+		e.addComponent(new Position(pos.x, pos.y, pos.z));
+	   	e.addComponent( new Attack(new WhirlbladeProcessor(pos, bon), damage) );
 	   	
 	   	return e;		
 	}

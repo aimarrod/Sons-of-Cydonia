@@ -1,0 +1,34 @@
+package com.soc.game.spells;
+
+import com.artemis.Entity;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.soc.core.Constants;
+import com.soc.core.EntityFactory;
+import com.soc.core.SoC;
+import com.soc.game.components.Position;
+import com.soc.game.components.State;
+import com.soc.game.components.Stats;
+
+public class WhirlbladeSpell extends Spell{
+
+	
+	public WhirlbladeSpell(){
+		this.icon = new TextureRegion(new Texture(Gdx.files.internal("resources/hunter-arrow.png")), 64, 64);
+		this.tooltip = "Spin around you, hitting and pushing foes on your way. Damage increases with strength and agility";
+		this.cast = 0.0f;
+		this.blocking = Constants.Spells.SPIN_DURATION;
+		this.state = State.SPINNING;
+		this.mana = 50;
+	}
+
+	@Override
+	public void create(Entity source, String group, Position pos, Stats stats) {
+		Entity e = EntityFactory.createWhirlblade(SoC.game.positionmapper.get(source), SoC.game.boundsmapper.get(source),(int) (stats.agility*0.5f + stats.strength*0.5));
+	    SoC.game.groupmanager.add(e, group);
+		SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
+		SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);
+	   	e.addToWorld();
+	}
+}

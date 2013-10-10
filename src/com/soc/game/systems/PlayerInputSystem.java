@@ -12,6 +12,8 @@ import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Character;
@@ -55,7 +57,7 @@ import com.soc.utils.GameLoader;
 			 Stats st = stm.get(SoC.game.player);
 			 
 			  
-			 if(state.state < State.BLOCKED){
+			 if(state.state < State.BLOCKED || state.state == State.SPINNING){
 				 
 				boolean moving = false;
 				 
@@ -84,6 +86,7 @@ import com.soc.utils.GameLoader;
 					pos.direction.y = Math.signum(vel.vy);
 			 	}
 			 
+			 	if(state.state == State.SPINNING) return;
 			 	if(moving){
 				 	state.state = State.WALK;
 			 	} else {
@@ -155,6 +158,9 @@ import com.soc.utils.GameLoader;
 			if(Gdx.input.isKeyPressed(plm.get(SoC.game.player).inventory)){
 				world.getSystem(HudSystem.class).toggleInventory();
 				return true;
+			}
+			if(Gdx.input.isKeyPressed(plm.get(SoC.game.player).characterMenu)){
+				world.getSystem(HudSystem.class).toogleCharacterMenu();
 			}
 			return false;
 		}
