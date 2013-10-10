@@ -36,7 +36,7 @@ public class Inventory extends Actor implements InputProcessor{
 	
 	public void draw(SpriteBatch batch, float partenAlpha){
 		int posX=0;
-		int posY=448;
+		int posY=384;
 		int posFocusX=0;
 		int posFocusY=0;
 		boolean existsFocus=false;
@@ -69,15 +69,15 @@ public class Inventory extends Actor implements InputProcessor{
 				batch.draw(itemFocused.icon,posFocusX+5,posFocusY+15,61,51);
 			}
 		}
-		batch.draw(armorSlot, 128, 512,  64, 64 );
+		batch.draw(armorSlot, 192, 448,  64, 64 );
 		Armor armor=SoC.game.playermapper.get(SoC.game.player).armor;
 		if(armor!=null){
-			batch.draw(armor.icon,128+5,512+15,55,45);
+			batch.draw(armor.icon,192+5,448+15,55,45);
 		}
-		batch.draw(weaponSlot,192,512,64,64);
+		batch.draw(weaponSlot,256,448,64,64);
 		Weapon weapon=SoC.game.playermapper.get(SoC.game.player).weapon;
 		if(weapon!=null){
-			batch.draw(weapon.icon,192+5,512+15,55,45);
+			batch.draw(weapon.icon,256+5,448+15,55,45);
 		}
 	}
 	
@@ -134,7 +134,7 @@ public class Inventory extends Actor implements InputProcessor{
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)){
 			if(screenX>0 && screenX<320 && screenY<height-256 && screenY>height-512){
 				int posX=0;
-				int posY=height-448;
+				int posY=height-384;
 				boolean foundSlot=false;
 				for(int i=1;i<=Constants.Items.INVENTORY_SIZE &&!foundSlot;i++){
 					if(screenX>posX && screenX<posX+64 && screenY<posY && screenY>posY-64){
@@ -195,9 +195,9 @@ public class Inventory extends Actor implements InputProcessor{
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		if(screenX>0 && screenX<320 && screenY<height-256 && screenY>height-512){
+		if(screenX>0 && screenX<320 && screenY<height-192 && screenY>height-448){
 			int posX=0;
-			int posY=height-448;
+			int posY=height-384;
 			boolean foundSlot=false;
 			for(int i=1;i<=Constants.Items.INVENTORY_SIZE &&!foundSlot;i++){
 				if(screenX>posX && screenX<posX+64 && screenY<posY && screenY>posY-64){

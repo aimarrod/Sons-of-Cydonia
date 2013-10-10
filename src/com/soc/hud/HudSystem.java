@@ -16,7 +16,9 @@ public class HudSystem extends VoidEntitySystem{
 	StatusBar statusBar;
 	ActionBar actionBar;
 	Inventory inventory;
+	CharacterMenu characterMenu;
 	TextButton textButton;
+	
 	
 	public HudSystem(OrthographicCamera camera){
 		this.camera = camera;
@@ -24,10 +26,12 @@ public class HudSystem extends VoidEntitySystem{
 		this.statusBar = new StatusBar();
 		this.actionBar = new ActionBar();
 		this.inventory=new Inventory();
+		this.characterMenu = new CharacterMenu();
 		//Deberias er cargado al principio el world y luego referenciarlo
 		this.textButton=new TextButton("", new Skin(  Gdx.files.internal( "resources/uiskin.json" ) ));
 		stage.addActor(statusBar);
 		stage.addActor(actionBar);
+		stage.addActor(characterMenu);
 		//stage.addActor(inventory);
 	}
 
@@ -42,10 +46,10 @@ public class HudSystem extends VoidEntitySystem{
 		stage.setViewport(width, height, true);
 		statusBar.setPosition(10, height - 65);
 		inventory.updateRes(width, height);
+		characterMenu.setPosition(10, height-280);
 	}
 	public void toggleInventory(){
-		boolean isHidden=inventory.hasParent();
-		if(!isHidden){
+		if(!inventory.hasParent()){
 			stage.addActor(inventory);
 			SoC.game.inputMultiplexer.addProcessor(inventory);
 		}else{
@@ -54,9 +58,15 @@ public class HudSystem extends VoidEntitySystem{
 		}
 	}
 	
+	public void toogleCharacterMenu(){
+		if(!characterMenu.hasParent()){
+			stage.addActor(characterMenu);
+		} else {
+			characterMenu.remove();
+		}
+	}
 	public void toggleTextButton(String tooltip, int x, int y){
-		boolean isHidden=textButton.hasParent();
-		if(!isHidden){
+		if(!textButton.hasParent()){
 			textButton.setText(tooltip);
 			textButton.setPosition(x, y);
 			stage.addActor(textButton);
