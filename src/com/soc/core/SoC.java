@@ -57,6 +57,10 @@ import com.soc.game.systems.RenderSystem;
 import com.soc.game.systems.MovementSystem;
 import com.soc.game.systems.PlayerInputSystem;
 import com.soc.hud.HudSystem;
+import com.soc.objects.Armor;
+import com.soc.objects.Item;
+import com.soc.objects.Potion;
+import com.soc.objects.Weapon;
 import com.soc.screens.GameOverScreen;
 import com.soc.screens.MenuScreen;
 import com.soc.screens.SavesScreen;
@@ -78,6 +82,7 @@ public class SoC extends Game {
 	public Entity player;
 	public World world;
 	public Spell[] spells;
+	public Item [] objects;
 	
 	public ComponentMapper<Position> positionmapper;
 	public ComponentMapper<Feet> feetmapper;
@@ -129,6 +134,13 @@ public class SoC extends Game {
 		spells[Constants.Spells.ARROW] = new ArrowSpell();
 		spells[Constants.Spells.WHIRLBLADE] = new WhirlbladeSpell();
 		spells[Constants.Spells.QUAKEBLADE] = new QuakebladeSpell();
+		
+		objects=new Item[Constants.Items.ITEM_NUMBER];
+		objects[Constants.Items.NONE]=null;
+		objects[Constants.Items.AXE]=new Weapon(Constants.Items.AXE,"Axe","resources/axe.png","Best Axe Ever!",100,10,10);
+		objects[Constants.Items.ARMOR]=new Armor(Constants.Items.ARMOR,"Armor","resources/armor.png", "Best Armor Ever!",100f);
+		objects[Constants.Items.HEALTH_POTION]=new Potion(Constants.Items.HEALTH_POTION,"PotionHealth","resources/potion_health.png","Small Health Potion",100,0);
+		objects[Constants.Items.MANA_POTION]=new Potion(Constants.Items.MANA_POTION,"ManaHealth","resources/potion_mana.png","Small Mana Potion",0,100);
 		
 		world = new World();
 		positionmapper = world.getMapper(Position.class);

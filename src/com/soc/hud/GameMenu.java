@@ -1,5 +1,7 @@
 package com.soc.hud;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -11,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.soc.core.SoC;
+import com.soc.utils.GameLoader;
 
 public class GameMenu extends Table implements InputProcessor {
 	private Table table;
@@ -70,7 +73,13 @@ public class GameMenu extends Table implements InputProcessor {
 			if(focusedButton==1){
 				SoC.game.world.getSystem(HudSystem.class).toogleGameMenu();
 			}else if(focusedButton==2){
-				//SaveGame
+				try {
+					System.out.println("Guardo");
+					GameLoader.saveGame(2);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}else if(focusedButton==3){
 				//Options
 			}else if(focusedButton==4){

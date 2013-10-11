@@ -8,8 +8,8 @@ public class Weapon extends Item {
 	public int gainAgility;
 	public int gainIntelligence;
 	
-	public Weapon(String name,String iconPath ,String tooltip, int gainStrenght, int gainAgility, int gainIntelligence){
-		super(name,iconPath,tooltip);
+	public Weapon(int num,String name,String iconPath ,String tooltip, int gainStrenght, int gainAgility, int gainIntelligence){
+		super(name,iconPath,tooltip,num);
 		this.gainStrenght=gainStrenght;
 		this.gainIntelligence=gainIntelligence;
 		this.gainAgility=gainAgility;

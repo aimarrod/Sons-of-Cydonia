@@ -6,8 +6,8 @@ import com.soc.game.components.Stats;
 public class Potion extends Item{
 	int gainHealth;
 	int gainMana;
-	public Potion(String name, String iconPath, String tooltip,int gainHealth,int gainMana) {
-		super(name, iconPath, tooltip);
+	public Potion(int num,String name, String iconPath, String tooltip,int gainHealth,int gainMana) {
+		super(name, iconPath, tooltip,num);
 		this.gainHealth=gainHealth;
 		this.gainMana=gainMana;
 	}

@@ -11,6 +11,7 @@ import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.GameScreen;
 import com.soc.core.SoC;
+import com.soc.game.components.Player;
 
 public class GameLoader {
 	
@@ -47,14 +48,15 @@ public class GameLoader {
 		save.map = SoC.game.map.name;
 		save.position = SoC.game.positionmapper.get(SoC.game.player);
 		save.stats = SoC.game.statsmapper.get(SoC.game.player);
+		save.player=new SavedPlayer(SoC.game.playermapper.get(SoC.game.player));
 		
 		handle.writeString(json.toJson(save), false);
 	}
 	
 	public static void newGame(String clazz){
-		SoC.game.player = EntityFactory.createCharacter(4300, 650, 0, 0, 0, Constants.Classes.WARRIOR);
+		SoC.game.player = EntityFactory.createCharacter(2600, 650, 0, 0, 0, Constants.Classes.WARRIOR);
 		SoC.game.setScreen(new GameScreen());
-		MapLoader.loadMap("ruins.tmx");
+		MapLoader.loadMap("starting.tmx");
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.PLAYERS);
 		SoC.game.world.getManager(LevelManager.class).setLevel(SoC.game.player, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.CHARACTERS);
@@ -66,11 +68,12 @@ public class GameLoader {
 	public static void loadGame(FileHandle file){
 				
 		Json json = new Json();
+		System.out.println("FIle: "+file);
 		SavedGame save = json.fromJson(SavedGame.class, file);
 
 		
 		
-		SoC.game.player = EntityFactory.loadCharacter(save.position, save.stats, Constants.Characters.WARRIOR);
+		SoC.game.player = EntityFactory.loadCharacter(save.position, save.stats, Constants.Characters.WARRIOR, new Player(save.player));
 		SoC.game.setScreen(new GameScreen());
 		MapLoader.loadMap(save.map);
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.PLAYERS);
@@ -79,5 +82,6 @@ public class GameLoader {
 		SoC.game.world.getManager(TagManager.class).register(Constants.Tags.PLAYER, SoC.game.player);
 		SoC.game.world.addEntity(SoC.game.player);
 	}
+
 }
 

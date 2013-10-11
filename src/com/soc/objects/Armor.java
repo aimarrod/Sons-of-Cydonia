@@ -7,8 +7,8 @@ import com.soc.game.components.Stats;
 public class Armor extends Item{
 	public float gainArmor;
 	
-	public Armor(String name,String iconPath ,String tooltip, float gainArmor){
-		super(name, iconPath,tooltip);
+	public Armor(int num,String name,String iconPath ,String tooltip, float gainArmor){
+		super(name, iconPath,tooltip,num);
 		this.gainArmor=gainArmor;
 	}
 	public void equip(){

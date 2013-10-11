@@ -36,7 +36,7 @@ import com.soc.utils.GraphicsLoader;
 
 public class EntityFactory {
 	
-	public static Entity loadCharacter(Position pos, Stats st, String clazz){
+	public static Entity loadCharacter(Position pos, Stats st, String clazz, Player player){
 		Entity e = SoC.game.world.createEntity();
 		
 		Character animations = new Character();
@@ -44,7 +44,7 @@ public class EntityFactory {
 		e.addComponent(st);
 	    e.addComponent(animations);
 		e.addComponent(new Velocity(0,0,Constants.Characters.VELOCITY));
-		e.addComponent(new Player());
+		e.addComponent(player);
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));

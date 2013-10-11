@@ -1,9 +1,5 @@
 package com.soc.core;
 
-import com.soc.game.spells.DaggerThrowSpell;
-import com.soc.game.spells.PunchSpell;
-import com.soc.game.spells.Spell;
-
 public class Constants {
 
 	public static class Characters{
@@ -94,6 +90,7 @@ public class Constants {
 		public static final float POISON_CLOUD_RADIUS = 100;
 	}
 	
+	
 	public static class Attributes{
 		public final static String MAP = "map"; 
 		public final static String MUSIC = "music";
@@ -109,6 +106,13 @@ public class Constants {
 		
 	public static class Items{
 		public final static int INVENTORY_SIZE=20;
+		public final static int ITEM_NUMBER=5;
+		public final static int NONE=0;
+		public final static int AXE=1;
+		public final static int ARMOR=2;
+		public final static int HEALTH_POTION=3;
+		public final static int MANA_POTION=4;
+
 	}
 	
 	public static class Alteration{

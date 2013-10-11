@@ -1,25 +1,20 @@
 package com.soc.game.systems;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+
 import java.util.List;
-import java.util.PriorityQueue;
 
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
-import com.artemis.utils.ImmutableBag;
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.alterations.Burn;
@@ -32,7 +27,6 @@ import com.soc.game.components.Debuff;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
-import com.soc.game.graphics.DirectionalAnimatedRenderer;
 import com.soc.game.graphics.Renderer;
 import com.soc.utils.FloatingText;
 
@@ -126,7 +120,6 @@ public class RenderSystem extends VoidEntitySystem{
 		State state = sm.get(e);
 		Position pos = pm.get(e);
 		Character animations = cm.get(e);
-		System.out.println(state.state);
 		Renderer r = animations.renderers[state.state];
 		
 		float angle = pos.direction.angle();
