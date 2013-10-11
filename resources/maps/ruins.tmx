@@ -69,7 +69,7 @@
    eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwGcR4AAQ==
   </data>
  </layer>
- <objectgroup name="level0-obstacle" width="200" height="200">
+ <objectgroup name="level0-obstacle" width="200" height="200" visible="0">
   <object x="0" y="0" width="192" height="6240"/>
   <object x="384" y="256" width="32" height="192"/>
   <object x="192" y="0" width="6208" height="256"/>
@@ -192,7 +192,7 @@
   <object x="2688" y="2176" width="32" height="32"/>
   <object x="896" y="512" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="level0-unwalkable" width="200" height="200">
+ <objectgroup name="level0-unwalkable" width="200" height="200" visible="0">
   <object x="544" y="352" width="320" height="160"/>
   <object x="544" y="576" width="320" height="160"/>
   <object x="960" y="576" width="320" height="160"/>
@@ -228,7 +228,7 @@
   <object x="3296" y="1504" width="416" height="1760"/>
   <object x="3680" y="1504" width="2496" height="2464"/>
  </objectgroup>
- <objectgroup name="level0-special" width="200" height="200">
+ <objectgroup name="level0-special" width="200" height="200" visible="0">
   <object x="5056" y="5024" width="64" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -236,8 +236,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level1-obstacle" width="200" height="200"/>
- <objectgroup name="level1-unwalkable" width="200" height="200">
+ <objectgroup name="level1-obstacle" width="200" height="200" visible="0"/>
+ <objectgroup name="level1-unwalkable" width="200" height="200" visible="0">
   <object x="5120" y="4768" width="1280" height="1632"/>
   <object x="5152" y="4768" width="544"/>
   <object x="5152" y="3712" width="1248" height="1056"/>
@@ -268,7 +268,7 @@
   <object x="4960" y="3392" width="64" height="32"/>
   <object x="4800" y="3392" width="64" height="32"/>
  </objectgroup>
- <objectgroup name="level1-special" width="200" height="200">
+ <objectgroup name="level1-special" width="200" height="200" visible="0">
   <object x="5056" y="5056" width="64" height="32">
    <properties>
     <property name="level" value="1"/>
@@ -282,75 +282,10 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level2-obstacle" width="200" height="200"/>
+ <objectgroup name="level2-obstacle" width="200" height="200" visible="0"/>
  <objectgroup name="level2-unwalkable" width="200" height="200">
-  <object x="4960" y="3008" width="1440" height="3456"/>
-  <object x="-32" y="3008" width="4896" height="3424"/>
-  <object x="0" y="0" width="4000" height="3008"/>
-  <object x="4000" y="0" width="2400" height="1632"/>
-  <object x="5824" y="1632" width="576" height="1376"/>
-  <object x="5568" y="2752" width="256" height="256"/>
-  <object x="5600" y="2720" width="224" height="32"/>
-  <object x="5632" y="2688" width="192" height="32"/>
-  <object x="5664" y="2656" width="160" height="32"/>
-  <object x="5696" y="2624" width="128" height="32"/>
-  <object x="5728" y="2592" width="96" height="32"/>
-  <object x="5760" y="2560" width="64" height="32"/>
-  <object x="5792" y="2528" width="32" height="32"/>
-  <object x="5408" y="2784" width="160" height="224"/>
-  <object x="5344" y="2816" width="64" height="192"/>
-  <object x="5312" y="2816" width="32" height="192"/>
-  <object x="5280" y="2848" width="32" height="160"/>
-  <object x="5184" y="2880" width="96" height="128"/>
-  <object x="5152" y="2912" width="32" height="96"/>
-  <object x="5024" y="2944" width="128" height="64"/>
-  <object x="4992" y="2976" width="32" height="32"/>
-  <object x="4000" y="2528" width="32" height="480"/>
-  <object x="4032" y="2560" width="32" height="448"/>
-  <object x="4064" y="2592" width="32" height="416"/>
-  <object x="4096" y="2624" width="32" height="384"/>
-  <object x="4128" y="2656" width="32" height="352"/>
-  <object x="4160" y="2688" width="32" height="320"/>
-  <object x="4192" y="2720" width="32" height="288"/>
-  <object x="4224" y="2752" width="32" height="256"/>
-  <object x="4256" y="2784" width="160" height="224"/>
-  <object x="4416" y="2816" width="64" height="192"/>
-  <object x="4480" y="2816" width="32" height="192"/>
-  <object x="4512" y="2848" width="32" height="160"/>
-  <object x="4544" y="2880" width="64" height="128"/>
-  <object x="4608" y="2880" width="32" height="128"/>
-  <object x="4640" y="2912" width="32" height="96"/>
-  <object x="4672" y="2944" width="128" height="64"/>
-  <object x="4800" y="2976" width="32" height="32"/>
-  <object x="4000" y="1632" width="32" height="480"/>
-  <object x="4032" y="1632" width="32" height="448"/>
-  <object x="4064" y="1632" width="32" height="416"/>
-  <object x="4096" y="1632" width="32" height="384"/>
-  <object x="4128" y="1632" width="32" height="352"/>
-  <object x="4160" y="1632" width="32" height="320"/>
-  <object x="4192" y="1632" width="32" height="288"/>
-  <object x="4224" y="1632" width="32" height="256"/>
-  <object x="4256" y="1632" width="160" height="224"/>
-  <object x="4416" y="1632" width="32" height="192"/>
-  <object x="4448" y="1632" width="160" height="160"/>
-  <object x="4608" y="1632" width="192" height="96"/>
-  <object x="4608" y="1728" width="32" height="32"/>
-  <object x="4800" y="1632" width="96" height="64"/>
-  <object x="4928" y="1632" width="96" height="64"/>
-  <object x="5024" y="1632" width="160" height="96"/>
-  <object x="5184" y="1632" width="32" height="128"/>
-  <object x="5216" y="1632" width="160" height="160"/>
-  <object x="5376" y="1632" width="32" height="192"/>
-  <object x="5408" y="1632" width="416" height="224"/>
-  <object x="5568" y="1856" width="256" height="32"/>
-  <object x="5600" y="1888" width="224" height="32"/>
-  <object x="5632" y="1920" width="192" height="32"/>
-  <object x="5664" y="1952" width="160" height="32"/>
-  <object x="5696" y="1984" width="128" height="32"/>
-  <object x="5728" y="2016" width="96" height="32"/>
-  <object x="5760" y="2048" width="64" height="32"/>
-  <object x="5792" y="2080" width="32" height="32"/>
-  <object x="4864" y="3424" width="96" height="2976"/>
+  <object x="4960" y="3008" width="32" height="416"/>
+  <object x="4832" y="3008" width="32" height="416"/>
  </objectgroup>
  <objectgroup name="level2-special" width="200" height="200">
   <object x="4864" y="3392" width="96" height="32">
@@ -359,8 +294,373 @@
     <property name="type" value="stairs"/>
    </properties>
   </object>
+  <object x="4992" y="3008" width="1408" height="3424">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5024" y="2976" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5056" y="2944" width="96" height="64">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5152" y="2944" width="32" height="64">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5184" y="2912" width="32" height="96">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5216" y="2880" width="64" height="128">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5280" y="2880" width="32" height="128">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5312" y="2848" width="32" height="160">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5344" y="2816" width="64" height="192">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5408" y="2816" width="32" height="192">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5440" y="2784" width="128" height="224">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5568" y="2784" width="128" height="224">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5600" y="2752" width="96" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5632" y="2720" width="64" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5664" y="2688" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5696" y="2656" width="128" height="352">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5728" y="2624" width="96" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5760" y="2592" width="64" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5792" y="2560" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5824" y="0" width="576" height="3008">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5792" y="2048" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5760" y="2016" width="64" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5728" y="1984" width="96" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5696" y="1952" width="128" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5664" y="1920" width="160" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5632" y="1888" width="192" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5600" y="1856" width="224" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5440" y="0" width="384" height="1856">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5408" y="1792" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5248" y="0" width="192" height="1792">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5216" y="1728" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="5056" y="0" width="160" height="1728">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4960" y="0" width="96" height="1696">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4864" y="0" width="96" height="1632">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4928" y="1632" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4864" y="1632" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4736" y="0" width="128" height="1696">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4736" y="1696" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4608" y="0" width="128" height="1728">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4576" y="1728" width="32" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4416" y="1728" width="160" height="64">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4384" y="1728" width="32" height="96">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4224" y="1728" width="160" height="128">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4192" y="1728" width="32" height="160">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4160" y="1728" width="32" height="192">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4128" y="1728" width="32" height="224">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4096" y="1728" width="32" height="256">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4064" y="1728" width="32" height="288">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4032" y="1728" width="32" height="320">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4000" y="1728" width="32" height="352">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4000" y="0" width="608" height="1728">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="0" y="-32" width="4000" height="6432">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4000" y="2560" width="32" height="480">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4672" y="3008" width="160" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4672" y="2976" width="128" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4672" y="2944" width="96" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4640" y="2944" width="32" height="96">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4608" y="2912" width="32" height="128">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4544" y="2880" width="64" height="160">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4512" y="2880" width="32" height="160">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4480" y="2848" width="32" height="192">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4416" y="2816" width="64" height="224">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4384" y="2816" width="32" height="224">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4256" y="2784" width="128" height="256">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4128" y="2688" width="32" height="352">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4224" y="2784" width="32" height="256">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4192" y="2752" width="32" height="288">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4160" y="2720" width="32" height="320">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4096" y="2656" width="32" height="384">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4064" y="2624" width="32" height="416">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4032" y="2592" width="32" height="448">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4000" y="3040" width="832" height="3360">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4832" y="3424" width="160" height="2976">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200"/>
- <objectgroup name="level1-spawners" width="200" height="200"/>
- <objectgroup name="level2-spawners" width="200" height="200"/>
+ <objectgroup name="level0-spawners" width="200" height="200" visible="0"/>
+ <objectgroup name="level1-spawners" width="200" height="200" visible="0"/>
+ <objectgroup name="level2-spawners" width="200" height="200" visible="0"/>
 </map>

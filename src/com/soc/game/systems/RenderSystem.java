@@ -106,9 +106,9 @@ public class RenderSystem extends VoidEntitySystem{
 			renderer.render(new int[]{current+3});
 		}
 		batch.begin();
-		font.setColor(0, 0, 0, 1);
 		for(int i = 0; i < texts.size(); i++){
 			FloatingText text = texts.get(i);
+			font.setColor(text.r, text.g, text.b, 1);
 			if(text.draw(batch, font)){
 				texts.remove(i);
 				i--;

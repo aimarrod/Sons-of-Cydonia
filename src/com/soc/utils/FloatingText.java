@@ -10,6 +10,9 @@ public class FloatingText {
 	public float posx;
 	public float posy;
 	public float speed;
+	public float r;
+	public float g;
+	public float b;
 	
 	public FloatingText(String text, float time, float posx, float posy, float speed) {
 		this.text = text;
@@ -17,6 +20,9 @@ public class FloatingText {
 		this.posx = posx;
 		this.posy = posy;
 		this.speed = speed;
+		this.r = 1;
+		this.g = 1;
+		this.b = 1;
 	}
 	
 	public boolean draw(SpriteBatch batch, BitmapFont font){

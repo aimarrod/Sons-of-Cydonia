@@ -1,13 +1,11 @@
 package com.soc.hud;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.soc.core.SoC;
-import com.soc.game.components.Stats;
 import com.soc.utils.GraphicsLoader;
 
 public class TooltipBox extends Actor{

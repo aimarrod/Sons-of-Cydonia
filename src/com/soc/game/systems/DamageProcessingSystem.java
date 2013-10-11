@@ -36,7 +36,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 	}
 
 	@Override
-	protected void process(Entity e) {		
+	protected void process(Entity e) {	
 		Stats stats=sm.get(e);
 		Damage dr=dm.get(e);
 		State state=stm.get(e);
@@ -46,7 +46,12 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		stats.health-=dr.damage;
 		e.removeComponent(dr);
 		e.changedInWorld();
-		world.getSystem(RenderSystem.class).texts.add(new FloatingText(""+dr.damage, Constants.Configuration.LABEL_DURATION, pos.x, pos.y, Constants.Configuration.LABEL_SPEED));
+		FloatingText text = new FloatingText(""+dr.damage, Constants.Configuration.LABEL_DURATION, pos.x, pos.y, Constants.Configuration.LABEL_SPEED);
+		world.getSystem(RenderSystem.class).texts.add(text);
+		text.r = dr.r;
+		text.g = dr.g;
+		text.b = dr.b;
+		
 		
 		if(stats.health<=0){
 			state.state=State.DYING;
@@ -56,12 +61,13 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 			e.changedInWorld();
 			velocity.vx=0;
 			velocity.vy=0;
+			System.out.println(em.has(e));
 			
 			if(em.has(e)){
 				Enemy enemy=em.get(e);
 				Entity player=world.getManager(TagManager.class).getEntity(Constants.Tags.PLAYER);
 				sm.get(player).addExperience(enemy.expierence);
-			}
+			} 
 			
 		}
 	}

@@ -21,7 +21,7 @@ public class Burn implements Alteration{
 		interval -= SoC.game.world.delta;
 		if(interval <= 0){
 			interval = Constants.Alteration.BURN_TICK_INTERVAL;
-			e.addComponent(new Damage(Constants.Alteration.BURN_DAMAGE));
+			e.addComponent(new Damage(Constants.Alteration.BURN_DAMAGE, 1, 0 ,0));
 			e.changedInWorld();
 		}
 		if(timer <= 0){
