@@ -1,11 +1,15 @@
 package com.soc.game.alterations;
 
 import com.artemis.Entity;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.core.SoC;
 import com.soc.game.components.Velocity;
 
 public class Push implements Alteration{
+	
+	public float colortimer;
+	public float r, g, b;
 	public Vector2 direction;
 	public float distance;
 	public float speed;
@@ -14,6 +18,10 @@ public class Push implements Alteration{
 		this.direction = direction;
 		this.distance = distance;
 		this.speed = speed;
+		this.colortimer = 0.1f;
+		this.r = 1;
+		this.g = 1;
+		this.b = 1;
 	}
 	
 	
@@ -29,6 +37,12 @@ public class Push implements Alteration{
 		  SoC.game.debuffmapper.get(e).removeDebuff(this);
 		  vel.vx = 0;
 		  vel.vy = 0;
+	  }
+	  
+	  colortimer -= SoC.game.world.delta;
+	  if(colortimer <= 0){
+		  if(this.b == 1) this.b = 0; else this.b = 1;
+		  colortimer = 0.3f;
 	  }
 	}
 }

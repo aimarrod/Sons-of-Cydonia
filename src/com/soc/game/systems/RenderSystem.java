@@ -144,7 +144,10 @@ public class RenderSystem extends VoidEntitySystem{
 			Debuff deb = dm.get(e);
 			if(deb.debuffClasses.contains(Burn.class)) batch.setColor(1, 0.5f, 0.5f, 1);
 			else if(deb.debuffClasses.contains(Poison.class)) batch.setColor(0.5f, 1, 0.5f, 1);
-			else if(deb.debuffClasses.contains(Push.class)) batch.setColor((float) Math.random(), (float) Math.random(), (float) Math.random(), 1);
+			else if(deb.debuffClasses.contains(Push.class)){
+				Push p = deb.getDebuff(Push.class);
+				batch.setColor(p.r, p.g, p.b, 1);
+			}
 		} else batch.setColor(r.r, r.g, r.b, r.a);
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);
 		batch.setColor(1,1,1,1);

@@ -16,6 +16,7 @@ import com.soc.game.attacks.HarmfulEnemyProcessor;
 import com.soc.game.attacks.IcicleProcessor;
 import com.soc.game.attacks.PoisonCloudProcessor;
 import com.soc.game.attacks.PunchProcessor;
+import com.soc.game.attacks.QuakeBladeProcessor;
 import com.soc.game.attacks.SlashProcessor;
 import com.soc.game.attacks.WhirlbladeProcessor;
 import com.soc.game.components.Attack;
@@ -63,7 +64,7 @@ public class EntityFactory {
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,Constants.Characters.VELOCITY));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
-	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.SLASH, new int[]{Constants.Spells.DAGGER_THROW, Constants.Spells.CHARGE, Constants.Spells.WHIRLBLADE}));
+	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.SLASH, new int[]{Constants.Spells.DAGGER_THROW, Constants.Spells.CHARGE, Constants.Spells.WHIRLBLADE, Constants.Spells.QUAKEBLADE}));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(animations);
@@ -252,7 +253,7 @@ public class EntityFactory {
 	public static Entity createCharge(Entity source, String group, Position pos, int damage){
 		Entity e=SoC.game.world.createEntity();
 				
-		e.addComponent( new Position(pos.x-Spells.CHARGE_BOX*0.5f, pos.y-Spells.CHARGE_BOX*0.5f, pos.z, pos.direction) );
+		e.addComponent( new Position(pos.x-Spells.CHARGE_BOX*0.5f, pos.y-Spells.CHARGE_BOX*0.5f, pos.z, pos.direction.cpy()) );
 		e.addComponent( new Bounds(Spells.CHARGE_BOX, Spells.CHARGE_BOX) );
 		e.addComponent( new Velocity(300*pos.direction.x, 300*pos.direction.y, Constants.Spells.CHARGE_SPEED) );
 	   	e.addComponent( new Attack(new ChargeProcessor(source, Constants.Spells.CHARGE_DURATION), damage) );
@@ -278,7 +279,7 @@ public class EntityFactory {
 		float centerx = pos.x + Constants.Characters.WIDTH*0.5f;
 		float centery = pos.y + Constants.Characters.HEIGHT*0.5f;
 		if(pos.direction.x != 0){
-			e.addComponent( new Position(centerx, pos.y, pos.z, pos.direction) );
+			e.addComponent( new Position(centerx, pos.y, pos.z, pos.direction.cpy()) );
 			e.addComponent( new Bounds((int) ((int) World.TILE_SIZE*Math.signum(pos.direction.x)*2.2f), (int) World.TILE_SIZE*2) );
 
 		} else {
@@ -307,6 +308,16 @@ public class EntityFactory {
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 		e.addComponent(new Position(pos.x+bon.width*0.5f, pos.y+bon.height+0.5f, pos.z));
 	   	e.addComponent( new Attack(new PoisonCloudProcessor(), 0) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createQuake(Position pos, Feet feet, int damage) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(0, 0, 0) );
+		e.addComponent(new Position(pos.x+feet.width*0.5f, pos.y+feet.heigth+0.5f, pos.z, pos.direction.cpy()));
+	   	e.addComponent( new Attack(new QuakeBladeProcessor(), damage) );
 	   	
 	   	return e;		
 	}

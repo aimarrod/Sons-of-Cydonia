@@ -83,6 +83,7 @@ public class GraphicsLoader {
 	   	}
 		tmp = TextureRegion.split(load("warrior-death.png"), 64, 64);
 	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	character.deathTime = 1f;
 		tmp = TextureRegion.split(load("warrior-spin.png"), 128, 128);
 	   	spin.animation = new Animation(0.2f/tmp[0].length, tmp[0]);
 	   	tmp = TextureRegion.split(load("warrior-fall.png"), 64, 64);
@@ -115,6 +116,7 @@ public class GraphicsLoader {
                 }
         }
 		death.animation = new Animation(0.5f/deathFrames.length, deathFrames);
+		character.deathTime=0.5f;
 		
 		character.renderers[State.WALK] = move;
 		character.renderers[State.DYING] = death;
@@ -138,7 +140,8 @@ public class GraphicsLoader {
                         deathFrames[index++] = tmp[i][j];
                 }
         }
-		death.animation = new Animation(1f/deathFrames.length, deathFrames);
+		death.animation = new Animation(2f/deathFrames.length, deathFrames);
+		character.deathTime=2f;
 		
 		character.renderers[State.WALK] = move;
 		character.renderers[State.DYING] = death;
@@ -174,6 +177,8 @@ public class GraphicsLoader {
 		for(int i = 0; i < tmp.length; i++){
 	   		death.sprite = tmp[i][0];
 	   	}
+		
+		character.deathTime=0.4f;
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;
 		character.renderers[State.ATTACK] = attack;
@@ -209,6 +214,7 @@ public class GraphicsLoader {
         }
         //0.4f duration of the whole animation so divided in the total of frames.
 	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
+	    character.deathTime=1f;
 
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;
@@ -294,5 +300,12 @@ public class GraphicsLoader {
         }
         cloud.animation = new Animation(2f/frames.length, frames);
         return cloud;
+	}
+	
+	public static AnimatedRenderer loadQuake(){
+		AnimatedRenderer quake = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("quake.png"), 256, 128);
+        quake.animation = new Animation(0.3f, tmp[0]);
+        return quake;
 	}
 }

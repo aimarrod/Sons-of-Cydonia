@@ -40,6 +40,7 @@ import com.soc.game.spells.ArrowSpell;
 import com.soc.game.spells.ChargeSpell;
 import com.soc.game.spells.DaggerThrowSpell;
 import com.soc.game.spells.PunchSpell;
+import com.soc.game.spells.QuakebladeSpell;
 import com.soc.game.spells.SlashSpell;
 import com.soc.game.spells.Spell;
 import com.soc.game.spells.WhirlbladeSpell;
@@ -127,6 +128,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.CHARGE] = new ChargeSpell();
 		spells[Constants.Spells.ARROW] = new ArrowSpell();
 		spells[Constants.Spells.WHIRLBLADE] = new WhirlbladeSpell();
+		spells[Constants.Spells.QUAKEBLADE] = new QuakebladeSpell();
 		
 		world = new World();
 		positionmapper = world.getMapper(Position.class);

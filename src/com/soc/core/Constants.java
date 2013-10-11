@@ -73,8 +73,9 @@ public class Constants {
 		public static final int CHARGE=6;
 		public static final int ARROW=7;
 		public static final int WHIRLBLADE=8;
+		public static final int QUAKEBLADE = 9;
 		
-		public static final int SPELL_NUMBER = 9;
+		public static final int SPELL_NUMBER = 10;
 		
 		public static final int BALLISTA_FIRE_RATE = 1;
 		public static final int DAGGER_SPEED = 900;
@@ -83,6 +84,9 @@ public class Constants {
 		public static final int CHARGE_SPEED = 700;
 		public static final float CHARGE_DURATION = 1.5f;
 		public static final int CHARGE_BOX = 70;
+		public static final float QUAKEBLADE_TICK_INTERVAL = 0.3f;
+		public static final int QUAKEBLADE_RADIUS_INITIAL = 30;
+		public static final int QUAKEBLADE_RADIUS_INCREASE = 16;
 		public static final float SPIN_DURATION = 3.5f;
 		public static final float SPIN_RADIUS = 75f;
 		public static final float POISON_CLOUD_DURATION = 6f;

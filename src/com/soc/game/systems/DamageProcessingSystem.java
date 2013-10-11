@@ -11,6 +11,7 @@ import com.soc.game.components.Damage;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Position;
+import com.soc.game.components.Character;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
@@ -25,6 +26,8 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 	@Mapper ComponentMapper<Velocity> vm;
 	@Mapper ComponentMapper<Enemy> em;
 	@Mapper ComponentMapper<Position> pm;
+	@Mapper ComponentMapper<Character> cm;
+
 
 	
 	@SuppressWarnings("unchecked")
@@ -38,8 +41,8 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		Damage dr=dm.get(e);
 		State state=stm.get(e);
 		Position pos = pm.get(e);
-		
 		Velocity velocity=vm.get(e);
+		
 		stats.health-=dr.damage;
 		e.removeComponent(dr);
 		e.changedInWorld();
@@ -47,7 +50,9 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		
 		if(stats.health<=0){
 			state.state=State.DYING;
-			e.addComponent(new Expires(1));
+			if(cm.has(e)) e.addComponent(new Expires((cm.get(e).deathTime)));
+			else e.addComponent(new Expires(1));
+			
 			e.changedInWorld();
 			velocity.vx=0;
 			velocity.vy=0;

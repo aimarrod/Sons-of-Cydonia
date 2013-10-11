@@ -8,6 +8,7 @@ public class Character extends Component{
 	public String[] sounds;
 	
 	public Renderer[] renderers;
+	public float deathTime;
 	
 	public Character(){
 		this.renderers = new Renderer[State.STATENUM]; 

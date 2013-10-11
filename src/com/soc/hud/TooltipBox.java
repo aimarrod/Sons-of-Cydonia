@@ -45,7 +45,6 @@ public class TooltipBox extends Actor{
 	}
 	
 	public void setText(String text, float appearTime){
-		System.out.println(text);
 		if(this.text == text) return;
 		this.text = text;
 		this.timer = 1 - appearTime;

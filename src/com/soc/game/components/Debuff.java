@@ -15,6 +15,15 @@ public class Debuff extends Component{
 		debuffClasses = new Bag<Class>();
 	}
 	
+	public <T> T getDebuff(Class<T> clazz){
+		for(int i = 0; i < debuffs.size(); i++){
+			if(debuffs.get(i).getClass().equals(clazz)){
+				return (T) debuffs.get(i);
+			}
+		}
+		return null;
+	}
+	
 	public void removeDebuff(Alteration alt){
 		debuffs.remove(alt);
 		debuffClasses.remove(alt.getClass());
@@ -37,11 +46,11 @@ public class Debuff extends Component{
 		d.debuffClasses.add(alteration.getClass());
 	}
 	
-	public void removeDebuff(Class altclass){
+	public void removeDebuff(Class clazz){
 		for(int i = 0; i < debuffs.size(); i++){
-			if(debuffs.get(i).getClass().equals(altclass)){
+			if(debuffs.get(i).getClass().equals(clazz)){
 				debuffs.remove(i);
-				debuffClasses.remove(altclass);
+				debuffClasses.remove(clazz);
 				return;
 			}
 		}
