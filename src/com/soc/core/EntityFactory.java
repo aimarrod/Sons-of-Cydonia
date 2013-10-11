@@ -188,7 +188,7 @@ public class EntityFactory {
 		e.addComponent(new Velocity(0,0,100));
 		e.addComponent(new Bounds(64, 64));
 		e.addComponent(new State(1));
-		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 20));
+		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 1));
 		e.addComponent(new Feet(30, 15));
 		e.addComponent(new Enemy(1000, 5, new ZombiAI()));
 		e.addComponent(new Stats(
