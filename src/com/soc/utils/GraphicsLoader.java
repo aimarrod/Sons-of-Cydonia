@@ -185,6 +185,48 @@ public class GraphicsLoader {
 		character.renderers[State.WALK] = movement;
 	}
 	
+	public static void loadZombie(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		character.renderers = new Renderer[State.STATENUM];
+		attack.ox = -16;
+		attack.oy = 0;
+		movement.ox -= 16;
+		movement.oy -= 0;
+		idle.ox -= 16;
+		idle.oy -= 0;
+		death.ox -= 16;
+		death.oy -= 0;
+		
+		TextureRegion[][] tmp = TextureRegion.split(load("zombie-attack.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("zombie-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("zombie-death.png"), 64, 64);
+		TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+		death.animation = new Animation(2f/deathFrames.length, deathFrames);
+		character.deathTime=2f;
+		
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.WALK] = movement;
+	}
+	
 	public static void loadBallista(Character character){
 		//False repeat at the end
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);

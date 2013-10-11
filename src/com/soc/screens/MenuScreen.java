@@ -76,8 +76,10 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int pointer,
                 int button )
             {
-                SoC.game.clearProcessors();
-                GameLoader.newGame("warrior");
+            	if(button==0){
+	                SoC.game.clearProcessors();
+	                GameLoader.newGame("warrior");
+            	}
 
             }
 
@@ -109,9 +111,10 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int pointer,
                 int button )
             {
-                super.touchUp( event, x, y, pointer, button );
-                SoC.game.clearProcessors();
-                SoC.game.setScreen(new SavesScreen(game));
+            	if(button==0){
+	                SoC.game.clearProcessors();
+	                SoC.game.setScreen(new SavesScreen(game));
+            	}
 
             }
             @Override
@@ -154,7 +157,6 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
             {
-                System.out.println("touchdown");
                 return true;
             }
         } );
@@ -184,14 +186,13 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int pointer,
                 int button )
             {
-            	if (button==0){
-            		
+            	if(button==0){
+                    SoC.game.dispose();
             	}
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
             {
-                SoC.game.dispose();
                 return true;
             }
         } );
@@ -250,6 +251,27 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 				else
 					focusedBotton++;
 				return true;
+			}else{
+				if(Gdx.input.isKeyPressed(Keys.ENTER)){
+					if(focusedBotton==1){
+		                SoC.game.clearProcessors();
+		                GameLoader.newGame("warrior");
+					}else{
+						if(focusedBotton==2){
+			                SoC.game.clearProcessors();
+			                SoC.game.setScreen(new SavesScreen(game));
+						}else{
+							if(focusedBotton==3){
+
+							}else{
+								if(focusedBotton==4){
+					                SoC.game.dispose();
+								}
+							}
+						}
+					}
+					return true;
+				}
 			}
 		}		
 		return false;

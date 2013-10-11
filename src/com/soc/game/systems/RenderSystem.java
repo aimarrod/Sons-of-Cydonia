@@ -126,7 +126,7 @@ public class RenderSystem extends VoidEntitySystem{
 		State state = sm.get(e);
 		Position pos = pm.get(e);
 		Character animations = cm.get(e);
-		
+		System.out.println(state.state);
 		Renderer r = animations.renderers[state.state];
 		
 		float angle = pos.direction.angle();

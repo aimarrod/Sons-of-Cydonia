@@ -1,21 +1,11 @@
 package com.soc.core;
 
-import com.artemis.managers.GroupManager;
-import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.soc.game.graphics.Renderer;
-import com.soc.game.map.Map;
-import com.soc.game.systems.CameraSystem;
 import com.soc.game.systems.PlayerInputSystem;
-import com.soc.game.systems.RenderSystem;
-import com.soc.hud.HudSystem;
-import com.soc.utils.LevelManager;
-import com.soc.utils.MapLoader;
+
 
 public class GameScreen implements Screen {
 

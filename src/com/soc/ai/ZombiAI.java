@@ -27,9 +27,17 @@ public class ZombiAI implements AI{
 		
 		vel.vx = vel.speed * pos.direction.x;
 		vel.vy = vel.speed * pos.direction.y;
-		
-		if(Math.abs(dstx) < 32) pos.direction.x = 0;
-		else if(Math.abs(dsty) < 32) pos.direction.y = 0;
+		if(Math.abs(dstx) < 32){
+			pos.direction.x = 0;
+		}
+		else if(Math.abs(dsty) < 32) {
+			pos.direction.y = 0;
+		}
+		if(Math.abs(dsty) < 32 && Math.abs(dstx) < 32){
+			state.state=State.ATTACK;
+		}else{
+			state.state=State.WALK;
+		}
 		
 	}
 

@@ -36,7 +36,7 @@ public class BallistaAI implements AI{
 				
 		if(time <= 0){
 			time = Constants.Spells.BALLISTA_FIRE_RATE;
-			Spell spell = SoC.game.spells[Constants.Spells.PUNCH];
+			Spell spell = SoC.game.spells[Constants.Spells.ARROW];
 			state.state = spell.state;
 			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.ARROW));
 			e.changedInWorld();

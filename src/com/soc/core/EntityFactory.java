@@ -159,7 +159,7 @@ public class EntityFactory {
 		e.addComponent(new State(1));
 		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 10));
 		e.addComponent(new Feet(30, 15));
-		e.addComponent(new Enemy(1000, 5, new ZombiAI()));
+		e.addComponent(new Enemy(1000, 5, new SlimeAI()));
 		e.addComponent(new Stats(
 				1, 
 				0, 
@@ -176,6 +176,36 @@ public class EntityFactory {
 				null));
 		Character animations = new Character();
 		GraphicsLoader.loadSlime(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	public static Entity createZombie(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Bounds(64, 64));
+		e.addComponent(new State(1));
+		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 20));
+		e.addComponent(new Feet(30, 15));
+		e.addComponent(new Enemy(1000, 5, new ZombiAI()));
+		e.addComponent(new Stats(
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Character animations = new Character();
+		GraphicsLoader.loadZombie(animations);
 		e.addComponent(animations);
 		
 		return e;

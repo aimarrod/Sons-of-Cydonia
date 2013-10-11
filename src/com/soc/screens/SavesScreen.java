@@ -172,6 +172,26 @@ public class SavesScreen extends AbstractScreen implements InputProcessor {
 				else
 					focusedButton++;
 				return true;
+			}else{
+				if(Gdx.input.isKeyPressed(Keys.ENTER)){
+					if(focusedButton==1){
+
+					}else{
+						if(focusedButton==2){
+
+						}else{
+							if(focusedButton==3){
+
+							}else{
+								if(focusedButton==4){
+									SoC.game.clearProcessors();
+									SoC.game.setScreen(new MenuScreen(game));
+								}
+							}
+						}
+					}
+					return true;
+				}
 			}
 		}
 		return false;
