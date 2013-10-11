@@ -63,7 +63,7 @@ public class GameOverScreen extends AbstractScreen implements InputProcessor{
             {
             	if(button==0){
             		  SoC.game.clearProcessors();
-		              SoC.game.setScreen(new SavesScreen(game));
+		              SoC.game.setScreen(new LoadScreen(game));
             	}
 
             }
@@ -154,7 +154,7 @@ public class GameOverScreen extends AbstractScreen implements InputProcessor{
 				if(Gdx.input.isKeyPressed(Keys.ENTER)){
 					if(focusedBotton==1){
 	            		  SoC.game.clearProcessors();
-			              SoC.game.setScreen(new SavesScreen(game));
+			              SoC.game.setScreen(new LoadScreen(game));
 					}else{
 						if(focusedBotton==2){
 			                SoC.game.clearProcessors();

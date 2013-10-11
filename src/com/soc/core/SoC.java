@@ -1,5 +1,6 @@
 package com.soc.core;
 
+import java.util.List;
 import java.util.Stack;
 
 import com.artemis.ComponentMapper;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonValue;
 import com.soc.core.Constants.Alteration;
 import com.soc.core.Constants.Attributes;
@@ -63,7 +65,7 @@ import com.soc.objects.Potion;
 import com.soc.objects.Weapon;
 import com.soc.screens.GameOverScreen;
 import com.soc.screens.MenuScreen;
-import com.soc.screens.SavesScreen;
+import com.soc.screens.LoadScreen;
 import com.soc.screens.SplashScreen;
 import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GameLoader;
@@ -247,6 +249,14 @@ public class SoC extends Game {
 		while(!processors.isEmpty()){
 			inputMultiplexer.addProcessor(processors.pop());
 		}
+	}
+	
+	public void archiveProcessors(){
+		Array<InputProcessor> procs = inputMultiplexer.getProcessors();
+		for(int i = 0; i < procs.size; i++){
+			processors.push(procs.get(i));
+		}
+		inputMultiplexer.clear();
 	}
 	
 	public void clearProcessors(){

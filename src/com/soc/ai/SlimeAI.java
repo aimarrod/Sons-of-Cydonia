@@ -40,7 +40,6 @@ import com.soc.game.components.Velocity;
 			Position p = SoC.game.positionmapper.get(e);
 
 			Random r = new Random();
-			//Random(0-5)+3
 			int maggots = r.nextInt(5) + 3;
 			for(int i = 1; i < maggots+1; i++){
 				Entity spawned = EntityFactory.createMaggot(r.nextInt(50)+p.x-25, r.nextInt(50)+p.y-25, p.z);	

@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.soc.core.SoC;
+import com.soc.screens.LoadScreen;
+import com.soc.screens.SaveScreen;
 import com.soc.utils.GameLoader;
 
 public class GameMenu extends Table implements InputProcessor {
@@ -73,13 +75,9 @@ public class GameMenu extends Table implements InputProcessor {
 			if(focusedButton==1){
 				SoC.game.world.getSystem(HudSystem.class).toogleGameMenu();
 			}else if(focusedButton==2){
-				try {
-					System.out.println("Guardo");
-					GameLoader.saveGame(2);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				SoC.game.screens.push(SoC.game.getScreen());
+				SoC.game.archiveProcessors();
+				SoC.game.setScreen(new SaveScreen(SoC.game));
 			}else if(focusedButton==3){
 				//Options
 			}else if(focusedButton==4){

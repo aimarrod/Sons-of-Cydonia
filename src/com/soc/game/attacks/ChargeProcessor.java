@@ -34,17 +34,19 @@ public class ChargeProcessor implements AttackProcessor{
 
 	@Override 
 	public void process(Entity attack) {
-		Velocity vAttack = SoC.game.velocitymapper.get(attack);
-		Position p = SoC.game.positionmapper.get(attack);
-		Velocity vSource = SoC.game.velocitymapper.get(source);
-		duration-= SoC.game.world.delta;
-		if(duration>0){
-			vAttack.vx=vAttack.speed*p.direction.x;
-			vAttack.vy=vAttack.speed*p.direction.y;
-			vSource.vx=vAttack.speed*p.direction.x;
-			vSource.vy=vAttack.speed*p.direction.y;
-		}else{
-			attack.deleteFromWorld();
+		if(SoC.game.statemapper.get(source).state == State.CHARGING){
+			Velocity vAttack = SoC.game.velocitymapper.get(attack);
+			Position p = SoC.game.positionmapper.get(attack);
+			Velocity vSource = SoC.game.velocitymapper.get(source);
+			duration-= SoC.game.world.delta;
+			if(duration>0){
+				vAttack.vx=vAttack.speed*p.direction.x;
+				vAttack.vy=vAttack.speed*p.direction.y;
+				vSource.vx=vAttack.speed*p.direction.x;
+				vSource.vy=vAttack.speed*p.direction.y;
+			}else{
+				attack.deleteFromWorld();
+			}
 		}
 	}
 
