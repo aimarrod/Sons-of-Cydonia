@@ -19,7 +19,6 @@ import com.soc.utils.GameLoader;
 
 public class MenuScreen extends AbstractScreen implements InputProcessor{
 	private Texture background;
-	private Image hand;
 	private int focusedBotton;
 	private Texture handT;
 	private TextButton startGameButton;
@@ -32,7 +31,6 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 	public MenuScreen(SoC game) {
 		super(game);
 		background=new Texture(Gdx.files.internal("resources/background.jpg"));
-		hand=new Image(new Texture(Gdx.files.internal("resources/hand.png")));
 		handT=new Texture(Gdx.files.internal("resources/hand.png"));
 		normalStyle=new TextButtonStyle();
 		normalStyle.font=getSkin().getFont("gameFont");
@@ -59,7 +57,6 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
     {
         super.show();
         // retrieve the default table actor
-        final MenuScreen menu = this;
         Table table = super.getTable();
         // register the button "start game"
         startGameButton.addListener( new InputListener() {
