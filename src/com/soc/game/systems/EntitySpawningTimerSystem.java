@@ -55,7 +55,7 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
 				}else if(spawn.type.equals(Constants.Groups.ZOMBIES)){
 					spawned = EntityFactory.createZombie(pos.x, pos.y, pos.z);
-					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				}else if(spawn.type.equals(Constants.Groups.SATANS)){
 					spawned = EntityFactory.createSatan(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);

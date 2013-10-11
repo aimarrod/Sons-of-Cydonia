@@ -39,6 +39,7 @@ import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.map.Map;
 import com.soc.game.spells.ArrowSpell;
+import com.soc.game.spells.BiteSpell;
 import com.soc.game.spells.ChargeSpell;
 import com.soc.game.spells.DaggerThrowSpell;
 import com.soc.game.spells.PunchSpell;
@@ -136,6 +137,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.ARROW] = new ArrowSpell();
 		spells[Constants.Spells.WHIRLBLADE] = new WhirlbladeSpell();
 		spells[Constants.Spells.QUAKEBLADE] = new QuakebladeSpell();
+		spells[Constants.Spells.BITE] = new BiteSpell();
 		
 		objects=new Item[Constants.Items.ITEM_NUMBER];
 		objects[Constants.Items.NONE]=null;

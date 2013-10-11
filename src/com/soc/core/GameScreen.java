@@ -29,7 +29,7 @@ public class GameScreen implements Screen {
 	    SoC.game.cameraSystem.process();
 	    SoC.game.renderSystem.process();
 	    SoC.game.hudSystem.process();
-	    fps.log();
+	    //fps.log();
 
 	}
 

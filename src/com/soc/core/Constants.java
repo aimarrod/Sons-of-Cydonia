@@ -72,8 +72,9 @@ public class Constants {
 		public static final int ARROW=7;
 		public static final int WHIRLBLADE=8;
 		public static final int QUAKEBLADE = 9;
+		public static final int BITE = 10;
 		
-		public static final int SPELL_NUMBER = 10;
+		public static final int SPELL_NUMBER = 11;
 		
 		public static final int BALLISTA_FIRE_RATE = 1;
 		public static final int DAGGER_SPEED = 900;

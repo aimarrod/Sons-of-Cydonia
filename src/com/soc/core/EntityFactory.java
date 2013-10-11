@@ -11,6 +11,7 @@ import com.soc.ai.ZombiAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
 import com.soc.game.attacks.ArrowProcessor;
+import com.soc.game.attacks.BiteProcessor;
 import com.soc.game.attacks.ChargeProcessor;
 import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.attacks.HarmfulEnemyProcessor;
@@ -184,27 +185,14 @@ public class EntityFactory {
 	public static Entity createZombie(float px, float py, int pz){
 		Entity e = SoC.game.world.createEntity();
 		
-		e.addComponent(new Position(px, py, pz));
-		e.addComponent(new Velocity(0,0,100));
-		e.addComponent(new Bounds(64, 64));
-		e.addComponent(new State(1));
-		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 1));
-		e.addComponent(new Feet(30, 15));
-		e.addComponent(new Enemy(1000, 5, new ZombiAI()));
-		e.addComponent(new Stats(
-				1, 
-				0, 
-				0, 
-				0, 
-				0, 
-				0, 
-				1, 
-				0, 
-				0, 
-				0, 
-				0, 
-				0, 
-				null));
+	    e.addComponent(new Position(px,py, pz));
+	    e.addComponent(new Velocity(0,0,100));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+	    e.addComponent(new State(1));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.BITE, new int[]{}));
+	    e.addComponent(new Feet(32, 10));
+	    e.addComponent(new Enemy(600,10, new ZombiAI()));
+	    
 		Character animations = new Character();
 		GraphicsLoader.loadZombie(animations);
 		e.addComponent(animations);
@@ -217,7 +205,7 @@ public class EntityFactory {
 		e.addComponent(new Velocity(0,0,100));
 		e.addComponent(new Bounds(64, 64));
 		e.addComponent(new State(1));
-		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 20));
+		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 1));
 		e.addComponent(new Feet(30, 15));
 		e.addComponent(new Enemy(1000, 5, new SatanAI()));
 		e.addComponent(new Stats(
@@ -305,6 +293,17 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Attack(new PunchProcessor(pos.direction, range), damage) );
+	   	
+	   	return e;
+	}
+	
+	public static Entity createBite(String group, Position pos, int damage, int range){
+		Entity e=SoC.game.world.createEntity();
+				
+		e.addComponent( new Position(pos.x, pos.y, pos.z) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
+		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
+	   	e.addComponent( new Attack(new BiteProcessor(pos.direction, range), damage) );
 	   	
 	   	return e;
 	}
