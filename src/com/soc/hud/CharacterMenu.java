@@ -23,7 +23,6 @@ public class CharacterMenu extends Actor{
 		skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
 		font =skin.getFont("gameFont");
 		this.parent = parent;
-		parent.stage.addActor(this);
 
 	}
 	

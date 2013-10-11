@@ -35,10 +35,6 @@ public class HudSystem extends VoidEntitySystem{
 		this.gameMenu=new GameMenu(this);
 		this.tooltip = new TooltipBox(this);
 		
-		//Deberias er cargado al principio el world y luego referenciarlo
-		this.textButton=new TextButton("", new Skin(  Gdx.files.internal( "resources/uiskin.json" ) ));
-		//stage.addActor(gameMenu);
-		//stage.addActor(inventory);
 	}
 	
 	@Override
@@ -56,7 +52,7 @@ public class HudSystem extends VoidEntitySystem{
 	public void setViewport(int width, int height){
 		stage.setViewport(width, height, true);
 		statusBar.setPosition(10, height - 65);
-		inventory.updateRes(width, height);
+		inventory.setPosition(10, 150);
 		characterMenu.setPosition(10, height-280);
 		gameMenu.setPosition(width/2,height/2+50 );
 		gameMenu.setViewport(height);
@@ -89,16 +85,4 @@ public class HudSystem extends VoidEntitySystem{
 			SoC.game.inputMultiplexer.removeProcessor(gameMenu);
 		}
 	}
-	public void toggleTextButton(String tooltip, int x, int y){
-		if(!textButton.hasParent()){
-			textButton.setText(tooltip);
-			textButton.setPosition(x, y);
-			stage.addActor(textButton);
-		}else{
-			textButton.remove();
-		}
-	}
-
-
-	
 }
