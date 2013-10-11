@@ -6,6 +6,7 @@ import com.soc.ai.BallistaAI;
 import com.soc.ai.MaggotAI;
 import com.soc.ai.SkeletonAI;
 import com.soc.ai.SlimeAI;
+import com.soc.ai.ZombiAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
 import com.soc.game.attacks.ArrowProcessor;
@@ -13,6 +14,7 @@ import com.soc.game.attacks.ChargeProcessor;
 import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.attacks.HarmfulEnemyProcessor;
 import com.soc.game.attacks.IcicleProcessor;
+import com.soc.game.attacks.PoisonCloudProcessor;
 import com.soc.game.attacks.PunchProcessor;
 import com.soc.game.attacks.SlashProcessor;
 import com.soc.game.attacks.WhirlbladeProcessor;
@@ -156,7 +158,7 @@ public class EntityFactory {
 		e.addComponent(new State(1));
 		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 10));
 		e.addComponent(new Feet(30, 15));
-		e.addComponent(new Enemy(1000, 5, new SlimeAI()));
+		e.addComponent(new Enemy(1000, 5, new ZombiAI()));
 		e.addComponent(new Stats(
 				1, 
 				0, 
@@ -295,6 +297,16 @@ public class EntityFactory {
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 		e.addComponent(new Position(pos.x, pos.y, pos.z));
 	   	e.addComponent( new Attack(new WhirlbladeProcessor(pos, bon), damage) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createPoisonCloud(Position pos, Bounds bon) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
+		e.addComponent(new Position(pos.x+bon.width*0.5f, pos.y+bon.height+0.5f, pos.z));
+	   	e.addComponent( new Attack(new PoisonCloudProcessor(), 0) );
 	   	
 	   	return e;		
 	}

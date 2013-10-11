@@ -85,6 +85,8 @@ public class Constants {
 		public static final int CHARGE_BOX = 70;
 		public static final float SPIN_DURATION = 3.5f;
 		public static final float SPIN_RADIUS = 75f;
+		public static final float POISON_CLOUD_DURATION = 6f;
+		public static final float POISON_CLOUD_RADIUS = 100;
 	}
 	
 	public static class Attributes{
@@ -108,6 +110,9 @@ public class Constants {
 		public final static float BURN_DURATION=5f;
 		public final static float BURN_TICK_INTERVAL=1f;
 		public final static int BURN_DAMAGE = 10;
+		public final static float POISON_DURATION = 10f;
+		public final static float POISON_TICK_INTERVAL = 1f;
+		public final static int POISON_DAMAGE = 5;
 	}
 	
 }

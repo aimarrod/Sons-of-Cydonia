@@ -281,4 +281,18 @@ public class GraphicsLoader {
 		icicle.animation = new Animation(0.2f/4, tmp[direction]);
 		return icicle;
 	}
+	
+	public static AnimatedRenderer loadCloud(){
+		AnimatedRenderer cloud = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("cloud.png"), 256, 256);
+        TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        cloud.animation = new Animation(2f/frames.length, frames);
+        return cloud;
+	}
 }

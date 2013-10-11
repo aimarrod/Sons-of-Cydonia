@@ -22,9 +22,13 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
+import com.soc.game.alterations.Burn;
+import com.soc.game.alterations.Poison;
+import com.soc.game.alterations.Push;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
+import com.soc.game.components.Debuff;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
@@ -42,7 +46,7 @@ public class RenderSystem extends VoidEntitySystem{
 	@Mapper ComponentMapper<Attack> am;
 	@Mapper ComponentMapper<State> sm;
 	@Mapper ComponentMapper<Player> plm;
-
+	@Mapper ComponentMapper<Debuff> dm;
 	
 	private OrthogonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
@@ -135,7 +139,14 @@ public class RenderSystem extends VoidEntitySystem{
 		}
 		r.direction = ((int) angle/90 + 3) % 4;
 		
-		batch.setColor(r.r, r.g, r.b, r.a);
+		
+		if(dm.has(e)){
+			Debuff deb = dm.get(e);
+			if(deb.debuffClasses.contains(Burn.class)) batch.setColor(1, 0.5f, 0.5f, 1);
+			else if(deb.debuffClasses.contains(Poison.class)) batch.setColor(0.5f, 1, 0.5f, 1);
+			else if(deb.debuffClasses.contains(Push.class)) batch.setColor((float) Math.random(), (float) Math.random(), (float) Math.random(), 1);
+		} else batch.setColor(r.r, r.g, r.b, r.a);
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);
+		batch.setColor(1,1,1,1);
 	}
 }

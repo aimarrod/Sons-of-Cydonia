@@ -1,24 +1,19 @@
 package com.soc.game.systems;
 
-import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
-import com.artemis.EntitySystem;
 import com.artemis.annotations.Mapper;
 import com.artemis.managers.GroupManager;
 import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
-import com.soc.core.Constants.Groups;
 import com.soc.core.Constants.World;
 import com.soc.game.alterations.Burn;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
-import com.soc.game.components.Damage;
 import com.soc.game.components.Debuff;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
@@ -30,9 +25,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.game.map.Map;
 import com.soc.game.map.Stairs;
-import com.soc.game.map.Tile;
 
 public class CollisionSystem extends VoidEntitySystem {
 	@Mapper
@@ -72,9 +65,9 @@ public class CollisionSystem extends VoidEntitySystem {
 				Constants.Groups.PLAYER_ATTACKS, Constants.Groups.ENEMIES));
 		collisionGroups.add(new AttackCollision(Constants.Groups.ENEMY_ATTACKS,
 				Constants.Groups.PLAYERS));
+		collisionGroups.add(new CharacterCollision());
 		collisionGroups.add(new CharacterMapCollision());
 		collisionGroups.add(new ProjectileMapCollision());
-		collisionGroups.add(new CharacterCollision());
 		
 	}
 
@@ -134,6 +127,10 @@ public class CollisionSystem extends VoidEntitySystem {
 			if (nextx.overlaps(otherrect)) {
 				v.vx = 0;
 			}
+			if(current.overlaps(otherrect)){
+				v.vx = v.speed * (Math.abs(otherrect.x - current.x));
+				v.vy = v.speed * (Math.abs(otherrect.y - current.y));
+			}
 		}
 	}
 
@@ -181,17 +178,18 @@ public class CollisionSystem extends VoidEntitySystem {
 	}
 
 	private class CharacterMapCollision implements CollisionGroup {
-		private ImmutableBag<Entity> characters;
+		private ImmutableBag<Entity> enemies;
 
 		public CharacterMapCollision() {
-			characters = SoC.game.groupmanager
-					.getEntities(Constants.Groups.CHARACTERS);
+			enemies = SoC.game.groupmanager
+					.getEntities(Constants.Groups.ENEMIES);
 		}
 
 		@Override
 		public void processCollisions() {
-			for (int i = 0; i < characters.size(); i++) {
-				process(characters.get(i));
+			process(SoC.game.player);
+			for (int i = 0; i < enemies.size(); i++) {
+				process(enemies.get(i));
 			}
 		}
 
