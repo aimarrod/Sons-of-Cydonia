@@ -47,6 +47,8 @@ public class ChargeProcessor implements AttackProcessor{
 			}else{
 				attack.deleteFromWorld();
 			}
+		} else {
+			attack.deleteFromWorld();
 		}
 	}
 

@@ -303,23 +303,53 @@ public class GraphicsLoader {
 		character.renderers[State.ATTACK] = attack;
 	}
 	
-//	public static DirectionalAnimatedRenderer loadCharacterSpriteSheet(Texture sheet, float duration, int hsize, int vsize, boolean loops){
-//		int hframes = sheet.getWidth()/hsize;
-//		int vframes = sheet.getHeight()/vsize;
-//		
-//		DirectionalAnimatedRenderer renderer = new DirectionalAnimatedRenderer(loops);
-//		
-//		renderer.animations = new Animation[vframes];
-//		renderer.ox = -(hsize-Constants.Characters.FEET_WIDTH)*0.5f;
-//		renderer.oy = -Constants.Characters.FEET_HEIGTH*0.5f;
-//
-//
-//	   	TextureRegion[][] tmp = TextureRegion.split(sheet, hsize, vsize);
-//	   	for(int i = 0; i < tmp.length; i++){
-//	   		renderer.animations[i] = new Animation(duration/hframes, tmp[i]);
-//	   	}
-//	   	return renderer;
-//	}
+	public static void loadGaiaAir(Character character){
+		StaticRenderer idle = new StaticRenderer();
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		character.renderers = new Renderer[State.STATENUM];
+		idle.ox  = -48f;
+		
+		idle.sprite = new TextureRegion(load("gaia-air.png"));
+		TextureRegion[][] tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+        TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+
+	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
+	    character.deathTime=1f;
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+	}
+	
+	public static void loadEyeball(Character character){
+		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		TextureRegion[][] tmp = TextureRegion.split(load("eyball-walk.png"), 32, 38);
+		for(int i = 0; i < tmp.length; i++){
+	   		move.animations[i] = new Animation(0.2f/tmp[i].length, tmp[i]);
+	   	}
+		
+		tmp = TextureRegion.split(load("eyeball-death.png"), 32, 32);
+		TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+		death.animation = new Animation(0.5f/deathFrames.length, deathFrames);
+		character.deathTime=0.5f;
+		
+		character.renderers[State.WALK] = move;
+		character.renderers[State.DYING] = death;
+		
+	}
 	
 	public static AnimatedRenderer loadDaggerThrow(){
 		AnimatedRenderer dagger = new AnimatedRenderer(true);
@@ -389,5 +419,19 @@ public class GraphicsLoader {
 		TextureRegion[][] tmp = TextureRegion.split(load("quake.png"), 256, 128);
         quake.animation = new Animation(0.3f, tmp[0]);
         return quake;
+	}
+	
+	public static AnimatedRenderer loadTornado(){
+		AnimatedRenderer tornado = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("tornado.png"), 64, 64);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        tornado.animation = new Animation(0.05f, frames);
+        return tornado;
 	}
 }

@@ -55,7 +55,6 @@ import com.soc.utils.GameLoader;
 			 Position pos=pm.get(SoC.game.player);
 			 Player player = plm.get(SoC.game.player);
 			 Stats st = stm.get(SoC.game.player);
-			 
 			  
 			 if(state.state < State.BLOCKED || state.state == State.SPINNING){
 				 

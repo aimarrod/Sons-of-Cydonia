@@ -660,7 +660,17 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200" visible="0"/>
+ <objectgroup name="level0-spawners" width="200" height="200">
+  <object x="256" y="320" width="32" height="32">
+   <properties>
+    <property name="interval" value="0"/>
+    <property name="max" value="1"/>
+    <property name="range" value="10000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="gaia-air"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="level1-spawners" width="200" height="200" visible="0"/>
  <objectgroup name="level2-spawners" width="200" height="200" visible="0"/>
 </map>
