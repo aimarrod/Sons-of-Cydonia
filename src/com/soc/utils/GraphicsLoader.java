@@ -263,6 +263,34 @@ public class GraphicsLoader {
 		character.renderers[State.ATTACK] = attack;
 	}
 	
+	public static void loadSatan(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement= new DirectionalAnimatedRenderer(true);
+		
+		character.renderers = new Renderer[State.STATENUM];
+		attack.ox = -0;
+		attack.oy = 0;
+		idle.ox -= -0;
+		idle.oy -= 0;
+		movement.ox -=0;
+		movement.oy -= 0;
+		
+		TextureRegion[][] tmp = TextureRegion.split(load("satan-attack.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("satan-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.WALK] = movement;
+		character.renderers[State.ATTACK] = attack;
+	}
+	
 //	public static DirectionalAnimatedRenderer loadCharacterSpriteSheet(Texture sheet, float duration, int hsize, int vsize, boolean loops){
 //		int hframes = sheet.getWidth()/hsize;
 //		int vframes = sheet.getHeight()/vsize;
