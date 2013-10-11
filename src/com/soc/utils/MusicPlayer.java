@@ -20,37 +20,38 @@ public class MusicPlayer {
 		instance = new MusicPlayer();
 	}
 	
-	public void pause(){
-		current.pause();
+	public static void pause(){
+		instance.current.pause();
 	}
 	
-	public void resume(){
-		current.setLooping(true);
-		current.play();
+	public static void resume(){
+		instance.current.setLooping(true);
+		instance.current.play();
 	}
 	
-	public void dispose(){
-		current.dispose();
-		current = music.pop();
-		if(current != null){
-			current.setLooping(true);
-			current.play();
+	public static void dispose(){
+		if(instance.current == null) return;
+		instance.current.dispose();
+		instance.current = instance.music.pop();
+		if(instance.current != null){
+			instance.current.setLooping(true);
+			instance.current.play();
 		}
 	}
 	
-	public void play(String file){
+	public static void play(String file){
 		Music m = Gdx.audio.newMusic(Gdx.files.internal(BASE_DIR + file));
-		music.push(current);
-		current = m;
-		current.setLooping(true);
-		current.play();
+		if(instance.current != null) instance.music.push(instance.current);
+		instance.current = m;
+		instance.current.setLooping(true);
+		instance.current.play();
 	}
 	
-	public void reset(){
-		if(current != null)
-			current.dispose();
-		while(!music.isEmpty()){
-			music.pop().dispose();
+	public static void reset(){
+		if(instance.current != null)
+			instance.current.dispose();
+		while(!instance.music.isEmpty()){
+			instance.music.pop().dispose();
 		}
 	}
 }

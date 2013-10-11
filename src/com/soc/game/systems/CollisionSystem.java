@@ -7,6 +7,7 @@ import com.artemis.managers.GroupManager;
 import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
+import com.badlogic.gdx.assets.loaders.MusicLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
@@ -25,7 +26,10 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.map.Gate;
 import com.soc.game.map.Stairs;
+import com.soc.utils.MapLoader;
+import com.soc.utils.MusicPlayer;
 
 public class CollisionSystem extends VoidEntitySystem {
 	@Mapper
@@ -268,6 +272,11 @@ public class CollisionSystem extends VoidEntitySystem {
 
 			if (plm.has(e)) {
 				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_GATE) {
+					Gate gate = (Gate) SoC.game.map.tiles[pos.z][centerx][centery];
+					SoC.game.resetWorld();
+					MapLoader.loadMap(gate.destination);
+					pos.x = gate.x;
+					pos.y = gate.y;
 				}
 			}
 

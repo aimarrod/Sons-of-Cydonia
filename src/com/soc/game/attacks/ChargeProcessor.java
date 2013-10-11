@@ -82,7 +82,7 @@ public class ChargeProcessor implements AttackProcessor{
 		if(pos1.direction.y != 0){
 			pushdirection.x = Math.signum(pos2.x - pos1.x);
 		}
-		Debuff.addDebuff(victim, new Push(pushdirection, 300, 200));
+		Debuff.addDebuff(victim, new Push(pushdirection, 50, 200));
 	}
 
 	@Override

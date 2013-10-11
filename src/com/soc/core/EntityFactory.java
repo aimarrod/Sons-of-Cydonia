@@ -3,6 +3,7 @@ package com.soc.core;
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.BallistaAI;
+import com.soc.ai.EyeballAI;
 import com.soc.ai.GaiaAirAI;
 import com.soc.ai.MaggotAI;
 import com.soc.ai.SatanAI;
@@ -276,6 +277,37 @@ public class EntityFactory {
 		
 		return e;
 	}
+	
+	public static Entity createEyeball(float x, float y, int z) {
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(x, y, z));
+		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Bounds(32, 38));
+		e.addComponent(new Feet(32, 38));
+		e.addComponent(new Flying());
+		e.addComponent(new State(1));
+		e.addComponent(new Enemy(0, 5, new EyeballAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Character animations = new Character();
+		GraphicsLoader.loadEyeball(animations);
+		e.addComponent(animations);
+	   	
+	   	return e;		
+	}
 	/*
 	 * ATTACKS
 	 */
@@ -428,4 +460,5 @@ public class EntityFactory {
 	   	
 	   	return e;		
 	}
+	
 }
