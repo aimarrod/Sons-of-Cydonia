@@ -57,7 +57,6 @@ public class PoisonCloudProcessor implements AttackProcessor {
 	@Override
 	public void handle(Entity attack, Entity victim) {
 		Debuff.addDebuff(victim, new Poison());
-		System.out.println("DAMN!");
 	}
 
 	@Override
