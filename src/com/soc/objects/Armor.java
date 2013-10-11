@@ -11,6 +11,9 @@ public class Armor extends Item{
 		super(name, iconPath,tooltip,num);
 		this.gainArmor=gainArmor;
 	}
+	public Armor(){
+		
+	}
 	public void equip(){
 		Stats stats=SoC.game.statsmapper.get(SoC.game.player);
 		stats.armor+=gainArmor;

@@ -48,8 +48,7 @@ public class GameLoader {
 		save.map = SoC.game.map.name;
 		save.position = SoC.game.positionmapper.get(SoC.game.player);
 		save.stats = SoC.game.statsmapper.get(SoC.game.player);
-		save.player=new SavedPlayer(SoC.game.playermapper.get(SoC.game.player));
-		
+		save.player=new SavedPlayer(SoC.game.playermapper.get(SoC.game.player));	
 		handle.writeString(json.toJson(save), false);
 	}
 	

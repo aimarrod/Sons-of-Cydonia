@@ -22,6 +22,7 @@ public class Player extends Component {
 	public Weapon weapon;
 	public Armor armor;
 	public Item[] inventary;
+
 	public Player(){
 		move_up = Input.Keys.W;
 		move_down = Input.Keys.S;

@@ -18,4 +18,7 @@ public abstract class Item {
 		this.tooltip=tooltip;
 		this.num=num;
 	}
+	public Item(){
+		
+	}
 }

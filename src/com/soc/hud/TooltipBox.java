@@ -1,5 +1,6 @@
 package com.soc.hud;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,7 +21,7 @@ public class TooltipBox extends Actor{
 		this.text = null;
 		this.timer = 0;
 		this.container = GraphicsLoader.load("dialog-box.png");
-		this.skin = parent.skin;
+		skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
 		this.font =skin.getFont("gameFont");
 		this.parent = parent;
 		parent.stage.addActor(this);

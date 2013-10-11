@@ -15,6 +15,9 @@ public class Weapon extends Item {
 		this.gainAgility=gainAgility;
 		
 	}
+	public Weapon(){
+		
+	}
 	public void equip(){
 		Stats stats=SoC.game.statsmapper.get(SoC.game.player);
 		stats.strength+=gainStrenght;
