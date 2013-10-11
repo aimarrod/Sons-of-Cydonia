@@ -12,13 +12,14 @@ import com.soc.core.SoC;
 public class ActionBar extends Actor implements InputProcessor{
 
 	public Texture slot;
-	public Stage stage;
+	public HudSystem parent;
 	int[] spells;
+	int tooltip;
 	
-	public ActionBar(Stage stage){
+	public ActionBar(HudSystem parent){
 		slot = new Texture(Gdx.files.internal("resources/spell-container.png"));
-		this.stage = stage;
-		stage.addActor(this);
+		this.parent = parent;
+		parent.stage.addActor(this);
 	}
 	
 	@Override
@@ -68,16 +69,17 @@ public class ActionBar extends Actor implements InputProcessor{
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		Vector2 coords = stage.stageToScreenCoordinates(new Vector2(screenX, screenY));
+		Vector2 coords = parent.stage.stageToScreenCoordinates(new Vector2(screenX, screenY));
 		spells = SoC.game.statsmapper.get(SoC.game.player).spells;
 		if(coords.x > getX() && coords.x < getX() + (slot.getWidth()+2)*spells.length && coords.y > getY() && coords.y < getY() + 64){
 			for(int i = 0; i < spells.length; i++){
 				if(coords.x > getX()+(slot.getWidth()+2)*(i) && coords.x < (slot.getWidth()+2)*(i+1) && coords.y > getY() && coords.y < getY() + 64){
-					
-					System.out.println(SoC.game.spells[spells[i]].tooltip);
+					parent.tooltip.setText(SoC.game.spells[spells[i]].tooltip, 0.2f);
+					return false;
 				}
 			}
 		}
+		parent.tooltip.setText(null, 0);
 		return false;
 	}
 

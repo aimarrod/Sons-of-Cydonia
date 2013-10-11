@@ -16,6 +16,7 @@ public class Player extends Component {
 	public int attack;
 	public int inventory;
 	public int characterMenu;
+	public int gameMenu;
 	public int [] spellkeys;
 	public Weapon weapon;
 	public Armor armor;
@@ -28,6 +29,7 @@ public class Player extends Component {
 		attack = Input.Keys.SPACE;
 		inventory=Input.Keys.I;
 		characterMenu = Input.Keys.C;
+		gameMenu=Input.Keys.ESCAPE;
 		spellkeys = new int[]{Input.Keys.NUM_1, Input.Keys.NUM_2, Input.Keys.NUM_3, Input.Keys.NUM_4};
 		inventary=new Item[Constants.Items.INVENTORY_SIZE];
 		inventary[0]=new Weapon("Axe","resources/axe.png","Best Axe Ever!",100,10,10);

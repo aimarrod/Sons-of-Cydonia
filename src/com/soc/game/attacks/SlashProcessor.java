@@ -16,7 +16,6 @@ import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Position;
-import com.soc.game.components.Push;
 import com.soc.game.components.State;
 import com.soc.utils.EffectsPlayer;
 

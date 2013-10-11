@@ -16,11 +16,14 @@ public class CharacterMenu extends Actor{
 	Texture container;
 	BitmapFont font;
 	Skin skin;
+	public HudSystem parent;
 	
-	public CharacterMenu(){
+	public CharacterMenu(HudSystem parent){
 		container = new Texture(Gdx.files.internal("resources/character-menu.png"));
 		skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
 		font =skin.getFont("gameFont");
+		this.parent = parent;
+		parent.stage.addActor(this);
 
 	}
 	

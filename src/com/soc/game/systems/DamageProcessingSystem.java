@@ -60,5 +60,4 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 			
 		}
 	}
-
 }

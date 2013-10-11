@@ -38,10 +38,12 @@ public class Constants {
 		public static final float TILE_FACTOR = 0.03125f;
 		public static final int TILE_WALKABLE = 0;
 		public static final int TILE_OBSTACLE = 1; 
-		public static final int TILE_MAP_CHANGE = 2;
+		public static final int TILE_GATE = 2;
 		public static final int TILE_LEVEL_CHANGE = 3;
 		public static final int TILE_STAIRS = 4;
 		public static final int TILE_UNWALKABLE = 5;
+		public static final int TILE_LAVA = 6;
+		public static final int TILE_HOLE = 7;
 		public static final int LAYERS_PER_LEVEL = 4;
 	}
 	
@@ -100,6 +102,12 @@ public class Constants {
 		
 	public static class Items{
 		public final static int INVENTORY_SIZE=20;
+	}
+	
+	public static class Alteration{
+		public final static float BURN_DURATION=5f;
+		public final static float BURN_TICK_INTERVAL=1f;
+		public final static int BURN_DAMAGE = 10;
 	}
 	
 }

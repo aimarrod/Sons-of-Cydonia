@@ -18,11 +18,13 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.soc.core.Constants.Alteration;
 import com.soc.core.Constants.Attributes;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Character;
 import com.soc.game.components.Damage;
+import com.soc.game.components.Debuff;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
@@ -46,10 +48,10 @@ import com.soc.game.systems.AttackProcessingSystem;
 import com.soc.game.systems.CameraSystem;
 import com.soc.game.systems.CollisionSystem;
 import com.soc.game.systems.DamageProcessingSystem;
+import com.soc.game.systems.DebuffProcessingSystem;
 import com.soc.game.systems.EnemyActuatorSystem;
 import com.soc.game.systems.EntitySpawningTimerSystem;
 import com.soc.game.systems.ExpiringSystem;
-import com.soc.game.systems.PushProcessingSystem;
 import com.soc.game.systems.RenderSystem;
 import com.soc.game.systems.MovementSystem;
 import com.soc.game.systems.PlayerInputSystem;
@@ -90,6 +92,8 @@ public class SoC extends Game {
 	public ComponentMapper<Attack> attackmapper;
 	public ComponentMapper<Damage> damagemapper;
 	public ComponentMapper<Spawner> spawnermapper;
+	public ComponentMapper<Debuff> debuffmapper;
+
 	
 	public GroupManager groupmanager;
 	public TagManager tagmanager;
@@ -139,6 +143,7 @@ public class SoC extends Game {
 		damagemapper = world.getMapper(Damage.class);
 		spawnermapper = world.getMapper(Spawner.class);
 		enemymapper = world.getMapper(Enemy.class);
+		debuffmapper = world.getMapper(Debuff.class);
 		
 		inputMultiplexer=new InputMultiplexer();
 		Gdx.input.setInputProcessor(inputMultiplexer);
@@ -160,7 +165,7 @@ public class SoC extends Game {
 		world.setSystem(new AttackProcessingSystem());
 	    world.setSystem(new EnemyActuatorSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
-	    world.setSystem(new PushProcessingSystem());
+	    world.setSystem(new DebuffProcessingSystem());
 	    world.setSystem(new DamageProcessingSystem());
 	    world.setSystem(new CollisionSystem());	
 	    world.setSystem(new MovementSystem());

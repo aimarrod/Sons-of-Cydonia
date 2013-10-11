@@ -18,19 +18,26 @@ public class HudSystem extends VoidEntitySystem{
 	public Inventory inventory;
 	public CharacterMenu characterMenu;
 	public TextButton textButton;
+	public TooltipBox tooltip;
+	public GameMenu gameMenu;
+	public Skin skin;
 	
 	
 	public HudSystem(OrthographicCamera camera){
+		
 		this.camera = camera;
 		this.stage = new Stage();
-		this.statusBar = new StatusBar();
-		this.actionBar = new ActionBar(stage);
-		this.inventory=new Inventory();
-		this.characterMenu = new CharacterMenu();
+		this.skin = new Skin( Gdx.files.internal("resources/skin2.json"));
+		this.statusBar = new StatusBar(this);
+		this.actionBar = new ActionBar(this);
+		this.inventory=new Inventory(this);
+		this.characterMenu = new CharacterMenu(this);
+		this.gameMenu=new GameMenu(this);
+		this.tooltip = new TooltipBox(this);
+		
 		//Deberias er cargado al principio el world y luego referenciarlo
 		this.textButton=new TextButton("", new Skin(  Gdx.files.internal( "resources/uiskin.json" ) ));
-		stage.addActor(statusBar);
-		stage.addActor(characterMenu);
+		//stage.addActor(gameMenu);
 		//stage.addActor(inventory);
 	}
 	
@@ -51,6 +58,9 @@ public class HudSystem extends VoidEntitySystem{
 		statusBar.setPosition(10, height - 65);
 		inventory.updateRes(width, height);
 		characterMenu.setPosition(10, height-280);
+		gameMenu.setPosition(width/2,height/2+50 );
+		gameMenu.setViewport(height);
+		tooltip.setBounds(width-250, 20, 200, 200);;
 	}
 	public void toggleInventory(){
 		if(!inventory.hasParent()){
@@ -67,6 +77,16 @@ public class HudSystem extends VoidEntitySystem{
 			stage.addActor(characterMenu);
 		} else {
 			characterMenu.remove();
+		}
+	}
+	
+	public void toogleGameMenu(){
+		if(!gameMenu.hasParent()){
+			stage.addActor(gameMenu);
+			SoC.game.inputMultiplexer.addProcessor(gameMenu);
+		}else{
+			gameMenu.remove();
+			SoC.game.inputMultiplexer.removeProcessor(gameMenu);
 		}
 	}
 	public void toggleTextButton(String tooltip, int x, int y){

@@ -7,15 +7,12 @@ import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Position;
-import com.soc.game.components.Push;
 import com.soc.game.components.Velocity;
 
 public class MovementSystem extends EntityProcessingSystem {
 	 @Mapper ComponentMapper<Position> pm;
 	 @Mapper ComponentMapper<Velocity> vm;
 	 @Mapper ComponentMapper<Bounds> bm;
-	 @Mapper ComponentMapper<Push> psm;
-
 	 
 	 @SuppressWarnings("unchecked")
 	 public MovementSystem() {

@@ -103,6 +103,10 @@ public class MapLoader {
 												String.class)),
 										Integer.parseInt(obj.get("y",
 												String.class)), false);
+							} else if (type.equals("lava")){
+								SoC.game.map.tiles[l][i][j] = new Tile(World.TILE_LAVA);
+							} else if (type.equals("hole")){
+								SoC.game.map.tiles[l][i][j] = new Tile(World.TILE_HOLE);
 							}
 							break;
 						}

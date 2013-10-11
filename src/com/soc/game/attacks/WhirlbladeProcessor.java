@@ -15,11 +15,12 @@ import com.soc.core.Constants;
 import com.soc.core.Constants.World;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
+import com.soc.game.alterations.Push;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
+import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
-import com.soc.game.components.Push;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.utils.EffectsPlayer;
@@ -82,6 +83,7 @@ public class WhirlbladeProcessor implements AttackProcessor {
 			SoC.game.damagemapper.get(victim).damage+=a.damage;
 		}else{
 			victim.addComponent(new Damage(a.damage));
+			victim.changedInWorld();
 		}
 		Position pos1 = SoC.game.positionmapper.get(attack);
 		Position pos2 = SoC.game.positionmapper.get(victim);
@@ -89,8 +91,7 @@ public class WhirlbladeProcessor implements AttackProcessor {
 		p.direction.x = Math.signum(pos2.x - pos1.x);
 		p.direction.y = Math.signum(pos2.y - pos1.y);
 
-		victim.addComponent(p);
-		victim.changedInWorld();
+		Debuff.addDebuff(victim, p);
 	}
 
 	@Override

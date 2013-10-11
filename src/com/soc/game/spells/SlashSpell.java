@@ -15,7 +15,7 @@ import com.soc.utils.GraphicsLoader;
 public class SlashSpell extends Spell{
 		public SlashSpell(){
 			this.icon = GraphicsLoader.load("slash-icon.png");
-			this.tooltip = "Slash your evil foe with your mighty sword!";
+			this.tooltip = "Slash your evil \nfoe with your \nmighty sword!";
 			this.cast = 0.3f;
 			this.blocking = 0.4f;
 			this.state = State.ATTACK;

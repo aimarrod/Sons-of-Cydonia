@@ -24,7 +24,9 @@ public class Inventory extends Actor implements InputProcessor{
 	public int width;
 	public int height;
 	public int focusedSlot;
-	public Inventory(){
+	public HudSystem parent;
+	
+	public Inventory(HudSystem parent){
 		slot=new Texture(Gdx.files.internal("resources/slot.png"));
 		armorSlot=new Texture(Gdx.files.internal("resources/slot-armor.png"));
 		weaponSlot=new Texture(Gdx.files.internal("resources/slot-weapon.png"));
@@ -32,6 +34,7 @@ public class Inventory extends Actor implements InputProcessor{
 		this.width=1280;
 		this.height=900;
 		focusedSlot=1;
+		this.parent = parent;
 	}
 	
 	public void draw(SpriteBatch batch, float partenAlpha){
@@ -122,10 +125,11 @@ public class Inventory extends Actor implements InputProcessor{
 						}
 					}
 				}
+				return true;
 			}
 				
 		}
-		return true;
+		return false;
 	}
 
 	@Override
@@ -141,6 +145,7 @@ public class Inventory extends Actor implements InputProcessor{
 						foundSlot=true;
 						Item item=SoC.game.playermapper.get(SoC.game.player).inventary[i-1];
 						if(item!=null){
+							//!!
 							if(item instanceof Weapon){
 								((Weapon)item).equip();
 							}else{
@@ -205,9 +210,9 @@ public class Inventory extends Actor implements InputProcessor{
 					focusedSlot=i;
 					Item item=SoC.game.playermapper.get(SoC.game.player).inventary[i-1];
 					if(item!=null){
-						SoC.game.world.getSystem(HudSystem.class).toggleTextButton(item.tooltip,posX,posY);
+						parent.tooltip.setText(item.tooltip, 0f);
 					}else{
-						SoC.game.world.getSystem(HudSystem.class).toggleTextButton(null, 0,0);
+						parent.tooltip.setText(null, 0);
 					}
 				}
 				posX+=64;
@@ -219,7 +224,8 @@ public class Inventory extends Actor implements InputProcessor{
 		}
 		else{
 			focusedSlot=1;
-			SoC.game.world.getSystem(HudSystem.class).toggleTextButton(null, 0,0);
+			parent.tooltip.setText(null, 0);
+
 		}
 		return false;
 	}

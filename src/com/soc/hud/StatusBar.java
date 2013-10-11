@@ -15,11 +15,14 @@ public class StatusBar extends Actor{
 	public Texture container;
 	public Texture bars;
 	public BitmapFont font;
+	public HudSystem parent;
 	
-	public StatusBar(){
+	public StatusBar(HudSystem parent){
 		bars = new Texture(Gdx.files.internal("resources/hp-mp.png"));
 		container = new Texture(Gdx.files.internal("resources/bar-hp-mp.png"));
 		font = new BitmapFont();
+		this.parent = parent;
+		parent.stage.addActor(this);
 	}
 
 	@Override

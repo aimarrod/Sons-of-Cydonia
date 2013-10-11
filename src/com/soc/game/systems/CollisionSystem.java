@@ -15,10 +15,13 @@ import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.core.Constants.Groups;
 import com.soc.core.Constants.World;
+import com.soc.game.alterations.Burn;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
+import com.soc.game.components.Debuff;
 import com.soc.game.components.Enemy;
+import com.soc.game.components.Expires;
 import com.soc.game.components.Feet;
 import com.soc.game.components.Flying;
 import com.soc.game.components.Harmful;
@@ -194,9 +197,12 @@ public class CollisionSystem extends VoidEntitySystem {
 
 		protected void process(Entity e) {
 
+			State st = stm.get(e);
 			Position pos = pm.get(e);
 			Velocity v = vm.get(e);
 			Feet feet = fm.get(e);
+			
+			if(st.state == State.FALLING || st.state == State.DYING) return;
 
 			int nextleft = (int) ((pos.x + v.vx * world.delta + feet.width) * World.TILE_FACTOR);
 			int nextright = (int) ((pos.x + v.vx * world.delta) * World.TILE_FACTOR);
@@ -243,10 +249,27 @@ public class CollisionSystem extends VoidEntitySystem {
 				pos.z = ((Stairs) SoC.game.map.tiles[pos.z][centerx][centery]).level - 1;
 				SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL
 						+ pos.z);
+				return;
+			}
+			
+			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_LAVA) {
+				Debuff.addDebuff(e, new Burn());
+				return;
+			}
+			
+			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_HOLE) {
+				st.state=State.FALLING;
+				pos.x += pos.direction.x*World.TILE_SIZE;
+				pos.y += pos.direction.y*World.TILE_SIZE;
+				e.addComponent(new Expires(1));
+				e.changedInWorld();
+				v.vx=0;
+				v.vy=0;
+				return;
 			}
 
 			if (plm.has(e)) {
-				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_MAP_CHANGE) {
+				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_GATE) {
 				}
 			}
 

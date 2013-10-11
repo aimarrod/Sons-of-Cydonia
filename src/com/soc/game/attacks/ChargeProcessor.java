@@ -8,12 +8,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
+import com.soc.game.alterations.Push;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
+import com.soc.game.components.Debuff;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
-import com.soc.game.components.Push;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
 
@@ -68,6 +69,7 @@ public class ChargeProcessor implements AttackProcessor{
 			SoC.game.damagemapper.get(victim).damage+=a.damage;
 		}else{
 			victim.addComponent(new Damage(a.damage));
+			victim.changedInWorld();
 		}
 		Vector2 pushdirection = new Vector2();
 		if(pos1.direction.x != 0){
@@ -76,8 +78,7 @@ public class ChargeProcessor implements AttackProcessor{
 		if(pos1.direction.y != 0){
 			pushdirection.x = Math.signum(pos2.x - pos1.x);
 		}
-		victim.addComponent(new Push(pushdirection, 300, 200));
-		victim.changedInWorld();
+		Debuff.addDebuff(victim, new Push(pushdirection, 300, 200));
 	}
 
 	@Override
