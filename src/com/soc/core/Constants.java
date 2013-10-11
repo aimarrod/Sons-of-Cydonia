@@ -21,6 +21,7 @@ public class Constants {
 		public static final String BALLISTAS= "ballista";
 		public static final String ZOMBIES= "zombie";
 		public static final String SATANS= "satan";
+		public static final String GAIA_AIR = "gaia-air";
 		
 		public static final String ENEMY_ATTACKS = "enemyattack";
 		public static final String PLAYER_ATTACKS = "playerattack";
@@ -76,6 +77,8 @@ public class Constants {
 		
 		public static final int SPELL_NUMBER = 11;
 		
+		public static final int TORNADO_RANGE = 1000;
+		public static final int TORNADO_SPEED = 500;
 		public static final int BALLISTA_FIRE_RATE = 1;
 		public static final int DAGGER_SPEED = 900;
 		public static final int DAGGER_RANGE = 700;

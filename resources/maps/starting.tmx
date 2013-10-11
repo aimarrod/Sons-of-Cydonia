@@ -174,7 +174,7 @@
   <object x="2304" y="448" width="32" height="160"/>
   <object x="2272" y="576" width="32" height="288"/>
  </objectgroup>
- <objectgroup name="level1-obstacle" width="100" height="200">
+ <objectgroup name="level1-obstacle" width="100" height="200" visible="0">
   <object x="2336" y="0" width="704" height="64"/>
   <object x="3136" y="0" width="64" height="64"/>
   <object x="3168" y="64" width="32" height="224"/>
@@ -264,7 +264,7 @@
   <object x="864" y="3648" width="1760" height="192"/>
   <object x="1184" y="3552" width="1024" height="96"/>
  </objectgroup>
- <objectgroup name="level0-unwalkable" width="100" height="200">
+ <objectgroup name="level0-unwalkable" width="100" height="200" visible="0">
   <object x="1152" y="5152" width="128" height="128"/>
   <object x="1120" y="5184" width="32" height="128"/>
   <object x="1152" y="5280" width="96" height="32"/>
@@ -296,7 +296,7 @@
   <object x="1760" y="4096" width="224" height="32"/>
   <object x="1792" y="4064" width="160" height="32"/>
  </objectgroup>
- <objectgroup name="level1-unwalkable" width="100" height="200">
+ <objectgroup name="level1-unwalkable" width="100" height="200" visible="0">
   <object x="1376" y="3456" width="832" height="96"/>
   <object x="1536" y="3296" width="416" height="160"/>
   <object x="1952" y="3328" width="32" height="128"/>
@@ -334,26 +334,8 @@
     <property name="type" value="slime"/>
    </properties>
   </object>
-  <object x="1856" y="5248" width="64" height="64">
-   <properties>
-    <property name="interval" value="2.5"/>
-    <property name="max" value="1"/>
-    <property name="range" value="100"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="zombie"/>
-   </properties>
-  </object>
-  <object x="1344" y="5536" width="64" height="64">
-   <properties>
-    <property name="interval" value="2.5"/>
-    <property name="max" value="1"/>
-    <property name="range" value="100"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="satan"/>
-   </properties>
-  </object>
  </objectgroup>
- <objectgroup name="level1-spawners" width="100" height="200" visible="0">
+ <objectgroup name="level1-spawners" width="100" height="200">
   <object x="1920" y="3072" width="32" height="32">
    <properties>
     <property name="interval" value="2"/>

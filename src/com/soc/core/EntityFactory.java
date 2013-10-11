@@ -3,6 +3,7 @@ package com.soc.core;
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.BallistaAI;
+import com.soc.ai.GaiaAirAI;
 import com.soc.ai.MaggotAI;
 import com.soc.ai.SatanAI;
 import com.soc.ai.SkeletonAI;
@@ -20,6 +21,7 @@ import com.soc.game.attacks.PoisonCloudProcessor;
 import com.soc.game.attacks.PunchProcessor;
 import com.soc.game.attacks.QuakeBladeProcessor;
 import com.soc.game.attacks.SlashProcessor;
+import com.soc.game.attacks.TornadoProcessor;
 import com.soc.game.attacks.WhirlbladeProcessor;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
@@ -182,6 +184,7 @@ public class EntityFactory {
 		
 		return e;
 	}
+	
 	public static Entity createZombie(float px, float py, int pz){
 		Entity e = SoC.game.world.createEntity();
 		
@@ -199,6 +202,7 @@ public class EntityFactory {
 		
 		return e;
 	}
+	
 	public static Entity createSatan(float px, float py, int pz){
 		Entity e = SoC.game.world.createEntity();
 		e.addComponent(new Position(px, py, pz));
@@ -224,6 +228,38 @@ public class EntityFactory {
 				null));
 		Character animations = new Character();
 		GraphicsLoader.loadSatan(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createGaiaAir(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		System.out.println(py);
+		System.out.println(px);
+		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Feet(32, 64));
+		e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 5, new GaiaAirAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Character animations = new Character();
+		GraphicsLoader.loadGaiaAir(animations);
 		e.addComponent(animations);
 		
 		return e;
@@ -376,6 +412,18 @@ public class EntityFactory {
 		e.addComponent( new Velocity(0, 0, 0) );
 		e.addComponent(new Position(pos.x+feet.width*0.5f, pos.y+feet.heigth+0.5f, pos.z, pos.direction.cpy()));
 	   	e.addComponent( new Attack(new QuakeBladeProcessor(), damage) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createTornado(float x, float y, int z, Vector2 direction) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
+		e.addComponent( new Position(x, y, z, direction));
+		e.addComponent( new Bounds(32, 32) );
+		e.addComponent( new Flying() );
+	   	e.addComponent( new Attack(new TornadoProcessor(), 0) );
 	   	
 	   	return e;		
 	}
