@@ -100,11 +100,13 @@ public class MapLoader {
 												String.class)));
 							} else if (type.equals("gate")) {
 								SoC.game.map.tiles[l][i][j] = new Gate(obj.get(
-										"map", String.class),
+										"destination", String.class),
 										Integer.parseInt(obj.get("x",
 												String.class)),
 										Integer.parseInt(obj.get("y",
-												String.class)), false);
+												String.class)),
+										Integer.parseInt(obj.get("z",
+												String.class)));
 							} else if (type.equals("lava")){
 								SoC.game.map.tiles[l][i][j] = new Tile(World.TILE_LAVA);
 							} else if (type.equals("hole")){

@@ -47,6 +47,7 @@ public class GraphicsLoader {
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		DirectionalStaticRenderer charge = new DirectionalStaticRenderer();
 		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		DirectionalAnimatedRenderer run = new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		AnimatedRenderer spin = new AnimatedRenderer(true);
 		AnimatedRenderer fall = new AnimatedRenderer(true);
@@ -59,8 +60,8 @@ public class GraphicsLoader {
 		idle.oy = -0;
 		death.ox = -16;
 		death.oy = 0;
-		movement.ox = -16;
-		movement.oy = 0;
+		run.ox = -16;
+		run.oy = 0;
 		charge.ox -= 16;
 		charge.oy -= 0;
 		fall.ox -= 16;
@@ -71,6 +72,10 @@ public class GraphicsLoader {
 		TextureRegion[][] tmp = TextureRegion.split(load("warrior-attack.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
 	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("warrior-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		run.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
 	   	}
 		tmp = TextureRegion.split(load("warrior-walk.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
@@ -96,6 +101,7 @@ public class GraphicsLoader {
 		character.renderers[State.CHARGING] = charge;
 		character.renderers[State.SPINNING] = spin;
 		character.renderers[State.FALLING] = fall;
+		character.renderers[State.RUN] = run;
 	}
 	
 	public static void loadMaggot(Character character){
@@ -423,6 +429,8 @@ public class GraphicsLoader {
 	
 	public static AnimatedRenderer loadTornado(){
 		AnimatedRenderer tornado = new AnimatedRenderer(true);
+		
+		tornado.ox = -10;
 		TextureRegion[][] tmp = TextureRegion.split(load("tornado.png"), 64, 64);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;

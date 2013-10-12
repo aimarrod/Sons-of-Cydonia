@@ -454,7 +454,7 @@ public class EntityFactory {
 		
 		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
 		e.addComponent( new Position(x, y, z, direction));
-		e.addComponent( new Bounds(32, 32) );
+		e.addComponent( new Bounds(44, 32) );
 		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new TornadoProcessor(), 0) );
 	   	

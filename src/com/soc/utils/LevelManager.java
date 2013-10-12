@@ -12,6 +12,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.Manager;
 import com.badlogic.gdx.utils.Array;
+import com.soc.core.SoC;
 import com.soc.game.components.Position;
 
 public class LevelManager extends Manager{

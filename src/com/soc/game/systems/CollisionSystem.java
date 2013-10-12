@@ -277,6 +277,8 @@ public class CollisionSystem extends VoidEntitySystem {
 					MapLoader.loadMap(gate.destination);
 					pos.x = gate.x;
 					pos.y = gate.y;
+					pos.z = gate.z;
+					SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);
 				}
 			}
 

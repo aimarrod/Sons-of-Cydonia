@@ -52,6 +52,9 @@ public class TornadoProcessor implements AttackProcessor{
 			Velocity torvel = SoC.game.velocitymapper.get(attack);
 			vel.vx = torvel.vx;
 			vel.vy = torvel.vy;
+			
+			Position attackpos = SoC.game.positionmapper.get(attack);
+			Position victimpos = SoC.game.positionmapper.get(hit);
 		}
 	}
 
@@ -64,7 +67,7 @@ public class TornadoProcessor implements AttackProcessor{
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
 		
-		return (attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		return (attackpos.z == victimpos.z && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	
 
 	}
@@ -76,8 +79,8 @@ public class TornadoProcessor implements AttackProcessor{
 		Position pos2 = SoC.game.positionmapper.get(attack);
 		Bounds bon = SoC.game.boundsmapper.get(attack);
 
-		pos1.x = pos2.x + bon.width*0.5f+1;
-		pos1.y = pos2.y + 1;
+		pos1.x = pos2.x;
+		pos1.y = pos2.y + 2;
 		victim.removeComponent(Delay.class);
 		victim.changedInWorld();
 		SoC.game.statemapper.get(victim).state = State.SPINNING;
@@ -86,7 +89,7 @@ public class TornadoProcessor implements AttackProcessor{
 	@Override
 	public void frame(Entity attack, SpriteBatch batch) {
 		Position pos = SoC.game.positionmapper.get(attack);
-		batch.draw(renderer.frame(SoC.game.world.delta), pos.x, pos.y);
+		batch.draw(renderer.frame(SoC.game.world.delta), pos.x+renderer.ox, pos.y+renderer.oy);
 	}
 
 	@Override

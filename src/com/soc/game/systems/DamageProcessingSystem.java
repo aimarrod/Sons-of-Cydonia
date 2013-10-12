@@ -7,6 +7,7 @@ import com.artemis.annotations.Mapper;
 import com.artemis.managers.TagManager;
 import com.artemis.systems.EntityProcessingSystem;
 import com.soc.core.Constants;
+import com.soc.core.SoC;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
@@ -43,10 +44,12 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		Position pos = pm.get(e);
 		Velocity velocity=vm.get(e);
 		
-		stats.health-=dr.damage;
+		int dmg = dr.damage - stats.armor;
+		if(dmg < 1) dmg = 1;
+		stats.health-=dmg;
 		e.removeComponent(dr);
 		e.changedInWorld();
-		FloatingText text = new FloatingText(""+dr.damage, Constants.Configuration.LABEL_DURATION, pos.x, pos.y, Constants.Configuration.LABEL_SPEED);
+		FloatingText text = new FloatingText(""+dmg, Constants.Configuration.LABEL_DURATION, pos.x, pos.y, Constants.Configuration.LABEL_SPEED);
 		world.getSystem(RenderSystem.class).texts.add(text);
 		text.r = dr.r;
 		text.g = dr.g;
@@ -61,11 +64,10 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 			e.changedInWorld();
 			velocity.vx=0;
 			velocity.vy=0;
-			System.out.println(em.has(e));
 			
 			if(em.has(e)){
 				Enemy enemy=em.get(e);
-				Entity player=world.getManager(TagManager.class).getEntity(Constants.Tags.PLAYER);
+				Entity player=SoC.game.player;
 				sm.get(player).addExperience(enemy.expierence);
 			} 
 			

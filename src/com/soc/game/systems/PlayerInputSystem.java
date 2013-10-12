@@ -38,13 +38,17 @@ import com.soc.utils.GameLoader;
 		 @Mapper ComponentMapper<Stats> stm;
 		 @Mapper ComponentMapper<Character> cm;
 		 
+		 private float timer;
+		 private int lastKey;
+		 private boolean running;
+		 		 
 		 public PlayerInputSystem() {
 			 super();
 		 }
 		  
 		 @Override
 		 protected void initialize() {
-			 //SoC.game.inputMultiplexer.addProcessor(this);
+			 timer = 0;
 		 }
 		 
 		 @Override
@@ -54,7 +58,6 @@ import com.soc.utils.GameLoader;
 			 State state = sm.get(SoC.game.player);
 			 Position pos=pm.get(SoC.game.player);
 			 Player player = plm.get(SoC.game.player);
-			 Stats st = stm.get(SoC.game.player);
 			  
 			 if(state.state < State.BLOCKED || state.state == State.SPINNING){
 				 
@@ -81,36 +84,64 @@ import com.soc.utils.GameLoader;
 			 	}
 			 	
 			 	if(moving){
+			 		if(running){
+			 			vel.vx*=2;
+			 			vel.vy*=2;
+			 		}
 			 		pos.direction.x = Math.signum(vel.vx);
 					pos.direction.y = Math.signum(vel.vy);
 			 	}
-			 
-			 	if(state.state == State.SPINNING) return;
-			 	if(moving){
+			 	
+			 	timer -= world.delta;
+			 	if(timer <= 0){
+			 		lastKey = -1;
+			 	}
+			 	
+			 	if(state.state == State.SPINNING){
+					running = false;
+				 	lastKey = -1;
+			 		return;
+			 	}
+			 	if(moving && running){
+			 		state.state = State.RUN;
+			 	} else if(moving){
 				 	state.state = State.WALK;
 			 	} else {
 				 	state.state = State.IDLE;
+				 	running = false;
 			 	}
+			 }
+			 if(state.state >= State.BLOCKED){
+				 running = false;
+			 	 lastKey = -1;
 			 }
 			 			 
 		 }
 
 		@Override
 		public boolean keyDown(int keycode) {
-			if(keycode==plm.get(SoC.game.player).inventory){
+			Player player = plm.get(SoC.game.player);
+			if(keycode==player.inventory){
 				world.getSystem(HudSystem.class).toggleInventory();
 				return true;
 			}
-			if(keycode==plm.get(SoC.game.player).characterMenu){
+			if(keycode==player.characterMenu){
 				world.getSystem(HudSystem.class).toogleCharacterMenu();
 				return true;
 			}
-			if(keycode==plm.get(SoC.game.player).gameMenu){
+			if(keycode==player.gameMenu){
 				world.getSystem(HudSystem.class).toogleGameMenu();
 				return true;
 			}
-			
-			
+			if(keycode==player.move_down || keycode==player.move_right || keycode==player.move_left || keycode==player.move_up){
+				System.out.println("IAAAA");
+				if(lastKey == keycode){
+					running = true;
+				} else {
+					lastKey = keycode;
+					timer = 0.5f;
+				}
+			}
 			return false;
 		}
 

@@ -27,6 +27,7 @@ public class MusicPlayer {
 	public static void resume(){
 		instance.current.setLooping(true);
 		instance.current.play();
+		instance.current.setVolume(0.5f);
 	}
 	
 	public static void dispose(){
@@ -36,6 +37,7 @@ public class MusicPlayer {
 		if(instance.current != null){
 			instance.current.setLooping(true);
 			instance.current.play();
+			instance.current.setVolume(0.5f);
 		}
 	}
 	
@@ -45,6 +47,7 @@ public class MusicPlayer {
 		instance.current = m;
 		instance.current.setLooping(true);
 		instance.current.play();
+		instance.current.setVolume(0.5f);
 	}
 	
 	public static void reset(){
