@@ -45,6 +45,9 @@ public class Constants {
 		public static final int TILE_UNWALKABLE = 5;
 		public static final int TILE_LAVA = 6;
 		public static final int TILE_HOLE = 7;
+		public static final int TILE_DIALOG = 8;
+		public static final int TILE_PUSH = 9;
+		public static final int TILE_TELEPORT = 10;
 		public static final int LAYERS_PER_LEVEL = 4;
 	}
 	

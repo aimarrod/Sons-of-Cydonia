@@ -128,7 +128,6 @@ import com.soc.utils.FloatingText;
 				return true;
 			}
 			if(keycode==player.move_down || keycode==player.move_right || keycode==player.move_left || keycode==player.move_up){
-				System.out.println("IAAAA");
 				if(lastKey == keycode){
 					running = true;
 				} else {

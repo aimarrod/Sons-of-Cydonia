@@ -20,13 +20,15 @@ import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Feet;
 import com.soc.game.components.Flying;
-import com.soc.game.components.Harmful;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.map.Dialog;
+import com.soc.game.map.DialogTile;
 import com.soc.game.map.Gate;
+import com.soc.game.map.Push;
 import com.soc.game.map.Stairs;
 import com.soc.utils.MapLoader;
 import com.soc.utils.MusicPlayer;
@@ -53,7 +55,7 @@ public class CollisionSystem extends VoidEntitySystem {
 	@Mapper
 	ComponentMapper<Flying> flm;
 	@Mapper
-	ComponentMapper<Harmful> hm;
+	ComponentMapper<Debuff> psm;
 
 	private Bag<CollisionGroup> collisionGroups;
 
@@ -209,6 +211,7 @@ public class CollisionSystem extends VoidEntitySystem {
 			Position pos = pm.get(e);
 			Velocity v = vm.get(e);
 			Feet feet = fm.get(e);
+			boolean stopped = false;
 			
 			if(st.state == State.FALLING || st.state == State.DYING) return;
 
@@ -224,6 +227,7 @@ public class CollisionSystem extends VoidEntitySystem {
 
 			int centerx = (int) ((pos.x + feet.width * 0.5) * World.TILE_FACTOR);
 			int centery = (int) ((pos.y + feet.heigth * 0.5) * World.TILE_FACTOR);
+			
 
 			if (SoC.game.map.tiles[pos.z][nextright][up].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][nextleft][up].type == World.TILE_OBSTACLE
@@ -237,6 +241,8 @@ public class CollisionSystem extends VoidEntitySystem {
 					|| SoC.game.map.tiles[pos.z][left][nextdown].type == World.TILE_OBSTACLE) {
 				v.vy = 0;
 			}
+			
+			
 			
 			if(!flm.has(e)){
 				if (SoC.game.map.tiles[pos.z][nextright][up].type == World.TILE_UNWALKABLE
@@ -275,6 +281,11 @@ public class CollisionSystem extends VoidEntitySystem {
 				v.vy=0;
 				return;
 			}
+			
+
+			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_PUSH) {
+				((Push) SoC.game.map.tiles[pos.z][centerx][centery]).push(e);
+			}
 
 			if (plm.has(e)) {
 				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_GATE) {
@@ -285,7 +296,15 @@ public class CollisionSystem extends VoidEntitySystem {
 					pos.y = gate.y;
 					pos.z = gate.z;
 					SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);
-					System.out.println(Constants.Groups.LEVEL+pos.z);
+					return;
+				}
+				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_DIALOG) {
+					Dialog dialog = ((DialogTile) SoC.game.map.tiles[pos.z][centerx][centery]).dialog;
+					if(!dialog.popped){
+						SoC.game.hudSystem.tooltip.pop(dialog.text, 1f, 5f);
+						dialog.popped = true;
+					}
+					return;
 				}
 			}
 

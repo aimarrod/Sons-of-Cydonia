@@ -15,6 +15,8 @@ public class TooltipBox extends Actor{
 	private Texture container;
 	private Skin skin;
 	private BitmapFont font;
+	private float duration;
+	private boolean blocked, dissapearing;
 	public HudSystem parent;
 	
 	public TooltipBox(HudSystem parent){
@@ -25,6 +27,7 @@ public class TooltipBox extends Actor{
 		this.font =skin.getFont("gameFont");
 		this.parent = parent;
 		parent.stage.addActor(this);
+
 	}
 	
 	@Override
@@ -33,19 +36,46 @@ public class TooltipBox extends Actor{
 		batch.setColor(1, 1, 1, timer);
 		font.setColor(1, 1, 1, timer);
 		font.setScale(0.45f);
-		timer += SoC.game.world.delta*0.5;
+		timer += SoC.game.world.delta*((dissapearing)?-1:1);
+		System.out.println(timer);
 		if(timer > 1){
 			timer = 1;
+		} else {
+			if(timer < 0){
+				timer = 0;
+			}
 		}
+		
 		batch.draw(container, getX(), getY());
 		font.drawWrapped(batch, text, getX()+10, getY()+container.getHeight()-10, getWidth());
 		batch.setColor(1, 1, 1, 1);
 		
+		if(blocked){
+			duration -= SoC.game.world.delta;
+			if(duration <= 0){
+				timer = 1;
+				dissapearing = true;
+				blocked = false;
+			}
+		} else {
+			if(timer == 0){
+				dissapearing=false;
+				text=null;
+			}
+		}
 	}
 	
 	public void setText(String text, float appearTime){
-		if(this.text == text) return;
+		if(this.text == text || blocked) return;
 		this.text = text;
 		this.timer = 1 - appearTime;
+		this.dissapearing=false;
+	}
+	
+	public void pop(String text, float appearTime, float duration){
+		this.duration = duration;
+		this.timer = 1 - appearTime;
+		this.text = text;
+		this.blocked = true;
 	}
 }

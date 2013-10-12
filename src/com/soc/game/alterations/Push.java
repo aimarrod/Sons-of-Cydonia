@@ -30,8 +30,10 @@ public class Push implements Alteration{
 	  
 	  vel.vx = speed*Math.signum(direction.x);
 	  vel.vy = speed*Math.signum(direction.y);
+	  System.out.println(distance);
 	  
 	  distance -= Math.abs(vel.vx*SoC.game.world.delta)+Math.abs(vel.vy*SoC.game.world.delta);
+	  System.out.println(distance);
 	  
 	  if(distance <= 0){
 		  SoC.game.debuffmapper.get(e).removeDebuff(this);
@@ -42,7 +44,7 @@ public class Push implements Alteration{
 	  colortimer -= SoC.game.world.delta;
 	  if(colortimer <= 0){
 		  if(this.b == 1) this.b = 0; else this.b = 1;
-		  colortimer = 0.3f;
+		  colortimer = 0.1f;
 	  }
 	}
 }
