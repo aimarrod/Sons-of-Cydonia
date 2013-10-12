@@ -22,6 +22,7 @@ public class Constants {
 		public static final String ZOMBIES= "zombie";
 		public static final String SATANS= "satan";
 		public static final String GAIA_AIR = "gaia-air";
+		public static final String EYEBALLS = "eyeball";
 		
 		public static final String ENEMY_ATTACKS = "enemyattack";
 		public static final String PLAYER_ATTACKS = "playerattack";

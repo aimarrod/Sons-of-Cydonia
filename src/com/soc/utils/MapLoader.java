@@ -28,6 +28,8 @@ public class MapLoader {
 		TiledMap map = new TmxMapLoader().load(BASE_DIR + name);
 		SoC.game.map = new Map();
 		SoC.game.map.name = name;
+		MusicPlayer.reset();
+		MusicPlayer.play(map.getProperties().get("music", String.class));
 		MapLoader.loadTiles(map);
 		MapLoader.loadSpawners(map);
 		SoC.game.world.getSystem(RenderSystem.class).changeMap(map);

@@ -34,9 +34,9 @@ public class QuakeBladeProcessor implements AttackProcessor{
 	ComponentMapper<Damage> dm = SoC.game.world.getMapper(Damage.class);
 	public QuakeBladeProcessor() {
 		this.hit = new Bag<Entity>();
-		this.interval = Constants.Spells.QUAKEBLADE_TICK_INTERVAL;
+		this.interval = 0;
 		this.hitbox = new Circle();
-		this.counter = 1;
+		this.counter = 0;
 		this.radius = Constants.Spells.QUAKEBLADE_RADIUS_INITIAL;
 		this.renderer = GraphicsLoader.loadQuake();
 	}
@@ -46,9 +46,10 @@ public class QuakeBladeProcessor implements AttackProcessor{
 		Position pos = SoC.game.positionmapper.get(attack);
 		interval -= SoC.game.world.delta;
 		if(interval <= 0){
+			hit.clear();
 			counter++;
-			pos.x += radius*pos.direction.x;
-			pos.y += radius*pos.direction.y;
+			pos.x += radius*pos.direction.x*1.5f;
+			pos.y += radius*pos.direction.y*1.5f;
 			interval = Constants.Spells.QUAKEBLADE_TICK_INTERVAL;
 			radius += Constants.Spells.QUAKEBLADE_RADIUS_INCREASE;
 			if(counter >= 5){
@@ -91,7 +92,8 @@ public class QuakeBladeProcessor implements AttackProcessor{
 	@Override
 	public void frame(Entity attack, SpriteBatch batch) {
 		Position pos = SoC.game.positionmapper.get(attack);
-		batch.draw(renderer.frame(SoC.game.world.delta), pos.x-128, pos.y-64);
+		renderer.time = Constants.Spells.QUAKEBLADE_TICK_INTERVAL*(counter);
+		batch.draw(renderer.frame(0), pos.x-128, pos.y-64);
 	}
 
 	@Override

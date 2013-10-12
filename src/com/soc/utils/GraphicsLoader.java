@@ -70,7 +70,7 @@ public class GraphicsLoader {
 		
 		TextureRegion[][] tmp = TextureRegion.split(load("warrior-attack.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
-	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
+	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
 	   	}
 		tmp = TextureRegion.split(load("warrior-walk.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
@@ -330,12 +330,12 @@ public class GraphicsLoader {
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
-		TextureRegion[][] tmp = TextureRegion.split(load("eyball-walk.png"), 32, 38);
+		TextureRegion[][] tmp = TextureRegion.split(load("eyeball-walk.png"), 32, 38);
 		for(int i = 0; i < tmp.length; i++){
-	   		move.animations[i] = new Animation(0.2f/tmp[i].length, tmp[i]);
+	   		move.animations[i] = new Animation(2f/tmp[i].length, tmp[i]);
 	   	}
 		
-		tmp = TextureRegion.split(load("eyeball-death.png"), 32, 32);
+		tmp = TextureRegion.split(load("eyeball-death.png"), 32, 38);
 		TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
         for (int i = 0; i < tmp.length; i++) {
@@ -343,8 +343,8 @@ public class GraphicsLoader {
                         deathFrames[index++] = tmp[i][j];
                 }
         }
-		death.animation = new Animation(0.5f/deathFrames.length, deathFrames);
-		character.deathTime=0.5f;
+		death.animation = new Animation(1f/deathFrames.length, deathFrames);
+		character.deathTime=0.8f;
 		
 		character.renderers[State.WALK] = move;
 		character.renderers[State.DYING] = death;
@@ -417,7 +417,7 @@ public class GraphicsLoader {
 	public static AnimatedRenderer loadQuake(){
 		AnimatedRenderer quake = new AnimatedRenderer(true);
 		TextureRegion[][] tmp = TextureRegion.split(load("quake.png"), 256, 128);
-        quake.animation = new Animation(0.3f, tmp[0]);
+        quake.animation = new Animation(Constants.Spells.QUAKEBLADE_TICK_INTERVAL, tmp[0]);
         return quake;
 	}
 	
