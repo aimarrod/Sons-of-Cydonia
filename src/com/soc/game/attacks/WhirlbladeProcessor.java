@@ -82,7 +82,7 @@ public class WhirlbladeProcessor implements AttackProcessor {
 		if(SoC.game.damagemapper.has(victim)){
 			SoC.game.damagemapper.get(victim).damage+=a.damage;
 		}else{
-			victim.addComponent(new Damage(a.damage));
+			victim.addComponent(new Damage(a.damage, false));
 			victim.changedInWorld();
 		}
 		Position pos1 = SoC.game.positionmapper.get(attack);

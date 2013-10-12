@@ -11,6 +11,7 @@ import com.soc.game.components.Debuff;
 public class BuffProcessingSystem extends EntityProcessingSystem{
 	
 	@Mapper ComponentMapper<Buff> bm; 
+	@SuppressWarnings("unchecked")
 	public BuffProcessingSystem() {
 		super(Aspect.getAspectForAll(Buff.class));
 	}

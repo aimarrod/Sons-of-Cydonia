@@ -23,6 +23,8 @@ public class BallistaAI implements AI{
 		Position playerpos = SoC.game.positionmapper.get(SoC.game.player);
 		State state=SoC.game.statemapper.get(e);
 		
+		if(state.state == State.DYING) return;
+		
 		pos.direction.x = playerpos.x-pos.x;
 		pos.direction.y = playerpos.y-pos.y;
 		

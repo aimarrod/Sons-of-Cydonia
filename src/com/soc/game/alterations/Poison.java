@@ -22,9 +22,9 @@ public class Poison implements Alteration{
 		interval -= SoC.game.world.delta;
 		if(interval <= 0){
 			if(SoC.game.damagemapper.has(e)){
-				SoC.game.damagemapper.get(e).damage+=Constants.Alteration.POISON_DAMAGE;
+				SoC.game.damagemapper.get(e).pureDamage+=Constants.Alteration.POISON_DAMAGE;
 			}else{
-				e.addComponent(new Damage(Constants.Alteration.POISON_DAMAGE, 0, 1, 0));
+				e.addComponent(new Damage(Constants.Alteration.POISON_DAMAGE, 0, 1, 0, true));
 				e.changedInWorld();
 			}
 		interval = Constants.Alteration.POISON_TICK_INTERVAL;

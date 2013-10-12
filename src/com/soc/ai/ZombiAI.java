@@ -61,73 +61,41 @@ public class ZombiAI implements AI{
 	
 	public void process(Entity e) {
 
-
-		Enemy enemy = SoC.game.enemymapper.get(e);
-		Position p = SoC.game.positionmapper.get(e);
-		Velocity v = SoC.game.velocitymapper.get(e);
+		Position pos = SoC.game.positionmapper.get(e);
+		Velocity vel = SoC.game.velocitymapper.get(e);
 		State state = SoC.game.statemapper.get(e);
 		Entity player = SoC.game.player;
-		Position playp = SoC.game.positionmapper.get(player);
-
-		float dstx = 0f;
-		float dsty = 0f;
-		boolean dstModified=false;
+		Position playerPos = SoC.game.positionmapper.get(player);
 		
-		if(state.state >= State.BLOCKED) return;
+		if(state.state == State.DYING) return;
 		
+		float dsty = playerPos.y - pos.y;
+		float dstx = playerPos.x - pos.x;
 		
-
-		if (Math.hypot(playp.x - p.x, playp.y - p.y) > enemy.vision) {
-			v.vx = 0;
-			v.vy = 0;
-			state.state=State.IDLE;
+		pos.direction.x = Math.signum(dstx);
+		pos.direction.y = Math.signum(dsty); 
+		
+		vel.vx = vel.speed * pos.direction.x;
+		vel.vy = vel.speed * pos.direction.y;
+		
+		if(state.state != State.ATTACK){	
+			if(Math.abs(dstx) < 40 && Math.abs(dsty) < 20 ){
+				Spell spell = SoC.game.spells[Constants.Spells.BITE];
+				state.state = spell.state;
+				e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.BITE));
+				vel.vx = 0;
+				vel.vy = 0;
+				if(Math.abs(dstx) < Constants.Characters.WIDTH) pos.direction.x = 0;
+				e.changedInWorld();
+			} else if(vel.vx != 0 && vel.vy != 0){
+				state.state = State.WALK;
+				if(Math.abs(dstx) < 32) pos.direction.x = 0;
+				else if(Math.abs(dsty) < 10) pos.direction.y = 0;
+			}
 		} else {
-			dstModified=true;
-			if (AStar.instance.isDirectPath(p, playp)) {
-				path.clear();
-				dstx = playp.x - p.x;
-				dsty = playp.y - p.y;
-			} else if (path.isEmpty()) {
-				path = AStar.instance.getPath(p, playp);
-			}
-
-			if (!path.isEmpty()) {
-				Node currentNode = path.get(0);
-				dstx = Math.abs(currentNode.x - p.x);
-				dsty = Math.abs(currentNode.y - p.y);
-				if (dstx <= 16 && dsty <= 16) {
-					path.remove(0);
-				}
-			}
+			vel.vx *= 0.5;
+			vel.vx *= 0.5;
 		}
-
-		if (Math.abs(dstx) < 16) {
-			v.vx = 0;
-		} else {
-			if (dstx > 0) {
-				v.vx = v.speed;
-			} else {
-				v.vx = -v.speed;
-			}
-		}
-		if (Math.abs(dsty) < 16) {
-			v.vy = 0;
-		} else {
-			if (dsty > 0) {
-				v.vy = v.speed;
-			} else {
-				v.vy = -v.speed;
-			}
-		}
-		if(dstModified && (Math.abs(dstx) < 16 && Math.abs(dsty) < 16 )){
-			Spell spell = SoC.game.spells[Constants.Spells.BITE];
-			state.state = spell.state;
-			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.BITE));
-			e.changedInWorld();
-
-		}
-		p.direction.x = Math.signum(v.vx);
-		p.direction.y = Math.signum(v.vy);
 	}
 
 

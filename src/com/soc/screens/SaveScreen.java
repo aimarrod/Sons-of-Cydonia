@@ -48,7 +48,7 @@ public class SaveScreen extends AbstractScreen implements InputProcessor {
 				continue;
 			}
 			if (files[i] == null) {
-				buttons[i] = new TextButton("No save", normalStyle);
+				buttons[i] = new TextButton("No game", normalStyle);
 				continue;
 			}
 			buttons[i] = new TextButton(files[i].name(), normalStyle);
@@ -80,7 +80,7 @@ public class SaveScreen extends AbstractScreen implements InputProcessor {
 							int pointer, int button) {
 						if(handle != null){
 							try{
-								GameLoader.saveGame(position);
+								GameLoader.saveGame(position+1);
 							} catch(Exception e){
 								
 							} finally {

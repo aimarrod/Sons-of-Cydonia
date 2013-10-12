@@ -27,13 +27,11 @@ public class TornadoProcessor implements AttackProcessor{
 	public AnimatedRenderer renderer;
 	public Entity hit;
 	public float distance;
-	public Circle hitbox;
-	public float radius;
-	private Rectangle enemy;
+
+
 	
 	public TornadoProcessor() {
 		this.hit = null;
-		this.hitbox = new Circle();
 		this.distance = Constants.Spells.TORNADO_RANGE;
 		this.renderer = GraphicsLoader.loadTornado();
 	}
@@ -77,7 +75,6 @@ public class TornadoProcessor implements AttackProcessor{
 		hit = victim;
 		Position pos1 = SoC.game.positionmapper.get(victim);
 		Position pos2 = SoC.game.positionmapper.get(attack);
-		Bounds bon = SoC.game.boundsmapper.get(attack);
 
 		pos1.x = pos2.x;
 		pos1.y = pos2.y + 2;
@@ -98,9 +95,9 @@ public class TornadoProcessor implements AttackProcessor{
 			SoC.game.statemapper.get(hit).state = State.IDLE;
 			int damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.1);
 			if(SoC.game.damagemapper.has(hit)){
-				SoC.game.damagemapper.get(hit).damage+=damage;
+				SoC.game.damagemapper.get(hit).pureDamage+=damage;
 			}else{
-				hit.addComponent(new Damage(damage));
+				hit.addComponent(new Damage(damage, true));
 				hit.changedInWorld();
 			}
 		}

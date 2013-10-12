@@ -134,6 +134,12 @@ public class CollisionSystem extends VoidEntitySystem {
 			if(current.overlaps(otherrect)){
 				v.vx = v.speed * (Math.abs(otherrect.x - current.x));
 				v.vy = v.speed * (Math.abs(otherrect.y - current.y));
+				if(v.vx == 0 && v.vy == 0){
+					v.vx = v.speed;
+					v.vy = v.speed;
+
+				}
+				
 			}
 		}
 	}
@@ -279,6 +285,7 @@ public class CollisionSystem extends VoidEntitySystem {
 					pos.y = gate.y;
 					pos.z = gate.z;
 					SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);
+					System.out.println(Constants.Groups.LEVEL+pos.z);
 				}
 			}
 
@@ -305,7 +312,7 @@ public class CollisionSystem extends VoidEntitySystem {
 
 				for (int b = 0; receivers.size() > b; b++) {
 					Entity enemy = receivers.get(b);
-					if (stm.get(enemy).state != State.DYING &&  attack.processor.collision(atk, enemy)) {
+					if (stm.get(enemy).state != State.DYING && stm.get(enemy).state != State.FALLING &&  attack.processor.collision(atk, enemy)) {
 						attack.processor.handle(atk, enemy);
 					}
 				}

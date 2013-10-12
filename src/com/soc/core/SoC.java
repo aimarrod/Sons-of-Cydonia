@@ -181,8 +181,8 @@ public class SoC extends Game {
 		world.setSystem(new AttackProcessingSystem());
 	    world.setSystem(new EnemyActuatorSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
-	    world.setSystem(new DebuffProcessingSystem());
 	    world.setSystem(new BuffProcessingSystem());
+	    world.setSystem(new DebuffProcessingSystem());
 	    world.setSystem(new DamageProcessingSystem());
 	    world.setSystem(new CollisionSystem());	
 	    world.setSystem(new MovementSystem());

@@ -111,7 +111,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-obstacle" width="100" height="200" visible="0">
+ <objectgroup name="level0-obstacle" width="100" height="200">
   <object x="1152" y="0" width="64" height="1056"/>
   <object x="1312" y="-32" width="64" height="1088"/>
   <object x="1056" y="0" width="128" height="896"/>
@@ -345,6 +345,10 @@
   <object x="2272" y="864" width="608" height="224"/>
   <object x="2464" y="576" width="416" height="288"/>
   <object x="2336" y="224" width="32" height="224"/>
+  <object x="2208" y="0" width="128" height="544"/>
+  <object x="2176" y="512" width="160" height="96"/>
+  <object x="2176" y="608" width="128" height="256"/>
+  <object x="2112" y="864" width="192" height="192"/>
  </objectgroup>
  <objectgroup name="level0-spawners" width="100" height="200">
   <object x="2240" y="5248" width="64" height="64">
@@ -353,7 +357,7 @@
     <property name="max" value="1"/>
     <property name="range" value="100"/>
     <property name="respawn" value="true"/>
-    <property name="type" value="eyeball"/>
+    <property name="type" value="zombie"/>
    </properties>
   </object>
  </objectgroup>

@@ -70,7 +70,7 @@
    eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwGcR4AAQ==
   </data>
  </layer>
- <objectgroup name="level0-obstacle" width="200" height="200" visible="0">
+ <objectgroup name="level0-obstacle" width="200" height="200">
   <object x="0" y="0" width="192" height="6240"/>
   <object x="384" y="256" width="32" height="192"/>
   <object x="192" y="0" width="6208" height="256"/>
@@ -78,7 +78,7 @@
   <object x="6336" y="6240" width="64" height="160"/>
   <object x="384" y="6176" width="5952" height="224"/>
   <object x="0" y="6240" width="64" height="160"/>
-  <object x="64" y="6336" width="320" height="64"/>
+  <object x="64" y="6368" width="320" height="32"/>
   <object x="512" y="5216" width="32" height="672"/>
   <object x="544" y="5856" width="896" height="32"/>
   <object x="1440" y="5856" width="32" height="384"/>
@@ -193,7 +193,7 @@
   <object x="2688" y="2176" width="32" height="32"/>
   <object x="896" y="512" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="level0-unwalkable" width="200" height="200" visible="0">
+ <objectgroup name="level0-unwalkable" width="200" height="200">
   <object x="544" y="352" width="320" height="160"/>
   <object x="544" y="576" width="320" height="160"/>
   <object x="960" y="576" width="320" height="160"/>
@@ -229,11 +229,20 @@
   <object x="3296" y="1504" width="416" height="1760"/>
   <object x="3680" y="1504" width="2496" height="2464"/>
  </objectgroup>
- <objectgroup name="level0-special" width="200" height="200" visible="0">
+ <objectgroup name="level0-special" width="200" height="200">
   <object x="5056" y="5024" width="64" height="32">
    <properties>
     <property name="level" value="2"/>
     <property name="type" value="stairs"/>
+   </properties>
+  </object>
+  <object x="224" y="6336" width="96" height="32">
+   <properties>
+    <property name="destination" value="starting.tmx"/>
+    <property name="type" value="gate"/>
+    <property name="x" value="2945"/>
+    <property name="y" value="6000"/>
+    <property name="z" value="1"/>
    </properties>
   </object>
  </objectgroup>
@@ -254,7 +263,15 @@
   <object x="2816" y="4608" width="2208" height="1792"/>
   <object x="5024" y="4768" width="32" height="1632"/>
   <object x="2624" y="5888" width="192" height="512"/>
-  <object x="0" y="5728" width="2624" height="672"/>
+  <object x="0" y="5696" width="2624" height="704">
+   <properties>
+    <property name="destination" value="starting.tmx"/>
+    <property name="type" value="gate"/>
+    <property name="x" value="2945"/>
+    <property name="y" value="6300"/>
+    <property name="z" value="1"/>
+   </properties>
+  </object>
   <object x="0" y="0" width="1024" height="5728"/>
   <object x="1024" y="0" width="3584" height="4032"/>
   <object x="4608" y="3616" width="96" height="416"/>
@@ -284,11 +301,11 @@
   </object>
  </objectgroup>
  <objectgroup name="level2-obstacle" width="200" height="200" visible="0"/>
- <objectgroup name="level2-unwalkable" width="200" height="200">
+ <objectgroup name="level2-unwalkable" width="200" height="200" visible="0">
   <object x="4960" y="3008" width="32" height="416"/>
   <object x="4832" y="3008" width="32" height="416"/>
  </objectgroup>
- <objectgroup name="level2-special" width="200" height="200">
+ <objectgroup name="level2-special" width="200" height="200" visible="0">
   <object x="4864" y="3392" width="96" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -550,7 +567,7 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="0" y="-32" width="4000" height="6432">
+  <object x="0" y="-64" width="4000" height="6464">
    <properties>
     <property name="type" value="hole"/>
    </properties>
@@ -661,7 +678,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200">
+ <objectgroup name="level0-spawners" width="200" height="200" visible="0">
   <object x="256" y="320" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>

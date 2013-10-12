@@ -2,6 +2,7 @@ package com.soc.core;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
+import com.osc.game.benefits.Unmovable;
 import com.soc.ai.BallistaAI;
 import com.soc.ai.EyeballAI;
 import com.soc.ai.GaiaAirAI;
@@ -28,6 +29,7 @@ import com.soc.game.attacks.TornadoProcessor;
 import com.soc.game.attacks.WhirlbladeProcessor;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.Buff;
 import com.soc.game.components.Character;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Feet;
@@ -118,6 +120,8 @@ public class EntityFactory {
 	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 100, 1, Constants.Spells.PUNCH, new int[]{}));
 	    e.addComponent(new Enemy(600,10, new BallistaAI()));
 	    e.addComponent(new Feet(25, 25));
+		Buff.addbuff(e, new Unmovable());
+
 	    
 	    Character animations = new Character();
 	    GraphicsLoader.loadBallista(animations);
@@ -261,6 +265,7 @@ public class EntityFactory {
 				0, 
 				0, 
 				null));
+		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
 		GraphicsLoader.loadGaiaAir(animations);
 		e.addComponent(animations);
@@ -394,7 +399,7 @@ public class EntityFactory {
 	public static Entity createPunch(String group, Position pos, int damage, int range){
 		Entity e=SoC.game.world.createEntity();
 				
-		e.addComponent( new Position(pos.x, pos.y, pos.z) );
+		e.addComponent( new Position(pos.x + Constants.Characters.WIDTH * pos.direction.x, pos.y + Constants.Characters.HEIGHT * pos.direction.y, pos.z));
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Attack(new PunchProcessor(pos.direction, range), damage) );
@@ -404,8 +409,8 @@ public class EntityFactory {
 	
 	public static Entity createBite(String group, Position pos, int damage, int range){
 		Entity e=SoC.game.world.createEntity();
-				
-		e.addComponent( new Position(pos.x, pos.y, pos.z) );
+		
+		e.addComponent( new Position(pos.x + Constants.Characters.WIDTH * pos.direction.x, pos.y + Constants.Characters.HEIGHT * pos.direction.y, pos.z));
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Attack(new BiteProcessor(pos.direction, range), damage) );

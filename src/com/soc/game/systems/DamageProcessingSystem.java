@@ -45,7 +45,9 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		Velocity velocity=vm.get(e);
 		
 		int dmg = dr.damage - stats.armor;
-		if(dmg < 1) dmg = 1;
+		if(dmg < 0) dmg = 0;
+		dmg += dr.pureDamage;
+		if(dmg < 1) dmg = 1; 
 		stats.health-=dmg;
 		e.removeComponent(dr);
 		e.changedInWorld();

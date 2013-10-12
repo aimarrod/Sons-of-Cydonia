@@ -133,7 +133,7 @@ import com.soc.utils.FloatingText;
 					running = true;
 				} else {
 					lastKey = keycode;
-					timer = 0.5f;
+					timer = 0.2f;
 				}
 			}
 			return false;

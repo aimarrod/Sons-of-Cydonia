@@ -9,11 +9,11 @@ import com.soc.game.alterations.Alteration;
 
 public class Buff extends Component{
 	public Bag<Benefit> buffs;
-	public Bag<Class> buffClasses;
+	public Bag<Class <? extends Benefit>> buffClasses;
 	
 	public Buff(){
 		buffs = new Bag<Benefit>();
-		buffClasses = new Bag<Class>();
+		buffClasses = new Bag<Class<? extends Benefit>>();
 	}
 	public <T> T getBuff(Class<T> clazz){
 		for(int i = 0; i < buffs.size(); i++){
@@ -35,8 +35,7 @@ public class Buff extends Component{
 			if(b.buffClasses.contains(benefit.getClass())){
 				return;
 			}
-		}
-		else{
+		} else{
 			b = new Buff();
 			e.addComponent(b);
 			e.changedInWorld();
@@ -45,7 +44,7 @@ public class Buff extends Component{
 		b.buffClasses.add(benefit.getClass());
 	}
 	
-	public void removebuff(Class clazz){
+	public void removebuff(Class<? extends Benefit> clazz){
 		for(int i = 0; i < buffs.size(); i++){
 			if(buffs.get(i).getClass().equals(clazz)){
 				buffs.remove(i);
