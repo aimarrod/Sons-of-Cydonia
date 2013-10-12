@@ -26,6 +26,7 @@ import com.soc.game.attacks.PunchProcessor;
 import com.soc.game.attacks.QuakeBladeProcessor;
 import com.soc.game.attacks.SlashProcessor;
 import com.soc.game.attacks.TornadoProcessor;
+import com.soc.game.attacks.VenomSwordProcessor;
 import com.soc.game.attacks.WhirlbladeProcessor;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
@@ -216,7 +217,7 @@ public class EntityFactory {
 		e.addComponent(new Velocity(0,0,100));
 		e.addComponent(new Bounds(64, 64));
 		e.addComponent(new State(1));
-		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 1));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.VENOMSWORD, new int[]{}));
 		e.addComponent(new Feet(30, 15));
 		e.addComponent(new Enemy(1000, 5, new SatanAI()));
 		e.addComponent(new Stats(
@@ -418,6 +419,15 @@ public class EntityFactory {
 	   	return e;
 	}
 	
+	public static Entity createVenomSword(String group, Position pos, int damage, int range){
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(pos.x + Constants.Characters.WIDTH * pos.direction.x, pos.y + Constants.Characters.HEIGHT * pos.direction.y, pos.z));
+		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
+	   	e.addComponent( new Attack(new VenomSwordProcessor(pos.direction, range), damage) );
+	   	
+	   	return e;
+	}
 	public static Entity createCharge(Entity source, String group, Position pos, int damage){
 		Entity e=SoC.game.world.createEntity();
 				

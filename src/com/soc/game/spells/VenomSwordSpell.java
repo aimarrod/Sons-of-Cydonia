@@ -22,7 +22,7 @@ public class VenomSwordSpell extends Spell {
 
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createBite(group, pos, stats.strength, 16);
+		Entity e = EntityFactory.createVenomSword(group, pos, stats.strength, 16);
 		SoC.game.groupmanager.add(e, group);
 		SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 		e.addToWorld();
