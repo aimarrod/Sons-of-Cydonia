@@ -55,7 +55,6 @@ public class VenomSwordProcessor implements AttackProcessor{
 			victim.addComponent(new Damage(a.damage, false));
 			victim.changedInWorld();
 		}
-		System.out.println("metelo co–o");
 		Debuff.addDebuff(victim, new Venom());
 		Buff.addbuff(victim, new Rage());
 		
