@@ -6,6 +6,7 @@ import com.soc.ai.BallistaAI;
 import com.soc.ai.EyeballAI;
 import com.soc.ai.GaiaAirAI;
 import com.soc.ai.MaggotAI;
+import com.soc.ai.RedMonsterAI;
 import com.soc.ai.SatanAI;
 import com.soc.ai.SkeletonAI;
 import com.soc.ai.SlimeAI;
@@ -16,6 +17,7 @@ import com.soc.game.attacks.ArrowProcessor;
 import com.soc.game.attacks.BiteProcessor;
 import com.soc.game.attacks.ChargeProcessor;
 import com.soc.game.attacks.DaggerThrowProcessor;
+import com.soc.game.attacks.FlameProcessor;
 import com.soc.game.attacks.HarmfulEnemyProcessor;
 import com.soc.game.attacks.IcicleProcessor;
 import com.soc.game.attacks.PoisonCloudProcessor;
@@ -296,6 +298,41 @@ public class EntityFactory {
 	   	
 	   	return e;		
 	}
+	
+	public static Entity createRedMonster(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		System.out.println(py);
+		System.out.println(px);
+		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Feet(32, 64));
+		e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 5, new RedMonsterAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Character animations = new Character();
+		GraphicsLoader.loadRedMonster(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	
+	
 	/*
 	 * ATTACKS
 	 */
@@ -456,6 +493,16 @@ public class EntityFactory {
 		e.addComponent( new Bounds(32, 32) );
 		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new TornadoProcessor(), 0) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createFlame(float x, float y, int z, Vector2 direction) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z, direction));
+		e.addComponent( new Bounds(32, 32) );
+	   	e.addComponent( new Attack(new FlameProcessor(), 0) );
 	   	
 	   	return e;		
 	}
