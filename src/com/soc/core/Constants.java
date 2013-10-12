@@ -129,4 +129,9 @@ public class Constants {
 		public final static int POISON_DAMAGE = 5;
 	}
 	
+	public static class Buff{
+		public final static float SHIELD_DURATION=10F;
+		public final static float SHIELD_GAINHEALTH=50F;
+	}
+	
 }

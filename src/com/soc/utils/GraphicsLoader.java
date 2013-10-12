@@ -434,4 +434,20 @@ public class GraphicsLoader {
         tornado.animation = new Animation(0.05f, frames);
         return tornado;
 	}
+	
+	public static AnimatedRenderer loadLifeShield(){
+		AnimatedRenderer lifeShield = new AnimatedRenderer(true);
+		lifeShield.ox=-45;
+		lifeShield.oy=-35;
+		TextureRegion[][] tmp = TextureRegion.split(load("life-shield.png"), 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        lifeShield.animation = new Animation(0.05f, frames);
+        return lifeShield;
+	}
 }

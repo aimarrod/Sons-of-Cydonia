@@ -8,13 +8,12 @@ import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
-
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.osc.game.benefits.ShieldBuff;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.alterations.Burn;
@@ -22,6 +21,7 @@ import com.soc.game.alterations.Poison;
 import com.soc.game.alterations.Push;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.Buff;
 import com.soc.game.components.Character;
 import com.soc.game.components.Debuff;
 import com.soc.game.components.Player;
@@ -41,6 +41,7 @@ public class RenderSystem extends VoidEntitySystem{
 	@Mapper ComponentMapper<State> sm;
 	@Mapper ComponentMapper<Player> plm;
 	@Mapper ComponentMapper<Debuff> dm;
+	@Mapper ComponentMapper<Buff> bum;
 	
 	private OrthogonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
@@ -144,5 +145,12 @@ public class RenderSystem extends VoidEntitySystem{
 		} else batch.setColor(r.r, r.g, r.b, r.a);
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);
 		batch.setColor(1,1,1,1);
+		if(bum.has(e)){
+			Buff buff=bum.get(e);
+			if(buff.buffClasses.contains(ShieldBuff.class)){
+				ShieldBuff shieldBuff=buff.getBuff(ShieldBuff.class);
+				batch.draw(shieldBuff.renderer.frame(world.delta), pos.x+shieldBuff.renderer.ox, pos.y+shieldBuff.renderer.oy);
+			}
+		}
 	}
 }
