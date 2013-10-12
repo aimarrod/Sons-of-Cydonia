@@ -42,6 +42,7 @@ import com.soc.game.spells.PunchSpell;
 import com.soc.game.spells.QuakebladeSpell;
 import com.soc.game.spells.SlashSpell;
 import com.soc.game.spells.Spell;
+import com.soc.game.spells.VenomSwordSpell;
 import com.soc.game.spells.WhirlbladeSpell;
 import com.soc.game.systems.AttackDelaySystem;
 import com.soc.game.systems.AttackProcessingSystem;
@@ -135,6 +136,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.WHIRLBLADE] = new WhirlbladeSpell();
 		spells[Constants.Spells.QUAKEBLADE] = new QuakebladeSpell();
 		spells[Constants.Spells.BITE] = new BiteSpell();
+		spells[Constants.Spells.VENOMSWORD] = new VenomSwordSpell();
 		
 		objects=new Item[Constants.Items.ITEM_NUMBER];
 		objects[Constants.Items.NONE]=null;

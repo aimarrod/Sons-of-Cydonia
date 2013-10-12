@@ -79,8 +79,9 @@ public class Constants {
 		public static final int WHIRLBLADE=8;
 		public static final int QUAKEBLADE = 9;
 		public static final int BITE = 10;
+		public static final int VENOMSWORD = 11;
 		
-		public static final int SPELL_NUMBER = 11;
+		public static final int SPELL_NUMBER = 12;
 		
 		public static final int TORNADO_RANGE = 1000;
 		public static final int TORNADO_SPEED = 500;
@@ -132,11 +133,16 @@ public class Constants {
 		public final static float POISON_DURATION = 10f;
 		public final static float POISON_TICK_INTERVAL = 1f;
 		public final static int POISON_DAMAGE = 5;
+		public final static float VENOM_DURATION = 60f;
+		public final static float VENOM_TICK_INTERVAL = 1f;
+		public final static int VENOM_DAMAGE = 5;
 	}
 	
 	public static class Buff{
 		public final static float SHIELD_DURATION=10F;
 		public final static float SHIELD_GAINHEALTH=50F;
+		public final static float RAGE_DURATION = 60f;
+		public final static float GAIN_STRENGTH = 5f;
 	}
 	
 }
