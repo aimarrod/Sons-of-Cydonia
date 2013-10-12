@@ -24,7 +24,7 @@ public class GameLoader {
 	
 	public static FileHandle[] getHandles(){
 		FileHandle[] handles = new FileHandle[3]; 
-		FileHandle[] list = Gdx.files.external("saves").list();
+		FileHandle[] list = Gdx.files.external("saves").list(".json");
 		for(int i = 0; i < handles.length; i++){
 			if(i < list.length){
 				handles[i] = list[i];
