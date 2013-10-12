@@ -17,27 +17,32 @@ import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
 
 public class VenomSwordProcessor implements AttackProcessor{	
-	public Bag<Entity> hit;
+	public Entity hit;
 	public float range;
 	@Mapper
 	ComponentMapper<Damage> dm = SoC.game.world.getMapper(Damage.class);
 	public VenomSwordProcessor(Vector2 dir, float range) {
-		hit = new Bag<Entity>();
+		hit = null;
 		this.range = range;
 	}
 	@Override
 	public void process(Entity attack) {
 		attack.deleteFromWorld();
-		
 	}
 
 	@Override
 	public boolean collision(Entity attack, Entity victim) {
+		if(hit != null) return false;
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
-		return (!hit.contains(victim) && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		System.out.println("AttackPosX: "+attackpos.x);
+		System.out.println("VictimPosX: "+victimpos.x);
+		System.out.println("AttackPosY: "+attackpos.y);
+		System.out.println("VictimPosYS: "+victimpos.y);
+		System.out.println( ( attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y));
+		return ( attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	}
 
 	@Override
@@ -47,8 +52,8 @@ public class VenomSwordProcessor implements AttackProcessor{
 
 	@Override
 	public void handle(Entity attack, Entity victim) {
+		hit=victim;
 		Attack a = SoC.game.attackmapper.get(attack);
-		hit.add(victim);
 		if(SoC.game.damagemapper.has(victim)){
 			SoC.game.damagemapper.get(victim).damage+=a.damage;
 		}else{
