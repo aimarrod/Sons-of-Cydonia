@@ -15,8 +15,10 @@ import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.core.Constants.World;
+import com.soc.game.map.DialogTile;
 import com.soc.game.map.Gate;
 import com.soc.game.map.Map;
+import com.soc.game.map.Push;
 import com.soc.game.map.Stairs;
 import com.soc.game.map.Tile;
 import com.soc.game.systems.RenderSystem;
@@ -111,6 +113,17 @@ public class MapLoader {
 								SoC.game.map.tiles[l][i][j] = new Tile(World.TILE_LAVA);
 							} else if (type.equals("hole")){
 								SoC.game.map.tiles[l][i][j] = new Tile(World.TILE_HOLE);
+							} else if (type.equals("dialog")){
+								SoC.game.map.tiles[l][i][j] = new DialogTile(
+										Integer.parseInt(obj.get("id", String.class))
+								);
+							} else if (type.equals("push")){
+								SoC.game.map.tiles[l][i][j] = new Push(
+										Integer.parseInt(obj.get("x", String.class)),
+										Integer.parseInt(obj.get("y", String.class)),
+										i*World.TILE_SIZE,
+										j*World.TILE_SIZE
+								);
 							}
 							break;
 						}

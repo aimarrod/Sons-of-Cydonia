@@ -12,6 +12,7 @@ public class Gate extends Tile{
 		super(Constants.World.TILE_GATE);
 		this.x = x;
 		this.y = y;
+		this.z = z;
 		this.destination = destination;
 	}
 }
