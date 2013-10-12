@@ -332,6 +332,29 @@ public class GraphicsLoader {
 		character.renderers[State.DYING] = death;
 	}
 	
+	public static void loadRedMonster(Character character){
+		StaticRenderer idle = new StaticRenderer();
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		character.renderers = new Renderer[State.STATENUM];
+		idle.ox  = -48f;
+		
+		idle.sprite = new TextureRegion(load("redMonster.png"));
+		TextureRegion[][] tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+        TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+
+	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
+	    character.deathTime=1f;
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+	}
+	
 	public static void loadEyeball(Character character){
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
@@ -441,5 +464,37 @@ public class GraphicsLoader {
         }
         tornado.animation = new Animation(0.05f, frames);
         return tornado;
+	}
+	
+	public static AnimatedRenderer loadLifeShield(){
+		AnimatedRenderer lifeShield = new AnimatedRenderer(true);
+		lifeShield.ox=-45;
+		lifeShield.oy=-35;
+		TextureRegion[][] tmp = TextureRegion.split(load("life-shield.png"), 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        lifeShield.animation = new Animation(0.05f, frames);
+        return lifeShield;
+	}
+	
+	public static AnimatedRenderer loadFlame(){
+		AnimatedRenderer flame = new AnimatedRenderer(true);
+		flame.ox=0;
+		flame.oy=0;
+		TextureRegion[][] tmp = TextureRegion.split(load("flame.png"), 64, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        flame.animation = new Animation(0.05f, frames);
+        return flame;
 	}
 }

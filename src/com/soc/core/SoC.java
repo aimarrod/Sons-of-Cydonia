@@ -1,6 +1,5 @@
 package com.soc.core;
 
-import java.util.List;
 import java.util.Stack;
 
 import com.artemis.ComponentMapper;
@@ -17,13 +16,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.JsonValue;
-import com.soc.core.Constants.Alteration;
-import com.soc.core.Constants.Attributes;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.Buff;
 import com.soc.game.components.Character;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Debuff;
@@ -39,6 +35,7 @@ import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.map.Map;
 import com.soc.game.spells.ArrowSpell;
+import com.soc.game.spells.BiteSpell;
 import com.soc.game.spells.ChargeSpell;
 import com.soc.game.spells.DaggerThrowSpell;
 import com.soc.game.spells.PunchSpell;
@@ -48,6 +45,7 @@ import com.soc.game.spells.Spell;
 import com.soc.game.spells.WhirlbladeSpell;
 import com.soc.game.systems.AttackDelaySystem;
 import com.soc.game.systems.AttackProcessingSystem;
+import com.soc.game.systems.BuffProcessingSystem;
 import com.soc.game.systems.CameraSystem;
 import com.soc.game.systems.CollisionSystem;
 import com.soc.game.systems.DamageProcessingSystem;
@@ -55,9 +53,9 @@ import com.soc.game.systems.DebuffProcessingSystem;
 import com.soc.game.systems.EnemyActuatorSystem;
 import com.soc.game.systems.EntitySpawningTimerSystem;
 import com.soc.game.systems.ExpiringSystem;
-import com.soc.game.systems.RenderSystem;
 import com.soc.game.systems.MovementSystem;
 import com.soc.game.systems.PlayerInputSystem;
+import com.soc.game.systems.RenderSystem;
 import com.soc.hud.HudSystem;
 import com.soc.objects.Armor;
 import com.soc.objects.Item;
@@ -65,7 +63,6 @@ import com.soc.objects.Potion;
 import com.soc.objects.Weapon;
 import com.soc.screens.GameOverScreen;
 import com.soc.screens.MenuScreen;
-import com.soc.screens.LoadScreen;
 import com.soc.screens.SplashScreen;
 import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GameLoader;
@@ -101,6 +98,7 @@ public class SoC extends Game {
 	public ComponentMapper<Damage> damagemapper;
 	public ComponentMapper<Spawner> spawnermapper;
 	public ComponentMapper<Debuff> debuffmapper;
+	public ComponentMapper<Buff> buffmapper;
 
 	
 	public GroupManager groupmanager;
@@ -136,6 +134,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.ARROW] = new ArrowSpell();
 		spells[Constants.Spells.WHIRLBLADE] = new WhirlbladeSpell();
 		spells[Constants.Spells.QUAKEBLADE] = new QuakebladeSpell();
+		spells[Constants.Spells.BITE] = new BiteSpell();
 		
 		objects=new Item[Constants.Items.ITEM_NUMBER];
 		objects[Constants.Items.NONE]=null;
@@ -160,6 +159,7 @@ public class SoC extends Game {
 		spawnermapper = world.getMapper(Spawner.class);
 		enemymapper = world.getMapper(Enemy.class);
 		debuffmapper = world.getMapper(Debuff.class);
+		buffmapper = world.getMapper(Buff.class);
 		
 		inputMultiplexer=new InputMultiplexer();
 		Gdx.input.setInputProcessor(inputMultiplexer);
@@ -182,6 +182,7 @@ public class SoC extends Game {
 	    world.setSystem(new EnemyActuatorSystem());
 	    world.setSystem(new EntitySpawningTimerSystem());
 	    world.setSystem(new DebuffProcessingSystem());
+	    world.setSystem(new BuffProcessingSystem());
 	    world.setSystem(new DamageProcessingSystem());
 	    world.setSystem(new CollisionSystem());	
 	    world.setSystem(new MovementSystem());

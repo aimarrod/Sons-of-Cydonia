@@ -1,21 +1,17 @@
 
 package com.soc.game.systems;
 
-import java.io.IOException;
-
-import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
-import com.artemis.systems.EntityProcessingSystem;
 import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.osc.game.benefits.ShieldBuff;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
+import com.soc.game.components.Buff;
 import com.soc.game.components.Character;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Player;
@@ -25,9 +21,7 @@ import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.spells.Spell;
 import com.soc.hud.HudSystem;
-import com.soc.utils.EffectsPlayer;
 import com.soc.utils.FloatingText;
-import com.soc.utils.GameLoader;
 
 
 	public class PlayerInputSystem extends VoidEntitySystem implements InputProcessor{
@@ -184,6 +178,10 @@ import com.soc.utils.GameLoader;
 					vel.vy = 0;
 					return true;
 				}
+			}
+			
+			if(keycode == Input.Keys.B){
+				Buff.addbuff(SoC.game.player, new ShieldBuff());
 			}
 			
 			return false;

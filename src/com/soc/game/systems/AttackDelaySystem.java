@@ -28,7 +28,7 @@ public class AttackDelaySystem extends EntityProcessingSystem{
      }
      protected void process(Entity e) {
          Delay del = dm.get(e);
-         del.delay -= world.delta;
+        del.delay -= world.delta;
          del.expiration -= world.delta;
          if(del.delay <= 0 && !del.attacked){
         	 SoC.game.spells[del.attack].create(e ,del.group, pm.get(e), stm.get(e));

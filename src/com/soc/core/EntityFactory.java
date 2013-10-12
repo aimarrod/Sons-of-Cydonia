@@ -6,6 +6,7 @@ import com.soc.ai.BallistaAI;
 import com.soc.ai.EyeballAI;
 import com.soc.ai.GaiaAirAI;
 import com.soc.ai.MaggotAI;
+import com.soc.ai.RedMonsterAI;
 import com.soc.ai.SatanAI;
 import com.soc.ai.SkeletonAI;
 import com.soc.ai.SlimeAI;
@@ -13,8 +14,10 @@ import com.soc.ai.ZombiAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
 import com.soc.game.attacks.ArrowProcessor;
+import com.soc.game.attacks.BiteProcessor;
 import com.soc.game.attacks.ChargeProcessor;
 import com.soc.game.attacks.DaggerThrowProcessor;
+import com.soc.game.attacks.FlameProcessor;
 import com.soc.game.attacks.HarmfulEnemyProcessor;
 import com.soc.game.attacks.IcicleProcessor;
 import com.soc.game.attacks.PoisonCloudProcessor;
@@ -188,27 +191,14 @@ public class EntityFactory {
 	public static Entity createZombie(float px, float py, int pz){
 		Entity e = SoC.game.world.createEntity();
 		
-		e.addComponent(new Position(px, py, pz));
-		e.addComponent(new Velocity(0,0,100));
-		e.addComponent(new Bounds(64, 64));
-		e.addComponent(new State(1));
-		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 1));
-		e.addComponent(new Feet(30, 15));
-		e.addComponent(new Enemy(1000, 5, new ZombiAI()));
-		e.addComponent(new Stats(
-				1, 
-				0, 
-				0, 
-				0, 
-				0, 
-				0, 
-				1, 
-				0, 
-				0, 
-				0, 
-				0, 
-				0, 
-				null));
+	    e.addComponent(new Position(px,py, pz));
+	    e.addComponent(new Velocity(0,0,100));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+	    e.addComponent(new State(1));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.BITE, new int[]{}));
+	    e.addComponent(new Feet(32, 10));
+	    e.addComponent(new Enemy(600,10, new ZombiAI()));
+	    
 		Character animations = new Character();
 		GraphicsLoader.loadZombie(animations);
 		e.addComponent(animations);
@@ -222,7 +212,7 @@ public class EntityFactory {
 		e.addComponent(new Velocity(0,0,100));
 		e.addComponent(new Bounds(64, 64));
 		e.addComponent(new State(1));
-		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 20));
+		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 1));
 		e.addComponent(new Feet(30, 15));
 		e.addComponent(new Enemy(1000, 5, new SatanAI()));
 		e.addComponent(new Stats(
@@ -308,6 +298,41 @@ public class EntityFactory {
 	   	
 	   	return e;		
 	}
+	
+	public static Entity createRedMonster(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		System.out.println(py);
+		System.out.println(px);
+		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Feet(32, 64));
+		e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 5, new RedMonsterAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Character animations = new Character();
+		GraphicsLoader.loadRedMonster(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	
+	
 	/*
 	 * ATTACKS
 	 */
@@ -373,6 +398,17 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Attack(new PunchProcessor(pos.direction, range), damage) );
+	   	
+	   	return e;
+	}
+	
+	public static Entity createBite(String group, Position pos, int damage, int range){
+		Entity e=SoC.game.world.createEntity();
+				
+		e.addComponent( new Position(pos.x, pos.y, pos.z) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
+		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
+	   	e.addComponent( new Attack(new BiteProcessor(pos.direction, range), damage) );
 	   	
 	   	return e;
 	}
@@ -457,6 +493,16 @@ public class EntityFactory {
 		e.addComponent( new Bounds(44, 32) );
 		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new TornadoProcessor(), 0) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createFlame(float x, float y, int z, Vector2 direction) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z, direction));
+		e.addComponent( new Bounds(32, 32) );
+	   	e.addComponent( new Attack(new FlameProcessor(), 0) );
 	   	
 	   	return e;		
 	}
