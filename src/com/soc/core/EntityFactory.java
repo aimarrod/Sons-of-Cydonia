@@ -506,7 +506,7 @@ public class EntityFactory {
 		Entity e=SoC.game.world.createEntity();
 		
 		e.addComponent( new Position(x, y, z, direction));
-		e.addComponent( new Bounds(32, 32) );
+		e.addComponent( new Bounds(32, 70) );
 	   	e.addComponent( new Attack(new FlameProcessor(), 0) );
 	   	
 	   	return e;		

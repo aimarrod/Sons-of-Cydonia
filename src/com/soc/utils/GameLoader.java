@@ -24,7 +24,7 @@ public class GameLoader {
 	
 	public static FileHandle[] getHandles(){
 		FileHandle[] handles = new FileHandle[3]; 
-		FileHandle[] list = Gdx.files.external("saves").list();
+		FileHandle[] list = Gdx.files.external("saves").list(".json");
 		for(int i = 0; i < handles.length; i++){
 			if(i < list.length){
 				handles[i] = list[i];
@@ -53,9 +53,9 @@ public class GameLoader {
 	}
 	
 	public static void newGame(String clazz){
-		SoC.game.player = EntityFactory.createCharacter(2300, 650, 0, 0, 0, Constants.Classes.WARRIOR);
+		SoC.game.player = EntityFactory.createCharacter(2300, 600, 0, 0, 0, Constants.Classes.WARRIOR);
 		SoC.game.setScreen(new GameScreen());
-		MapLoader.loadMap("starting.tmx");
+		MapLoader.loadMap("finalMap.tmx");
 
 
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.PLAYERS);
