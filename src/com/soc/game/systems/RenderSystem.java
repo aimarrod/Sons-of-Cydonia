@@ -13,12 +13,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.osc.game.benefits.Rage;
 import com.osc.game.benefits.ShieldBuff;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.alterations.Burn;
 import com.soc.game.alterations.Poison;
 import com.soc.game.alterations.Push;
+import com.soc.game.alterations.Venom;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
@@ -141,16 +143,25 @@ public class RenderSystem extends VoidEntitySystem{
 			else if(deb.debuffClasses.contains(Push.class)){
 				Push p = deb.getDebuff(Push.class);
 				batch.setColor(p.r, p.g, p.b, 1);
+			}else if(deb.debuffClasses.contains(Venom.class)) batch.setColor(0.5f, 1, 0.5f, 1);{
+				
 			}
 		} else batch.setColor(r.r, r.g, r.b, r.a);
+
+		if(bum.has(e)){
+			Buff buff=bum.get(e);
+			if(buff.buffClasses.contains(Rage.class)){
+				Rage rage=buff.getBuff(Rage.class);
+				batch.draw(rage.renderer.frame(world.delta),pos.x+rage.renderer.ox, pos.y+rage.renderer.oy);
+			}
+		}
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);
 		batch.setColor(1,1,1,1);
 		if(bum.has(e)){
 			Buff buff=bum.get(e);
-			if(buff.buffClasses.contains(ShieldBuff.class)){
-				ShieldBuff shieldBuff=buff.getBuff(ShieldBuff.class);
-				batch.draw(shieldBuff.renderer.frame(world.delta), pos.x+shieldBuff.renderer.ox, pos.y+shieldBuff.renderer.oy);
-			}
-		}
+		if(buff.buffClasses.contains(ShieldBuff.class)){
+			ShieldBuff shieldBuff=buff.getBuff(ShieldBuff.class);
+			batch.draw(shieldBuff.renderer.frame(world.delta), pos.x+shieldBuff.renderer.ox, pos.y+shieldBuff.renderer.oy);
+		}}
 	}
 }

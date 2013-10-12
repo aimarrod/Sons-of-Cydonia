@@ -497,4 +497,20 @@ public class GraphicsLoader {
         flame.animation = new Animation(4f/17, frames);
         return flame;
 	}
+	
+	public static AnimatedRenderer loadRageAura(){
+		AnimatedRenderer rageAura = new AnimatedRenderer(true);
+		rageAura.ox=-44;
+		rageAura.oy=-20;
+		TextureRegion[][] tmp = TextureRegion.split(load("rage-aura.png"), 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        rageAura.animation = new Animation(0.05f, frames);
+        return rageAura;
+	}
 }

@@ -7,7 +7,11 @@ import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
+import com.soc.game.components.State;
+import com.soc.game.components.Velocity;
+import com.soc.game.spells.Spell;
 
 public class RedMonsterAI implements AI{
 
@@ -22,25 +26,41 @@ public class RedMonsterAI implements AI{
 	
 	@Override
 	public void process(Entity e) {
-		timer -= SoC.game.world.delta;
-		if(timer > 0) return;
 		Position pos = SoC.game.positionmapper.get(e);
-		Bounds bon = SoC.game.boundsmapper.get(e);
-		float posx;
-		float posy=pos.y*500;
-		if(pos.direction.x == 0) posx = pos.x + r.nextInt((int) (bon.width*5)) - bon.width*2;
-		else posx = pos.x + bon.width*0.5f;
-		if(pos.direction.y == 0) posy = pos.y + r.nextInt((int) (bon.height*3)) - bon.height;
-		else posy = pos.y;
+		Velocity vel = SoC.game.velocitymapper.get(e);
+		State state = SoC.game.statemapper.get(e);
+		Entity player = SoC.game.player;
+		Position playerPos = SoC.game.positionmapper.get(player);
 		
-		posy=pos.y-500;
+		if(state.state == State.DYING) return;
 		
-		Entity flame = EntityFactory.createFlame(posx, posy, pos.z, pos.direction.cpy());
-	    SoC.game.groupmanager.add(flame, Constants.Groups.ENEMY_ATTACKS);
-	    SoC.game.groupmanager.add(flame, Constants.Groups.MAP_BOUND);
-	    SoC.game.levelmanager.setLevel(flame, Constants.Groups.LEVEL+pos.z);
-	    flame.addToWorld();
-		timer = 5.0f;
+		float dsty = playerPos.y - pos.y;
+		float dstx = playerPos.x - pos.x;
+		
+		pos.direction.x = Math.signum(dstx);
+		pos.direction.y = Math.signum(dsty); 
+		
+		vel.vx = vel.speed * pos.direction.x;
+		vel.vy = vel.speed * pos.direction.y;
+		
+		if(state.state != State.ATTACK){	
+			if(Math.abs(dstx) < 40 && Math.abs(dsty) < 20 ){
+				Spell spell = SoC.game.spells[Constants.Spells.BITE];
+				state.state = spell.state;
+				e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.BITE));
+				vel.vx = 0;
+				vel.vy = 0;
+				if(Math.abs(dstx) < Constants.Characters.WIDTH) pos.direction.x = 0;
+				e.changedInWorld();
+			} else if(vel.vx != 0 && vel.vy != 0){
+				state.state = State.WALK;
+				if(Math.abs(dstx) < 32) pos.direction.x = 0;
+				else if(Math.abs(dsty) < 10) pos.direction.y = 0;
+			}
+		} else {
+			vel.vx *= 0.5;
+			vel.vx *= 0.5;
+		}
 	}
 
 	@Override

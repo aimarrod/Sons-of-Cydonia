@@ -21,44 +21,6 @@ public class ZombiAI implements AI{
 	public ZombiAI(){
 		path = new ArrayList<Node>();
 	}
-	
-//	@Override
-//	public void process(Entity e) {
-//		Position pos = SoC.game.positionmapper.get(e);
-//		Position playerPos = SoC.game.positionmapper.get(SoC.game.player);
-//		Velocity vel = SoC.game.velocitymapper.get(e);
-//		State state = SoC.game.statemapper.get(e);
-//		
-//		if(state.state == State.DYING) return;
-//		
-//		float dsty = playerPos.y - pos.y;
-//		float dstx = playerPos.x - pos.x;
-//		
-//		pos.direction.x = Math.signum(dstx);
-//		pos.direction.y = Math.signum(dsty); 
-//		
-//		vel.vx = vel.speed * pos.direction.x;
-//		vel.vy = vel.speed * pos.direction.y;
-////		if(Math.abs(dstx) < 32){
-////			System.out.println("Paso por el primero");
-////			pos.direction.x = 0;
-////		}
-////		else if(Math.abs(dsty) < 32) {
-////			System.out.println("Paso por el segundo");
-////			pos.direction.y = 0;
-////		}
-//		if(Math.abs(dsty) < 32 && Math.abs(dstx) < 32){
-//			System.out.println("Paso por aqui ");
-//			Spell spell = SoC.game.spells[Constants.Spells.BITE];
-//			state.state = spell.state;
-//			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.BITE));
-//			e.changedInWorld();
-//		}else{
-//			state.state=State.WALK;
-//		}
-//		
-//	}
-	
 	public void process(Entity e) {
 
 		Position pos = SoC.game.positionmapper.get(e);

@@ -8,6 +8,7 @@ import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.osc.game.benefits.Rage;
 import com.osc.game.benefits.ShieldBuff;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
@@ -182,6 +183,10 @@ import com.soc.utils.FloatingText;
 			
 			if(keycode == Input.Keys.B){
 				Buff.addbuff(SoC.game.player, new ShieldBuff());
+			}else{
+				if(keycode == Input.Keys.R){
+					Buff.addbuff(SoC.game.player, new Rage());
+				}
 			}
 			
 			return false;

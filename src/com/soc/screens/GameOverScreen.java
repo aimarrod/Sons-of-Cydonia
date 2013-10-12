@@ -41,6 +41,7 @@ public class GameOverScreen extends AbstractScreen implements InputProcessor{
 		buttons[1]=menuScreenButton;
 		focusedBotton=1;
 		SoC.game.inputMultiplexer.addProcessor(this);
+		 SoC.game.getScreen().dispose();
 	}
     @Override
     public void show()
