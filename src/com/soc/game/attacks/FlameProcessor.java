@@ -2,53 +2,56 @@ package com.soc.game.attacks;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
-import com.soc.core.Constants;
 import com.soc.core.SoC;
+import com.soc.game.alterations.Burn;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
-import com.soc.game.components.Delay;
+import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
-import com.soc.game.components.State;
-import com.soc.game.components.Velocity;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.utils.GraphicsLoader;
 
 public class FlameProcessor implements AttackProcessor{
 	public AnimatedRenderer renderer;
-	public Entity hit;
-	public Circle hitbox;
-	public float radius;
-	private Rectangle enemy;
-	
+	public float timer;
+	public float lastHit;
 	public FlameProcessor() {
-		this.hit = null;
-		this.hitbox = new Circle();
-		this.renderer = GraphicsLoader.loadFlame();
+  		this.renderer = GraphicsLoader.loadFlame();
+  		this.timer=4f;
+  		this.lastHit=4f;
 	}
 
 	@Override 
 	public void process(Entity attack) {
-
+		timer-=SoC.game.world.delta;
+		if(timer<=0){
+			attack.deleteFromWorld();
+		}
 	}
 
 	@Override
 	public boolean collision(Entity attack, Entity victim) {
-		if(hit != null) return false;
 		
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
-		
-		return (attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		return ((lastHit-timer)>0.5 && timer<=3f && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	
 
 	}
 
 	@Override
 	public void handle(Entity attack, Entity victim) {
+		lastHit=timer;
+		int damage = (int) (SoC.game.statsmapper.get(victim).maxHealth*0.1);
+		if(SoC.game.damagemapper.has(victim)){
+			SoC.game.damagemapper.get(victim).damage+=damage;
+		}else{
+			victim.addComponent(new Damage(damage, false));
+			victim.changedInWorld();
+		}
+		Debuff.addDebuff(victim, new Burn());
 	}
 
 	@Override
