@@ -30,6 +30,7 @@ public class Rage implements Benefit{
 			initialStrength=stats.strength;
 			stats.strength+=Constants.Buff.GAIN_STRENGTH;
 			lastBuff=timer;
+			buffAdded=true;
 		}else{
 			if(timer>0){
 				if((lastBuff-timer)>=1){
