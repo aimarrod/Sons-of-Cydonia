@@ -2,6 +2,7 @@ package com.soc.utils;
 
 import java.util.Iterator;
 
+import com.artemis.Entity;
 import com.artemis.utils.Bag;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -152,7 +153,7 @@ public class MapLoader {
 				RectangleMapObject spawner = (RectangleMapObject) spawners
 						.next();
 				Rectangle rect = spawner.getRectangle();
-				EntityFactory
+				Entity spwnr = EntityFactory
 						.createSpawner(
 								rect.getX(),
 								rect.getY(),
@@ -167,9 +168,9 @@ public class MapLoader {
 										"range", String.class)),
 								Float.parseFloat(spawner.getProperties().get(
 										"interval", String.class)), 
-								Boolean.parseBoolean(spawner.getProperties().get("respawn",String.class)))
-										.addToWorld();
-				
+								Boolean.parseBoolean(spawner.getProperties().get("respawn",String.class)));
+				SoC.game.groupmanager.add(spwnr, Constants.Groups.MAP_BOUND);
+				spwnr.addToWorld();
 			}
 		}
 	}

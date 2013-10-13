@@ -392,6 +392,90 @@ public class GraphicsLoader {
 		character.renderers[State.DYING] = death;
 	}
 	
+	public static void loadGaiaFlame(Character character){
+		StaticRenderer idle = new StaticRenderer();
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		character.renderers = new Renderer[State.STATENUM];
+		idle.ox  = -48f;
+		
+		idle.sprite = new TextureRegion(load("gaia-flame.png"));
+		TextureRegion[][] tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+        TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+
+	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
+	    character.deathTime=1f;
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+	}
+	
+	public static void loadGaia(Character character){
+		StaticRenderer idle = new StaticRenderer();
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		character.renderers = new Renderer[State.STATENUM];
+		idle.ox  = -48f;
+		
+		idle.sprite = new TextureRegion(load("gaia.png"));
+		TextureRegion[][] tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+        TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+
+	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
+	    character.deathTime=1f;
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+	}
+	
+	public static void loadGaiaAvatar(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+
+		attack.ox = -16;
+		attack.oy = 0;
+		movement.ox = -16;
+		movement.oy = 0;
+		idle.ox = -16;
+		idle.oy = -0;
+		death.ox = -16;
+		death.oy = 0;
+
+		
+		Texture tex = load("gaia-avatar-cast.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 192, 192);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("gaia-avatar-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("warrior-death.png"), 64, 64);
+	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	
+	   	character.deathTime = 1f;
+		
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.WALK] = movement;
+	}
+
 	public static void loadMidMonster(Character character){
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
@@ -594,6 +678,35 @@ public class GraphicsLoader {
         return rageAura;
 	}
 	
+	public static AnimatedRenderer loadTeleport(){
+		AnimatedRenderer teleport = new AnimatedRenderer(false);
+		teleport.ox= -80;
+		teleport.oy= -65;
+		TextureRegion[][] tmp = TextureRegion.split(load("teleport.png"), 192, 192);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        teleport.animation = new Animation(Constants.Buff.TELEPORT_CAST_TIME/frames.length, frames);
+        teleport.animation.setPlayMode(Animation.REVERSED);
+        return teleport;
+	}
+	
+	public static DirectionalAnimatedRenderer loadShield(){
+		DirectionalAnimatedRenderer shield = new DirectionalAnimatedRenderer(false);
+		shield.ox= -50;
+		shield.oy= -40;
+		TextureRegion[][] tmp = TextureRegion.split(load("shield.png"), 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		shield.animations[i] = new Animation(Constants.Buff.SHIELD_CHARGE_TIME/tmp[i].length, tmp[i]);
+	   	}
+
+        return shield;
+	}
+	
 	public static AnimatedRenderer loadMeteorFall(){
 		AnimatedRenderer meteor = new AnimatedRenderer(true);
 		meteor.ox = -16;
@@ -617,7 +730,7 @@ public class GraphicsLoader {
         meteor.animation = new Animation(Constants.Spells.METEOR_BLAST_TICK_INTERVAL, frames);
         return meteor;
 	}
-	
+
 	public static AnimatedRenderer loadFireStoneInitial(){
 		AnimatedRenderer fireStone = new AnimatedRenderer(false);
 		fireStone.ox+=0;

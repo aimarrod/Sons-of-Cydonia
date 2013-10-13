@@ -14,7 +14,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.osc.game.benefits.Rage;
+import com.osc.game.benefits.Shield;
 import com.osc.game.benefits.ShieldBuff;
+import com.osc.game.benefits.Teleport;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.alterations.Burn;
@@ -31,6 +33,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.graphics.Renderer;
 import com.soc.utils.FloatingText;
+import com.soc.utils.GraphicsLoader;
 
 public class RenderSystem extends VoidEntitySystem{
 	
@@ -154,14 +157,45 @@ public class RenderSystem extends VoidEntitySystem{
 				Rage rage=buff.getBuff(Rage.class);
 				batch.draw(rage.renderer.frame(world.delta),pos.x+rage.renderer.ox, pos.y+rage.renderer.oy);
 			}
+			if(buff.buffClasses.contains(Shield.class) && pos.direction.x == 0 && pos.direction.y == 1){
+				float posx = pos.x;
+				float posy = pos.y;
+				Bounds bon = bm.get(e);
+				Shield shield = buff.getBuff(Shield.class);
+				
+				if(pos.direction.x != 0) posx +=  bon.width*(pos.direction.x);
+				else posy += bon.height*(pos.direction.y);
+				shield.renderer.direction = r.direction;
+				
+				batch.draw(shield.renderer.frame(world.delta), posx+shield.renderer.ox, posy+shield.renderer.oy);
+			}
 		}
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);
 		batch.setColor(1,1,1,1);
 		if(bum.has(e)){
 			Buff buff=bum.get(e);
-		if(buff.buffClasses.contains(ShieldBuff.class)){
-			ShieldBuff shieldBuff=buff.getBuff(ShieldBuff.class);
-			batch.draw(shieldBuff.renderer.frame(world.delta), pos.x+shieldBuff.renderer.ox, pos.y+shieldBuff.renderer.oy);
-		}}
+			if(buff.buffClasses.contains(ShieldBuff.class)){
+				ShieldBuff shieldBuff=buff.getBuff(ShieldBuff.class);
+				batch.draw(shieldBuff.renderer.frame(world.delta), pos.x+shieldBuff.renderer.ox, pos.y+shieldBuff.renderer.oy);
+			}
+			if(buff.buffClasses.contains(Teleport.class)){
+				Teleport tp = buff.getBuff(Teleport.class);
+				batch.draw(tp.renderer.frame(world.delta), pos.x+tp.renderer.ox, pos.y+tp.renderer.oy);
+			}
+			if(buff.buffClasses.contains(Shield.class) && (pos.direction.x != 0 || pos.direction.y != 1)){
+				float posx = pos.x;
+				float posy = pos.y;
+				Bounds bon = bm.get(e);
+				Shield shield = buff.getBuff(Shield.class);
+				
+				if(pos.direction.x != 0) posx +=  bon.width*(pos.direction.x);
+				else posy += bon.height*(pos.direction.y);
+				shield.renderer.direction = r.direction;
+				
+				batch.draw(shield.renderer.frame(world.delta), posx+shield.renderer.ox, posy+shield.renderer.oy);
+
+			}
+
+		}
 	}
 }

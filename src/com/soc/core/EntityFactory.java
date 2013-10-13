@@ -6,6 +6,7 @@ import com.osc.game.benefits.Unmovable;
 import com.soc.ai.BallistaAI;
 import com.soc.ai.BatAI;
 import com.soc.ai.EyeballAI;
+import com.soc.ai.GaiaAI;
 import com.soc.ai.GaiaAirAI;
 import com.soc.ai.GaiaDarkAI;
 import com.soc.ai.GaiaFlameAI;
@@ -352,7 +353,38 @@ public class EntityFactory {
 				null));
 		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
-		GraphicsLoader.loadGaiaDark(animations);
+		GraphicsLoader.loadGaiaFlame(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createGaia(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Bounds(128, 128));
+		e.addComponent(new Feet(32, 64));
+		e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 5, new GaiaAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Buff.addbuff(e, new Unmovable());
+		Character animations = new Character();
+		GraphicsLoader.loadGaia(animations);
 		e.addComponent(animations);
 		
 		return e;

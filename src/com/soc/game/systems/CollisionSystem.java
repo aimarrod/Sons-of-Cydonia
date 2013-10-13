@@ -1,5 +1,6 @@
 package com.soc.game.systems;
 
+import com.artemis.Component;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
@@ -8,12 +9,14 @@ import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.math.Rectangle;
+import com.osc.game.benefits.Unmovable;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.core.Constants.World;
 import com.soc.game.alterations.Burn;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.Buff;
 import com.soc.game.components.Debuff;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
@@ -54,6 +57,8 @@ public class CollisionSystem extends VoidEntitySystem {
 	ComponentMapper<Flying> flm;
 	@Mapper
 	ComponentMapper<Debuff> psm;
+	@Mapper
+	ComponentMapper<Buff> bfm;
 
 	private Bag<CollisionGroup> collisionGroups;
 
@@ -110,7 +115,7 @@ public class CollisionSystem extends VoidEntitySystem {
 		}
 
 		public void process(Entity e, Entity other) {
-			if (e == other || stm.get(e).state == State.CHARGING)
+			if (e == other || (stm.get(e).state == State.CHARGING && bfm.has(e) && !bfm.get(e).buffClasses.contains(Unmovable.class)))
 				return;
 			Position pos = pm.get(e);
 			Velocity v = vm.get(e);
@@ -188,10 +193,10 @@ public class CollisionSystem extends VoidEntitySystem {
 	}
 
 	private class CharacterMapCollision implements CollisionGroup {
-		private ImmutableBag<Entity> enemies;
+		private Bag<Entity> enemies;
 
 		public CharacterMapCollision() {
-			enemies = SoC.game.groupmanager
+			enemies = (Bag<Entity>) SoC.game.groupmanager
 					.getEntities(Constants.Groups.ENEMIES);
 		}
 
@@ -225,7 +230,7 @@ public class CollisionSystem extends VoidEntitySystem {
 			int centerx = (int) ((pos.x + feet.width * 0.5) * World.TILE_FACTOR);
 			int centery = (int) ((pos.y + feet.heigth * 0.5) * World.TILE_FACTOR);
 			
-
+			
 			if (SoC.game.map.tiles[pos.z][nextright][up].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][nextleft][up].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][nextright][down].type == World.TILE_OBSTACLE
@@ -291,6 +296,7 @@ public class CollisionSystem extends VoidEntitySystem {
 					pos.y = gate.y;
 					pos.z = gate.z;
 					SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);
+					enemies.clear();
 					return;
 				}
 				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_DIALOG) {

@@ -30,13 +30,18 @@ public class GaiaFlameAI implements AI{
 		Position playerPos = SoC.game.positionmapper.get(SoC.game.player);
 		float distance = (float) Math.hypot(playerPos.x-pos.x, playerPos.y - pos.y);
 		if(distance > 2200) return;
-		timer = 0.05f * ((2200-distance)/2200) + 0.2f*(distance/2200);
+		timer = 0.1f * ((2200-distance)/2200) + 0.2f*(distance/2200);
 		
 		Position p = SoC.game.positionmapper.get(e);
 		
 
 		
-		int tileX = r.nextInt(66) + 127;
+		int tileX = 0;
+		if(distance > 700){
+			tileX = r.nextInt(66) + 127;
+		} else {
+			tileX = r.nextInt(25) + 160;
+		}
 		int tileY = r.nextInt(35) + 157;
 			Entity spawned = EntityFactory.createMeteor(tileX*World.TILE_SIZE+World.TILE_SIZE*0.5f, tileY*World.TILE_SIZE+World.TILE_SIZE*0.5f, p.z);	
 			SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
@@ -47,8 +52,7 @@ public class GaiaFlameAI implements AI{
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
-		
+		SoC.game.progress.gaiaFlameDefeated=true;		
 	}
 
 }

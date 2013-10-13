@@ -9,7 +9,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.osc.game.benefits.Rage;
+import com.osc.game.benefits.Shield;
 import com.osc.game.benefits.ShieldBuff;
+import com.osc.game.benefits.Teleport;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Buff;
@@ -32,10 +34,12 @@ import com.soc.utils.FloatingText;
 		 @Mapper ComponentMapper<Player> plm;
 		 @Mapper ComponentMapper<Stats> stm;
 		 @Mapper ComponentMapper<Character> cm;
+		 @Mapper ComponentMapper<Buff> bm;
 		 
 		 private float timer;
 		 private int lastKey;
 		 private boolean running;
+		 private boolean blocked;
 		 		 
 		 public PlayerInputSystem() {
 			 super();
@@ -54,7 +58,7 @@ import com.soc.utils.FloatingText;
 			 Position pos=pm.get(SoC.game.player);
 			 Player player = plm.get(SoC.game.player);
 			  
-			 if(state.state < State.BLOCKED || state.state == State.SPINNING){
+			 if(!blocked && (state.state < State.BLOCKED || state.state == State.SPINNING)){
 				 
 				boolean moving = false;
 				 
@@ -115,42 +119,27 @@ import com.soc.utils.FloatingText;
 
 		@Override
 		public boolean keyDown(int keycode) {
-			Player player = plm.get(SoC.game.player);
-			if(keycode==player.inventory){
-				world.getSystem(HudSystem.class).toggleInventory();
-				return true;
-			}
-			if(keycode==player.characterMenu){
-				world.getSystem(HudSystem.class).toogleCharacterMenu();
-				return true;
-			}
-			if(keycode==player.gameMenu){
-				world.getSystem(HudSystem.class).toogleGameMenu();
-				return true;
-			}
-			if(keycode==player.move_down || keycode==player.move_right || keycode==player.move_left || keycode==player.move_up){
-				if(lastKey == keycode){
-					running = true;
-				} else {
-					lastKey = keycode;
-					timer = 0.2f;
-				}
-			}
-			return false;
-		}
-
-		@Override
-		public boolean keyUp(int keycode) {
-			
+			Player controls = plm.get(SoC.game.player);
 			Entity player = SoC.game.player;
 			Position pos = pm.get(player);
 			State state = sm.get(player);
 			Stats stats = stm.get(player);
-			Player controls = plm.get(player);
 			Velocity vel = vm.get(player);
 			
-			if(state.state >= State.BLOCKED) return false;
-			
+			if(keycode==controls.inventory){
+				world.getSystem(HudSystem.class).toggleInventory();
+				return true;
+			}
+			if(keycode==controls.characterMenu){
+				world.getSystem(HudSystem.class).toogleCharacterMenu();
+				return true;
+			}
+			if(keycode==controls.gameMenu){
+				world.getSystem(HudSystem.class).toogleGameMenu();
+				return true;
+			}
+			if(blocked || state.state >= State.BLOCKED) return false;
+
 			if(keycode == controls.attack){
 				int spellnum = stm.get(player).attack;
 				Spell spell = SoC.game.spells[spellnum];
@@ -167,7 +156,11 @@ import com.soc.utils.FloatingText;
 					int spellnum = stm.get(player).spells[i];
 					Spell spell = SoC.game.spells[spellnum];
 					if(stats.mana < spell.mana){
-						SoC.game.renderSystem.texts.add(new FloatingText("No Mana!", Constants.Configuration.LABEL_DURATION, pos.x, pos.y, Constants.Configuration.LABEL_SPEED));
+						FloatingText text = new FloatingText("No mana!", 1f, pos.x, pos.y, 50);
+						text.r = 0.5f;
+						text.b = 1;
+						text.g = 0.5f;
+						SoC.game.renderSystem.texts.add(text);
 						return true;
 					}
 					stats.mana -= spell.mana;
@@ -179,15 +172,43 @@ import com.soc.utils.FloatingText;
 					return true;
 				}
 			}
-			
 			if(keycode == Input.Keys.B){
-				Buff.addbuff(SoC.game.player, new ShieldBuff());
-			}else{
-				if(keycode == Input.Keys.R){
-					Buff.addbuff(SoC.game.player, new Rage());
+				if(stats.mana < 10){
+					FloatingText text = new FloatingText("No mana!", 1f, pos.x, pos.y, 50);
+					text.r = 0.5f;
+					text.b = 1;
+					text.g = 0.5f;
+					SoC.game.renderSystem.texts.add(text);
+					return true;
+				}
+				stats.mana -= 10;
+				Buff.addbuff(SoC.game.player, new Shield());
+				vel.vx = 0;
+				vel.vy = 0;
+				state.state = State.IDLE;
+				blocked = true;
+				return true;
+			}
+			if(keycode==controls.move_down || keycode==controls.move_right || keycode==controls.move_left || keycode==controls.move_up){
+				if(lastKey == keycode){
+					running = true;
+				} else {
+					lastKey = keycode;
+					timer = 0.2f;
 				}
 			}
-			
+			return false;
+		}
+
+		@Override
+		public boolean keyUp(int keycode) {
+			if(keycode == Input.Keys.B){
+				if(blocked){
+					bm.get(SoC.game.player).removebuff(Shield.class);;
+					blocked = false;
+				}
+				return true;
+			}
 			return false;
 		}
 
