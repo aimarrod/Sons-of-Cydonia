@@ -4,8 +4,11 @@ import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.osc.game.benefits.Unmovable;
 import com.soc.ai.BallistaAI;
+import com.soc.ai.BatAI;
 import com.soc.ai.EyeballAI;
 import com.soc.ai.GaiaAirAI;
+import com.soc.ai.GaiaDarkAI;
+import com.soc.ai.GaiaFlameAI;
 import com.soc.ai.MaggotAI;
 import com.soc.ai.RedMonsterAI;
 import com.soc.ai.SatanAI;
@@ -21,6 +24,7 @@ import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.attacks.FlameProcessor;
 import com.soc.game.attacks.HarmfulEnemyProcessor;
 import com.soc.game.attacks.IcicleProcessor;
+import com.soc.game.attacks.MeteorProcessor;
 import com.soc.game.attacks.PoisonCloudProcessor;
 import com.soc.game.attacks.PunchProcessor;
 import com.soc.game.attacks.QuakeBladeProcessor;
@@ -161,6 +165,38 @@ public class EntityFactory {
 		return e;
 	}
 	
+	public static Entity createBat(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,600));
+		e.addComponent(new Bounds(25, 25));
+		e.addComponent(new State(1));
+		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 10));
+		e.addComponent(new Feet(25, 25));
+		e.addComponent(new Enemy(1000, 5, new BatAI()));
+		e.addComponent(new Flying());
+		e.addComponent(new Stats(
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Character animations = new Character();
+		GraphicsLoader.loadBat(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
 	public static Entity createSlime(float px, float py, int pz){
 		Entity e = SoC.game.world.createEntity();
 		
@@ -244,8 +280,6 @@ public class EntityFactory {
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent(new Position(px, py, pz));
-		System.out.println(py);
-		System.out.println(px);
 		e.addComponent(new Velocity(0,0,0));
 		e.addComponent(new Bounds(32, 64));
 		e.addComponent(new Feet(32, 64));
@@ -268,6 +302,68 @@ public class EntityFactory {
 		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
 		GraphicsLoader.loadGaiaAir(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createGaiaDark(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Feet(32, 64));
+		e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 5, new GaiaDarkAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Buff.addbuff(e, new Unmovable());
+		Character animations = new Character();
+		GraphicsLoader.loadGaiaDark(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createGaiaFlame(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Feet(32, 64));
+		e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 5, new GaiaFlameAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Buff.addbuff(e, new Unmovable());
+		Character animations = new Character();
+		GraphicsLoader.loadGaiaDark(animations);
 		e.addComponent(animations);
 		
 		return e;
@@ -508,6 +604,16 @@ public class EntityFactory {
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(32, 70) );
 	   	e.addComponent( new Attack(new FlameProcessor(), 0) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createMeteor(float x, float y, int z) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z));
+		e.addComponent( new Bounds(32, 32) );
+	   	e.addComponent( new Attack(new MeteorProcessor(), 20) );
 	   	
 	   	return e;		
 	}

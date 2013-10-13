@@ -44,8 +44,8 @@ public class GaiaAirAI implements AI{
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
-		
+		SoC.game.tagmanager.getEntity("gaia");
+		SoC.game.hudSystem.tooltip.pop("", 0.5f, 2f);
 	}
 
 }

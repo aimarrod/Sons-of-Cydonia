@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -52,8 +53,8 @@ public class GraphicsLoader {
 		AnimatedRenderer spin = new AnimatedRenderer(true);
 		AnimatedRenderer fall = new AnimatedRenderer(true);
 		
-		attack.ox = -48;
-		attack.oy = -32;
+		attack.ox = -80;
+		attack.oy = -64;
 		movement.ox = -16;
 		movement.oy = 0;
 		idle.ox = -16;
@@ -62,14 +63,16 @@ public class GraphicsLoader {
 		death.oy = 0;
 		run.ox = -16;
 		run.oy = 0;
-		charge.ox -= 16;
-		charge.oy -= 0;
+		charge.ox = -80;
+		charge.oy = -64;
 		fall.ox -= 16;
 		fall.oy -= 0;
-		spin.ox = -48;
-		spin.oy = -32;
+		spin.ox = -80;
+		spin.oy = -64;
 		
-		TextureRegion[][] tmp = TextureRegion.split(load("warrior-attack.png"), 128, 128);
+		Texture tex = load("warrior-attack.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 192, 192);
 		for(int i = 0; i < tmp.length; i++){
 	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
 	   	}
@@ -82,17 +85,21 @@ public class GraphicsLoader {
 	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
-		tmp = TextureRegion.split(load("warrior-charge.png"), 128, 128);
+		tex = load("warrior-charge.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		tmp = TextureRegion.split(tex, 192, 192);
 		for(int i = 0; i < tmp.length; i++){
 	   		charge.sprites[i] = tmp[i][0];
 	   	}
 		tmp = TextureRegion.split(load("warrior-death.png"), 64, 64);
 	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
 	   	character.deathTime = 1f;
-		tmp = TextureRegion.split(load("warrior-spin.png"), 128, 128);
+		tex = load("warrior-spin.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		tmp = TextureRegion.split(tex, 192, 192);
 	   	spin.animation = new Animation(0.2f/tmp[0].length, tmp[0]);
 	   	tmp = TextureRegion.split(load("warrior-fall.png"), 64, 64);
-	   	fall.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	fall.animation = new Animation(1.2f/tmp[0].length, tmp[0]);
 		
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;
@@ -125,6 +132,36 @@ public class GraphicsLoader {
 		character.deathTime=0.5f;
 		
 		character.renderers[State.WALK] = move;
+		character.renderers[State.DYING] = death;
+		
+	}
+	
+	public static void loadBat(Character character){
+		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		TextureRegion[][] tmp = TextureRegion.split(load("bat-walk.png"), 32, 32);
+		for(int i = 0; i < tmp.length; i++){
+	   		move.animations[i] = new Animation(0.2f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("bat-attack.png"), 32, 32);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(1.5f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("blood-spill.png"), 32, 32);
+		TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+		death.animation = new Animation(0.5f/deathFrames.length, deathFrames);
+		character.deathTime=0.5f;
+		
+		character.renderers[State.WALK] = move;
+		character.renderers[State.ATTACK] = attack;
 		character.renderers[State.DYING] = death;
 		
 	}
@@ -332,6 +369,29 @@ public class GraphicsLoader {
 		character.renderers[State.DYING] = death;
 	}
 	
+	public static void loadGaiaDark(Character character){
+		StaticRenderer idle = new StaticRenderer();
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		character.renderers = new Renderer[State.STATENUM];
+		idle.ox  = -48f;
+		
+		idle.sprite = new TextureRegion(load("gaia-dark.png"));
+		TextureRegion[][] tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+        TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+
+	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
+	    character.deathTime=1f;
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+	}
+	
 	public static void loadRedMonster(Character character){
 		StaticRenderer idle = new StaticRenderer();
 		AnimatedRenderer death = new AnimatedRenderer(false);
@@ -512,5 +572,37 @@ public class GraphicsLoader {
         }
         rageAura.animation = new Animation(0.05f, frames);
         return rageAura;
+	}
+	
+	public static AnimatedRenderer loadMeteorFall(){
+		AnimatedRenderer meteor = new AnimatedRenderer(true);
+		meteor.ox = -16;
+		TextureRegion[][] tmp = TextureRegion.split(load("meteor-falling.png"), 32, 32);
+        meteor.animation = new Animation(0.05f, tmp[0]);
+        return meteor;
+	}
+	
+	public static AnimatedRenderer loadMeteorBlast(){
+		AnimatedRenderer meteor = new AnimatedRenderer(true);
+		meteor.ox = -128;
+		meteor.oy = -64;
+		TextureRegion[][] tmp = TextureRegion.split(load("meteor-blast.png"), 256, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        meteor.animation = new Animation(Constants.Spells.METEOR_BLAST_TICK_INTERVAL, frames);
+        return meteor;
+	}
+	
+	public static StaticRenderer loadMeteorShadow(){
+		StaticRenderer meteor = new StaticRenderer();
+		meteor.ox = -16;
+		meteor.oy = -16;
+		meteor.sprite = new TextureRegion(load("meteor-shadow.png"));
+        return meteor;
 	}
 }

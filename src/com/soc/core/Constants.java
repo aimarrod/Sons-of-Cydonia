@@ -22,6 +22,8 @@ public class Constants {
 		public static final String ZOMBIES= "zombie";
 		public static final String SATANS= "satan";
 		public static final String GAIA_AIR = "gaia-air";
+		public static final String GAIA_DARK = "gaia-dark";
+		public static final String GAIA_FLAME = "gaia-flame";
 		public static final String EYEBALLS = "eyeball";
 		public static final String RED_MONSTER = "redMonster";
 		
@@ -99,6 +101,12 @@ public class Constants {
 		public static final float SPIN_RADIUS = 75f;
 		public static final float POISON_CLOUD_DURATION = 6f;
 		public static final float POISON_CLOUD_RADIUS = 100;
+		public static final float METEOR_BLAST_TICK_INTERVAL = 0.1f;
+		public static final int METEOR_BLAST_TICK_NUMBER = 6;
+		public static final float METEOR_FALL_DISTANCE = 600f;
+		public static final float METEOR_FALL_SPEED = 700f;
+		public static final float METEOR_RADIUS = 35f;
+		public static final float METEOR_RADIUS_INCREASE = 10f;
 	}
 	
 	

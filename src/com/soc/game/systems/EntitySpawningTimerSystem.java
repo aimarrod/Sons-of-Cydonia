@@ -62,7 +62,13 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				} else if(spawn.type.equals(Constants.Groups.GAIA_AIR)){
 					spawned = EntityFactory.createGaiaAir(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				}  else if(spawn.type.equals(Constants.Groups.EYEBALLS)){
+				} else if(spawn.type.equals(Constants.Groups.GAIA_DARK)){
+					spawned = EntityFactory.createGaiaDark(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				} else if(spawn.type.equals(Constants.Groups.GAIA_FLAME)){
+					spawned = EntityFactory.createGaiaFlame(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				} else if(spawn.type.equals(Constants.Groups.EYEBALLS)){
 					spawned = EntityFactory.createEyeball(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.RED_MONSTER)){

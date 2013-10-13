@@ -26,7 +26,7 @@ public class LevelManager extends Manager{
 			@Override
 			public int compare(Entity o1, Entity o2) {
 				ComponentMapper<Position> pm = world.getMapper(Position.class);
-				return (int) (pm.get(o2).y - pm.get(o1).y);
+				return (int) Math.signum(pm.get(o2).y - pm.get(o1).y);
 			}
 		};
 		entitiesByLevel = new HashMap<String, ArrayList<Entity>>();

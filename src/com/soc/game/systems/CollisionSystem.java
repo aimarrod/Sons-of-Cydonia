@@ -7,7 +7,6 @@ import com.artemis.managers.GroupManager;
 import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
-import com.badlogic.gdx.assets.loaders.MusicLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
@@ -31,7 +30,6 @@ import com.soc.game.map.Gate;
 import com.soc.game.map.Push;
 import com.soc.game.map.Stairs;
 import com.soc.utils.MapLoader;
-import com.soc.utils.MusicPlayer;
 
 public class CollisionSystem extends VoidEntitySystem {
 	@Mapper
@@ -211,7 +209,6 @@ public class CollisionSystem extends VoidEntitySystem {
 			Position pos = pm.get(e);
 			Velocity v = vm.get(e);
 			Feet feet = fm.get(e);
-			boolean stopped = false;
 			
 			if(st.state == State.FALLING || st.state == State.DYING) return;
 
@@ -242,8 +239,6 @@ public class CollisionSystem extends VoidEntitySystem {
 				v.vy = 0;
 			}
 			
-			
-			
 			if(!flm.has(e)){
 				if (SoC.game.map.tiles[pos.z][nextright][up].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][nextleft][up].type == World.TILE_UNWALKABLE
@@ -257,6 +252,27 @@ public class CollisionSystem extends VoidEntitySystem {
 						|| SoC.game.map.tiles[pos.z][left][nextdown].type == World.TILE_UNWALKABLE) {
 					v.vy = 0;
 				}
+				
+				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_LAVA) {
+					Debuff.addDebuff(e, new Burn());
+					return;
+				}
+				
+				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_HOLE) {
+					st.state=State.FALLING;
+					pos.x += pos.direction.x*World.TILE_SIZE;
+					pos.y += pos.direction.y*World.TILE_SIZE;
+					e.addComponent(new Expires(1));
+					e.changedInWorld();
+					v.vx=0;
+					v.vy=0;
+					return;
+				}
+				
+
+				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_PUSH) {
+					((Push) SoC.game.map.tiles[pos.z][centerx][centery]).push(e);
+				}
 			}
 			
 			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_STAIRS) {
@@ -264,27 +280,6 @@ public class CollisionSystem extends VoidEntitySystem {
 				SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL
 						+ pos.z);
 				return;
-			}
-			
-			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_LAVA) {
-				Debuff.addDebuff(e, new Burn());
-				return;
-			}
-			
-			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_HOLE) {
-				st.state=State.FALLING;
-				pos.x += pos.direction.x*World.TILE_SIZE;
-				pos.y += pos.direction.y*World.TILE_SIZE;
-				e.addComponent(new Expires(1));
-				e.changedInWorld();
-				v.vx=0;
-				v.vy=0;
-				return;
-			}
-			
-
-			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_PUSH) {
-				((Push) SoC.game.map.tiles[pos.z][centerx][centery]).push(e);
 			}
 
 			if (plm.has(e)) {

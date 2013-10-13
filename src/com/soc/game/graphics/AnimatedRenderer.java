@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AnimatedRenderer extends Renderer{
 
 	public Animation animation;
-	public float time;
 	public boolean loops;
 	
 	public AnimatedRenderer(boolean loops){	
