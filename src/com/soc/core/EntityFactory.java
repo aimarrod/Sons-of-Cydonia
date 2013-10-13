@@ -407,7 +407,7 @@ public class EntityFactory {
 		Entity e=SoC.game.world.createEntity();
 		
 		e.addComponent( new Position(pos.x + Constants.Characters.WIDTH * pos.direction.x, pos.y + Constants.Characters.HEIGHT * pos.direction.y, pos.z));
-		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
+		e.addComponent( new Bounds(Constants.Characters.WIDTH*3, Constants.Characters.HEIGHT*3) );
 	   	e.addComponent( new Attack(new VenomSwordProcessor(pos.direction, range), damage) );
 	   	
 	   	return e;
