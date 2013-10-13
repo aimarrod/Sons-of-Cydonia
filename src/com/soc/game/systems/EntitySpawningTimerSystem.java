@@ -59,14 +59,20 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				}else if(spawn.type.equals(Constants.Groups.SATANS)){
 					spawned = EntityFactory.createSatan(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				} else if(spawn.type.equals(Constants.Groups.GAIA_AIR)){
+				} else if(spawn.type.equals(Constants.Groups.GAIA_AIR) && !SoC.game.progress.gaiaAirDefeated){
 					spawned = EntityFactory.createGaiaAir(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				} else if(spawn.type.equals(Constants.Groups.GAIA_DARK)){
+					SoC.game.groupmanager.add(spawned, Constants.Groups.GAIAS);
+				} else if(spawn.type.equals(Constants.Groups.GAIA_DARK)&& !SoC.game.progress.gaiaDarkDefeated){
 					spawned = EntityFactory.createGaiaDark(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				} else if(spawn.type.equals(Constants.Groups.GAIA_FLAME)){
+					SoC.game.groupmanager.add(spawned, Constants.Groups.GAIAS);
+				} else if(spawn.type.equals(Constants.Groups.GAIA_FLAME)&& !SoC.game.progress.gaiaFlameDefeated){
 					spawned = EntityFactory.createGaiaFlame(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.GAIAS);
+				} else if(spawn.type.equals(Constants.Groups.GAIA)&& !SoC.game.progress.gaiaDefeated){
+					spawned = EntityFactory.createGaia(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.EYEBALLS)){
 					spawned = EntityFactory.createEyeball(pos.x, pos.y, pos.z);
@@ -75,11 +81,13 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					spawned=EntityFactory.createRedMonster(pos.x,pos.y,pos.z);
 						SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);	
 				}
-				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
-				SoC.game.spawnermanager.spawn(spawner, spawned);
-				spawned.addToWorld();
+				if(spawned != null){
+					SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+					SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
+					SoC.game.spawnermanager.spawn(spawner, spawned);
+					spawned.addToWorld();
+				}
 			} else {
 				spawn.time -= world.delta;
 			}

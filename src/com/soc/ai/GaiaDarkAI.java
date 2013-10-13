@@ -48,8 +48,7 @@ public class GaiaDarkAI implements AI{
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
-		
+		SoC.game.progress.gaiaDarkDefeated=true;
 	}
 
 }

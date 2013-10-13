@@ -7,6 +7,7 @@ import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
+import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -78,6 +79,7 @@ public class SoC extends Game {
 	public static final int FRAME_HEIGHT = 900;
 	
 	public static SoC game;
+	public GameProgress progress;
 	public OrthographicCamera camera;
 	public Entity player;
 	public World world;
@@ -215,7 +217,7 @@ public class SoC extends Game {
 	public void resetWorld(){
 		ImmutableBag<Entity> enemies = world.getManager(GroupManager.class).getEntities(Constants.Groups.MAP_BOUND);
 		for(int i = 0; i < enemies.size(); i++){
-			enemies.get(i).deleteFromWorld();
+			world.deleteEntity(enemies.get(i));
 		}
 	}
 	

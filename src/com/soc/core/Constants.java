@@ -24,6 +24,8 @@ public class Constants {
 		public static final String GAIA_AIR = "gaia-air";
 		public static final String GAIA_DARK = "gaia-dark";
 		public static final String GAIA_FLAME = "gaia-flame";
+		public static final String GAIA = "gaia";
+		public static final String GAIAS = "gaia-flame";
 		public static final String EYEBALLS = "eyeball";
 		public static final String RED_MONSTER = "redMonster";
 		
@@ -103,8 +105,8 @@ public class Constants {
 		public static final float POISON_CLOUD_RADIUS = 100;
 		public static final float METEOR_BLAST_TICK_INTERVAL = 0.1f;
 		public static final int METEOR_BLAST_TICK_NUMBER = 6;
-		public static final float METEOR_FALL_DISTANCE = 600f;
-		public static final float METEOR_FALL_SPEED = 700f;
+		public static final float METEOR_FALL_DISTANCE = 800f;
+		public static final float METEOR_FALL_SPEED = 600f;
 		public static final float METEOR_RADIUS = 35f;
 		public static final float METEOR_RADIUS_INCREASE = 10f;
 	}
@@ -151,6 +153,8 @@ public class Constants {
 		public final static float SHIELD_GAINHEALTH=50F;
 		public final static float RAGE_DURATION = 60f;
 		public final static float GAIN_STRENGTH = 5f;
+		public final static float TELEPORT_CAST_TIME = 1f;
+		public final static float SHIELD_CHARGE_TIME=0.3f;
 	}
 	
 }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
+import com.soc.core.GameProgress;
 import com.soc.core.GameScreen;
 import com.soc.core.SoC;
 import com.soc.game.components.Player;
@@ -49,12 +50,14 @@ public class GameLoader {
 		save.position = SoC.game.positionmapper.get(SoC.game.player);
 		save.stats = SoC.game.statsmapper.get(SoC.game.player);
 		save.player=new SavedPlayer(SoC.game.playermapper.get(SoC.game.player));	
+		save.progress=SoC.game.progress;
 		handle.writeString(json.toJson(save), false);
 	}
 	
 	public static void newGame(String clazz){
 		SoC.game.player = EntityFactory.createCharacter(2300, 600, 0, 0, 0, Constants.Classes.WARRIOR);
 		SoC.game.setScreen(new GameScreen());
+		SoC.game.progress = new GameProgress();
 		MapLoader.loadMap("finalMap.tmx");
 
 
@@ -73,7 +76,10 @@ public class GameLoader {
 		SavedGame save = json.fromJson(SavedGame.class, file);
 
 		
-		
+		SoC.game.progress = save.progress;
+		if(SoC.game.progress==null){
+			SoC.game.progress=new GameProgress();
+		}
 		SoC.game.player = EntityFactory.loadCharacter(save.position, save.stats, Constants.Characters.WARRIOR, new Player(save.player));
 		SoC.game.setScreen(new GameScreen());
 		MapLoader.loadMap(save.map);
