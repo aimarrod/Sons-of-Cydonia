@@ -475,16 +475,18 @@ public class GraphicsLoader {
 		character.renderers[State.ATTACK] = attack;
 		character.renderers[State.WALK] = movement;
 	}
-	
-	public static void loadRedMonster(Character character){
-		StaticRenderer idle = new StaticRenderer();
+
+	public static void loadMidMonster(Character character){
+		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
-		character.renderers = new Renderer[State.STATENUM];
-		idle.ox  = -48f;
-		
-		idle.sprite = new TextureRegion(load("redMonster.png"));
-		TextureRegion[][] tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+		TextureRegion[][] tmp = TextureRegion.split(load("mid-monster.png"), 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		move.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
         TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
         for (int i = 0; i < tmp.length; i++) {
@@ -495,6 +497,8 @@ public class GraphicsLoader {
 
 	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
 	    character.deathTime=1f;
+	    character.renderers[State.ATTACK]=move;
+	    character.renderers[State.WALK]=move;
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;
 	}
@@ -642,6 +646,22 @@ public class GraphicsLoader {
         return flame;
 	}
 	
+	public static AnimatedRenderer loadFlameWall(){
+		AnimatedRenderer flame = new AnimatedRenderer(true);
+		flame.ox=0;
+		flame.oy=0;
+		TextureRegion[][] tmp = TextureRegion.split(load("flame-wall.png"), 64, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        flame.animation = new Animation(4f/9, frames);
+        return flame;
+	}
+	
 	public static AnimatedRenderer loadRageAura(){
 		AnimatedRenderer rageAura = new AnimatedRenderer(true);
 		rageAura.ox=-44;
@@ -710,8 +730,47 @@ public class GraphicsLoader {
         meteor.animation = new Animation(Constants.Spells.METEOR_BLAST_TICK_INTERVAL, frames);
         return meteor;
 	}
-	
 
+	public static AnimatedRenderer loadFireStoneInitial(){
+		AnimatedRenderer fireStone = new AnimatedRenderer(false);
+		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-initial.png"), 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+       	fireStone.animation = new Animation(0.5f, frames);
+        return fireStone;
+	}
+	public static AnimatedRenderer loadFireStoneRunning(){
+		AnimatedRenderer fireStone = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-running.png"), 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+       	fireStone.animation = new Animation(0.05f, frames);
+        return fireStone;
+	}
+	
+	public static AnimatedRenderer loadFireStoneDeath(){
+		AnimatedRenderer fireStone = new AnimatedRenderer(false);
+		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-death.png"), 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+       	fireStone.animation = new Animation(0.5f, frames);
+        return fireStone;
+	}
 	
 	public static StaticRenderer loadMeteorShadow(){
 		StaticRenderer meteor = new StaticRenderer();

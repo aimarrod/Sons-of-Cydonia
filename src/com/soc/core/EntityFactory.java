@@ -11,7 +11,7 @@ import com.soc.ai.GaiaAirAI;
 import com.soc.ai.GaiaDarkAI;
 import com.soc.ai.GaiaFlameAI;
 import com.soc.ai.MaggotAI;
-import com.soc.ai.RedMonsterAI;
+import com.soc.ai.MidMonsterAI;
 import com.soc.ai.SatanAI;
 import com.soc.ai.SkeletonAI;
 import com.soc.ai.SlimeAI;
@@ -22,7 +22,9 @@ import com.soc.game.attacks.ArrowProcessor;
 import com.soc.game.attacks.BiteProcessor;
 import com.soc.game.attacks.ChargeProcessor;
 import com.soc.game.attacks.DaggerThrowProcessor;
+import com.soc.game.attacks.FireStoneProcessor;
 import com.soc.game.attacks.FlameProcessor;
+import com.soc.game.attacks.FlameWallProcessor;
 import com.soc.game.attacks.HarmfulEnemyProcessor;
 import com.soc.game.attacks.IcicleProcessor;
 import com.soc.game.attacks.MeteorProcessor;
@@ -419,17 +421,15 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createRedMonster(float px, float py, int pz){
+	public static Entity createMidMonster(float px, float py, int pz){
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent(new Position(px, py, pz));
-		System.out.println(py);
-		System.out.println(px);
-		e.addComponent(new Velocity(0,0,0));
-		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Bounds(64, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(0, 5, new RedMonsterAI()));
+		e.addComponent(new Enemy(0, 5, new MidMonsterAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -445,7 +445,7 @@ public class EntityFactory {
 				0, 
 				null));
 		Character animations = new Character();
-		GraphicsLoader.loadRedMonster(animations);
+		GraphicsLoader.loadMidMonster(animations);
 		e.addComponent(animations);
 		
 		return e;
@@ -624,12 +624,33 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
+	public static Entity createFireStone(float x, float y, int z, Vector2 direction) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
+		e.addComponent( new Position(x, y, z, direction));
+		e.addComponent( new Bounds(44, 32) );
+	   	e.addComponent( new Attack(new FireStoneProcessor(), 0) );
+	   	
+	   	return e;		
+	}
+	
 	public static Entity createFlame(float x, float y, int z, Vector2 direction) {
 		Entity e=SoC.game.world.createEntity();
 		
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(32, 70) );
 	   	e.addComponent( new Attack(new FlameProcessor(), 0) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createFlameWall(float x, float y, int z, Vector2 direction) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z, direction));
+		e.addComponent( new Bounds(32, 70) );
+	   	e.addComponent( new Attack(new FlameWallProcessor(), 0) );
 	   	
 	   	return e;		
 	}

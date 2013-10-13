@@ -201,8 +201,6 @@ public class Inventory extends Actor implements InputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		System.out.println("ScreenX: " + screenX);
-		System.out.println("ScreenY: " + screenY);
 		return false;
 	}
 

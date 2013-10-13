@@ -1,0 +1,84 @@
+package com.soc.game.attacks;
+
+import com.artemis.Entity;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.soc.core.SoC;
+import com.soc.game.components.Bounds;
+import com.soc.game.components.Damage;
+import com.soc.game.components.Position;
+import com.soc.game.components.State;
+import com.soc.game.graphics.AnimatedRenderer;
+import com.soc.utils.GraphicsLoader;
+
+public class FireStoneProcessor implements AttackProcessor{
+	public AnimatedRenderer initial;
+	public AnimatedRenderer running;
+	public AnimatedRenderer death;
+	public Entity hit;
+	float timer;
+	
+	public FireStoneProcessor(){
+		this.hit=null;
+		this.initial=GraphicsLoader.loadFireStoneInitial();
+		this.running = GraphicsLoader.loadFireStoneRunning();
+		this.death=GraphicsLoader.loadFireStoneDeath();
+		timer=0;
+	}
+	@Override
+	public void process(Entity attack) {
+		timer+=SoC.game.world.delta;
+		if(hit!=null){
+			attack.deleteFromWorld();
+			delete();
+		}
+		
+	}
+
+	@Override
+	public boolean collision(Entity attack, Entity victim) {
+if(hit != null) return false;
+		
+		Position attackpos = SoC.game.positionmapper.get(attack);
+		Position victimpos = SoC.game.positionmapper.get(victim);
+		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
+		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
+		
+		return (attackpos.z == victimpos.z && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+	}
+
+	@Override
+	public void frame(Entity attack, SpriteBatch sprite) {
+		Position pos = SoC.game.positionmapper.get(attack);
+		if(hit==null && timer<1.2f){
+			System.out.println("1");
+			sprite.draw(initial.frame(SoC.game.world.delta), pos.x+initial.ox, pos.y+initial.oy);
+		}else if(hit ==null ){
+			System.out.println("2");
+			sprite.draw(running.frame(SoC.game.world.delta), pos.x+running.ox, pos.y+running.oy);
+		}else if(hit !=null){
+			sprite.draw(death.frame(SoC.game.world.delta), pos.x+running.ox, pos.y+running.oy);
+		}
+	}
+
+	@Override
+	public void handle(Entity attack, Entity enemy) {
+		hit=enemy;
+		
+	}
+
+	@Override
+	public void delete() {
+		if(hit != null){
+			SoC.game.statemapper.get(hit).state = State.IDLE;
+			int damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.1);
+			if(SoC.game.damagemapper.has(hit)){
+				SoC.game.damagemapper.get(hit).pureDamage+=damage;
+			}else{
+				hit.addComponent(new Damage(damage, true));
+				hit.changedInWorld();
+			}
+		}
+		
+	}
+
+}
