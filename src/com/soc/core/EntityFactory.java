@@ -22,6 +22,7 @@ import com.soc.game.attacks.BiteProcessor;
 import com.soc.game.attacks.ChargeProcessor;
 import com.soc.game.attacks.DaggerThrowProcessor;
 import com.soc.game.attacks.FlameProcessor;
+import com.soc.game.attacks.FlameWallProcessor;
 import com.soc.game.attacks.HarmfulEnemyProcessor;
 import com.soc.game.attacks.IcicleProcessor;
 import com.soc.game.attacks.MeteorProcessor;
@@ -598,6 +599,16 @@ public class EntityFactory {
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(32, 70) );
 	   	e.addComponent( new Attack(new FlameProcessor(), 0) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createFlameWall(float x, float y, int z, Vector2 direction) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z, direction));
+		e.addComponent( new Bounds(32, 70) );
+	   	e.addComponent( new Attack(new FlameWallProcessor(), 0) );
 	   	
 	   	return e;		
 	}

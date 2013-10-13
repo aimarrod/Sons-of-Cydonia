@@ -4,10 +4,8 @@ import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
-import com.artemis.managers.GroupManager;
 import com.artemis.systems.EntityProcessingSystem;
-import com.artemis.systems.VoidEntitySystem;
-import com.artemis.utils.Timer;
+import com.badlogic.gdx.math.Vector2;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
@@ -73,13 +71,23 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.RED_MONSTER)){
 					spawned=EntityFactory.createRedMonster(pos.x,pos.y,pos.z);
-						SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);	
-				}
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);	
+				} 
+					
+				if(spawn.type.equals(Constants.Groups.FLAME_WALL)){
+					spawned=EntityFactory.createFlameWall(pos.x,pos.y,pos.z, new Vector2(0,0));
+					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+					SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+					SoC.game.spawnermanager.spawn(spawner, spawned);
+					spawned.addToWorld();
+				}else{
 				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
 				SoC.game.spawnermanager.spawn(spawner, spawned);
 				spawned.addToWorld();
+				}
 			} else {
 				spawn.time -= world.delta;
 			}

@@ -285,5 +285,401 @@
     <property name="type" value="satan"/>
    </properties>
   </object>
+  <object x="1376" y="3936" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="3968" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4000" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4032" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4064" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4096" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4128" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4160" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4192" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4224" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4256" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4288" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4320" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4352" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4384" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4416" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4448" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4480" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4512" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4544" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4576" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4608" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="3936" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="3968" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4000" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4032" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4064" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4096" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4128" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4160" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4192" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4224" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4256" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4288" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4320" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4352" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4384" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4416" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4448" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4480" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4512" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4544" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4576" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4608" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
