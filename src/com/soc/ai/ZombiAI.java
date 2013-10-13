@@ -41,7 +41,7 @@ public class ZombiAI implements AI{
 		vel.vy = vel.speed * pos.direction.y;
 		
 		if(state.state != State.ATTACK){	
-			if(Math.abs(dstx) < 40 && Math.abs(dsty) < 20 ){
+			if(Math.abs(dstx) < 40 && Math.abs(dsty) < 12 ){
 				Spell spell = SoC.game.spells[Constants.Spells.BITE];
 				state.state = spell.state;
 				e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.BITE));

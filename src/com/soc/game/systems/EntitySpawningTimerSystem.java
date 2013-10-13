@@ -58,7 +58,7 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				}else if(spawn.type.equals(Constants.Groups.SATANS)){
 					spawned = EntityFactory.createSatan(pos.x, pos.y, pos.z);
-					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.GAIA_AIR)){
 					spawned = EntityFactory.createGaiaAir(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);

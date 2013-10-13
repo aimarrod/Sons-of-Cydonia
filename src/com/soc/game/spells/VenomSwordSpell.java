@@ -12,7 +12,7 @@ public class VenomSwordSpell extends Spell {
 	public VenomSwordSpell() {
 		// this.icon = GraphicsLoader.load("punch-icon.png");
 		this.tooltip = "Venom!";
-		this.cast = 1f;
+		this.cast = 0.9f;
 		this.sound = "";
 		this.blocking = 1f;
 		this.state = State.ATTACK;
@@ -22,7 +22,7 @@ public class VenomSwordSpell extends Spell {
 
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createBite(group, pos, stats.strength, 16);
+		Entity e = EntityFactory.createVenomSword(group, pos, stats.strength, 16);
 		SoC.game.groupmanager.add(e, group);
 		SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 		e.addToWorld();

@@ -276,5 +276,14 @@
     <property name="type" value="redMonster"/>
    </properties>
   </object>
+  <object x="480" y="3904" width="96" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="satan"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

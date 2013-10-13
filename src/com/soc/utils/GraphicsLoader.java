@@ -322,7 +322,7 @@ public class GraphicsLoader {
 		
 		TextureRegion[][] tmp = TextureRegion.split(load("satan-attack.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
-	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
+	   		attack.animations[i]= new Animation(1f/tmp[i].length, tmp[i]);
 	   	}
 		tmp = TextureRegion.split(load("satan-walk.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
