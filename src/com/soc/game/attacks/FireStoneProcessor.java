@@ -3,8 +3,10 @@ package com.soc.game.attacks;
 import com.artemis.Entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.soc.core.SoC;
+import com.soc.game.alterations.Push;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
+import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.graphics.AnimatedRenderer;
@@ -16,6 +18,7 @@ public class FireStoneProcessor implements AttackProcessor{
 	public AnimatedRenderer death;
 	public Entity hit;
 	float timer;
+	float deathTimer;
 	
 	public FireStoneProcessor(){
 		this.hit=null;
@@ -23,15 +26,18 @@ public class FireStoneProcessor implements AttackProcessor{
 		this.running = GraphicsLoader.loadFireStoneRunning();
 		this.death=GraphicsLoader.loadFireStoneDeath();
 		timer=0;
+		deathTimer=0;
 	}
 	@Override
 	public void process(Entity attack) {
 		timer+=SoC.game.world.delta;
 		if(hit!=null){
+			deathTimer+=SoC.game.world.delta;
+			if(deathTimer>0.5f){
 			attack.deleteFromWorld();
 			delete();
+			}
 		}
-		
 	}
 
 	@Override
@@ -49,11 +55,9 @@ if(hit != null) return false;
 	@Override
 	public void frame(Entity attack, SpriteBatch sprite) {
 		Position pos = SoC.game.positionmapper.get(attack);
-		if(hit==null && timer<1.2f){
-			System.out.println("1");
+		if(hit==null && timer<0.6f){
 			sprite.draw(initial.frame(SoC.game.world.delta), pos.x+initial.ox, pos.y+initial.oy);
 		}else if(hit ==null ){
-			System.out.println("2");
 			sprite.draw(running.frame(SoC.game.world.delta), pos.x+running.ox, pos.y+running.oy);
 		}else if(hit !=null){
 			sprite.draw(death.frame(SoC.game.world.delta), pos.x+running.ox, pos.y+running.oy);
@@ -63,6 +67,7 @@ if(hit != null) return false;
 	@Override
 	public void handle(Entity attack, Entity enemy) {
 		hit=enemy;
+		Debuff.addDebuff(hit, new Push(SoC.game.positionmapper.get(attack).direction,100,100));
 		
 	}
 
