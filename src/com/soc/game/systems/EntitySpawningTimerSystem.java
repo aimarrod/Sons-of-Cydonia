@@ -81,6 +81,14 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
 					SoC.game.spawnermanager.spawn(spawner, spawned);
 					spawned.addToWorld();
+				}else if(spawn.type.equals(Constants.Groups.FIRE_STONE)){
+					spawned=EntityFactory.createFireStone(pos.x,pos.y,pos.z, new Vector2(1,0));
+					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+					SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.PROJECTILES);
+					SoC.game.spawnermanager.spawn(spawner, spawned);
+					spawned.addToWorld();
 				}else{
 				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);

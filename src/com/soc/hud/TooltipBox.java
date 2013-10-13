@@ -37,7 +37,6 @@ public class TooltipBox extends Actor{
 		font.setColor(1, 1, 1, timer);
 		font.setScale(0.45f);
 		timer += SoC.game.world.delta*((dissapearing)?-1:1);
-		System.out.println(timer);
 		if(timer > 1){
 			timer = 1;
 		} else {

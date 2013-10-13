@@ -48,9 +48,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		if(dmg < 0) dmg = 0;
 		dmg += dr.pureDamage;
 		if(dmg < 1) dmg = 1; 
-		System.out.println(stats.health);
 		stats.health-=dmg;
-		System.out.println(stats.health);
 		e.removeComponent(dr);
 		e.changedInWorld();
 		FloatingText text = new FloatingText(""+dmg, Constants.Configuration.LABEL_DURATION, pos.x, pos.y, Constants.Configuration.LABEL_SPEED);

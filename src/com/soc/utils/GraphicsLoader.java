@@ -618,6 +618,47 @@ public class GraphicsLoader {
         return meteor;
 	}
 	
+	public static AnimatedRenderer loadFireStoneInitial(){
+		AnimatedRenderer fireStone = new AnimatedRenderer(false);
+		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-initial.png"), 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+       	fireStone.animation = new Animation(0.5f, frames);
+        return fireStone;
+	}
+	public static AnimatedRenderer loadFireStoneRunning(){
+		AnimatedRenderer fireStone = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-running.png"), 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+       	fireStone.animation = new Animation(0.05f, frames);
+        return fireStone;
+	}
+	
+	public static AnimatedRenderer loadFireStoneDeath(){
+		AnimatedRenderer fireStone = new AnimatedRenderer(false);
+		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-death.png"), 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+       	fireStone.animation = new Animation(0.5f, frames);
+        return fireStone;
+	}
+	
 	public static StaticRenderer loadMeteorShadow(){
 		StaticRenderer meteor = new StaticRenderer();
 		meteor.ox = -16;
