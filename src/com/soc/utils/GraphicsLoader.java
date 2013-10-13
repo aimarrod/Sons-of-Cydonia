@@ -392,15 +392,17 @@ public class GraphicsLoader {
 		character.renderers[State.DYING] = death;
 	}
 	
-	public static void loadRedMonster(Character character){
-		StaticRenderer idle = new StaticRenderer();
+	public static void loadMidMonster(Character character){
+		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
-		character.renderers = new Renderer[State.STATENUM];
-		idle.ox  = -48f;
-		
-		idle.sprite = new TextureRegion(load("redMonster.png"));
-		TextureRegion[][] tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+		TextureRegion[][] tmp = TextureRegion.split(load("mid-monster.png"), 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		move.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
         TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
         for (int i = 0; i < tmp.length; i++) {
@@ -411,6 +413,8 @@ public class GraphicsLoader {
 
 	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
 	    character.deathTime=1f;
+	    character.renderers[State.ATTACK]=move;
+	    character.renderers[State.WALK]=move;
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;
 	}

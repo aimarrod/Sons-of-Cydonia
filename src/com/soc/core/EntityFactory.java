@@ -10,7 +10,7 @@ import com.soc.ai.GaiaAirAI;
 import com.soc.ai.GaiaDarkAI;
 import com.soc.ai.GaiaFlameAI;
 import com.soc.ai.MaggotAI;
-import com.soc.ai.RedMonsterAI;
+import com.soc.ai.MidMonsterAI;
 import com.soc.ai.SatanAI;
 import com.soc.ai.SkeletonAI;
 import com.soc.ai.SlimeAI;
@@ -388,17 +388,15 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createRedMonster(float px, float py, int pz){
+	public static Entity createMidMonster(float px, float py, int pz){
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent(new Position(px, py, pz));
-		System.out.println(py);
-		System.out.println(px);
-		e.addComponent(new Velocity(0,0,0));
-		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Bounds(64, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(0, 5, new RedMonsterAI()));
+		e.addComponent(new Enemy(0, 5, new MidMonsterAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -414,7 +412,7 @@ public class EntityFactory {
 				0, 
 				null));
 		Character animations = new Character();
-		GraphicsLoader.loadRedMonster(animations);
+		GraphicsLoader.loadMidMonster(animations);
 		e.addComponent(animations);
 		
 		return e;

@@ -25,7 +25,7 @@ public class Constants {
 		public static final String GAIA_DARK = "gaia-dark";
 		public static final String GAIA_FLAME = "gaia-flame";
 		public static final String EYEBALLS = "eyeball";
-		public static final String RED_MONSTER = "redMonster";
+		public static final String RED_MONSTER = "mid-monster";
 		public static final String FLAME_WALL = "flame-wall";
 		
 		public static final String ENEMY_ATTACKS = "enemyattack";

@@ -267,13 +267,13 @@
   </object>
  </objectgroup>
  <objectgroup name="level0-spawners" width="100" height="200">
-  <object x="1504" y="3904" width="96" height="32">
+  <object x="1504" y="4064" width="96" height="32">
    <properties>
     <property name="interval" value="2.5"/>
     <property name="max" value="1"/>
     <property name="range" value="1000"/>
     <property name="respawn" value="false"/>
-    <property name="type" value="redMonster"/>
+    <property name="type" value="mid-monster"/>
    </properties>
   </object>
   <object x="480" y="3904" width="96" height="32">
