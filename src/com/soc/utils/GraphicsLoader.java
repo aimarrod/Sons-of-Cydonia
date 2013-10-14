@@ -884,4 +884,20 @@ public class GraphicsLoader {
         flame.animation = new Animation(0.05f, frames);
         return flame;
 	}
+	
+	public static AnimatedRenderer loadRedCast(){
+		AnimatedRenderer flame = new AnimatedRenderer(true);
+		flame.ox=0;
+		flame.oy-=20;
+		TextureRegion[][] tmp = TextureRegion.split(load("castRed.png"), 64,64);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        flame.animation = new Animation(0.05f, frames);
+        return flame;
+	}
 }
