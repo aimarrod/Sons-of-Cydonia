@@ -2,12 +2,14 @@ package com.soc.core;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
+import com.osc.game.benefits.Inmune;
 import com.osc.game.benefits.Unmovable;
 import com.soc.ai.BallistaAI;
 import com.soc.ai.BatAI;
 import com.soc.ai.EyeballAI;
 import com.soc.ai.GaiaAI;
 import com.soc.ai.GaiaAirAI;
+import com.soc.ai.GaiaAvatarAI;
 import com.soc.ai.GaiaDarkAI;
 import com.soc.ai.GaiaFlameAI;
 import com.soc.ai.MaggotAI;
@@ -32,9 +34,11 @@ import com.soc.game.attacks.PoisonCloudProcessor;
 import com.soc.game.attacks.PunchProcessor;
 import com.soc.game.attacks.QuakeBladeProcessor;
 import com.soc.game.attacks.SlashProcessor;
+import com.soc.game.attacks.TentaclesProcessor;
 import com.soc.game.attacks.TornadoProcessor;
 import com.soc.game.attacks.VenomSwordProcessor;
 import com.soc.game.attacks.WhirlbladeProcessor;
+import com.soc.game.attacks.WindbladeProcessor;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
@@ -271,7 +275,7 @@ public class EntityFactory {
 		
 		e.addComponent(new Position(px, py, pz));
 		e.addComponent(new Velocity(0,0,0));
-		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Bounds(128, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
 		e.addComponent(new Enemy(0, 5, new GaiaAirAI()));
@@ -302,7 +306,7 @@ public class EntityFactory {
 		
 		e.addComponent(new Position(px, py, pz));
 		e.addComponent(new Velocity(0,0,0));
-		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Bounds(128, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
 		e.addComponent(new Enemy(0, 5, new GaiaDarkAI()));
@@ -333,7 +337,7 @@ public class EntityFactory {
 		
 		e.addComponent(new Position(px, py, pz));
 		e.addComponent(new Velocity(0,0,0));
-		e.addComponent(new Bounds(32, 64));
+		e.addComponent(new Bounds(128, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
 		e.addComponent(new Enemy(0, 5, new GaiaFlameAI()));
@@ -383,8 +387,39 @@ public class EntityFactory {
 				0, 
 				null));
 		Buff.addbuff(e, new Unmovable());
+		Buff.addbuff(e, new Inmune());
 		Character animations = new Character();
 		GraphicsLoader.loadGaia(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createGaiaAvatar(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+		e.addComponent(new Feet(32, 64));
+		e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 5, new GaiaAvatarAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		Character animations = new Character();
+		GraphicsLoader.loadGaiaAvatar(animations);
 		e.addComponent(animations);
 		
 		return e;
@@ -612,10 +647,10 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createTornado(float x, float y, int z, Vector2 direction) {
+	public static Entity createTornado(float x, float y, int z, Vector2 direction, float speedFactor) {
 		Entity e=SoC.game.world.createEntity();
 		
-		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
+		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x*speedFactor, Constants.Spells.TORNADO_SPEED*direction.y*speedFactor, 0) );
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(44, 32) );
 		e.addComponent( new Flying() );
@@ -663,6 +698,27 @@ public class EntityFactory {
 	   	e.addComponent( new Attack(new MeteorProcessor(), 20) );
 	   	
 	   	return e;		
+	}
+
+	public static Entity createWindblade(String group, Position pos, int damage,
+			Position pos2) {
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(Constants.Spells.WINDBLADE_SPEED*pos.direction.x, Constants.Spells.WINDBLADE_SPEED*pos.direction.y, 0) );
+		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction) );
+		e.addComponent( new Bounds(48, 48) );
+	   	e.addComponent( new Attack(new WindbladeProcessor(), damage) );
+	   	
+		return e;
+	}
+	
+	public static Entity createTentacles(float x, float y, int z, int damage){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z) );
+		e.addComponent( new Attack(new TentaclesProcessor(), damage));
+		
+		return e;
 	}
 	
 }

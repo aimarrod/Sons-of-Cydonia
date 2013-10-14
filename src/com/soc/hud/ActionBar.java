@@ -26,8 +26,8 @@ public class ActionBar extends Actor implements InputProcessor{
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		spells = SoC.game.statsmapper.get(SoC.game.player).spells;
 		for(int i = 0; i < spells.length; i++){
-			batch.draw(SoC.game.spells[spells[i]].icon, getX()+(i*slot.getHeight()+2), getY()+2);
-			batch.draw(slot, getX()+(i*slot.getWidth()+2), getY());
+			batch.draw(SoC.game.spells[spells[i]].icon, getX()+(i*slot.getWidth()+5), getY()+7);
+			//batch.draw(slot, getX()+(i*slot.getWidth()+2), getY());
 		}
 	}
 

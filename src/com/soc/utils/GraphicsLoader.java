@@ -456,9 +456,9 @@ public class GraphicsLoader {
 		
 		Texture tex = load("gaia-avatar-cast.png");
 		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
-		TextureRegion[][] tmp = TextureRegion.split(tex, 192, 192);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 64, 64);
 		for(int i = 0; i < tmp.length; i++){
-	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
+	   		attack.animations[i]= new Animation(0.5f/tmp[i].length, tmp[i]);
 	   	}
 		tmp = TextureRegion.split(load("gaia-avatar-walk.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
@@ -715,6 +715,13 @@ public class GraphicsLoader {
         return meteor;
 	}
 	
+	public static AnimatedRenderer loadWindblade(){
+		AnimatedRenderer windb = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("windblade.png"), 48, 48);
+        windb.animation = new Animation(0.05f, tmp[0]);
+        return windb;
+	}
+	
 	public static AnimatedRenderer loadMeteorBlast(){
 		AnimatedRenderer meteor = new AnimatedRenderer(true);
 		meteor.ox = -128;
@@ -777,6 +784,22 @@ public class GraphicsLoader {
 		meteor.ox = -16;
 		meteor.oy = -16;
 		meteor.sprite = new TextureRegion(load("meteor-shadow.png"));
+        return meteor;
+	}
+	
+	public static AnimatedRenderer loadTentacles(){
+		AnimatedRenderer meteor = new AnimatedRenderer(true);
+		meteor.ox = -230;
+		meteor.oy = -120;
+		TextureRegion[][] tmp = TextureRegion.split(load("tentacles.png"), 512, 512);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        meteor.animation = new Animation(Constants.Spells.TENTACLES_DURATION/frames.length, frames);
         return meteor;
 	}
 }

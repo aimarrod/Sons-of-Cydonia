@@ -86,8 +86,10 @@ public class Constants {
 		public static final int QUAKEBLADE = 9;
 		public static final int BITE = 10;
 		public static final int VENOMSWORD = 11;
+		public static final int WINDBLADE = 12;
+		public static final int TENTACLES = 13;
 		
-		public static final int SPELL_NUMBER = 12;
+		public static final int SPELL_NUMBER = 14;
 		
 		public static final int TORNADO_RANGE = 1000;
 		public static final int TORNADO_SPEED = 500;
@@ -111,6 +113,10 @@ public class Constants {
 		public static final float METEOR_FALL_SPEED = 600f;
 		public static final float METEOR_RADIUS = 35f;
 		public static final float METEOR_RADIUS_INCREASE = 10f;
+		public static final float WINDBLADE_SPEED = 600f;
+		public static final float TENTACLES_DURATION = 1.5f;
+		public static final float TENTACLES_PREPARE = 1.03f;
+		public static final float TENTACLES_RADIUS = 170f;
 	}
 	
 	

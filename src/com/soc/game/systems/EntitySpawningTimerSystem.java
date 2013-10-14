@@ -103,8 +103,6 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 						SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
 						SoC.game.spawnermanager.spawn(spawner, spawned);
 						spawned.addToWorld();
-						spawned=EntityFactory.createMidMonster(pos.x,pos.y,pos.z);
-						SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);	
 					} 
 				}
 			} else {

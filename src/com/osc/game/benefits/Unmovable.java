@@ -13,8 +13,9 @@ public class Unmovable implements Benefit{
 
 	@Override
 	public void process(Entity e) {
+		if(!SoC.game.debuffmapper.has(e)) return;
 		Debuff d = SoC.game.debuffmapper.get(e);
-		if(d != null && d.debuffClasses.contains(Push.class)){
+		if(d.debuffClasses.contains(Push.class)){
 			System.out.println("EHEIs");
 			d.removeDebuff(Push.class);
 			Position pos = SoC.game.positionmapper.get(e);

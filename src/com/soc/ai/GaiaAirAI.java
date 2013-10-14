@@ -33,13 +33,13 @@ public class GaiaAirAI implements AI{
 		if(pos.direction.y == 0) posy = pos.y + r.nextInt((int) (bon.height*3)) - bon.height;
 		else posy = pos.y;
 		
-		Entity tornado = EntityFactory.createTornado(posx, posy, pos.z, pos.direction.cpy());
+		Entity tornado = EntityFactory.createTornado(posx, posy, pos.z, pos.direction.cpy(), 1.1f);
 	    SoC.game.groupmanager.add(tornado, Constants.Groups.ENEMY_ATTACKS);
 	    SoC.game.groupmanager.add(tornado, Constants.Groups.MAP_BOUND);
 	    SoC.game.groupmanager.add(tornado, Constants.Groups.PROJECTILES);
 	    SoC.game.levelmanager.setLevel(tornado, Constants.Groups.LEVEL+pos.z);
 	    tornado.addToWorld();
-		timer = 1.0f;
+		timer = 1f;
 	}
 
 	@Override

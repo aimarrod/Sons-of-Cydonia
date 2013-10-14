@@ -22,15 +22,18 @@ import com.soc.utils.EffectsPlayer;
 public class SlashProcessor implements AttackProcessor {
 	public Bag<Entity> hit;
 	public Rectangle hitbox;
+	public float timer;
 	@Mapper
 	ComponentMapper<Damage> dm = SoC.game.world.getMapper(Damage.class);
 	public SlashProcessor() {
 		hit = new Bag<Entity>();
+		timer = 0.15f;
 	}
 
 	@Override 
 	public void process(Entity attack) {
-		attack.deleteFromWorld();
+		timer -= SoC.game.world.delta;
+		if(timer <= 0) attack.deleteFromWorld();
 	}
 
 	@Override
@@ -39,7 +42,6 @@ public class SlashProcessor implements AttackProcessor {
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
-		State state = SoC.game.statemapper.get(victim);
 		
 		if(attackbounds.height < 0) return (!hit.contains(victim) && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y + attackbounds.height < victimpos.y + victimbounds.height && attackpos.y > victimpos.y);	
 		else if(attackbounds.width < 0) return (!hit.contains(victim) && attackpos.x  + attackbounds.width < victimpos.x + victimbounds.width && attackpos.x > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
