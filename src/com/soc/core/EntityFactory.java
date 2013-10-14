@@ -54,6 +54,7 @@ import com.soc.game.components.Spawner;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.components.Wall;
 import com.soc.utils.GraphicsLoader;
 
 
@@ -762,6 +763,21 @@ public class EntityFactory {
 		e.addComponent( new Attack(new TentaclesProcessor(), damage));
 		
 		return e;
+	}
+	
+	public static Entity createWall(Entity source, int x, int y, int z){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x*Constants.World.TILE_SIZE, y*Constants.World.TILE_SIZE, z) );
+		e.addComponent( new Bounds((int)Constants.World.TILE_SIZE, (int)Constants.World.TILE_SIZE));
+		e.addComponent( new Wall() );
+		
+		SoC.game.groupmanager.add(e, Constants.Groups.WALLS);
+		SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL + z);
+		SoC.game.wallmanager.block(source, e);
+		
+		return e;
+		
 	}
 	
 }

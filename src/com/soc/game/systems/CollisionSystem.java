@@ -75,6 +75,7 @@ public class CollisionSystem extends VoidEntitySystem {
 		collisionGroups.add(new AttackCollision(Constants.Groups.ENEMY_ATTACKS,
 				Constants.Groups.PLAYERS));
 		collisionGroups.add(new CharacterCollision());
+		collisionGroups.add(new WallCollision());
 		collisionGroups.add(new CharacterMapCollision());
 		collisionGroups.add(new ProjectileMapCollision());
 		
@@ -94,6 +95,61 @@ public class CollisionSystem extends VoidEntitySystem {
 
 	private interface CollisionGroup {
 		public void processCollisions();
+	}
+	
+	private class WallCollision implements CollisionGroup{
+
+		ImmutableBag<Entity> enemies;
+		ImmutableBag<Entity> walls;
+		
+		public WallCollision(){
+			enemies = SoC.game.groupmanager.getEntities(Constants.Groups.CHARACTERS);
+			walls = SoC.game.groupmanager.getEntities(Constants.Groups.WALLS);
+		}
+		
+			@Override
+			public void processCollisions() {
+				for (int i = 0; i < walls.size(); i++) {
+					process(SoC.game.player, walls.get(i));
+				}
+				for (int i = 0; i < enemies.size(); i++) {
+					for (int j = 0; j < walls.size(); j++) {
+						process(enemies.get(i), walls.get(j));
+					}
+				}
+			}
+
+			public void process(Entity character, Entity wall) {
+				Position pos = pm.get(character);
+				Velocity v = vm.get(character);
+				Feet feet = fm.get(character);
+				Position wallpos = pm.get(wall);
+				Bounds wallbounds = bm.get(wall);
+
+				Rectangle nexty = new Rectangle(pos.x, pos.y + v.vy * world.delta,
+						feet.width, feet.heigth);
+				Rectangle nextx = new Rectangle(pos.x + v.vx * world.delta, pos.y,
+						feet.width, feet.heigth);
+				Rectangle current = new Rectangle(pos.x, pos.y, feet.width, feet.heigth);
+				Rectangle otherrect = new Rectangle(wallpos.x, wallpos.y,
+						wallbounds.width, wallbounds.height);
+				if (nexty.overlaps(otherrect)) {
+					v.vy = 0;
+				}
+				if (nextx.overlaps(otherrect)) {
+					v.vx = 0;
+				}
+				if(current.overlaps(otherrect)){
+					v.vx = v.speed * (Math.abs(otherrect.x - current.x));
+					v.vy = v.speed * (Math.abs(otherrect.y - current.y));
+					if(v.vx == 0 && v.vy == 0){
+						v.vx = v.speed;
+						v.vy = v.speed;
+
+					}	
+				}			
+		}
+		
 	}
 	
 
@@ -143,8 +199,7 @@ public class CollisionSystem extends VoidEntitySystem {
 					v.vx = v.speed;
 					v.vy = v.speed;
 
-				}
-				
+				}	
 			}
 		}
 	}

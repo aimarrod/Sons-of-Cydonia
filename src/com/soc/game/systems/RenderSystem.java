@@ -31,6 +31,7 @@ import com.soc.game.components.Debuff;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
+import com.soc.game.components.Wall;
 import com.soc.game.graphics.Renderer;
 import com.soc.utils.FloatingText;
 import com.soc.utils.GraphicsLoader;
@@ -47,6 +48,8 @@ public class RenderSystem extends VoidEntitySystem{
 	@Mapper ComponentMapper<Player> plm;
 	@Mapper ComponentMapper<Debuff> dm;
 	@Mapper ComponentMapper<Buff> bum;
+	@Mapper ComponentMapper<Wall> wm;
+
 	
 	private OrthogonalTiledMapRenderer renderer;
 	private OrthographicCamera camera;
@@ -96,10 +99,10 @@ public class RenderSystem extends VoidEntitySystem{
 				Entity e = list.get(j);
 				if(cm.has(e)){
 					renderCharacter(e);
-				} else {
-					if(am.has(e)){
-						am.get(e).processor.frame(e, batch);
-					}
+				} else if(am.has(e)){
+					am.get(e).processor.frame(e, batch);
+				} else if(wm.has(e)){
+					wm.get(e).draw(e, batch);
 				}
 			}
 			batch.end();
