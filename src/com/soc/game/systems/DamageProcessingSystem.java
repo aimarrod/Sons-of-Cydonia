@@ -9,6 +9,7 @@ import com.artemis.systems.EntityProcessingSystem;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Damage;
+import com.soc.game.components.Delay;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Position;
@@ -28,6 +29,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 	@Mapper ComponentMapper<Enemy> em;
 	@Mapper ComponentMapper<Position> pm;
 	@Mapper ComponentMapper<Character> cm;
+	@Mapper ComponentMapper<Delay> dlm;
 
 
 	
@@ -47,7 +49,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		int dmg = dr.damage - stats.armor;
 		if(dmg < 0) dmg = 0;
 		dmg += dr.pureDamage;
-		if(dmg < 1) dmg = 1; 
+		if(dmg < 0) dmg = 0; 
 		stats.health-=dmg;
 		e.removeComponent(dr);
 		e.changedInWorld();
@@ -62,6 +64,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 			state.state=State.DYING;
 			if(cm.has(e)) e.addComponent(new Expires((cm.get(e).deathTime)));
 			else e.addComponent(new Expires(1));
+			if(dlm.has(e)) e.removeComponent(Delay.class);
 			
 			e.changedInWorld();
 			velocity.vx=0;

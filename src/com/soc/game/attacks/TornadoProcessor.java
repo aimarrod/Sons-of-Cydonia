@@ -50,20 +50,19 @@ public class TornadoProcessor implements AttackProcessor{
 			Velocity torvel = SoC.game.velocitymapper.get(attack);
 			vel.vx = torvel.vx;
 			vel.vy = torvel.vy;
-			
-			Position attackpos = SoC.game.positionmapper.get(attack);
-			Position victimpos = SoC.game.positionmapper.get(hit);
 		}
 	}
 
 	@Override
 	public boolean collision(Entity attack, Entity victim) {
 		if(hit != null) return false;
+		if(SoC.game.debuffmapper.has(victim) && SoC.game.debuffmapper.get(victim).debuffClasses.contains(Push.class)) return false;
 		
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
+		
 		
 		return (attackpos.z == victimpos.z && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	

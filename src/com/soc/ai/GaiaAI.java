@@ -6,6 +6,7 @@ import com.artemis.Entity;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.math.Vector2;
+import com.osc.game.benefits.Inmune;
 import com.soc.core.Constants.World;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
@@ -19,28 +20,67 @@ import com.soc.game.components.Position;
 public class GaiaAI implements AI{
 
 	public float timer;
-	boolean avatarSpawned;
+	boolean avatarSpawned, fighting;
 	public Random r;
+	int topTile, bottomTile, leftTile, rigthTile;
+	boolean horizontal;
 	
 	public GaiaAI(){
 		timer = 0;
 		r = new Random();
+		topTile = 53;
+		bottomTile = 14;
+		leftTile = 114;
+		rigthTile = 114+78;
+		horizontal = true;
 	}
 	
 	@Override
 	public void process(Entity e) {
 		timer -= SoC.game.world.delta;
-		if(!(SoC.game.progress.gaiaAirDefeated && SoC.game.progress.gaiaDarkDefeated && SoC.game.progress.gaiaFlameDefeated)){
-			if(SoC.game.damagemapper.has(e)){
-				e.getComponent(Damage.class).damage = 0;
-				SoC.game.hudSystem.tooltip.pop("An eerie voice resonates: I am Gaia, keeper of this temple. Find and defeat my aspects if thou wish to continue.", 0, 7f);
+		
+		if(fighting){
+			if(timer <= 0){
+				if(horizontal){
+					boolean left = false;
+					for(float i = 0; i < topTile - bottomTile; i += 3.5f){
+						Entity tornado = EntityFactory.createTornado(
+								((left)?(leftTile):(rigthTile))*World.TILE_SIZE + World.TILE_SIZE*0.5f, 
+								bottomTile + (i * World.TILE_SIZE) + World.TILE_SIZE*0.5f,
+								SoC.game.positionmapper.get(SoC.game.player).z, 
+								((left)?new Vector2(1, 0):new Vector2(-1,0)),
+								1f);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.ENEMY_ATTACKS);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.MAP_BOUND);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.PROJECTILES);
+						SoC.game.levelmanager.setLevel(tornado, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);
+						tornado.addToWorld();
+						left = !left;
+					}
+				} else {
+					boolean top = false;
+					for(float i = 0; i < rigthTile - leftTile; i += 3.5f){
+						Entity tornado = EntityFactory.createTornado(
+								leftTile + (i * World.TILE_SIZE) + World.TILE_SIZE*0.5f,
+								((top)?(topTile):(bottomTile))*World.TILE_SIZE + World.TILE_SIZE*0.5f, 
+								SoC.game.positionmapper.get(SoC.game.player).z, 
+								((top)?new Vector2(0, -1):new Vector2(0,1)),
+								1f);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.ENEMY_ATTACKS);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.MAP_BOUND);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.PROJECTILES);
+						SoC.game.levelmanager.setLevel(tornado, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);
+						tornado.addToWorld();
+						System.out.println(top);
+						top = !top;
+					}
+					
+				}
+				horizontal = !horizontal;
+				timer = 1.5f;
 			}
-			return;
-		} else {
-			if(!avatarSpawned){
-				//Spawn avatar
-				avatarSpawned = true;
-			}
+			
+			
 			if(SoC.game.damagemapper.has(e)){
 				Position pos = SoC.game.positionmapper.get(e);
 				Position playerPos = SoC.game.positionmapper.get(SoC.game.player);
@@ -51,6 +91,26 @@ public class GaiaAI implements AI{
 				if(Math.abs(dsty) > 16) p.direction.y = Math.signum(dsty);
 				if(p.direction.x != 0 && p.direction.y != 0) p.distance = 2500;
 				Debuff.addDebuff(SoC.game.player, p);
+			}
+			return;
+		}
+		
+		if(!(SoC.game.progress.gaiaAirDefeated && SoC.game.progress.gaiaDarkDefeated && SoC.game.progress.gaiaFlameDefeated)) 
+			return;
+		else {
+			if(!SoC.game.progress.gaiaAvatarDefeated && !avatarSpawned){
+				Entity gaia = EntityFactory.createGaiaAvatar(158*World.TILE_SIZE, 40*World.TILE_SIZE, 0);
+				SoC.game.groupmanager.add(gaia, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager.setLevel(gaia, Constants.Groups.LEVEL +0);
+				SoC.game.groupmanager.add(gaia, Constants.Groups.ENEMIES);
+				SoC.game.groupmanager.add(gaia, Constants.Groups.CHARACTERS);
+				gaia.addToWorld();
+				
+				avatarSpawned = true;
+			} else if(SoC.game.progress.gaiaAvatarDefeated){
+					SoC.game.buffmapper.get(e).removebuff(Inmune.class);
+					fighting = true;
+					return;
 			}
 		}
 	}
