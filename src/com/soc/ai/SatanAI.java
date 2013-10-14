@@ -16,10 +16,20 @@ public class SatanAI implements AI{
 	float shieldCD;
 	float lastTimeShield;
 	float timer;
+	float limitXLeft;
+	float limitXRight;
+	float limitYBottom;
+	float limitYUp;
+
 	public SatanAI(){
 		shieldCD=15f;
 		lastTimeShield=0f;
 		timer=0;
+		limitXLeft=1*Constants.World.TILE_SIZE;
+		limitXRight=33*Constants.World.TILE_SIZE;
+		limitYBottom=54*Constants.World.TILE_SIZE;
+		limitYUp=83*Constants.World.TILE_SIZE;
+		
 	}
 	@Override
 	public void process(Entity e) {
@@ -30,7 +40,13 @@ public class SatanAI implements AI{
 		State state = SoC.game.statemapper.get(e);
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
-		
+		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
+			System.out.println("Paso por aqui");
+			state.state=State.IDLE;
+			vel.vx=0;
+			vel.vy=0;
+			return;
+		}
 		if(state.state == State.DYING) return;
 		
 		timer-=SoC.game.world.delta;
@@ -52,7 +68,6 @@ public class SatanAI implements AI{
 			if(Math.abs(dstx) < 40 && Math.abs(dsty) < 20 ){
 				Spell spell = SoC.game.spells[Constants.Spells.VENOMSWORD];
 				state.state = spell.state;
-				System.out.println("Delay");
 				e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.VENOMSWORD));
 				vel.vx = 0;
 				vel.vy = 0;

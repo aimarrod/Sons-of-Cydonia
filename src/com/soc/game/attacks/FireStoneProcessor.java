@@ -33,7 +33,7 @@ public class FireStoneProcessor implements AttackProcessor{
 		timer+=SoC.game.world.delta;
 		if(hit!=null){
 			deathTimer+=SoC.game.world.delta;
-			if(deathTimer>0.5f){
+			if(deathTimer>1f){
 			attack.deleteFromWorld();
 			delete();
 			}
