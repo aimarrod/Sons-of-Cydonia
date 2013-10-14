@@ -873,7 +873,7 @@ public class GraphicsLoader {
 		AnimatedRenderer flame = new AnimatedRenderer(false);
 		flame.ox=0;
 		flame.oy-=20;
-		TextureRegion[][] tmp = TextureRegion.split(load("satan-push.png"), 128, 128);
+		TextureRegion[][] tmp = TextureRegion.split(load("satan-push2.png"), 128, 128);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
         for (int i = 0; i < tmp.length; i++) {
