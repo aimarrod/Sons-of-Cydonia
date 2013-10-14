@@ -467,22 +467,9 @@ public class EntityFactory {
 		e.addComponent(new Bounds(64, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(0, 5, new MidMonsterAI()));
-		e.addComponent(new Stats(
-				100, 
-				0, 
-				0, 
-				100, 
-				0, 
-				0, 
-				1, 
-				0, 
-				0, 
-				0, 
-				0, 
-				0, 
-				null));
-		Character animations = new Character();
+	    e.addComponent(new Stats(50, 0, 0, 50, 0, 0, 1, 1, 1, 1, 1231312312, Constants.Spells.FLAME, new int[]{}));
+	    e.addComponent(new Enemy(0, 5, new MidMonsterAI()));
+	    Character animations = new Character();
 		GraphicsLoader.loadMidMonster(animations);
 		e.addComponent(animations);
 		
@@ -704,12 +691,12 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createFlame(float x, float y, int z, Vector2 direction) {
+	public static Entity createFlame(float x, float y, int z,int damage) {
 		Entity e=SoC.game.world.createEntity();
 		
-		e.addComponent( new Position(x, y, z, direction));
-		e.addComponent( new Bounds(32, 70) );
-	   	e.addComponent( new Attack(new FlameProcessor(), 0) );
+		e.addComponent( new Position(x, y, z));
+		e.addComponent( new Bounds(200, 200) );
+	   	e.addComponent( new Attack(new FlameProcessor(), damage) );
 	   	
 	   	return e;		
 	}

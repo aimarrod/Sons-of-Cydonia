@@ -23,6 +23,7 @@ public class FlameProcessor implements AttackProcessor{
 
 	@Override 
 	public void process(Entity attack) {
+		System.out.println("paso por aqui");
 		timer-=SoC.game.world.delta;
 		if(timer<=0){
 			attack.deleteFromWorld();
@@ -31,11 +32,11 @@ public class FlameProcessor implements AttackProcessor{
 
 	@Override
 	public boolean collision(Entity attack, Entity victim) {
-		
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
+		System.out.println(lastHit-timer);
 		return ((lastHit-timer)>0.5 && timer<=3f && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	
 
@@ -43,8 +44,9 @@ public class FlameProcessor implements AttackProcessor{
 
 	@Override
 	public void handle(Entity attack, Entity victim) {
+		System.out.println("handle");
 		lastHit=timer;
-		int damage = (int) (SoC.game.statsmapper.get(victim).maxHealth*0.1);
+		int damage = (int) (SoC.game.attackmapper.get(attack).damage);
 		if(SoC.game.damagemapper.has(victim)){
 			SoC.game.damagemapper.get(victim).damage+=damage;
 		}else{

@@ -734,7 +734,7 @@
     <property name="type" value="fire-stone-monster"/>
    </properties>
   </object>
-  <object x="608" y="4960" width="32" height="32">
+  <object x="576" y="4960" width="32" height="32">
    <properties>
     <property name="interval" value="2.5"/>
     <property name="max" value="1"/>

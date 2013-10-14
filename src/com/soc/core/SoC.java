@@ -7,7 +7,6 @@ import com.artemis.Entity;
 import com.artemis.World;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
-import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -39,6 +38,7 @@ import com.soc.game.spells.ArrowSpell;
 import com.soc.game.spells.BiteSpell;
 import com.soc.game.spells.ChargeSpell;
 import com.soc.game.spells.DaggerThrowSpell;
+import com.soc.game.spells.FlameSpell;
 import com.soc.game.spells.PunchSpell;
 import com.soc.game.spells.QuakebladeSpell;
 import com.soc.game.spells.SlashSpell;
@@ -146,6 +146,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.VENOMSWORD] = new VenomSwordSpell();
 		spells[Constants.Spells.WINDBLADE] = new WindbladeSpell();
 		spells[Constants.Spells.TENTACLES] = new TentacleSpell();
+		spells[Constants.Spells.FLAME] = new FlameSpell();
 		
 		objects=new Item[Constants.Items.ITEM_NUMBER];
 		objects[Constants.Items.NONE]=null;
