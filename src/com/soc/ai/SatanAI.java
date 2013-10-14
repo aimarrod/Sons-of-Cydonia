@@ -41,7 +41,6 @@ public class SatanAI implements AI{
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
 		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
-			System.out.println("Paso por aqui");
 			state.state=State.IDLE;
 			vel.vx=0;
 			vel.vy=0;
