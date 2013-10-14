@@ -118,6 +118,7 @@ public class Constants {
 		public static final float TENTACLES_DURATION = 1.5f;
 		public static final float TENTACLES_PREPARE = 1.03f;
 		public static final float TENTACLES_RADIUS = 170f;
+		public static final float AIR_CIRCLE_TIME = 2f;
 	}
 	
 	

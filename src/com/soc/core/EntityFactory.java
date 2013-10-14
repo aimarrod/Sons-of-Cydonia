@@ -21,6 +21,7 @@ import com.soc.ai.SlimeAI;
 import com.soc.ai.ZombiAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
+import com.soc.game.attacks.AirCircleProcessor;
 import com.soc.game.attacks.ArrowProcessor;
 import com.soc.game.attacks.BiteProcessor;
 import com.soc.game.attacks.ChargeProcessor;
@@ -665,7 +666,7 @@ public class EntityFactory {
 		Entity e=SoC.game.world.createEntity();
 		
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
-		e.addComponent(new Position(pos.x+bon.width*0.5f, pos.y+bon.height+0.5f, pos.z));
+		e.addComponent( new Position(pos.x+bon.width*0.5f, pos.y+bon.height+0.5f, pos.z));
 	   	e.addComponent( new Attack(new PoisonCloudProcessor(), 0) );
 	   	
 	   	return e;		
@@ -752,6 +753,18 @@ public class EntityFactory {
 		e.addComponent( new Attack(new TentaclesProcessor(), damage));
 		
 		return e;
+	}
+	
+	
+	public static Entity createCircle(float x, float y, int posz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x+Constants.Characters.WIDTH, y+Constants.Characters.HEIGHT, posz) );
+		e.addComponent( new Bounds(50, 50));
+		e.addComponent( new Attack(new AirCircleProcessor(), 0) );
+			
+		return e;
+		
 	}
 	
 	public static Entity createWall(Entity source, int x, int y, int z){
