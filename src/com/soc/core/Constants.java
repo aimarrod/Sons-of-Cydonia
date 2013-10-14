@@ -29,7 +29,7 @@ public class Constants {
 		public static final String EYEBALLS = "eyeball";
 		public static final String RED_MONSTER = "mid-monster";
 		public static final String FLAME_WALL = "flame-wall";
-		public static final String FIRE_STONE = "fire-stone";
+		public static final String FIRE_STONE = "fire-stone-monster";
 		
 		public static final String ENEMY_ATTACKS = "enemyattack";
 		public static final String PLAYER_ATTACKS = "playerattack";

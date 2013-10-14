@@ -15,8 +15,7 @@ public class Unmovable implements Benefit{
 	public void process(Entity e) {
 		if(!SoC.game.debuffmapper.has(e)) return;
 		Debuff d = SoC.game.debuffmapper.get(e);
-		if(d.debuffClasses.contains(Push.class)){
-			System.out.println("EHEIs");
+		if(d != null && d.debuffClasses.contains(Push.class)){
 			d.removeDebuff(Push.class);
 			Position pos = SoC.game.positionmapper.get(e);
 			SoC.game.renderSystem.texts.add(new FloatingText("Unmovable!", Constants.Configuration.LABEL_DURATION, pos.x+20, pos.y+20, Constants.Configuration.LABEL_SPEED));

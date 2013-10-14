@@ -7,6 +7,7 @@ import com.osc.game.benefits.Unmovable;
 import com.soc.ai.BallistaAI;
 import com.soc.ai.BatAI;
 import com.soc.ai.EyeballAI;
+import com.soc.ai.FireStoneMonsterAI;
 import com.soc.ai.GaiaAI;
 import com.soc.ai.GaiaAirAI;
 import com.soc.ai.GaiaAvatarAI;
@@ -486,6 +487,37 @@ public class EntityFactory {
 		return e;
 	}
 	
+	public static Entity createFireStoneMonster(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Bounds(128, 128));
+		e.addComponent(new Feet(32, 64));
+		e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 5, new FireStoneMonsterAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null));
+		//Buff.addbuff(e, new Unmovable());
+		Character animations = new Character();
+		GraphicsLoader.loadFireStoneMonster(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
 	
 	
 	/*
@@ -664,7 +696,7 @@ public class EntityFactory {
 		
 		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
 		e.addComponent( new Position(x, y, z, direction));
-		e.addComponent( new Bounds(44, 32) );
+		e.addComponent( new Bounds(64, 128) );
 	   	e.addComponent( new Attack(new FireStoneProcessor(), 0) );
 	   	
 	   	return e;		

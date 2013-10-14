@@ -23,6 +23,7 @@ public class GaiaAI implements AI{
 	boolean avatarSpawned, fighting;
 	public Random r;
 	int topTile, bottomTile, leftTile, rigthTile;
+	boolean horizontal;
 	
 	public GaiaAI(){
 		timer = 0;
@@ -31,6 +32,7 @@ public class GaiaAI implements AI{
 		bottomTile = 14;
 		leftTile = 114;
 		rigthTile = 114+78;
+		horizontal = true;
 	}
 	
 	@Override
@@ -39,21 +41,42 @@ public class GaiaAI implements AI{
 		
 		if(fighting){
 			if(timer <= 0){
-				boolean left = false;
-				for(float i = bottomTile; i < topTile - bottomTile; i += 3.5f){
-					Entity tornado = EntityFactory.createTornado(
-							((left)?(leftTile):(rigthTile))*World.TILE_SIZE + World.TILE_SIZE*0.5f, 
-							bottomTile + (i * World.TILE_SIZE) + World.TILE_SIZE*0.5f,
-							SoC.game.positionmapper.get(SoC.game.player).z, 
-							((left)?new Vector2(1, 0):new Vector2(-1,0)),
-							1f);
-				    SoC.game.groupmanager.add(tornado, Constants.Groups.ENEMY_ATTACKS);
-				    SoC.game.groupmanager.add(tornado, Constants.Groups.MAP_BOUND);
-				    SoC.game.groupmanager.add(tornado, Constants.Groups.PROJECTILES);
-				    SoC.game.levelmanager.setLevel(tornado, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);
-				    tornado.addToWorld();
-				    left = !left;
+				if(horizontal){
+					boolean left = false;
+					for(float i = 0; i < topTile - bottomTile; i += 3.5f){
+						Entity tornado = EntityFactory.createTornado(
+								((left)?(leftTile):(rigthTile))*World.TILE_SIZE + World.TILE_SIZE*0.5f, 
+								bottomTile + (i * World.TILE_SIZE) + World.TILE_SIZE*0.5f,
+								SoC.game.positionmapper.get(SoC.game.player).z, 
+								((left)?new Vector2(1, 0):new Vector2(-1,0)),
+								1f);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.ENEMY_ATTACKS);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.MAP_BOUND);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.PROJECTILES);
+						SoC.game.levelmanager.setLevel(tornado, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);
+						tornado.addToWorld();
+						left = !left;
+					}
+				} else {
+					boolean top = false;
+					for(float i = 0; i < rigthTile - leftTile; i += 3.5f){
+						Entity tornado = EntityFactory.createTornado(
+								leftTile + (i * World.TILE_SIZE) + World.TILE_SIZE*0.5f,
+								((top)?(topTile):(bottomTile))*World.TILE_SIZE + World.TILE_SIZE*0.5f, 
+								SoC.game.positionmapper.get(SoC.game.player).z, 
+								((top)?new Vector2(0, -1):new Vector2(0,1)),
+								1f);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.ENEMY_ATTACKS);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.MAP_BOUND);
+						SoC.game.groupmanager.add(tornado, Constants.Groups.PROJECTILES);
+						SoC.game.levelmanager.setLevel(tornado, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);
+						tornado.addToWorld();
+						System.out.println(top);
+						top = !top;
+					}
+					
 				}
+				horizontal = !horizontal;
 				timer = 1.5f;
 			}
 			

@@ -528,6 +528,33 @@ public class GraphicsLoader {
 		
 	}
 	
+	public static void loadFireStoneMonster(Character character){
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		character.renderers = new Renderer[State.STATENUM];
+		
+		TextureRegion [][]tmp = TextureRegion.split(load("fire-stone-monster.png"), 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+			System.out.println(i);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		
+		tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+        TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+
+	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
+	    character.deathTime=1f;
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+	}
+	
 	public static AnimatedRenderer loadDaggerThrow(){
 		AnimatedRenderer dagger = new AnimatedRenderer(true);
 		TextureRegion[][] tmp = TextureRegion.split(load("dagger-attack.png"), 64, 64);
@@ -740,6 +767,8 @@ public class GraphicsLoader {
 
 	public static AnimatedRenderer loadFireStoneInitial(){
 		AnimatedRenderer fireStone = new AnimatedRenderer(false);
+		fireStone.ox+=0;
+		fireStone.oy+=10;
 		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-initial.png"), 128, 128);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
@@ -748,11 +777,13 @@ public class GraphicsLoader {
                         frames[index++] = tmp[i][j];
                 }
         }
-       	fireStone.animation = new Animation(0.5f, frames);
+       	fireStone.animation = new Animation(0.25f, frames);
         return fireStone;
 	}
 	public static AnimatedRenderer loadFireStoneRunning(){
 		AnimatedRenderer fireStone = new AnimatedRenderer(true);
+		fireStone.ox+=0;
+		fireStone.oy+=10;
 		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-running.png"), 128, 128);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
@@ -766,7 +797,10 @@ public class GraphicsLoader {
 	}
 	
 	public static AnimatedRenderer loadFireStoneDeath(){
+		
 		AnimatedRenderer fireStone = new AnimatedRenderer(false);
+		fireStone.ox+=0;
+		fireStone.oy+=50;
 		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-death.png"), 128, 128);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;

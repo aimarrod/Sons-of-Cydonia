@@ -78,6 +78,9 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				} else if(spawn.type.equals(Constants.Groups.RED_MONSTER)){
 					spawned=EntityFactory.createMidMonster(pos.x,pos.y,pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);	
+				} else if(spawn.type.equals(Constants.Groups.FIRE_STONE)){
+					spawned=EntityFactory.createFireStoneMonster(pos.x,pos.y,pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				}
 				
 					
@@ -88,21 +91,12 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
 					SoC.game.spawnermanager.spawn(spawner, spawned);
 					spawned.addToWorld();
-				}else if(spawn.type.equals(Constants.Groups.FIRE_STONE)){
-					spawned=EntityFactory.createFireStone(pos.x,pos.y,pos.z, new Vector2(1,0));
-					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
-					SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-					SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-					SoC.game.groupmanager.add(spawned, Constants.Groups.PROJECTILES);
-					SoC.game.spawnermanager.spawn(spawner, spawned);
-					spawned.addToWorld();
-				}else{
-					if(spawned != null){
+				}else if(spawned != null){
 						SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 						SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
 						SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
 						SoC.game.spawnermanager.spawn(spawner, spawned);
-						spawned.addToWorld();
+						spawned.addToWorld();	
 					} 
 				}
 			} else {
@@ -110,4 +104,4 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 			}
 		}
 	}
-}
+
