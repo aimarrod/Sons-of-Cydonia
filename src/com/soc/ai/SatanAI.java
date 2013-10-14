@@ -3,6 +3,7 @@ package com.soc.ai;
 import com.artemis.Entity;
 import com.osc.game.benefits.ShieldBuff;
 import com.soc.core.Constants;
+import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Delay;
@@ -20,6 +21,7 @@ public class SatanAI implements AI{
 	float limitXRight;
 	float limitYBottom;
 	float limitYUp;
+	float timerPushAttack;
 
 	public SatanAI(){
 		shieldCD=15f;
@@ -29,7 +31,7 @@ public class SatanAI implements AI{
 		limitXRight=33*Constants.World.TILE_SIZE;
 		limitYBottom=54*Constants.World.TILE_SIZE;
 		limitYUp=83*Constants.World.TILE_SIZE;
-		
+		timerPushAttack=0;
 	}
 	@Override
 	public void process(Entity e) {
@@ -53,10 +55,19 @@ public class SatanAI implements AI{
 			Buff.addbuff(e, new ShieldBuff());
 			lastTimeShield=timer;
 		}
+
 		
 		float dsty = playerPos.y - pos.y;
 		float dstx = playerPos.x - pos.x;
-		
+		timerPushAttack-=SoC.game.world.delta;
+		if(timerPushAttack<=0 && dstx<5*Constants.World.TILE_SIZE && dsty<Constants.World.TILE_SIZE){
+			timerPushAttack=5f;
+			Entity spawned=EntityFactory.createRedPush(playerPos.x-(Constants.Characters.WIDTH/2), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+			SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+			SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+			SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+			spawned.addToWorld();
+		}
 		pos.direction.x = Math.signum(dstx);
 		pos.direction.y = Math.signum(dsty); 
 		

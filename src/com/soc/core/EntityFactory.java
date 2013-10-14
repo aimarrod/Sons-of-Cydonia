@@ -35,6 +35,7 @@ import com.soc.game.attacks.MeteorProcessor;
 import com.soc.game.attacks.PoisonCloudProcessor;
 import com.soc.game.attacks.PunchProcessor;
 import com.soc.game.attacks.QuakeBladeProcessor;
+import com.soc.game.attacks.RedPushAttackProcessor;
 import com.soc.game.attacks.SlashProcessor;
 import com.soc.game.attacks.TentaclesProcessor;
 import com.soc.game.attacks.TornadoProcessor;
@@ -697,6 +698,16 @@ public class EntityFactory {
 		e.addComponent( new Position(x, y, z));
 		e.addComponent( new Bounds(200, 200) );
 	   	e.addComponent( new Attack(new FlameProcessor(), damage) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createRedPush(float x, float y, int z,int damage) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z));
+		e.addComponent( new Bounds(200, 200) );
+	   	e.addComponent( new Attack(new RedPushAttackProcessor(), damage) );
 	   	
 	   	return e;		
 	}
