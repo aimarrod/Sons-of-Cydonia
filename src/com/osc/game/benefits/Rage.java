@@ -39,9 +39,15 @@ public class Rage implements Benefit{
 				}
 			}else{
 				stats.strength=initialStrength;
-				SoC.game.buffmapper.get(e).removebuff(this);
+				SoC.game.buffmapper.get(e).removebuff(e,this);
 			}
 		}
+		
+	}
+	@Override
+	public void delete(Entity e) {
+		Stats stats=SoC.game.statsmapper.get(e);
+		stats.strength=initialStrength;
 		
 	}
 

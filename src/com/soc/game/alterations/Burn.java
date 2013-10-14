@@ -29,8 +29,14 @@ public class Burn implements Alteration{
 			}
 		}
 		if(timer <= 0){
-			SoC.game.debuffmapper.get(e).removeDebuff(this);
+			SoC.game.debuffmapper.get(e).removeDebuff(this,e);
 		}
+	}
+
+	@Override
+	public void delete(Entity e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

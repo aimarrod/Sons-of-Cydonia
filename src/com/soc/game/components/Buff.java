@@ -23,7 +23,8 @@ public class Buff extends Component{
 		}
 		return null;
 	}
-	public void removebuff(Benefit ben){
+	public void removebuff(Entity e,Benefit ben){
+		ben.delete(e);
 		buffs.remove(ben);
 		buffClasses.remove(ben.getClass());
 	}
@@ -44,9 +45,10 @@ public class Buff extends Component{
 		b.buffClasses.add(benefit.getClass());
 	}
 	
-	public void removebuff(Class<? extends Benefit> clazz){
+	public void removebuff(Class<? extends Benefit> clazz,Entity e){
 		for(int i = 0; i < buffs.size(); i++){
 			if(buffs.get(i).getClass().equals(clazz)){
+				buffs.get(i).delete(e);
 				buffs.remove(i);
 				buffClasses.remove(clazz);
 				return;

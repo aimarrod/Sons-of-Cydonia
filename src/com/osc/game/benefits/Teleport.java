@@ -29,7 +29,12 @@ public class Teleport implements Benefit{
 			pos.x = posx;
 			pos.y = posy;
 			pos.z = posz;
-			SoC.game.buffmapper.get(e).removebuff(this);
+			SoC.game.buffmapper.get(e).removebuff(e,this);
 		}
+	}
+	@Override
+	public void delete(Entity e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

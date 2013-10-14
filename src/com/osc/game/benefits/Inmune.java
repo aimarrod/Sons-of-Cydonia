@@ -24,4 +24,10 @@ public class Inmune implements Benefit{
 		}
 	}
 
+	@Override
+	public void delete(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

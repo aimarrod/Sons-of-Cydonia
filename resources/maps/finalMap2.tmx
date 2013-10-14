@@ -99,22 +99,17 @@
     <property name="type" value="lava"/>
    </properties>
   </object>
-  <object x="3200" y="3328"/>
   <object x="2720" y="704"/>
   <object x="1056" y="3744" width="128" height="960">
    <properties>
     <property name="type" value="lava"/>
    </properties>
   </object>
-  <object x="2720" y="3168" width="32"/>
-  <object x="2720" y="3168" width="32"/>
   <object x="32" y="3328" width="1440" height="448">
    <properties>
     <property name="type" value="lava"/>
    </properties>
   </object>
-  <object x="2400" y="5216"/>
-  <object x="2400" y="5216"/>
   <object x="2720" y="5248" width="96" height="480">
    <properties>
     <property name="type" value="hole"/>
@@ -721,24 +716,6 @@
     <property name="type" value="flame-wall"/>
    </properties>
   </object>
-  <object x="1216" y="5504" width="32" height="32">
-   <properties>
-    <property name="interval" value="2.5"/>
-    <property name="max" value="1"/>
-    <property name="range" value="1000"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="fire-stone"/>
-   </properties>
-  </object>
-  <object x="1216" y="5504" width="32" height="32">
-   <properties>
-    <property name="interval" value="2.5"/>
-    <property name="max" value="1"/>
-    <property name="range" value="1000"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="fire-stone"/>
-   </properties>
-  </object>
   <object x="224" y="2816" width="32" height="32">
    <properties>
     <property name="interval" value="2.5"/>
@@ -755,6 +732,15 @@
     <property name="range" value="2000"/>
     <property name="respawn" value="true"/>
     <property name="type" value="fire-stone-monster"/>
+   </properties>
+  </object>
+  <object x="608" y="4960" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="anti-venom-fountain"/>
    </properties>
   </object>
  </objectgroup>

@@ -204,7 +204,7 @@ import com.soc.utils.FloatingText;
 		public boolean keyUp(int keycode) {
 			if(keycode == Input.Keys.B){
 				if(blocked){
-					bm.get(SoC.game.player).removebuff(Shield.class);;
+					bm.get(SoC.game.player).removebuff(Shield.class,SoC.game.player);;
 					blocked = false;
 				}
 				return true;

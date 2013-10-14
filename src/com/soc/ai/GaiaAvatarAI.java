@@ -43,7 +43,7 @@ public class GaiaAvatarAI implements AI{
 		
 		if(teleport){
 			teleport = false;
-			SoC.game.buffmapper.get(e).removebuff(Inmune.class);
+			SoC.game.buffmapper.get(e).removebuff(Inmune.class,e);
 			state.state = State.IDLE;
 		}
 

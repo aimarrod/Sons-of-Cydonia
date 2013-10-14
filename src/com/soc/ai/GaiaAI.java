@@ -108,7 +108,7 @@ public class GaiaAI implements AI{
 				
 				avatarSpawned = true;
 			} else if(SoC.game.progress.gaiaAvatarDefeated){
-					SoC.game.buffmapper.get(e).removebuff(Inmune.class);
+					SoC.game.buffmapper.get(e).removebuff(Inmune.class,e);
 					fighting = true;
 					return;
 			}

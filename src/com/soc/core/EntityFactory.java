@@ -21,6 +21,7 @@ import com.soc.ai.SlimeAI;
 import com.soc.ai.ZombiAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
+import com.soc.game.attacks.AntiVenomFountain;
 import com.soc.game.attacks.ArrowProcessor;
 import com.soc.game.attacks.BiteProcessor;
 import com.soc.game.attacks.ChargeProcessor;
@@ -718,6 +719,16 @@ public class EntityFactory {
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(32, 70) );
 	   	e.addComponent( new Attack(new FlameWallProcessor(), 0) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createAntiVenomFountain(float x, float y, int z, Vector2 direction) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z, direction));
+		e.addComponent( new Bounds(32, 70) );
+	   	e.addComponent( new Attack(new AntiVenomFountain(), 0) );
 	   	
 	   	return e;		
 	}

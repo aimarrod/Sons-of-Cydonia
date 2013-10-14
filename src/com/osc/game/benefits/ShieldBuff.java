@@ -33,14 +33,19 @@ public class ShieldBuff implements Benefit{
 			if(timer>0 && buffAdded){
 				if(stats.health<=initialHealth){
 					stats.maxHealth-=gainHealth;
-					SoC.game.buffmapper.get(e).removebuff(this);
+					SoC.game.buffmapper.get(e).removebuff(e,this);
 				}
 			}else{
 				stats.maxHealth-=gainHealth;
 				stats.health=initialHealth;
-				SoC.game.buffmapper.get(e).removebuff(this);
+				SoC.game.buffmapper.get(e).removebuff(e,this);
 			}
 		}
+		
+	}
+	@Override
+	public void delete(Entity e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

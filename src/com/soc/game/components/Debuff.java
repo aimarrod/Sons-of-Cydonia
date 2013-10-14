@@ -24,7 +24,8 @@ public class Debuff extends Component{
 		return null;
 	}
 	
-	public void removeDebuff(Alteration alt){
+	public void removeDebuff(Alteration alt, Entity e){
+		alt.delete(e);
 		debuffs.remove(alt);
 		debuffClasses.remove(alt.getClass());
 	}
@@ -46,9 +47,10 @@ public class Debuff extends Component{
 		d.debuffClasses.add(alteration.getClass());
 	}
 	
-	public void removeDebuff(Class clazz){
+	public void removeDebuff(Class clazz, Entity e){
 		for(int i = 0; i < debuffs.size(); i++){
 			if(debuffs.get(i).getClass().equals(clazz)){
+				debuffs.get(i).delete(e);
 				debuffs.remove(i);
 				debuffClasses.remove(clazz);
 				return;

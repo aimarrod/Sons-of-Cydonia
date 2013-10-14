@@ -30,8 +30,14 @@ public class Poison implements Alteration{
 		interval = Constants.Alteration.POISON_TICK_INTERVAL;
 		}
 		if(timer <= 0){
-			SoC.game.debuffmapper.get(e).removeDebuff(this);
+			SoC.game.debuffmapper.get(e).removeDebuff(this,e);
 		}
+	}
+
+	@Override
+	public void delete(Entity e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
