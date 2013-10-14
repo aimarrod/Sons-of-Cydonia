@@ -58,7 +58,7 @@ public class GameLoader {
 		SoC.game.player = EntityFactory.createCharacter(2300, 600, 0, 0, 0, Constants.Classes.WARRIOR);
 		SoC.game.setScreen(new GameScreen());
 		SoC.game.progress = new GameProgress();
-		MapLoader.loadMap("finalMap.tmx");
+		MapLoader.loadMap("finalMap2.tmx");
 
 
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.PLAYERS);

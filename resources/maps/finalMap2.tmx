@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="200" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="layers" value="1"/>
+  <property name="music" value="dark-ambiance.ogg"/>
+ </properties>
+ <tileset firstgid="1" name="base_out_atlas" tilewidth="32" tileheight="32">
+  <image source="tiles/base_out_atlas.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="1025" name="terrain_atlas" tilewidth="32" tileheight="32">
+  <image source="tiles/terrain_atlas.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="level0-low" width="100" height="200">
+  <data encoding="base64" compression="zlib">
+   eJzt3bERg0AQBEFkKCMSU/6OYsBhlqKNTmDnrXfu/BzHCQAX/b4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwr/qWn1uB72nxpCb1Rpq8t8Vyk3qTWr2/FrtN6h1W1B300GNZ3UEPPZbVHfTQY1ndQQ89ltUd9NBjWd1BDz2W1R300GNZ3UEPPZbVHfTY7KFJv78m2y3e2qTeW5NntbijycJ7qPcFAAAAAN6t/q8GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALjqD+dIjoY=
+  </data>
+ </layer>
+ <layer name="level0-high" width="100" height="200">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer name="level0-object-low" width="100" height="200">
+  <data encoding="base64" compression="zlib">
+   eJzt3MtNw0AUBdBZYNIElSDaQNRipw5EG6GTsKcY2DI4joSY8Y19jmRZ2WRefPX8U/RKAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOjj+VDKwzC/vRzWrm5/Hofljb7kkUUeWeSRRR5Z5JFFHlnkkUUeWeSRRR5Z5JFFHlnkkeX1UMrn3fz25n07AAAAAAAAAAAAcGMuzSJ4WnkWwdKMhFazEhLmMqT+d/haXS3qSzgWCTX8pa6t5zGF5jHuNI9b6I9xJp/Wax7lcbGuuV5pvab+WK6rd38k5DEF5eH6kdUfdR49++Moj191rdEfdQ5r5DGF5lH3xh6vH2l5jPKIymPN/vD8cb2usWMe+uNnXXVP1J9brJmYxxSSh/7I6o+e9SUci7meSMqjPle1zqN+9nA9v1yX94l9apizNGOn1aydhLk+PWs43y9vad8LAJDOfRAAAFu2hfvd01DK+9Bu32r9rTp//7aPod2+1frs1xbOgwAAAAAAAAD/6QtCTRfN
+  </data>
+ </layer>
+ <layer name="level0-object-high" width="100" height="200">
+  <data encoding="base64" compression="zlib">
+   eJzt2jEKwlAURNE00RWL29CduEQruzGVnzfEc0BSfDBDLkgKtw0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAf3S7fj+7H5yxhh5d9OiiRxc9uujRRY8uenTRo4seXfTookcXPbroAQAAAAAAAAAAAAD/ofW/w0e7Pn69r+FZNGxI9JjbkOgxtyHRY25DosfchkSPuQ2JHnMbEj3mNiR6zG1I9JjbkOgxtyHRY25DosfchkSPuQ2JHnMbEj3mNiR6zG1I9Fi/4XU5/rR9LwBAO+9BAACc2Rnedx/7tj33dddV9wc6nOF3EAAAAAAAAIDzegOUxHYE
+  </data>
+ </layer>
+ <objectgroup name="level0-unwalkable" width="100" height="200">
+  <object x="1472" y="3296" width="32" height="512"/>
+  <object x="1696" y="3296" width="32" height="512"/>
+  <object x="480" y="4640" width="32" height="640"/>
+  <object x="768" y="4640" width="32" height="640"/>
+ </objectgroup>
+ <objectgroup name="level0-obstacle" width="100" height="200">
+  <object x="832" y="5280" width="256" height="32"/>
+  <object x="128" y="5280" width="256" height="32"/>
+  <object x="128" y="5472" width="256" height="32"/>
+  <object x="128" y="5696" width="256" height="32"/>
+  <object x="832" y="5792" width="256" height="32"/>
+  <object x="1696" y="5696" width="768" height="64"/>
+  <object x="2720" y="5696" width="448" height="64"/>
+  <object x="2464" y="4608" width="32" height="672"/>
+  <object x="2688" y="4608" width="32" height="672"/>
+  <object x="1632" y="4640" width="32" height="640"/>
+  <object x="1408" y="4640" width="32" height="640"/>
+  <object x="0" y="0" width="32" height="6400"/>
+  <object x="0" y="6368" width="3200" height="32"/>
+  <object x="3168" y="0" width="32" height="6400"/>
+  <object x="0" y="0" width="3200" height="128"/>
+ </objectgroup>
+ <objectgroup name="level0-special" width="100" height="200">
+  <object x="1696" y="5856" width="1504" height="544">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="0" y="5856" width="800" height="544">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="800" y="5984" width="640" height="416">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2720" y="4672" width="480" height="576">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1664" y="4672" width="800" height="576">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="800" y="4672" width="608" height="576">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="0" y="4672" width="480" height="576">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1984" y="3744" width="128" height="928">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1728" y="3328" width="1504" height="448">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="3200" y="3328"/>
+  <object x="2720" y="704"/>
+  <object x="1056" y="3744" width="128" height="960">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2720" y="3168" width="32"/>
+  <object x="2720" y="3168" width="32"/>
+  <object x="32" y="3328" width="1440" height="448">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2400" y="5216"/>
+  <object x="2400" y="5216"/>
+  <object x="2720" y="5248" width="96" height="480">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="2720" y="5632" width="384" height="96">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="2816" y="5248" width="288" height="384">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="2368" y="5248" width="96" height="480">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="32" y="2368" width="544" height="960">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="2368" width="160" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="2400" width="128" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="2432" width="96" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="2464" width="64" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="2496" width="32" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="3296" width="128" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="3264" width="96" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="3232" width="64" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="3200" width="32" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2688" y="2368" width="480" height="960">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2560" y="3296" width="128" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2592" y="3264" width="96" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2624" y="3232" width="64" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2656" y="3200" width="32" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2528" y="2368" width="160" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2560" y="2400" width="128" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2592" y="2432" width="96" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2624" y="2464" width="64" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2656" y="2496" width="32" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="576" y="2880" width="896" height="448">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="768" y="2400" width="704" height="352">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="576" y="2560" width="192" height="192">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="576" y="2528" width="192" height="32">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="672" y="2432" width="96" height="96">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="704" y="2368" width="64" height="64">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="608" y="2464" width="64" height="64">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="1728" y="2880" width="960" height="448">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="1728" y="2400" width="928" height="352">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="level0-spawners" width="100" height="200">
+  <object x="1504" y="4064" width="96" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="mid-monster"/>
+   </properties>
+  </object>
+  <object x="480" y="3904" width="96" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="satan"/>
+   </properties>
+  </object>
+  <object x="1376" y="3936" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="3968" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4000" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4032" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4064" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4096" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4128" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4160" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4192" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4224" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4256" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4288" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4320" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4352" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4384" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4416" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4448" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4480" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4512" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4544" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4576" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1376" y="4608" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="3936" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="3968" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4000" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4032" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4064" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4096" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4128" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4160" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4192" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4224" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4256" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4288" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4320" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4352" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4384" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4416" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4448" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4480" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4512" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4544" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4576" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1664" y="4608" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="flame-wall"/>
+   </properties>
+  </object>
+  <object x="1216" y="5504" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="fire-stone"/>
+   </properties>
+  </object>
+  <object x="1216" y="5504" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="fire-stone"/>
+   </properties>
+  </object>
+  <object x="576" y="2784" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="fire-stone-monster"/>
+   </properties>
+  </object>
+  <object x="2656" y="2784" width="32" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="fire-stone-monster"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
