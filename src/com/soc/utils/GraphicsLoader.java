@@ -836,4 +836,20 @@ public class GraphicsLoader {
         meteor.animation = new Animation(Constants.Spells.TENTACLES_DURATION/frames.length, frames);
         return meteor;
 	}
+	
+	public static AnimatedRenderer loadWall(){
+		AnimatedRenderer wall = new AnimatedRenderer(true);
+		wall.ox = -16;
+		wall.oy = -16;
+		TextureRegion[][] tmp = TextureRegion.split(load("wall.png"), 64, 64);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        wall.animation = new Animation(1f/frames.length, frames);
+        return wall;
+	}
 }

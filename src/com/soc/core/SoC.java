@@ -75,6 +75,7 @@ import com.soc.utils.LevelManager;
 import com.soc.utils.MapLoader;
 import com.soc.utils.MusicPlayer;
 import com.soc.utils.SpawnerManager;
+import com.soc.utils.WallManager;
 
 public class SoC extends Game {
 	public static final int FRAME_WIDTH = 1440;
@@ -110,6 +111,8 @@ public class SoC extends Game {
 	public TagManager tagmanager;
 	public LevelManager levelmanager;
 	public SpawnerManager spawnermanager;
+	public WallManager wallmanager;
+
 	
 	public HudSystem hudSystem;
 	public RenderSystem renderSystem;
@@ -178,11 +181,13 @@ public class SoC extends Game {
 		tagmanager = new TagManager();
 		levelmanager = new LevelManager();
 		spawnermanager = new SpawnerManager();
+		wallmanager = new WallManager();
 		
 		world.setManager(spawnermanager);
 		world.setManager(groupmanager);
 		world.setManager(tagmanager);
 		world.setManager(levelmanager);
+		world.setManager(wallmanager);
 		
 	    world.setSystem(new PlayerInputSystem());
 		world.setSystem(new AttackDelaySystem());

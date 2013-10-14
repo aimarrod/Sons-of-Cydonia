@@ -14,6 +14,7 @@ public class Constants {
 	public static class Groups{
 		public static final String PLAYERS = "player";
 		public static final String ENEMIES = "enemy";
+		public static final String WALLS = "wall";
 		
 		public static final String MAGGOTS = "maggot";
 		public static final String SLIMES = "slime";

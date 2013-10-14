@@ -65,12 +65,12 @@
    eJzt07kNADAIADEKJMrsv2224JHsCa65CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALpUThfAXs8fAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcMIH36gAHw==
   </data>
  </layer>
- <layer name="level2-object-high" width="200" height="200">
+ <layer name="level2-object-high" width="200" height="200" visible="0">
   <data encoding="base64" compression="zlib">
    eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwGcR4AAQ==
   </data>
  </layer>
- <objectgroup name="level0-obstacle" width="200" height="200">
+ <objectgroup name="level0-obstacle" width="200" height="200" visible="0">
   <object x="0" y="0" width="192" height="6240"/>
   <object x="384" y="256" width="32" height="192"/>
   <object x="192" y="0" width="6208" height="256"/>
@@ -192,7 +192,7 @@
   <object x="2208" y="2176" width="32" height="32"/>
   <object x="2688" y="2176" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="level0-unwalkable" width="200" height="200">
+ <objectgroup name="level0-unwalkable" width="200" height="200" visible="0">
   <object x="544" y="352" width="320" height="160"/>
   <object x="544" y="576" width="320" height="160"/>
   <object x="960" y="576" width="320" height="160"/>
@@ -228,7 +228,7 @@
   <object x="3296" y="1504" width="416" height="1760"/>
   <object x="3680" y="1504" width="2496" height="2464"/>
  </objectgroup>
- <objectgroup name="level0-special" width="200" height="200">
+ <objectgroup name="level0-special" width="200" height="200" visible="0">
   <object x="5056" y="5024" width="64" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -413,24 +413,29 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level1-obstacle" width="200" height="200" visible="0"/>
+ <objectgroup name="level1-obstacle" width="200" height="200" visible="0">
+  <object x="6208" y="224" width="192" height="6176"/>
+  <object x="0" y="6176" width="6208" height="224"/>
+  <object x="0" y="0" width="6400" height="224"/>
+  <object x="-32" y="224" width="192" height="5952"/>
+ </objectgroup>
  <objectgroup name="level1-unwalkable" width="200" height="200" visible="0">
-  <object x="5120" y="4768" width="1280" height="1632"/>
+  <object x="5120" y="4768" width="1088" height="1472"/>
   <object x="5152" y="4768" width="544"/>
-  <object x="5152" y="3712" width="1248" height="1056"/>
-  <object x="5152" y="3616" width="1248" height="96"/>
-  <object x="5248" y="0" width="1120" height="3616"/>
+  <object x="5152" y="3712" width="1056" height="1056"/>
+  <object x="5152" y="3616" width="1056" height="96"/>
+  <object x="5248" y="160" width="960" height="3456"/>
   <object x="5216" y="3424" width="32" height="32"/>
-  <object x="4992" y="0" width="256" height="3392"/>
+  <object x="4992" y="160" width="256" height="3232"/>
   <object x="5088" y="3392" width="160" height="32"/>
   <object x="4992" y="3712" width="160" height="832"/>
   <object x="1120" y="4128" width="1568" height="1504"/>
   <object x="2624" y="5728" width="192" height="160"/>
   <object x="2752" y="4608" width="64" height="1024"/>
-  <object x="2816" y="4608" width="2208" height="1792"/>
-  <object x="5024" y="4768" width="32" height="1632"/>
-  <object x="2624" y="5888" width="192" height="512"/>
-  <object x="0" y="5696" width="2624" height="704">
+  <object x="2816" y="4608" width="2208" height="1600"/>
+  <object x="5024" y="4768" width="32" height="1472"/>
+  <object x="2624" y="5888" width="192" height="352"/>
+  <object x="160" y="5696" width="2464" height="544">
    <properties>
     <property name="destination" value="starting.tmx"/>
     <property name="type" value="gate"/>
@@ -439,12 +444,12 @@
     <property name="z" value="1"/>
    </properties>
   </object>
-  <object x="0" y="0" width="1024" height="5728"/>
-  <object x="1024" y="0" width="3584" height="4032"/>
+  <object x="160" y="160" width="832" height="5536"/>
+  <object x="1024" y="160" width="3584" height="3840"/>
   <object x="4608" y="3616" width="96" height="416"/>
   <object x="4704" y="3680" width="32" height="352"/>
   <object x="4736" y="3712" width="128" height="320"/>
-  <object x="4608" y="0" width="384" height="3328"/>
+  <object x="4608" y="160" width="384" height="3168"/>
   <object x="4608" y="3328" width="32" height="128"/>
   <object x="4640" y="3328" width="128" height="96"/>
   <object x="4768" y="3328" width="96" height="64"/>
@@ -467,19 +472,24 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level2-obstacle" width="200" height="200" visible="0"/>
+ <objectgroup name="level2-obstacle" width="200" height="200" visible="0">
+  <object x="0" y="-32" width="6400" height="224"/>
+  <object x="0" y="6272" width="6400" height="224"/>
+  <object x="0" y="192" width="192" height="5952"/>
+  <object x="6208" y="192" width="192" height="6080"/>
+ </objectgroup>
  <objectgroup name="level2-unwalkable" width="200" height="200" visible="0">
   <object x="4960" y="3008" width="32" height="416"/>
   <object x="4832" y="3008" width="32" height="416"/>
  </objectgroup>
- <objectgroup name="level2-special" width="200" height="200" visible="0">
+ <objectgroup name="level2-special" width="200" height="200">
   <object x="4864" y="3392" width="96" height="32">
    <properties>
     <property name="level" value="2"/>
     <property name="type" value="stairs"/>
    </properties>
   </object>
-  <object x="4992" y="3008" width="1408" height="3424">
+  <object x="4992" y="3392" width="1248" height="2880">
    <properties>
     <property name="type" value="hole"/>
    </properties>
@@ -574,7 +584,7 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="5824" y="0" width="576" height="3008">
+  <object x="5824" y="160" width="416" height="2848">
    <properties>
     <property name="type" value="hole"/>
    </properties>
@@ -614,7 +624,7 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="5440" y="0" width="384" height="1856">
+  <object x="5440" y="160" width="384" height="1696">
    <properties>
     <property name="type" value="hole"/>
    </properties>
@@ -624,7 +634,7 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="5248" y="0" width="192" height="1792">
+  <object x="5248" y="160" width="192" height="1632">
    <properties>
     <property name="type" value="hole"/>
    </properties>
@@ -634,17 +644,17 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="5056" y="0" width="160" height="1728">
+  <object x="5056" y="160" width="160" height="1568">
    <properties>
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="4960" y="0" width="96" height="1696">
+  <object x="4960" y="160" width="96" height="1536">
    <properties>
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="4864" y="0" width="96" height="1632">
+  <object x="4864" y="160" width="96" height="1472">
    <properties>
     <property name="type" value="hole"/>
    </properties>
@@ -659,7 +669,7 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="4736" y="0" width="128" height="1696">
+  <object x="4736" y="160" width="128" height="1568">
    <properties>
     <property name="type" value="hole"/>
    </properties>
@@ -669,7 +679,7 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="4608" y="0" width="128" height="1728">
+  <object x="4608" y="160" width="128" height="1568">
    <properties>
     <property name="type" value="hole"/>
    </properties>
@@ -729,12 +739,12 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="4000" y="0" width="608" height="1728">
+  <object x="4000" y="160" width="608" height="1568">
    <properties>
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="0" y="-64" width="4000" height="6464">
+  <object x="160" y="160" width="3840" height="6112">
    <properties>
     <property name="type" value="hole"/>
    </properties>
@@ -834,18 +844,23 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="4000" y="3040" width="832" height="3360">
+  <object x="4000" y="3040" width="832" height="3232">
    <properties>
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="4832" y="3424" width="160" height="2976">
+  <object x="4832" y="3424" width="160" height="2848">
+   <properties>
+    <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4992" y="3008" width="1248" height="384">
    <properties>
     <property name="type" value="hole"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200">
+ <objectgroup name="level0-spawners" width="200" height="200" visible="0">
   <object x="256" y="320" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>

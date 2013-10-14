@@ -9,11 +9,13 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.osc.game.benefits.Inmune;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.alterations.Push;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
+import com.soc.game.components.Buff;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Debuff;
 import com.soc.game.components.Delay;
@@ -57,6 +59,7 @@ public class TornadoProcessor implements AttackProcessor{
 	public boolean collision(Entity attack, Entity victim) {
 		if(hit != null) return false;
 		if(SoC.game.debuffmapper.has(victim) && SoC.game.debuffmapper.get(victim).debuffClasses.contains(Push.class)) return false;
+		if(SoC.game.buffmapper.has(victim) && SoC.game.buffmapper.get(victim).buffClasses.contains(Inmune.class)) return false;
 		
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position victimpos = SoC.game.positionmapper.get(victim);
@@ -64,7 +67,7 @@ public class TornadoProcessor implements AttackProcessor{
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
 		
 		
-		return (attackpos.z == victimpos.z && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		return (attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	
 
 	}
@@ -79,6 +82,7 @@ public class TornadoProcessor implements AttackProcessor{
 		pos1.y = pos2.y + 2;
 		victim.removeComponent(Delay.class);
 		victim.changedInWorld();
+		Buff.addbuff(victim, new Inmune());
 		SoC.game.statemapper.get(victim).state = State.SPINNING;
 	}
 
@@ -91,6 +95,7 @@ public class TornadoProcessor implements AttackProcessor{
 	@Override
 	public void delete() {
 		if(hit != null){
+			SoC.game.buffmapper.get(hit).removebuff(Inmune.class);
 			SoC.game.statemapper.get(hit).state = State.IDLE;
 			int damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.1);
 			if(SoC.game.damagemapper.has(hit)){
