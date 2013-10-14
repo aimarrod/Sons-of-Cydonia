@@ -475,7 +475,7 @@ public class EntityFactory {
 				0, 
 				0, 
 				null));
-		//Buff.addbuff(e, new Unmovable());
+		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
 		GraphicsLoader.loadFireStoneMonster(animations);
 		e.addComponent(animations);
