@@ -782,8 +782,8 @@ public class GraphicsLoader {
 	}
 	public static AnimatedRenderer loadFireStoneRunning(){
 		AnimatedRenderer fireStone = new AnimatedRenderer(true);
-		fireStone.ox+=0;
-		fireStone.oy+=10;
+		fireStone.ox-=39;
+		fireStone.oy-=37;
 		TextureRegion[][] tmp = TextureRegion.split(load("fire-stone-running.png"), 128, 128);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
@@ -809,7 +809,7 @@ public class GraphicsLoader {
                         frames[index++] = tmp[i][j];
                 }
         }
-       	fireStone.animation = new Animation(0.5f, frames);
+       	fireStone.animation = new Animation(0.25f, frames);
         return fireStone;
 	}
 	

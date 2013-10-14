@@ -18,10 +18,19 @@ public class MidMonsterAI implements AI{
 
 	public float timer;
 	public Random r;
+	float limitXLeft;
+	float limitXRight;
+	float limitYBottom;
+	float limitYUp;
+	
 	
 	public MidMonsterAI(){
 		timer = 0;
 		r = new Random();
+		limitXLeft=37*Constants.World.TILE_SIZE;
+		limitXRight=61*Constants.World.TILE_SIZE;
+		limitYBottom=54*Constants.World.TILE_SIZE;
+		limitYUp=83*Constants.World.TILE_SIZE;
 	}
 	
 	@Override
@@ -31,6 +40,13 @@ public class MidMonsterAI implements AI{
 		State state = SoC.game.statemapper.get(e);
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
+		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
+			System.out.println("Paso por aqui");
+			state.state=State.IDLE;
+			vel.vx=0;
+			vel.vy=0;
+			return;
+		}
 		
 		if(state.state == State.DYING) return;
 		

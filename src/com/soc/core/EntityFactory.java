@@ -497,6 +497,7 @@ public class EntityFactory {
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
 		e.addComponent(new Enemy(0, 5, new FireStoneMonsterAI()));
+		e.addComponent(new Flying());
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -511,7 +512,7 @@ public class EntityFactory {
 				0, 
 				0, 
 				null));
-		//Buff.addbuff(e, new Unmovable());
+		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
 		GraphicsLoader.loadFireStoneMonster(animations);
 		e.addComponent(animations);
@@ -694,10 +695,9 @@ public class EntityFactory {
 	
 	public static Entity createFireStone(float x, float y, int z, Vector2 direction) {
 		Entity e=SoC.game.world.createEntity();
-		
 		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
 		e.addComponent( new Position(x, y, z, direction));
-		e.addComponent( new Bounds(64, 128) );
+		e.addComponent( new Bounds(84, 75) );
 	   	e.addComponent( new Attack(new FireStoneProcessor(), 0) );
 	   	
 	   	return e;		
