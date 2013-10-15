@@ -24,6 +24,7 @@ import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Character;
 import com.soc.game.components.Debuff;
+import com.soc.game.components.Drop;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
@@ -49,6 +50,7 @@ public class RenderSystem extends VoidEntitySystem{
 	@Mapper ComponentMapper<Debuff> dm;
 	@Mapper ComponentMapper<Buff> bum;
 	@Mapper ComponentMapper<Wall> wm;
+	@Mapper ComponentMapper<Drop> drm;
 
 	
 	private OrthogonalTiledMapRenderer renderer;
@@ -103,6 +105,8 @@ public class RenderSystem extends VoidEntitySystem{
 					am.get(e).processor.frame(e, batch);
 				} else if(wm.has(e)){
 					wm.get(e).draw(e, batch);
+				} else if(drm.has(e)){
+					drm.get(e).draw(e, batch);
 				}
 			}
 			batch.end();

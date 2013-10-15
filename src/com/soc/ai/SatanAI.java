@@ -13,7 +13,7 @@ import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 
-public class SatanAI implements AI{
+public class SatanAI extends AI{
 	float shieldCD;
 	float lastTimeShield;
 	float timer;

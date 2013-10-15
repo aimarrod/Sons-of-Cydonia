@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
 import com.soc.game.attacks.spells.ArrowSpell;
 import com.soc.game.attacks.spells.BiteSpell;
+import com.soc.game.attacks.spells.BoneThrowSpell;
 import com.soc.game.attacks.spells.ChargeSpell;
 import com.soc.game.attacks.spells.DaggerThrowSpell;
 import com.soc.game.attacks.spells.FlameSpell;
@@ -40,6 +41,7 @@ import com.soc.game.components.Delay;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Feet;
+import com.soc.game.components.Drop;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.Spawner;
@@ -108,6 +110,8 @@ public class SoC extends Game {
 	public ComponentMapper<Spawner> spawnermapper;
 	public ComponentMapper<Debuff> debuffmapper;
 	public ComponentMapper<Buff> buffmapper;
+	public ComponentMapper<Drop> dropmapper;
+
 
 	
 	public GroupManager groupmanager;
@@ -140,7 +144,7 @@ public class SoC extends Game {
 		
 		spells = new Spell[Constants.Spells.SPELL_NUMBER];
 		spells[Constants.Spells.DAGGER_THROW] = new DaggerThrowSpell(); 
-		spells[Constants.Spells.PUNCH] = new PunchSpell();
+		spells[Constants.Spells.BONE_THROW] = new BoneThrowSpell();
 		spells[Constants.Spells.SLASH] = new SlashSpell();
 		spells[Constants.Spells.CHARGE] = new ChargeSpell();
 		spells[Constants.Spells.ARROW] = new ArrowSpell();
@@ -193,6 +197,7 @@ public class SoC extends Game {
 		enemymapper = world.getMapper(Enemy.class);
 		debuffmapper = world.getMapper(Debuff.class);
 		buffmapper = world.getMapper(Buff.class);
+		dropmapper = world.getMapper(Drop.class);
 		
 		inputMultiplexer=new InputMultiplexer();
 		Gdx.input.setInputProcessor(inputMultiplexer);

@@ -25,6 +25,7 @@ import com.soc.game.attacks.processors.AirCircleProcessor;
 import com.soc.game.attacks.processors.AntiVenomFountain;
 import com.soc.game.attacks.processors.ArrowProcessor;
 import com.soc.game.attacks.processors.BiteProcessor;
+import com.soc.game.attacks.processors.BoneThrowProcessor;
 import com.soc.game.attacks.processors.ChargeProcessor;
 import com.soc.game.attacks.processors.DaggerThrowProcessor;
 import com.soc.game.attacks.processors.FireStoneProcessor;
@@ -48,6 +49,7 @@ import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Character;
+import com.soc.game.components.Drop;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Feet;
 import com.soc.game.components.Flying;
@@ -118,7 +120,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,100));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(1));
-	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}, Constants.Groups.SKELETONS));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.BONE_THROW, new int[]{}, Constants.Groups.SKELETONS));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new Enemy(600,10, new SkeletonAI()));
 	    
@@ -135,7 +137,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,0));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(0));
-	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 100, 1, Constants.Spells.PUNCH, new int[]{},Constants.Groups.BALLISTAS));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 100, 1, Constants.Spells.ARROW, new int[]{},Constants.Groups.BALLISTAS));
 	    e.addComponent(new Enemy(600,10, new BallistaAI()));
 	    e.addComponent(new Feet(25, 25));
 		Buff.addbuff(e, new Unmovable());
@@ -789,6 +791,18 @@ public class EntityFactory {
 		return e;
 	}
 	
+	public static Entity createBoneThrow(String group, Position pos, int damage,
+			Position pos2) {
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(Constants.Spells.BONE_THROW_SPEED*pos.direction.x, Constants.Spells.BONE_THROW_SPEED*pos.direction.y, 0) );
+		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction) );
+		e.addComponent( new Bounds(32, 32) );
+	   	e.addComponent( new Attack(new BoneThrowProcessor(), damage) );
+	   	
+		return e;
+	}
+	
 	public static Entity createTentacles(float x, float y, int z, int damage){
 		Entity e = SoC.game.world.createEntity();
 		
@@ -823,6 +837,19 @@ public class EntityFactory {
 		
 		return e;
 		
+	}
+	
+	public static Entity createItem(int number, float x, float y, int z){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x + Constants.World.TILE_SIZE*0.5f, y + Constants.World.TILE_SIZE*0.5f, z) );
+		e.addComponent( new Bounds(Constants.Items.ITEM_SIZE, Constants.Items.ITEM_SIZE));
+		e.addComponent( new Drop(number) );
+		
+		SoC.game.groupmanager.add(e, Constants.Groups.ITEMS);
+		SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL + z);
+		
+		return e;
 	}
 	
 }

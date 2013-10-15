@@ -9,7 +9,7 @@ import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.game.components.Position;
 
-public class FireStoneMonsterAI implements AI {
+public class FireStoneMonsterAI extends AI {
 	public float posYStone;
 	public float timer;
 	public float timer2;

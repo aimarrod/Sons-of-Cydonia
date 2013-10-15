@@ -19,7 +19,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 
-public class GaiaAvatarAI implements AI{
+public class GaiaAvatarAI extends AI{
 
 	public float timer, x, y;
 	public boolean teleport;

@@ -2,7 +2,7 @@ package com.soc.ai;
 
 import com.artemis.Entity;
 
-public class EyeballAI implements AI{
+public class EyeballAI extends AI{
 
 	@Override
 	public void process(Entity e) {

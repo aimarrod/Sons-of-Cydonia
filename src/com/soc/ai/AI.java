@@ -15,7 +15,15 @@ import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.utils.EffectsPlayer;
 
-public interface AI {
-	public void process(Entity e);
-	public void death(Entity e);
+public abstract class AI {
+	
+	public AIModule[] modules;
+	
+	public abstract void process(Entity e);
+	public abstract void death(Entity e);
+	protected void processModules(Entity e){
+		for(int i = 0; i < modules.length; i++){
+			modules[i].process(e);
+		}
+	}
 }

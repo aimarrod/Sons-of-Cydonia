@@ -195,7 +195,7 @@ public class GraphicsLoader {
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
-		StaticRenderer death = new StaticRenderer();
+		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		character.renderers = new Renderer[State.STATENUM];
 		attack.ox = -16;
@@ -218,9 +218,8 @@ public class GraphicsLoader {
 	   	}
 		tmp = TextureRegion.split(load("skeleton-death.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
-	   		death.sprite = tmp[i][0];
+	   		death.animation = new Animation(0.4f/tmp[i].length, tmp[i]);
 	   	}
-		
 		character.deathTime=0.4f;
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;
@@ -918,5 +917,12 @@ public class GraphicsLoader {
         }
         flame.animation = new Animation(0.05f, frames);
         return flame;
+	}
+
+	public static AnimatedRenderer loadBoneThrow() {
+		AnimatedRenderer bone = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("bone-projectile.png"), 32, 32);
+        bone.animation = new Animation(0.03f, tmp[0]);
+        return bone;
 	}
 }

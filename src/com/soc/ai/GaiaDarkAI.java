@@ -10,7 +10,7 @@ import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Position;
 
-public class GaiaDarkAI implements AI{
+public class GaiaDarkAI extends AI{
 
 	public float timer;
 	public Random r;

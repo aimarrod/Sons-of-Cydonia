@@ -10,7 +10,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
 
-public class BatAI implements AI{
+public class BatAI extends AI{
 	
 	public float goalx;
 	public float goaly;
