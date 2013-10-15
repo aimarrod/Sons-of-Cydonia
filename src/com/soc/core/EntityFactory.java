@@ -738,7 +738,7 @@ public class EntityFactory {
 	
 	public static Entity createFlameWall(Entity owner,float x, float y, int z) {
 		Entity e=SoC.game.world.createEntity();
-		
+		System.out.println("paso por aqui");
 		e.addComponent( new Position(x*Constants.World.TILE_SIZE, y*Constants.World.TILE_SIZE, z) );
 		e.addComponent( new Bounds((int)Constants.World.TILE_SIZE, (int)Constants.World.TILE_SIZE));;
 	   	e.addComponent( new Attack(new FlameWallProcessor(), 0) );

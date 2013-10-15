@@ -3,12 +3,11 @@ package com.soc.ai;
 import java.util.Random;
 
 import com.artemis.Entity;
+import com.artemis.utils.Bag;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.game.attacks.spells.Spell;
-import com.soc.game.components.Bounds;
-import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
@@ -25,6 +24,8 @@ public class MidMonsterAI implements AI{
 	boolean monsterSpawned;
 	boolean characterInside;
 	boolean flameWallSpawned;
+	Bag<Entity>flameWallsLeft;
+	Bag<Entity>flameWallsRight;
 	
 	
 	public MidMonsterAI(){
@@ -37,6 +38,8 @@ public class MidMonsterAI implements AI{
 		monsterSpawned=false;
 		characterInside=false;
 		flameWallSpawned=false;
+		flameWallsLeft=new Bag<Entity>();
+		flameWallsRight=new Bag<Entity>();
 	}
 	
 	@Override
@@ -144,9 +147,25 @@ public class MidMonsterAI implements AI{
 			monsterSpawned=true;
 		}
 		if(!flameWallSpawned){
-			for(int i=54;i<=82;i++){
-				EntityFactory.createFlameWall(e, 37, i, 0).addToWorld();
+			Entity flame=null;
+			for(int i=54;i<=79;i++){
+				flame=EntityFactory.createFlameWall(e, 38, i, 0);
+				SoC.game.groupmanager.add(flame, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(flame, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager.setLevel(flame, Constants.Groups.LEVEL +pos.z);
+				flame.addToWorld();
+				flameWallsLeft.add(flame);
 			}
+			for(int i=54;i<=79;i++){
+				flame=EntityFactory.createFlameWall(e, 59, i, 0);
+				SoC.game.groupmanager.add(flame, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(flame, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager
+				.setLevel(flame, Constants.Groups.LEVEL +pos.z);
+				flame.addToWorld();
+				flameWallsRight.add(flame);
+			}
+			flameWallSpawned=true;
 		}
 		
 		if(!characterInside && (playerPos.x>limitXLeft && playerPos.x<limitXRight) && (playerPos.y>limitYBottom && playerPos.y<limitYUp)){
