@@ -9,7 +9,6 @@ import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.math.Rectangle;
-import com.osc.game.states.benefits.Unmovable;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.core.Constants.World;
@@ -17,6 +16,7 @@ import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Debuff;
+import com.soc.game.components.Drop;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Feet;
@@ -32,6 +32,8 @@ import com.soc.game.map.Gate;
 import com.soc.game.map.Push;
 import com.soc.game.map.Stairs;
 import com.soc.game.states.alterations.Burn;
+import com.soc.game.states.benefits.Unmovable;
+import com.soc.utils.FloatingText;
 import com.soc.utils.MapLoader;
 
 public class CollisionSystem extends VoidEntitySystem {
@@ -59,6 +61,8 @@ public class CollisionSystem extends VoidEntitySystem {
 	ComponentMapper<Debuff> psm;
 	@Mapper
 	ComponentMapper<Buff> bfm;
+	@Mapper
+	ComponentMapper<Drop> drm;
 
 	private Bag<CollisionGroup> collisionGroups;
 
@@ -78,6 +82,7 @@ public class CollisionSystem extends VoidEntitySystem {
 		collisionGroups.add(new WallCollision());
 		collisionGroups.add(new CharacterMapCollision());
 		collisionGroups.add(new ProjectileMapCollision());
+		collisionGroups.add(new DropPicking());
 		
 	}
 
@@ -95,6 +100,51 @@ public class CollisionSystem extends VoidEntitySystem {
 
 	private interface CollisionGroup {
 		public void processCollisions();
+	}
+	
+	private class DropPicking implements CollisionGroup{
+
+		ImmutableBag<Entity> items;
+		float timer;
+		
+		public DropPicking(){
+			items = SoC.game.groupmanager.getEntities(Constants.Groups.ITEMS);
+			timer = 0f;
+		}
+		
+			@Override
+			public void processCollisions() {
+				timer -= SoC.game.world.delta;
+				for (int i = 0; i < items.size(); i++) {
+					process(items.get(i));
+				}
+			}
+
+			public void process(Entity item) {
+				Position pos = pm.get(SoC.game.player);
+				Feet feet = fm.get(SoC.game.player);
+				Position itempos = pm.get(item);
+				Bounds itembon = bm.get(item);
+
+				Rectangle current = new Rectangle(pos.x, pos.y, feet.width, feet.heigth);
+				Rectangle otherrect = new Rectangle(itempos.x, itempos.y,
+						itembon.width, itembon.height);
+				
+				if(current.overlaps(otherrect)){
+					Player p = SoC.game.playermapper.get(SoC.game.player);
+					if(p.addToInventary(SoC.game.items[SoC.game.dropmapper.get(item).item])) {
+						item.deleteFromWorld();
+					} else if(timer <= 0){
+						FloatingText text = new FloatingText("Inventory is full.", 1f, pos.x, pos.y, 50);
+						text.b = 0;
+						text.r = 0;
+						text.g = 0;
+						SoC.game.renderSystem.texts.add(text);
+						timer = 1f;
+					}
+				}		
+		}
+		
 	}
 	
 	private class WallCollision implements CollisionGroup{

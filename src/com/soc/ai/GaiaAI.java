@@ -6,7 +6,6 @@ import com.artemis.Entity;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.math.Vector2;
-import com.osc.game.states.benefits.Inmune;
 import com.soc.core.Constants.World;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
@@ -17,8 +16,9 @@ import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
 import com.soc.game.components.Stats;
 import com.soc.game.states.alterations.Push;
+import com.soc.game.states.benefits.Inmune;
 
-public class GaiaAI implements AI{
+public class GaiaAI extends AI{
 
 	public float timer;
 	boolean avatarSpawned, fighting;
@@ -131,10 +131,10 @@ public class GaiaAI implements AI{
 			Position playerPos = SoC.game.positionmapper.get(SoC.game.player);
 			
 			if(!SoC.game.progress.gaiaAvatarDefeated && !avatarSpawned && (int)(playerPos.x*World.TILE_FACTOR) >= 115 && ((int)(playerPos.y*World.TILE_FACTOR) >= 7 && (int)(playerPos.y*World.TILE_FACTOR) <= 9)){
-				EntityFactory.createWall(e, 114, 7, 0);
-				EntityFactory.createWall(e, 114, 8, 0);
-				EntityFactory.createWall(e, 114, 9, 0);
-				EntityFactory.createWall(e, 114, 10, 0);
+				EntityFactory.createWall(e, 114, 7, 0).addToWorld();
+				EntityFactory.createWall(e, 114, 8, 0).addToWorld();
+				EntityFactory.createWall(e, 114, 9, 0).addToWorld();
+				EntityFactory.createWall(e, 114, 10, 0).addToWorld();
 				
 				SoC.game.hudSystem.tooltip.pop("You hear an echo:\n I see you have defeated my aspects, warrior. Very well, now prove your worth to me.", 0f, 8f);
 

@@ -390,7 +390,7 @@
     <property name="max" value="1"/>
     <property name="range" value="100"/>
     <property name="respawn" value="true"/>
-    <property name="type" value="zombie"/>
+    <property name="type" value="skeleton"/>
    </properties>
   </object>
  </objectgroup>

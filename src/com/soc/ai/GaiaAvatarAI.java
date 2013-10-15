@@ -4,8 +4,6 @@ import java.util.Random;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.osc.game.states.benefits.Inmune;
-import com.osc.game.states.benefits.Teleport;
 import com.soc.core.Constants.World;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
@@ -18,8 +16,10 @@ import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
+import com.soc.game.states.benefits.Inmune;
+import com.soc.game.states.benefits.Teleport;
 
-public class GaiaAvatarAI implements AI{
+public class GaiaAvatarAI extends AI{
 
 	public float timer, x, y;
 	public boolean teleport;

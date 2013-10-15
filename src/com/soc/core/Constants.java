@@ -15,6 +15,7 @@ public class Constants {
 		public static final String PLAYERS = "player";
 		public static final String ENEMIES = "enemy";
 		public static final String WALLS = "wall";
+		public static final String ITEMS = "item";
 		
 		public static final String MAGGOTS = "maggot";
 		public static final String SLIMES = "slime";
@@ -81,7 +82,7 @@ public class Constants {
 		public static final int ICICLE = 2;
 		public static final int FIREBALL = 3;
 		public static final int ICEBLAST = 4;
-		public static final int PUNCH= 5;
+		public static final int BONE_THROW= 5;
 		public static final int CHARGE=6;
 		public static final int ARROW=7;
 		public static final int WHIRLBLADE=8;
@@ -116,11 +117,12 @@ public class Constants {
 		public static final float METEOR_FALL_SPEED = 600f;
 		public static final float METEOR_RADIUS = 35f;
 		public static final float METEOR_RADIUS_INCREASE = 10f;
-		public static final float WINDBLADE_SPEED = 600f;
+		public static final float WINDBLADE_SPEED = 700f;
 		public static final float TENTACLES_DURATION = 1.5f;
 		public static final float TENTACLES_PREPARE = 1.03f;
 		public static final float TENTACLES_RADIUS = 170f;
 		public static final float AIR_CIRCLE_TIME = 2f;
+		public static final float BONE_THROW_SPEED = 1000f;
 	}
 	
 	
@@ -161,6 +163,8 @@ public class Constants {
 		public final static int GOLD_SHIELD=18;
 		public final static int ANTIDOTE=19;
 		public final static int ANTIBURN=20;
+		
+		public final static int ITEM_SIZE = 32;
 
 
 	}

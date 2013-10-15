@@ -11,7 +11,7 @@ import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Position;
 
-public class GaiaAirAI implements AI{
+public class GaiaAirAI extends AI{
 
 	public float timer;
 	public Random r;

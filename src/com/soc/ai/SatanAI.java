@@ -1,8 +1,6 @@
 package com.soc.ai;
 
 import com.artemis.Entity;
-import com.osc.game.states.benefits.Casting;
-import com.osc.game.states.benefits.ShieldBuff;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.GameProgress;
@@ -14,8 +12,10 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.states.benefits.Casting;
+import com.soc.game.states.benefits.ShieldBuff;
 
-public class SatanAI implements AI{
+public class SatanAI extends AI{
 	float shieldCD;
 	float lastTimeShield;
 	float timer;

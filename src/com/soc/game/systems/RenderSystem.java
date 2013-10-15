@@ -13,11 +13,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.osc.game.states.benefits.Casting;
-import com.osc.game.states.benefits.Rage;
-import com.osc.game.states.benefits.Shield;
-import com.osc.game.states.benefits.ShieldBuff;
-import com.osc.game.states.benefits.Teleport;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Attack;
@@ -25,6 +20,7 @@ import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Character;
 import com.soc.game.components.Debuff;
+import com.soc.game.components.Drop;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
@@ -35,6 +31,11 @@ import com.soc.game.states.alterations.LavaBurn;
 import com.soc.game.states.alterations.Poison;
 import com.soc.game.states.alterations.Push;
 import com.soc.game.states.alterations.Venom;
+import com.soc.game.states.benefits.Casting;
+import com.soc.game.states.benefits.Rage;
+import com.soc.game.states.benefits.Shield;
+import com.soc.game.states.benefits.ShieldBuff;
+import com.soc.game.states.benefits.Teleport;
 import com.soc.utils.FloatingText;
 
 public class RenderSystem extends VoidEntitySystem{
@@ -50,6 +51,7 @@ public class RenderSystem extends VoidEntitySystem{
 	@Mapper ComponentMapper<Debuff> dm;
 	@Mapper ComponentMapper<Buff> bum;
 	@Mapper ComponentMapper<Wall> wm;
+	@Mapper ComponentMapper<Drop> drm;
 
 	
 	private OrthogonalTiledMapRenderer renderer;
@@ -104,6 +106,8 @@ public class RenderSystem extends VoidEntitySystem{
 					am.get(e).processor.frame(e, batch);
 				} else if(wm.has(e)){
 					wm.get(e).draw(e, batch);
+				} else if(drm.has(e)){
+					drm.get(e).draw(e, batch);
 				}
 			}
 			batch.end();

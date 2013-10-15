@@ -9,7 +9,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.utils.EffectsPlayer;
 
-public class BallistaAI implements AI{
+public class BallistaAI extends AI{
 	
 	float time;
 	

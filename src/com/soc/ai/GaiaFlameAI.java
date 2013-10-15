@@ -11,7 +11,7 @@ import com.soc.game.components.Bounds;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 
-public class GaiaFlameAI implements AI{
+public class GaiaFlameAI extends AI{
 
 	public float timer;
 	public Random r;

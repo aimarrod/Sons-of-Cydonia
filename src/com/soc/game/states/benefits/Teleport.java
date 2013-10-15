@@ -1,4 +1,4 @@
-package com.osc.game.states.benefits;
+package com.soc.game.states.benefits;
 
 import com.artemis.Entity;
 import com.soc.core.Constants;

@@ -12,7 +12,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
 
-public class MidMonsterAI implements AI{
+public class MidMonsterAI extends AI{
 
 
 	public float timer;

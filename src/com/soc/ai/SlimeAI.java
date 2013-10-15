@@ -10,7 +10,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
 
-	public class SlimeAI implements AI{
+	public class SlimeAI extends AI{
 
 		@Override
 		public void process(Entity e) {
