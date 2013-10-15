@@ -31,6 +31,7 @@ public class Constants {
 		public static final String RED_MONSTER = "mid-monster";
 		public static final String FLAME_WALL = "flame-wall";
 		public static final String FIRE_STONE = "fire-stone-monster";
+		public static final String ANTI_VENOM_FOUNTAIN = "anti-venom-fountain";
 		
 		public static final String ENEMY_ATTACKS = "enemyattack";
 		public static final String PLAYER_ATTACKS = "playerattack";
@@ -75,6 +76,7 @@ public class Constants {
 	}
 	
 	public static class Spells{
+		public static final int NO_SPELL = -1;
 		public static final int SLASH = 0;
 		public static final int DAGGER_THROW = 1;
 		public static final int ICICLE = 2;
@@ -106,8 +108,8 @@ public class Constants {
 		public static final int QUAKEBLADE_RADIUS_INCREASE = 16;
 		public static final float SPIN_DURATION = 3.5f;
 		public static final float SPIN_RADIUS = 75f;
-		public static final float POISON_CLOUD_DURATION = 6f;
-		public static final float POISON_CLOUD_RADIUS = 100;
+		public static final float POISON_CLOUD_DURATION = 7f;
+		public static final float POISON_CLOUD_RADIUS = 65f;
 		public static final float METEOR_BLAST_TICK_INTERVAL = 0.1f;
 		public static final int METEOR_BLAST_TICK_NUMBER = 6;
 		public static final float METEOR_FALL_DISTANCE = 800f;
@@ -137,12 +139,29 @@ public class Constants {
 		
 	public static class Items{
 		public final static int INVENTORY_SIZE=20;
-		public final static int ITEM_NUMBER=5;
+		public final static int ITEM_NUMBER=21;
 		public final static int NONE=0;
-		public final static int AXE=1;
-		public final static int ARMOR=2;
-		public final static int HEALTH_POTION=3;
-		public final static int MANA_POTION=4;
+		public final static int HEALTH_POTION=1;
+		public final static int MANA_POTION=2;
+		public final static int HEALTH_ULTRAPOTION=3;
+		public final static int MANA_ULTRAPOTION=4;
+		public final static int MIX_POTION=5;
+		public final static int MIX_ULTRAPOTION=6;
+		public final static int STONE_AXE=7;
+		public final static int IRON_AXE=8;
+		public final static int GOLD_AXE=9;
+		public final static int BRONZE_SWORD=10;
+		public final static int SILVER_SWORD=11;
+		public final static int GOLD_SWORD=12;
+		public final static int LEATHER_HELM=13;
+		public final static int IRON_HELM=14;
+		public final static int GOLD_HELM=15;
+		public final static int WOODEN_SHIELD=16;
+		public final static int IRON_SHIELD=17;
+		public final static int GOLD_SHIELD=18;
+		public final static int ANTIDOTE=19;
+		public final static int ANTIBURN=20;
+
 
 	}
 	

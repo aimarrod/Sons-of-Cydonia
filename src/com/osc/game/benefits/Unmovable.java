@@ -16,10 +16,16 @@ public class Unmovable implements Benefit{
 		if(!SoC.game.debuffmapper.has(e)) return;
 		Debuff d = SoC.game.debuffmapper.get(e);
 		if(d != null && d.debuffClasses.contains(Push.class)){
-			d.removeDebuff(Push.class);
+			d.removeDebuff(Push.class,e);
 			Position pos = SoC.game.positionmapper.get(e);
 			SoC.game.renderSystem.texts.add(new FloatingText("Unmovable!", Constants.Configuration.LABEL_DURATION, pos.x+20, pos.y+20, Constants.Configuration.LABEL_SPEED));
 		}
+	}
+
+	@Override
+	public void delete(Entity e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

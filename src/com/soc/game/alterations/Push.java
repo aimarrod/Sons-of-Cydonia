@@ -34,7 +34,7 @@ public class Push implements Alteration{
 	  distance -= Math.abs(vel.vx*SoC.game.world.delta)+Math.abs(vel.vy*SoC.game.world.delta);
 	  
 	  if(distance <= 0){
-		  SoC.game.debuffmapper.get(e).removeDebuff(this);
+		  SoC.game.debuffmapper.get(e).removeDebuff(this,e);
 		  vel.vx = 0;
 		  vel.vy = 0;
 	  }
@@ -44,5 +44,12 @@ public class Push implements Alteration{
 		  if(this.b == 1) this.b = 0; else this.b = 1;
 		  colortimer = 0.1f;
 	  }
+	}
+
+
+	@Override
+	public void delete(Entity e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

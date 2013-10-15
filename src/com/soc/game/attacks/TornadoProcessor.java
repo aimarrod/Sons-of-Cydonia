@@ -95,7 +95,7 @@ public class TornadoProcessor implements AttackProcessor{
 	@Override
 	public void delete() {
 		if(hit != null){
-			SoC.game.buffmapper.get(hit).removebuff(Inmune.class);
+			SoC.game.buffmapper.get(hit).removebuff(Inmune.class,hit);
 			SoC.game.statemapper.get(hit).state = State.IDLE;
 			int damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.1);
 			if(SoC.game.damagemapper.has(hit)){

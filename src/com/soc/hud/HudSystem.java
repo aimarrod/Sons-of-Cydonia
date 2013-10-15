@@ -56,7 +56,7 @@ public class HudSystem extends VoidEntitySystem{
 		characterMenu.setPosition(10, height-280);
 		gameMenu.setPosition(width/2,height/2+50 );
 		gameMenu.setViewport(height);
-		tooltip.setBounds(width-250, 20, 200, 200);
+		tooltip.setBounds(width-350, 20, 200, 200);
 	}
 	public void toggleInventory(){
 		if(!inventory.hasParent()){

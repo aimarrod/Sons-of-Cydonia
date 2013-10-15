@@ -91,6 +91,13 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
 					SoC.game.spawnermanager.spawn(spawner, spawned);
 					spawned.addToWorld();
+				}else if(spawn.type.equals(Constants.Groups.ANTI_VENOM_FOUNTAIN)){
+					spawned=EntityFactory.createAntiVenomFountain(pos.x,pos.y,pos.z, new Vector2(0,0));
+					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+					SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+					SoC.game.spawnermanager.spawn(spawner, spawned);
+					spawned.addToWorld();
 				}else if(spawned != null){
 						SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 						SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);

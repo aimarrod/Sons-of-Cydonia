@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.soc.core.Constants;
 import com.soc.core.SoC;
 
 public class ActionBar extends Actor implements InputProcessor{
@@ -26,8 +27,9 @@ public class ActionBar extends Actor implements InputProcessor{
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		spells = SoC.game.statsmapper.get(SoC.game.player).spells;
 		for(int i = 0; i < spells.length; i++){
-			batch.draw(SoC.game.spells[spells[i]].icon, getX()+(i*slot.getWidth()+5), getY()+7);
-			//batch.draw(slot, getX()+(i*slot.getWidth()+2), getY());
+			if(spells[i] != Constants.Spells.NO_SPELL){
+				batch.draw(SoC.game.spells[spells[i]].icon, getX()+(i*slot.getWidth()+5), getY()+7);
+			}
 		}
 	}
 
@@ -74,6 +76,7 @@ public class ActionBar extends Actor implements InputProcessor{
 		if(coords.x > getX() && coords.x < getX() + (slot.getWidth()+2)*spells.length && coords.y > getY() && coords.y < getY() + 64){
 			for(int i = 0; i < spells.length; i++){
 				if(coords.x > getX()+(slot.getWidth()+2)*(i) && coords.x < (slot.getWidth()+2)*(i+1) && coords.y > getY() && coords.y < getY() + 64){
+					if(spells[i] == Constants.Spells.NO_SPELL) return false;
 					parent.tooltip.setText(SoC.game.spells[spells[i]].tooltip, 0.2f);
 					return false;
 				}

@@ -44,4 +44,9 @@ public class Shield implements Benefit{
 				}
 			}
 		}
+		@Override
+		public void delete(Entity e) {
+			// TODO Auto-generated method stub
+			
+		}
 }

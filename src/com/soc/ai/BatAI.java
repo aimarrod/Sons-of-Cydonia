@@ -4,11 +4,11 @@ package com.soc.ai;
 import com.artemis.Entity;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
+import com.soc.game.attacks.spells.Spell;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
-import com.soc.game.spells.Spell;
 
 public class BatAI implements AI{
 	

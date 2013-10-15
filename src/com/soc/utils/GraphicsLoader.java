@@ -615,6 +615,8 @@ public class GraphicsLoader {
                 }
         }
         cloud.animation = new Animation(2f/frames.length, frames);
+        cloud.ox = -128;
+        cloud.oy = -128;
         return cloud;
 	}
 	
@@ -836,9 +838,26 @@ public class GraphicsLoader {
         meteor.animation = new Animation(Constants.Spells.TENTACLES_DURATION/frames.length, frames);
         return meteor;
 	}
+
+	public static AnimatedRenderer loadAntiVenomFountain() {
+		AnimatedRenderer fountain = new AnimatedRenderer(true);
+		fountain.ox-=50;
+		fountain.oy-=20;
+		TextureRegion[][] tmp = TextureRegion.split(load("removePoison.png"), 192, 192);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+          }  }    
+        fountain.animation = new Animation(0.05f, frames);
+        return fountain;
+    }
 	
 	public static AnimatedRenderer loadAirCircle(){
 		AnimatedRenderer circle = new AnimatedRenderer(true);
+		circle.ox = -25;
+		circle.oy = -25;
 		TextureRegion[][] tmp = TextureRegion.split(load("air-circle.png"), 50, 50);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
@@ -864,6 +883,7 @@ public class GraphicsLoader {
                         frames[index++] = tmp[i][j];
                 }
         }
+
         wall.animation = new Animation(1f/frames.length, frames);
         return wall;
 	}

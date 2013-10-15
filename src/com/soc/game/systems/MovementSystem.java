@@ -24,6 +24,7 @@ public class MovementSystem extends EntityProcessingSystem {
 	  Position position = pm.get(e);
 	  Velocity velocity = vm.get(e);
 	  
+	  System.out.println(velocity.vx);
 	  
 	  if(velocity.vx != 0 && velocity.vy != 0){
 		  position.x += (velocity.vx*0.65)*world.delta;

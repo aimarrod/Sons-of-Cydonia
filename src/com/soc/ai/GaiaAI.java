@@ -6,17 +6,17 @@ import com.artemis.Entity;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.math.Vector2;
-import com.osc.game.benefits.Inmune;
+import com.osc.game.states.benefits.Inmune;
 import com.soc.core.Constants.World;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
-import com.soc.game.alterations.Push;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
 import com.soc.game.components.Stats;
+import com.soc.game.states.alterations.Push;
 
 public class GaiaAI implements AI{
 
@@ -146,9 +146,10 @@ public class GaiaAI implements AI{
 				gaia.addToWorld();
 				avatarSpawned = true;
 			} else if(SoC.game.progress.gaiaAvatarDefeated){
-				SoC.game.buffmapper.get(e).removebuff(Inmune.class);
-				fighting = true;
-				return;
+					SoC.game.buffmapper.get(e).removebuff(Inmune.class,e);
+					fighting = true;
+					return;
+
 			}
 		}
 	}

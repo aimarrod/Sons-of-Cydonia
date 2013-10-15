@@ -2,8 +2,8 @@ package com.soc.game.components;
 
 import com.artemis.Component;
 import com.soc.core.Constants;
-import com.soc.game.attacks.DaggerThrowProcessor;
-import com.soc.game.spells.Spell;
+import com.soc.game.attacks.processors.DaggerThrowProcessor;
+import com.soc.game.attacks.spells.Spell;
 
 public class Stats extends Component{
 	public int health;
@@ -22,16 +22,17 @@ public class Stats extends Component{
 	
 	public int attack;
 	public int[] spells;
+	public String clazz;
 	
 	public Stats(int health, int mana, int experience, int maxHealth,
 			int maxMana, int maxExperience, int level, int armor, int strength,
-			int agility, int intelligence, int attack, int[] spells) {
+			int agility, int intelligence, int attack, int[] spells, String clazz) {
 		this.health = health;
 		this.mana = mana;
-		this.experience = 50;
+		this.experience = experience;
 		this.maxHealth = maxHealth;
 		this.maxMana = maxMana;
-		this.maxExperience = 100;
+		this.maxExperience = maxExperience;
 		this.level = level;
 		this.armor = armor;
 		this.strength = strength;
@@ -39,30 +40,46 @@ public class Stats extends Component{
 		this.intelligence = intelligence;
 		this.attack = attack;
 		this.spells = spells;
+		this.clazz = clazz;
 	}
 	
 	public Stats() {
 	}
 
 	public boolean addExperience(int expGained){
-		experience+=expGained;
-		if(experience>=maxExperience){
-			increaseLevel();
-			calculateNextLevel();
-			return true;
+		if(level >= 10){
+			experience = maxExperience;
+			return false;
 		}
-		return false;
+		experience+=expGained;
+		boolean levelup = false;
+		while(experience>=maxExperience){
+			increaseLevel();
+			levelup = true;
+		}
+		return levelup;
 	}	
 	private void increaseLevel(){
 		level++;
-		armor+=2.5;
-		strength+=5;
-		agility+=5;
-		intelligence+=5;
-	}
-	
-	private void calculateNextLevel(){
-		experience=0;
-		maxExperience*=1.5;
+		maxHealth += 20;
+		health = maxHealth;
+		maxMana += 10;
+		mana = maxMana;
+		armor += 1;
+		strength += 5;
+		agility += 5;
+		intelligence += 5;
+		experience -= maxExperience;
+		maxExperience*=2;
+		
+		if(clazz.equals(Constants.Characters.WARRIOR)){
+			if(level == 3){
+				spells[1] = Constants.Spells.CHARGE;
+			} else if(level == 6) {
+				spells[2] = Constants.Spells.WHIRLBLADE;
+			} else if(level == 10){
+				spells[3] = Constants.Spells.QUAKEBLADE;
+			}
+		}
 	}
 }

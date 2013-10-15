@@ -8,12 +8,13 @@ import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.osc.game.benefits.Rage;
-import com.osc.game.benefits.Shield;
-import com.osc.game.benefits.ShieldBuff;
-import com.osc.game.benefits.Teleport;
+import com.osc.game.states.benefits.Rage;
+import com.osc.game.states.benefits.Shield;
+import com.osc.game.states.benefits.ShieldBuff;
+import com.osc.game.states.benefits.Teleport;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
+import com.soc.game.attacks.spells.Spell;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Character;
 import com.soc.game.components.Delay;
@@ -22,7 +23,6 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.game.spells.Spell;
 import com.soc.hud.HudSystem;
 import com.soc.utils.FloatingText;
 
@@ -154,6 +154,7 @@ import com.soc.utils.FloatingText;
 			for(int i = 0; i < controls.spellkeys.length; i++){
 				if(keycode == controls.spellkeys[i]){
 					int spellnum = stm.get(player).spells[i];
+					if(spellnum == Constants.Spells.NO_SPELL) return false;
 					Spell spell = SoC.game.spells[spellnum];
 					if(stats.mana < spell.mana){
 						FloatingText text = new FloatingText("No mana!", 1f, pos.x, pos.y, 50);
@@ -204,7 +205,7 @@ import com.soc.utils.FloatingText;
 		public boolean keyUp(int keycode) {
 			if(keycode == Input.Keys.B){
 				if(blocked){
-					bm.get(SoC.game.player).removebuff(Shield.class);;
+					bm.get(SoC.game.player).removebuff(Shield.class,SoC.game.player);;
 					blocked = false;
 				}
 				return true;

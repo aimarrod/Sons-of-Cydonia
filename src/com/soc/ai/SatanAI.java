@@ -1,16 +1,16 @@
 package com.soc.ai;
 
 import com.artemis.Entity;
-import com.osc.game.benefits.ShieldBuff;
+import com.osc.game.states.benefits.ShieldBuff;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
+import com.soc.game.attacks.spells.Spell;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.game.spells.Spell;
 
 public class SatanAI implements AI{
 	float shieldCD;
@@ -41,7 +41,6 @@ public class SatanAI implements AI{
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
 		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
-			System.out.println("Paso por aqui");
 			state.state=State.IDLE;
 			vel.vx=0;
 			vel.vy=0;
