@@ -2,8 +2,8 @@ package com.soc.core;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.osc.game.benefits.Inmune;
-import com.osc.game.benefits.Unmovable;
+import com.osc.game.states.benefits.Inmune;
+import com.osc.game.states.benefits.Unmovable;
 import com.soc.ai.BallistaAI;
 import com.soc.ai.BatAI;
 import com.soc.ai.EyeballAI;
@@ -21,28 +21,28 @@ import com.soc.ai.SlimeAI;
 import com.soc.ai.ZombiAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
-import com.soc.game.attacks.AntiVenomFountain;
-import com.soc.game.attacks.ArrowProcessor;
-import com.soc.game.attacks.BiteProcessor;
-import com.soc.game.attacks.ChargeProcessor;
-import com.soc.game.attacks.DaggerThrowProcessor;
-import com.soc.game.attacks.FireStoneProcessor;
-import com.soc.game.attacks.FlameProcessor;
-import com.soc.game.attacks.FlameWallProcessor;
-import com.soc.game.attacks.HarmfulEnemyProcessor;
-import com.soc.game.attacks.IcicleProcessor;
-import com.soc.game.attacks.MeteorProcessor;
-import com.soc.game.attacks.PoisonCloudProcessor;
-import com.soc.game.attacks.PunchProcessor;
-import com.soc.game.attacks.QuakeBladeProcessor;
-import com.soc.game.attacks.RedCastingProcessor;
-import com.soc.game.attacks.RedPushAttackProcessor;
-import com.soc.game.attacks.SlashProcessor;
-import com.soc.game.attacks.TentaclesProcessor;
-import com.soc.game.attacks.TornadoProcessor;
-import com.soc.game.attacks.VenomSwordProcessor;
-import com.soc.game.attacks.WhirlbladeProcessor;
-import com.soc.game.attacks.WindbladeProcessor;
+import com.soc.game.attacks.processors.AirCircleProcessor;
+import com.soc.game.attacks.processors.AntiVenomFountain;
+import com.soc.game.attacks.processors.ArrowProcessor;
+import com.soc.game.attacks.processors.BiteProcessor;
+import com.soc.game.attacks.processors.ChargeProcessor;
+import com.soc.game.attacks.processors.DaggerThrowProcessor;
+import com.soc.game.attacks.processors.FireStoneProcessor;
+import com.soc.game.attacks.processors.FlameProcessor;
+import com.soc.game.attacks.processors.FlameWallProcessor;
+import com.soc.game.attacks.processors.HarmfulEnemyProcessor;
+import com.soc.game.attacks.processors.IcicleProcessor;
+import com.soc.game.attacks.processors.MeteorProcessor;
+import com.soc.game.attacks.processors.PoisonCloudProcessor;
+import com.soc.game.attacks.processors.PunchProcessor;
+import com.soc.game.attacks.processors.QuakeBladeProcessor;
+import com.soc.game.attacks.processors.RedPushAttackProcessor;
+import com.soc.game.attacks.processors.SlashProcessor;
+import com.soc.game.attacks.processors.TentaclesProcessor;
+import com.soc.game.attacks.processors.TornadoProcessor;
+import com.soc.game.attacks.processors.VenomSwordProcessor;
+import com.soc.game.attacks.processors.WhirlbladeProcessor;
+import com.soc.game.attacks.processors.WindbladeProcessor;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
@@ -90,7 +90,7 @@ public class EntityFactory {
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,Constants.Characters.VELOCITY));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
-	    e.addComponent(new Stats(100, 50, 0, 100, 100, 0, 1, 1, 1, 1, 1, Constants.Spells.SLASH, new int[]{Constants.Spells.DAGGER_THROW, Constants.Spells.CHARGE, Constants.Spells.WHIRLBLADE, Constants.Spells.QUAKEBLADE}));
+	    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.SLASH, new int[]{Constants.Spells.DAGGER_THROW, -1, -1, -1}, Constants.Characters.WARRIOR));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(animations);
@@ -117,7 +117,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,100));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(1));
-	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.PUNCH, new int[]{}, Constants.Groups.SKELETONS));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new Enemy(600,10, new SkeletonAI()));
 	    
@@ -134,7 +134,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,0));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(0));
-	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 100, 1, Constants.Spells.PUNCH, new int[]{}));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 100, 1, Constants.Spells.PUNCH, new int[]{},Constants.Groups.BALLISTAS));
 	    e.addComponent(new Enemy(600,10, new BallistaAI()));
 	    e.addComponent(new Feet(25, 25));
 		Buff.addbuff(e, new Unmovable());
@@ -170,7 +170,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				Constants.Groups.MAGGOTS));
 		Character animations = new Character();
 		GraphicsLoader.loadMaggot(animations);
 		e.addComponent(animations);
@@ -202,7 +203,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				"bat"));
 		Character animations = new Character();
 		GraphicsLoader.loadBat(animations);
 		e.addComponent(animations);
@@ -233,7 +235,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				Constants.Groups.SLIMES));
 		Character animations = new Character();
 		GraphicsLoader.loadSlime(animations);
 		e.addComponent(animations);
@@ -248,7 +251,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,100));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(1));
-	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.BITE, new int[]{}));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.BITE, new int[]{}, Constants.Groups.ZOMBIES));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new Enemy(600,10, new ZombiAI()));
 	    
@@ -265,7 +268,7 @@ public class EntityFactory {
 		e.addComponent(new Velocity(0,0,100));
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 		e.addComponent(new State(1));
-	    e.addComponent(new Stats(50, 0, 0, 50, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.VENOMSWORD, new int[]{}));
+	    e.addComponent(new Stats(50, 0, 0, 50, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.VENOMSWORD, new int[]{}, Constants.Groups.SATANS));
 		e.addComponent(new Feet(32, 15));
 		e.addComponent(new Enemy(1000, 5, new SatanAI()));
 		Character animations = new Character();
@@ -297,7 +300,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				Constants.Groups.GAIAS));
 		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
 		GraphicsLoader.loadGaiaAir(animations);
@@ -328,7 +332,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				Constants.Groups.GAIAS));
 		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
 		GraphicsLoader.loadGaiaDark(animations);
@@ -359,7 +364,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				Constants.Groups.GAIAS));
 		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
 		GraphicsLoader.loadGaiaFlame(animations);
@@ -390,7 +396,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				Constants.Groups.GAIAS));
 		Buff.addbuff(e, new Unmovable());
 		Buff.addbuff(e, new Inmune());
 		Character animations = new Character();
@@ -422,7 +429,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				Constants.Groups.GAIAS));
 		Character animations = new Character();
 		GraphicsLoader.loadGaiaAvatar(animations);
 		e.addComponent(animations);
@@ -453,7 +461,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				Constants.Groups.EYEBALLS));
 		Character animations = new Character();
 		GraphicsLoader.loadEyeball(animations);
 		e.addComponent(animations);
@@ -469,7 +478,22 @@ public class EntityFactory {
 		e.addComponent(new Bounds(64, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-	    e.addComponent(new Stats(50, 0, 0, 50, 0, 0, 1, 1, 1, 1, 1231312312, Constants.Spells.FLAME, new int[]{}));
+		e.addComponent(new Enemy(0, 5, new MidMonsterAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null,
+				Constants.Groups.RED_MONSTER));
 	    e.addComponent(new Enemy(0, 5, new MidMonsterAI()));
 	    Character animations = new Character();
 		GraphicsLoader.loadMidMonster(animations);
@@ -501,7 +525,8 @@ public class EntityFactory {
 				0, 
 				0, 
 				0, 
-				null));
+				null,
+				Constants.Groups.FIRE_STONE));
 		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
 		GraphicsLoader.loadFireStoneMonster(animations);
@@ -654,8 +679,7 @@ public class EntityFactory {
 	public static Entity createPoisonCloud(Position pos, Bounds bon) {
 		Entity e=SoC.game.world.createEntity();
 		
-		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
-		e.addComponent(new Position(pos.x+bon.width*0.5f, pos.y+bon.height+0.5f, pos.z));
+		e.addComponent( new Position(pos.x+bon.width*0.5f, pos.y+bon.height+0.5f, pos.z));
 	   	e.addComponent( new Attack(new PoisonCloudProcessor(), 0) );
 	   	
 	   	return e;		
@@ -699,16 +723,6 @@ public class EntityFactory {
 		e.addComponent( new Position(x, y, z));
 		e.addComponent( new Bounds(200, 200) );
 	   	e.addComponent( new Attack(new FlameProcessor(), damage) );
-	   	
-	   	return e;		
-	}
-	
-	public static Entity createRedCast(float x, float y, int z,Entity owner) {
-		Entity e=SoC.game.world.createEntity();
-		
-		e.addComponent( new Position(x, y, z));
-		e.addComponent( new Bounds(200, 200) );
-	   	e.addComponent( new Attack(new RedCastingProcessor(owner), 0) );
 	   	
 	   	return e;		
 	}
@@ -771,6 +785,18 @@ public class EntityFactory {
 		e.addComponent( new Attack(new TentaclesProcessor(), damage));
 		
 		return e;
+	}
+	
+	
+	public static Entity createCircle(float x, float y, int posz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, posz) );
+		e.addComponent( new Bounds(50, 50));
+		e.addComponent( new Attack(new AirCircleProcessor(), 0) );
+			
+		return e;
+		
 	}
 	
 	public static Entity createWall(Entity source, int x, int y, int z){

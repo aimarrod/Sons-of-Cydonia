@@ -3,9 +3,9 @@ package com.soc.game.components;
 import com.artemis.Component;
 import com.artemis.Entity;
 import com.artemis.utils.Bag;
-import com.osc.game.benefits.Benefit;
+import com.osc.game.states.benefits.Benefit;
 import com.soc.core.SoC;
-import com.soc.game.alterations.Alteration;
+import com.soc.game.states.alterations.Alteration;
 
 public class Buff extends Component{
 	public Bag<Benefit> buffs;

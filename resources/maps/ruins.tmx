@@ -482,7 +482,7 @@
   <object x="4960" y="3008" width="32" height="416"/>
   <object x="4832" y="3008" width="32" height="416"/>
  </objectgroup>
- <objectgroup name="level2-special" width="200" height="200">
+ <objectgroup name="level2-special" width="200" height="200" visible="0">
   <object x="4864" y="3392" width="96" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -860,7 +860,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200" visible="0">
+ <objectgroup name="level0-spawners" width="200" height="200">
   <object x="256" y="320" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>
@@ -895,6 +895,105 @@
     <property name="range" value="10000"/>
     <property name="respawn" value="false"/>
     <property name="type" value="gaia"/>
+   </properties>
+  </object>
+  <object x="1408" y="2880" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="3"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="896" y="1120" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="500"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="1792" y="288" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="400"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="1952" y="1344" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="200"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="1696" y="1088" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="500"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="1024" y="768" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="200"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="896" y="448" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="400"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="1632" y="1440" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="500"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="1952" y="1344" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="200"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="1952" y="1344" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="500"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="1632" y="800" width="32" height="32">
+   <properties>
+    <property name="interval" value="15"/>
+    <property name="max" value="3"/>
+    <property name="range" value="400"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
    </properties>
   </object>
  </objectgroup>

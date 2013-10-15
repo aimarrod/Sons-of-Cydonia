@@ -4,18 +4,18 @@ import com.artemis.Component;
 import com.artemis.Entity;
 import com.artemis.utils.Bag;
 import com.soc.core.SoC;
-import com.soc.game.alterations.Alteration;
+import com.soc.game.states.alterations.Alteration;
 
 public class Debuff extends Component{
 	public Bag<Alteration> debuffs;
-	public Bag<Class> debuffClasses;
+	public Bag<Class<? extends Alteration>> debuffClasses;
 	
 	public Debuff(){
 		debuffs = new Bag<Alteration>();
-		debuffClasses = new Bag<Class>();
+		debuffClasses = new Bag<Class <? extends Alteration>>();
 	}
 	
-	public <T> T getDebuff(Class<T> clazz){
+	public <T extends Alteration> T getDebuff(Class<T> clazz){
 		for(int i = 0; i < debuffs.size(); i++){
 			if(debuffs.get(i).getClass().equals(clazz)){
 				return (T) debuffs.get(i);
@@ -47,7 +47,7 @@ public class Debuff extends Component{
 		d.debuffClasses.add(alteration.getClass());
 	}
 	
-	public void removeDebuff(Class clazz, Entity e){
+	public void removeDebuff(Class<? extends Alteration> clazz, Entity e){
 		for(int i = 0; i < debuffs.size(); i++){
 			if(debuffs.get(i).getClass().equals(clazz)){
 				debuffs.get(i).delete(e);

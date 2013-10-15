@@ -2,7 +2,7 @@ package com.soc.utils;
 
 import com.soc.core.Constants;
 import com.soc.game.components.Player;
-import com.soc.objects.Item;
+import com.soc.game.objects.Item;
 
 public class SavedPlayer {
 	public int move_up;

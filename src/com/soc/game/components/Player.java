@@ -4,9 +4,9 @@ import com.artemis.Component;
 import com.badlogic.gdx.Input;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
-import com.soc.objects.Armor;
-import com.soc.objects.Item;
-import com.soc.objects.Weapon;
+import com.soc.game.objects.Armor;
+import com.soc.game.objects.Item;
+import com.soc.game.objects.Weapon;
 import com.soc.utils.SavedPlayer;
 
 public class Player extends Component {
@@ -34,10 +34,9 @@ public class Player extends Component {
 		gameMenu=Input.Keys.ESCAPE;
 		spellkeys = new int[]{Input.Keys.NUM_1, Input.Keys.NUM_2, Input.Keys.NUM_3, Input.Keys.NUM_4};
 		inventary=new Item[Constants.Items.INVENTORY_SIZE];
-		inventary[0]=SoC.game.objects[Constants.Items.AXE];
-		inventary[1]=SoC.game.objects[Constants.Items.ARMOR];
-		inventary[2]=SoC.game.objects[Constants.Items.HEALTH_POTION];
-		inventary[3]=SoC.game.objects[Constants.Items.MANA_POTION];
+		for(int i = 0; i < Constants.Items.INVENTORY_SIZE; i++){
+			inventary[i] = SoC.game.items[i+1];
+		}
 		weapon=null;
 		armor=null;
 	}
@@ -52,10 +51,10 @@ public class Player extends Component {
 		gameMenu=player.gameMenu;
 		this.spellkeys = player.spellkeys;
 		this.inventary=new Item[Constants.Items.INVENTORY_SIZE];
-		this.armor=(Armor) SoC.game.objects[player.armor];
-		this.weapon=(Weapon)SoC.game.objects[player.weapon];
+		this.armor=(Armor) SoC.game.items[player.armor];
+		this.weapon=(Weapon)SoC.game.items[player.weapon];
 		for(int i=0;i<Constants.Items.INVENTORY_SIZE;i++){
-			inventary[i]=SoC.game.objects[player.inventary[i]];
+			inventary[i]=SoC.game.items[player.inventary[i]];
 		}
 	}
 	public boolean addToInventary(Item item){

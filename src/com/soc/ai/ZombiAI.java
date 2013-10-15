@@ -6,12 +6,12 @@ import com.artemis.Entity;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
+import com.soc.game.attacks.spells.Spell;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
-import com.soc.game.spells.Spell;
 import com.soc.utils.EffectsPlayer;
 
 public class ZombiAI implements AI{
@@ -39,7 +39,7 @@ public class ZombiAI implements AI{
 		
 		vel.vx = vel.speed * pos.direction.x;
 		vel.vy = vel.speed * pos.direction.y;
-		
+						
 		if(state.state != State.ATTACK){	
 			if(Math.abs(dstx) < 40 && Math.abs(dsty) < 12 ){
 				Spell spell = SoC.game.spells[Constants.Spells.BITE];
@@ -47,6 +47,7 @@ public class ZombiAI implements AI{
 				e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.BITE));
 				vel.vx = 0;
 				vel.vy = 0;
+				
 				if(Math.abs(dstx) < Constants.Characters.WIDTH) pos.direction.x = 0;
 				e.changedInWorld();
 			} else if(vel.vx != 0 && vel.vy != 0){

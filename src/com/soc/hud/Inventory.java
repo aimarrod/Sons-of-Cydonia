@@ -12,10 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
-import com.soc.objects.Armor;
-import com.soc.objects.Item;
-import com.soc.objects.Potion;
-import com.soc.objects.Weapon;
+import com.soc.game.objects.Armor;
+import com.soc.game.objects.Item;
+import com.soc.game.objects.Potion;
+import com.soc.game.objects.Weapon;
 
 public class Inventory extends Actor implements InputProcessor {
 	public Texture slot;
@@ -116,17 +116,7 @@ public class Inventory extends Actor implements InputProcessor {
 			if (Gdx.input.isKeyPressed(Keys.E)) {
 				Item item = SoC.game.playermapper.get(SoC.game.player).inventary[focusedSlot - 1];
 				if (item != null) {
-					if (item instanceof Weapon) {
-						((Weapon) item).equip();
-					} else {
-						if (item instanceof Armor) {
-							((Armor) item).equip();
-						} else {
-							if (item instanceof Potion) {
-								((Potion) item).use();
-							}
-						}
-					}
+					item.use();
 				}
 				return true;
 			}
@@ -149,18 +139,7 @@ public class Inventory extends Actor implements InputProcessor {
 							&& pos.y < posY + 64) {
 						Item item = SoC.game.playermapper.get(SoC.game.player).inventary[i - 1];
 						if (item != null) {
-							// !!
-							if (item instanceof Weapon) {
-								((Weapon) item).equip();
-							} else {
-								if (item instanceof Armor) {
-									((Armor) item).equip();
-								} else {
-									if (item instanceof Potion) {
-										((Potion) item).use();
-									}
-								}
-							}
+							item.use();
 						}
 						return true;
 					}

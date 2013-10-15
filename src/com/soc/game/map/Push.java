@@ -19,7 +19,7 @@ public class Push extends Tile{
 	}
 	
 	public void push(Entity e){
-		Debuff.addDebuff(e, new com.soc.game.alterations.Push(dir, 32, 150));
+		Debuff.addDebuff(e, new com.soc.game.states.alterations.Push(dir, 32, 150));
 	}
 
 }

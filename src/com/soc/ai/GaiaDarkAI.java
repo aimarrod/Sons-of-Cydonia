@@ -14,36 +14,34 @@ public class GaiaDarkAI implements AI{
 
 	public float timer;
 	public Random r;
+	public boolean init;
 	
 	public GaiaDarkAI(){
 		timer = 0;
 		r = new Random();
+		init = false;
 	}
 	
 	@Override
 	public void process(Entity e) {
+
+		Position playerPos = SoC.game.positionmapper.get(SoC.game.player);
+
+		if(!init && (int)(playerPos.x*World.TILE_FACTOR) > 12 && (int)(playerPos.y*World.TILE_FACTOR) > 181 && (int)(playerPos.y*World.TILE_FACTOR) < 186){
+			EntityFactory.createWall(e, 12, 185, 0).addToWorld();
+			EntityFactory.createWall(e, 12, 184, 0).addToWorld();
+			EntityFactory.createWall(e, 12, 183, 0).addToWorld();
+			EntityFactory.createWall(e, 12, 182, 0).addToWorld();
+			init = true;
+			return;
+		}
 		timer -= SoC.game.world.delta;
 		if(timer > 0) return;	
-		Position pos = SoC.game.positionmapper.get(e);
-		Position playerPos = SoC.game.positionmapper.get(SoC.game.player);
-		if(Math.hypot(playerPos.x-pos.x, playerPos.y - pos.y) > 1000) return;
-		System.out.println("EI");
-		timer = 2.0f;
-		
-		Position p = SoC.game.positionmapper.get(e);
-		
+		timer = 3.0f;		
+		Entity circle = EntityFactory.createCircle(playerPos.x+Constants.Characters.WIDTH*0.5f, playerPos.y+Constants.Characters.HEIGHT*0.5f, playerPos.z);
+		SoC.game.levelmanager.setLevel(circle, Constants.Groups.LEVEL + playerPos.z);
+		circle.addToWorld();
 
-		
-		int maggots = r.nextInt(5) + 3;
-		for(int i = 1; i < maggots+1; i++){
-			Entity spawned = EntityFactory.createBat(r.nextInt(50)+p.x-25, r.nextInt(50)+p.y-25, p.z);	
-			SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
-			SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-			SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +p.z);
-			SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMIES);
-			spawned.addToWorld();
-
-		}
 	}
 
 	@Override

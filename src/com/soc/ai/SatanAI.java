@@ -1,17 +1,18 @@
 package com.soc.ai;
 
 import com.artemis.Entity;
-import com.osc.game.benefits.ShieldBuff;
+import com.osc.game.states.benefits.Casting;
+import com.osc.game.states.benefits.ShieldBuff;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
+import com.soc.game.attacks.spells.Spell;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.game.spells.Spell;
 
 public class SatanAI implements AI{
 	float shieldCD;
@@ -62,19 +63,12 @@ public class SatanAI implements AI{
 		float dsty = playerPos.y - pos.y;
 		float dstx = playerPos.x - pos.x;
 		timerPushAttack-=SoC.game.world.delta;
-		if(timerPushAttack<=3 && dstx<15*Constants.World.TILE_SIZE && dsty<15*Constants.World.TILE_SIZE){
-			Entity spawned=null;
-			
+		if(timerPushAttack<=3 && dstx<15*Constants.World.TILE_SIZE && dsty<15*Constants.World.TILE_SIZE){		
 			if(timerPushAttack>0 && !casting){
-				System.out.println(timerPushAttack);
-				spawned=EntityFactory.createRedCast(pos.x-(Constants.Characters.WIDTH/2), pos.y+Constants.Characters.HEIGHT, playerPos.z,e);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-				spawned.addToWorld();
+				Buff.addbuff(e,new Casting(3f,Constants.BuffColors.RED));
 				casting=true;
 			}else if(timerPushAttack<=0 && casting){
-				spawned=EntityFactory.createRedPush(playerPos.x-(Constants.Characters.WIDTH/2), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+				Entity spawned=EntityFactory.createRedPush(playerPos.x-(Constants.Characters.WIDTH/2), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);

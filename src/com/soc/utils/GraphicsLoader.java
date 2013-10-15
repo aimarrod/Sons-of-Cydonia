@@ -615,6 +615,8 @@ public class GraphicsLoader {
                 }
         }
         cloud.animation = new Animation(2f/frames.length, frames);
+        cloud.ox = -128;
+        cloud.oy = -128;
         return cloud;
 	}
 	
@@ -851,6 +853,23 @@ public class GraphicsLoader {
         fountain.animation = new Animation(0.05f, frames);
         return fountain;
     }
+	
+	public static AnimatedRenderer loadAirCircle(){
+		AnimatedRenderer circle = new AnimatedRenderer(true);
+		circle.ox = -25;
+		circle.oy = -25;
+		TextureRegion[][] tmp = TextureRegion.split(load("air-circle.png"), 50, 50);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        circle.animation = new Animation(Constants.Spells.AIR_CIRCLE_TIME/frames.length, frames);
+        circle.animation.setPlayMode(Animation.LOOP_REVERSED);
+        return circle;
+	}
 	
 	public static AnimatedRenderer loadWall(){
 		AnimatedRenderer wall = new AnimatedRenderer(true);

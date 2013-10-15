@@ -9,11 +9,10 @@ import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.math.Rectangle;
-import com.osc.game.benefits.Unmovable;
+import com.osc.game.states.benefits.Unmovable;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.core.Constants.World;
-import com.soc.game.alterations.Burn;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
@@ -32,6 +31,7 @@ import com.soc.game.map.DialogTile;
 import com.soc.game.map.Gate;
 import com.soc.game.map.Push;
 import com.soc.game.map.Stairs;
+import com.soc.game.states.alterations.Burn;
 import com.soc.utils.MapLoader;
 
 public class CollisionSystem extends VoidEntitySystem {
