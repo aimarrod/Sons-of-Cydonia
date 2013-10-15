@@ -151,6 +151,9 @@ public class Constants {
 		public final static float BURN_DURATION=5f;
 		public final static float BURN_TICK_INTERVAL=1f;
 		public final static int BURN_DAMAGE = 10;
+		public final static float LAVA_BURN_DURATION=5f;
+		public final static float LAVA_BURN_TICK_INTERVAL=1f;
+		public final static float  LAVA_BURN_DAMAGE = 0.10f;
 		public final static float POISON_DURATION = 10f;
 		public final static float POISON_TICK_INTERVAL = 1f;
 		public final static int POISON_DAMAGE = 5;

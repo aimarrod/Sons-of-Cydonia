@@ -20,6 +20,7 @@ import com.osc.game.benefits.Teleport;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.alterations.Burn;
+import com.soc.game.alterations.LavaBurn;
 import com.soc.game.alterations.Poison;
 import com.soc.game.alterations.Push;
 import com.soc.game.alterations.Venom;
@@ -144,7 +145,7 @@ public class RenderSystem extends VoidEntitySystem{
 		
 		if(dm.has(e)){
 			Debuff deb = dm.get(e);
-			if(deb.debuffClasses.contains(Burn.class)) batch.setColor(1, 0.5f, 0.5f, 1);
+			if(deb.debuffClasses.contains(Burn.class) || deb.debuffClasses.contains(LavaBurn.class)) batch.setColor(1, 0.5f, 0.5f, 1);
 			else if(deb.debuffClasses.contains(Poison.class)) batch.setColor(0.5f, 1, 0.5f, 1);
 			else if(deb.debuffClasses.contains(Push.class)){
 				Push p = deb.getDebuff(Push.class);
@@ -153,7 +154,6 @@ public class RenderSystem extends VoidEntitySystem{
 				
 			}
 		} else batch.setColor(r.r, r.g, r.b, r.a);
-
 		if(bum.has(e)){
 			Buff buff=bum.get(e);
 			if(buff.buffClasses.contains(Rage.class)){

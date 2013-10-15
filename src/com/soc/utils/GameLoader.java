@@ -55,7 +55,7 @@ public class GameLoader {
 	}
 	
 	public static void newGame(String clazz){
-		SoC.game.player = EntityFactory.createCharacter(2300, 600, 0, 0, 0, Constants.Classes.WARRIOR);
+		SoC.game.player = EntityFactory.createCharacter(300, 600, 0, 0, 0, Constants.Classes.WARRIOR);
 		SoC.game.setScreen(new GameScreen());
 		SoC.game.progress = new GameProgress();
 		MapLoader.loadMap("finalMap2.tmx");
