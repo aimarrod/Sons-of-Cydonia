@@ -36,6 +36,8 @@ import com.soc.game.attacks.processors.MeteorProcessor;
 import com.soc.game.attacks.processors.PoisonCloudProcessor;
 import com.soc.game.attacks.processors.PunchProcessor;
 import com.soc.game.attacks.processors.QuakeBladeProcessor;
+import com.soc.game.attacks.processors.RedCastingProcessor;
+import com.soc.game.attacks.processors.RedPushAttackProcessor;
 import com.soc.game.attacks.processors.SlashProcessor;
 import com.soc.game.attacks.processors.TentaclesProcessor;
 import com.soc.game.attacks.processors.TornadoProcessor;
@@ -493,7 +495,8 @@ public class EntityFactory {
 				0, 
 				null,
 				Constants.Groups.RED_MONSTER));
-		Character animations = new Character();
+	    e.addComponent(new Enemy(0, 5, new MidMonsterAI()));
+	    Character animations = new Character();
 		GraphicsLoader.loadMidMonster(animations);
 		e.addComponent(animations);
 		
@@ -715,12 +718,31 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createFlame(float x, float y, int z, Vector2 direction) {
+	public static Entity createFlame(float x, float y, int z,int damage) {
 		Entity e=SoC.game.world.createEntity();
 		
-		e.addComponent( new Position(x, y, z, direction));
-		e.addComponent( new Bounds(32, 70) );
-	   	e.addComponent( new Attack(new FlameProcessor(), 0) );
+		e.addComponent( new Position(x, y, z));
+		e.addComponent( new Bounds(200, 200) );
+	   	e.addComponent( new Attack(new FlameProcessor(), damage) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createRedCast(float x, float y, int z,Entity owner) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z));
+		e.addComponent( new Bounds(200, 200) );
+	   	e.addComponent( new Attack(new RedCastingProcessor(owner), 0) );
+	   	
+	   	return e;		
+	}
+	public static Entity createRedPush(float x, float y, int z,int damage) {
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(x, y, z));
+		e.addComponent( new Bounds(200, 200) );
+	   	e.addComponent( new Attack(new RedPushAttackProcessor(), damage) );
 	   	
 	   	return e;		
 	}

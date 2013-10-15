@@ -40,8 +40,8 @@ public class MidMonsterAI implements AI{
 		State state = SoC.game.statemapper.get(e);
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
+		timer-=SoC.game.world.delta;
 		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
-			System.out.println("Paso por aqui");
 			state.state=State.IDLE;
 			vel.vx=0;
 			vel.vy=0;
@@ -59,15 +59,23 @@ public class MidMonsterAI implements AI{
 		vel.vx = vel.speed * pos.direction.x;
 		vel.vy = vel.speed * pos.direction.y;
 		
+		
 		if(state.state != State.ATTACK){	
+			if(timer<=0){
+				timer=5f;
+				Entity spawned=EntityFactory.createFlame(playerPos.x-(Constants.Characters.WIDTH/2), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+				spawned.addToWorld();
+			}
 			if(Math.abs(dstx) < 40 && Math.abs(dsty) < 20 ){
 				Spell spell = SoC.game.spells[Constants.Spells.BITE];
 				state.state = spell.state;
-				e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.BITE));
+				//e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.BITE));
 				vel.vx = 0;
 				vel.vy = 0;
 				if(Math.abs(dstx) < Constants.Characters.WIDTH) pos.direction.x = 0;
-				e.changedInWorld();
 			} else if(vel.vx != 0 && vel.vy != 0){
 				state.state = State.WALK;
 				if(Math.abs(dstx) < 32) pos.direction.x = 0;
