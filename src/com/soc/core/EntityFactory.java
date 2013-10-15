@@ -2,8 +2,6 @@ package com.soc.core;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
-import com.osc.game.states.benefits.Inmune;
-import com.osc.game.states.benefits.Unmovable;
 import com.soc.ai.BallistaAI;
 import com.soc.ai.BatAI;
 import com.soc.ai.EyeballAI;
@@ -37,7 +35,6 @@ import com.soc.game.attacks.processors.MeteorProcessor;
 import com.soc.game.attacks.processors.PoisonCloudProcessor;
 import com.soc.game.attacks.processors.PunchProcessor;
 import com.soc.game.attacks.processors.QuakeBladeProcessor;
-import com.soc.game.attacks.processors.RedCastingProcessor;
 import com.soc.game.attacks.processors.RedPushAttackProcessor;
 import com.soc.game.attacks.processors.SlashProcessor;
 import com.soc.game.attacks.processors.TentaclesProcessor;
@@ -60,6 +57,8 @@ import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.components.Wall;
+import com.soc.game.states.benefits.Inmune;
+import com.soc.game.states.benefits.Unmovable;
 import com.soc.utils.GraphicsLoader;
 
 
@@ -729,16 +728,6 @@ public class EntityFactory {
 	   	
 	   	return e;		
 	}
-	
-	public static Entity createRedCast(float x, float y, int z,Entity owner) {
-		Entity e=SoC.game.world.createEntity();
-		
-		e.addComponent( new Position(x, y, z));
-		e.addComponent( new Bounds(200, 200) );
-	   	e.addComponent( new Attack(new RedCastingProcessor(owner), 0) );
-	   	
-	   	return e;		
-	}
 	public static Entity createRedPush(float x, float y, int z,int damage) {
 		Entity e=SoC.game.world.createEntity();
 		
@@ -749,12 +738,13 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createFlameWall(float x, float y, int z, Vector2 direction) {
+	public static Entity createFlameWall(Entity owner,float x, float y, int z) {
 		Entity e=SoC.game.world.createEntity();
 		
-		e.addComponent( new Position(x, y, z, direction));
-		e.addComponent( new Bounds(32, 70) );
+		e.addComponent( new Position(x*Constants.World.TILE_SIZE, y*Constants.World.TILE_SIZE, z) );
+		e.addComponent( new Bounds((int)Constants.World.TILE_SIZE, (int)Constants.World.TILE_SIZE));;
 	   	e.addComponent( new Attack(new FlameWallProcessor(), 0) );
+	   	SoC.game.wallmanager.block(owner, e);
 	   	
 	   	return e;		
 	}

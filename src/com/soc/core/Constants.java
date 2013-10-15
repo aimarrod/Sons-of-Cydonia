@@ -30,7 +30,6 @@ public class Constants {
 		public static final String GAIAS = "gaia-flame";
 		public static final String EYEBALLS = "eyeball";
 		public static final String RED_MONSTER = "mid-monster";
-		public static final String FLAME_WALL = "flame-wall";
 		public static final String FIRE_STONE = "fire-stone-monster";
 		public static final String ANTI_VENOM_FOUNTAIN = "anti-venom-fountain";
 		
@@ -174,6 +173,9 @@ public class Constants {
 		public final static float BURN_DURATION=5f;
 		public final static float BURN_TICK_INTERVAL=1f;
 		public final static int BURN_DAMAGE = 10;
+		public final static float LAVA_BURN_DURATION=5f;
+		public final static float LAVA_BURN_TICK_INTERVAL=1f;
+		public final static float  LAVA_BURN_DAMAGE = 0.10f;
 		public final static float POISON_DURATION = 10f;
 		public final static float POISON_TICK_INTERVAL = 1f;
 		public final static int POISON_DAMAGE = 5;
@@ -189,6 +191,11 @@ public class Constants {
 		public final static float GAIN_STRENGTH = 5f;
 		public final static float TELEPORT_CAST_TIME = 1f;
 		public final static float SHIELD_CHARGE_TIME=0.3f;
+	}
+	
+	public static class BuffColors{
+		//public final static String GREEN="greenCast";
+		public final static String RED="red";
 	}
 	
 }

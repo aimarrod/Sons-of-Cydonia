@@ -19,6 +19,6 @@ public class Drop extends Component{
 		Position pos = SoC.game.positionmapper.get(e);
 		Bounds bon = SoC.game.boundsmapper.get(e);
 
-		batch.draw(tex, pos.x-bon.width*0.5f, pos.y-bon.height*0.5f, bon.width, bon.height);
+		batch.draw(tex, pos.x, pos.y, bon.width, bon.height);
 	}
 }

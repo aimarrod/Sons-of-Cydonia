@@ -13,10 +13,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.osc.game.states.benefits.Rage;
-import com.osc.game.states.benefits.Shield;
-import com.osc.game.states.benefits.ShieldBuff;
-import com.osc.game.states.benefits.Teleport;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Attack;
@@ -31,11 +27,16 @@ import com.soc.game.components.State;
 import com.soc.game.components.Wall;
 import com.soc.game.graphics.Renderer;
 import com.soc.game.states.alterations.Burn;
+import com.soc.game.states.alterations.LavaBurn;
 import com.soc.game.states.alterations.Poison;
 import com.soc.game.states.alterations.Push;
 import com.soc.game.states.alterations.Venom;
+import com.soc.game.states.benefits.Casting;
+import com.soc.game.states.benefits.Rage;
+import com.soc.game.states.benefits.Shield;
+import com.soc.game.states.benefits.ShieldBuff;
+import com.soc.game.states.benefits.Teleport;
 import com.soc.utils.FloatingText;
-import com.soc.utils.GraphicsLoader;
 
 public class RenderSystem extends VoidEntitySystem{
 	
@@ -148,7 +149,7 @@ public class RenderSystem extends VoidEntitySystem{
 		
 		if(dm.has(e)){
 			Debuff deb = dm.get(e);
-			if(deb.debuffClasses.contains(Burn.class)) batch.setColor(1, 0.5f, 0.5f, 1);
+			if(deb.debuffClasses.contains(Burn.class) || deb.debuffClasses.contains(LavaBurn.class)) batch.setColor(1, 0.5f, 0.5f, 1);
 			else if(deb.debuffClasses.contains(Poison.class)) batch.setColor(0.5f, 1, 0.5f, 1);
 			else if(deb.debuffClasses.contains(Push.class)){
 				Push p = deb.getDebuff(Push.class);
@@ -157,7 +158,6 @@ public class RenderSystem extends VoidEntitySystem{
 				
 			}
 		} else batch.setColor(r.r, r.g, r.b, r.a);
-
 		if(bum.has(e)){
 			Buff buff=bum.get(e);
 			if(buff.buffClasses.contains(Rage.class)){
@@ -201,6 +201,10 @@ public class RenderSystem extends VoidEntitySystem{
 				
 				batch.draw(shield.renderer.frame(world.delta), posx+shield.renderer.ox, posy+shield.renderer.oy);
 
+			}
+			if(buff.buffClasses.contains(Casting.class)){
+				Casting cast=buff.getBuff(Casting.class);
+				batch.draw(cast.renderer.frame(world.delta), pos.x+cast.renderer.ox,pos.y+cast.renderer.oy+Constants.Characters.HEIGHT);
 			}
 
 		}

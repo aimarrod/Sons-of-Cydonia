@@ -9,7 +9,6 @@ import com.artemis.systems.VoidEntitySystem;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.math.Rectangle;
-import com.osc.game.states.benefits.Unmovable;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.core.Constants.World;
@@ -33,6 +32,7 @@ import com.soc.game.map.Gate;
 import com.soc.game.map.Push;
 import com.soc.game.map.Stairs;
 import com.soc.game.states.alterations.Burn;
+import com.soc.game.states.benefits.Unmovable;
 import com.soc.utils.FloatingText;
 import com.soc.utils.MapLoader;
 
@@ -105,13 +105,16 @@ public class CollisionSystem extends VoidEntitySystem {
 	private class DropPicking implements CollisionGroup{
 
 		ImmutableBag<Entity> items;
+		float timer;
 		
 		public DropPicking(){
 			items = SoC.game.groupmanager.getEntities(Constants.Groups.ITEMS);
+			timer = 0f;
 		}
 		
 			@Override
 			public void processCollisions() {
+				timer -= SoC.game.world.delta;
 				for (int i = 0; i < items.size(); i++) {
 					process(items.get(i));
 				}
@@ -131,12 +134,13 @@ public class CollisionSystem extends VoidEntitySystem {
 					Player p = SoC.game.playermapper.get(SoC.game.player);
 					if(p.addToInventary(SoC.game.items[SoC.game.dropmapper.get(item).item])) {
 						item.deleteFromWorld();
-					} else {
+					} else if(timer <= 0){
 						FloatingText text = new FloatingText("Inventory is full.", 1f, pos.x, pos.y, 50);
 						text.b = 0;
 						text.r = 0;
 						text.g = 0;
 						SoC.game.renderSystem.texts.add(text);
+						timer = 1f;
 					}
 				}		
 		}

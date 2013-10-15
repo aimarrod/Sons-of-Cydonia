@@ -6,7 +6,6 @@ import com.artemis.annotations.Mapper;
 import com.artemis.utils.Bag;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.osc.game.states.benefits.Rage;
 import com.soc.core.SoC;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
@@ -15,6 +14,7 @@ import com.soc.game.components.Damage;
 import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
 import com.soc.game.states.alterations.Venom;
+import com.soc.game.states.benefits.Rage;
 
 public class VenomSwordProcessor implements AttackProcessor{	
 	public Entity hit;
@@ -37,11 +37,6 @@ public class VenomSwordProcessor implements AttackProcessor{
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
-		System.out.println("AttackPosX: "+attackpos.x);
-		System.out.println("VictimPosX: "+victimpos.x);
-		System.out.println("AttackPosY: "+attackpos.y);
-		System.out.println("VictimPosYS: "+victimpos.y);
-		System.out.println( ( attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y));
 		return ( attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	}
 

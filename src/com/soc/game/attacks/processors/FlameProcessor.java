@@ -23,7 +23,6 @@ public class FlameProcessor implements AttackProcessor{
 
 	@Override 
 	public void process(Entity attack) {
-		System.out.println("paso por aqui");
 		timer-=SoC.game.world.delta;
 		if(timer<=0){
 			attack.deleteFromWorld();
@@ -43,7 +42,6 @@ public class FlameProcessor implements AttackProcessor{
 
 	@Override
 	public void handle(Entity attack, Entity victim) {
-		System.out.println("handle");
 		lastHit=timer;
 		int damage = (int) (SoC.game.attackmapper.get(attack).damage);
 		if(SoC.game.damagemapper.has(victim)){

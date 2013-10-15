@@ -2,7 +2,6 @@ package com.soc.game.attacks.processors;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.osc.game.states.benefits.Rage;
 import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
@@ -10,6 +9,7 @@ import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.states.alterations.Venom;
+import com.soc.game.states.benefits.Rage;
 import com.soc.utils.GraphicsLoader;
 
 public class AntiVenomFountain implements AttackProcessor {

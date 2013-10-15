@@ -1,5 +1,7 @@
 package com.soc.game.attacks.processors;
 
+import java.util.Random;
+
 import com.artemis.Entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -61,14 +63,13 @@ public class RedPushAttackProcessor implements AttackProcessor{
 			victim.addComponent(new Damage(a.damage, false));
 			victim.changedInWorld();
 		}
-		Vector2 pushdirection = new Vector2();
-		if(pos1.direction.x != 0){
-			pushdirection.y = Math.signum(pos2.y - pos1.y);
-		}
-		if(pos1.direction.y != 0){
-			pushdirection.x = Math.signum(pos2.x - pos1.x);
-		}
-		Debuff.addDebuff(victim, new Push(pushdirection, 50, 200));
+		Vector2 [] directions=new Vector2 [2];
+		Vector2 pushDirection = new Vector2(1,0);
+		Vector2 pushDirection2=new Vector2(0,1);
+		directions[0]=pushDirection;
+		directions[1]=pushDirection2;
+		Random r=new Random();
+		Debuff.addDebuff(victim, new Push(directions[r.nextInt(2)], 300, 300));
 		
 	}
 

@@ -1,9 +1,9 @@
 package com.soc.ai;
 
 import com.artemis.Entity;
-import com.osc.game.states.benefits.ShieldBuff;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
+import com.soc.core.GameProgress;
 import com.soc.core.SoC;
 import com.soc.game.attacks.spells.Spell;
 import com.soc.game.components.Buff;
@@ -12,6 +12,8 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.states.benefits.Casting;
+import com.soc.game.states.benefits.ShieldBuff;
 
 public class SatanAI extends AI{
 	float shieldCD;
@@ -21,7 +23,12 @@ public class SatanAI extends AI{
 	float limitXRight;
 	float limitYBottom;
 	float limitYUp;
+	float limitBridgeXLeft;
+	float limitBridgeXRight;
+	float limitBridgeYBottom;
+	float limitBridgeYUp;
 	float timerPushAttack;
+	boolean satanSpawned;
 	boolean casting;
 
 	public SatanAI(){
@@ -32,8 +39,13 @@ public class SatanAI extends AI{
 		limitXRight=33*Constants.World.TILE_SIZE;
 		limitYBottom=54*Constants.World.TILE_SIZE;
 		limitYUp=83*Constants.World.TILE_SIZE;
+		limitBridgeXLeft=15*Constants.World.TILE_SIZE;
+		limitBridgeXRight=24*Constants.World.TILE_SIZE;
+		limitBridgeYBottom=36*Constants.World.TILE_SIZE;
+		limitBridgeYUp=54*Constants.World.TILE_SIZE;
 		timerPushAttack=7f;
 		casting=false;
+		satanSpawned=false;
 	}
 	@Override
 	public void process(Entity e) {
@@ -44,11 +56,41 @@ public class SatanAI extends AI{
 		State state = SoC.game.statemapper.get(e);
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
+		if(!satanSpawned){
+//			EntityFactory.createWall(e, 16, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 17, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 18, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 19, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 20, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 21, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 22, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 23, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 45, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 46, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 47, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 48, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 49, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 50, 54, 0).addToWorld();
+			satanSpawned=true;
+		}
+		
+		if( playerPos.x>limitBridgeXLeft && playerPos.x<limitBridgeXRight && playerPos.y>limitBridgeYBottom && playerPos.y<limitBridgeYUp){
+			EntityFactory.createWall(e, 16, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 17, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 18, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 19, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 20, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 21, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 22, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 23, 36, 0).addToWorld();
+		}
 		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
+			if((playerPos.x<limitBridgeXLeft || playerPos.x>limitBridgeXRight) || (playerPos.y<limitBridgeYBottom || playerPos.y>limitBridgeYUp)){
 			state.state=State.IDLE;
 			vel.vx=0;
 			vel.vy=0;
 			return;
+			}
 		}
 		if(state.state == State.DYING) return;
 		
@@ -62,19 +104,12 @@ public class SatanAI extends AI{
 		float dsty = playerPos.y - pos.y;
 		float dstx = playerPos.x - pos.x;
 		timerPushAttack-=SoC.game.world.delta;
-		if(timerPushAttack<=3 && dstx<15*Constants.World.TILE_SIZE && dsty<15*Constants.World.TILE_SIZE){
-			Entity spawned=null;
-			
+		if(timerPushAttack<=3 && dstx<15*Constants.World.TILE_SIZE && dsty<15*Constants.World.TILE_SIZE){		
 			if(timerPushAttack>0 && !casting){
-				System.out.println(timerPushAttack);
-				spawned=EntityFactory.createRedCast(pos.x-(Constants.Characters.WIDTH/2), pos.y+Constants.Characters.HEIGHT, playerPos.z,e);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-				spawned.addToWorld();
+				Buff.addbuff(e,new Casting(3f,Constants.BuffColors.RED));
 				casting=true;
 			}else if(timerPushAttack<=0 && casting){
-				spawned=EntityFactory.createRedPush(playerPos.x-(Constants.Characters.WIDTH/2), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+				Entity spawned=EntityFactory.createRedPush(playerPos.x-(Constants.Characters.WIDTH/2), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
@@ -112,7 +147,7 @@ public class SatanAI extends AI{
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
+		SoC.game.progress.leftMonsterDefeated=true;
 		
 	}
 

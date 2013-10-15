@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.osc.game.states.benefits.Inmune;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Attack;
@@ -23,6 +22,7 @@ import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.states.alterations.Push;
+import com.soc.game.states.benefits.Inmune;
 import com.soc.utils.GraphicsLoader;
 
 public class TornadoProcessor implements AttackProcessor{
@@ -43,7 +43,6 @@ public class TornadoProcessor implements AttackProcessor{
 		if(hit != null){
 			Velocity veloc = SoC.game.velocitymapper.get(attack);
 			distance -= SoC.game.world.delta*(Math.abs(veloc.vx)+Math.abs(veloc.vy));
-			System.out.println(distance);
 			if(distance <= 0){
 				attack.deleteFromWorld();
 				delete();

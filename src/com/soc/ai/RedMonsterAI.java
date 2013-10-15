@@ -30,8 +30,7 @@ public class RedMonsterAI extends AI{
 		Velocity vel = SoC.game.velocitymapper.get(e);
 		State state = SoC.game.statemapper.get(e);
 		Entity player = SoC.game.player;
-		Position playerPos = SoC.game.positionmapper.get(player);
-		
+		Position playerPos = SoC.game.positionmapper.get(player);		
 		if(state.state == State.DYING) return;
 		
 		float dsty = playerPos.y - pos.y;
