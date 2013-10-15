@@ -77,9 +77,6 @@ public class GameLoader {
 
 		
 		SoC.game.progress = save.progress;
-		if(SoC.game.progress==null){
-			SoC.game.progress=new GameProgress();
-		}
 		SoC.game.player = EntityFactory.loadCharacter(save.position, save.stats, Constants.Characters.WARRIOR, new Player(save.player));
 		SoC.game.setScreen(new GameScreen());
 		MapLoader.loadMap(save.map);

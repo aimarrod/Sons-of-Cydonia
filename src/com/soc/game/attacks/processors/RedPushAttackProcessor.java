@@ -69,7 +69,7 @@ public class RedPushAttackProcessor implements AttackProcessor{
 		directions[0]=pushDirection;
 		directions[1]=pushDirection2;
 		Random r=new Random();
-		Debuff.addDebuff(victim, new Push(directions[r.nextInt(2)], 300, 200));
+		Debuff.addDebuff(victim, new Push(directions[r.nextInt(2)], 300, 300));
 		
 	}
 

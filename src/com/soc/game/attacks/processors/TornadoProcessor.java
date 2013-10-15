@@ -43,7 +43,6 @@ public class TornadoProcessor implements AttackProcessor{
 		if(hit != null){
 			Velocity veloc = SoC.game.velocitymapper.get(attack);
 			distance -= SoC.game.world.delta*(Math.abs(veloc.vx)+Math.abs(veloc.vy));
-			System.out.println(distance);
 			if(distance <= 0){
 				attack.deleteFromWorld();
 				delete();

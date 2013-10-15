@@ -5,6 +5,7 @@ import com.osc.game.states.benefits.Casting;
 import com.osc.game.states.benefits.ShieldBuff;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
+import com.soc.core.GameProgress;
 import com.soc.core.SoC;
 import com.soc.game.attacks.spells.Spell;
 import com.soc.game.components.Buff;
@@ -22,7 +23,12 @@ public class SatanAI implements AI{
 	float limitXRight;
 	float limitYBottom;
 	float limitYUp;
+	float limitBridgeXLeft;
+	float limitBridgeXRight;
+	float limitBridgeYBottom;
+	float limitBridgeYUp;
 	float timerPushAttack;
+	boolean satanSpawned;
 	boolean casting;
 
 	public SatanAI(){
@@ -33,8 +39,13 @@ public class SatanAI implements AI{
 		limitXRight=33*Constants.World.TILE_SIZE;
 		limitYBottom=54*Constants.World.TILE_SIZE;
 		limitYUp=83*Constants.World.TILE_SIZE;
+		limitBridgeXLeft=15*Constants.World.TILE_SIZE;
+		limitBridgeXRight=24*Constants.World.TILE_SIZE;
+		limitBridgeYBottom=36*Constants.World.TILE_SIZE;
+		limitBridgeYUp=54*Constants.World.TILE_SIZE;
 		timerPushAttack=7f;
 		casting=false;
+		satanSpawned=false;
 	}
 	@Override
 	public void process(Entity e) {
@@ -45,11 +56,41 @@ public class SatanAI implements AI{
 		State state = SoC.game.statemapper.get(e);
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
+		if(!satanSpawned){
+//			EntityFactory.createWall(e, 16, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 17, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 18, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 19, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 20, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 21, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 22, 36, 0).addToWorld();
+//			EntityFactory.createWall(e, 23, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 45, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 46, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 47, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 48, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 49, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 50, 54, 0).addToWorld();
+			satanSpawned=true;
+		}
+		
+		if( playerPos.x>limitBridgeXLeft && playerPos.x<limitBridgeXRight && playerPos.y>limitBridgeYBottom && playerPos.y<limitBridgeYUp){
+			EntityFactory.createWall(e, 16, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 17, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 18, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 19, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 20, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 21, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 22, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 23, 36, 0).addToWorld();
+		}
 		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
+			if((playerPos.x<limitBridgeXLeft || playerPos.x>limitBridgeXRight) || (playerPos.y<limitBridgeYBottom || playerPos.y>limitBridgeYUp)){
 			state.state=State.IDLE;
 			vel.vx=0;
 			vel.vy=0;
 			return;
+			}
 		}
 		if(state.state == State.DYING) return;
 		
@@ -106,7 +147,7 @@ public class SatanAI implements AI{
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
+		SoC.game.progress.leftMonsterDefeated=true;
 		
 	}
 

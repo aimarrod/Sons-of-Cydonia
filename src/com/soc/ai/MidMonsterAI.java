@@ -22,6 +22,9 @@ public class MidMonsterAI implements AI{
 	float limitXRight;
 	float limitYBottom;
 	float limitYUp;
+	boolean monsterSpawned;
+	boolean characterInside;
+	boolean flameWallSpawned;
 	
 	
 	public MidMonsterAI(){
@@ -31,6 +34,9 @@ public class MidMonsterAI implements AI{
 		limitXRight=61*Constants.World.TILE_SIZE;
 		limitYBottom=54*Constants.World.TILE_SIZE;
 		limitYUp=83*Constants.World.TILE_SIZE;
+		monsterSpawned=false;
+		characterInside=false;
+		flameWallSpawned=false;
 	}
 	
 	@Override
@@ -40,6 +46,119 @@ public class MidMonsterAI implements AI{
 		State state = SoC.game.statemapper.get(e);
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
+		
+		if(!monsterSpawned &&!SoC.game.progress.leftMonsterDefeated && !SoC.game.progress.rightMonsterDefetead ){
+			EntityFactory.createWall(e, 54, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 55, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 56, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 57, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 58, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 59, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 60, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 45, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 44, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 43, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 42, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 41, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 40, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 39, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 38, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 82, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 81, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 80, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 79, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 78, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 77, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 76, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 75, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 74, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 73, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 72, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 71, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 70, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 69, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 68, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 67, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 66, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 65, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 64, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 63, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 62, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 61, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 60, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 59, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 58, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 57, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 56, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 55, 0).addToWorld();
+			EntityFactory.createWall(e, 37, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 38, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 39, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 40, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 41, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 42, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 43, 54, 0).addToWorld();
+//			EntityFactory.createWall(e, 45, 54, 0).addToWorld();
+//			EntityFactory.createWall(e, 46, 54, 0).addToWorld();
+//			EntityFactory.createWall(e, 47, 54, 0).addToWorld();
+//			EntityFactory.createWall(e, 48, 54, 0).addToWorld();
+//			EntityFactory.createWall(e, 49, 54, 0).addToWorld();
+//			EntityFactory.createWall(e, 50, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 52, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 53, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 54, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 55, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 56, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 57, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 58, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 59, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 60, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 81, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 80, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 79, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 78, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 77, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 76, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 75, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 74, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 73, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 72, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 71, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 70, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 69, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 68, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 67, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 66, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 65, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 64, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 63, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 62, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 61, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 60, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 59, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 58, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 57, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 56, 0).addToWorld();
+			EntityFactory.createWall(e, 61, 55, 0).addToWorld();
+			monsterSpawned=true;
+		}
+		if(!flameWallSpawned){
+			for(int i=54;i<=82;i++){
+				EntityFactory.createFlameWall(e, 37, i, 0).addToWorld();
+			}
+		}
+		
+		if(!characterInside && (playerPos.x>limitXLeft && playerPos.x<limitXRight) && (playerPos.y>limitYBottom && playerPos.y<limitYUp)){
+			EntityFactory.createWall(e, 45, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 46, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 47, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 48, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 49, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 50, 54, 0).addToWorld();
+			characterInside=true;
+		}
+
 		timer-=SoC.game.world.delta;
 		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
 			state.state=State.IDLE;

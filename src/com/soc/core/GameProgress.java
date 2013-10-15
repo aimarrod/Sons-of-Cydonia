@@ -6,5 +6,9 @@ public class GameProgress {
 	public boolean gaiaDarkDefeated=false;
 	public boolean gaiaAvatarDefeated=false;
 	public boolean gaiaDefeated=false;
+	public boolean leftMonsterDefeated=false;
+	public boolean midMonsterDefeated=false;
+	public boolean rightMonsterDefetead=false;
+	public boolean finalBossDefeated=false;
 
 }

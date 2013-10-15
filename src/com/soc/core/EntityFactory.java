@@ -736,12 +736,13 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createFlameWall(float x, float y, int z, Vector2 direction) {
+	public static Entity createFlameWall(Entity owner,float x, float y, int z) {
 		Entity e=SoC.game.world.createEntity();
 		
-		e.addComponent( new Position(x, y, z, direction));
-		e.addComponent( new Bounds(32, 70) );
+		e.addComponent( new Position(x*Constants.World.TILE_SIZE, y*Constants.World.TILE_SIZE, z) );
+		e.addComponent( new Bounds((int)Constants.World.TILE_SIZE, (int)Constants.World.TILE_SIZE));;
 	   	e.addComponent( new Attack(new FlameWallProcessor(), 0) );
+	   	SoC.game.wallmanager.block(owner, e);
 	   	
 	   	return e;		
 	}
