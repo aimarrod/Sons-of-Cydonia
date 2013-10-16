@@ -789,6 +789,7 @@ public class GraphicsLoader {
 	
 	public static void loadRightMonster(Character character){
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
@@ -798,6 +799,10 @@ public class GraphicsLoader {
 		for(int i = 0; i < tmp.length; i++){
 	   		move.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("right-monster-attack.png"), 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i] = new Animation(2f/tmp[i].length, tmp[i]);
 	   	}
 		tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
         TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
@@ -810,7 +815,7 @@ public class GraphicsLoader {
 
 	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
 	    character.deathTime=1f;
-	    character.renderers[State.ATTACK]=move;
+	    character.renderers[State.ATTACK]=attack;
 	    character.renderers[State.WALK]=move;
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;
@@ -884,6 +889,13 @@ public class GraphicsLoader {
 		AnimatedRenderer quake = new AnimatedRenderer(true);
 		TextureRegion[][] tmp = TextureRegion.split(load("quake.png"), 256, 128);
         quake.animation = new Animation(Constants.Spells.QUAKEBLADE_TICK_INTERVAL, tmp[0]);
+        return quake;
+	}
+	
+	public static AnimatedRenderer loadStomp(){
+		AnimatedRenderer quake = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("quake.png"), 256, 128);
+        quake.animation = new Animation(2f/tmp[1].length, tmp[1]);
         return quake;
 	}
 	
