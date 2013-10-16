@@ -151,10 +151,11 @@ public class CollisionSystem extends VoidEntitySystem {
 
 		ImmutableBag<Entity> enemies;
 		ImmutableBag<Entity> walls;
-		
+		ImmutableBag<Entity> projectiles;
 		public WallCollision(){
 			enemies = SoC.game.groupmanager.getEntities(Constants.Groups.CHARACTERS);
 			walls = SoC.game.groupmanager.getEntities(Constants.Groups.WALLS);
+			projectiles=SoC.game.groupmanager.getEntities(Constants.Groups.PROJECTILES);
 		}
 		
 			@Override
@@ -167,8 +168,25 @@ public class CollisionSystem extends VoidEntitySystem {
 						process(enemies.get(i), walls.get(j));
 					}
 				}
+				for(int i=0;i<projectiles.size();i++){
+					for (int j = 0; j < walls.size(); j++) {
+						processProjectilesWalls(projectiles.get(i), walls.get(j));
+					}
+				}
 			}
-
+			public void processProjectilesWalls(Entity projectile, Entity wall){
+				Position pos = pm.get(projectile);
+				Bounds bounds=bm.get(projectile);
+				Position wallpos = pm.get(wall);
+				Bounds wallbounds = bm.get(wall);
+				Rectangle current = new Rectangle(pos.x, pos.y, bounds.width, bounds.height);
+				Rectangle otherrect = new Rectangle(wallpos.x, wallpos.y,
+						wallbounds.width, wallbounds.height);
+				if(current.overlaps(otherrect)){
+					am.get(projectile).processor.delete();
+					projectile.deleteFromWorld();
+				}	
+			}
 			public void process(Entity character, Entity wall) {
 				Position pos = pm.get(character);
 				Velocity v = vm.get(character);

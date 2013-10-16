@@ -4,11 +4,13 @@ import com.artemis.Entity;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
+import com.soc.game.components.Buff;
 import com.soc.game.components.Feet;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.states.benefits.Inmune;
 
 public class RightMonsterAI extends AI{
 	float timerCast;
@@ -20,6 +22,8 @@ public class RightMonsterAI extends AI{
 	boolean playerInside;
 	float timerStomp;
 	boolean stompMode;
+	boolean inmune;
+	float timerCharge;
 	
 	public RightMonsterAI(){
 		timerCast=0;
@@ -31,6 +35,8 @@ public class RightMonsterAI extends AI{
 		rightSpawned=false;
 		timerStomp=10f;
 		stompMode=false;
+		inmune=false;
+		timerCharge=3f;
 		
 	}
 	@Override
@@ -42,6 +48,7 @@ public class RightMonsterAI extends AI{
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
 		if(state.state == State.DYING) return;
+		if(state.state == State.CHARGING) return;
 		if(!rightSpawned){
 			EntityFactory.createWall(e, 45, 54, 0).addToWorld();
 			EntityFactory.createWall(e, 46, 54, 0).addToWorld();
@@ -52,20 +59,43 @@ public class RightMonsterAI extends AI{
 			rightSpawned=true;
 		}
 		if( !playerInside && playerPos.x>limitXLeft && playerPos.x<limitXRight && playerPos.y>limitYBottom && playerPos.y<limitYUp){
-			EntityFactory.createWall(e, 78, 55, 0).addToWorld();
-			EntityFactory.createWall(e, 79, 55, 0).addToWorld();
-			EntityFactory.createWall(e, 80, 55, 0).addToWorld();
-			EntityFactory.createWall(e, 81, 55, 0).addToWorld();
-			EntityFactory.createWall(e, 82, 55, 0).addToWorld();
-			EntityFactory.createWall(e, 83, 55, 0).addToWorld();
+			EntityFactory.createWall(e, 77, 21, 0).addToWorld();
+			EntityFactory.createWall(e, 78, 21, 0).addToWorld();
+			EntityFactory.createWall(e, 79, 21, 0).addToWorld();
+			EntityFactory.createWall(e, 80, 21, 0).addToWorld();
+			EntityFactory.createWall(e, 81, 21, 0).addToWorld();
+			EntityFactory.createWall(e, 82, 21, 0).addToWorld();
+			EntityFactory.createWall(e, 83, 21, 0).addToWorld();
+			EntityFactory.createWall(e, 84, 21, 0).addToWorld();
 			playerInside=true;
 		}
-		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
+		
+		if(stats.health<stats.maxHealth*0.20){
+			if(!inmune){
+				Buff.addbuff(e, new Inmune());
+				inmune=true;
+			}
+			timerCharge-=SoC.game.world.delta;
+			if(timerCharge<=0){
+				SoC.game.statemapper.get(e).state=State.CHARGING;
+				Entity charge=EntityFactory.createChargeBoss(e, Constants.Groups.ENEMY_ATTACKS, pos, stats.strength);
+				SoC.game.groupmanager.add(charge, Constants.Groups.PROJECTILES);
+				SoC.game.groupmanager.add(charge, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(charge, Constants.Groups.MAP_BOUND);
+				charge.addToWorld();
+				timerCharge=3f;
+				return;
+			}
+			
+			
+		}
+		if(!inmune &&(playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
 			state.state=State.IDLE;
 			vel.vx=0;
 			vel.vy=0;
 			return;
 		}
+		if(!inmune){
 		timerStomp-=SoC.game.world.delta;
 		if(state.state==State.ATTACK){
 			timerCast+=SoC.game.world.delta;
@@ -82,6 +112,7 @@ public class RightMonsterAI extends AI{
 			}else{
 				return;
 			}
+		}
 		}
 		
 		float dsty = playerPos.y - pos.y;

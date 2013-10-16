@@ -791,6 +791,7 @@ public class GraphicsLoader {
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer charge = new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		move.ox-=20;
@@ -800,10 +801,15 @@ public class GraphicsLoader {
 	   		move.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
+		tmp = TextureRegion.split(load("right-monster-charge.png"), 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		charge.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);
+	   	}
 		tmp = TextureRegion.split(load("right-monster-attack.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
 	   		attack.animations[i] = new Animation(2f/tmp[i].length, tmp[i]);
 	   	}
+		
 		tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
         TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
@@ -818,6 +824,7 @@ public class GraphicsLoader {
 	    character.renderers[State.ATTACK]=attack;
 	    character.renderers[State.WALK]=move;
 		character.renderers[State.IDLE] = idle;
+		character.renderers[State.CHARGING]=charge;
 		character.renderers[State.DYING] = death;
 	}
 	public static AnimatedRenderer loadDaggerThrow(){
