@@ -20,6 +20,7 @@ public class Potion extends Item{
 		stats.mana+=gainMana;
 		if(stats.mana>stats.maxMana)
 			stats.mana=stats.maxMana;
+		SoC.game.playermapper.get(SoC.game.player).removeFromInventary(this);
 	}
 
 }

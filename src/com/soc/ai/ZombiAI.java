@@ -25,16 +25,9 @@ public class ZombiAI extends AI{
 		modules[1] = new BasicAttack(32, 1f);
 	}
 	public void process(Entity e) {
-		
-
 		State state = SoC.game.statemapper.get(e);
-		
 		if(state.state == State.DYING) return;
-		
-		processModules(e);
-		
-
-						
+		processModules(e);				
 	}
 
 

@@ -28,10 +28,18 @@ public class BasicPathfinding implements AIModule{
 		
 		State state = SoC.game.statemapper.get(e);
 		Velocity vel = SoC.game.velocitymapper.get(e);
-
-		if(state.state >= State.BLOCKED || (state.state == State.ATTACK && stops)){
+		
+		if(state.state == State.DYING || state.state == State.FALLING){
 			vel.vx = 0;
 			vel.vy = 0;
+			return;
+		}
+
+		if((state.state >= State.BLOCKED && stops)){
+			if(state.state != State.CHARGING){
+				vel.vx = 0;
+				vel.vy = 0;
+			}
 			return;
 		}
 		
@@ -46,11 +54,14 @@ public class BasicPathfinding implements AIModule{
 		} else {
 			vel.vx = 0;
 		}
+				
 		if(transparent || Math.abs(dsty) > range){
-			vel.vy = Math.signum(dsty)*vel.speed;
+			vel.vy = Math.signum(dsty)*vel.speed;			
 		} else {
+			System.out.println("AQUI");
 			vel.vy = 0;
 		}
+		
 		
 
 		
@@ -72,6 +83,10 @@ public class BasicPathfinding implements AIModule{
 			}
 		} else {
 			pos.direction.x = Math.signum(dstx);
+			if(Math.abs(dstx) < 32){
+				pos.direction.x = 0;
+				return;
+			}
 			if(Math.abs(dstx) > Math.abs(dsty)){
 				pos.direction.y = 0;
 			} else {

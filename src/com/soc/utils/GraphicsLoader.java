@@ -111,6 +111,193 @@ public class GraphicsLoader {
 		character.renderers[State.RUN] = run;
 	}
 	
+	public static void loadGreenKnight(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalStaticRenderer charge = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		attack.ox = -16;
+		attack.oy = -0;
+		movement.ox = -16;
+		movement.oy = 0;
+		idle.ox = -16;
+		idle.oy = -0;
+		death.ox = -16;
+		death.oy = 0;
+		charge.ox = -48;
+		charge.oy = -32;
+
+		
+		Texture tex = load("green-knight-attack.png");
+		TextureRegion[][] tmp = TextureRegion.split(tex, 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("green-knight-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tex = load("green-knight-charge.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		tmp = TextureRegion.split(tex, 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		charge.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("green-knight-death.png"), 64, 64);
+	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	character.deathTime = 1f;
+		
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.WALK] = movement;
+		character.renderers[State.CHARGING] = charge;
+
+	}
+	
+	public static void loadGoldKnight(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		AnimatedRenderer spin = new AnimatedRenderer(true);
+		
+		attack.ox = -48;
+		attack.oy = -32;
+		movement.ox = -16;
+		movement.oy = 0;
+		idle.ox = -16;
+		idle.oy = -0;
+		death.ox = -16;
+		death.oy = 0;
+		spin.ox = -48;
+		spin.oy = -32;
+		
+		Texture tex = load("gold-knight-attack.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("gold-knight-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("gold-knight-death.png"), 64, 64);
+	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	character.deathTime = 1f;
+		tex = load("gold-knight-spin.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		tmp = TextureRegion.split(tex, 128, 128);
+	   	spin.animation = new Animation(0.2f/tmp[0].length, tmp[0]);
+		
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.WALK] = movement;
+		character.renderers[State.SPINNING] = spin;
+	}
+	
+	public static void loadGoldBowKnight(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		attack.ox = -16;
+		attack.oy = -0;
+		movement.ox = -16;
+		movement.oy = 0;
+		idle.ox = -16;
+		idle.oy = -0;
+		death.ox = -16;
+		death.oy = 0;
+		
+		Texture tex = load("gold-knight-bow.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.5f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("gold-knight-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("gold-knight-death.png"), 64, 64);
+	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	character.deathTime = 1f;
+		tex = load("gold-knight-spin.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		tmp = TextureRegion.split(tex, 128, 128);
+		
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.WALK] = movement;
+	}
+	
+
+	public static void loadBlackMage(Character animations) {
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		AnimatedRenderer spin = new AnimatedRenderer(true);
+		
+		attack.ox = -16;
+		attack.oy = -0;
+		movement.ox = -16;
+		movement.oy = 0;
+		idle.ox = -16;
+		idle.oy = -0;
+		death.ox = -16;
+		death.oy = 0;
+		spin.ox = -45;
+		spin.oy = -0;
+		
+		Texture tex = load("black-mage-attack.png");
+		TextureRegion[][] tmp = TextureRegion.split(tex, 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.5f/tmp[i].length, tmp[i]);
+	   	}
+		
+		tmp = TextureRegion.split(load("black-mage-idle.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		
+		tmp = TextureRegion.split(load("black-mage-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
+	   	}
+
+		tmp = TextureRegion.split(load("black-mage-death.png"), 64, 64);
+	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	animations.deathTime = 1f;
+	   	
+		tex = load("black-mage-spinning.png");
+		tmp = TextureRegion.split(tex, 128, 128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+            for (int j = 0; j < tmp[0].length; j++) {
+                    frames[index++] = tmp[i][j];
+            }
+        }
+	   	spin.animation = new Animation(0.5f/frames.length, frames);
+		
+		animations.renderers[State.IDLE] = idle;
+		animations.renderers[State.DYING] = death;
+		animations.renderers[State.ATTACK] = attack;
+		animations.renderers[State.WALK] = movement;
+		animations.renderers[State.SPINNING] = spin;
+	}
+	
 	public static void loadMaggot(Character character){
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
@@ -1001,4 +1188,5 @@ public class GraphicsLoader {
         flame.animation = new Animation(0.05f, frames);
         return flame;
 	}
+
 }

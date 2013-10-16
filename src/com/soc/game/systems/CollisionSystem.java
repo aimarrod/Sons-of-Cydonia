@@ -221,7 +221,7 @@ public class CollisionSystem extends VoidEntitySystem {
 		}
 
 		public void process(Entity e, Entity other) {
-			if (e == other || (stm.get(e).state == State.CHARGING && bfm.has(e) && !bfm.get(e).buffClasses.contains(Unmovable.class)))
+			if (e == other || (stm.get(e).state == State.CHARGING && bfm.has(e) && !bfm.get(e).buffClasses.contains(Unmovable.class) && (em.has(e) && em.has(other))))
 				return;
 			Position pos = pm.get(e);
 			Velocity v = vm.get(e);

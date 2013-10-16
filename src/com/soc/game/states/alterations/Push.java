@@ -32,7 +32,7 @@ public class Push implements Alteration{
 	  vel.vy = speed*Math.signum(direction.y);
 	  
 	  distance -= Math.abs(vel.vx*SoC.game.world.delta)+Math.abs(vel.vy*SoC.game.world.delta);
-	  
+	  	  
 	  if(distance <= 0){
 		  SoC.game.debuffmapper.get(e).removeDebuff(this,e);
 		  vel.vx = 0;

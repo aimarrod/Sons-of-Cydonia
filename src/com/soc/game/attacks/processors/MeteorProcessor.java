@@ -40,6 +40,7 @@ public class MeteorProcessor implements AttackProcessor {
 		this.distance = Constants.Spells.METEOR_FALL_DISTANCE;
 		this.radius = Constants.Spells.METEOR_RADIUS;
 		this.hitbox = new Circle();
+		this.enemy = new Rectangle();
 		this.blast = GraphicsLoader.loadMeteorBlast();
 		this.fall = GraphicsLoader.loadMeteorFall();
 		this.shadow = GraphicsLoader.loadMeteorShadow();
@@ -74,9 +75,9 @@ public class MeteorProcessor implements AttackProcessor {
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position pos = SoC.game.positionmapper.get(victim);
 		Bounds bon = SoC.game.boundsmapper.get(victim);
-		hitbox = new Circle(attackpos.x, attackpos.y,
-				radius);
-		enemy = new Rectangle(pos.x, pos.y, bon.width, bon.height);
+		
+		enemy.set(pos.x, pos.y, bon.width, bon.height);
+		hitbox.set(attackpos.x, attackpos.y, radius);
 
 		return (distance<=0 && counter > 0 && !hit.contains(victim) && Intersector.overlaps(hitbox, enemy));
 	}

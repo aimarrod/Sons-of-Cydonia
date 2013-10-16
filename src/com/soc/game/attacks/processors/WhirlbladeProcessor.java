@@ -42,6 +42,7 @@ public class WhirlbladeProcessor implements AttackProcessor {
 		this.bon = bon;
 		this.timer = Constants.Spells.SPIN_DURATION;
 		this.interval = Constants.Spells.SPIN_DURATION*0.2f;
+		this.enemy = new Rectangle();
 		this.hitbox = new Circle();
 	}
 
@@ -70,8 +71,9 @@ public class WhirlbladeProcessor implements AttackProcessor {
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position pos = SoC.game.positionmapper.get(victim);
 		Bounds bon = SoC.game.boundsmapper.get(victim);
-		hitbox = new Circle(attackpos.x, attackpos.y, Constants.Spells.SPIN_RADIUS);
-		enemy = new Rectangle(pos.x, pos.y, bon.width, bon.height);
+		
+		enemy.set(pos.x, pos.y, bon.width, bon.height);
+		hitbox.set(attackpos.x, attackpos.y, Constants.Spells.SPIN_RADIUS);
 		return (!hit.contains(victim) && Intersector.overlaps(hitbox, enemy));
 	}
 

@@ -22,23 +22,22 @@ public class BasicAttack implements AIModule{
 
 	@Override
 	public void process(Entity e) {
-		timer -= SoC.game.world.delta;
-		if(timer > 0) return;
 		State state = SoC.game.statemapper.get(e);
 		if(state.state >= State.BLOCKED) return;
+		
+		timer -= SoC.game.world.delta;
+		if(timer > 0) return;
 				
 		timer = interval;
 		Position pos = SoC.game.positionmapper.get(e);
 		Position playerPos = SoC.game.positionmapper.get(SoC.game.player);
 				
 		if(Math.abs(playerPos.x - pos.x) < range && Math.abs(playerPos.y - pos.y) < range){
-			
 			Stats stats = SoC.game.statsmapper.get(e);
 			Spell spell = SoC.game.spells[stats.attack];
 			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS, spell.cast, spell.blocking, stats.attack));
 			e.changedInWorld();
 			state.state = spell.state;
-
 		}
 	}
 

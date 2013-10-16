@@ -1,5 +1,7 @@
 package com.soc.ai;
 
+import java.util.Random;
+
 import com.artemis.Entity;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
@@ -18,6 +20,7 @@ import com.soc.utils.EffectsPlayer;
 public abstract class AI {
 	
 	public AIModule[] modules;
+	public static Random rng = new Random();
 	
 	public abstract void process(Entity e);
 	public abstract void death(Entity e);

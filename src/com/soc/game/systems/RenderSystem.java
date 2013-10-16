@@ -36,6 +36,7 @@ import com.soc.game.states.benefits.Rage;
 import com.soc.game.states.benefits.Shield;
 import com.soc.game.states.benefits.ShieldBuff;
 import com.soc.game.states.benefits.Teleport;
+import com.soc.utils.DialogBox;
 import com.soc.utils.FloatingText;
 
 public class RenderSystem extends VoidEntitySystem{
@@ -60,6 +61,8 @@ public class RenderSystem extends VoidEntitySystem{
 	private SpriteBatch batch;
 	private BitmapFont font;
 	
+	
+	public DialogBox dialog;
 	public Bag<FloatingText> texts;
 	
 	
@@ -70,6 +73,7 @@ public class RenderSystem extends VoidEntitySystem{
 		this.batch = new SpriteBatch();
 		this.font = new BitmapFont();
 		this.texts = new Bag<FloatingText>();
+		this.dialog = new DialogBox();
 	}
 	
 	public void changeMap(TiledMap map){
@@ -122,6 +126,7 @@ public class RenderSystem extends VoidEntitySystem{
 				i--;
 			}
 		}
+		dialog.draw(batch);
 		batch.end();
 		
 	}
