@@ -4,12 +4,11 @@ import com.artemis.Entity;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
-import com.soc.game.components.Buff;
+import com.soc.game.components.Feet;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
-import com.soc.game.states.benefits.Casting;
 
 public class RightMonsterAI extends AI{
 	float timerCast;
@@ -43,8 +42,6 @@ public class RightMonsterAI extends AI{
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
 		if(state.state == State.DYING) return;
-		if(state.state >= State.BLOCKED){return;}	
-		timerStomp-=SoC.game.world.delta;
 		if(!rightSpawned){
 			EntityFactory.createWall(e, 45, 54, 0).addToWorld();
 			EntityFactory.createWall(e, 46, 54, 0).addToWorld();
@@ -69,16 +66,19 @@ public class RightMonsterAI extends AI{
 			vel.vy=0;
 			return;
 		}
-		
+		timerStomp-=SoC.game.world.delta;
 		if(state.state==State.ATTACK){
 			timerCast+=SoC.game.world.delta;
-			if(timerCast>2f){
-				stompMode=true;
-				Entity stomp = EntityFactory.createStomp(pos.x, pos.y, pos.z,stats.strength);
+			if(timerCast>=2f){
+				Feet feet=SoC.game.feetmapper.get(e);
+				Entity stomp = EntityFactory.createStomp(pos.x+feet.width*0.5f, pos.y+feet.heigth*0.5f, pos.z,stats.strength);
 			    SoC.game.groupmanager.add(stomp, Constants.Groups.ENEMY_ATTACKS);
 			    SoC.game.groupmanager.add(stomp, Constants.Groups.MAP_BOUND);
 			    SoC.game.levelmanager.setLevel(stomp, Constants.Groups.LEVEL+pos.z);
 			    stomp.addToWorld();
+			    timerCast=0f;
+			    state.state=State.IDLE;
+			    SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
 			}else{
 				return;
 			}
@@ -100,7 +100,8 @@ public class RightMonsterAI extends AI{
 		if(timerStomp<=0){
 			timerStomp=10f;
 			state.state=State.ATTACK;
-			Buff.addbuff(e, new Casting(2f,Constants.BuffColors.RED));
+			vel.vx=0;
+			vel.vy=0;
 		}
 	}
 

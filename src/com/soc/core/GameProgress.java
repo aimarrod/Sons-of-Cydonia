@@ -11,5 +11,6 @@ public class GameProgress {
 	public boolean midMonsterDefeated=false;
 	public boolean rightMonsterDefetead=false;
 	public boolean finalBossDefeated=false;
+	public boolean knightCaptainDefeated=false;
 
 }

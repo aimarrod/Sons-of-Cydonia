@@ -1,18 +1,16 @@
 package com.soc.ai;
 
-import java.util.ArrayList;
-
 import com.artemis.Entity;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.State;
 
-public class GreenKnightAI extends AI{
+public class KnightCaptainAI extends AI{
 	
-	public GreenKnightAI() {
+	public KnightCaptainAI(){
 		modules = new AIModule[2];
 		modules[0] = new BasicFollowing(32, false, true, true);
-		modules[1] = new SpellAttack(new int[]{Constants.Spells.SLASH, Constants.Spells.CHARGE}, new float[]{64, 400}, new float[]{0.5f, 2.5f});
+		modules[1] = new SpellAttack(new int[]{Constants.Spells.SLASH, Constants.Spells.WHIRLBLADE, Constants.Spells.QUAKEBLADE}, new float[]{64, 200, 400}, new float[]{0.5f, 2.0f, 3.0f});
 	}
 
 	@Override
@@ -24,7 +22,6 @@ public class GreenKnightAI extends AI{
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
-		
+		SoC.game.progress.knightCaptainDefeated = true;
 	}
 }

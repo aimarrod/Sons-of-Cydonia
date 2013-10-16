@@ -241,6 +241,50 @@ public class GraphicsLoader {
 		character.renderers[State.WALK] = movement;
 	}
 	
+	public static void loadKnightCaptain(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		AnimatedRenderer spin = new AnimatedRenderer(true);
+		
+		attack.ox = -48;
+		attack.oy = -32;
+		movement.ox = -16;
+		movement.oy = 0;
+		idle.ox = -16;
+		idle.oy = -0;
+		death.ox = -16;
+		death.oy = 0;
+		spin.ox = -48;
+		spin.oy = -32;
+		
+		Texture tex = load("knight-captain-attack.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("knight-captain-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("knight-captain-death.png"), 64, 64);
+	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	character.deathTime = 1f;
+		tex = load("knight-captain-spin.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		tmp = TextureRegion.split(tex, 128, 128);
+	   	spin.animation = new Animation(0.2f/tmp[0].length, tmp[0]);
+		
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.WALK] = movement;
+		character.renderers[State.SPINNING] = spin;
+	}
+	
 
 	public static void loadBlackMage(Character animations) {
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
@@ -263,7 +307,7 @@ public class GraphicsLoader {
 		Texture tex = load("black-mage-attack.png");
 		TextureRegion[][] tmp = TextureRegion.split(tex, 64, 64);
 		for(int i = 0; i < tmp.length; i++){
-	   		attack.animations[i]= new Animation(0.5f/tmp[i].length, tmp[i]);
+	   		attack.animations[i]= new Animation(2f/tmp[i].length, tmp[i]);
 	   	}
 		
 		tmp = TextureRegion.split(load("black-mage-idle.png"), 64, 64);
@@ -745,6 +789,7 @@ public class GraphicsLoader {
 	
 	public static void loadRightMonster(Character character){
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
@@ -754,6 +799,10 @@ public class GraphicsLoader {
 		for(int i = 0; i < tmp.length; i++){
 	   		move.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("right-monster-attack.png"), 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i] = new Animation(2f/tmp[i].length, tmp[i]);
 	   	}
 		tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
         TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
@@ -766,7 +815,7 @@ public class GraphicsLoader {
 
 	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
 	    character.deathTime=1f;
-	    character.renderers[State.ATTACK]=move;
+	    character.renderers[State.ATTACK]=attack;
 	    character.renderers[State.WALK]=move;
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.DYING] = death;
@@ -840,6 +889,13 @@ public class GraphicsLoader {
 		AnimatedRenderer quake = new AnimatedRenderer(true);
 		TextureRegion[][] tmp = TextureRegion.split(load("quake.png"), 256, 128);
         quake.animation = new Animation(Constants.Spells.QUAKEBLADE_TICK_INTERVAL, tmp[0]);
+        return quake;
+	}
+	
+	public static AnimatedRenderer loadStomp(){
+		AnimatedRenderer quake = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("quake.png"), 256, 128);
+        quake.animation = new Animation(2f/tmp[1].length, tmp[1]);
         return quake;
 	}
 	
@@ -1122,8 +1178,8 @@ public class GraphicsLoader {
 	
 	public static AnimatedRenderer loadRedCast(){
 		AnimatedRenderer flame = new AnimatedRenderer(true);
-		flame.ox=0;
-		flame.oy-=20;
+		flame.ox=-32;
+		flame.oy-=32;
 		TextureRegion[][] tmp = TextureRegion.split(load("castRed.png"), 64,64);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
@@ -1134,6 +1190,22 @@ public class GraphicsLoader {
         }
         flame.animation = new Animation(0.05f, frames);
         return flame;
+	}
+	
+	public static AnimatedRenderer loadDarkCast(){
+		AnimatedRenderer dark = new AnimatedRenderer(true);
+		dark.ox=-32;
+		dark.oy=-32;
+		TextureRegion[][] tmp = TextureRegion.split(load("cast-dark.png"), 64,64);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        dark.animation = new Animation(0.05f, frames);
+        return dark;
 	}
 
 	public static AnimatedRenderer loadBoneThrow() {

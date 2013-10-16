@@ -75,9 +75,9 @@ public class Stats extends Component{
 		if(clazz.equals(Constants.Characters.WARRIOR)){
 			if(level == 3){
 				spells[1] = Constants.Spells.CHARGE;
-			} else if(level == 6) {
+			} else if(level == 5) {
 				spells[2] = Constants.Spells.WHIRLBLADE;
-			} else if(level == 10){
+			} else if(level == 8){
 				spells[3] = Constants.Spells.QUAKEBLADE;
 			}
 		}

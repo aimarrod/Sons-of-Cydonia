@@ -25,15 +25,19 @@ public class StompProcessor implements AttackProcessor {
 	public Circle hitbox;
 	public float radius;
 	private Rectangle enemy;
+	private float duration;
 	public StompProcessor(){
 		this.hit = null;
 		this.hitbox = new Circle();
 		this.enemy = new Rectangle();
 		this.radius = Constants.Spells.STOMP_RADIUS;
-		this.renderer = GraphicsLoader.loadQuake();
+		this.renderer = GraphicsLoader.loadStomp();
+		this.duration=2f;
 	}
 	@Override
 	public void process(Entity attack) {
+		duration-=SoC.game.world.delta;
+		if(duration<=0)
 		attack.deleteFromWorld();
 		
 	}

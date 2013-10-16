@@ -6,13 +6,13 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
 
-public class BasicPathfinding implements AIModule{
+public class BasicFollowing implements AIModule{
 
 	public float dstx, dsty, range;
 	public boolean transparent, stops, diagonal;
 	
 	
-	public BasicPathfinding(float range, boolean transparent, boolean stops, boolean diagonal){
+	public BasicFollowing(float range, boolean transparent, boolean stops, boolean diagonal){
 
 		this.dsty = 0;
 		this.dstx = 0;

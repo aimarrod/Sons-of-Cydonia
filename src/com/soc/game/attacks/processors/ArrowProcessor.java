@@ -45,7 +45,7 @@ public class ArrowProcessor implements AttackProcessor {
 	public void frame(Entity attack, SpriteBatch sprite) {
 		Position pos = SoC.game.positionmapper.get(attack);
 	
-		if(pos.direction.y > pos.direction.x){
+		if(Math.abs(pos.direction.y) > Math.abs(pos.direction.x)){
 			pos.direction.x = 0;
 			pos.direction.y = Math.signum(pos.direction.y);
 		}

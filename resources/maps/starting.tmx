@@ -384,16 +384,7 @@
   <object x="2112" y="864" width="192" height="192"/>
  </objectgroup>
  <objectgroup name="level0-spawners" width="100" height="200">
-  <object x="2528" y="5344" width="64" height="64">
-   <properties>
-    <property name="interval" value="2.5"/>
-    <property name="max" value="1"/>
-    <property name="range" value="100"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="green knight"/>
-   </properties>
-  </object>
-  <object x="2080" y="5344" width="64" height="64">
+  <object x="2176" y="5312" width="64" height="64">
    <properties>
     <property name="interval" value="2.5"/>
     <property name="max" value="1"/>

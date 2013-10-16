@@ -8,7 +8,7 @@ public class GoldKnightAI extends AI{
 	
 	public GoldKnightAI() {
 		modules = new AIModule[2];
-		modules[0] = new BasicPathfinding(32, true, false, false);
+		modules[0] = new BasicFollowing(32, false, true, false);
 		modules[1] = new BasicAttack(200, 2f);
 	}
 
