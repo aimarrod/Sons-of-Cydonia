@@ -77,9 +77,7 @@ public class BlackMageAttackProcessor implements AttackProcessor{
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
 		enemy.set(victimpos.x, victimpos.y, victimbounds.width, victimbounds.height);
 		hitbox.set(attackpos.x, attackpos.y, (attackbounds.width+attackbounds.height)*0.5f);
-		
-		System.out.println(attackpos.y);
-		
+				
 		return (!hit.contains(victim) && Intersector.overlaps(hitbox, enemy));
 	}
 

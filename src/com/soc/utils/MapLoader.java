@@ -32,11 +32,19 @@ public class MapLoader {
 		SoC.game.map = new Map();
 		SoC.game.map.name = name;
 		MusicPlayer.reset();
-		MusicPlayer.play(map.getProperties().get("music", String.class));
+		loadResources(map);
+		MusicPlayer.play(map.getProperties().get("ambiance", String.class));
 		MapLoader.loadTiles(map);
 		MapLoader.loadSpawners(map);
 		SoC.game.world.getSystem(RenderSystem.class).changeMap(map);
 		return map;
+	}
+	
+	private static void loadResources(TiledMap map){
+		String[] music = map.getProperties().get("music", String.class).split(",");
+		for(int i = 0; i < music.length; i++){
+			MusicPlayer.load(music[i]);
+		}
 	}
 	
 	public static void loadTiles(TiledMap map) {

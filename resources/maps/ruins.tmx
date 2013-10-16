@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="200" height="200" tilewidth="32" tileheight="32">
  <properties>
+  <property name="ambiance" value="beauty-of-chaos.ogg"/>
   <property name="layers" value="3"/>
-  <property name="music" value="beauty-of-chaos.ogg"/>
+  <property name="music" value="gaia-battle.ogg,battle-at-the-summit.ogg"/>
  </properties>
  <tileset firstgid="1" name="terrain_atlas" tilewidth="32" tileheight="32">
   <image source="tiles/terrain_atlas.png" width="1024" height="1024"/>
@@ -860,7 +861,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200">
+ <objectgroup name="level0-spawners" width="200" height="200" visible="0">
   <object x="256" y="320" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>
@@ -996,7 +997,35 @@
     <property name="type" value="slime"/>
    </properties>
   </object>
+  <object x="4704" y="2208" width="64" height="64">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="100"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="bow knight"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="level1-spawners" width="200" height="200" visible="0"/>
- <objectgroup name="level2-spawners" width="200" height="200" visible="0"/>
+ <objectgroup name="level2-spawners" width="200" height="200">
+  <object x="4416" y="2176" width="32" height="32">
+   <properties>
+    <property name="interval" value="0"/>
+    <property name="max" value="1"/>
+    <property name="range" value="10000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="black mage"/>
+   </properties>
+  </object>
+  <object x="5376" y="2176" width="32" height="32">
+   <properties>
+    <property name="interval" value="0"/>
+    <property name="max" value="1"/>
+    <property name="range" value="10000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="knight captain"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
