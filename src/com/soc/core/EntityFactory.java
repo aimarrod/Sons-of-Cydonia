@@ -11,6 +11,7 @@ import com.soc.ai.GaiaAirAI;
 import com.soc.ai.GaiaAvatarAI;
 import com.soc.ai.GaiaDarkAI;
 import com.soc.ai.GaiaFlameAI;
+import com.soc.ai.RightMonsterAI;
 import com.soc.ai.MaggotAI;
 import com.soc.ai.MidMonsterAI;
 import com.soc.ai.SatanAI;
@@ -26,6 +27,7 @@ import com.soc.game.attacks.processors.BiteProcessor;
 import com.soc.game.attacks.processors.BoneThrowProcessor;
 import com.soc.game.attacks.processors.ChargeProcessor;
 import com.soc.game.attacks.processors.DaggerThrowProcessor;
+import com.soc.game.attacks.processors.FireBreathProcessor;
 import com.soc.game.attacks.processors.FireStoneProcessor;
 import com.soc.game.attacks.processors.FlameProcessor;
 import com.soc.game.attacks.processors.FlameWallProcessor;
@@ -480,7 +482,6 @@ public class EntityFactory {
 		e.addComponent(new Bounds(64, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(0, 5, new MidMonsterAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -499,6 +500,37 @@ public class EntityFactory {
 	    e.addComponent(new Enemy(0, 5, new MidMonsterAI()));
 	    Character animations = new Character();
 		GraphicsLoader.loadMidMonster(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createRightMonster(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Bounds(64, 64));
+		e.addComponent(new Feet(32, 64));
+		e.addComponent(new State(0));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null,
+				Constants.Groups.RIGHT_MONSTER));
+	    e.addComponent(new Enemy(0, 5, new RightMonsterAI()));
+	    Character animations = new Character();
+		GraphicsLoader.loadRightMonster(animations);
 		e.addComponent(animations);
 		
 		return e;
@@ -711,11 +743,20 @@ public class EntityFactory {
 	
 	public static Entity createFireStone(float x, float y, int z, Vector2 direction) {
 		Entity e=SoC.game.world.createEntity();
-		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
+		e.addComponent( new Velocity(Constants.Spells.FIREBREATH_SPEED*direction.x, Constants.Spells.FIREBREATH_SPEED*direction.y, 0) );
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(84, 75) );
 	   	e.addComponent( new Attack(new FireStoneProcessor(), 0) );
 	   	
+	   	return e;		
+	}
+	
+	public static Entity createFireBreath(float x, float y, int z,int damage, Vector2 direction) {
+		Entity e=SoC.game.world.createEntity();
+		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
+		e.addComponent( new Position(x, y, z, direction));
+		e.addComponent( new Bounds(84, 75) );
+	   	e.addComponent( new Attack(new FireBreathProcessor(), damage) );	   	
 	   	return e;		
 	}
 	

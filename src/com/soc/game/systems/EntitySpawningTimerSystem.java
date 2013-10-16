@@ -54,7 +54,7 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				}else if(spawn.type.equals(Constants.Groups.ZOMBIES)){
 					spawned = EntityFactory.createZombie(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				}else if(spawn.type.equals(Constants.Groups.SATANS)){
+				}else if(!SoC.game.progress.leftMonsterDefeated && spawn.type.equals(Constants.Groups.SATANS)){
 					spawned = EntityFactory.createSatan(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.GAIA_AIR) && !SoC.game.progress.gaiaAirDefeated){
@@ -80,6 +80,9 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);	
 				} else if(spawn.type.equals(Constants.Groups.FIRE_STONE)){
 					spawned=EntityFactory.createFireStoneMonster(pos.x,pos.y,pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				} else if(spawn.type.equals(Constants.Groups.RIGHT_MONSTER)){
+					spawned=EntityFactory.createRightMonster(pos.x,pos.y,pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				}
 				if(spawn.type.equals(Constants.Groups.ANTI_VENOM_FOUNTAIN)){

@@ -21,9 +21,11 @@ public class FireBreathSpell extends Spell {
 	}
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createFlame( pos.x,pos.y,pos.z, stats.intelligence);	
+		Entity e = EntityFactory.createFireBreath( pos.x,pos.y,pos.z, stats.intelligence, SoC.game.positionmapper.get(source).direction);	
 	    SoC.game.groupmanager.add(e, group);
+	    SoC.game.groupmanager.add(e, Constants.Groups.PROJECTILES);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
+	    SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);
 	   	e.addToWorld();
 	}
 }

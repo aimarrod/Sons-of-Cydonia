@@ -480,6 +480,8 @@ public class GraphicsLoader {
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
+		move.ox-=40;
+		idle.ox-=40;
 		TextureRegion[][] tmp = TextureRegion.split(load("mid-monster.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
 	   		move.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);
@@ -554,6 +556,34 @@ public class GraphicsLoader {
 		character.renderers[State.DYING] = death;
 	}
 	
+	public static void loadRightMonster(Character character){
+		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		move.ox-=20;
+		idle.ox-=20;
+		TextureRegion[][] tmp = TextureRegion.split(load("left-monster-walk.png"), 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		move.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+        TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        deathFrames[index++] = tmp[i][j];
+                }
+        }
+
+	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
+	    character.deathTime=1f;
+	    character.renderers[State.ATTACK]=move;
+	    character.renderers[State.WALK]=move;
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+	}
 	public static AnimatedRenderer loadDaggerThrow(){
 		AnimatedRenderer dagger = new AnimatedRenderer(true);
 		TextureRegion[][] tmp = TextureRegion.split(load("dagger-attack.png"), 64, 64);
@@ -924,5 +954,51 @@ public class GraphicsLoader {
 		TextureRegion[][] tmp = TextureRegion.split(load("bone-projectile.png"), 32, 32);
         bone.animation = new Animation(0.03f, tmp[0]);
         return bone;
+	}
+	
+	public static AnimatedRenderer loadInitialFireBreath(){
+		AnimatedRenderer flame = new AnimatedRenderer(false);
+		flame.ox=0;
+		flame.oy-=20;
+		TextureRegion[][] tmp = TextureRegion.split(load("fire-breath-initial.png"), 64,64);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        flame.animation = new Animation(0.05f, frames);
+        return flame;
+	}
+	public static AnimatedRenderer loadMidFireBreath(){
+		AnimatedRenderer flame = new AnimatedRenderer(true);
+		flame.ox=0;
+		flame.oy-=20;
+		TextureRegion[][] tmp = TextureRegion.split(load("fire-breath.png"), 64,64);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        flame.animation = new Animation(0.05f, frames);
+        return flame;
+	}
+	public static AnimatedRenderer loadEndFireBreath(){
+		AnimatedRenderer flame = new AnimatedRenderer(false);
+		flame.ox=0;
+		flame.oy-=20;
+		TextureRegion[][] tmp = TextureRegion.split(load("fire-breath-end.png"), 64,64);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        flame.animation = new Animation(0.05f, frames);
+        return flame;
 	}
 }

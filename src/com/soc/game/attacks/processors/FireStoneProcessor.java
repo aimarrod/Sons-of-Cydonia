@@ -2,6 +2,8 @@ package com.soc.game.attacks.processors;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Rectangle;
 import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;

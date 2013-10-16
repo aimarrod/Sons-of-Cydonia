@@ -56,9 +56,7 @@ public class MidMonsterAI extends AI{
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
 		if(state.state == State.DYING) return;
-		if(state.state >= State.BLOCKED){System.out.println("blocked");return;}
-		System.out.println(state.state);
-		
+		if(state.state >= State.BLOCKED){return;}		
 		if(fireBreath){
 			fireBreath=false;
 			teleportTimer=10f;
@@ -259,20 +257,22 @@ public class MidMonsterAI extends AI{
 			if(Math.abs(dstx) < 32) pos.direction.x = 0;
 			else if(Math.abs(dsty) < 10) pos.direction.y = 0;
 			
-			if(teleportTimer<=0 ){
+			if(teleportTimer<=0 ){ 
 				//The bounds are 37 and 57. So, a random number between 0-19->+1(1-20)-->+37
 				//int tileX=r.nextInt(20)+1+37;
-				int tileX=(int)(playerPos.x*Constants.World.TILE_FACTOR)-2+r.nextInt(5);
+				int tileX=(int)(playerPos.x*Constants.World.TILE_FACTOR)-4+r.nextInt(9);
 				Buff.addbuff(e, new Teleport(tileX*Constants.World.TILE_SIZE, 78*Constants.World.TILE_SIZE, 0));
 				for(int i=0;i<flameWallsLeft.size();i++){
 					Position pFlame=SoC.game.positionmapper.get(flameWallsLeft.get(i));
-					pFlame.x=(tileX-2)*Constants.World.TILE_SIZE;
+					pFlame.x=(tileX-4)*Constants.World.TILE_SIZE;
 				}
 				for(int i=0;i<flameWallsRight.size();i++){
 					Position pFlame=SoC.game.positionmapper.get(flameWallsRight.get(i));
-					pFlame.x=(tileX+2)*Constants.World.TILE_SIZE;
+					pFlame.x=(tileX+4)*Constants.World.TILE_SIZE;
 				}
 				Buff.addbuff(e, new Casting(2f,Constants.BuffColors.RED));
+				pos.direction.x=0;
+				pos.direction.y=-1;
 				fireBreath=true;
 				
 				Spell spell = SoC.game.spells[Constants.Spells.FIREBREATH];
