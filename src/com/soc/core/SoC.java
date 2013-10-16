@@ -78,6 +78,7 @@ import com.soc.utils.GameLoader;
 import com.soc.utils.GraphicsLoader;
 import com.soc.utils.LevelManager;
 import com.soc.utils.MapLoader;
+import com.soc.utils.MusicManager;
 import com.soc.utils.MusicPlayer;
 import com.soc.utils.SpawnerManager;
 import com.soc.utils.WallManager;
@@ -119,6 +120,7 @@ public class SoC extends Game {
 	public LevelManager levelmanager;
 	public SpawnerManager spawnermanager;
 	public WallManager wallmanager;
+	public MusicManager musicmanager;
 
 	
 	public HudSystem hudSystem;
@@ -210,12 +212,14 @@ public class SoC extends Game {
 		levelmanager = new LevelManager();
 		spawnermanager = new SpawnerManager();
 		wallmanager = new WallManager();
+		musicmanager = new MusicManager();
 		
 		world.setManager(spawnermanager);
 		world.setManager(groupmanager);
 		world.setManager(tagmanager);
 		world.setManager(levelmanager);
 		world.setManager(wallmanager);
+		world.setManager(musicmanager);
 		
 	    world.setSystem(new PlayerInputSystem());
 		world.setSystem(new AttackDelaySystem());
@@ -244,7 +248,6 @@ public class SoC extends Game {
 	
 	public void openMenu(){
 		SoC.game.screens.push(SoC.game.getScreen());
-		//TODO: Open Menu
 	}
 	
 	public void changeMap(String name){
