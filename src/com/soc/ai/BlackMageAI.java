@@ -16,7 +16,7 @@ public class BlackMageAI extends AI{
 	
 	public BlackMageAI(){
 		modules = new AIModule[1];
-		modules[0] = new BasicPathfinding(0, true, false, true);
+		modules[0] = new BasicFollowing(0, true, false, true);
 		init = true;
 	}
 	

@@ -21,7 +21,7 @@ public class ZombiAI extends AI{
 	public ZombiAI(){
 		path = new ArrayList<Node>();
 		modules = new AIModule[2];
-		modules[0] = new BasicPathfinding(32, false, true, false);
+		modules[0] = new BasicFollowing(32, false, true, false);
 		modules[1] = new BasicAttack(32, 1f);
 	}
 	public void process(Entity e) {

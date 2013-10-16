@@ -390,7 +390,7 @@
     <property name="max" value="1"/>
     <property name="range" value="100"/>
     <property name="respawn" value="true"/>
-    <property name="type" value="knight captain"/>
+    <property name="type" value="bow knight"/>
    </properties>
   </object>
  </objectgroup>

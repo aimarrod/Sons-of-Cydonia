@@ -11,7 +11,7 @@ public class GreenKnightAI extends AI{
 	
 	public GreenKnightAI() {
 		modules = new AIModule[2];
-		modules[0] = new BasicPathfinding(32, false, true, true);
+		modules[0] = new BasicFollowing(32, false, true, true);
 		modules[1] = new SpellAttack(new int[]{Constants.Spells.SLASH, Constants.Spells.CHARGE}, new float[]{64, 400}, new float[]{0.5f, 2.5f});
 	}
 

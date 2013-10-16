@@ -8,14 +8,15 @@ public class GoldBowKnightAI extends AI{
 	
 	public GoldBowKnightAI() {
 		modules = new AIModule[2];
-		modules[0] = new BasicPathfinding(500, false, true, true);
+		modules[0] = new BasicRunning(200, true, true);
 		modules[1] = new BasicAttack(500, 2f);
 	}
 
 	@Override
 	public void process(Entity e) {
 		State state = SoC.game.statemapper.get(e);
-		if(state.state < State.BLOCKED) processModules(e); 
+		if(state.state == State.DYING || state.state == State.FALLING) return;
+		processModules(e); 
 	}
 
 	@Override

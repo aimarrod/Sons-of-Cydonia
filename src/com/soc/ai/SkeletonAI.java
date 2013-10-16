@@ -23,7 +23,7 @@ public class SkeletonAI extends AI {
 	public SkeletonAI(){
 		path = new ArrayList<Node>();
 		modules = new AIModule[2];
-		modules[0] = new BasicPathfinding(600, false, true, true);
+		modules[0] = new BasicFollowing(600, false, true, true);
 		modules[1] = new BasicAttack(600, 2f);
 	}
 

@@ -9,7 +9,7 @@ public class KnightCaptainAI extends AI{
 	
 	public KnightCaptainAI(){
 		modules = new AIModule[2];
-		modules[0] = new BasicPathfinding(32, false, true, true);
+		modules[0] = new BasicFollowing(32, false, true, true);
 		modules[1] = new SpellAttack(new int[]{Constants.Spells.SLASH, Constants.Spells.WHIRLBLADE, Constants.Spells.QUAKEBLADE}, new float[]{64, 200, 400}, new float[]{0.5f, 2.0f, 3.0f});
 	}
 
