@@ -670,7 +670,7 @@ public class GraphicsLoader {
                         frames[index++] = tmp[i][j];
                 }
         }
-        flame.animation = new Animation(4f/17, frames);
+        flame.animation = new Animation(5f/17, frames);
         return flame;
 	}
 	

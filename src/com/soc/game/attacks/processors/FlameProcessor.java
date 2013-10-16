@@ -17,8 +17,8 @@ public class FlameProcessor implements AttackProcessor{
 	public float lastHit;
 	public FlameProcessor() {
   		this.renderer = GraphicsLoader.loadFlame();
-  		this.timer=4f;
-  		this.lastHit=4f;
+  		this.timer=5f;
+  		this.lastHit=5f;
 	}
 
 	@Override 
@@ -35,7 +35,7 @@ public class FlameProcessor implements AttackProcessor{
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
-		return ((lastHit-timer)>0.5 && timer<=3f && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		return ((lastHit-timer)>0.5 && timer<=4f && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	
 
 	}

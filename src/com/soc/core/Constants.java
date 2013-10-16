@@ -92,8 +92,9 @@ public class Constants {
 		public static final int WINDBLADE = 12;
 		public static final int TENTACLES = 13;
 		public static final int FLAME=14;
+		public static final int FIREBREATH=15;
 		
-		public static final int SPELL_NUMBER = 15;
+		public static final int SPELL_NUMBER = 16;
 		
 		public static final int TORNADO_RANGE = 1000;
 		public static final int TORNADO_SPEED = 500;
