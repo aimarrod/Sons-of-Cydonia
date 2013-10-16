@@ -14,6 +14,7 @@ import com.soc.ai.GaiaDarkAI;
 import com.soc.ai.GaiaFlameAI;
 import com.soc.ai.GoldBowKnightAI;
 import com.soc.ai.GoldKnightAI;
+import com.soc.ai.KnightCaptainAI;
 import com.soc.ai.MaggotAI;
 import com.soc.ai.MidMonsterAI;
 import com.soc.ai.SatanAI;
@@ -356,6 +357,37 @@ public class EntityFactory {
 				Constants.Groups.GOLD_KNIGHTS));
 		Character animations = new Character();
 		GraphicsLoader.loadGoldKnight(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createKnightCaptain(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+	    e.addComponent(new Feet(32, 10));
+	    e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 50, new KnightCaptainAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				Constants.Spells.SLASH, 
+				null,
+				Constants.Groups.KNIGHT_CAPTAIN));
+		Character animations = new Character();
+		GraphicsLoader.loadKnightCaptain(animations);
 		e.addComponent(animations);
 		
 		return e;

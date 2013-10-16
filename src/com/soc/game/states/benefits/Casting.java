@@ -17,6 +17,8 @@ public class Casting implements Benefit{
 		buffAdded=false;
 		if(color.equals(Constants.BuffColors.RED))
 			renderer=GraphicsLoader.loadRedCast();
+		if(color.equals(Constants.BuffColors.DARK))
+			renderer=GraphicsLoader.loadDarkCast();
 	}
 	@Override
 	public void process(Entity e) {

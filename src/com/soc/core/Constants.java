@@ -36,6 +36,7 @@ public class Constants {
 		public static final String FIRE_STONE = "fire-stone-monster";
 		public static final String ANTI_VENOM_FOUNTAIN = "anti-venom-fountain";
 		public static final String BLACK_MAGE = "black mage";
+		public static final String KNIGHT_CAPTAIN = "knight captain";
 		
 		public static final String ENEMY_ATTACKS = "enemyattack";
 		public static final String PLAYER_ATTACKS = "playerattack";
@@ -201,6 +202,7 @@ public class Constants {
 	public static class BuffColors{
 		//public final static String GREEN="greenCast";
 		public final static String RED="red";
+		public final static String DARK = "dark";
 	}
 	
 }

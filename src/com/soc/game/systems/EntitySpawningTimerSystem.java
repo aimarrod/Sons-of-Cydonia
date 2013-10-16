@@ -83,6 +83,9 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.BLACK_MAGE)&& !SoC.game.progress.blackMageDefeated){
 					spawned = EntityFactory.createBlackMage(pos.x, pos.y, pos.z);
+				} else if(spawn.type.equals(Constants.Groups.KNIGHT_CAPTAIN) && !SoC.game.progress.knightCaptainDefeated){
+					spawned = EntityFactory.createKnightCaptain(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.EYEBALLS)){
 					spawned = EntityFactory.createEyeball(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);

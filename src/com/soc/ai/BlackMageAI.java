@@ -4,7 +4,9 @@ import com.artemis.Entity;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
+import com.soc.game.components.Buff;
 import com.soc.game.components.State;
+import com.soc.game.states.benefits.Casting;
 
 public class BlackMageAI extends AI{
 
@@ -37,8 +39,9 @@ public class BlackMageAI extends AI{
 				timer -= SoC.game.world.delta;
 				if(timer <= 0){
 					state.state = State.ATTACK;
-					castTimer = 0.5f;
-					timer = 1f;
+					Buff.addbuff(e, new Casting(2f, Constants.BuffColors.DARK));
+					castTimer = 2f;
+					timer = 0.5f;
 				}
 			}
 		}

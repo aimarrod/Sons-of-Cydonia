@@ -138,8 +138,10 @@ public class RenderSystem extends VoidEntitySystem{
 	private void renderCharacter(Entity e){
 		State state = sm.get(e);
 		Position pos = pm.get(e);
+		Bounds bon = bm.get(e);
 		Character animations = cm.get(e);
 		Renderer r = animations.renderers[state.state];
+		
 		
 		float angle = pos.direction.angle();
 		if(angle%90 != 0){
@@ -172,7 +174,6 @@ public class RenderSystem extends VoidEntitySystem{
 			if(buff.buffClasses.contains(Shield.class) && pos.direction.x == 0 && pos.direction.y == 1){
 				float posx = pos.x;
 				float posy = pos.y;
-				Bounds bon = bm.get(e);
 				Shield shield = buff.getBuff(Shield.class);
 				
 				if(pos.direction.x != 0) posx +=  bon.width*(pos.direction.x);
@@ -197,7 +198,6 @@ public class RenderSystem extends VoidEntitySystem{
 			if(buff.buffClasses.contains(Shield.class) && (pos.direction.x != 0 || pos.direction.y != 1)){
 				float posx = pos.x;
 				float posy = pos.y;
-				Bounds bon = bm.get(e);
 				Shield shield = buff.getBuff(Shield.class);
 				
 				if(pos.direction.x != 0) posx +=  bon.width*(pos.direction.x);
@@ -209,7 +209,7 @@ public class RenderSystem extends VoidEntitySystem{
 			}
 			if(buff.buffClasses.contains(Casting.class)){
 				Casting cast=buff.getBuff(Casting.class);
-				batch.draw(cast.renderer.frame(world.delta), pos.x+cast.renderer.ox,pos.y+cast.renderer.oy+Constants.Characters.HEIGHT);
+				batch.draw(cast.renderer.frame(world.delta), pos.x + bon.width*0.5f + cast.renderer.ox,pos.y  + bon.height*0.5f + cast.renderer.oy);
 			}
 
 		}

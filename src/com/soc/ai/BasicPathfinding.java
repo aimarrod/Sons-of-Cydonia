@@ -36,7 +36,7 @@ public class BasicPathfinding implements AIModule{
 		}
 
 		if((state.state >= State.BLOCKED && stops)){
-			if(state.state != State.CHARGING){
+			if(state.state != State.CHARGING && state.state != State.SPINNING){
 				vel.vx = 0;
 				vel.vy = 0;
 			}
