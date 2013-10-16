@@ -54,6 +54,9 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				}else if(spawn.type.equals(Constants.Groups.ZOMBIES)){
 					spawned = EntityFactory.createZombie(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				}else if(!SoC.game.progress.leftMonsterDefeated && spawn.type.equals(Constants.Groups.SATANS)){
+					spawned = EntityFactory.createSatan(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.GREEN_KNIGHTS)){
 					spawned = EntityFactory.createGreenKnight(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
@@ -62,9 +65,6 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.BOW_KNIGHTS)){
 					spawned = EntityFactory.createGoldBowKnight(pos.x, pos.y, pos.z);
-					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				} else if(spawn.type.equals(Constants.Groups.SATANS)){
-					spawned = EntityFactory.createSatan(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.GAIA_AIR) && !SoC.game.progress.gaiaAirDefeated){
 					spawned = EntityFactory.createGaiaAir(pos.x, pos.y, pos.z);
@@ -94,6 +94,9 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);	
 				} else if(spawn.type.equals(Constants.Groups.FIRE_STONE)){
 					spawned=EntityFactory.createFireStoneMonster(pos.x,pos.y,pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				} else if(spawn.type.equals(Constants.Groups.RIGHT_MONSTER)){
+					spawned=EntityFactory.createRightMonster(pos.x,pos.y,pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				}
 				if(spawn.type.equals(Constants.Groups.ANTI_VENOM_FOUNTAIN)){

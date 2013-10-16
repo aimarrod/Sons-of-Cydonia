@@ -35,6 +35,7 @@ public class Constants {
 		public static final String RED_MONSTER = "mid-monster";
 		public static final String FIRE_STONE = "fire-stone-monster";
 		public static final String ANTI_VENOM_FOUNTAIN = "anti-venom-fountain";
+		public static final String RIGHT_MONSTER = "right-monster";
 		public static final String BLACK_MAGE = "black mage";
 		public static final String KNIGHT_CAPTAIN = "knight captain";
 		
@@ -103,6 +104,7 @@ public class Constants {
 		
 		public static final int TORNADO_RANGE = 1000;
 		public static final int TORNADO_SPEED = 500;
+		public static final int FIREBREATH_SPEED = 1000;
 		public static final int BALLISTA_FIRE_RATE = 1;
 		public static final int DAGGER_SPEED = 900;
 		public static final int DAGGER_RANGE = 700;

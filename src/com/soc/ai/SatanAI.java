@@ -30,6 +30,7 @@ public class SatanAI extends AI{
 	float timerPushAttack;
 	boolean satanSpawned;
 	boolean casting;
+	boolean playerInside;
 
 	public SatanAI(){
 		shieldCD=15f;
@@ -46,6 +47,7 @@ public class SatanAI extends AI{
 		timerPushAttack=7f;
 		casting=false;
 		satanSpawned=false;
+		playerInside=false;
 	}
 	@Override
 	public void process(Entity e) {
@@ -57,14 +59,6 @@ public class SatanAI extends AI{
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
 		if(!satanSpawned){
-//			EntityFactory.createWall(e, 16, 36, 0).addToWorld();
-//			EntityFactory.createWall(e, 17, 36, 0).addToWorld();
-//			EntityFactory.createWall(e, 18, 36, 0).addToWorld();
-//			EntityFactory.createWall(e, 19, 36, 0).addToWorld();
-//			EntityFactory.createWall(e, 20, 36, 0).addToWorld();
-//			EntityFactory.createWall(e, 21, 36, 0).addToWorld();
-//			EntityFactory.createWall(e, 22, 36, 0).addToWorld();
-//			EntityFactory.createWall(e, 23, 36, 0).addToWorld();
 			EntityFactory.createWall(e, 45, 54, 0).addToWorld();
 			EntityFactory.createWall(e, 46, 54, 0).addToWorld();
 			EntityFactory.createWall(e, 47, 54, 0).addToWorld();
@@ -74,7 +68,7 @@ public class SatanAI extends AI{
 			satanSpawned=true;
 		}
 		
-		if( playerPos.x>limitBridgeXLeft && playerPos.x<limitBridgeXRight && playerPos.y>limitBridgeYBottom && playerPos.y<limitBridgeYUp){
+		if( !playerInside && playerPos.x>limitBridgeXLeft && playerPos.x<limitBridgeXRight && playerPos.y>limitBridgeYBottom && playerPos.y<limitBridgeYUp){
 			EntityFactory.createWall(e, 16, 36, 0).addToWorld();
 			EntityFactory.createWall(e, 17, 36, 0).addToWorld();
 			EntityFactory.createWall(e, 18, 36, 0).addToWorld();
@@ -83,6 +77,7 @@ public class SatanAI extends AI{
 			EntityFactory.createWall(e, 21, 36, 0).addToWorld();
 			EntityFactory.createWall(e, 22, 36, 0).addToWorld();
 			EntityFactory.createWall(e, 23, 36, 0).addToWorld();
+			playerInside=true;
 		}
 		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
 			if((playerPos.x<limitBridgeXLeft || playerPos.x>limitBridgeXRight) || (playerPos.y<limitBridgeYBottom || playerPos.y>limitBridgeYUp)){
