@@ -22,6 +22,7 @@ import com.soc.game.attacks.spells.BiteSpell;
 import com.soc.game.attacks.spells.BoneThrowSpell;
 import com.soc.game.attacks.spells.ChargeSpell;
 import com.soc.game.attacks.spells.DaggerThrowSpell;
+import com.soc.game.attacks.spells.FireBreathSpell;
 import com.soc.game.attacks.spells.FlameSpell;
 import com.soc.game.attacks.spells.QuakebladeSpell;
 import com.soc.game.attacks.spells.SlashSpell;
@@ -37,10 +38,10 @@ import com.soc.game.components.Character;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Debuff;
 import com.soc.game.components.Delay;
+import com.soc.game.components.Drop;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Feet;
-import com.soc.game.components.Drop;
 import com.soc.game.components.Player;
 import com.soc.game.components.Position;
 import com.soc.game.components.Spawner;
@@ -154,6 +155,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.WINDBLADE] = new WindbladeSpell();
 		spells[Constants.Spells.TENTACLES] = new TentacleSpell();
 		spells[Constants.Spells.FLAME] = new FlameSpell();
+		spells[Constants.Spells.FIREBREATH]=new FireBreathSpell();
 		
 		items=new Item[Constants.Items.ITEM_NUMBER];
 		items[Constants.Items.NONE] = null;

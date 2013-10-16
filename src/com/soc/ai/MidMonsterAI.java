@@ -3,15 +3,18 @@ package com.soc.ai;
 import java.util.Random;
 
 import com.artemis.Entity;
+import com.artemis.utils.Bag;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.game.attacks.spells.Spell;
-import com.soc.game.components.Bounds;
+import com.soc.game.components.Buff;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
+import com.soc.game.states.benefits.Casting;
+import com.soc.game.states.benefits.Teleport;
 
 public class MidMonsterAI extends AI{
 
@@ -25,8 +28,10 @@ public class MidMonsterAI extends AI{
 	boolean monsterSpawned;
 	boolean characterInside;
 	boolean flameWallSpawned;
-	
-	
+	Bag<Entity>flameWallsLeft;
+	Bag<Entity>flameWallsRight;
+	public float teleportTimer;
+	public boolean fireBreath;
 	public MidMonsterAI(){
 		timer = 0;
 		r = new Random();
@@ -37,6 +42,10 @@ public class MidMonsterAI extends AI{
 		monsterSpawned=false;
 		characterInside=false;
 		flameWallSpawned=false;
+		flameWallsLeft=new Bag<Entity>();
+		flameWallsRight=new Bag<Entity>();
+		fireBreath=false;
+		teleportTimer=10f;
 	}
 	
 	@Override
@@ -46,8 +55,24 @@ public class MidMonsterAI extends AI{
 		State state = SoC.game.statemapper.get(e);
 		Entity player = SoC.game.player;
 		Position playerPos = SoC.game.positionmapper.get(player);
+		if(state.state == State.DYING) return;
+		if(state.state >= State.BLOCKED){System.out.println("blocked");return;}
+		System.out.println(state.state);
 		
-		if(!monsterSpawned &&!SoC.game.progress.leftMonsterDefeated && !SoC.game.progress.rightMonsterDefetead ){
+		if(fireBreath){
+			fireBreath=false;
+			teleportTimer=10f;
+			for(int i=0;i<flameWallsLeft.size();i++){
+				Position pFlame=SoC.game.positionmapper.get(flameWallsLeft.get(i));
+				pFlame.x=38*Constants.World.TILE_SIZE;
+			}
+			for(int i=0;i<flameWallsRight.size();i++){
+				Position pFlame=SoC.game.positionmapper.get(flameWallsRight.get(i));
+				pFlame.x=59*Constants.World.TILE_SIZE;
+			}
+
+		}
+		if(!monsterSpawned ){
 			EntityFactory.createWall(e, 54, 82, 0).addToWorld();
 			EntityFactory.createWall(e, 55, 82, 0).addToWorld();
 			EntityFactory.createWall(e, 56, 82, 0).addToWorld();
@@ -144,9 +169,25 @@ public class MidMonsterAI extends AI{
 			monsterSpawned=true;
 		}
 		if(!flameWallSpawned){
-			for(int i=54;i<=82;i++){
-				EntityFactory.createFlameWall(e, 37, i, 0).addToWorld();
+			Entity flame=null;
+			for(int i=54;i<=79;i++){
+				flame=EntityFactory.createFlameWall(e, 38, i, 0);
+				SoC.game.groupmanager.add(flame, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(flame, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager.setLevel(flame, Constants.Groups.LEVEL +pos.z);
+				flame.addToWorld();
+				flameWallsLeft.add(flame);
 			}
+			for(int i=54;i<=79;i++){
+				flame=EntityFactory.createFlameWall(e, 59, i, 0);
+				SoC.game.groupmanager.add(flame, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(flame, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager
+				.setLevel(flame, Constants.Groups.LEVEL +pos.z);
+				flame.addToWorld();
+				flameWallsRight.add(flame);
+			}
+			flameWallSpawned=true;
 		}
 		
 		if(!characterInside && (playerPos.x>limitXLeft && playerPos.x<limitXRight) && (playerPos.y>limitYBottom && playerPos.y<limitYUp)){
@@ -159,7 +200,6 @@ public class MidMonsterAI extends AI{
 			characterInside=true;
 		}
 
-		timer-=SoC.game.world.delta;
 		if((playerPos.x<limitXLeft || playerPos.x>limitXRight) || (playerPos.y<limitYBottom || playerPos.y>limitYUp)){
 			state.state=State.IDLE;
 			vel.vx=0;
@@ -167,7 +207,9 @@ public class MidMonsterAI extends AI{
 			return;
 		}
 		
-		if(state.state == State.DYING) return;
+		
+		timer-=SoC.game.world.delta;
+		teleportTimer-=SoC.game.world.delta;
 		
 		float dsty = playerPos.y - pos.y;
 		float dstx = playerPos.x - pos.x;
@@ -179,31 +221,68 @@ public class MidMonsterAI extends AI{
 		vel.vy = vel.speed * pos.direction.y;
 		
 		
-		if(state.state != State.ATTACK){	
 			if(timer<=0){
-				timer=5f;
-				Entity spawned=EntityFactory.createFlame(playerPos.x-(Constants.Characters.WIDTH/2), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+				timer=1f;
+				Entity spawned=EntityFactory.createFlame((playerPos.x-(Constants.Characters.WIDTH/2)), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+				spawned.addToWorld();
+				spawned=EntityFactory.createFlame(playerPos.x+(Constants.Characters.WIDTH/2), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+				spawned.addToWorld();
+				spawned=EntityFactory.createFlame(playerPos.x-(Constants.Characters.WIDTH), playerPos.y+(Constants.Characters.HEIGHT), playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+				spawned.addToWorld();
+				spawned=EntityFactory.createFlame(playerPos.x+(Constants.Characters.WIDTH), playerPos.y+(Constants.Characters.HEIGHT), playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+				spawned.addToWorld();
+				spawned=EntityFactory.createFlame((playerPos.x-(Constants.Characters.WIDTH/2)), playerPos.y+(Constants.Characters.HEIGHT), playerPos.z,SoC.game.statsmapper.get(player).intelligence);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
+				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
+				spawned.addToWorld();
+				spawned=EntityFactory.createFlame(playerPos.x+(Constants.Characters.WIDTH/2), playerPos.y+(Constants.Characters.HEIGHT), playerPos.z,SoC.game.statsmapper.get(player).intelligence);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
 				spawned.addToWorld();
 			}
-			if(Math.abs(dstx) < 40 && Math.abs(dsty) < 20 ){
-				Spell spell = SoC.game.spells[Constants.Spells.BITE];
+
+			state.state = State.WALK;
+			if(Math.abs(dstx) < 32) pos.direction.x = 0;
+			else if(Math.abs(dsty) < 10) pos.direction.y = 0;
+			
+			if(teleportTimer<=0 ){
+				//The bounds are 37 and 57. So, a random number between 0-19->+1(1-20)-->+37
+				//int tileX=r.nextInt(20)+1+37;
+				int tileX=(int)(playerPos.x*Constants.World.TILE_FACTOR)-2+r.nextInt(5);
+				Buff.addbuff(e, new Teleport(tileX*Constants.World.TILE_SIZE, 78*Constants.World.TILE_SIZE, 0));
+				for(int i=0;i<flameWallsLeft.size();i++){
+					Position pFlame=SoC.game.positionmapper.get(flameWallsLeft.get(i));
+					pFlame.x=(tileX-2)*Constants.World.TILE_SIZE;
+				}
+				for(int i=0;i<flameWallsRight.size();i++){
+					Position pFlame=SoC.game.positionmapper.get(flameWallsRight.get(i));
+					pFlame.x=(tileX+2)*Constants.World.TILE_SIZE;
+				}
+				Buff.addbuff(e, new Casting(2f,Constants.BuffColors.RED));
+				fireBreath=true;
+				
+				Spell spell = SoC.game.spells[Constants.Spells.FIREBREATH];
 				state.state = spell.state;
-				//e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.BITE));
+				e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS,spell.cast, spell.blocking, Constants.Spells.FIREBREATH));
 				vel.vx = 0;
 				vel.vy = 0;
-				if(Math.abs(dstx) < Constants.Characters.WIDTH) pos.direction.x = 0;
-			} else if(vel.vx != 0 && vel.vy != 0){
-				state.state = State.WALK;
-				if(Math.abs(dstx) < 32) pos.direction.x = 0;
-				else if(Math.abs(dsty) < 10) pos.direction.y = 0;
+				e.changedInWorld();
 			}
-		} else {
-			vel.vx *= 0.5;
-			vel.vx *= 0.5;
-		}
+
 	}
 
 	@Override
