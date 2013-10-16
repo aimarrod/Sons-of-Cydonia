@@ -54,7 +54,16 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				}else if(spawn.type.equals(Constants.Groups.ZOMBIES)){
 					spawned = EntityFactory.createZombie(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				}else if(spawn.type.equals(Constants.Groups.SATANS)){
+				} else if(spawn.type.equals(Constants.Groups.GREEN_KNIGHTS)){
+					spawned = EntityFactory.createGreenKnight(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				} else if(spawn.type.equals(Constants.Groups.GOLD_KNIGHTS)){
+					spawned = EntityFactory.createGoldKnight(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				} else if(spawn.type.equals(Constants.Groups.BOW_KNIGHTS)){
+					spawned = EntityFactory.createGoldBowKnight(pos.x, pos.y, pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				} else if(spawn.type.equals(Constants.Groups.SATANS)){
 					spawned = EntityFactory.createSatan(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				} else if(spawn.type.equals(Constants.Groups.GAIA_AIR) && !SoC.game.progress.gaiaAirDefeated){
@@ -72,6 +81,8 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				} else if(spawn.type.equals(Constants.Groups.GAIA)&& !SoC.game.progress.gaiaDefeated){
 					spawned = EntityFactory.createGaia(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				} else if(spawn.type.equals(Constants.Groups.BLACK_MAGE)&& !SoC.game.progress.blackMageDefeated){
+					spawned = EntityFactory.createBlackMage(pos.x, pos.y, pos.z);
 				} else if(spawn.type.equals(Constants.Groups.EYEBALLS)){
 					spawned = EntityFactory.createEyeball(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);

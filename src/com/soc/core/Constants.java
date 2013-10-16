@@ -20,6 +20,9 @@ public class Constants {
 		public static final String MAGGOTS = "maggot";
 		public static final String SLIMES = "slime";
 		public static final String SKELETONS = "skeleton";
+		public static final String GREEN_KNIGHTS = "green knight";
+		public static final String GOLD_KNIGHTS = "gold knight";
+		public static final String BOW_KNIGHTS = "bow knight";
 		public static final String BALLISTAS= "ballista";
 		public static final String ZOMBIES= "zombie";
 		public static final String SATANS= "satan";
@@ -32,6 +35,7 @@ public class Constants {
 		public static final String RED_MONSTER = "mid-monster";
 		public static final String FIRE_STONE = "fire-stone-monster";
 		public static final String ANTI_VENOM_FOUNTAIN = "anti-venom-fountain";
+		public static final String BLACK_MAGE = "black mage";
 		
 		public static final String ENEMY_ATTACKS = "enemyattack";
 		public static final String PLAYER_ATTACKS = "playerattack";
@@ -108,7 +112,7 @@ public class Constants {
 		public static final int QUAKEBLADE_RADIUS_INITIAL = 30;
 		public static final int QUAKEBLADE_RADIUS_INCREASE = 16;
 		public static final float SPIN_DURATION = 3.5f;
-		public static final float SPIN_RADIUS = 75f;
+		public static final float SPIN_RADIUS = 60f;
 		public static final float POISON_CLOUD_DURATION = 7f;
 		public static final float POISON_CLOUD_RADIUS = 65f;
 		public static final float METEOR_BLAST_TICK_INTERVAL = 0.1f;

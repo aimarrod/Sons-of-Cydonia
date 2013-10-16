@@ -10,6 +10,7 @@ import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
+import com.soc.game.components.Velocity;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.graphics.DirectionalStaticRenderer;
 import com.soc.utils.GraphicsLoader;
@@ -43,9 +44,16 @@ public class ArrowProcessor implements AttackProcessor {
 	@Override
 	public void frame(Entity attack, SpriteBatch sprite) {
 		Position pos = SoC.game.positionmapper.get(attack);
-		Bounds bounds = SoC.game.boundsmapper.get(attack);
-		
+	
+		if(pos.direction.y > pos.direction.x){
+			pos.direction.x = 0;
+			pos.direction.y = Math.signum(pos.direction.y);
+		}
 		float angle = pos.direction.angle();
+	
+
+		
+		
 		if(angle%90 != 0){
 			if(angle<90f || angle>270f){
 				angle=0f;

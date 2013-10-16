@@ -15,8 +15,10 @@ import com.soc.core.SoC;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
+import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
+import com.soc.game.states.alterations.Push;
 import com.soc.utils.EffectsPlayer;
 
 public class SlashProcessor implements AttackProcessor {
@@ -59,7 +61,6 @@ public class SlashProcessor implements AttackProcessor {
 			victim.addComponent(new Damage(a.damage, false));
 			victim.changedInWorld();
 		}
-		
 	}
 
 	@Override

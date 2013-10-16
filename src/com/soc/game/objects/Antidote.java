@@ -25,5 +25,6 @@ public class Antidote extends Item {
 				d.removeDebuff(debuffs.get(i), SoC.game.player);
 			}
 		}
+		SoC.game.playermapper.get(SoC.game.player).removeFromInventary(this);
 	}
 }

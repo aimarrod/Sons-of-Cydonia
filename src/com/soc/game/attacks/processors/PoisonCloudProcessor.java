@@ -31,6 +31,7 @@ public class PoisonCloudProcessor implements AttackProcessor {
 	public PoisonCloudProcessor() {
 		this.timer = Constants.Spells.POISON_CLOUD_DURATION;
 		this.hitbox = new Circle();
+		this.enemy = new Rectangle();
 		this.renderer = GraphicsLoader.loadCloud();
 	}
 
@@ -47,9 +48,9 @@ public class PoisonCloudProcessor implements AttackProcessor {
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position pos = SoC.game.positionmapper.get(victim);
 		Bounds bon = SoC.game.boundsmapper.get(victim);
-		hitbox = new Circle(attackpos.x, attackpos.y,
+		enemy.set(pos.x, pos.y, bon.width, bon.height);
+		hitbox.set(attackpos.x, attackpos.y,
 				Constants.Spells.POISON_CLOUD_RADIUS);
-		enemy = new Rectangle(pos.x, pos.y, bon.width, bon.height);
 
 		return Intersector.overlaps(hitbox, enemy);
 	}

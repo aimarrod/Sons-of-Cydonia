@@ -4,6 +4,7 @@ import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.BallistaAI;
 import com.soc.ai.BatAI;
+import com.soc.ai.BlackMageAI;
 import com.soc.ai.EyeballAI;
 import com.soc.ai.FireStoneMonsterAI;
 import com.soc.ai.GaiaAI;
@@ -11,9 +12,12 @@ import com.soc.ai.GaiaAirAI;
 import com.soc.ai.GaiaAvatarAI;
 import com.soc.ai.GaiaDarkAI;
 import com.soc.ai.GaiaFlameAI;
+import com.soc.ai.GoldBowKnightAI;
+import com.soc.ai.GoldKnightAI;
 import com.soc.ai.MaggotAI;
 import com.soc.ai.MidMonsterAI;
 import com.soc.ai.SatanAI;
+import com.soc.ai.GreenKnightAI;
 import com.soc.ai.SkeletonAI;
 import com.soc.ai.SlimeAI;
 import com.soc.ai.ZombiAI;
@@ -32,8 +36,8 @@ import com.soc.game.attacks.processors.FlameWallProcessor;
 import com.soc.game.attacks.processors.HarmfulEnemyProcessor;
 import com.soc.game.attacks.processors.IcicleProcessor;
 import com.soc.game.attacks.processors.MeteorProcessor;
+import com.soc.game.attacks.processors.BlackMageAttackProcessor;
 import com.soc.game.attacks.processors.PoisonCloudProcessor;
-import com.soc.game.attacks.processors.PunchProcessor;
 import com.soc.game.attacks.processors.QuakeBladeProcessor;
 import com.soc.game.attacks.processors.RedPushAttackProcessor;
 import com.soc.game.attacks.processors.SlashProcessor;
@@ -259,6 +263,99 @@ public class EntityFactory {
 	    
 		Character animations = new Character();
 		GraphicsLoader.loadZombie(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createGreenKnight(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+	    e.addComponent(new Feet(32, 10));
+	    e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 50, new GreenKnightAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				Constants.Spells.CHARGE, 
+				null,
+				Constants.Groups.GREEN_KNIGHTS));
+		Character animations = new Character();
+		GraphicsLoader.loadGreenKnight(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createGoldBowKnight(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+	    e.addComponent(new Feet(32, 10));
+	    e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 50, new GoldBowKnightAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				Constants.Spells.ARROW, 
+				null,
+				Constants.Groups.GREEN_KNIGHTS));
+		Character animations = new Character();
+		GraphicsLoader.loadGoldBowKnight(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createGoldKnight(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+	    e.addComponent(new Feet(32, 10));
+	    e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 50, new GoldKnightAI()));
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				Constants.Spells.WHIRLBLADE, 
+				null,
+				Constants.Groups.GOLD_KNIGHTS));
+		Character animations = new Character();
+		GraphicsLoader.loadGoldKnight(animations);
 		e.addComponent(animations);
 		
 		return e;
@@ -537,6 +634,38 @@ public class EntityFactory {
 		return e;
 	}
 	
+	public static Entity createBlackMage(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,200));
+		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+		e.addComponent(new Feet(32, 10));
+		e.addComponent(new State(0));
+		e.addComponent(new Enemy(0, 5, new BlackMageAI()));
+		e.addComponent(new Flying());
+		e.addComponent(new Stats(
+				100, 
+				0, 
+				0, 
+				100, 
+				0, 
+				0, 
+				1, 
+				0, 
+				0, 
+				0, 
+				0, 
+				0, 
+				null,
+				Constants.Groups.BLACK_MAGE));
+		Character animations = new Character();
+		GraphicsLoader.loadBlackMage(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
 	
 	
 	/*
@@ -593,16 +722,6 @@ public class EntityFactory {
 		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new IcicleProcessor(dir, range), damage) );
-	   	
-	   	return e;
-	}
-	
-	public static Entity createPunch(String group, Position pos, int damage, int range){
-		Entity e=SoC.game.world.createEntity();
-				
-		e.addComponent( new Position(pos.x + Constants.Characters.WIDTH * pos.direction.x, pos.y + Constants.Characters.HEIGHT * pos.direction.y, pos.z));
-		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
-	   	e.addComponent( new Attack(new PunchProcessor(pos.direction, range), damage) );
 	   	
 	   	return e;
 	}
@@ -811,7 +930,21 @@ public class EntityFactory {
 		e.addComponent( new Attack(new AirCircleProcessor(), 0) );
 			
 		return e;
+	}
+	
+	public static Entity createParadigmShift(Entity source) {
+		Position pos = SoC.game.positionmapper.get(source);
+		Bounds bon = SoC.game.boundsmapper.get(source);
+		Velocity vel = SoC.game.velocitymapper.get(source);
+		Entity e = SoC.game.world.createEntity();
 		
+		e.addComponent( new Position(pos.x + bon.width*0.5f, pos.y+bon.height*0.5f, pos.z) );
+		e.addComponent( new Velocity(vel.vx, vel.vy, vel.speed));
+		e.addComponent( new Bounds(64, 64));
+		e.addComponent( new Flying() );
+		e.addComponent( new Attack(new BlackMageAttackProcessor(source), SoC.game.statsmapper.get(source).intelligence*2) );
+		
+		return e;
 	}
 	
 	public static Entity createWall(Entity source, int x, int y, int z){

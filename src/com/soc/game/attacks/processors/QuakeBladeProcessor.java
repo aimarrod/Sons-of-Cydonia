@@ -36,6 +36,7 @@ public class QuakeBladeProcessor implements AttackProcessor{
 		this.hit = new Bag<Entity>();
 		this.interval = 0;
 		this.hitbox = new Circle();
+		this.enemy = new Rectangle();
 		this.counter = 0;
 		this.radius = Constants.Spells.QUAKEBLADE_RADIUS_INITIAL;
 		this.renderer = GraphicsLoader.loadQuake();
@@ -64,8 +65,9 @@ public class QuakeBladeProcessor implements AttackProcessor{
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position pos = SoC.game.positionmapper.get(victim);
 		Bounds bon = SoC.game.boundsmapper.get(victim);
-		hitbox = new Circle(attackpos.x, attackpos.y, radius);
-		enemy = new Rectangle(pos.x, pos.y, bon.width, bon.height);
+		
+		enemy.set(pos.x, pos.y, bon.width, bon.height);
+		hitbox.set(attackpos.x, attackpos.y, radius);
 		
 		return (!hit.contains(victim) && Intersector.overlaps(hitbox, enemy));
 	}

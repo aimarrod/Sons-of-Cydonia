@@ -42,6 +42,7 @@ public class TentaclesProcessor implements AttackProcessor {
 		this.radius = Constants.Spells.TENTACLES_RADIUS;
 		this.hitting = false;
 		this.hitbox = new Circle();
+		this.enemy = new Rectangle();
 		this.renderer = GraphicsLoader.loadTentacles();
 		this.hit = new Bag<Entity>();
 	}
@@ -65,9 +66,8 @@ public class TentaclesProcessor implements AttackProcessor {
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position pos = SoC.game.positionmapper.get(victim);
 		Bounds bon = SoC.game.boundsmapper.get(victim);
-		hitbox = new Circle(attackpos.x, attackpos.y+110,
-				radius);
-		enemy = new Rectangle(pos.x, pos.y, bon.width, bon.height);
+		enemy.set(pos.x, pos.y, bon.width, bon.height);
+		hitbox.set(attackpos.x, attackpos.y, radius);
 
 		return (hitting && !hit.contains(victim) && Intersector.overlaps(hitbox, enemy));
 	}

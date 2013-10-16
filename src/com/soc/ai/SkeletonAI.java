@@ -36,6 +36,18 @@ public class SkeletonAI extends AI {
 	@Override
 	public void death(Entity e) {
 		Position pos = SoC.game.positionmapper.get(e);
-		EntityFactory.createItem(Constants.Items.ANTIDOTE, pos.x, pos.y, pos.z).addToWorld();
+		if(AI.rng.nextFloat() < 0.1){
+			EntityFactory.createItem(Constants.Items.HEALTH_POTION, pos.x, pos.y, pos.z).addToWorld();
+		}
+		if(AI.rng.nextFloat() < 0.1){
+			EntityFactory.createItem(Constants.Items.MANA_POTION, pos.x, pos.y, pos.z).addToWorld();
+		}
+		if(AI.rng.nextFloat() < 0.05){
+			EntityFactory.createItem(Constants.Items.STONE_AXE, pos.x, pos.y, pos.z);
+		}
+		if(AI.rng.nextFloat() < 0.05){
+			EntityFactory.createItem(Constants.Items.WOODEN_SHIELD, pos.x, pos.y, pos.z);
+		}
+
 	}
 }
