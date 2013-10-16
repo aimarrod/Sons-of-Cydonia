@@ -12,13 +12,13 @@ import com.soc.ai.GaiaAirAI;
 import com.soc.ai.GaiaAvatarAI;
 import com.soc.ai.GaiaDarkAI;
 import com.soc.ai.GaiaFlameAI;
-import com.soc.ai.RightMonsterAI;
 import com.soc.ai.GoldBowKnightAI;
 import com.soc.ai.GoldKnightAI;
+import com.soc.ai.GreenKnightAI;
 import com.soc.ai.MaggotAI;
 import com.soc.ai.MidMonsterAI;
+import com.soc.ai.RightMonsterAI;
 import com.soc.ai.SatanAI;
-import com.soc.ai.GreenKnightAI;
 import com.soc.ai.SkeletonAI;
 import com.soc.ai.SlimeAI;
 import com.soc.ai.ZombiAI;
@@ -28,6 +28,7 @@ import com.soc.game.attacks.processors.AirCircleProcessor;
 import com.soc.game.attacks.processors.AntiVenomFountain;
 import com.soc.game.attacks.processors.ArrowProcessor;
 import com.soc.game.attacks.processors.BiteProcessor;
+import com.soc.game.attacks.processors.BlackMageAttackProcessor;
 import com.soc.game.attacks.processors.BoneThrowProcessor;
 import com.soc.game.attacks.processors.ChargeProcessor;
 import com.soc.game.attacks.processors.DaggerThrowProcessor;
@@ -38,11 +39,11 @@ import com.soc.game.attacks.processors.FlameWallProcessor;
 import com.soc.game.attacks.processors.HarmfulEnemyProcessor;
 import com.soc.game.attacks.processors.IcicleProcessor;
 import com.soc.game.attacks.processors.MeteorProcessor;
-import com.soc.game.attacks.processors.BlackMageAttackProcessor;
 import com.soc.game.attacks.processors.PoisonCloudProcessor;
 import com.soc.game.attacks.processors.QuakeBladeProcessor;
 import com.soc.game.attacks.processors.RedPushAttackProcessor;
 import com.soc.game.attacks.processors.SlashProcessor;
+import com.soc.game.attacks.processors.StompProcessor;
 import com.soc.game.attacks.processors.TentaclesProcessor;
 import com.soc.game.attacks.processors.TornadoProcessor;
 import com.soc.game.attacks.processors.VenomSwordProcessor;
@@ -866,6 +867,14 @@ public class EntityFactory {
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(84, 75) );
 	   	e.addComponent( new Attack(new FireStoneProcessor(), 0) );
+	   	
+	   	return e;		
+	}
+	
+	public static Entity createStomp(float x, float y, int z, int damage) {
+		Entity e=SoC.game.world.createEntity();
+		e.addComponent( new Position(x, y, z));
+	   	e.addComponent( new Attack(new StompProcessor(), damage) );
 	   	
 	   	return e;		
 	}
