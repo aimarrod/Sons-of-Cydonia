@@ -82,15 +82,12 @@ public class BasicFollowing implements AIModule{
 				pos.direction.x = Math.signum(dstx)*(Math.abs(dstx)/Math.abs(dsty));
 			}
 		} else {
-			pos.direction.x = Math.signum(dstx);
 			if(Math.abs(dstx) < 32){
 				pos.direction.x = 0;
-				return;
-			}
-			if(Math.abs(dstx) > Math.abs(dsty)){
-				pos.direction.y = 0;
-			} else {
 				pos.direction.y = Math.signum(dsty);
+			} else {
+				pos.direction.x = Math.signum(dstx);
+				pos.direction.y = 0;
 			}
 		}
 	}

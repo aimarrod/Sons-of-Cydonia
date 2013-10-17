@@ -20,6 +20,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.states.alterations.Push;
 import com.soc.utils.EffectsPlayer;
+import com.soc.utils.GraphicsLoader;
 
 public class SlashProcessor implements AttackProcessor {
 	public Bag<Entity> hit;
@@ -34,6 +35,8 @@ public class SlashProcessor implements AttackProcessor {
 
 	@Override 
 	public void process(Entity attack) {
+
+		System.out.println("drawnn");
 		timer -= SoC.game.world.delta;
 		if(timer <= 0) attack.deleteFromWorld();
 	}
@@ -65,6 +68,10 @@ public class SlashProcessor implements AttackProcessor {
 
 	@Override
 	public void frame(Entity attack, SpriteBatch sprite) {
+		Position attackpos = SoC.game.positionmapper.get(attack);
+		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
+
+		sprite.draw(GraphicsLoader.load("dialog-box.png"), attackpos.x, attackpos.y, attackbounds.width, attackbounds.height);
 		
 	}
 

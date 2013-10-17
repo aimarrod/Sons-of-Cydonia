@@ -25,7 +25,7 @@ public class SlashSpell extends Spell{
 		}
 		@Override
 		public void create(Entity source, String group, Position pos, Stats stats) {
-			Entity e = EntityFactory.createSlash(pos, (int) (stats.strength * 0.7f + stats.agility * 0.4f));	
+			Entity e = EntityFactory.createSlash(source, pos, (int) (stats.strength * 0.7f + stats.agility * 0.4f));	
 		    SoC.game.groupmanager.add(e, group);
 		    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 		    SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);

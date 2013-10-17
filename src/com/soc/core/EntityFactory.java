@@ -17,6 +17,7 @@ import com.soc.ai.GoldKnightAI;
 import com.soc.ai.GreenKnightAI;
 import com.soc.ai.KnightCaptainAI;
 import com.soc.ai.MaggotAI;
+import com.soc.ai.MeleeSkeletonAI;
 import com.soc.ai.MidMonsterAI;
 import com.soc.ai.RightMonsterAI;
 import com.soc.ai.SatanAI;
@@ -133,6 +134,23 @@ public class EntityFactory {
 	    
 	    Character animations = new Character();
 	    GraphicsLoader.loadSkeleton(animations);
+	    e.addComponent(animations);
+	    
+	    return e;
+	}
+	
+	public static Entity createMeleeSkeleton(float px, float py, int pz,int damage){
+		Entity e = SoC.game.world.createEntity();
+	    e.addComponent(new Position(px,py, pz));
+	    e.addComponent(new Velocity(0,0,100));
+	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+	    e.addComponent(new State(1));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.SLASH, new int[]{}, Constants.Groups.SKELETONS));
+	    e.addComponent(new Feet(32, 10));
+	    e.addComponent(new Enemy(600,10, new MeleeSkeletonAI()));
+	    
+	    Character animations = new Character();
+	    GraphicsLoader.loadMeleeSkeleton(animations);
 	    e.addComponent(animations);
 	    
 	    return e;
@@ -832,19 +850,20 @@ public class EntityFactory {
 	}
 
 
-	public static Entity createSlash(Position pos, int damage) {
+	public static Entity createSlash(Entity source ,Position pos, int damage) {
 		Entity e=SoC.game.world.createEntity();
 		
+		Feet feet = SoC.game.feetmapper.get(source);
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
-		float centerx = pos.x + Constants.Characters.WIDTH*0.5f;
-		float centery = pos.y + Constants.Characters.HEIGHT*0.5f;
+		float centerx = pos.x + feet.width*0.5f;
+		float centery = pos.y + feet.heigth*0.5f;
 		if(pos.direction.x != 0){
-			e.addComponent( new Position(centerx, pos.y, pos.z, pos.direction.cpy()) );
-			e.addComponent( new Bounds((int) ((int) World.TILE_SIZE*Math.signum(pos.direction.x)*2.2f), (int) World.TILE_SIZE*2) );
+			e.addComponent( new Position(centerx+feet.width*0.5f*Math.signum(pos.direction.x), pos.y+feet.heigth*1.5f, pos.z, pos.direction.cpy()) );
+			e.addComponent( new Bounds((int) ((int) World.TILE_SIZE*Math.signum(pos.direction.x)*1.5f), (int) World.TILE_SIZE) );
 
 		} else {
-			e.addComponent( new Position(centerx-World.TILE_SIZE, centery, pos.z, pos.direction) );
-			e.addComponent( new Bounds((int)World.TILE_SIZE*3, (int) (World.TILE_SIZE*((pos.direction.y<0)?1.2f:1.6f)*Math.signum(pos.direction.y))));
+			e.addComponent( new Position(centerx-feet.width*0.8f, centery+feet.heigth*((pos.direction.y<0)?0.4f:1.1f), pos.z, pos.direction) );
+			e.addComponent( new Bounds((int)(World.TILE_SIZE*2.4f), (int) (World.TILE_SIZE*((pos.direction.y<0)?1.0f:1.7f)*Math.signum(pos.direction.y))));
 
 		}
 	   	e.addComponent( new Attack(new SlashProcessor(), damage) );
