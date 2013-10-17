@@ -1,8 +1,8 @@
 package com.soc.game.attacks.processors;
 
 import com.artemis.Entity;
-import com.artemis.utils.Bag;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Position;
@@ -13,24 +13,29 @@ public class ChargeBossProcessor implements AttackProcessor{
 	public Entity hit;
 	public float duration;
 	public Entity source;
+	public Vector2 direction;
 	
-	public ChargeBossProcessor(Entity source, float duration) {
+	public ChargeBossProcessor(Entity source, float duration, Vector2 direction) {
 		this.source = source;
 		hit = null;
 		this.duration = duration;
+		this.direction=direction;
 	}
 	@Override
 	public void process(Entity attack) {
+		if(SoC.game.statemapper.get(source).state==State.FALLING){
+			attack.deleteFromWorld();
+			return;
+		}
 		if(SoC.game.statemapper.get(source).state == State.CHARGING){
 			Velocity vAttack = SoC.game.velocitymapper.get(attack);
-			Position p = SoC.game.positionmapper.get(attack);
 			Velocity vSource = SoC.game.velocitymapper.get(source);
 			duration-= SoC.game.world.delta;
 			if(duration>0){
-				vAttack.vx=vAttack.speed*p.direction.x;
-				vAttack.vy=vAttack.speed*p.direction.y;
-				vSource.vx=vAttack.speed*p.direction.x;
-				vSource.vy=vAttack.speed*p.direction.y;
+				vAttack.vx=vAttack.speed*direction.x;
+				vAttack.vy=vAttack.speed*direction.y;
+				vSource.vx=vAttack.speed*direction.x;
+				vSource.vy=vAttack.speed*direction.y;
 			}else{
 				attack.deleteFromWorld();
 				delete();
