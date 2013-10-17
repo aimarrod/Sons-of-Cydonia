@@ -178,7 +178,7 @@ public class EntityFactory {
 	    
 	    Character animations = new Character();
 	    GraphicsLoader.loadBallista(animations);
-	    animations.deathSound = "enemy-explosion.png";
+	    animations.deathSound = "enemy-explosion.ogg";
 	    e.addComponent(animations);
 	    
 	    return e;
