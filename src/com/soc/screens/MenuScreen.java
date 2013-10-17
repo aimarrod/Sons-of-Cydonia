@@ -148,7 +148,8 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
                 int button )
             {
             	if (button==0){
-            		
+	                SoC.game.clearProcessors();
+	                SoC.game.setScreen(new OptionsScreen(game));
             	}
             }
             @Override
@@ -252,7 +253,8 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 			                SoC.game.setScreen(new LoadScreen(game));
 						}else{
 							if(focusedBotton==3){
-
+				                SoC.game.clearProcessors();
+				                SoC.game.setScreen(new OptionsScreen(game));
 							}else{
 								if(focusedBotton==4){
 									SoC.game.dispose();

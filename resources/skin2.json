@@ -24,6 +24,15 @@ com.badlogic.gdx.graphics.Color: {
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: { down: pushed-button, up: normal-button, font: gameFont, fontColor: green }
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
+	default-horizontal: { background: default-slider, knob: default-slider-knob }
+
+},
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: { font: menuFont, fontColor: white }
+},
 }
 
-}
+
