@@ -40,6 +40,7 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 		focusedStyle.down = getSkin().getDrawable("pushed-button");
 
 		files = GameLoader.getHandles();
+		System.out.println(files.length);
 		buttons = new TextButton[files.length + 1];
 		for (int i = 0; i < files.length+1; i++) {
 			if (i == files.length) {
@@ -175,13 +176,22 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 			}else{
 				if(Gdx.input.isKeyPressed(Keys.ENTER)){
 					if(focusedButton==1){
-
+						if(files[0]!=null){
+							SoC.game.clearProcessors();
+							GameLoader.loadGame(files[0]);
+						}
 					}else{
 						if(focusedButton==2){
-
+							if(files[1]!=null){
+								SoC.game.clearProcessors();
+								GameLoader.loadGame(files[1]);
+							}
 						}else{
 							if(focusedButton==3){
-
+								if(files[2]!=null){
+									SoC.game.clearProcessors();
+									GameLoader.loadGame(files[2]);
+								}
 							}else{
 								if(focusedButton==4){
 									SoC.game.clearProcessors();

@@ -78,7 +78,6 @@ public class SaveScreen extends AbstractScreen implements InputProcessor {
 					@Override
 					public void touchUp(InputEvent event, float x, float y,
 							int pointer, int button) {
-						if(handle != null){
 							try{
 								GameLoader.saveGame(position+1);
 							} catch(Exception e){
@@ -87,7 +86,7 @@ public class SaveScreen extends AbstractScreen implements InputProcessor {
 								SoC.game.setScreen(SoC.game.screens.pop());
 								SoC.game.restoreInputProcessors();
 							}
-						}
+
 					}
 				});
 
@@ -171,7 +170,6 @@ public class SaveScreen extends AbstractScreen implements InputProcessor {
 			}else{
 				if(keycode == Input.Keys.ENTER){
 					if(focusedButton==1){
-						if(files[0] != null){
 							try{
 								GameLoader.saveGame(1);
 							} catch(Exception e){
@@ -180,10 +178,8 @@ public class SaveScreen extends AbstractScreen implements InputProcessor {
 								SoC.game.restoreInputProcessors();
 								SoC.game.setScreen(SoC.game.screens.pop());
 							}
-						}
 					}else{
 						if(focusedButton==2){
-							if(files[1] != null){
 								try{
 									GameLoader.saveGame(2);
 								} catch(Exception e){
@@ -192,10 +188,8 @@ public class SaveScreen extends AbstractScreen implements InputProcessor {
 									SoC.game.restoreInputProcessors();
 									SoC.game.setScreen(SoC.game.screens.pop());
 								}
-							}
 						}else{
 							if(focusedButton==3){
-								if(files[2] != null){
 									try{
 										GameLoader.saveGame(3);
 									} catch(Exception e){
@@ -204,7 +198,6 @@ public class SaveScreen extends AbstractScreen implements InputProcessor {
 										SoC.game.restoreInputProcessors();
 										SoC.game.setScreen(SoC.game.screens.pop());
 									}
-								}
 							}else{
 								if(focusedButton==4){
 									SoC.game.restoreInputProcessors();
