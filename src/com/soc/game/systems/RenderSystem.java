@@ -79,12 +79,8 @@ public class RenderSystem extends VoidEntitySystem{
 	public void changeMap(TiledMap map){
 		this.renderer = new OrthogonalTiledMapRenderer(map, UNITSCALE);
 		this.layers = Integer.parseInt(map.getProperties().get("layers", String.class));
+	}
 
-	}
-	
-	public void render(){
-		renderer.render(new int[]{0,1});
-	}
 	
 	@Override
 	protected void begin() {

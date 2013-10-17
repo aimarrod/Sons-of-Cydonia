@@ -34,7 +34,7 @@ public class CharacterMenu extends Actor{
         batch.draw(container, getX(),  getY());
         font.setScale(0.5f);
         font.setColor(Color.WHITE);
-        font.draw(batch, "Health: ", getX()+15, getY()+190);
+        font.draw(batch, "HP: ", getX()+15, getY()+190);
         font.setScale(0.55f);
         font.setColor(Color.RED);
         font.draw(batch, ""+stats.maxHealth, getX()+70, getY()+190);
@@ -42,52 +42,52 @@ public class CharacterMenu extends Actor{
         
         font.setScale(0.5f);
         font.setColor(Color.WHITE);
-        font.draw(batch, "Mana: ", getX()+15, getY()+170);
+        font.draw(batch, "MP: ", getX()+15, getY()+170);
         font.setScale(0.55f);
         font.setColor(Color.BLUE);
         font.draw(batch, ""+stats.maxMana, getX()+70, getY()+170);
         
         font.setScale(0.5f);
         font.setColor(Color.WHITE);
-        font.draw(batch, "Strength: ", getX()+15, getY()+150);
+        font.draw(batch, "Str: ", getX()+15, getY()+150);
         font.setScale(0.55f);
         font.setColor(Color.ORANGE);
-        font.draw(batch, stats.strength+"", getX()+110, getY()+150);
+        font.draw(batch, stats.strength+"", getX()+70, getY()+150);
         
         font.setScale(0.5f);
         font.setColor(Color.WHITE);
-        font.draw(batch, "Agility: ", getX()+15, getY()+130);
+        font.draw(batch, "Agi: ", getX()+15, getY()+130);
         font.setScale(0.55f);
         font.setColor(0, 0.5f, 0, 1);
-        font.draw(batch, stats.agility+"", getX()+110, getY()+130);
+        font.draw(batch, stats.agility+"", getX()+70, getY()+130);
         
         font.setScale(0.5f);
         font.setColor(Color.WHITE);
-        font.draw(batch, "Intelligence: ", getX()+15, getY()+110);
+        font.draw(batch, "Int: ", getX()+15, getY()+110);
         font.setScale(0.55f);
         font.setColor(Color.CYAN);
-        font.draw(batch, stats.intelligence+"", getX()+110, getY()+110);
+        font.draw(batch, stats.intelligence+"", getX()+70, getY()+110);
         
         font.setScale(0.5f);
         font.setColor(Color.WHITE);
-        font.draw(batch, "Defense: ", getX()+15, getY()+90);
+        font.draw(batch, "Def: ", getX()+15, getY()+90);
         font.setScale(0.55f);
         font.setColor(Color.GRAY);
-        font.draw(batch, stats.armor+"", getX()+110, getY()+90);
+        font.draw(batch, stats.armor+"", getX()+70, getY()+90);
         
         font.setScale(0.5f);
         font.setColor(Color.WHITE);
         font.draw(batch, "Weapon: ", getX()+15, getY()+60);
         if(player.weapon != null){
         	batch.setColor(1,1,1,1);
-        	batch.draw(player.weapon.icon, getX()+85, getY()+38, 25, 25);
+        	batch.draw(player.weapon.icon, getX()+105, getY()+38, 25, 25);
         }
         
         font.setColor(Color.WHITE);
         font.draw(batch, "Armor: ", getX()+15, getY()+30);
         if(player.armor != null){
         	batch.setColor(1,1,1,1);
-        	batch.draw(player.armor.icon, getX()+85, getY()+8, 25, 25);
+        	batch.draw(player.armor.icon, getX()+105, getY()+8, 25, 25);
         }
 		
         batch.setColor(1, 1, 1, 1);
