@@ -79,6 +79,7 @@ public class GameMenu extends Table implements InputProcessor {
 				SoC.game.world.getSystem(HudSystem.class).toogleGameMenu();
 			}else if(focusedButton==2){
 				SoC.game.screens.push(SoC.game.getScreen());
+            	SoC.game.hudSystem.hideCharacterGameMenu();
 				SoC.game.archiveProcessors();
 				SoC.game.setScreen(new SaveScreen(SoC.game));
 			}else if(focusedButton==3){
@@ -86,11 +87,13 @@ public class GameMenu extends Table implements InputProcessor {
 			}else if(focusedButton==4){
             	SoC.game.player.deleteFromWorld();
             	SoC.game.resetWorld();
+            	SoC.game.hudSystem.hideCharacterGameMenu();
+            	SoC.game.clearProcessors();
             	SoC.game.openMenuScreen();
 			}	
 			return true;
 		}
-		if(keycode==Input.Keys.UP ||keycode==Input.Keys.W){
+		if(keycode==Input.Keys.UP){
 			buttons[focusedButton-1].setStyle(normalStyle);
 			if(focusedButton==1)
 				focusedButton=4;
@@ -99,7 +102,7 @@ public class GameMenu extends Table implements InputProcessor {
 			buttons[focusedButton-1].setStyle(focusedStyle);
 			return true;
 		}else{
-			if(keycode==Input.Keys.S || keycode==Input.Keys.DOWN){
+			if(keycode==Input.Keys.DOWN){
 				buttons[focusedButton-1].setStyle(normalStyle);
 				if(focusedButton==4)
 					focusedButton=1;
@@ -129,6 +132,26 @@ public class GameMenu extends Table implements InputProcessor {
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if(getX()-150<screenX && getX()+150>screenX && (getY()+75)<height-screenY && (getY()+135)>height-screenY){
+			SoC.game.world.getSystem(HudSystem.class).toogleGameMenu();
+			return true;
+		}else if(getX()-150<screenX && getX()+150>screenX && (getY()+5)<height-screenY && (getY()+65)>height-screenY){
+			SoC.game.screens.push(SoC.game.getScreen());
+        	SoC.game.hudSystem.hideCharacterGameMenu();
+			SoC.game.archiveProcessors();
+			SoC.game.setScreen(new SaveScreen(SoC.game));
+			return true;
+		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-5)>height-screenY && (getY()-65)<height-screenY){
+
+			return true;
+		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-75)>height-screenY && (getY()-135)<height-screenY){
+        	SoC.game.player.deleteFromWorld();
+        	SoC.game.resetWorld();
+        	SoC.game.hudSystem.hideCharacterGameMenu();
+        	SoC.game.clearProcessors();
+        	SoC.game.openMenuScreen();
+			return true;
+		}
 		return false;
 	}
 
