@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="200" tilewidth="32" tileheight="32">
  <properties>
+  <property name="ambiance" value="green-plains.ogg"/>
   <property name="layers" value="2"/>
   <property name="music" value="green-plains.ogg"/>
  </properties>
@@ -383,7 +384,17 @@
   <object x="2176" y="608" width="128" height="256"/>
   <object x="2112" y="864" width="192" height="192"/>
  </objectgroup>
- <objectgroup name="level0-spawners" width="100" height="200"/>
+ <objectgroup name="level0-spawners" width="100" height="200">
+  <object x="2288" y="5328" width="32" height="32">
+   <properties>
+    <property name="interval" value="2"/>
+    <property name="max" value="1"/>
+    <property name="range" value="10000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="level1-spawners" width="100" height="200">
   <object x="1920" y="3072" width="32" height="32">
    <properties>

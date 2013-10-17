@@ -53,8 +53,8 @@ public class GraphicsLoader {
 		AnimatedRenderer spin = new AnimatedRenderer(true);
 		AnimatedRenderer fall = new AnimatedRenderer(true);
 		
-		attack.ox = -80;
-		attack.oy = -64;
+		attack.ox = -48;
+		attack.oy = -32;
 		movement.ox = -16;
 		movement.oy = 0;
 		idle.ox = -16;
@@ -72,7 +72,7 @@ public class GraphicsLoader {
 		
 		Texture tex = load("warrior-attack.png");
 		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
-		TextureRegion[][] tmp = TextureRegion.split(tex, 192, 192);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 128, 128);
 		for(int i = 0; i < tmp.length; i++){
 	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
 	   	}
@@ -439,6 +439,42 @@ public class GraphicsLoader {
 		death.oy -= 0;
 		
 		TextureRegion[][] tmp = TextureRegion.split(load("skeleton-attack.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("skeleton-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tmp = TextureRegion.split(load("skeleton-death.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		death.animation = new Animation(0.4f/tmp[i].length, tmp[i]);
+	   	}
+		character.deathTime=0.4f;
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.WALK] = movement;
+	}
+	
+	public static void loadMeleeSkeleton(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		character.renderers = new Renderer[State.STATENUM];
+		attack.ox = -48;
+		attack.oy = -32;
+		movement.ox -= 16;
+		movement.oy -= 0;
+		idle.ox -= 16;
+		idle.oy -= 0;
+		death.ox -= 16;
+		death.oy -= 0;
+		
+		TextureRegion[][] tmp = TextureRegion.split(load("skeleton-attack-mace.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
 	   		attack.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
 	   	}

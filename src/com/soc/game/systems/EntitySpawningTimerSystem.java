@@ -28,16 +28,17 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 	protected void process(Entity spawner) {
 		Spawner spawn = sm.get(spawner);
 		Position pos = pm.get(spawner);
-		Bounds boun = bm.get(spawner);
 		Position playerpos = pm.get(SoC.game.player);
 		
 		if(spawn.max > 0 && playerpos.z == pos.z && Math.hypot(pos.x-playerpos.x, pos.y-playerpos.y) <= spawn.range){
 			if(spawn.time <= 0){
+				System.out.println("Entra2 " + spawn.type);
 				spawn.time = spawn.interval;
 				spawn.max -= 1;
 				Entity spawned=null;
 				if(spawn.type.equals(Constants.Groups.SKELETONS)){
-					spawned = EntityFactory.createSkeleton(pos.x, pos.y, pos.z,10);
+					if(Math.random() >= 0.5f) spawned = EntityFactory.createSkeleton(pos.x, pos.y, pos.z,10);
+					else spawned = EntityFactory.createMeleeSkeleton(pos.x, pos.y, pos.z, 20);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				}
 				else if(spawn.type.equals(Constants.Groups.BALLISTAS)){
@@ -114,9 +115,8 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 						spawned.addToWorld();	
 					} 
 				}
-			} else {
-				spawn.time -= world.delta;
 			}
+			spawn.time -= world.delta;
 		}
 	}
 

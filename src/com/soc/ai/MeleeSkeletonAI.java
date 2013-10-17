@@ -1,0 +1,28 @@
+package com.soc.ai;
+
+import com.artemis.Entity;
+import com.soc.core.SoC;
+import com.soc.game.components.State;
+
+public class MeleeSkeletonAI extends AI{
+	
+	public MeleeSkeletonAI() {
+		modules = new AIModule[2];
+		modules[0] = new BasicFollowing(32, false, true, false);
+		modules[1] = new BasicAttack(50, 1f);
+	}
+
+	@Override
+	public void process(Entity e) {
+		State state = SoC.game.statemapper.get(e);
+		if(state.state == State.DYING) return;
+		processModules(e); 
+	}
+
+	@Override
+	public void death(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

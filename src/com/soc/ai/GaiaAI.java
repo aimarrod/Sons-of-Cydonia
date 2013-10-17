@@ -131,6 +131,7 @@ public class GaiaAI extends AI{
 			Position playerPos = SoC.game.positionmapper.get(SoC.game.player);
 			
 			if(!SoC.game.progress.gaiaAvatarDefeated && !avatarSpawned && (int)(playerPos.x*World.TILE_FACTOR) >= 115 && ((int)(playerPos.y*World.TILE_FACTOR) >= 7 && (int)(playerPos.y*World.TILE_FACTOR) <= 9)){
+				
 				EntityFactory.createWall(e, 114, 7, 0).addToWorld();
 				EntityFactory.createWall(e, 114, 8, 0).addToWorld();
 				EntityFactory.createWall(e, 114, 9, 0).addToWorld();
@@ -144,6 +145,10 @@ public class GaiaAI extends AI{
 				SoC.game.groupmanager.add(gaia, Constants.Groups.ENEMIES);
 				SoC.game.groupmanager.add(gaia, Constants.Groups.CHARACTERS);
 				gaia.addToWorld();
+				
+				SoC.game.musicmanager.play(e, "gaia-battle.png");
+				SoC.game.musicmanager.play(gaia, "gaia-battle.png");
+				
 				avatarSpawned = true;
 			} else if(SoC.game.progress.gaiaAvatarDefeated){
 					SoC.game.buffmapper.get(e).removebuff(Inmune.class,e);
