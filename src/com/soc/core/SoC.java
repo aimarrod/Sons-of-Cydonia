@@ -70,6 +70,7 @@ import com.soc.game.systems.MovementSystem;
 import com.soc.game.systems.PlayerInputSystem;
 import com.soc.game.systems.RenderSystem;
 import com.soc.hud.HudSystem;
+import com.soc.screens.CreditsScreen;
 import com.soc.screens.GameOverScreen;
 import com.soc.screens.MenuScreen;
 import com.soc.screens.SplashScreen;
@@ -242,8 +243,7 @@ public class SoC extends Game {
 		processors = new Stack<InputProcessor>();
 		
 		//Save, New, Load game handler.
-		MenuScreen menu=new MenuScreen(this);
-		setScreen(menu);
+		setScreen(new MenuScreen(this));
 	}
 	
 	public void openMenu(){
