@@ -31,11 +31,11 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 
 		background = new Texture(Gdx.files.internal("resources/background.jpg"));
 		normalStyle = new TextButtonStyle();
-		normalStyle.font = getSkin().getFont("gameFont");
+		normalStyle.font = getSkin().getFont("buttonFont");
 		normalStyle.up = getSkin().getDrawable("normal-button");
 		normalStyle.down = getSkin().getDrawable("pushed-button");
 		focusedStyle = new TextButtonStyle();
-		focusedStyle.font = getSkin().getFont("gameFont");
+		focusedStyle.font = getSkin().getFont("buttonFont");
 		focusedStyle.up = getSkin().getDrawable("focused-button");
 		focusedStyle.down = getSkin().getDrawable("pushed-button");
 
