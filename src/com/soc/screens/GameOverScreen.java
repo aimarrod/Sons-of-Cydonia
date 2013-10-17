@@ -27,11 +27,11 @@ public class GameOverScreen extends AbstractScreen implements InputProcessor{
 		background=new Texture(Gdx.files.internal("resources/background.jpg"));
 		handT=new Texture(Gdx.files.internal("resources/hand.png"));
 		normalStyle=new TextButtonStyle();
-		normalStyle.font=getSkin().getFont("gameFont");
+		normalStyle.font=getSkin().getFont("buttonFont");
 		normalStyle.up=getSkin().getDrawable("normal-button");
 		normalStyle.down=getSkin().getDrawable("pushed-button");
 		focusedStyle=new TextButtonStyle();
-		focusedStyle.font=getSkin().getFont("gameFont");
+		focusedStyle.font=getSkin().getFont("buttonFont");
 		focusedStyle.up=getSkin().getDrawable("focused-button");
 		focusedStyle.down=getSkin().getDrawable("pushed-button");
 		loadGameButton = new TextButton( "Load Game", normalStyle);
