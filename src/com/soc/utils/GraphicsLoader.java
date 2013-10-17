@@ -552,12 +552,13 @@ public class GraphicsLoader {
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		character.renderers = new Renderer[State.STATENUM];
-		attack.ox = -0;
+		attack.ox = -20;
 		attack.oy = 0;
-		idle.ox -= -0;
-		idle.oy -= 0;
-		movement.ox -=0;
-		movement.oy -= 0;
+		idle.ox = 0;
+		idle.oy = 0;
+		movement.ox =-20;
+		movement.oy = 0;
+		
 		
 		TextureRegion[][] tmp = TextureRegion.split(load("skull-knight-walk.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
