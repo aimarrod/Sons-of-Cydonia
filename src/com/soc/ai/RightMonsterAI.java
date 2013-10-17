@@ -2,6 +2,7 @@ package com.soc.ai;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
+import com.soc.ai.AI;
 import com.soc.core.Constants;
 import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
