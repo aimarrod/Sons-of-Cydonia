@@ -235,6 +235,7 @@ public class RightMonsterAI extends AI{
 				    timerCast=0f;
 				    state.state=State.IDLE;
 				    SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
+				    
 				    return;
 				}
 				}else{
@@ -271,7 +272,16 @@ public class RightMonsterAI extends AI{
 				vel.vx=0;
 				vel.vy=0;
 				stomp=true;
+				SoC.game.buffmapper.get(e).removebuff(Inmune.class, e);
+				inmune=false;
+				return;
 			}
+			
+			if(!inmune){
+				Buff.addbuff(e, new Inmune());
+				inmune=true;
+			}
+
 		}
 
 	}

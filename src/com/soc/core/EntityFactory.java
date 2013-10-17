@@ -626,7 +626,7 @@ public class EntityFactory {
 		e.addComponent(new Position(px, py, pz));
 		e.addComponent(new Velocity(0,0,100));
 		e.addComponent(new Bounds(64, 64));
-		e.addComponent(new Feet(32, 64));
+		e.addComponent(new Feet(32, 32));
 		e.addComponent(new State(0));
 		e.addComponent(new Stats(
 				100, 
@@ -808,9 +808,9 @@ public class EntityFactory {
 	
 	public static Entity createChargeBoss(Entity source, String group, Position pos, int damage, Vector2 direction){
 		Entity e=SoC.game.world.createEntity();
-				
+		Bounds bounds=SoC.game.boundsmapper.get(source);	
 		e.addComponent( new Position(pos.x-Spells.CHARGE_BOX*0.5f, pos.y-Spells.CHARGE_BOX*0.5f, pos.z, pos.direction.cpy()) );
-		e.addComponent( new Bounds(Spells.CHARGE_BOX, Spells.CHARGE_BOX) );
+		e.addComponent( new Bounds(bounds.width, bounds.height) );
 		e.addComponent( new Velocity(300*pos.direction.x, 300*pos.direction.y, Constants.Spells.CHARGE_SPEED) );
 	   	e.addComponent( new Attack(new ChargeBossProcessor(source, Constants.Spells.CHARGE_DURATION,direction), damage) );
 	   	
@@ -1034,6 +1034,7 @@ public class EntityFactory {
 		e.addComponent( new Wall() );
 		
 		SoC.game.groupmanager.add(e, Constants.Groups.WALLS);
+		SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 		SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL + z);
 		SoC.game.wallmanager.block(source, e);
 		
@@ -1050,6 +1051,8 @@ public class EntityFactory {
 		
 		SoC.game.groupmanager.add(e, Constants.Groups.ITEMS);
 		SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL + z);
+		SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
+
 		
 		return e;
 	}
