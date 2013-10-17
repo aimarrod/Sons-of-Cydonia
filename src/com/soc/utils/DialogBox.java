@@ -30,12 +30,13 @@ public class DialogBox {
 	public DialogBox(){
 		this.text = new LinkedList<String>();
 		this.positions = new LinkedList<Position>();
-		this.timer = 0;
+		this.timer = 0.5f;
 		this.chatBaloon = GraphicsLoader.load("chat-baloon.png");
 		this.skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
 		this.font =skin.getFont("gameFont");
 		this.fontColor = skin.getColor("yellow");
-
+		this.duration = 2f;
+		
 	}
 	
 	public void draw (SpriteBatch batch) {
@@ -102,8 +103,6 @@ public class DialogBox {
 	}
 	
 	public void pop(String text, Position pos){
-		this.duration = 2f;
-		this.timer = 0.5f;
 		this.positions.add(pos);
 		this.text.add(text);
 	}

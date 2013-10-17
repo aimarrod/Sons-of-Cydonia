@@ -22,6 +22,7 @@ public class Player extends Component {
 	public Weapon weapon;
 	public Armor armor;
 	public Item[] inventary;
+	public boolean blocking;
 
 	public Player(){
 		move_up = Input.Keys.W;
@@ -34,11 +35,11 @@ public class Player extends Component {
 		gameMenu=Input.Keys.ESCAPE;
 		spellkeys = new int[]{Input.Keys.NUM_1, Input.Keys.NUM_2, Input.Keys.NUM_3, Input.Keys.NUM_4};
 		inventary=new Item[Constants.Items.INVENTORY_SIZE];
-		for(int i = 0; i < Constants.Items.INVENTORY_SIZE; i++){
-			inventary[i] = SoC.game.items[i+1];
-		}
+		inventary[0] = SoC.game.items[Constants.Items.HEALTH_POTION];
+		inventary[1] = SoC.game.items[Constants.Items.MANA_POTION];
 		weapon=null;
 		armor=null;
+		blocking = false;
 	}
 	public Player(SavedPlayer player){
 		move_up = player.move_up;
@@ -56,6 +57,7 @@ public class Player extends Component {
 		for(int i=0;i<Constants.Items.INVENTORY_SIZE;i++){
 			inventary[i]=SoC.game.items[player.inventary[i]];
 		}
+		blocking = false;
 	}
 	public boolean addToInventary(Item item){
 		boolean inserted=false;

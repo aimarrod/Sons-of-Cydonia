@@ -39,7 +39,6 @@ import com.soc.utils.FloatingText;
 		 private float timer;
 		 private int lastKey;
 		 private boolean running;
-		 private boolean blocked;
 		 		 
 		 public PlayerInputSystem() {
 			 super();
@@ -58,7 +57,7 @@ import com.soc.utils.FloatingText;
 			 Position pos=pm.get(SoC.game.player);
 			 Player player = plm.get(SoC.game.player);
 			  
-			 if(!blocked && (state.state < State.BLOCKED || state.state == State.SPINNING)){
+			 if((state.state < State.BLOCKED || state.state == State.SPINNING)){
 				 
 				boolean moving = false;
 				 
@@ -138,7 +137,7 @@ import com.soc.utils.FloatingText;
 				world.getSystem(HudSystem.class).toogleGameMenu();
 				return true;
 			}
-			if(blocked || state.state >= State.BLOCKED) return false;
+			if(controls.blocking || state.state >= State.BLOCKED) return false;
 
 			if(keycode == controls.attack){
 				int spellnum = stm.get(player).attack;
@@ -174,7 +173,7 @@ import com.soc.utils.FloatingText;
 				}
 			}
 			if(keycode == Input.Keys.B){
-				if(stats.mana < 10){
+				if(stats.mana <= 0){
 					FloatingText text = new FloatingText("No mana!", 1f, pos.x, pos.y, 50);
 					text.r = 0.5f;
 					text.b = 1;
@@ -182,12 +181,11 @@ import com.soc.utils.FloatingText;
 					SoC.game.renderSystem.texts.add(text);
 					return true;
 				}
-				stats.mana -= 10;
 				Buff.addbuff(SoC.game.player, new Shield());
 				vel.vx = 0;
 				vel.vy = 0;
 				state.state = State.IDLE;
-				blocked = true;
+				controls.blocking = true;
 				return true;
 			}
 			if(keycode==controls.move_down || keycode==controls.move_right || keycode==controls.move_left || keycode==controls.move_up){
@@ -203,10 +201,11 @@ import com.soc.utils.FloatingText;
 
 		@Override
 		public boolean keyUp(int keycode) {
+			Player controls = SoC.game.playermapper.get(SoC.game.player);
 			if(keycode == Input.Keys.B){
-				if(blocked){
+				if(controls.blocking){
 					bm.get(SoC.game.player).removebuff(Shield.class,SoC.game.player);;
-					blocked = false;
+					controls.blocking = false;
 				}
 				return true;
 			}

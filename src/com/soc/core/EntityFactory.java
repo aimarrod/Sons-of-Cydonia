@@ -162,7 +162,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,0));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(0));
-	    e.addComponent(new Stats(60, 0, 0, 30, 0, 0, 1, 2, 0, 100, 0, Constants.Spells.ARROW, new int[]{},Constants.Groups.BALLISTAS));
+	    e.addComponent(new Stats(60, 0, 0, 30, 0, 0, 0, 0, 0, 100, 0, Constants.Spells.ARROW, new int[]{},Constants.Groups.BALLISTAS));
 	    e.addComponent(new Enemy(50, new BallistaAI()));
 	    e.addComponent(new Feet(25, 25));
 		Buff.addbuff(e, new Unmovable());

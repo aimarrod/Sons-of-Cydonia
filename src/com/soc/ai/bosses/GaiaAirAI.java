@@ -26,8 +26,6 @@ public class GaiaAirAI extends AI{
 	
 	@Override
 	public void process(Entity e) {
-		SoC.game.renderSystem.dialog.pop("GAIAAIR", SoC.game.positionmapper.get(e));
-
 		if(init){
 		timer -= SoC.game.world.delta;
 		if(timer > 0) return;
@@ -50,6 +48,9 @@ public class GaiaAirAI extends AI{
 		} else {
 			Position pos = SoC.game.positionmapper.get(SoC.game.player);
 			if((int)(pos.y*World.TILE_FACTOR) > 7 && (int)(pos.x * World.TILE_FACTOR) <= 11 && (int)(pos.x * World.TILE_FACTOR) >= 5){
+				SoC.game.renderSystem.dialog.pop("How dare you desecrate this sacred grounds fool!", SoC.game.positionmapper.get(e));
+				SoC.game.renderSystem.dialog.pop("Feel the fury of the storm!", SoC.game.positionmapper.get(e));
+
 				EntityFactory.createWall(e, 6, 5, 0).addToWorld();
 				EntityFactory.createWall(e, 7, 5, 0).addToWorld();
 				EntityFactory.createWall(e, 8, 5, 0).addToWorld();
