@@ -54,7 +54,7 @@ public class ChargeBossProcessor implements AttackProcessor{
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
 		
-		return (hit==null && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		return (attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	}
 
 	@Override
@@ -65,7 +65,10 @@ public class ChargeBossProcessor implements AttackProcessor{
 
 	@Override
 	public void handle(Entity attack, Entity enemy) {
-		// TODO Auto-generated method stub
+		Velocity aP=SoC.game.velocitymapper.get(attack);
+		Velocity eP=SoC.game.velocitymapper.get(enemy);
+		eP.vx=aP.vx;
+		eP.vy=aP.vy;
 		
 	}
 

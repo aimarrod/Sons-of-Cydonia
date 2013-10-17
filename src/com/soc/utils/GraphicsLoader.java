@@ -807,6 +807,8 @@ public class GraphicsLoader {
 		move.ox-=20;
 		idle.ox-=20;
 		attack.ox=-20;
+		charge.ox=-45;
+		charge.oy=-40;
 		TextureRegion[][] tmp = TextureRegion.split(load("left-monster-walk.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
 	   		move.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);

@@ -147,17 +147,7 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		if (Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)) {
+		if (keycode==Keys.W || keycode==Keys.UP) {
 			buttons[focusedButton - 1].setStyle(normalStyle);
 			if (focusedButton == 1)
 				focusedButton = 4;
@@ -165,8 +155,8 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 				focusedButton--;
 			return true;
 		} else {
-			if (Gdx.input.isKeyPressed(Keys.S)
-					|| Gdx.input.isKeyPressed(Keys.DOWN)) {
+			if (keycode==Keys.S
+					|| keycode==Keys.DOWN) {
 				buttons[focusedButton - 1].setStyle(normalStyle);
 				if (focusedButton == 4)
 					focusedButton = 1;
@@ -174,7 +164,7 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 					focusedButton++;
 				return true;
 			}else{
-				if(Gdx.input.isKeyPressed(Keys.ENTER)){
+				if(keycode==Keys.ENTER){
 					if(focusedButton==1){
 						if(files[0]!=null){
 							SoC.game.clearProcessors();
@@ -204,6 +194,17 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 				}
 			}
 		}
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+
 		return false;
 	}
 

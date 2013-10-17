@@ -85,4 +85,15 @@ public class HudSystem extends VoidEntitySystem{
 			SoC.game.inputMultiplexer.removeProcessor(gameMenu);
 		}
 	}
+	
+	public void hideCharacterGameMenu(){
+		if(gameMenu.hasParent()){
+			gameMenu.remove();
+			SoC.game.inputMultiplexer.removeProcessor(gameMenu);
+		}
+		if(inventory.hasParent()){
+			inventory.remove();
+			SoC.game.inputMultiplexer.removeProcessor(inventory);
+		}
+	}
 }

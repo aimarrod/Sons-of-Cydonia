@@ -27,6 +27,7 @@ public class ExpiringSystem extends EntityProcessingSystem{
             if(pm.has(e)){
             	e.deleteFromWorld();
             	SoC.game.resetWorld();
+            	SoC.game.hudSystem.hideCharacterGameMenu();
             	SoC.game.openGameOverScren();
             } else {
             	 if(enm.has(e)) enm.get(e).processor.death(e);
