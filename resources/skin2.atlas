@@ -5,22 +5,37 @@ filter: Nearest,Nearest
 repeat: none
 focused-button
   rotate: false
-  xy: 1, 57
+  xy: 1, 1
   size: 132, 28
   orig: 132, 28
   offset: 0, 0
   index: -1
 normal-button
   rotate: false
-  xy: 1, 29
+  xy: 135, 3
   size: 133, 26
   orig: 133, 26
   offset: 0, 0
   index: -1
 pushed-button
   rotate: false
-  xy: 1, 1
+  xy: 270, 3
   size: 130, 26
   orig: 130, 26
+  offset: 0, 0
+  index: -1
+default-slider-knob
+  rotate: false
+  xy: 402, 11
+  size: 9, 18
+  orig: 9, 18
+  offset: 0, 0
+  index: -1
+default-slider
+  rotate: false
+  xy: 413, 21
+  size: 8, 8
+  split: 2, 2, 2, 2
+  orig: 8, 8
   offset: 0, 0
   index: -1
