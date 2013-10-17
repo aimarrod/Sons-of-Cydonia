@@ -6,12 +6,13 @@ import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Position;
+import com.soc.game.components.Stats;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.graphics.DirectionalAnimatedRenderer;
 import com.soc.utils.GraphicsLoader;
 
 public class Shield implements Benefit{
-		public float timer;
+		public float timer, manaBurnTimer;
 		public DirectionalAnimatedRenderer renderer; 
 		
 		public Shield(){
@@ -21,6 +22,18 @@ public class Shield implements Benefit{
 		@Override
 		public void process(Entity e) {
 			timer -= SoC.game.world.delta;
+			
+			manaBurnTimer -= SoC.game.world.delta;
+			if(manaBurnTimer <= 0){
+				manaBurnTimer = 0.3f;
+				Stats stats = SoC.game.statsmapper.get(e);
+				stats.mana -= 1;
+				if(stats.mana == 0){
+					SoC.game.buffmapper.get(e).removebuff(Shield.class,SoC.game.player);;
+					SoC.game.playermapper.get(e).blocking = false;
+				}
+			}
+			
 			if(timer <= 0){
 				ImmutableBag<Entity> proj = SoC.game.groupmanager.getEntities(Constants.Groups.DESTROYABLE_PROJECTILES);
 				Position pos = SoC.game.positionmapper.get(e);

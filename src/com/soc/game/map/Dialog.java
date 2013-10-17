@@ -10,8 +10,11 @@ public class Dialog {
 	}
 	
 	static Dialog[] dialogs = new Dialog[]{
-		new Dialog("CONTROLS 1:\n\nSPACE:  normal attack\nNUMBER KEYS:  skills\nB: Shield"),
-		new Dialog("CONTROLS 2:\n\n"
+		new Dialog("\nCONTROLS 1:\n\n"
+				+ "SPACE:  normal attack\n"
+				+ "NUM KEYS:  skills\n"
+				+ "B: Shield"),
+		new Dialog("\nCONTROLS 2:\n\n"
 				+ "ESC:  menu\n"
 				+ "C:  character stats\n"
 				+ "I:  inventory\n\n"
@@ -19,7 +22,9 @@ public class Dialog {
 				+ "ENTER: use object\n"
 				+ "TAB: Switch object\n"
 				+ "Or use the mouse"),
-		new Dialog("Tip:\n\n Double tap a movement key to run"),
-		new Dialog("Tip:\n\n Save your game ofter, you never know what may lie ahead!")
+		new Dialog("\nTip:\n\n"
+				+ "Double tap a movement key to run"),
+		new Dialog("\nTip:\n\n"
+				+ "Save your game ofter, you never know what may lie ahead!")
 	};
 }
