@@ -26,6 +26,7 @@ public class SlashProcessor implements AttackProcessor {
 	public Bag<Entity> hit;
 	public Rectangle hitbox;
 	public float timer;
+	public boolean sounded;
 	@Mapper
 	ComponentMapper<Damage> dm = SoC.game.world.getMapper(Damage.class);
 	public SlashProcessor() {
@@ -35,8 +36,10 @@ public class SlashProcessor implements AttackProcessor {
 
 	@Override 
 	public void process(Entity attack) {
-
-		System.out.println("drawnn");
+		if(!sounded){
+			EffectsPlayer.play("swing.ogg");
+			sounded=true;
+		}
 		timer -= SoC.game.world.delta;
 		if(timer <= 0) attack.deleteFromWorld();
 	}

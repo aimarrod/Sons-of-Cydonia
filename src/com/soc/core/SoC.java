@@ -16,6 +16,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.soc.game.attacks.spells.ArrowSpell;
 import com.soc.game.attacks.spells.BiteSpell;
@@ -131,6 +132,8 @@ public class SoC extends Game {
 	
 	public Map map;
 	
+	public Skin skin;
+	
 	public Stack<Screen> screens;
 	public Stack<InputProcessor> processors;
 		
@@ -140,6 +143,7 @@ public class SoC extends Game {
 	@Override
 	public void create() {		
 		SoC.game = this;
+		skin = new Skin(Gdx.files.internal( "resources/skin2.json" ));
 		GraphicsLoader.initialize();
 		MusicPlayer.initialize();
 		EffectsPlayer.initialize();
@@ -241,7 +245,7 @@ public class SoC extends Game {
 		//Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 		screens=new Stack<Screen>();
 		processors = new Stack<InputProcessor>();
-		
+				
 		//Save, New, Load game handler.
 		setScreen(new MenuScreen(this));
 	}

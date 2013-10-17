@@ -19,7 +19,12 @@ public class EffectsPlayer {
 		instance = new EffectsPlayer();
 	}
 	
+	public static void load(String name){
+		instance.sounds.put(name, Gdx.audio.newSound(Gdx.files.internal("resources/effects/"+name)));
+	}
+	
 	public static void play(String name){
+		if(name == null || name == "") return;
 		Sound sound = instance.sounds.get(name);
 		if(sound == null){
 			sound = Gdx.audio.newSound(Gdx.files.internal("resources/effects/"+name));

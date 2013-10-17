@@ -84,6 +84,7 @@ public class RenderSystem extends VoidEntitySystem{
 	
 	@Override
 	protected void begin() {
+		font.setScale(1.2f);
 	}
 
 	@Override

@@ -16,6 +16,7 @@ import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.graphics.AnimatedRenderer;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GraphicsLoader;
 
 public class DaggerThrowProcessor implements AttackProcessor{
@@ -26,6 +27,7 @@ public class DaggerThrowProcessor implements AttackProcessor{
 	public float range;
 	public boolean reached;
 	public boolean backing;
+	public boolean sounded;
 	
 	public DaggerThrowProcessor(Position source) {
 		this.hit = new Bag<Entity>();
@@ -39,6 +41,10 @@ public class DaggerThrowProcessor implements AttackProcessor{
 
 	@Override 
 	public void process(Entity attack) {
+		if(!sounded){
+			EffectsPlayer.play("throw.ogg");
+			sounded = true;
+		}
 		
 		Position p = SoC.game.positionmapper.get(attack);
 		Velocity v = SoC.game.velocitymapper.get(attack);

@@ -88,6 +88,8 @@ public class EntityFactory {
 
 	    if(clazz.equals(Constants.Characters.WARRIOR)){
 	    	GraphicsLoader.loadWarrior(animations);
+	    	animations.damageSound = "warrior-damage.ogg";
+	    	animations.deathSound = "warrior-death.ogg";
 	    }
 	    
 		return e;
@@ -109,6 +111,8 @@ public class EntityFactory {
 	    if(type == Constants.Classes.HUNTER){
 	    } else if(type == Constants.Classes.WARRIOR){
 	    	GraphicsLoader.loadWarrior(animations);
+	    	animations.damageSound = "warrior-damage.ogg";
+	    	animations.deathSound = "warrior-death.ogg";
 	    } else if(type == Constants.Classes.MAGE){
 	    	
 	    } else {
@@ -133,9 +137,11 @@ public class EntityFactory {
 	    e.addComponent(new Enemy(10, new SkeletonAI()));
 	    
 	    Character animations = new Character();
+	    animations.deathSound = "skeleton-death.ogg";
+	    animations.damageSound = "skeleton-damage.ogg";
 	    GraphicsLoader.loadSkeleton(animations);
 	    e.addComponent(animations);
-	    
+	   
 	    return e;
 	}
 	
@@ -150,6 +156,8 @@ public class EntityFactory {
 	    e.addComponent(new Enemy(10, new MeleeSkeletonAI()));
 	    
 	    Character animations = new Character();
+	    animations.deathSound = "skeleton-death.ogg";
+	    animations.damageSound = "skeleton-damage.ogg";
 	    GraphicsLoader.loadMeleeSkeleton(animations);
 	    e.addComponent(animations);
 	    
@@ -170,6 +178,7 @@ public class EntityFactory {
 	    
 	    Character animations = new Character();
 	    GraphicsLoader.loadBallista(animations);
+	    animations.deathSound = "enemy-explosion.png";
 	    e.addComponent(animations);
 	    
 	    return e;
@@ -234,6 +243,8 @@ public class EntityFactory {
 				Constants.Groups.SLIMES));
 		Character animations = new Character();
 		GraphicsLoader.loadSlime(animations);
+		animations.deathSound = "slime-damage.ogg";
+		animations.damageSound = "slime-damage.ogg";
 		e.addComponent(animations);
 		
 		return e;

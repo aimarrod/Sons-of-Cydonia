@@ -32,7 +32,7 @@ public class DialogBox {
 		this.positions = new LinkedList<Position>();
 		this.timer = 0.5f;
 		this.chatBaloon = GraphicsLoader.load("chat-baloon.png");
-		this.skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
+		this.skin = SoC.game.skin;
 		this.font =skin.getFont("gameFont");
 		this.fontColor = skin.getColor("yellow");
 		this.duration = 2f;

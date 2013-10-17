@@ -12,11 +12,13 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.graphics.DirectionalStaticRenderer;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GraphicsLoader;
 
 public class BoneThrowProcessor implements AttackProcessor {
 	public boolean hit;
 	public AnimatedRenderer renderer;
+	public boolean sounded;
 	
 	public BoneThrowProcessor() {
 		this.hit = false;
@@ -27,7 +29,10 @@ public class BoneThrowProcessor implements AttackProcessor {
 
 	@Override
 	public void process(Entity attack) {
-		
+		if(!sounded){
+			EffectsPlayer.play("throw.ogg");
+			sounded = true;
+		}
 	}
 
 	@Override

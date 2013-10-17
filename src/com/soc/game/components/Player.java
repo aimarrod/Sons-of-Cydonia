@@ -15,6 +15,7 @@ public class Player extends Component {
 	public int move_left;
 	public int move_right;
 	public int attack;
+	public int shield;
 	public int inventory;
 	public int characterMenu;
 	public int gameMenu;
@@ -32,6 +33,7 @@ public class Player extends Component {
 		attack = Input.Keys.SPACE;
 		inventory=Input.Keys.I;
 		characterMenu = Input.Keys.C;
+		shield = Input.Keys.SHIFT_LEFT;
 		gameMenu=Input.Keys.ESCAPE;
 		spellkeys = new int[]{Input.Keys.NUM_1, Input.Keys.NUM_2, Input.Keys.NUM_3, Input.Keys.NUM_4};
 		inventary=new Item[Constants.Items.INVENTORY_SIZE];

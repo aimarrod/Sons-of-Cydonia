@@ -172,7 +172,7 @@ import com.soc.utils.FloatingText;
 					return true;
 				}
 			}
-			if(keycode == Input.Keys.B){
+			if(keycode == controls.shield){
 				if(stats.mana <= 0){
 					FloatingText text = new FloatingText("No mana!", 1f, pos.x, pos.y, 50);
 					text.r = 0.5f;
@@ -202,7 +202,7 @@ import com.soc.utils.FloatingText;
 		@Override
 		public boolean keyUp(int keycode) {
 			Player controls = SoC.game.playermapper.get(SoC.game.player);
-			if(keycode == Input.Keys.B){
+			if(keycode == controls.shield){
 				if(controls.blocking){
 					bm.get(SoC.game.player).removebuff(Shield.class,SoC.game.player);;
 					controls.blocking = false;

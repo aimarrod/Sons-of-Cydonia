@@ -17,6 +17,7 @@ import com.soc.game.components.Character;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.FloatingText;
 
 public class DamageProcessingSystem extends EntityProcessingSystem {
@@ -61,6 +62,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		
 		
 		if(stats.health<=0){
+			if(cm.has(e)) EffectsPlayer.play(cm.get(e).deathSound);
 			state.state=State.DYING;
 			if(cm.has(e)) e.addComponent(new Expires((cm.get(e).deathTime)));
 			else e.addComponent(new Expires(1));
@@ -76,6 +78,8 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 				sm.get(player).addExperience(enemy.experience);
 			} 
 			
+		} else {
+			if(cm.has(e)) EffectsPlayer.play(cm.get(e).damageSound);
 		}
 	}
 }

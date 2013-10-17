@@ -31,20 +31,26 @@ public class MapLoader {
 		TiledMap map = new TmxMapLoader().load(BASE_DIR + name);
 		SoC.game.map = new Map();
 		SoC.game.map.name = name;
-		MusicPlayer.reset();
-		loadResources(map);
-		MusicPlayer.play(map.getProperties().get("ambiance", String.class));
+
+		MapLoader.loadResources(map);
 		MapLoader.loadTiles(map);
 		MapLoader.loadSpawners(map);
+		
 		SoC.game.world.getSystem(RenderSystem.class).changeMap(map);
 		return map;
 	}
 	
 	private static void loadResources(TiledMap map){
+		MusicPlayer.reset();
+		EffectsPlayer.clear();
+		
 		String[] music = map.getProperties().get("music", String.class).split(",");
 		for(int i = 0; i < music.length; i++){
 			MusicPlayer.load(music[i]);
 		}
+		
+		MusicPlayer.play(map.getProperties().get("ambiance", String.class));
+		
 	}
 	
 	public static void loadTiles(TiledMap map) {

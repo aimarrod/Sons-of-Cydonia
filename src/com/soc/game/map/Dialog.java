@@ -13,7 +13,7 @@ public class Dialog {
 		new Dialog("\nCONTROLS 1:\n\n"
 				+ "SPACE:  normal attack\n"
 				+ "NUM KEYS:  skills\n"
-				+ "B: Shield"),
+				+ "SHIFT LEFT: Shield"),
 		new Dialog("\nCONTROLS 2:\n\n"
 				+ "ESC:  menu\n"
 				+ "C:  character stats\n"
@@ -21,7 +21,7 @@ public class Dialog {
 				+ "INVENTORY\n\n"
 				+ "ENTER: use object\n"
 				+ "TAB: Switch object\n"
-				+ "Or use the mouse"),
+				+ "E: Use object"),
 		new Dialog("\nTip:\n\n"
 				+ "Double tap a movement key to run"),
 		new Dialog("\nTip:\n\n"
