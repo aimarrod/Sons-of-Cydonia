@@ -6,6 +6,7 @@ import com.artemis.Entity;
 import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
 import com.artemis.utils.ImmutableBag;
+import com.soc.ai.modules.AIModule;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.attacks.spells.Spell;
@@ -26,7 +27,7 @@ public abstract class AI {
 	public abstract void death(Entity e);
 	protected void processModules(Entity e){
 		for(int i = 0; i < modules.length; i++){
-			modules[i].process(e);
+			if(modules[i].process(e)) break;
 		}
 	}
 }

@@ -3,6 +3,9 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	gameFont: {
 		file: "fonts/font.fnt"
 	},
+	menuFont: {
+		file: "fonts/menu-font.fnt"
+	},
 
 },
 com.badlogic.gdx.graphics.Color: {
@@ -12,6 +15,7 @@ com.badlogic.gdx.graphics.Color: {
 	black: { a: 1, b: 0, g: 0, r: 0 },
 	blue: { a: 1, b: 1, g: 0, r: 0 },
 	orange: { a: 1, b: 0, g: 0.8, r: 1 },
+	yellow: { a: 1, b: 0, g: 0.9, r: 1 },
 	orange_light: { a: 1, b: 0.1, g: 0.85, r: 1 },
 	orange_half_alpha: { a:0.5, b:0, g: 0.7, r: 1 },
 },

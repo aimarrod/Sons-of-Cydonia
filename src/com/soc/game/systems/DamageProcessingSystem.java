@@ -73,7 +73,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 			if(em.has(e)){
 				Enemy enemy=em.get(e);
 				Entity player=SoC.game.player;
-				sm.get(player).addExperience(enemy.expierence);
+				sm.get(player).addExperience(enemy.experience);
 			} 
 			
 		}

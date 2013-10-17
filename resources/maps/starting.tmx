@@ -51,7 +51,7 @@
    eJzt3WFqE0EYgOG2Z+jP6knUk6i38ijerD+rmICBZdiQUDDfW/s8sJCGQMOUmXcz226fHu7uPhyOj4fj6Y08PvqXr5v06fD9Px+OLw9v5/G17/u1r5v09fD9vx2O7w9v5/G17/u1r5v0cn939+tw/L6ffR/vxY8L41xZN9+Ln2d+Hs9/n6+sm/+r5yvXncfYuvm/erxyXLev05AWDWnRkBYN6dCOFu1o0Y4W7WjSkRYdadGRFh1p0I0W3WjRjRbd6NGQFg1p0ZAWDenQjhbtaNGOFu1o0pEWHWnRkRYdadCNFt1o0Y0W3WjSkRYdadGRFh1p0I0W3WjRjRbdaNKRFh1p0ZEWHWnQjRbdaNGNFt1o0pEWHWnRkRYdadCNFt1o0Y0W3WjRjxb9aNGPFv3o0ZAWDWnRkBYN6dGQFg1p0ZAWDWnQjRbdaNGNFt3o0ZAWDWnRkBYN6dCOFu1o0Y4W7ejRkBYNmXeaE0caMu80J440ZN5pTpxoyKzTnDjRkFnbfhxpyKxtP440ZNa2H9oxb9sP7Zi1zgftmLXOB+2Ytc4H/Zi1zgf9mKUfLfrRsp0P2jFvOx+0Y952TmjHvO2c2M4V69aMvTlh3Zqzdz5l3Zqxnk+dvnbOO2Ndl6xTs9Z1yTo1a12XrFPzzjXEue4MDWnRkBYNadn2QjvmbXuhHfO2vdCOedteaMesvV5oyJy9XmjInL1eaMicvV5oyCyfP1p8/mjx+aPF548O1z5aXPtoce2jxbWPHg1p0ZAWDWnRkA7taNGOFu1o0Y4eDWnRkBYN6XjZ+ds0DZmzrk3aMWtdm7Rj1ro2ace87RqlHfM0pEVDOvbOdzVkzt5c0JA57i3a4t6iLev4a8esdfy1Y9Z2/F3/aHD9o8X1jw7XP1rsXbXYu2pZz6+0Y965+1Mzwx5Wx975lYbM2Rt7DZmzN/YaMmc9v9KOee5f0uL+JR3r+ZV2zLJ/1WL/qsX+VY/9qxb7Vx32r1rsX7XYv2o5N/YaMuNcKzRkxrlWaMiMvd8XXZ/ntvbWJv24rUv/g14/buvSHol+3Nal8daP2zLeAAAAANf5A2pCnYs=
   </data>
  </layer>
- <objectgroup name="level0-special" width="100" height="200">
+ <objectgroup name="level0-special" width="100" height="200" visible="0">
   <object x="1184" y="992" width="160" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -90,13 +90,13 @@
     <property name="type" value="dialog"/>
    </properties>
   </object>
-  <object x="1952" y="5120" width="832" height="32">
+  <object x="1440" y="4544" width="1344" height="32">
    <properties>
     <property name="id" value="1"/>
     <property name="type" value="dialog"/>
    </properties>
   </object>
-  <object x="1952" y="5152" width="32" height="576">
+  <object x="1440" y="4576" width="32" height="1120">
    <properties>
     <property name="id" value="1"/>
     <property name="type" value="dialog"/>
@@ -109,7 +109,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level1-special" width="100" height="200">
+ <objectgroup name="level1-special" width="100" height="200" visible="0">
   <object x="1184" y="1024" width="160" height="32">
    <properties>
     <property name="level" value="1"/>
@@ -135,8 +135,14 @@
     <property name="z" value="0"/>
    </properties>
   </object>
+  <object x="1120" y="768" width="288" height="32">
+   <properties>
+    <property name="id" value="3"/>
+    <property name="type" value="dialog"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="level0-obstacle" width="100" height="200">
+ <objectgroup name="level0-obstacle" width="100" height="200" visible="0">
   <object x="1152" y="0" width="64" height="1056"/>
   <object x="1312" y="-32" width="64" height="1088"/>
   <object x="1056" y="0" width="128" height="896"/>
@@ -223,7 +229,7 @@
   <object x="1216" y="0" width="96" height="96"/>
   <object x="2112" y="0" width="224" height="96"/>
  </objectgroup>
- <objectgroup name="level1-obstacle" width="100" height="200">
+ <objectgroup name="level1-obstacle" width="100" height="200" visible="0">
   <object x="2336" y="0" width="704" height="64"/>
   <object x="3136" y="0" width="64" height="64"/>
   <object x="3168" y="64" width="32" height="2272"/>
@@ -320,7 +326,7 @@
   <object x="1184" y="800" width="32" height="256"/>
   <object x="1312" y="800" width="32" height="256"/>
  </objectgroup>
- <objectgroup name="level0-unwalkable" width="100" height="200">
+ <objectgroup name="level0-unwalkable" width="100" height="200" visible="0">
   <object x="1152" y="5152" width="128" height="128"/>
   <object x="1120" y="5184" width="32" height="128"/>
   <object x="1152" y="5280" width="96" height="32"/>
@@ -352,7 +358,7 @@
   <object x="1760" y="4096" width="224" height="32"/>
   <object x="1792" y="4064" width="160" height="32"/>
  </objectgroup>
- <objectgroup name="level1-unwalkable" width="100" height="200">
+ <objectgroup name="level1-unwalkable" width="100" height="200" visible="0">
   <object x="1376" y="3456" width="832" height="96"/>
   <object x="1536" y="3296" width="416" height="160"/>
   <object x="1952" y="3328" width="32" height="128"/>
@@ -385,11 +391,200 @@
   <object x="2112" y="864" width="192" height="192"/>
  </objectgroup>
  <objectgroup name="level0-spawners" width="100" height="200">
-  <object x="2288" y="5328" width="32" height="32">
+  <object x="1856" y="4896" width="64" height="64">
    <properties>
-    <property name="interval" value="2"/>
+    <property name="interval" value="30"/>
     <property name="max" value="1"/>
-    <property name="range" value="10000"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1856" y="4896" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2560" y="4864" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2208" y="4384" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="992" y="4448" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="800" y="4992" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="608" y="5664" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1312" y="3712" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2112" y="3552" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1760" y="2976" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1632" y="2976" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2048" y="2144" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1408" y="2080" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1120" y="1728" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1472" y="1664" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1248" y="2560" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2240" y="1504" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2400" y="1216" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2176" y="1088" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2368" y="992" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1664" y="1088" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2752" y="736" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
     <property name="respawn" value="true"/>
     <property name="type" value="skeleton"/>
    </properties>
@@ -403,6 +598,114 @@
     <property name="range" value="2000"/>
     <property name="respawn" value="false"/>
     <property name="type" value="ballista"/>
+   </properties>
+  </object>
+  <object x="2880" y="3776" width="64" height="64">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="192" y="5056" width="64" height="64">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="2976" y="1152" width="64" height="64">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="2592" y="288" width="64" height="64">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="slime"/>
+   </properties>
+  </object>
+  <object x="1920" y="640" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="1280" y="320" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="320" y="256" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="288" y="896" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="288" y="1472" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="288" y="2464" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="544" y="3360" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
+   </properties>
+  </object>
+  <object x="2816" y="2816" width="64" height="64">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="skeleton"/>
    </properties>
   </object>
  </objectgroup>

@@ -37,10 +37,10 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 		focusedStyle.font=getSkin().getFont("gameFont");
 		focusedStyle.up=getSkin().getDrawable("focused-button");
 		focusedStyle.down=getSkin().getDrawable("pushed-button");
-		startGameButton = new TextButton( "Start game", normalStyle);
-		loadGameButton = new TextButton( "Load Game", normalStyle);
-		optionsButton = new TextButton( "Options", normalStyle);
-		exitButton = new TextButton( "Exit", normalStyle );
+		startGameButton = new TextButton( "START GAME", normalStyle);
+		loadGameButton = new TextButton( "LOAD GAME", normalStyle);
+		optionsButton = new TextButton( "OPTIONS", normalStyle);
+		exitButton = new TextButton( "EXIT", normalStyle );
 		buttons=new TextButton[4];
 		buttons[0]=startGameButton;
 		buttons[1]=loadGameButton;

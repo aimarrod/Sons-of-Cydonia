@@ -5,38 +5,44 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.soc.core.SoC;
+import com.soc.game.components.Position;
 import com.soc.hud.HudSystem;
 
 public class DialogBox {
 	public Queue<String> text;
-	public Queue<Vector2> positions;
+	public Queue<Position> positions;
 	float timer;
 	private Skin skin;
+	private Texture chatBaloon;
 	private BitmapFont font;
 	private float duration;
 	private boolean dissapearing;
-	private float lowerBound, upperBound, leftBound, rightBound;
+	private Color fontColor;
+	private float lowerBound, upperBound, leftBound, rightBound, posX, posY, dialength, dialheight;
 	
 	public DialogBox(){
 		this.text = new LinkedList<String>();
-		this.positions = new LinkedList<Vector2>();
+		this.positions = new LinkedList<Position>();
 		this.timer = 0;
-		skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
+		this.chatBaloon = GraphicsLoader.load("chat-baloon.png");
+		this.skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
 		this.font =skin.getFont("gameFont");
+		this.fontColor = skin.getColor("yellow");
 
 	}
 	
 	public void draw (SpriteBatch batch) {
 		if(text.isEmpty()) return;
 		batch.setColor(1, 1, 1, timer);
-		font.setColor(1, 1, 1, timer);
-		font.setScale(0.33f);
+		font.setColor(fontColor.r, fontColor.g, fontColor.b, timer);
+		font.setScale(0.5f);
 		timer += SoC.game.world.delta*((dissapearing)?-1:1);
 		if(timer > 1){
 			timer = 1;
@@ -52,25 +58,33 @@ public class DialogBox {
 		rightBound = SoC.game.camera.position.x + SoC.game.camera.viewportWidth * 0.5f;
 		
 		
-		float posX = positions.peek().x;
-		float posY = positions.peek().y;
-		float width = 300;
+		posX = positions.peek().x;
+		posY = positions.peek().y;
+		
+		String current = text.peek();
+		dialength = (current.length()*font.getSpaceWidth());
+		int lines = (int) Math.ceil(dialength/300);
+		if(dialength > 300){
+			dialength = 300;
+		}
+		dialheight = lines* (font.getLineHeight() + 15);
+		dialheight += dialheight*0.5;
 		
 		if(posX < leftBound){
 			posX = leftBound + 50;
-			width = 100;
-		} else if(posX + 300 > rightBound){
-			posX = rightBound - 350;
-			width = 100;
+		} else if(posX + dialength > rightBound){
+			posX = rightBound - dialength;
 		}
 		
-		if(posY < lowerBound - 400 + width){
-			posY = lowerBound + 50;
+		if(posY < lowerBound + dialheight){
+			posY = lowerBound + 20;
 		} else if(posY > upperBound){
-			posY = upperBound - 350;
+			posY = upperBound - dialheight;
 		}
 		
-		font.drawWrapped(batch, text.peek(), posX, posY,300);
+		
+		batch.draw(chatBaloon, posX, posY, dialength + 50, dialheight);
+		font.drawWrapped(batch, text.peek(), posX+ 25, posY + dialheight-10, 280);
 		batch.setColor(1, 1, 1, 1);
 		
 		if(!text.isEmpty()){
@@ -87,10 +101,10 @@ public class DialogBox {
 		}
 	}
 	
-	public void pop(String text, float posx, float posy){
+	public void pop(String text, Position pos){
 		this.duration = 2f;
 		this.timer = 0.5f;
-		this.positions.add(new Vector2(posx, posy));
+		this.positions.add(pos);
 		this.text.add(text);
 	}
 }

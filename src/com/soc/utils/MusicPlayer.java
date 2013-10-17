@@ -10,6 +10,7 @@ public class MusicPlayer {
 	private static final String BASE_DIR = "resources/music/";
 	
 	public static MusicPlayer instance;
+	public float volume;
 	public HashMap<String, Music> loaded;
 	public Stack<Music> music;
 	public Music current;
@@ -17,6 +18,7 @@ public class MusicPlayer {
 	private MusicPlayer(){
 		this.music = new Stack<Music>();
 		this.loaded = new HashMap<String, Music>();
+		this.volume = 0.5f;
 	}
 	
 	public static void initialize(){
@@ -30,7 +32,7 @@ public class MusicPlayer {
 	public static void resume(){
 		instance.current.setLooping(true);
 		instance.current.play();
-		instance.current.setVolume(0.5f);
+		instance.current.setVolume(instance.volume);
 	}
 	
 	public static void resumePrevious(){
@@ -51,7 +53,7 @@ public class MusicPlayer {
 		if(instance.current != null){
 			instance.current.setLooping(true);
 			instance.current.play();
-			instance.current.setVolume(0.5f);
+			instance.current.setVolume(instance.volume);
 		}
 	}
 	
@@ -72,7 +74,7 @@ public class MusicPlayer {
 		instance.current = m;
 		instance.current.setLooping(true);
 		instance.current.play();
-		instance.current.setVolume(0.5f);
+		instance.current.setVolume(instance.volume);
 	}
 	
 	public static void reset(){

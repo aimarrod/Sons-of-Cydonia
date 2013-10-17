@@ -207,7 +207,6 @@ import com.soc.utils.FloatingText;
 				if(blocked){
 					bm.get(SoC.game.player).removebuff(Shield.class,SoC.game.player);;
 					blocked = false;
-					SoC.game.renderSystem.dialog.pop("SHIELD!", SoC.game.positionmapper.get(SoC.game.player).x, SoC.game.positionmapper.get(SoC.game.player).y);
 				}
 				return true;
 			}

@@ -367,43 +367,15 @@ public class GraphicsLoader {
 		
 	}
 	
-	public static void loadBat(Character character){
-		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
-		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(true);
-		AnimatedRenderer death = new AnimatedRenderer(false);
-		
-		TextureRegion[][] tmp = TextureRegion.split(load("bat-walk.png"), 32, 32);
-		for(int i = 0; i < tmp.length; i++){
-	   		move.animations[i] = new Animation(0.2f/tmp[i].length, tmp[i]);
-	   	}
-		tmp = TextureRegion.split(load("bat-attack.png"), 32, 32);
-		for(int i = 0; i < tmp.length; i++){
-	   		attack.animations[i]= new Animation(1.5f/tmp[i].length, tmp[i]);
-	   	}
-		tmp = TextureRegion.split(load("blood-spill.png"), 32, 32);
-		TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
-        int index = 0;
-        for (int i = 0; i < tmp.length; i++) {
-                for (int j = 0; j < tmp[0].length; j++) {
-                        deathFrames[index++] = tmp[i][j];
-                }
-        }
-		death.animation = new Animation(0.5f/deathFrames.length, deathFrames);
-		character.deathTime=0.5f;
-		
-		character.renderers[State.WALK] = move;
-		character.renderers[State.ATTACK] = attack;
-		character.renderers[State.DYING] = death;
-		
-	}
-	
 	public static void loadSlime(Character character){
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		DirectionalAnimatedRenderer idle = new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		TextureRegion[][] tmp = TextureRegion.split(load("slime-walk.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
 	   		move.animations[i] = new Animation(1f/tmp[i].length, tmp[i]);
+	   		idle.animations[i] = new Animation(1f/tmp[i].length, tmp[i]);
 	   	}
 		
 		tmp = TextureRegion.split(load("slime-death.png"), 64, 64);
@@ -417,6 +389,7 @@ public class GraphicsLoader {
 		death.animation = new Animation(2f/deathFrames.length, deathFrames);
 		character.deathTime=2f;
 		
+		character.renderers[State.IDLE] = idle;
 		character.renderers[State.WALK] = move;
 		character.renderers[State.DYING] = death;
 		

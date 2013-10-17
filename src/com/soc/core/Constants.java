@@ -105,7 +105,7 @@ public class Constants {
 		public static final int TORNADO_RANGE = 1000;
 		public static final int TORNADO_SPEED = 500;
 		public static final int FIREBREATH_SPEED = 1000;
-		public static final int BALLISTA_FIRE_RATE = 1;
+		public static final float BALLISTA_FIRE_RATE = 1.75f;
 		public static final int DAGGER_SPEED = 900;
 		public static final int DAGGER_RANGE = 700;
 		public static final int ARROW_SPEED = 900;
