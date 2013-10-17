@@ -6,6 +6,9 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	menuFont: {
 		file: "fonts/menu-font.fnt"
 	},
+	buttonFont: {
+		file: "fonts/button-font.fnt"
+	},
 
 },
 com.badlogic.gdx.graphics.Color: {

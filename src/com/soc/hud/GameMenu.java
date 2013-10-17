@@ -39,11 +39,11 @@ public class GameMenu extends Table implements InputProcessor {
 		this.height=900;
 		this.focusedButton=1;
 		normalStyle=new TextButtonStyle();
-		normalStyle.font=skin.getFont("gameFont");
+		normalStyle.font=skin.getFont("buttonFont");
 		normalStyle.up=skin.getDrawable("normal-button");
 		normalStyle.down=skin.getDrawable("pushed-button");
 		focusedStyle=new TextButtonStyle();
-		focusedStyle.font=skin.getFont("gameFont");
+		focusedStyle.font=skin.getFont("buttonFont");
 		focusedStyle.up=skin.getDrawable("focused-button");
 		focusedStyle.down=skin.getDrawable("pushed-button");
 		resumeGameButton = new TextButton( "Resume Game", focusedStyle);
