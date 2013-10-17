@@ -792,10 +792,12 @@ public class GraphicsLoader {
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		DirectionalAnimatedRenderer charge = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer fall=new AnimatedRenderer(false);
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		move.ox-=20;
 		idle.ox-=20;
+		attack.ox=-20;
 		TextureRegion[][] tmp = TextureRegion.split(load("left-monster-walk.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
 	   		move.animations[i] = new Animation(0.5f/tmp[i].length, tmp[i]);
@@ -810,9 +812,18 @@ public class GraphicsLoader {
 	   		attack.animations[i] = new Animation(2f/tmp[i].length, tmp[i]);
 	   	}
 		
+		tmp = TextureRegion.split(load("right-monster-fall.png"), 128, 128);
+        TextureRegion [] fallFrames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+            for (int j = 0; j < tmp[0].length; j++) {
+                    fallFrames[index++] = tmp[i][j];
+            }
+    }
+		
 		tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
         TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
-        int index = 0;
+        index = 0;
         for (int i = 0; i < tmp.length; i++) {
                 for (int j = 0; j < tmp[0].length; j++) {
                         deathFrames[index++] = tmp[i][j];
@@ -820,12 +831,14 @@ public class GraphicsLoader {
         }
 
 	    death.animation = new Animation(1f/deathFrames.length, deathFrames);
+	    fall.animation=new Animation(1f/fallFrames.length,fallFrames);
 	    character.deathTime=1f;
 	    character.renderers[State.ATTACK]=attack;
 	    character.renderers[State.WALK]=move;
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.CHARGING]=charge;
 		character.renderers[State.DYING] = death;
+		character.renderers[State.FALLING]=fall;
 	}
 	public static AnimatedRenderer loadDaggerThrow(){
 		AnimatedRenderer dagger = new AnimatedRenderer(true);

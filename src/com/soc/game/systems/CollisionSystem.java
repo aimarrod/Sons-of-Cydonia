@@ -388,8 +388,9 @@ public class CollisionSystem extends VoidEntitySystem {
 				
 				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_HOLE) {
 					st.state=State.FALLING;
-					pos.x += pos.direction.x*World.TILE_SIZE;
-					pos.y += pos.direction.y*World.TILE_SIZE;
+					Bounds b=SoC.game.boundsmapper.get(e);
+					pos.x += pos.direction.x*(b.width);
+					pos.y += pos.direction.y*(b.height);
 					e.addComponent(new Expires(1));
 					e.changedInWorld();
 					v.vx=0;

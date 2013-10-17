@@ -822,13 +822,13 @@ public class EntityFactory {
 	   	return e;
 	}
 	
-	public static Entity createChargeBoss(Entity source, String group, Position pos, int damage){
+	public static Entity createChargeBoss(Entity source, String group, Position pos, int damage, Vector2 direction){
 		Entity e=SoC.game.world.createEntity();
 				
 		e.addComponent( new Position(pos.x-Spells.CHARGE_BOX*0.5f, pos.y-Spells.CHARGE_BOX*0.5f, pos.z, pos.direction.cpy()) );
 		e.addComponent( new Bounds(Spells.CHARGE_BOX, Spells.CHARGE_BOX) );
 		e.addComponent( new Velocity(300*pos.direction.x, 300*pos.direction.y, Constants.Spells.CHARGE_SPEED) );
-	   	e.addComponent( new Attack(new ChargeBossProcessor(source, Constants.Spells.CHARGE_DURATION), damage) );
+	   	e.addComponent( new Attack(new ChargeBossProcessor(source, Constants.Spells.CHARGE_DURATION,direction), damage) );
 	   	
 	   	return e;
 	}
