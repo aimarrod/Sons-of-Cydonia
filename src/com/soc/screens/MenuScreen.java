@@ -48,6 +48,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 		buttons[3]=exitButton;
 		focusedBotton=1;
 		SoC.game.inputMultiplexer.addProcessor(this);
+		if(game.getScreen()!=null){
+			game.getScreen().dispose();
+		}
 	}
     @Override
     public void show()
@@ -223,15 +226,7 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 	}
 	@Override
 	public boolean keyDown(int keycode) {
-		return false;
-	}
-	@Override
-	public boolean keyUp(int keycode) {
-		return false;
-	}
-	@Override
-	public boolean keyTyped(char character) {
-		if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)){
+		if( keycode == Keys.W || keycode == Keys.UP){
 			buttons[focusedBotton-1].setStyle(normalStyle);
 			if(focusedBotton==1)
 				focusedBotton=4;
@@ -239,7 +234,7 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 				focusedBotton--;
 			return true;
 		}else{
-			if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)){
+			if(keycode == Keys.S || keycode == Keys.DOWN){
 				buttons[focusedBotton-1].setStyle(normalStyle);
 				if(focusedBotton==4)
 					focusedBotton=1;
@@ -247,7 +242,7 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 					focusedBotton++;
 				return true;
 			}else{
-				if(Gdx.input.isKeyPressed(Keys.ENTER)){
+				if(keycode == Keys.ENTER){
 					if(focusedBotton==1){
 		                SoC.game.clearProcessors();
 		                GameLoader.newGame("warrior");
@@ -270,7 +265,15 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 					return true;
 				}
 			}
-		}		
+		}	
+		return false;
+	}
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
+	}
+	@Override
+	public boolean keyTyped(char character) {	
 		return false;
 	}
 	@Override

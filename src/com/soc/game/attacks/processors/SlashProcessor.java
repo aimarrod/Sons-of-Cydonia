@@ -68,10 +68,6 @@ public class SlashProcessor implements AttackProcessor {
 
 	@Override
 	public void frame(Entity attack, SpriteBatch sprite) {
-		Position attackpos = SoC.game.positionmapper.get(attack);
-		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
-
-		sprite.draw(GraphicsLoader.load("dialog-box.png"), attackpos.x, attackpos.y, attackbounds.width, attackbounds.height);
 		
 	}
 

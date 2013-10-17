@@ -32,6 +32,7 @@ import com.soc.game.attacks.processors.ArrowProcessor;
 import com.soc.game.attacks.processors.BiteProcessor;
 import com.soc.game.attacks.processors.BlackMageAttackProcessor;
 import com.soc.game.attacks.processors.BoneThrowProcessor;
+import com.soc.game.attacks.processors.ChargeBossProcessor;
 import com.soc.game.attacks.processors.ChargeProcessor;
 import com.soc.game.attacks.processors.DaggerThrowProcessor;
 import com.soc.game.attacks.processors.FireBreathProcessor;
@@ -835,6 +836,17 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Spells.CHARGE_BOX, Spells.CHARGE_BOX) );
 		e.addComponent( new Velocity(300*pos.direction.x, 300*pos.direction.y, Constants.Spells.CHARGE_SPEED) );
 	   	e.addComponent( new Attack(new ChargeProcessor(source, Constants.Spells.CHARGE_DURATION), damage) );
+	   	
+	   	return e;
+	}
+	
+	public static Entity createChargeBoss(Entity source, String group, Position pos, int damage){
+		Entity e=SoC.game.world.createEntity();
+				
+		e.addComponent( new Position(pos.x-Spells.CHARGE_BOX*0.5f, pos.y-Spells.CHARGE_BOX*0.5f, pos.z, pos.direction.cpy()) );
+		e.addComponent( new Bounds(Spells.CHARGE_BOX, Spells.CHARGE_BOX) );
+		e.addComponent( new Velocity(300*pos.direction.x, 300*pos.direction.y, Constants.Spells.CHARGE_SPEED) );
+	   	e.addComponent( new Attack(new ChargeBossProcessor(source, Constants.Spells.CHARGE_DURATION), damage) );
 	   	
 	   	return e;
 	}

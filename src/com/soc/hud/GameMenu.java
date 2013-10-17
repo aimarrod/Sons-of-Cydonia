@@ -13,7 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.soc.core.SoC;
+import com.soc.screens.GameOverScreen;
 import com.soc.screens.LoadScreen;
+import com.soc.screens.MenuScreen;
 import com.soc.screens.SaveScreen;
 import com.soc.utils.GameLoader;
 
@@ -35,6 +37,7 @@ public class GameMenu extends Table implements InputProcessor {
 		table=this;
 		this.skin = parent.skin;
 		this.height=900;
+		this.focusedButton=1;
 		normalStyle=new TextButtonStyle();
 		normalStyle.font=skin.getFont("gameFont");
 		normalStyle.up=skin.getDrawable("normal-button");
@@ -43,7 +46,7 @@ public class GameMenu extends Table implements InputProcessor {
 		focusedStyle.font=skin.getFont("gameFont");
 		focusedStyle.up=skin.getDrawable("focused-button");
 		focusedStyle.down=skin.getDrawable("pushed-button");
-		resumeGameButton = new TextButton( "Resume Game", normalStyle);
+		resumeGameButton = new TextButton( "Resume Game", focusedStyle);
 		saveGameButton = new TextButton( "Save Game", normalStyle);
 		optionsButton = new TextButton( "Options", normalStyle);
 		exitButton = new TextButton( "Exit", normalStyle );
@@ -81,7 +84,9 @@ public class GameMenu extends Table implements InputProcessor {
 			}else if(focusedButton==3){
 				//Options
 			}else if(focusedButton==4){
-				//Exit
+            	SoC.game.player.deleteFromWorld();
+            	SoC.game.resetWorld();
+            	SoC.game.openMenuScreen();
 			}	
 			return true;
 		}

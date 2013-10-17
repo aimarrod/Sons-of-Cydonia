@@ -278,6 +278,10 @@ public class SoC extends Game {
 	public void openGameOverScren(){
 		game.setScreen(new GameOverScreen(game));
 	}
+	
+	public void openMenuScreen(){
+		game.setScreen(new MenuScreen(game));
+	}
 
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
