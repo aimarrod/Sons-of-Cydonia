@@ -559,16 +559,17 @@ public class GraphicsLoader {
 		movement.ox -=0;
 		movement.oy -= 0;
 		
-		TextureRegion[][] tmp = TextureRegion.split(load("satan-attack.png"), 64, 64);
+		TextureRegion[][] tmp = TextureRegion.split(load("skull-knight-walk.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){
-	   		attack.animations[i]= new Animation(1f/tmp[i].length, tmp[i]);
-	   	}
-		tmp = TextureRegion.split(load("satan-walk.png"), 64, 64);
-		for(int i = 0; i < tmp.length; i++){
-	   		movement.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+	   		movement.animations[i]= new Animation(1f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
-		tmp = TextureRegion.split(load("ballista-death.png"), 128, 64);
+//		tmp = TextureRegion.split(load("satan-walk.png"), 64, 64);
+//		for(int i = 0; i < tmp.length; i++){
+//	   		movement.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+//	   		idle.sprites[i] = tmp[i][0];
+//	   	}
+		tmp = TextureRegion.split(load("skull-knight-death.png"),64, 64);
         TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
         int index = 0;
         for (int i = 0; i < tmp.length; i++) {
@@ -582,7 +583,7 @@ public class GraphicsLoader {
 		character.renderers[State.IDLE] = idle;
 		character.renderers[State.WALK] = movement;
 		character.renderers[State.DYING] = death;
-		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.ATTACK] = movement;
 	}
 	
 	public static void loadGaiaAir(Character character){
