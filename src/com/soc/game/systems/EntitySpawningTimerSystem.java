@@ -89,13 +89,13 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				} else if(spawn.type.equals(Constants.Groups.EYEBALLS)){
 					spawned = EntityFactory.createEyeball(pos.x, pos.y, pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				} else if(spawn.type.equals(Constants.Groups.RED_MONSTER)){
+				} else if(spawn.type.equals(Constants.Groups.RED_MONSTER) && !SoC.game.progress.midMonsterDefeated){
 					spawned=EntityFactory.createMidMonster(pos.x,pos.y,pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);	
 				} else if(spawn.type.equals(Constants.Groups.FIRE_STONE)){
 					spawned=EntityFactory.createFireStoneMonster(pos.x,pos.y,pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
-				} else if(spawn.type.equals(Constants.Groups.RIGHT_MONSTER)){
+				} else if(spawn.type.equals(Constants.Groups.RIGHT_MONSTER) && !SoC.game.progress.rightMonsterDefetead){
 					spawned=EntityFactory.createRightMonster(pos.x,pos.y,pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				}

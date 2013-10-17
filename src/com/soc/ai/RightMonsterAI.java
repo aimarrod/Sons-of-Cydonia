@@ -96,24 +96,33 @@ public class RightMonsterAI extends AI{
 			return;
 		}
 		if(!inmune){
-		timerStomp-=SoC.game.world.delta;
-		if(state.state==State.ATTACK){
-			timerCast+=SoC.game.world.delta;
-			if(timerCast>=2f){
-				Feet feet=SoC.game.feetmapper.get(e);
-				Entity stomp = EntityFactory.createStomp(pos.x+feet.width*0.5f, pos.y+feet.heigth*0.5f, pos.z,stats.strength);
-			    SoC.game.groupmanager.add(stomp, Constants.Groups.ENEMY_ATTACKS);
-			    SoC.game.groupmanager.add(stomp, Constants.Groups.MAP_BOUND);
-			    SoC.game.levelmanager.setLevel(stomp, Constants.Groups.LEVEL+pos.z);
-			    stomp.addToWorld();
-			    timerCast=0f;
-			    state.state=State.IDLE;
-			    SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
-			}else{
-				return;
+			timerStomp-=SoC.game.world.delta;
+			if(state.state==State.ATTACK){
+				timerCast+=SoC.game.world.delta;
+				if(timerCast>=2f){
+					Feet feet=SoC.game.feetmapper.get(e);
+					Entity stomp = EntityFactory.createStomp(pos.x+feet.width*0.5f, pos.y+feet.heigth*0.5f, pos.z,stats.strength);
+				    SoC.game.groupmanager.add(stomp, Constants.Groups.ENEMY_ATTACKS);
+				    SoC.game.groupmanager.add(stomp, Constants.Groups.MAP_BOUND);
+				    SoC.game.levelmanager.setLevel(stomp, Constants.Groups.LEVEL+pos.z);
+				    stomp.addToWorld();
+				    timerCast=0f;
+				    state.state=State.IDLE;
+				    SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
+				    return;
+				}
 			}
 		}
+//		if(Math.abs(dstx) < 32) pos.direction.x = 0;
+//		else if(Math.abs(dsty) < 10) pos.direction.y = 0;
+		
+		if(timerStomp<=0){
+			timerStomp=10f;
+			state.state=State.ATTACK;
+			vel.vx=0;
+			vel.vy=0;
 		}
+		
 		
 		float dsty = playerPos.y - pos.y;
 		float dstx = playerPos.x - pos.x;
@@ -125,14 +134,12 @@ public class RightMonsterAI extends AI{
 		vel.vy = vel.speed * pos.direction.y;
 		
 		state.state = State.WALK;
-		if(Math.abs(dstx) < 32) pos.direction.x = 0;
-		else if(Math.abs(dsty) < 10) pos.direction.y = 0;
-		
-		if(timerStomp<=0){
-			timerStomp=10f;
-			state.state=State.ATTACK;
-			vel.vx=0;
-			vel.vy=0;
+		if(Math.abs(dstx) > Math.abs(dsty)){
+			pos.direction.x = Math.signum(dstx);
+			pos.direction.y = Math.signum(dsty)*(Math.abs(dsty)/Math.abs(dstx));
+		} else {
+			pos.direction.y = Math.signum(dsty);
+			pos.direction.x = Math.signum(dstx)*(Math.abs(dstx)/Math.abs(dsty));
 		}
 	}
 

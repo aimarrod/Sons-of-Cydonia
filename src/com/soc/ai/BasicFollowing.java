@@ -58,7 +58,6 @@ public class BasicFollowing implements AIModule{
 		if(transparent || Math.abs(dsty) > range){
 			vel.vy = Math.signum(dsty)*vel.speed;			
 		} else {
-			System.out.println("AQUI");
 			vel.vy = 0;
 		}
 		

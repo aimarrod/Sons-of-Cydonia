@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="200" tilewidth="32" tileheight="32">
  <properties>
+  <property name="ambiance" value="dark-ambiance.ogg"/>
   <property name="layers" value="1"/>
-  <property name="music" value="dark-ambiance.ogg"/>
+  <property name="music" value="gaia-battle.ogg"/>
  </properties>
  <tileset firstgid="1" name="base_out_atlas" tilewidth="32" tileheight="32">
   <image source="tiles/base_out_atlas.png" width="1024" height="1024"/>

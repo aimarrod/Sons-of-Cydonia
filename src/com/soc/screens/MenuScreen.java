@@ -48,6 +48,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 		buttons[3]=exitButton;
 		focusedBotton=1;
 		SoC.game.inputMultiplexer.addProcessor(this);
+		if(game.getScreen()!=null){
+			game.getScreen().dispose();
+		}
 	}
     @Override
     public void show()
