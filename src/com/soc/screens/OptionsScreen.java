@@ -251,7 +251,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	       Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
 	        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	        batch.begin();
-	        batch.draw(background, 0, 0, Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
+	        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	        //Update delta and draw the actors inside the stage
 	        batch.end();
 	        stage.act( delta );
