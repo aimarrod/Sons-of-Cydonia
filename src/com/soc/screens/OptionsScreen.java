@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -27,6 +29,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	private Label labelMusic;
 	private Label labelResolution;
 	private Label labelEffects;
+	private CheckBox fullScreen;
 	private int width=1440;
 	private int height=900;
 	private TextButton returnButton;
@@ -51,7 +54,13 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		focusedStyle.up=getSkin().getDrawable("focused-button");
 		focusedStyle.down=getSkin().getDrawable("pushed-button");
 		returnButton = new TextButton( "Return", focusedStyle);
-
+		CheckBoxStyle cbStyle=new CheckBoxStyle();
+		cbStyle.checkboxOff=getSkin().getDrawable("check-off");
+		cbStyle.checkboxOn=getSkin().getDrawable("check-on");
+		cbStyle.font=getSkin().getFont("buttonFont");
+		cbStyle.fontColor=getSkin().getColor("white");
+		fullScreen=new CheckBox("FullScreen", cbStyle);
+		stage.addActor(fullScreen);
 		stage.addActor(music);
 		stage.addActor(effects);
 		stage.addActor(labelEffects);
@@ -107,11 +116,11 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		super.resize(width, height);
 		this.width=width;
 		this.height=height;
-		returnButton.setX(width-1000);
-		returnButton.setY(height-400);
-		returnButton.setWidth(200);
-		labelResolution.setX(width-1000);
-		labelResolution.setY(height-300);
+		this.returnButton.setX(width-1000);
+		this.returnButton.setY(height-400);
+		this.returnButton.setWidth(200);
+		this.labelResolution.setX(width-1000);
+		this.labelResolution.setY(height-300);
 		this.labelEffects.setX(width-1000);
 		this.labelEffects.setY(height-200);
 		this.labelMusic.setX(width-1000);
@@ -122,6 +131,8 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		this.music.setX(width-1000);
 		this.music.setY(height-150);
 		this.music.setWidth(390);
+		this.fullScreen.setX(width-1000);
+		this.fullScreen.setY(height-350);
 	}
 	@Override
 	public boolean keyDown(int keycode) {
