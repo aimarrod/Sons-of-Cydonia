@@ -256,9 +256,11 @@ public class CollisionSystem extends VoidEntitySystem {
 					otherfeet.width, otherfeet.heigth);
 			if (nexty.overlaps(otherrect)) {
 				v.vy = 0;
+				pos.direction.y=0;
 			}
 			if (nextx.overlaps(otherrect)) {
 				v.vx = 0;
+				pos.direction.x=0;
 			}
 			if(current.overlaps(otherrect)){
 				v.vx = v.speed * (Math.abs(otherrect.x - current.x));
@@ -358,13 +360,13 @@ public class CollisionSystem extends VoidEntitySystem {
 					|| SoC.game.map.tiles[pos.z][nextleft][up].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][nextright][down].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][nextleft][down].type == World.TILE_OBSTACLE) {
-				v.vx = 0;
+				v.vx = 0; pos.direction.x=0;
 			}
 			if (SoC.game.map.tiles[pos.z][rigth][nextup].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][left][nextup].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][rigth][nextdown].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][left][nextdown].type == World.TILE_OBSTACLE) {
-				v.vy = 0;
+				v.vy = 0; pos.direction.y=0;
 			}
 			
 			if(!flm.has(e)){
@@ -372,13 +374,13 @@ public class CollisionSystem extends VoidEntitySystem {
 						|| SoC.game.map.tiles[pos.z][nextleft][up].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][nextright][down].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][nextleft][down].type == World.TILE_UNWALKABLE) {
-					v.vx = 0;
+					v.vx = 0; pos.direction.x=0;
 				}
 				if (SoC.game.map.tiles[pos.z][rigth][nextup].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][left][nextup].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][rigth][nextdown].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][left][nextdown].type == World.TILE_UNWALKABLE) {
-					v.vy = 0;
+					v.vy = 0; pos.direction.y=0;
 				}
 				
 				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_LAVA) {
