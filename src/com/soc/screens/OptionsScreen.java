@@ -1,5 +1,8 @@
 package com.soc.screens;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Input.Keys;
@@ -37,23 +40,31 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	private TextButton returnButton;
 	private TextButtonStyle normalStyle;
 	private TextButtonStyle focusedStyle;
-	private String[] resolutions;
+	//private String[] resolutions;
+	private ArrayList<Resolution>resolutions;
 	private int currentValue;
 	boolean fromMenu;
 	boolean isFullScreen;
 	public OptionsScreen(SoC game, boolean fromMenu) {
 		super(game);
+		resolutions=new ArrayList<Resolution>();
+		for(int i=0;i<Gdx.graphics.getDisplayModes().length;i++){
+			if((Gdx.graphics.getDisplayModes())[i].height>=600){
+				resolutions.add(new Resolution(Gdx.graphics.getDisplayModes()[i].width,Gdx.graphics.getDisplayModes()[i].height));
+			}
+		}
+		Collections.sort(resolutions);
 		this.fromMenu=fromMenu;
 		boolean found=false;
 		if(Gdx.graphics.getDesktopDisplayMode().width==Gdx.graphics.getWidth() && Gdx.graphics.getDesktopDisplayMode().height==Gdx.graphics.getHeight())
 			isFullScreen=true;
 		else
 			isFullScreen=false;
-		resolutions=new String []{"1024x640","1280x800","1440x900","1280x1080"};
+		//resolutions=new String []{"1024x640","1280x800","1440x900","1280x1080"};
 		currentValue=0;
 		String actualRes=Gdx.graphics.getWidth()+"x"+Gdx.graphics.getHeight();
-		for(int i=0;i<resolutions.length&& !found;i++){
-			if(actualRes.equals(resolutions[i])){
+		for(int i=0;i<resolutions.size()&& !found;i++){
+			if(actualRes.equals(resolutions.get(i))){
 				found=true;
 				currentValue=i;
 			}
@@ -69,9 +80,9 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		LabelStyle lStyle=new LabelStyle();
 		lStyle.font=skin.getFont("numberFont");
 		lStyle.fontColor=skin.getColor("white");
-		this.resolutionsLabel=new Label(resolutions[0],lStyle);
+		this.resolutionsLabel=new Label(resolutions.get(0).toString(),lStyle);
 		this.resolutionsLabel.setScale(1f, 1f);
-		this.resolution=new Slider(0,resolutions.length-1,1,false,getSkin());
+		this.resolution=new Slider(0,resolutions.size()-1,1,false,getSkin());
 		this.resolution.setValue(currentValue);
 		normalStyle=new TextButtonStyle();
 		normalStyle.font=getSkin().getFont("buttonFont");
@@ -128,8 +139,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	            {
 	            	if(button==0){
 	        			if(!fullScreen.isChecked()){
-	        				String []res=resolutions[currentValue].split("x");
-	        	    		Gdx.graphics.setDisplayMode(Integer.parseInt(res[0]),Integer.parseInt(res[1]),false);
+	        	    		Gdx.graphics.setDisplayMode(resolutions.get(currentValue).width,resolutions.get(currentValue).height,false);
 	        			}
 	        			if(fromMenu){
 	        				SoC.game.clearProcessors();
@@ -151,6 +161,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 						Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 					}else{
 						Gdx.graphics.setDisplayMode(1280, 720, false);
+        	    		//Gdx.graphics.setDisplayMode(resolutions.get(currentValue).width,resolutions.get(currentValue).height,false);
 					}
 					
 				}
@@ -170,7 +181,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 				public void changed(ChangeEvent event, Actor actor) {
 					//resolutionsLabel.setText(resolutions[(int) resolution.getValue()]);
 					currentValue=(int)resolution.getValue();
-					resolutionsLabel.setText(resolutions[currentValue]);
+					resolutionsLabel.setText(resolutions.get(currentValue).toString());
 				}
 		        } );
 	}
@@ -205,8 +216,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	public boolean keyDown(int keycode) {
 		if(keycode==Keys.ENTER){
 			if(!fullScreen.isChecked()){
-				String []res=resolutions[currentValue].split("x");
-	    		Gdx.graphics.setDisplayMode(Integer.parseInt(res[0]),Integer.parseInt(res[1]),false);
+	    		Gdx.graphics.setDisplayMode(resolutions.get(currentValue).width,resolutions.get(currentValue).height,false);
 			}
     		if(fromMenu){
 				SoC.game.clearProcessors();
