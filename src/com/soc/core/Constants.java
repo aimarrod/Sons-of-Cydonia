@@ -25,7 +25,7 @@ public class Constants {
 		public static final String BOW_KNIGHTS = "bow knight";
 		public static final String BALLISTAS= "ballista";
 		public static final String ZOMBIES= "zombie";
-		public static final String SATANS= "satan";
+		public static final String SKULL_KNIGHT= "satan";
 		public static final String GAIA_AIR = "gaia-air";
 		public static final String GAIA_DARK = "gaia-dark";
 		public static final String GAIA_FLAME = "gaia-flame";

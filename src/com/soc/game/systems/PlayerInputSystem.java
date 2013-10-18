@@ -19,6 +19,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.states.benefits.LevelUp;
 import com.soc.game.states.benefits.Rage;
 import com.soc.game.states.benefits.Shield;
 import com.soc.game.states.benefits.ShieldBuff;

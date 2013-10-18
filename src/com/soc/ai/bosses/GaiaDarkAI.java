@@ -35,13 +35,14 @@ public class GaiaDarkAI extends AI{
 			EntityFactory.createWall(e, 12, 182, 0).addToWorld();
 			init = true;
 			return;
+		} else if(init){
+			timer -= SoC.game.world.delta;
+			if(timer > 0) return;	
+			timer = 3.0f;		
+			Entity circle = EntityFactory.createCircle(playerPos.x+Constants.Characters.WIDTH*0.5f, playerPos.y+Constants.Characters.HEIGHT*0.5f, playerPos.z);
+			SoC.game.levelmanager.setLevel(circle, Constants.Groups.LEVEL + playerPos.z);
+			circle.addToWorld();
 		}
-		timer -= SoC.game.world.delta;
-		if(timer > 0) return;	
-		timer = 3.0f;		
-		Entity circle = EntityFactory.createCircle(playerPos.x+Constants.Characters.WIDTH*0.5f, playerPos.y+Constants.Characters.HEIGHT*0.5f, playerPos.z);
-		SoC.game.levelmanager.setLevel(circle, Constants.Groups.LEVEL + playerPos.z);
-		circle.addToWorld();
 
 	}
 

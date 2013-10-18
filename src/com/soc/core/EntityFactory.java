@@ -13,7 +13,7 @@ import com.soc.ai.bosses.GaiaFlameAI;
 import com.soc.ai.bosses.KnightCaptainAI;
 import com.soc.ai.bosses.MidMonsterAI;
 import com.soc.ai.bosses.RightMonsterAI;
-import com.soc.ai.bosses.SatanAI;
+import com.soc.ai.bosses.SkullKnightAI;
 import com.soc.ai.normals.EyeballAI;
 import com.soc.ai.normals.GoldBowKnightAI;
 import com.soc.ai.normals.GoldKnightAI;
@@ -88,8 +88,8 @@ public class EntityFactory {
 
 	    if(clazz.equals(Constants.Characters.WARRIOR)){
 	    	GraphicsLoader.loadWarrior(animations);
-	    	animations.damageSound = "warrior-damage.ogg";
-	    	animations.deathSound = "warrior-death.ogg";
+	    	animations.damageSound = "male-damage.ogg";
+	    	animations.deathSound = "male-death.ogg";
 	    }
 	    
 		return e;
@@ -111,8 +111,8 @@ public class EntityFactory {
 	    if(type == Constants.Classes.HUNTER){
 	    } else if(type == Constants.Classes.WARRIOR){
 	    	GraphicsLoader.loadWarrior(animations);
-	    	animations.damageSound = "warrior-damage.ogg";
-	    	animations.deathSound = "warrior-death.ogg";
+	    	animations.damageSound = "male-damage.ogg";
+	    	animations.deathSound = "male-death.ogg";
 	    } else if(type == Constants.Classes.MAGE){
 	    	
 	    } else {
@@ -211,6 +211,8 @@ public class EntityFactory {
 				Constants.Groups.MAGGOTS));
 		Character animations = new Character();
 		GraphicsLoader.loadMaggot(animations);
+		animations.damageSound = "slime-damage.ogg";
+		animations.deathSound = "slime-damage.ogg";
 		e.addComponent(animations);
 		
 		return e;
@@ -262,6 +264,8 @@ public class EntityFactory {
 	    e.addComponent(new Enemy(10, new ZombiAI()));
 	    
 		Character animations = new Character();
+		animations.damageSound = "zombie-damage.ogg";
+		animations.deathSound = "zombie-death.ogg";
 		GraphicsLoader.loadZombie(animations);
 		e.addComponent(animations);
 		
@@ -293,6 +297,8 @@ public class EntityFactory {
 				null,
 				Constants.Groups.GREEN_KNIGHTS));
 		Character animations = new Character();
+		animations.damageSound = "female-damage.ogg";
+		animations.deathSound = "female-death.ogg";
 		GraphicsLoader.loadGreenKnight(animations);
 		e.addComponent(animations);
 		
@@ -324,6 +330,8 @@ public class EntityFactory {
 				null,
 				Constants.Groups.GREEN_KNIGHTS));
 		Character animations = new Character();
+		animations.damageSound = "male-damage.ogg";
+		animations.deathSound = "male-death.ogg";
 		GraphicsLoader.loadGoldBowKnight(animations);
 		e.addComponent(animations);
 		
@@ -355,6 +363,8 @@ public class EntityFactory {
 				null,
 				Constants.Groups.GOLD_KNIGHTS));
 		Character animations = new Character();
+		animations.damageSound = "male-damage.ogg";
+		animations.deathSound = "male-death.ogg";
 		GraphicsLoader.loadGoldKnight(animations);
 		e.addComponent(animations);
 		
@@ -386,23 +396,27 @@ public class EntityFactory {
 				null,
 				Constants.Groups.KNIGHT_CAPTAIN));
 		Character animations = new Character();
+		animations.damageSound = "female-damage.ogg";
+		animations.deathSound = "female-death.ogg";
 		GraphicsLoader.loadKnightCaptain(animations);
 		e.addComponent(animations);
 		
 		return e;
 	}
 	
-	public static Entity createSatan(float px, float py, int pz){
+	public static Entity createSkullKnight(float px, float py, int pz){
 		Entity e = SoC.game.world.createEntity();
 		e.addComponent(new Position(px, py, pz));
 		e.addComponent(new Velocity(0,0,100));
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 		e.addComponent(new State(1));
-	    e.addComponent(new Stats(50, 0, 0, 50, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.VENOMSWORD, new int[]{}, Constants.Groups.SATANS));
+	    e.addComponent(new Stats(50, 0, 0, 50, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.VENOMSWORD, new int[]{}, Constants.Groups.SKULL_KNIGHT));
 		e.addComponent(new Feet(32, 15));
-		e.addComponent(new Enemy(5, new SatanAI()));
+		e.addComponent(new Enemy(5, new SkullKnightAI()));
 		Character animations = new Character();
 		GraphicsLoader.loadSatan(animations);
+		animations.damageSound = "undead-damage.ogg";
+		animations.deathSound = "undead-death.ogg";
 		e.addComponent(animations);
 		
 		return e;
@@ -434,6 +448,7 @@ public class EntityFactory {
 				Constants.Groups.GAIAS));
 		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
+		animations.deathSound = "gaia-death.ogg";
 		GraphicsLoader.loadGaiaAir(animations);
 		e.addComponent(animations);
 		
@@ -466,6 +481,7 @@ public class EntityFactory {
 				Constants.Groups.GAIAS));
 		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
+		animations.deathSound = "gaia-death.ogg";
 		GraphicsLoader.loadGaiaDark(animations);
 		e.addComponent(animations);
 		
@@ -498,6 +514,7 @@ public class EntityFactory {
 				Constants.Groups.GAIAS));
 		Buff.addbuff(e, new Unmovable());
 		Character animations = new Character();
+		animations.deathSound = "gaia-death.ogg";
 		GraphicsLoader.loadGaiaFlame(animations);
 		e.addComponent(animations);
 		
@@ -531,6 +548,7 @@ public class EntityFactory {
 		Buff.addbuff(e, new Unmovable());
 		Buff.addbuff(e, new Inmune());
 		Character animations = new Character();
+		animations.deathSound = "gaia-death.ogg";
 		GraphicsLoader.loadGaia(animations);
 		e.addComponent(animations);
 		
@@ -562,6 +580,8 @@ public class EntityFactory {
 				null,
 				Constants.Groups.GAIAS));
 		Character animations = new Character();
+		animations.damageSound = "female-damage.ogg";
+		animations.deathSound = "female-death.ogg";
 		GraphicsLoader.loadGaiaAvatar(animations);
 		e.addComponent(animations);
 		
@@ -721,6 +741,7 @@ public class EntityFactory {
 				null,
 				Constants.Groups.BLACK_MAGE));
 		Character animations = new Character();
+		animations.deathSound = "black-mage-death.ogg";
 		GraphicsLoader.loadBlackMage(animations);
 		e.addComponent(animations);
 		
@@ -733,16 +754,15 @@ public class EntityFactory {
 	 * ATTACKS
 	 */
 		
-	public static Entity createDaggerThrow(String group, Position pos, int damage, Vector2 dir){
-		Entity e=SoC.game.world.createEntity();
+	public static Entity createDaggerThrow(Position pos, int damage, Vector2 dir){
+		Entity e = SoC.game.world.createEntity();
 		
-		e.addComponent( new Position(pos.x,pos.y, pos.z) );
-		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
-		e.addComponent( new Velocity(Constants.Spells.DAGGER_SPEED*dir.x, Constants.Spells.DAGGER_SPEED*dir.y,900) );
-	   	e.addComponent( new Flying() );
+		e.addComponent( new Velocity(Constants.Spells.DAGGER_SPEED*pos.direction.x, Constants.Spells.DAGGER_SPEED*pos.direction.y, Constants.Spells.DAGGER_SPEED) );
+		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction) );
+		e.addComponent( new Bounds(32, 32) );
 	   	e.addComponent( new Attack(new DaggerThrowProcessor(pos), damage) );
 	   	
-	   	return e;
+		return e;
 	}
 	
 	public static Entity createArrow(String group, Position pos, int damage, Vector2 dir){

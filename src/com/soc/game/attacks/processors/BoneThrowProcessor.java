@@ -30,7 +30,7 @@ public class BoneThrowProcessor implements AttackProcessor {
 	@Override
 	public void process(Entity attack) {
 		if(!sounded){
-			EffectsPlayer.play("throw.ogg");
+			EffectsPlayer.playLooping("throw.ogg");
 			sounded = true;
 		}
 	}
@@ -68,8 +68,7 @@ public class BoneThrowProcessor implements AttackProcessor {
 
 	@Override
 	public void delete() {
-		// TODO Auto-generated method stub
-		
+		EffectsPlayer.stop("throw.ogg");
 	}
 
 }
