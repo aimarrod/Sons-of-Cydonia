@@ -32,6 +32,7 @@ import com.soc.game.states.alterations.Poison;
 import com.soc.game.states.alterations.Push;
 import com.soc.game.states.alterations.Venom;
 import com.soc.game.states.benefits.Casting;
+import com.soc.game.states.benefits.LevelUp;
 import com.soc.game.states.benefits.Rage;
 import com.soc.game.states.benefits.Shield;
 import com.soc.game.states.benefits.ShieldBuff;
@@ -207,6 +208,10 @@ public class RenderSystem extends VoidEntitySystem{
 			if(buff.buffClasses.contains(Casting.class)){
 				Casting cast=buff.getBuff(Casting.class);
 				batch.draw(cast.renderer.frame(world.delta), pos.x + bon.width*0.5f + cast.renderer.ox,pos.y  + bon.height*0.5f + cast.renderer.oy);
+			}
+			if(buff.buffClasses.contains(LevelUp.class)){
+				LevelUp up=buff.getBuff(LevelUp.class);
+				batch.draw(up.renderer.frame(world.delta), pos.x+ up.renderer.ox,pos.y + up.renderer.oy);
 			}
 
 		}

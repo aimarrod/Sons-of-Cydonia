@@ -11,17 +11,17 @@ public class Dialog {
 	
 	static Dialog[] dialogs = new Dialog[]{
 		new Dialog("\nCONTROLS 1:\n\n"
-				+ "SPACE:  normal attack\n"
+				+ "SPACE: attack\n"
 				+ "NUM KEYS:  skills\n"
-				+ "SHIFT LEFT: Shield"),
-		new Dialog("\nCONTROLS 2:\n\n"
-				+ "ESC:  menu\n"
-				+ "C:  character stats\n"
-				+ "I:  inventory\n\n"
+				+ "I Inventory \n\n" 
 				+ "INVENTORY\n\n"
 				+ "ENTER: use object\n"
 				+ "TAB: Switch object\n"
 				+ "E: Use object"),
+		new Dialog("\nCONTROLS 2:\n\n"
+				+ "ESC:  menu\n"
+				+ "C:  character stats\n"
+				+ "SHIFT LEFT: Shield\n"),
 		new Dialog("\nTip:\n\n"
 				+ "Double tap a movement key to run"),
 		new Dialog("\nTip:\n\n"

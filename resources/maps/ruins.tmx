@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="200" height="200" tilewidth="32" tileheight="32">
  <properties>
-  <property name="ambiance" value="beauty-of-chaos.ogg"/>
+  <property name="ambiance" value="grail.ogg"/>
   <property name="layers" value="3"/>
   <property name="music" value="gaia-battle.ogg,battle-at-the-summit.ogg"/>
  </properties>
@@ -23,12 +23,12 @@
  </layer>
  <layer name="level0-object-low" width="200" height="200">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="level0-object-high" width="200" height="200">
   <data encoding="base64" compression="zlib">
-   eJztnUmS5DQYRru6rtAdsABOApykm5PAGXrVC+AQtWrGezBeIwtYAEE6Cke4XLJG/9In6b2IDKUHWZYs+eVvpzOfPQMAAAAAAGjPmxv3e5azvOfloXwhljxrPtd7lrO85+W+9wDwlLuE8eEbS4yz/uEYPoU2CWPZRkrtn3KunAX8Ecay3yj1yZGPYS60SRj8MS/4Iwz+mBfaJAz+mJez/DEy+GNeaJMwNfxRO3WxH6tfXqe/ur6+LpgfO08V/BGmhj9qpzHj5vvrvB+urx9v8ufHzlNl1j6fwohtdDRutvx6nffb9fX7Tf782HmqcP0qjFKMAHU5q1+P3IdGHvvgB3+EGXHsp8TtM0O7hBnx+lVM/AH4I4YRr1+5GPkY5kKbhOH++bzgjzDcP58X2iQM/pgX/BEGf8wLbdIWpfZXGqsq4I8wlnVT6pMjH8NcaJMwln1Y6T6d0lhVAX/Ekfu98e1813ul+3SjH8McaJM4cu+7bee73u/bH39ogT/asm9//KEFbRJP6XNvrvzK/uD5QfyRQulzb678yv7g+cE5+vVZlD735sqv7A+eH8QfrVH2B9AmNekt/gD8kUJpXNlb/AG0SQqlcWVv8QfgjxQs4kr8oQ1togX+0AJ/aIE/tKBN4qlx37e1P2K/hzlLij/iqXHft/VnnNjvYc6SztCvz6Kn+75wDvijLUrXd+EpHI94LL6/q3R9F56CP+Kx+P4u/tCG4/HAG0+fXbH4/i7+0AZ/PHDn6bOW4A9tOB4PxPjDAvyhDf54IMYfofg8Zzn+0MbqeBwdd9d5OpSG8sWUkbq/LkLxec5y/KGNlT/W7V4O7ku65h2loXwxZYTYrpcbn+csxx/a1PKHa35K2Sn5Sv1R8xyOP7Sx9oevvJSyU/KV+qMm+EMb/OHPExsj5ab4Qxv84c8TGyPlpvhDm178EbPtkjJa9Uv8oU0v/rgk5Osp/rjHH9L04o/c+KN0+2v/tYo/Xj5/vB/4Q4te/JEbf1wiyzja/tp/iT/mZHR/lLrEGuIPbUb3R2wZKfHNmeAPbfBH2X6Vgj+0wR9l+1UK/tAGf8TlKXn23JcXf2iDP+LylDx77suLP7SZxR9rerlxzw9tv+TZc19e/KHNaP5Y9sO17pq+CNzPSN2vUvCHNqP5o7fzL/7QZiR/xN4rVwJ/aFP7eJzhj9h1YmKM2PjDCvyhjZU/js7lIQ8c9dvtujHb3k77YgziD/BRO/5YuBycq7extavfhrYd6ms+R+APcFE7/tgvK71X4Zvvm05ZFkPu/UP8oU0Lf7j6xP4zU0580NIfufcP8Yc2rf1xtG5OfNDSH7n3D/GHNgr+iFmu7o9c8Ic2Cv7Yb8fnE1/+lv7IBX9oo+SPo7GxcHTNy7fdlL6HP8CFij98Y2PhxeZ3DM7wx/56AP4AFwr+CI2NfR7iD6iFgj9i9sEq/lj3O7R9q+ej8Ic2Kv5I2V7o+lbsOgtHn/X2WD0fhT+0GcUfKfdUUspasXo+Cn9o06M/crcXW1fiD1jp0R++a0++7cV+luL6Faz06I/Y61Ax24gdM1bgD2169IcvFoktd78ev58ILmb3R8qys9It+EObUfyxlL+8cv3hWnb0v7glaWg84w8tevfHwuX/cVEy1mv1y/0YwR/a9O6PFHwxRquYA39o07M/cuOElHUt0q1D8Ic2PfsjN05IWdc63YM/tFDwR+n2RgJ/aKHgj5jfPZyl38xyHugFBX+kxh8jM8t5oBcU/BEbf6TG46H/MiiN861S0KEXfyykxuOh/zIojfNrxezQjl78AdCCnvwBUBv8AXBMi3O3dZxN+jiFfKz84bunceSPs+Js0scp5KMQf4ANtHM5CvEH2EA7l4M/xoV2LkfBHy3j1daxc2gfY9d3xXv4oxwFf7SMV1vHzkdp7r38LfijHAV/1MLnj95x1QN/lKPgj1p91OeP3sEfNij4o1YfxR+QCv6oU7Y1+MMG/FGnbGvwhw34o07Z1uAPG/BHnbKtwR824I86ZVuDP2zAH3XKtgZ/2IA/6pRtDf6wAX/UKdsa/GGDgj9ifh/uDPAHpKLgj/X5QGvwB6Si4A/ij3Lwhw0K/iD+KAd/2IA/6pRtDf6wAX/UKdsa/GED/qhTtjX4wwb8Uadsa/CHDb35I3TMU8alb/2Scs5cJ7aP5/gjta1KluW2c2t688dZ/WnlqE69jY8cfzA+wszkj5TfwOltfOAPG2byR0r80dv4wB82zOQP4o/4bTM+HsAf55dz5jr4oy29+aOEFH/0Ro4/IExv/ighxR+9keMPCIM/6pRtDf6wAX/UKdsa/GED/qhTtjX4wwb8Uadsa/CHDfijTtnW4A8b8Eedsq3BHzbgjzplW4M/bJjdHy0I1T9nOmfsp7b7md9zyCm/BUr+WL9f++bkdMV1PJYyzy4vlN4ZTDM+bFDyx/o7WHc356bLGPD9Bt3Z5bVKj+p1BOMjjII/wIZQO6uNj+20ythR8AfY0Js/FMcH/hgX/FEO/hiX3tpZcXy09EdsanVda5a0FxTHR0t/xKZW17VmSXtBcXy08AeAC8Xx0cIfAL1g7Y9e0l73u/eYQx1rf/SSXkT2Y7aYQx3ON2NR678cZ8HKH9CGWv/lOAv067HAH+di5Q+ruFd9e7nbLd2PfX44B6v2tIp7z97efn9b7Wdpvfb1gHOYNf4Y5bw7Sj1UmbU9RznvjlIPVfCHe7oXRqmHKrO25yjn3VHqoQr+cE/3Qq/73Quztu8o5939fnP/41zwh3u6F0aphyqztueo/ui1Hqrgj77BH7ZYtaf65+BRPrfjD1us/KF+Huttf48YpR6qWH//SpVRzruj1EMV/OGe7oVR6qEK/nBP98Io9VAFf7ine2WUeqjQmz+Otpta3tnn3Vbn7f11N/xxLlbtWXvcldbDt78x227VL0f1oAop7Zny+UrdHynnXeXxQfxhi7U/zk73+3s0P3b/jqa3KI8P/GGLtT+s0qPntWNJOe8qjw/8Ycus7Yk/IAYrf7QgZR9q+eOb6/xvd6/vTmwr/GHLSO1Zci/Hcnz/fPP49cuJZeEPW/CHe/os8EffjNSeiv746aaNP1TS3gnV49Xts2evb8PrKrSHoj/+uG73z93rrwr+UEl7J1SPz69j44vbOvtSiqI/Ft57/vj1/om/sa5wXhqZUeKP1PJH+dze6373wijtO0o9oF9C/rjfLV+nt991Wt/fO+at6dvNsv023zryUx7lpZZ3v8uzXc+3jz5C99BePn+83+v08p9G+++DbNdd563/ffRuU+/9Nt9t8u/bKaW8z24f1lvSGuXVrh/lHZe3X295v6y3vr848gCALX9fx9o/19e/jDmAJ3xw9dGH19dH/EckwBM+vo6LT66vTxkfAE94dR0Xr5eYl/EBADAt/wEoDNXB
+   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
   </data>
  </layer>
  <layer name="level1-low" width="200" height="200">
@@ -66,12 +66,12 @@
    eJzt07kNADAIADEKJMrsv2224JHsCa65CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALpUThfAXs8fAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcMIH36gAHw==
   </data>
  </layer>
- <layer name="level2-object-high" width="200" height="200" visible="0">
+ <layer name="level2-object-high" width="200" height="200">
   <data encoding="base64" compression="zlib">
    eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwGcR4AAQ==
   </data>
  </layer>
- <objectgroup name="level0-obstacle" width="200" height="200" visible="0">
+ <objectgroup name="level0-obstacle" width="200" height="200">
   <object x="0" y="0" width="192" height="6240"/>
   <object x="384" y="256" width="32" height="192"/>
   <object x="192" y="0" width="6208" height="256"/>
@@ -150,9 +150,9 @@
   <object x="2880" y="1504" width="32" height="32"/>
   <object x="2048" y="1984" width="864" height="32"/>
   <object x="2016" y="1984" width="32" height="288"/>
-  <object x="2048" y="1856" width="832" height="32"/>
-  <object x="2624" y="992" width="288" height="32"/>
-  <object x="2176" y="992" width="288" height="32"/>
+  <object x="2048" y="1824" width="832" height="64"/>
+  <object x="2624" y="960" width="288" height="64"/>
+  <object x="2176" y="960" width="288" height="64"/>
   <object x="2144" y="256" width="32" height="768"/>
   <object x="2880" y="256" width="32" height="288"/>
   <object x="2880" y="704" width="32" height="608"/>
@@ -193,7 +193,7 @@
   <object x="2208" y="2176" width="32" height="32"/>
   <object x="2688" y="2176" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="level0-unwalkable" width="200" height="200" visible="0">
+ <objectgroup name="level0-unwalkable" width="200" height="200">
   <object x="544" y="352" width="320" height="160"/>
   <object x="544" y="576" width="320" height="160"/>
   <object x="960" y="576" width="320" height="160"/>
@@ -861,8 +861,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200" visible="0">
-  <object x="256" y="320" width="32" height="32">
+ <objectgroup name="level0-spawners" width="200" height="200">
+  <object x="256" y="320" width="64" height="64">
    <properties>
     <property name="interval" value="0"/>
     <property name="max" value="1"/>
@@ -871,7 +871,7 @@
     <property name="type" value="gaia-air"/>
    </properties>
   </object>
-  <object x="1952" y="1536" width="32" height="32">
+  <object x="1952" y="1504" width="64" height="64">
    <properties>
     <property name="interval" value="0"/>
     <property name="max" value="1"/>
@@ -970,22 +970,13 @@
     <property name="type" value="slime"/>
    </properties>
   </object>
-  <object x="1952" y="1344" width="32" height="32">
+  <object x="2208" y="2112" width="32" height="32">
    <properties>
-    <property name="interval" value="15"/>
-    <property name="max" value="3"/>
-    <property name="range" value="200"/>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="700"/>
     <property name="respawn" value="true"/>
-    <property name="type" value="slime"/>
-   </properties>
-  </object>
-  <object x="1952" y="1344" width="32" height="32">
-   <properties>
-    <property name="interval" value="15"/>
-    <property name="max" value="3"/>
-    <property name="range" value="500"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="slime"/>
+    <property name="type" value="eyeball"/>
    </properties>
   </object>
   <object x="1632" y="800" width="32" height="32">
@@ -1006,8 +997,441 @@
     <property name="type" value="bow knight"/>
    </properties>
   </object>
+  <object x="2688" y="2112" width="32" height="32">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="700"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="eyeball"/>
+   </properties>
+  </object>
+  <object x="2208" y="2656" width="32" height="32">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="700"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="eyeball"/>
+   </properties>
+  </object>
+  <object x="2688" y="2656" width="32" height="32">
+   <properties>
+    <property name="interval" value="30"/>
+    <property name="max" value="1"/>
+    <property name="range" value="700"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="eyeball"/>
+   </properties>
+  </object>
+  <object x="2272" y="2304" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="3"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="2272" y="2304" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="2272" y="2560" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="2592" y="2336" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="2592" y="2592" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1856" y="2784" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1216" y="3136" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1184" y="2400" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="448" y="2720" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="480" y="4768" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="100"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1056" y="5120" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1856" y="6016" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="3456" y="6112" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="3552" y="4096" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1760" y="4096" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1120" y="5920" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="400"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1152" y="6080" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="400"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1312" y="5984" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1024" y="6048" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="400"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="960" y="5952" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="green-knight"/>
+   </properties>
+  </object>
+  <object x="1152" y="5984" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="400"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1248" y="6112" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="eyeball"/>
+   </properties>
+  </object>
+  <object x="896" y="6112" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="300"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="eyeball"/>
+   </properties>
+  </object>
+  <object x="1344" y="6048" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="600"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="eyeball"/>
+   </properties>
+  </object>
+  <object x="5184" y="416" width="32" height="32">
+   <properties>
+    <property name="interval" value="0"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="bow-knight"/>
+   </properties>
+  </object>
+  <object x="5184" y="1216" width="32" height="32">
+   <properties>
+    <property name="interval" value="0"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="bow-knight"/>
+   </properties>
+  </object>
+  <object x="5408" y="928" width="32" height="32">
+   <properties>
+    <property name="interval" value="0"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="bow-knight"/>
+   </properties>
+  </object>
+  <object x="5408" y="928" width="32" height="32">
+   <properties>
+    <property name="interval" value="0"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="gold-knight"/>
+   </properties>
+  </object>
+  <object x="5408" y="704" width="32" height="32">
+   <properties>
+    <property name="interval" value="0"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="bow-knight"/>
+   </properties>
+  </object>
+  <object x="960" y="5952" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="300"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="green-knight"/>
+   </properties>
+  </object>
+  <object x="1312" y="5984" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="500"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1248" y="6112" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="450"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="eyeball"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="level1-spawners" width="200" height="200" visible="0"/>
+ <objectgroup name="level1-spawners" width="200" height="200">
+  <object x="2688" y="5664" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="green-knight"/>
+   </properties>
+  </object>
+  <object x="1888" y="5664" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="bow-knight"/>
+   </properties>
+  </object>
+  <object x="1888" y="5632" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="bow-knight"/>
+   </properties>
+  </object>
+  <object x="1136" y="5648" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="gold-knight"/>
+   </properties>
+  </object>
+  <object x="1056" y="4992" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="green-knight"/>
+   </properties>
+  </object>
+  <object x="1056" y="4096" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="green-knight"/>
+   </properties>
+  </object>
+  <object x="2016" y="4064" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="gold-knight"/>
+   </properties>
+  </object>
+  <object x="2144" y="4064" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="bow-knight"/>
+   </properties>
+  </object>
+  <object x="3328" y="4064" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="green-knight"/>
+   </properties>
+  </object>
+  <object x="4896" y="3488" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="gold-knight"/>
+   </properties>
+  </object>
+  <object x="4768" y="3488" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="green-knight"/>
+   </properties>
+  </object>
+  <object x="5024" y="3488" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="green-knight"/>
+   </properties>
+  </object>
+  <object x="4768" y="3488" width="32" height="32">
+   <properties>
+    <property name="interval" value="60"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="bow-knight"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="level2-spawners" width="200" height="200">
   <object x="4416" y="2176" width="32" height="32">
    <properties>

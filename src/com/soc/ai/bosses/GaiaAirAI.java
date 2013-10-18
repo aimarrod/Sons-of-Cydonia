@@ -57,10 +57,10 @@ public class GaiaAirAI extends AI{
 				EntityFactory.createWall(e, 9, 5, 0).addToWorld();
 				EntityFactory.createWall(e, 10, 5, 0).addToWorld();
 				EntityFactory.createWall(e, 11, 5, 0).addToWorld();
-				EntityFactory.createWall(e, 12, 185, 0).addToWorld();
-				EntityFactory.createWall(e, 12, 184, 0).addToWorld();
-				EntityFactory.createWall(e, 12, 183, 0).addToWorld();
-				EntityFactory.createWall(e, 12, 182, 0).addToWorld();
+				EntityFactory.createWall(e, 13, 185, 0).addToWorld();
+				EntityFactory.createWall(e, 13, 184, 0).addToWorld();
+				EntityFactory.createWall(e, 13, 183, 0).addToWorld();
+				EntityFactory.createWall(e, 13, 182, 0).addToWorld();
 
 				
 		    	init = true;

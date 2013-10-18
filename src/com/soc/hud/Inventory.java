@@ -112,15 +112,18 @@ public class Inventory extends Actor implements InputProcessor {
 			} else {
 				focusedSlot++;
 			}
-		} else {
-			if (Gdx.input.isKeyPressed(Keys.E)) {
+		} else if (Gdx.input.isKeyPressed(Keys.E)) {
 				Item item = SoC.game.playermapper.get(SoC.game.player).inventary[focusedSlot - 1];
 				if (item != null) {
 					item.use();
 				}
 				return true;
+		} else if(Gdx.input.isKeyPressed(Keys.B)) {
+			Item item = SoC.game.playermapper.get(SoC.game.player).inventary[focusedSlot - 1];
+			if (item != null) {
+				SoC.game.playermapper.get(SoC.game.player).removeFromInventary(item);
 			}
-
+			return true;
 		}
 		return false;
 	}

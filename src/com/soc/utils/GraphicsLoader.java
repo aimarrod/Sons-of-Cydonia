@@ -344,11 +344,13 @@ public class GraphicsLoader {
 	
 	public static void loadMaggot(Character character){
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		DirectionalAnimatedRenderer idle = new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		TextureRegion[][] tmp = TextureRegion.split(load("maggot-walk.png"), 32, 32);
 		for(int i = 0; i < tmp.length; i++){
 	   		move.animations[i] = new Animation(0.2f/tmp[i].length, tmp[i]);
+	   		idle.animations[i] = new Animation(1f/tmp[i].length, tmp[i]);
 	   	}
 		
 		tmp = TextureRegion.split(load("blood-spill.png"), 32, 32);
@@ -362,6 +364,7 @@ public class GraphicsLoader {
 		death.animation = new Animation(0.5f/deathFrames.length, deathFrames);
 		character.deathTime=0.5f;
 		
+		character.renderers[State.IDLE] = idle;
 		character.renderers[State.WALK] = move;
 		character.renderers[State.DYING] = death;
 		
@@ -1292,6 +1295,22 @@ public class GraphicsLoader {
         }
         flame.animation = new Animation(0.05f, frames);
         return flame;
+	}
+	
+	public static AnimatedRenderer loadLevelUp(){
+		AnimatedRenderer up = new AnimatedRenderer(false);
+		up.ox=-48;
+		up.oy-=25;
+		TextureRegion[][] tmp = TextureRegion.split(load("level-up.png"), 128,128);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        up.animation = new Animation(1f/frames.length, frames);
+        return up;
 	}
 
 }

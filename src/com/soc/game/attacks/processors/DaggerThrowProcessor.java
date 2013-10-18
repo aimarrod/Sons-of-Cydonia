@@ -34,15 +34,14 @@ public class DaggerThrowProcessor implements AttackProcessor{
 		this.renderer = GraphicsLoader.loadDaggerThrow();
 		this.range = Constants.Spells.DAGGER_RANGE;
 		this.backing = false;
+		this.sounded = false;
 		this.source = source;
-		
-		
 	}
 
 	@Override 
 	public void process(Entity attack) {
 		if(!sounded){
-			EffectsPlayer.play("throw.ogg");
+			EffectsPlayer.playLooping("throw.ogg");
 			sounded = true;
 		}
 		
@@ -50,6 +49,7 @@ public class DaggerThrowProcessor implements AttackProcessor{
 		Velocity v = SoC.game.velocitymapper.get(attack);
 		
 		range -= Math.abs(v.speed*SoC.game.world.delta);
+
 		
 		if(0 > range && !backing){
 			backing = true;
@@ -74,8 +74,10 @@ public class DaggerThrowProcessor implements AttackProcessor{
 			}
 		}
 		
-		if(reached)
+		if(reached){
+			delete();
 			attack.deleteFromWorld(); 
+		}
 	}
 
 	@Override
@@ -84,7 +86,6 @@ public class DaggerThrowProcessor implements AttackProcessor{
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
-		State state = SoC.game.statemapper.get(victim);
 		
 		return (!hit.contains(victim) && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	}
@@ -107,12 +108,10 @@ public class DaggerThrowProcessor implements AttackProcessor{
 		Position pos = SoC.game.positionmapper.get(attack);
 		Bounds bounds = SoC.game.boundsmapper.get(attack);
 		sprite.draw(renderer.frame(SoC.game.world.delta),pos.x,pos.y,bounds.width, bounds.height);
-		
 	}
 
 	@Override
 	public void delete() {
-		// TODO Auto-generated method stub
-		
+		EffectsPlayer.stop("throw.ogg");		
 	}
 }

@@ -51,9 +51,9 @@ public class HudSystem extends VoidEntitySystem{
 	
 	public void setViewport(int width, int height){
 		stage.setViewport(width, height, true);
-		statusBar.setPosition(10, height - 65);
+		statusBar.setPosition(10, height - 70);
 		inventory.setPosition(10, 150);
-		characterMenu.setPosition(10, height-280);
+		characterMenu.setPosition(215, height-205);
 		gameMenu.setPosition(width/2,height/2+50 );
 		gameMenu.setViewport(height);
 		tooltip.setBounds(width-350, 20, 200, 200);
