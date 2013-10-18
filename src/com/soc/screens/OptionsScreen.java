@@ -8,12 +8,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.soc.core.SoC;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GameLoader;
 import com.soc.utils.MusicManager;
 import com.soc.utils.MusicPlayer;
@@ -21,9 +24,12 @@ import com.soc.utils.MusicPlayer;
 
 public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	private Texture background;
-	private	Slider slider;
+	private	Slider music;
+	private Slider effects;
 	private Label labelMusic;
 	private Label labelResolution;
+	private Label labelEffects;
+	private CheckBox fullScreen;
 	private int width=1440;
 	private int height=900;
 	private TextButton returnButton;
@@ -32,17 +38,13 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	public OptionsScreen(SoC game) {
 		super(game);
 		this.background=new Texture(Gdx.files.internal("resources/background.jpg"));
-		this.slider=new Slider(0,10,1,false,getSkin());
-		this.slider.setX(200);
-		this.slider.setY(height-150);
-		this.slider.setWidth(390);
-		this.slider.setValue(MusicPlayer.instance.volume*10);
-		this.labelMusic=new Label("music configuration",skin);
-		this.labelMusic.setX(200);
-		this.labelMusic.setY(height-100);
+		this.music=new Slider(0,10,1,false,getSkin());
+		this.music.setValue(MusicPlayer.instance.volume*10);
+		this.effects=new Slider(0,10,1,false,getSkin());
+		this.effects.setValue(EffectsPlayer.instance.volume*10);
+		this.labelMusic=new Label("music",skin);
+		this.labelEffects=new Label("effects",skin);
 		this.labelResolution=new Label("resolution",skin);
-		this.labelResolution.setX(200);
-		this.labelResolution.setY(height-300);
 		normalStyle=new TextButtonStyle();
 		normalStyle.font=getSkin().getFont("buttonFont");
 		normalStyle.up=getSkin().getDrawable("normal-button");
@@ -52,10 +54,17 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		focusedStyle.up=getSkin().getDrawable("focused-button");
 		focusedStyle.down=getSkin().getDrawable("pushed-button");
 		returnButton = new TextButton( "Return", focusedStyle);
-		returnButton.setX(width-300);
-		returnButton.setY(0);
-		returnButton.setWidth(200);
-		stage.addActor(slider);
+		CheckBoxStyle cbStyle=new CheckBoxStyle();
+		cbStyle.checkboxOff=getSkin().getDrawable("check-off");
+		cbStyle.checkboxOn=getSkin().getDrawable("check-on");
+		cbStyle.font=getSkin().getFont("buttonFont");
+		cbStyle.font.setScale(0.5f, 0.5f);
+		cbStyle.fontColor=getSkin().getColor("white");
+		fullScreen=new CheckBox("FullScreen", cbStyle);
+		stage.addActor(fullScreen);
+		stage.addActor(music);
+		stage.addActor(effects);
+		stage.addActor(labelEffects);
 		stage.addActor(labelMusic);
 		stage.addActor(labelResolution);
 		stage.addActor(returnButton);
@@ -64,11 +73,11 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	
 	public void show(){
 		 super.show();
-		 slider.addListener( new ChangeListener() {
+		 music.addListener( new ChangeListener() {
 
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				MusicPlayer.instance.volume=slider.getValue()/10;
+				MusicPlayer.instance.volume=music.getValue()/10;
 			}
 	        } );
 		 
@@ -94,12 +103,49 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	            }
 
 	        } );
+	        fullScreen.addListener(new ChangeListener(){
+
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					if(fullScreen.isChecked()){
+						Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
+					}else{
+						Gdx.graphics.setDisplayMode(1280, 720, false);
+					}
+					
+				}
+	        	
+	        });
+	        effects.addListener( new ChangeListener() {
+
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					EffectsPlayer.instance.volume=music.getValue()/10;
+				}
+		        } );
 	}
 	
 	public void resize(int width, int height) {
 		super.resize(width, height);
 		this.width=width;
 		this.height=height;
+		this.returnButton.setX(width-1000);
+		this.returnButton.setY(height-400);
+		this.returnButton.setWidth(200);
+		this.labelResolution.setX(width-1000);
+		this.labelResolution.setY(height-300);
+		this.labelEffects.setX(width-1000);
+		this.labelEffects.setY(height-200);
+		this.labelMusic.setX(width-1000);
+		this.labelMusic.setY(height-100);
+		this.effects.setX(width-1000);
+		this.effects.setY(height-250);
+		this.effects.setWidth(390);
+		this.music.setX(width-1000);
+		this.music.setY(height-150);
+		this.music.setWidth(390);
+		this.fullScreen.setX(width-1000);
+		this.fullScreen.setY(height-350);
 	}
 	@Override
 	public boolean keyDown(int keycode) {

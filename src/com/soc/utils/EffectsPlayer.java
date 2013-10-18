@@ -10,9 +10,11 @@ public class EffectsPlayer {
 
 	public HashMap<String, Sound> sounds;
 	public static EffectsPlayer instance;
+	public float volume;
 	
 	private EffectsPlayer(){
 		sounds = new HashMap<String, Sound>();
+		volume=0.5f;
 	}
 	
 	public static void initialize(){
