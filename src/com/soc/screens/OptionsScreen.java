@@ -49,7 +49,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		super(game);
 		resolutions=new ArrayList<Resolution>();
 		for(int i=0;i<Gdx.graphics.getDisplayModes().length;i++){
-			if((Gdx.graphics.getDisplayModes())[i].height>=600){
+			if((Gdx.graphics.getDisplayModes())[i].height>600){
 				resolutions.add(new Resolution(Gdx.graphics.getDisplayModes()[i].width,Gdx.graphics.getDisplayModes()[i].height));
 			}
 		}
