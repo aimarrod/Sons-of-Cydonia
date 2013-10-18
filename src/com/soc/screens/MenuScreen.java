@@ -17,7 +17,6 @@ import com.soc.utils.GameLoader;
 public class MenuScreen extends AbstractScreen implements InputProcessor{
 	private Texture background;
 	private int focusedBotton;
-	private Texture handT;
 	private TextButton startGameButton;
 	private TextButton loadGameButton;
 	private TextButton optionsButton;
@@ -28,7 +27,6 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 	public MenuScreen(SoC game) {
 		super(game);
 		background=new Texture(Gdx.files.internal("resources/background.jpg"));
-		handT=new Texture(Gdx.files.internal("resources/hand.png"));
 		normalStyle=new TextButtonStyle();
 		normalStyle.font=getSkin().getFont("buttonFont");
 		normalStyle.up=getSkin().getDrawable("normal-button");
@@ -216,7 +214,6 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 	        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	        batch.begin();
 	        batch.draw(background, 0, 0, Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
-	        batch.draw(handT, buttons[focusedBotton-1].getX()-20, buttons[focusedBotton-1].getY()+13, 0,0,20,20);
 	        buttons[focusedBotton-1].setStyle(focusedStyle);
 	        //Update delta and draw the actors inside the stage
 	        batch.end();

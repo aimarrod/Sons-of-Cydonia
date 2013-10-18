@@ -26,6 +26,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	private Texture background;
 	private	Slider music;
 	private Slider effects;
+	private Slider resolution;
 	private Label labelMusic;
 	private Label labelResolution;
 	private Label labelEffects;
@@ -69,6 +70,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		stage.addActor(labelResolution);
 		stage.addActor(returnButton);
 		SoC.game.inputMultiplexer.addProcessor(this);
+		
 	}
 	
 	public void show(){
