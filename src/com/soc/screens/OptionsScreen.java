@@ -64,7 +64,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		currentValue=0;
 		String actualRes=Gdx.graphics.getWidth()+"x"+Gdx.graphics.getHeight();
 		for(int i=0;i<resolutions.size()&& !found;i++){
-			if(actualRes.equals(resolutions.get(i))){
+			if(actualRes.equals(resolutions.get(i).toString())){
 				found=true;
 				currentValue=i;
 			}
@@ -80,7 +80,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		LabelStyle lStyle=new LabelStyle();
 		lStyle.font=skin.getFont("numberFont");
 		lStyle.fontColor=skin.getColor("white");
-		this.resolutionsLabel=new Label(resolutions.get(0).toString(),lStyle);
+		this.resolutionsLabel=new Label(resolutions.get(currentValue).toString(),lStyle);
 		this.resolutionsLabel.setScale(1f, 1f);
 		this.resolution=new Slider(0,resolutions.size()-1,1,false,getSkin());
 		this.resolution.setValue(currentValue);
