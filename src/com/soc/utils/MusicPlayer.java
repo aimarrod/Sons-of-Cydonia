@@ -85,4 +85,9 @@ public class MusicPlayer {
 		}
 		instance.loaded.clear();
 	}
+	
+    public static void setVolume(float volume){
+    	instance.volume = volume;
+    	instance.current.setVolume(volume);
+    }
 }

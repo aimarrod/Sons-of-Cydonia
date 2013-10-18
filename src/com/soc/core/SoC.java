@@ -242,7 +242,7 @@ public class SoC extends Game {
 		renderSystem = SoC.game.world.setSystem( new RenderSystem(camera), true );
 		hudSystem = SoC.game.world.setSystem(new HudSystem(camera),true);
 				
-		//Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
+		Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 		screens=new Stack<Screen>();
 		processors = new Stack<InputProcessor>();
 				
@@ -292,7 +292,8 @@ public class SoC extends Game {
 		cfg.width = FRAME_WIDTH;
 		cfg.height = FRAME_HEIGHT;
 		cfg.useGL20 = true;
-		//cfg.resizable = false;
+		cfg.resizable = false;
+		//cfg.fullscreen = true;
 		cfg.title = "GameXYZ";
 		new LwjglApplication(new SoC(), cfg);
 	}

@@ -38,10 +38,16 @@ public class ZombiAI extends AI{
 
 	@Override
 	public void death(Entity e) {
-		Position p = SoC.game.positionmapper.get(e);
-		Entity spawned = EntityFactory.createPoisonCloud(p, SoC.game.boundsmapper.get(e));
+		Position pos = SoC.game.positionmapper.get(e);
+		Entity spawned = EntityFactory.createPoisonCloud(pos, SoC.game.boundsmapper.get(e));
 		SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
 		SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-		SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +(p.z+1));
+		SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +(pos.z+1));
+		if(AI.rng.nextFloat() < 0.1){
+			EntityFactory.createItem(Constants.Items.ANTIDOTE, pos.x, pos.y, pos.z).addToWorld();
+		}
+		if(AI.rng.nextFloat() < 0.1){
+			EntityFactory.createItem(Constants.Items.MIX_POTION, pos.x, pos.y, pos.z).addToWorld();
+		}
 	}
 }

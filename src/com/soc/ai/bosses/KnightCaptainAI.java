@@ -54,5 +54,8 @@ public class KnightCaptainAI extends AI{
 	@Override
 	public void death(Entity e) {
 		SoC.game.progress.knightCaptainDefeated = true;
+		Position pos = SoC.game.positionmapper.get(e);
+			EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
+			EntityFactory.createItem(Constants.Items.GOLD_AXE, pos.x, pos.y, pos.z).addToWorld();
 	}
 }

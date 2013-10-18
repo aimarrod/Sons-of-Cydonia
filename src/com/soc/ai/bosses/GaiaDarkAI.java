@@ -49,6 +49,8 @@ public class GaiaDarkAI extends AI{
 	@Override
 	public void death(Entity e) {
 		SoC.game.progress.gaiaDarkDefeated=true;
+		Position pos = SoC.game.positionmapper.get(e);
+		EntityFactory.createItem(Constants.Items.IRON_HELM, pos.x, pos.y, pos.z).addToWorld();	
 	}
 
 }

@@ -32,7 +32,8 @@ public class EffectsPlayer {
 			sound = Gdx.audio.newSound(Gdx.files.internal("resources/effects/"+name));
 			instance.sounds.put(name, sound);
 		}
-		sound.play();
+		System.out.println(instance.volume);
+		sound.play(instance.volume);
 	}
 	
 	public static void playLooping(String name){
@@ -42,7 +43,7 @@ public class EffectsPlayer {
 			sound = Gdx.audio.newSound(Gdx.files.internal("resources/effects/"+name));
 			instance.sounds.put(name, sound);
 		}
-		sound.loop();
+		sound.loop(instance.volume);
 	}
 	
 	public static void stop(String name){

@@ -5,6 +5,7 @@ import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Stats;
+import com.soc.utils.EffectsPlayer;
 
 public class LavaBurn implements Alteration{
 
@@ -23,6 +24,7 @@ public class LavaBurn implements Alteration{
 		Stats stats=SoC.game.statsmapper.get(e);
 		float damage=stats.health*Constants.Alteration.LAVA_BURN_DAMAGE;
 		if(interval <= 0){
+			EffectsPlayer.play("foom.ogg");
 			interval = Constants.Alteration.LAVA_BURN_TICK_INTERVAL;
 			if(SoC.game.damagemapper.has(e)){
 				SoC.game.damagemapper.get(e).pureDamage+=damage;

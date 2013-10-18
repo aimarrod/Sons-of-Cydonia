@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
@@ -35,8 +34,6 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	private Label labelEffects;
 	private Label resolutionsLabel;
 	private CheckBox fullScreen;
-	private int width;
-	private int height;
 	private TextButton returnButton;
 	private TextButtonStyle normalStyle;
 	private TextButtonStyle focusedStyle;
@@ -119,7 +116,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				MusicPlayer.instance.volume=music.getValue()/10;
+				MusicPlayer.instance.setVolume(music.getValue()/10);
 			}
 	        } );
 		 
@@ -171,7 +168,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 
 				@Override
 				public void changed(ChangeEvent event, Actor actor) {
-					EffectsPlayer.instance.volume=music.getValue()/10;
+					EffectsPlayer.instance.volume=effects.getValue()/10;
 				}
 		        } );
 	        
@@ -188,8 +185,6 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	
 	public void resize(int width, int height) {
 		super.resize(width, height);
-		this.width=width;
-		this.height=height;
 		this.returnButton.setX(width-800);
 		this.returnButton.setY(height-550);
 		this.returnButton.setWidth(200);

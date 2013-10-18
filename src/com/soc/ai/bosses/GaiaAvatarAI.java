@@ -108,6 +108,8 @@ public class GaiaAvatarAI extends AI{
 	@Override
 	public void death(Entity e) {
 		SoC.game.progress.gaiaAvatarDefeated=true;		
+		Position pos = SoC.game.positionmapper.get(e);
+		EntityFactory.createItem(Constants.Items.MIX_POTION, pos.x, pos.y, pos.z).addToWorld();
 	}
 
 }

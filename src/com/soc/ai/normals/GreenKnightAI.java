@@ -8,7 +8,9 @@ import com.soc.ai.modules.AIModule;
 import com.soc.ai.modules.BasicFollowing;
 import com.soc.ai.modules.SpellAttack;
 import com.soc.core.Constants;
+import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
+import com.soc.game.components.Position;
 import com.soc.game.components.State;
 
 public class GreenKnightAI extends AI{
@@ -28,7 +30,12 @@ public class GreenKnightAI extends AI{
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
-		
+		Position pos = SoC.game.positionmapper.get(e);
+		if(AI.rng.nextFloat() < 0.2){
+			EntityFactory.createItem(Constants.Items.HEALTH_POTION, pos.x, pos.y, pos.z).addToWorld();
+		}		
+		if(AI.rng.nextFloat() < 0.02){
+			EntityFactory.createItem(Constants.Items.HEALTH_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
+		}	
 	}
 }

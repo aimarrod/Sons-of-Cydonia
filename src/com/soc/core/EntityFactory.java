@@ -259,7 +259,7 @@ public class EntityFactory {
 	    e.addComponent(new Velocity(0,0,100));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(1));
-	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.BITE, new int[]{}, Constants.Groups.ZOMBIES));
+	    e.addComponent(new Stats(10, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, Constants.Spells.BITE, new int[]{}, Constants.Groups.ZOMBIES));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new Enemy(10, new ZombiAI()));
 	    
@@ -276,11 +276,11 @@ public class EntityFactory {
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent(new Position(px, py, pz));
-		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Velocity(0,0,160));
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));
-		e.addComponent(new Enemy(50, new GreenKnightAI()));
+		e.addComponent(new Enemy(75, new GreenKnightAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -288,10 +288,10 @@ public class EntityFactory {
 				100, 
 				0, 
 				0, 
-				1, 
-				0, 
-				0, 
-				0, 
+				5, 
+				4, 
+				20, 
+				30, 
 				0, 
 				Constants.Spells.CHARGE, 
 				null,
@@ -309,22 +309,22 @@ public class EntityFactory {
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent(new Position(px, py, pz));
-		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Velocity(0,0,130));
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));
-		e.addComponent(new Enemy(50, new GoldBowKnightAI()));
+		e.addComponent(new Enemy(75, new GoldBowKnightAI()));
 		e.addComponent(new Stats(
-				100, 
+				60, 
 				0, 
 				0, 
-				100, 
+				60, 
 				0, 
 				0, 
-				1, 
-				0, 
-				0, 
-				0, 
+				5, 
+				5, 
+				10, 
+				40, 
 				0, 
 				Constants.Spells.ARROW, 
 				null,
@@ -342,11 +342,11 @@ public class EntityFactory {
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent(new Position(px, py, pz));
-		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Velocity(0,0,160));
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));
-		e.addComponent(new Enemy(50, new GoldKnightAI()));
+		e.addComponent(new Enemy(100, new GoldKnightAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -354,10 +354,10 @@ public class EntityFactory {
 				100, 
 				0, 
 				0, 
-				1, 
-				0, 
-				0, 
-				0, 
+				5, 
+				5, 
+				30, 
+				20, 
 				0, 
 				Constants.Spells.WHIRLBLADE, 
 				null,
@@ -375,23 +375,23 @@ public class EntityFactory {
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent(new Position(px, py, pz));
-		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Velocity(0,0,150));
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));
-		e.addComponent(new Enemy(50, new KnightCaptainAI()));
+		e.addComponent(new Enemy(800, new KnightCaptainAI()));
 		e.addComponent(new Stats(
-				100, 
+				300, 
 				0, 
 				0, 
-				100, 
+				300, 
 				0, 
 				0, 
-				1, 
-				0, 
-				0, 
-				0, 
-				0, 
+				10, 
+				10, 
+				25, 
+				25, 
+				25, 
 				Constants.Spells.SLASH, 
 				null,
 				Constants.Groups.KNIGHT_CAPTAIN));
@@ -430,7 +430,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(128, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(5, new GaiaAirAI()));
+		e.addComponent(new Enemy(250, new GaiaAirAI()));
 		e.addComponent(new Stats(
 				50, 
 				0, 
@@ -463,7 +463,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(128, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(5, new GaiaDarkAI()));
+		e.addComponent(new Enemy(250, new GaiaDarkAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -496,7 +496,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(128, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(5, new GaiaFlameAI()));
+		e.addComponent(new Enemy(300, new GaiaFlameAI()));
 		e.addComponent(new Stats(
 				200, 
 				0, 
@@ -529,7 +529,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(128, 128));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(5, new GaiaAI()));
+		e.addComponent(new Enemy(600, new GaiaAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -563,7 +563,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(5, new GaiaAvatarAI()));
+		e.addComponent(new Enemy(0, new GaiaAvatarAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -723,20 +723,20 @@ public class EntityFactory {
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 		e.addComponent(new Feet(32, 10));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(5, new BlackMageAI()));
+		e.addComponent(new Enemy(1000, new BlackMageAI()));
 		e.addComponent(new Flying());
 		e.addComponent(new Stats(
-				100, 
+				200, 
 				0, 
 				0, 
-				100, 
+				200, 
 				0, 
 				0, 
-				1, 
+				10, 
+				6, 
 				0, 
 				0, 
-				0, 
-				0, 
+				20, 
 				0, 
 				null,
 				Constants.Groups.BLACK_MAGE));

@@ -20,6 +20,7 @@ import com.soc.game.components.Position;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.graphics.Renderer;
 import com.soc.game.states.alterations.Poison;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GraphicsLoader;
 
 public class MeteorProcessor implements AttackProcessor {
@@ -57,6 +58,10 @@ public class MeteorProcessor implements AttackProcessor {
 			return;
 		}
 		if(distance <= 0){
+			if(!sounded){
+				EffectsPlayer.play("spell-explosion.ogg");
+				sounded=true;
+			}
 			timer-= SoC.game.world.delta;
 			if(timer <= 0){
 				radius += Constants.Spells.METEOR_RADIUS_INCREASE;

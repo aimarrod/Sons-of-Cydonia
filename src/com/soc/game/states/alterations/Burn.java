@@ -4,6 +4,7 @@ import com.artemis.Entity;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Damage;
+import com.soc.utils.EffectsPlayer;
 
 public class Burn implements Alteration{
 
@@ -20,6 +21,7 @@ public class Burn implements Alteration{
 		timer -= SoC.game.world.delta;
 		interval -= SoC.game.world.delta;
 		if(interval <= 0){
+			EffectsPlayer.play("foom.ogg");
 			interval = Constants.Alteration.BURN_TICK_INTERVAL;
 			if(SoC.game.damagemapper.has(e)){
 				SoC.game.damagemapper.get(e).pureDamage+=Constants.Alteration.BURN_DAMAGE;

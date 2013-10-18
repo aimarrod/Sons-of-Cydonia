@@ -54,6 +54,9 @@ public class GaiaFlameAI extends AI{
 	@Override
 	public void death(Entity e) {
 		SoC.game.progress.gaiaFlameDefeated=true;		
+		Position pos = SoC.game.positionmapper.get(e);
+		EntityFactory.createItem(Constants.Items.IRON_AXE, pos.x, pos.y, pos.z).addToWorld();
+		EntityFactory.createItem(Constants.Items.GOLD_HELM, pos.x, pos.y, pos.z).addToWorld();	
 	}
 
 }

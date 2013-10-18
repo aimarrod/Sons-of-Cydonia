@@ -13,13 +13,14 @@ import com.soc.game.components.Damage;
 import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
 import com.soc.game.graphics.AnimatedRenderer;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GraphicsLoader;
 
 public class RedPushAttackProcessor implements AttackProcessor{
 	public AnimatedRenderer renderer;
 	public Entity hit;
 	public float deathTimer;
-	boolean isOver;
+	boolean isOver, sounded;
 	public RedPushAttackProcessor(){
 		renderer=GraphicsLoader.loadRedPush();
 		deathTimer=2f;
@@ -28,6 +29,10 @@ public class RedPushAttackProcessor implements AttackProcessor{
 	}
 	@Override
 	public void process(Entity attack) {
+		if(!sounded){
+			EffectsPlayer.play("spell-explosion.ogg");
+			sounded=true;
+		}
 		if(isOver){
 			deathTimer-=SoC.game.world.delta;
 			if(deathTimer<=0)attack.deleteFromWorld();
