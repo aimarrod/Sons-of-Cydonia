@@ -58,6 +58,7 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 		cbStyle.checkboxOff=getSkin().getDrawable("check-off");
 		cbStyle.checkboxOn=getSkin().getDrawable("check-on");
 		cbStyle.font=getSkin().getFont("buttonFont");
+		cbStyle.font.setScale(0.5f, 0.5f);
 		cbStyle.fontColor=getSkin().getColor("white");
 		fullScreen=new CheckBox("FullScreen", cbStyle);
 		stage.addActor(fullScreen);
@@ -102,7 +103,19 @@ public class OptionsScreen extends AbstractScreen implements InputProcessor{
 	            }
 
 	        } );
-	        
+	        fullScreen.addListener(new ChangeListener(){
+
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					if(fullScreen.isChecked()){
+						Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
+					}else{
+						Gdx.graphics.setDisplayMode(1280, 720, false);
+					}
+					
+				}
+	        	
+	        });
 	        effects.addListener( new ChangeListener() {
 
 				@Override
