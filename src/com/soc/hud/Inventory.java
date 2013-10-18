@@ -211,11 +211,12 @@ public class Inventory extends Actor implements InputProcessor {
 					posX = getX() + 256;
 				}
 			}
-		} else {
-			focusedSlot = 1;
-			parent.tooltip.setText(null, 0);
+		} 
+		//else {
+			//focusedSlot = 1;
+			//parent.tooltip.setText(null, 0);
 
-		}
+		//}
 		return false;
 	}
 

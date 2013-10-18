@@ -63,6 +63,7 @@ public class HudSystem extends VoidEntitySystem{
 			stage.addActor(inventory);
 			SoC.game.inputMultiplexer.addProcessor(inventory);
 		}else{
+			tooltip.setText(null, 0);
 			inventory.remove();
 			SoC.game.inputMultiplexer.removeProcessor(inventory);
 		}
