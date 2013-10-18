@@ -71,6 +71,14 @@ public class TooltipBox extends Actor{
 		this.dissapearing=false;
 	}
 	
+	//Compare items
+	public void setForWeapong(String text, int armor, float appearTime){
+		if(this.text == text || blocked) return;
+		this.text = text;
+		this.timer = 1 - appearTime;
+		this.dissapearing=false;
+	}
+	
 	public void pop(String text, float appearTime, float duration){
 		this.duration = duration;
 		this.timer = 1 - appearTime;

@@ -426,7 +426,7 @@ public class CollisionSystem extends VoidEntitySystem {
 				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_DIALOG) {
 					Dialog dialog = ((DialogTile) SoC.game.map.tiles[pos.z][centerx][centery]).dialog;
 					if(!dialog.popped){
-						SoC.game.hudSystem.tooltip.pop(dialog.text, 1f, 5f);
+						SoC.game.hudSystem.tooltip.pop(dialog.text, 1f, 15f);
 						dialog.popped = true;
 					}
 					return;
