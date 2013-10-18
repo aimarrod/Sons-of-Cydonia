@@ -1,6 +1,5 @@
 package com.soc.game.systems;
 
-import com.artemis.Component;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
@@ -33,6 +32,7 @@ import com.soc.game.map.Push;
 import com.soc.game.map.Stairs;
 import com.soc.game.states.alterations.Burn;
 import com.soc.game.states.benefits.Unmovable;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.FloatingText;
 import com.soc.utils.MapLoader;
 
@@ -83,7 +83,6 @@ public class CollisionSystem extends VoidEntitySystem {
 		collisionGroups.add(new CharacterMapCollision());
 		collisionGroups.add(new ProjectileMapCollision());
 		collisionGroups.add(new DropPicking());
-		
 	}
 
 	@Override
@@ -106,6 +105,7 @@ public class CollisionSystem extends VoidEntitySystem {
 
 		ImmutableBag<Entity> items;
 		float timer;
+		boolean sounded;
 		
 		public DropPicking(){
 			items = SoC.game.groupmanager.getEntities(Constants.Groups.ITEMS);
@@ -117,6 +117,9 @@ public class CollisionSystem extends VoidEntitySystem {
 				timer -= SoC.game.world.delta;
 				for (int i = 0; i < items.size(); i++) {
 					process(items.get(i));
+				}
+				if(timer <= 0){
+					sounded = false;
 				}
 			}
 
@@ -134,6 +137,10 @@ public class CollisionSystem extends VoidEntitySystem {
 					Player p = SoC.game.playermapper.get(SoC.game.player);
 					if(p.addToInventary(SoC.game.items[SoC.game.dropmapper.get(item).item])) {
 						item.deleteFromWorld();
+						if(!sounded){
+							EffectsPlayer.play("pickup.ogg");
+							sounded = true;
+						}
 					} else if(timer <= 0){
 						FloatingText text = new FloatingText("Inventory is full.", 1f, pos.x, pos.y, 50);
 						text.b = 0;
@@ -142,7 +149,7 @@ public class CollisionSystem extends VoidEntitySystem {
 						SoC.game.renderSystem.texts.add(text);
 						timer = 1f;
 					}
-				}		
+				}	
 		}
 		
 	}
@@ -256,11 +263,15 @@ public class CollisionSystem extends VoidEntitySystem {
 					otherfeet.width, otherfeet.heigth);
 			if (nexty.overlaps(otherrect)) {
 				v.vy = 0;
-				pos.direction.y=0;
+				if(v.vx != 0){
+					pos.direction.y=0;
+				}
 			}
 			if (nextx.overlaps(otherrect)) {
 				v.vx = 0;
-				pos.direction.x=0;
+				if(v.vy != 0){
+					pos.direction.x=0;
+				}
 			}
 			if(current.overlaps(otherrect)){
 				v.vx = v.speed * (Math.abs(otherrect.x - current.x));
@@ -360,13 +371,19 @@ public class CollisionSystem extends VoidEntitySystem {
 					|| SoC.game.map.tiles[pos.z][nextleft][up].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][nextright][down].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][nextleft][down].type == World.TILE_OBSTACLE) {
-				v.vx = 0; pos.direction.x=0;
+				v.vx = 0; 
+				if(v.vy != 0){
+					pos.direction.x=0;
+				}
 			}
 			if (SoC.game.map.tiles[pos.z][rigth][nextup].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][left][nextup].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][rigth][nextdown].type == World.TILE_OBSTACLE
 					|| SoC.game.map.tiles[pos.z][left][nextdown].type == World.TILE_OBSTACLE) {
-				v.vy = 0; pos.direction.y=0;
+				v.vy = 0;
+				if(v.vx != 0){
+					pos.direction.y=0;
+				}
 			}
 			
 			if(!flm.has(e)){
@@ -374,13 +391,19 @@ public class CollisionSystem extends VoidEntitySystem {
 						|| SoC.game.map.tiles[pos.z][nextleft][up].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][nextright][down].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][nextleft][down].type == World.TILE_UNWALKABLE) {
-					v.vx = 0; pos.direction.x=0;
+					v.vx = 0; 
+					if(v.vy != 0){
+						pos.direction.x=0;
+					}
 				}
 				if (SoC.game.map.tiles[pos.z][rigth][nextup].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][left][nextup].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][rigth][nextdown].type == World.TILE_UNWALKABLE
 						|| SoC.game.map.tiles[pos.z][left][nextdown].type == World.TILE_UNWALKABLE) {
-					v.vy = 0; pos.direction.y=0;
+					v.vy = 0; 
+					if(v.vx != 0){
+						pos.direction.y=0;
+					}
 				}
 				
 				if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_LAVA) {
@@ -458,7 +481,7 @@ public class CollisionSystem extends VoidEntitySystem {
 
 				for (int b = 0; receivers.size() > b; b++) {
 					Entity enemy = receivers.get(b);
-					if (stm.get(enemy).state != State.DYING && stm.get(enemy).state != State.FALLING &&  attack.processor.collision(atk, enemy)) {
+					if (pm.get(atk).z == pm.get(enemy).z && stm.get(enemy).state != State.DYING && stm.get(enemy).state != State.FALLING &&  attack.processor.collision(atk, enemy)) {
 						attack.processor.handle(atk, enemy);
 					}
 				}
@@ -488,7 +511,7 @@ public class CollisionSystem extends VoidEntitySystem {
 
 				for (int b = 0; receivers.size() > b; b++) {
 					Entity enemy = receivers.get(b);
-					if (attack.processor.collision(atk, enemy)) {
+					if (pm.get(enemy).z == pm.get(atk).z && attack.processor.collision(atk, enemy)) {
 						enemy.deleteFromWorld();
 					}
 				}

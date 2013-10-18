@@ -129,7 +129,7 @@ public class EntityFactory {
 	public static Entity createSkeleton(float px, float py, int pz,int damage){
 		Entity e = SoC.game.world.createEntity();
 	    e.addComponent(new Position(px,py, pz));
-	    e.addComponent(new Velocity(0,0,100));
+	    e.addComponent(new Velocity(0,0,150));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(1));
 	    e.addComponent(new Stats(15, 0, 0, 15, 0, 0, 1, 0, 5, 5, 0, Constants.Spells.BONE_THROW, new int[]{}, Constants.Groups.SKELETONS));
@@ -148,7 +148,7 @@ public class EntityFactory {
 	public static Entity createMeleeSkeleton(float px, float py, int pz,int damage){
 		Entity e = SoC.game.world.createEntity();
 	    e.addComponent(new Position(px,py, pz));
-	    e.addComponent(new Velocity(0,0,100));
+	    e.addComponent(new Velocity(0,0,150));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new State(1));
 	    e.addComponent(new Stats(20, 0, 0, 20, 0, 0, 1, 0, 10, 5, 0, Constants.Spells.SLASH, new int[]{}, Constants.Groups.SKELETONS));
@@ -432,10 +432,10 @@ public class EntityFactory {
 		e.addComponent(new State(0));
 		e.addComponent(new Enemy(5, new GaiaAirAI()));
 		e.addComponent(new Stats(
-				100, 
+				50, 
 				0, 
 				0, 
-				100, 
+				50, 
 				0, 
 				0, 
 				1, 
@@ -498,10 +498,10 @@ public class EntityFactory {
 		e.addComponent(new State(0));
 		e.addComponent(new Enemy(5, new GaiaFlameAI()));
 		e.addComponent(new Stats(
-				100, 
+				200, 
 				0, 
 				0, 
-				100, 
+				200, 
 				0, 
 				0, 
 				1, 

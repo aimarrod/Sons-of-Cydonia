@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="200" height="200" tilewidth="32" tileheight="32">
  <properties>
-  <property name="ambiance" value="beauty-of-chaos.ogg"/>
+  <property name="ambiance" value="grail.ogg"/>
   <property name="layers" value="3"/>
   <property name="music" value="gaia-battle.ogg,battle-at-the-summit.ogg"/>
  </properties>
@@ -229,7 +229,7 @@
   <object x="3296" y="1504" width="416" height="1760"/>
   <object x="3680" y="1504" width="2496" height="2464"/>
  </objectgroup>
- <objectgroup name="level0-special" width="200" height="200">
+ <objectgroup name="level0-special" width="200" height="200" visible="0">
   <object x="5056" y="5024" width="64" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -414,13 +414,13 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level1-obstacle" width="200" height="200">
+ <objectgroup name="level1-obstacle" width="200" height="200" visible="0">
   <object x="6208" y="224" width="192" height="6176"/>
   <object x="0" y="6176" width="6208" height="224"/>
   <object x="0" y="0" width="6400" height="224"/>
   <object x="-32" y="224" width="192" height="5952"/>
  </objectgroup>
- <objectgroup name="level1-unwalkable" width="200" height="200">
+ <objectgroup name="level1-unwalkable" width="200" height="200" visible="0">
   <object x="5120" y="4768" width="1088" height="1472"/>
   <object x="5152" y="4768" width="544"/>
   <object x="5152" y="3712" width="1056" height="1056"/>
@@ -459,7 +459,7 @@
   <object x="4960" y="3392" width="64" height="32"/>
   <object x="4800" y="3392" width="64" height="32"/>
  </objectgroup>
- <objectgroup name="level1-special" width="200" height="200">
+ <objectgroup name="level1-special" width="200" height="200" visible="0">
   <object x="5056" y="5056" width="64" height="32">
    <properties>
     <property name="level" value="1"/>
@@ -473,17 +473,17 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level2-obstacle" width="200" height="200">
+ <objectgroup name="level2-obstacle" width="200" height="200" visible="0">
   <object x="0" y="-32" width="6400" height="224"/>
   <object x="0" y="6272" width="6400" height="224"/>
   <object x="0" y="192" width="192" height="5952"/>
   <object x="6208" y="192" width="192" height="6080"/>
  </objectgroup>
- <objectgroup name="level2-unwalkable" width="200" height="200">
+ <objectgroup name="level2-unwalkable" width="200" height="200" visible="0">
   <object x="4960" y="3008" width="32" height="416"/>
   <object x="4832" y="3008" width="32" height="416"/>
  </objectgroup>
- <objectgroup name="level2-special" width="200" height="200">
+ <objectgroup name="level2-special" width="200" height="200" visible="0">
   <object x="4864" y="3392" width="96" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -1105,11 +1105,11 @@
     <property name="type" value="zombie"/>
    </properties>
   </object>
-  <object x="448" y="4416" width="32" height="32">
+  <object x="480" y="4768" width="32" height="32">
    <properties>
     <property name="interval" value="20"/>
     <property name="max" value="1"/>
-    <property name="range" value="1000"/>
+    <property name="range" value="100"/>
     <property name="respawn" value="true"/>
     <property name="type" value="zombie"/>
    </properties>
@@ -1163,7 +1163,7 @@
    <properties>
     <property name="interval" value="20"/>
     <property name="max" value="1"/>
-    <property name="range" value="1000"/>
+    <property name="range" value="400"/>
     <property name="respawn" value="true"/>
     <property name="type" value="zombie"/>
    </properties>
@@ -1172,7 +1172,7 @@
    <properties>
     <property name="interval" value="20"/>
     <property name="max" value="1"/>
-    <property name="range" value="1000"/>
+    <property name="range" value="400"/>
     <property name="respawn" value="true"/>
     <property name="type" value="zombie"/>
    </properties>
@@ -1190,7 +1190,7 @@
    <properties>
     <property name="interval" value="20"/>
     <property name="max" value="1"/>
-    <property name="range" value="1000"/>
+    <property name="range" value="400"/>
     <property name="respawn" value="true"/>
     <property name="type" value="zombie"/>
    </properties>
@@ -1208,7 +1208,7 @@
    <properties>
     <property name="interval" value="20"/>
     <property name="max" value="1"/>
-    <property name="range" value="1000"/>
+    <property name="range" value="400"/>
     <property name="respawn" value="true"/>
     <property name="type" value="zombie"/>
    </properties>
@@ -1222,11 +1222,11 @@
     <property name="type" value="eyeball"/>
    </properties>
   </object>
-  <object x="864" y="6112" width="32" height="32">
+  <object x="896" y="6112" width="32" height="32">
    <properties>
     <property name="interval" value="20"/>
     <property name="max" value="1"/>
-    <property name="range" value="1000"/>
+    <property name="range" value="300"/>
     <property name="respawn" value="true"/>
     <property name="type" value="eyeball"/>
    </properties>
@@ -1235,7 +1235,7 @@
    <properties>
     <property name="interval" value="20"/>
     <property name="max" value="1"/>
-    <property name="range" value="1000"/>
+    <property name="range" value="600"/>
     <property name="respawn" value="true"/>
     <property name="type" value="eyeball"/>
    </properties>
@@ -1283,6 +1283,33 @@
     <property name="range" value="2000"/>
     <property name="respawn" value="false"/>
     <property name="type" value="bow-knight"/>
+   </properties>
+  </object>
+  <object x="960" y="5952" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="300"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="green-knight"/>
+   </properties>
+  </object>
+  <object x="1312" y="5984" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="500"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="zombie"/>
+   </properties>
+  </object>
+  <object x="1248" y="6112" width="32" height="32">
+   <properties>
+    <property name="interval" value="20"/>
+    <property name="max" value="1"/>
+    <property name="range" value="450"/>
+    <property name="respawn" value="true"/>
+    <property name="type" value="eyeball"/>
    </properties>
   </object>
  </objectgroup>

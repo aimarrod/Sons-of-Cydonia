@@ -63,7 +63,7 @@ public class BoneThrowProcessor implements AttackProcessor {
 			victim.changedInWorld();
 		}
 		attack.deleteFromWorld();
-		
+		delete();
 	}
 
 	@Override
