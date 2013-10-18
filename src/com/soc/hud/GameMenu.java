@@ -1,23 +1,14 @@
 package com.soc.hud;
 
-import java.io.IOException;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.soc.core.SoC;
-import com.soc.screens.GameOverScreen;
-import com.soc.screens.LoadScreen;
-import com.soc.screens.MenuScreen;
+import com.soc.screens.OptionsScreen;
 import com.soc.screens.SaveScreen;
-import com.soc.utils.GameLoader;
 
 public class GameMenu extends Table implements InputProcessor {
 	private Table table;
@@ -83,7 +74,10 @@ public class GameMenu extends Table implements InputProcessor {
 				SoC.game.archiveProcessors();
 				SoC.game.setScreen(new SaveScreen(SoC.game));
 			}else if(focusedButton==3){
-				//Options
+				SoC.game.screens.push(SoC.game.getScreen());
+            	SoC.game.hudSystem.hideCharacterGameMenu();
+				SoC.game.archiveProcessors();
+				SoC.game.setScreen(new OptionsScreen(SoC.game,false));
 			}else if(focusedButton==4){
             	SoC.game.player.deleteFromWorld();
             	SoC.game.resetWorld();
@@ -142,7 +136,10 @@ public class GameMenu extends Table implements InputProcessor {
 			SoC.game.setScreen(new SaveScreen(SoC.game));
 			return true;
 		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-5)>height-screenY && (getY()-65)<height-screenY){
-
+			SoC.game.screens.push(SoC.game.getScreen());
+        	SoC.game.hudSystem.hideCharacterGameMenu();
+			SoC.game.archiveProcessors();
+			SoC.game.setScreen(new OptionsScreen(SoC.game,false));
 			return true;
 		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-75)>height-screenY && (getY()-135)<height-screenY){
         	SoC.game.player.deleteFromWorld();
