@@ -46,10 +46,10 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		State state=stm.get(e);
 		Position pos = pm.get(e);
 		Velocity velocity=vm.get(e);
-		
+		int pureDamage=dr.pureDamage;
 		int dmg = dr.damage - stats.armor;
 		if(dmg < 0) dmg = 0;
-		dmg += dr.pureDamage;
+		dmg += pureDamage;
 		if(dmg < 0) dmg = 0; 
 		stats.health-=dmg;
 		e.removeComponent(dr);
@@ -59,7 +59,11 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		text.r = dr.r;
 		text.g = dr.g;
 		text.b = dr.b;
-		
+		if(SoC.game.playermapper.has(e)&& pureDamage==0){
+			text.r=1;
+			text.g=0;
+			text.b=0;
+		}
 		
 		if(stats.health<=0){
 			if(cm.has(e)) EffectsPlayer.play(cm.get(e).deathSound);
