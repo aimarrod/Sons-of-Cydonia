@@ -3,10 +3,10 @@ package com.soc.hud;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 
@@ -16,11 +16,14 @@ public class ActionBar extends Actor implements InputProcessor{
 	public HudSystem parent;
 	int[] spells;
 	int tooltip;
+	BitmapFont font;
 	
 	public ActionBar(HudSystem parent){
 		slot = new Texture(Gdx.files.internal("resources/spell-container.png"));
 		this.parent = parent;
+		font=new BitmapFont();
 		parent.stage.addActor(this);
+		
 	}
 	
 	@Override
@@ -29,6 +32,7 @@ public class ActionBar extends Actor implements InputProcessor{
 		for(int i = 0; i < spells.length; i++){
 			if(spells[i] != Constants.Spells.NO_SPELL){
 				batch.draw(SoC.game.spells[spells[i]].icon, getX()+(i*slot.getWidth()+5), getY()+7);
+				font.draw(batch, i+1+"", getX()+(i*slot.getWidth()+55),  getY()+63);
 			}
 		}
 	}
