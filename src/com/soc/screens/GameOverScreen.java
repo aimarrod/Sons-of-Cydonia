@@ -12,11 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.soc.core.SoC;
+import com.soc.utils.MusicPlayer;
 
 public class GameOverScreen extends AbstractScreen implements InputProcessor{
 	private Texture background;
 	private int focusedBotton;
-	private Texture handT;
 	private TextButton loadGameButton;
 	private TextButton menuScreenButton;
 	private TextButton []buttons;
@@ -25,7 +25,6 @@ public class GameOverScreen extends AbstractScreen implements InputProcessor{
 	public GameOverScreen(SoC game) {
 		super(game);
 		background=new Texture(Gdx.files.internal("resources/background.jpg"));
-		handT=new Texture(Gdx.files.internal("resources/hand.png"));
 		normalStyle=new TextButtonStyle();
 		normalStyle.font=getSkin().getFont("buttonFont");
 		normalStyle.up=getSkin().getDrawable("normal-button");
@@ -41,7 +40,8 @@ public class GameOverScreen extends AbstractScreen implements InputProcessor{
 		buttons[1]=menuScreenButton;
 		focusedBotton=1;
 		SoC.game.inputMultiplexer.addProcessor(this);
-		 SoC.game.getScreen().dispose();
+		SoC.game.getScreen().dispose();
+		MusicPlayer.play("gameover-theme.ogg");
 	}
     @Override
     public void show()
@@ -199,7 +199,6 @@ public class GameOverScreen extends AbstractScreen implements InputProcessor{
 	        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	        batch.begin();
 	        batch.draw(background, 0, 0, Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height);
-	        batch.draw(handT, buttons[focusedBotton-1].getX()-20, buttons[focusedBotton-1].getY()+13, 0,0,20,20);
 	        buttons[focusedBotton-1].setStyle(focusedStyle);
 	        //Update delta and draw the actors inside the stage
 	        batch.end();

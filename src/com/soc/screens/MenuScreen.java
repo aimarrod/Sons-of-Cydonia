@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.soc.core.SoC;
 import com.soc.utils.GameLoader;
+import com.soc.utils.MusicPlayer;
 
 public class MenuScreen extends AbstractScreen implements InputProcessor{
 	private Texture background;
@@ -49,6 +50,7 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 		if(game.getScreen()!=null){
 			game.getScreen().dispose();
 		}
+		MusicPlayer.play("menu-theme.ogg");
 	}
     @Override
     public void show()

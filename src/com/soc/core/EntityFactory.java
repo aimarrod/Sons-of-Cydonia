@@ -760,6 +760,7 @@ public class EntityFactory {
 		e.addComponent( new Velocity(Constants.Spells.DAGGER_SPEED*pos.direction.x, Constants.Spells.DAGGER_SPEED*pos.direction.y, Constants.Spells.DAGGER_SPEED) );
 		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction) );
 		e.addComponent( new Bounds(32, 32) );
+		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new DaggerThrowProcessor(pos), damage) );
 	   	
 		return e;
@@ -876,6 +877,7 @@ public class EntityFactory {
 
 		}
 	   	e.addComponent( new Attack(new SlashProcessor(), damage) );
+		e.addComponent( new Flying() );
 	   	
 	   	return e;		
 	}
@@ -926,6 +928,7 @@ public class EntityFactory {
 		e.addComponent( new Velocity(Constants.Spells.FIREBREATH_SPEED*direction.x, Constants.Spells.FIREBREATH_SPEED*direction.y, 0) );
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(84, 75) );
+		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new FireStoneProcessor(), 0) );
 	   	
 	   	return e;		
@@ -944,6 +947,7 @@ public class EntityFactory {
 		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(84, 75) );
+		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new FireBreathProcessor(), damage) );	   	
 	   	return e;		
 	}
@@ -991,6 +995,7 @@ public class EntityFactory {
 	public static Entity createMeteor(float x, float y, int z) {
 		Entity e=SoC.game.world.createEntity();
 		
+		e.addComponent( new Flying() );
 		e.addComponent( new Position(x, y, z));
 		e.addComponent( new Bounds(32, 32) );
 	   	e.addComponent( new Attack(new MeteorProcessor(), 20) );
@@ -1005,6 +1010,7 @@ public class EntityFactory {
 		e.addComponent( new Velocity(Constants.Spells.WINDBLADE_SPEED*pos.direction.x, Constants.Spells.WINDBLADE_SPEED*pos.direction.y, 0) );
 		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction) );
 		e.addComponent( new Bounds(48, 48) );
+		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new WindbladeProcessor(), damage) );
 	   	
 		return e;
@@ -1017,6 +1023,7 @@ public class EntityFactory {
 		e.addComponent( new Velocity(Constants.Spells.BONE_THROW_SPEED*pos.direction.x, Constants.Spells.BONE_THROW_SPEED*pos.direction.y, 0) );
 		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction) );
 		e.addComponent( new Bounds(32, 32) );
+		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new BoneThrowProcessor(), damage) );
 	   	
 		return e;

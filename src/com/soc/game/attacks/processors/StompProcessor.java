@@ -26,6 +26,7 @@ public class StompProcessor implements AttackProcessor {
 	public float radius;
 	private Rectangle enemy;
 	private float duration;
+	
 	public StompProcessor(){
 		this.hit = null;
 		this.hitbox = new Circle();

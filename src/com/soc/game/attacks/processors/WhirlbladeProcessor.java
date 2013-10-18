@@ -33,6 +33,7 @@ public class WhirlbladeProcessor implements AttackProcessor {
 	public Bounds bon;
 	public Circle hitbox;
 	private Rectangle enemy;
+	public boolean sounded;
 	
 	@Mapper
 	ComponentMapper<Damage> dm = SoC.game.world.getMapper(Damage.class);
@@ -48,6 +49,11 @@ public class WhirlbladeProcessor implements AttackProcessor {
 
 	@Override 
 	public void process(Entity attack) {
+		if(!sounded){
+			EffectsPlayer.playLooping("swing.ogg");
+			sounded = true;
+		}
+		
 		timer -= SoC.game.world.delta;
 		if(timer <= 0){
 			attack.deleteFromWorld();
@@ -103,7 +109,7 @@ public class WhirlbladeProcessor implements AttackProcessor {
 
 	@Override
 	public void delete() {
-		
+		EffectsPlayer.stop("swing.ogg");
 	}
 
 }

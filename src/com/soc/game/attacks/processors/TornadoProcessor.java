@@ -23,6 +23,7 @@ import com.soc.game.components.Velocity;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.states.alterations.Push;
 import com.soc.game.states.benefits.Inmune;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GraphicsLoader;
 
 public class TornadoProcessor implements AttackProcessor{
@@ -83,6 +84,7 @@ public class TornadoProcessor implements AttackProcessor{
 		victim.changedInWorld();
 		Buff.addbuff(victim, new Inmune());
 		SoC.game.statemapper.get(victim).state = State.SPINNING;
+		EffectsPlayer.playLooping("swing.ogg");
 	}
 
 	@Override
@@ -94,6 +96,7 @@ public class TornadoProcessor implements AttackProcessor{
 	@Override
 	public void delete() {
 		if(hit != null){
+			EffectsPlayer.stop("swing.ogg");
 			SoC.game.buffmapper.get(hit).removebuff(Inmune.class,hit);
 			SoC.game.statemapper.get(hit).state = State.IDLE;
 			int damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.1);

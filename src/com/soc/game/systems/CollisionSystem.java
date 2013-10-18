@@ -273,15 +273,6 @@ public class CollisionSystem extends VoidEntitySystem {
 					pos.direction.x=0;
 				}
 			}
-			if(current.overlaps(otherrect)){
-				v.vx = v.speed * (Math.abs(otherrect.x - current.x));
-				v.vy = v.speed * (Math.abs(otherrect.y - current.y));
-				if(v.vx == 0 && v.vy == 0){
-					v.vx = v.speed;
-					v.vy = v.speed;
-
-				}	
-			}
 		}
 	}
 

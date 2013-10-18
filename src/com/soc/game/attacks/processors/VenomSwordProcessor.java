@@ -15,6 +15,7 @@ import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
 import com.soc.game.states.alterations.Venom;
 import com.soc.game.states.benefits.Rage;
+import com.soc.utils.EffectsPlayer;
 
 public class VenomSwordProcessor implements AttackProcessor{	
 	public Entity hit;
@@ -27,6 +28,7 @@ public class VenomSwordProcessor implements AttackProcessor{
 	}
 	@Override
 	public void process(Entity attack) {
+		EffectsPlayer.play("swing.ogg");
 		attack.deleteFromWorld();
 	}
 
