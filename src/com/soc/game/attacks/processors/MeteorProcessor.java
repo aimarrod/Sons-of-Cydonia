@@ -30,6 +30,7 @@ public class MeteorProcessor implements AttackProcessor {
 	public Circle hitbox;
 	private Rectangle enemy;
 	private Renderer fall, blast, shadow;
+	private boolean sounded;
 
 	@Mapper
 	ComponentMapper<Damage> dm = SoC.game.world.getMapper(Damage.class);
