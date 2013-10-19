@@ -147,8 +147,8 @@ public class GaiaAI extends AI{
 				SoC.game.groupmanager.add(gaia, Constants.Groups.CHARACTERS);
 				gaia.addToWorld();
 				
-				SoC.game.musicmanager.play(e, "gaia-battle.png");
-				SoC.game.musicmanager.play(gaia, "gaia-battle.png");
+				SoC.game.musicmanager.play(e, "gaia-battle.ogg");
+				SoC.game.musicmanager.play(gaia, "gaia-battle.ogg");
 				
 				avatarSpawned = true;
 			} else if(SoC.game.progress.gaiaAvatarDefeated){

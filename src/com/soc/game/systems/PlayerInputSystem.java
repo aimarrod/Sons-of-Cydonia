@@ -199,9 +199,11 @@ import com.soc.utils.FloatingText;
 			}
 			if(keycode==controls.healthPotion){
 				SoC.game.hudSystem.inventory.useFirstHealthPotion();
+				return true;
 			}
 			if(keycode==controls.manaPotion){
 				SoC.game.hudSystem.inventory.useFirstManaPotion();
+				return true;
 			}
 			return false;
 		}
