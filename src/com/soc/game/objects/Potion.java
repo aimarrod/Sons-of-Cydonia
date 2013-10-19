@@ -4,8 +4,8 @@ import com.soc.core.SoC;
 import com.soc.game.components.Stats;
 
 public class Potion extends Item{
-	int gainHealth;
-	int gainMana;
+	public int gainHealth;
+	public int gainMana;
 	String iconPath;
 
 	public Potion(int num, String name, String iconPath, String tooltip,int gainHealth,int gainMana) {

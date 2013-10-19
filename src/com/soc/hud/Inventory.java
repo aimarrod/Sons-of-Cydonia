@@ -226,4 +226,51 @@ public class Inventory extends Actor implements InputProcessor {
 		return false;
 	}
 
+	public void useFirstHealthPotion() {
+		Potion candidate=null;
+		boolean found=false;
+		int candidateValue=-1;
+		for (int i = Constants.Items.INVENTORY_SIZE ; i > 0 && !found; i--) {
+				Item item = SoC.game.playermapper.get(SoC.game.player).inventary[i - 1];
+				if (item != null && item instanceof Potion) {
+					candidate=(Potion)item;
+					if(candidate.gainHealth>0 && candidate.gainMana==0){
+						found=true;
+						candidate.use();
+						return;
+					}else if(candidate.gainHealth>0 && candidate.gainMana>0){
+						i=candidateValue;
+					}
+				}
+				
+		}
+		if(candidateValue!=-1 && !found){
+			SoC.game.playermapper.get(SoC.game.player).inventary[candidateValue - 1].use();
+		}
+}
+
+	public void useFirstManaPotion() {
+		Potion candidate=null;
+		boolean found=false;
+		int candidateValue=-1;
+		for (int i = Constants.Items.INVENTORY_SIZE ; i > 0 && !found; i--) {
+				Item item = SoC.game.playermapper.get(SoC.game.player).inventary[i - 1];
+				if (item != null && item instanceof Potion) {
+					candidate=(Potion)item;
+					if(candidate.gainMana>0 && candidate.gainHealth==0){
+						found=true;
+						candidate.use();
+						return;
+					}else if(candidate.gainMana>0 && candidate.gainHealth>0){
+						i=candidateValue;
+					}
+				}
+				
+		}
+		if(candidateValue!=-1 && !found){
+			SoC.game.playermapper.get(SoC.game.player).inventary[candidateValue - 1].use();
+		}
+		
+	}
+
 }
