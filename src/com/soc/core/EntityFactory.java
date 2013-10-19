@@ -42,6 +42,7 @@ import com.soc.game.attacks.processors.FlameProcessor;
 import com.soc.game.attacks.processors.FlameWallProcessor;
 import com.soc.game.attacks.processors.HarmfulEnemyProcessor;
 import com.soc.game.attacks.processors.IcicleProcessor;
+import com.soc.game.attacks.processors.InfernoProcessor;
 import com.soc.game.attacks.processors.MeteorProcessor;
 import com.soc.game.attacks.processors.PoisonCloudProcessor;
 import com.soc.game.attacks.processors.QuakeBladeProcessor;
@@ -94,7 +95,7 @@ public class EntityFactory {
 	    	animations.damageSound = "male-damage.ogg";
 	    	animations.deathSound = "male-death.ogg";
 	    } else if(clazz.equals(Constants.Characters.MAGE)){
-	    	GraphicsLoader.loadWarrior(animations);
+	    	GraphicsLoader.loadMage(animations);
 	    	animations.damageSound = "female-damage.ogg";
 	    	animations.deathSound = "female-death.ogg";
 	    }
@@ -120,7 +121,7 @@ public class EntityFactory {
 	    	animations.damageSound = "male-damage.ogg";
 	    	animations.deathSound = "male-death.ogg";
 	    } else if(clazz.equals(Constants.Characters.MAGE)){
-		    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.ICICLE, new int[]{Constants.Spells.RIDE_THE_LIGHTNING, -1, -1, -1}, Constants.Characters.WARRIOR));
+		    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.ICICLE, new int[]{Constants.Spells.RIDE_THE_LIGHTNING, -1, -1, -1}, Constants.Characters.MAGE));
 	 	    GraphicsLoader.loadMage(animations);
 	 	    animations.damageSound = "female-damage.ogg";
 	 	    animations.deathSound = "female-death.ogg";
@@ -1148,6 +1149,13 @@ public class EntityFactory {
 	   	e.addComponent( new Attack(new FireballProcessor(pos.direction), damage) );
 	   	
 		return e;
+	}
+
+	public static Entity createInferno(String group, Position pos, int damage) {
+		Entity e = SoC.game.world.createEntity();
+		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction) );
+	   	e.addComponent( new Attack(new InfernoProcessor(), damage) );
+	   	return e;
 	}
 	
 }

@@ -90,6 +90,18 @@ public class Stats extends Component{
 			}
 		}
 		
+		if(clazz.equals(Constants.Characters.MAGE)){
+			if(level == 2){
+				spells[1] = Constants.Spells.INFERNO;
+				skill = true;
+			} else if(level == 5) {
+			} else if(level == 8){
+			}
+		}
+		
+		
+		
+		
 		Position pos = SoC.game.positionmapper.get(SoC.game.player);
 		FloatingText text = new FloatingText("Level up!", 1.5f, pos.x, pos.y+Constants.Characters.HEIGHT, 20);
 		text.r = 1;

@@ -231,7 +231,7 @@
   <object x="6144" y="3968" width="64" height="2208"/>
   <object x="3552" y="4960" width="64" height="1088"/>
  </objectgroup>
- <objectgroup name="level0-special" width="200" height="200" visible="0">
+ <objectgroup name="level0-special" width="200" height="200">
   <object x="5056" y="5024" width="64" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -891,7 +891,7 @@
     <property name="type" value="gaia-flame"/>
    </properties>
   </object>
-  <object x="5056" y="5056" width="32" height="32">
+  <object x="5056" y="5088" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>
     <property name="max" value="1"/>
