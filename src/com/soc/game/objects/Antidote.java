@@ -5,6 +5,7 @@ import com.soc.core.SoC;
 import com.soc.game.components.Debuff;
 import com.soc.game.states.alterations.Alteration;
 import com.soc.game.states.alterations.Burn;
+import com.soc.utils.EffectsPlayer;
 
 public class Antidote extends Item {
 	public Bag<Class<? extends Alteration>> debuffs;
@@ -27,10 +28,12 @@ public class Antidote extends Item {
 			}
 		}
 		SoC.game.playermapper.get(SoC.game.player).removeFromInventary(this);
+		EffectsPlayer.play("bubble.ogg");
 	}
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException {
+		@SuppressWarnings("unchecked")
 		Antidote clone=new Antidote(this.num,this.name,this.iconPath,this.tooltip,Burn.class);
 		this.debuffs=clone.debuffs;
 		return clone;

@@ -16,6 +16,7 @@ import com.soc.game.objects.Armor;
 import com.soc.game.objects.Item;
 import com.soc.game.objects.Potion;
 import com.soc.game.objects.Weapon;
+import com.soc.utils.EffectsPlayer;
 
 public class Inventory extends Actor implements InputProcessor {
 	public Texture slot;
@@ -242,10 +243,11 @@ public class Inventory extends Actor implements InputProcessor {
 						i=candidateValue;
 					}
 				}
-				
 		}
-		if(candidateValue!=-1 && !found){
+		if(candidateValue != -1){
 			SoC.game.playermapper.get(SoC.game.player).inventary[candidateValue - 1].use();
+		} else {
+			EffectsPlayer.play("negative.ogg");
 		}
 }
 
@@ -267,8 +269,10 @@ public class Inventory extends Actor implements InputProcessor {
 				}
 				
 		}
-		if(candidateValue!=-1 && !found){
+		if(candidateValue!=-1){
 			SoC.game.playermapper.get(SoC.game.player).inventary[candidateValue - 1].use();
+		} else {
+			EffectsPlayer.play("negative.ogg");
 		}
 		
 	}

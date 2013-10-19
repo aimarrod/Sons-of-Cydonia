@@ -2,6 +2,7 @@ package com.soc.game.objects;
 
 import com.soc.core.SoC;
 import com.soc.game.components.Stats;
+import com.soc.utils.EffectsPlayer;
 
 public class Potion extends Item{
 	public int gainHealth;
@@ -23,6 +24,7 @@ public class Potion extends Item{
 		if(stats.mana>stats.maxMana)
 			stats.mana=stats.maxMana;
 		SoC.game.playermapper.get(SoC.game.player).removeFromInventary(this);
+		EffectsPlayer.play("bubble.ogg");
 	}
 	
 	@Override

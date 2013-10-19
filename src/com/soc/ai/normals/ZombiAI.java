@@ -42,6 +42,8 @@ public class ZombiAI extends AI{
 		Entity spawned = EntityFactory.createPoisonCloud(pos, SoC.game.boundsmapper.get(e));
 		SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
 		SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
+		spawned.addToWorld();
+		
 		SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +(pos.z+1));
 		if(AI.rng.nextFloat() < 0.1){
 			EntityFactory.createItem(Constants.Items.ANTIDOTE, pos.x, pos.y, pos.z).addToWorld();
