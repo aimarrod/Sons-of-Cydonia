@@ -40,6 +40,7 @@ public class PoisonCloudProcessor implements AttackProcessor {
 		timer -= SoC.game.world.delta;
 		if(timer <= 0){
 			attack.deleteFromWorld();
+			delete();
 		}
 	}
 

@@ -17,12 +17,12 @@ import com.soc.utils.GraphicsLoader;
 public class RideTheLightningSpell extends Spell{
 	
 	public RideTheLightningSpell(){
-		this.icon = GraphicsLoader.load("charge-icon.png");
-		this.tooltip = "\nCHARGE\n\n30 mana\n\nRushers forward with a spear, damaging and pushing all enemies on front of you.\nScales with strength and a little agility";
+		this.icon = GraphicsLoader.load("ride-the-lightning-icon.png");
+		this.tooltip = "\nRIDE THE LIGHTNING\n\n15 mana\n\nBecame a lightning and rush forward, releasing a damagin burst of energy at your destination.\nScales with intelligence";
 		this.cast = 0f;
 		this.blocking = Constants.Spells.CHARGE_DURATION+this.cast;
 		this.state = State.CHARGING;
-		this.mana = 30;
+		this.mana = 15;
 	}
 	
 	@Override
