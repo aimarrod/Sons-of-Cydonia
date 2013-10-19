@@ -131,6 +131,7 @@ public class Constants {
 		public static final float TENTACLES_RADIUS = 170f;
 		public static final float AIR_CIRCLE_TIME = 2f;
 		public static final float BONE_THROW_SPEED = 1000f;
+		public static final float FIREBALL_THROW_SPEED = 1000f;
 		public static final int STOMP_RADIUS = 100;
 	}
 	

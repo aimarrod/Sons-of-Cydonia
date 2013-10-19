@@ -55,10 +55,10 @@ public class GameLoader {
 	}
 	
 	public static void newGame(String clazz){
-		SoC.game.player = EntityFactory.createCharacter(2300, 650, 0, 0, 0, Constants.Classes.WARRIOR);
+		SoC.game.player = EntityFactory.createCharacter(2300, 600, 0, 0, 0, Constants.Classes.WARRIOR);
 		SoC.game.setScreen(new GameScreen());
 		SoC.game.progress = new GameProgress();
-		MapLoader.loadMap("starting.tmx");
+		MapLoader.loadMap("finalMap2.tmx");
 
 		SoC.game.world.getManager(GroupManager.class).add(SoC.game.player, Constants.Groups.PLAYERS);
 		SoC.game.world.getManager(LevelManager.class).setLevel(SoC.game.player, Constants.Groups.LEVEL+SoC.game.positionmapper.get(SoC.game.player).z);

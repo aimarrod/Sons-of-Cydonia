@@ -750,12 +750,14 @@ public class GraphicsLoader {
 	
 	public static void loadEyeball(Character character){
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		StaticRenderer idle=new StaticRenderer();
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		TextureRegion[][] tmp = TextureRegion.split(load("eyeball-walk.png"), 32, 38);
 		for(int i = 0; i < tmp.length; i++){
 	   		move.animations[i] = new Animation(2f/tmp[i].length, tmp[i]);
 	   	}
+		idle.sprite=tmp[1][0];
 		
 		tmp = TextureRegion.split(load("eyeball-death.png"), 32, 38);
 		TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
@@ -769,7 +771,9 @@ public class GraphicsLoader {
 		character.deathTime=0.8f;
 		
 		character.renderers[State.WALK] = move;
+		character.renderers[State.ATTACK]=move;
 		character.renderers[State.DYING] = death;
+		character.renderers[State.IDLE]=idle;
 		
 	}
 	

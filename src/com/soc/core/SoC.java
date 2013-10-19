@@ -24,6 +24,7 @@ import com.soc.game.attacks.spells.BoneThrowSpell;
 import com.soc.game.attacks.spells.ChargeSpell;
 import com.soc.game.attacks.spells.DaggerThrowSpell;
 import com.soc.game.attacks.spells.FireBreathSpell;
+import com.soc.game.attacks.spells.FireballSpell;
 import com.soc.game.attacks.spells.FlameSpell;
 import com.soc.game.attacks.spells.QuakebladeSpell;
 import com.soc.game.attacks.spells.SlashSpell;
@@ -163,6 +164,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.TENTACLES] = new TentacleSpell();
 		spells[Constants.Spells.FLAME] = new FlameSpell();
 		spells[Constants.Spells.FIREBREATH]=new FireBreathSpell();
+		spells[Constants.Spells.FIREBALL]=new FireballSpell();
 		
 		items=new Item[Constants.Items.ITEM_NUMBER];
 		items[Constants.Items.NONE] = null;
