@@ -11,21 +11,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.utils.GameLoader;
 import com.soc.utils.MusicPlayer;
 
-public class MenuScreen extends AbstractScreen implements InputProcessor{
+public class CharacterScreen extends AbstractScreen implements InputProcessor{
 	private Texture background;
 	private int focusedBotton;
-	private TextButton startGameButton;
-	private TextButton loadGameButton;
-	private TextButton optionsButton;
-	private TextButton exitButton;
+	private TextButton warriorButton;
+	private TextButton mageButton;
 	private TextButton []buttons;
 	private TextButtonStyle normalStyle;
 	private TextButtonStyle focusedStyle;
-	public MenuScreen(SoC game) {
+	public CharacterScreen(SoC game) {
 		super(game);
 		background=new Texture(Gdx.files.internal("resources/background.jpg"));
 		normalStyle=new TextButtonStyle();
@@ -36,21 +35,17 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 		focusedStyle.font=getSkin().getFont("buttonFont");
 		focusedStyle.up=getSkin().getDrawable("focused-button");
 		focusedStyle.down=getSkin().getDrawable("pushed-button");
-		startGameButton = new TextButton( "START GAME", normalStyle);
-		loadGameButton = new TextButton( "LOAD GAME", normalStyle);
-		optionsButton = new TextButton( "OPTIONS", normalStyle);
-		exitButton = new TextButton( "EXIT", normalStyle );
-		buttons=new TextButton[4];
-		buttons[0]=startGameButton;
-		buttons[1]=loadGameButton;
-		buttons[2]=optionsButton;
-		buttons[3]=exitButton;
+		warriorButton = new TextButton( "WARRIOR", normalStyle);
+		mageButton = new TextButton( "MAGE", normalStyle);
+		buttons=new TextButton[2];
+		buttons[0]=warriorButton;
+		buttons[1]=mageButton;
+
 		focusedBotton=1;
 		SoC.game.inputMultiplexer.addProcessor(this);
 		if(game.getScreen()!=null){
 			game.getScreen().dispose();
 		}
-		MusicPlayer.play("menu-theme.ogg");
 	}
     @Override
     public void show()
@@ -59,7 +54,7 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
         // retrieve the default table actor
         Table table = super.getTable();
         // register the button "start game"
-        startGameButton.addListener( new InputListener() {
+        warriorButton.addListener( new InputListener() {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
             {
@@ -75,14 +70,14 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
             {
             	if(button==0){
 	                SoC.game.clearProcessors();
-	                SoC.game.setScreen(new CharacterScreen(game));
+	                GameLoader.newGame(Constants.Characters.WARRIOR);
             	}
 
             }
 
         } );
         
-        startGameButton.addListener(new ClickListener(){
+        warriorButton.addListener(new ClickListener(){
         	public boolean mouseMoved(InputEvent event,
                     float x,
                     float y){
@@ -95,11 +90,11 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
         	}
 
         });
-        table.add( startGameButton ).size( 300, 60 ).uniform().spaceBottom( 10 );
+        table.add( warriorButton ).size( 300, 60 ).uniform().spaceBottom( 10 );
         table.row();
 
         // register the button "options"
-        loadGameButton.addListener( new InputListener() {
+        mageButton.addListener( new InputListener() {
             @Override
             public void touchUp(
                 InputEvent event,
@@ -110,7 +105,7 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
             {
             	if(button==0){
 	                SoC.game.clearProcessors();
-	                SoC.game.setScreen(new LoadScreen(game));
+	                GameLoader.newGame(Constants.Characters.MAGE);
             	}
 
             }
@@ -121,7 +116,7 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
             }
         } );
         
-        loadGameButton.addListener(new ClickListener(){
+        mageButton.addListener(new ClickListener(){
         	public boolean mouseMoved(InputEvent event,
                     float x,
                     float y){
@@ -134,81 +129,9 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
         	}
 
         });
-        table.add( loadGameButton ).uniform().fill().spaceBottom( 10 );
+        table.add( mageButton ).uniform().fill().spaceBottom( 10 );
         table.row();
 
-        // register the button "high scores"
-        optionsButton.addListener( new InputListener() {
-            @Override
-            public void touchUp(
-                InputEvent event,
-                float x,
-                float y,
-                int pointer,
-                int button )
-            {
-            	if (button==0){
-	                SoC.game.clearProcessors();
-	                SoC.game.setScreen(new OptionsScreen(game,true));
-            	}
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
-            {
-                return true;
-            }
-        } );
-        
-        optionsButton.addListener(new ClickListener(){
-        	public boolean mouseMoved(InputEvent event,
-                    float x,
-                    float y){
-        		if(focusedBotton!=3){
-        			buttons[focusedBotton-1].setStyle(normalStyle);
-        		}
-        		focusedBotton=3;
-        		return true;
-        		
-        	}
-
-        });
-        table.add( optionsButton ).uniform().fill().spaceBottom(10);
-        table.row();
-        // register the button "high scores"
-        exitButton.addListener( new InputListener() {
-            @Override
-            public void touchUp(
-                InputEvent event,
-                float x,
-                float y,
-                int pointer,
-                int button )
-            {
-            	if(button==0){
-            		System.exit(0);
-            	}
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
-            {
-                return true;
-            }
-        } );
-        
-        exitButton.addListener(new ClickListener(){
-        	public boolean mouseMoved(InputEvent event,
-                    float x,
-                    float y){
-        		if(focusedBotton!=4){
-        			buttons[focusedBotton-1].setStyle(normalStyle);
-        		}
-        		focusedBotton=4;
-        		return true;
-        		
-        	}
-
-        });
-        table.add( exitButton ).uniform().fill();
     }
     
 	public void render(float delta) {
@@ -244,21 +167,11 @@ public class MenuScreen extends AbstractScreen implements InputProcessor{
 				if(keycode == Keys.ENTER){
 					if(focusedBotton==1){
 		                SoC.game.clearProcessors();
-		                SoC.game.setScreen(new CharacterScreen(game));
+		                GameLoader.newGame(Constants.Characters.WARRIOR);
 					}else{
 						if(focusedBotton==2){
 			                SoC.game.clearProcessors();
-			                SoC.game.setScreen(new LoadScreen(game));
-						}else{
-							if(focusedBotton==3){
-				                SoC.game.clearProcessors();
-				                SoC.game.setScreen(new OptionsScreen(game,true));
-							}else{
-								if(focusedBotton==4){
-									System.exit(0);
-					                
-								}
-							}
+			                GameLoader.newGame(Constants.Characters.MAGE);	
 						}
 					}
 					return true;

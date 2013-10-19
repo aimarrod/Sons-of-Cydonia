@@ -44,6 +44,8 @@ public class RideTheLightningProcessor implements AttackProcessor{
 
 	@Override 
 	public void process(Entity attack) {
+		SoC.game.effectSystem.addSound(attack, "thunder.ogg");
+		
 		if(SoC.game.statemapper.get(source).state == State.CHARGING){
 			Velocity vAttack = SoC.game.velocitymapper.get(attack);
 			Position p = SoC.game.positionmapper.get(attack);
