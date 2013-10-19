@@ -540,14 +540,14 @@ public class EntityFactory {
 		e.addComponent(new State(0));
 		e.addComponent(new Enemy(600, new GaiaAI()));
 		e.addComponent(new Stats(
-				100, 
+				300, 
 				0, 
 				0, 
-				100, 
+				300, 
 				0, 
 				0, 
 				1, 
-				0, 
+				8, 
 				0, 
 				0, 
 				0, 
@@ -574,17 +574,17 @@ public class EntityFactory {
 		e.addComponent(new State(0));
 		e.addComponent(new Enemy(0, new GaiaAvatarAI()));
 		e.addComponent(new Stats(
-				100, 
+				200, 
 				0, 
 				0, 
-				100, 
+				200, 
 				0, 
 				0, 
 				1, 
+				8, 
 				0, 
 				0, 
-				0, 
-				0, 
+				30, 
 				0, 
 				null,
 				Constants.Groups.GAIAS));
