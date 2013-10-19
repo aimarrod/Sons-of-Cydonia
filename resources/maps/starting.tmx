@@ -120,7 +120,7 @@
     <property name="type" value="hole"/>
    </properties>
   </object>
-  <object x="3040" y="32" width="96" height="32">
+  <object x="3040" y="64" width="96" height="32">
    <properties>
     <property name="destination" value="ruins.tmx"/>
     <property name="type" value="gate"/>
@@ -136,7 +136,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-obstacle" width="100" height="200" visible="0">
+ <objectgroup name="level0-obstacle" width="100" height="200">
   <object x="1152" y="0" width="64" height="1056"/>
   <object x="1312" y="-32" width="64" height="1088"/>
   <object x="1056" y="0" width="128" height="896"/>
@@ -188,7 +188,7 @@
   <object x="2816" y="1120" width="384" height="512"/>
   <object x="2848" y="0" width="352" height="1120"/>
   <object x="2496" y="0" width="352" height="672"/>
-  <object x="2336" y="0" width="160" height="864"/>
+  <object x="2336" y="0" width="160" height="960"/>
   <object x="1472" y="0" width="288" height="1024"/>
   <object x="1376" y="-32" width="96" height="928"/>
   <object x="2272" y="4352" width="64" height="64"/>
@@ -211,19 +211,19 @@
   <object x="2624" y="2272" width="32" height="32"/>
   <object x="1120" y="1824" width="32" height="32"/>
   <object x="2048" y="3520" width="32" height="32"/>
-  <object x="2304" y="608" width="32" height="256"/>
+  <object x="2304" y="608" width="32" height="352"/>
   <object x="2112" y="96" width="128" height="480"/>
   <object x="2144" y="576" width="64" height="384"/>
   <object x="2112" y="576" width="32" height="480"/>
   <object x="2304" y="96" width="32" height="192"/>
   <object x="2304" y="448" width="32" height="160"/>
-  <object x="2272" y="576" width="32" height="288"/>
+  <object x="2272" y="576" width="32" height="384"/>
   <object x="480" y="6368" width="2720" height="32"/>
   <object x="3168" y="5824" width="32" height="544"/>
   <object x="1216" y="0" width="96" height="96"/>
   <object x="2112" y="0" width="224" height="96"/>
  </objectgroup>
- <objectgroup name="level1-obstacle" width="100" height="200" visible="0">
+ <objectgroup name="level1-obstacle" width="100" height="200">
   <object x="2336" y="0" width="704" height="64"/>
   <object x="3136" y="0" width="64" height="64"/>
   <object x="3168" y="64" width="32" height="2272"/>
@@ -316,7 +316,7 @@
   <object x="864" y="3648" width="1760" height="192"/>
   <object x="1184" y="3552" width="1024" height="96"/>
   <object x="3136" y="2336" width="64" height="4064"/>
-  <object x="3040" y="0" width="96" height="32"/>
+  <object x="3040" y="0" width="96" height="64"/>
   <object x="1184" y="800" width="32" height="256"/>
   <object x="1312" y="800" width="32" height="256"/>
  </objectgroup>

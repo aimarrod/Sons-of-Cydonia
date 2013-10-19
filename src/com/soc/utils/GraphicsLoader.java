@@ -111,6 +111,74 @@ public class GraphicsLoader {
 		character.renderers[State.RUN] = run;
 	}
 	
+	public static void loadMage(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		DirectionalAnimatedRenderer run = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer charge = new AnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		AnimatedRenderer spin = new AnimatedRenderer(true);
+		AnimatedRenderer fall = new AnimatedRenderer(true);
+		
+		attack.ox = -8;
+		attack.oy = -0;
+		movement.ox = -4;
+		movement.oy = 0;
+		idle.ox = -4;
+		idle.oy = -0;
+		death.ox = -4;
+		death.oy = 0;
+		run.ox = -4;
+		run.oy = 0;
+		charge.ox = -8;
+		charge.oy = -0;
+		fall.ox -= 8;
+		fall.oy -= 0;
+		spin.ox = -8;
+		spin.oy = -0;
+		
+		Texture tex = load("mage-attack.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("mage-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		run.animations[i]= new Animation(0.4f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("mage-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+		tex = load("mage-charge.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		tmp = TextureRegion.split(tex, 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		charge.animation = new Animation(0.05f, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("mage-death.png"), 64, 64);
+	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	character.deathTime = 1f;
+		tex = load("mage-spin.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		tmp = TextureRegion.split(tex, 64, 64);
+	   	spin.animation = new Animation(0.2f/tmp[0].length, tmp[0]);
+	   	tmp = TextureRegion.split(load("mage-fall.png"), 64, 64);
+	   	fall.animation = new Animation(1.2f/tmp[0].length, tmp[0]);
+		
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.WALK] = movement;
+		character.renderers[State.CHARGING] = charge;
+		character.renderers[State.SPINNING] = spin;
+		character.renderers[State.FALLING] = fall;
+		character.renderers[State.RUN] = run;
+	}
+	
 	public static void loadGreenKnight(Character character){
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
@@ -549,17 +617,17 @@ public class GraphicsLoader {
 	}
 	
 	public static void loadSatan(Character character){
-		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		AnimatedRenderer attack = new AnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		DirectionalAnimatedRenderer movement= new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		character.renderers = new Renderer[State.STATENUM];
-		attack.ox = -20;
-		attack.oy = 0;
-		idle.ox = 0;
+		attack.ox = -48;
+		attack.oy = -32;
+		idle.ox = -16;
 		idle.oy = 0;
-		movement.ox =-20;
+		movement.ox =-16;
 		movement.oy = 0;
 		
 		
@@ -568,9 +636,9 @@ public class GraphicsLoader {
 	   		movement.animations[i]= new Animation(1f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
-		tmp = TextureRegion.split(load("skull-knight-attack.png"), 64, 64);
+		tmp = TextureRegion.split(load("skull-knight-attack.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
-	   		attack.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+	   		attack.animation= new Animation(0.3f/tmp[i].length, tmp[i]);
 	   	}
 		tmp = TextureRegion.split(load("skull-knight-death.png"),64, 64);
         TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
@@ -883,10 +951,15 @@ public class GraphicsLoader {
 		TextureRegion[][] tmp = TextureRegion.split(load("magic-icicle.png"), 64, 64);
 		int direction = 0;
 		if(dir.y == -1){
-			direction = 2; 
+			direction = 2;
+			icicle.ox = -16;
+		} else if(dir.y == 1){
+			icicle.ox = -16;
 		} else if(dir.x == 1){
+			icicle.oy = -16f;
 			direction = 3;
 		} else if(dir.x == -1){
+			icicle.oy = -16f;
 			direction = 1;
 		}
 		icicle.animation = new Animation(0.2f/4, tmp[direction]);
@@ -894,18 +967,23 @@ public class GraphicsLoader {
 	}
 	
 	public static AnimatedRenderer loadFireball(Vector2 dir) {
-		AnimatedRenderer icicle = new AnimatedRenderer(true);
+		AnimatedRenderer fireball = new AnimatedRenderer(true);
 		TextureRegion[][] tmp = TextureRegion.split(load("magic-fireball.png"), 64, 64);
 		int direction = 0;
 		if(dir.y == -1){
-			direction = 2; 
+			direction = 2;
+			fireball.ox = -16;
+		} else if(dir.y == 1){
+			fireball.ox = -16;
 		} else if(dir.x == 1){
+			fireball.oy = -16f;
 			direction = 3;
 		} else if(dir.x == -1){
+			fireball.oy = -16f;
 			direction = 1;
 		}
-		icicle.animation = new Animation(0.2f/4, tmp[direction]);
-		return icicle;
+		fireball.animation = new Animation(0.2f/4, tmp[direction]);
+		return fireball;
 	}
 	
 	public static AnimatedRenderer loadCloud(){
@@ -1164,6 +1242,20 @@ public class GraphicsLoader {
         fountain.animation = new Animation(0.05f, frames);
         return fountain;
     }
+	
+	public static AnimatedRenderer loadAirBlast(){
+		AnimatedRenderer circle = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = TextureRegion.split(load("air-circle.png"), 50, 50);
+		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+                for (int j = 0; j < tmp[0].length; j++) {
+                        frames[index++] = tmp[i][j];
+                }
+        }
+        circle.animation = new Animation(Constants.Spells.AIR_BLAST_TIME/frames.length, frames);
+        return circle;
+	}
 	
 	public static AnimatedRenderer loadAirCircle(){
 		AnimatedRenderer circle = new AnimatedRenderer(true);

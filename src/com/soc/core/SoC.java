@@ -26,7 +26,9 @@ import com.soc.game.attacks.spells.DaggerThrowSpell;
 import com.soc.game.attacks.spells.FireBreathSpell;
 import com.soc.game.attacks.spells.FireballSpell;
 import com.soc.game.attacks.spells.FlameSpell;
+import com.soc.game.attacks.spells.IcicleSpell;
 import com.soc.game.attacks.spells.QuakebladeSpell;
+import com.soc.game.attacks.spells.RideTheLightningSpell;
 import com.soc.game.attacks.spells.SlashSpell;
 import com.soc.game.attacks.spells.Spell;
 import com.soc.game.attacks.spells.TentacleSpell;
@@ -65,6 +67,7 @@ import com.soc.game.systems.CameraSystem;
 import com.soc.game.systems.CollisionSystem;
 import com.soc.game.systems.DamageProcessingSystem;
 import com.soc.game.systems.DebuffProcessingSystem;
+import com.soc.game.systems.EffectSystem;
 import com.soc.game.systems.EnemyActuatorSystem;
 import com.soc.game.systems.EntitySpawningTimerSystem;
 import com.soc.game.systems.ExpiringSystem;
@@ -130,6 +133,7 @@ public class SoC extends Game {
 	public RenderSystem renderSystem;
 	public CameraSystem cameraSystem;
 	public InputMultiplexer inputMultiplexer;
+	public EffectSystem effectSystem;
 	
 	public Map map;
 	
@@ -163,8 +167,12 @@ public class SoC extends Game {
 		spells[Constants.Spells.WINDBLADE] = new WindbladeSpell();
 		spells[Constants.Spells.TENTACLES] = new TentacleSpell();
 		spells[Constants.Spells.FLAME] = new FlameSpell();
+		spells[Constants.Spells.FIREBREATH] = new FireBreathSpell();
+		spells[Constants.Spells.FIREBALL] = new FireballSpell();
+		spells[Constants.Spells.ICICLE] = new IcicleSpell();
 		spells[Constants.Spells.FIREBREATH]=new FireBreathSpell();
-		spells[Constants.Spells.FIREBALL]=new FireballSpell();
+		spells[Constants.Spells.RIDE_THE_LIGHTNING]=new RideTheLightningSpell();
+
 		
 		items=new Item[Constants.Items.ITEM_NUMBER];
 		items[Constants.Items.NONE] = null;
@@ -239,6 +247,7 @@ public class SoC extends Game {
 	    world.setSystem(new CollisionSystem());	
 	    world.setSystem(new MovementSystem());
 	    world.setSystem(new ExpiringSystem());
+	    effectSystem=world.setSystem(new EffectSystem());
 	    
 		cameraSystem = SoC.game.world.setSystem( new CameraSystem(camera), true);
 		renderSystem = SoC.game.world.setSystem( new RenderSystem(camera), true );

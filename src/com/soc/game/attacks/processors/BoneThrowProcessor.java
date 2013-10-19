@@ -18,7 +18,6 @@ import com.soc.utils.GraphicsLoader;
 public class BoneThrowProcessor implements AttackProcessor {
 	public boolean hit;
 	public AnimatedRenderer renderer;
-	public boolean sounded;
 	
 	public BoneThrowProcessor() {
 		this.hit = false;
@@ -29,10 +28,7 @@ public class BoneThrowProcessor implements AttackProcessor {
 
 	@Override
 	public void process(Entity attack) {
-		if(!sounded){
-			EffectsPlayer.playLooping("throw.ogg");
-			sounded = true;
-		}
+		SoC.game.effectSystem.addSound(attack, "throw.ogg");
 	}
 
 	@Override
@@ -68,7 +64,6 @@ public class BoneThrowProcessor implements AttackProcessor {
 
 	@Override
 	public void delete() {
-		EffectsPlayer.stop("throw.ogg");
 	}
 
 }

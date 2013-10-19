@@ -1,34 +1,47 @@
 package com.soc.game.attacks.processors;
 
 import com.artemis.Entity;
+import com.artemis.utils.Bag;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.components.Attack;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Damage;
 import com.soc.game.components.Position;
+import com.soc.game.components.State;
+import com.soc.game.components.Velocity;
+import com.soc.game.graphics.AnimatedRenderer;
+import com.soc.game.graphics.DirectionalStaticRenderer;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GraphicsLoader;
 
 public class FireballProcessor implements AttackProcessor {
-	public boolean hit;
+	public boolean hit, sounded;
+	public float distance;
 	public AnimatedRenderer renderer;
-	public boolean sounded;
 	
-	public FireballProcessor(Vector2 direction){
+	public FireballProcessor(Vector2 dir) {
 		this.hit = false;
-		this.renderer = GraphicsLoader.loadFireball(direction);
-	}
-	@Override
-	public void process(Entity attack) {
-		if(!sounded){
-			EffectsPlayer.playLooping("throw.ogg");
-			sounded = true;
-		}
+		this.renderer = GraphicsLoader.loadFireball(dir);
+		this.distance = Constants.Spells.FIREBALL_RANGE;
 	}
 
+	@Override
+	public void process(Entity attack) {
+		Velocity vel = SoC.game.velocitymapper.get(attack);
+		if(!sounded){
+			EffectsPlayer.play("foom.ogg");
+			sounded = true;
+		}
+		distance -= vel.speed * SoC.game.world.delta;
+		if(distance <= 0){
+			attack.deleteFromWorld();
+			delete();
+		}
+	}
 	
 	@Override
 	public boolean collision(Entity attack, Entity victim) {
@@ -42,10 +55,8 @@ public class FireballProcessor implements AttackProcessor {
 
 	@Override
 	public void frame(Entity attack, SpriteBatch sprite) {
-Position pos = SoC.game.positionmapper.get(attack);
-		
-		sprite.draw(renderer.frame(SoC.game.world.delta),pos.x+renderer.ox,pos.y+renderer.oy);
-
+		Position pos = SoC.game.positionmapper.get(attack);
+		sprite.draw(renderer.frame(SoC.game.world.delta),pos.x+renderer.ox,pos.y+renderer.oy,64, 64);
 	}
 
 	@Override
@@ -65,8 +76,6 @@ Position pos = SoC.game.positionmapper.get(attack);
 
 	@Override
 	public void delete() {
-		EffectsPlayer.stop("throw.ogg");
-
 	}
 
 }

@@ -263,7 +263,6 @@ public class CollisionSystem extends VoidEntitySystem {
 					feet.width, feet.heigth);
 			Rectangle nextx = new Rectangle(pos.x + v.vx * world.delta, pos.y,
 					feet.width, feet.heigth);
-			Rectangle current = new Rectangle(pos.x, pos.y, feet.width, feet.heigth);
 			Rectangle otherrect = new Rectangle(otherpos.x, otherpos.y,
 					otherfeet.width, otherfeet.heigth);
 			if (nexty.overlaps(otherrect)) {
@@ -303,6 +302,12 @@ public class CollisionSystem extends VoidEntitySystem {
 
 			int centerx = (int) ((pos.x + b.width * 0.5) * World.TILE_FACTOR);
 			int centery = (int) ((pos.y + b.height * 0.5) * World.TILE_FACTOR);
+			
+			if(centerx < 0 || centerx >= SoC.game.map.tiles[pos.z].length || centery < 0 || centery >= SoC.game.map.tiles[pos.z][centerx].length){
+				e.deleteFromWorld();
+				a.processor.delete();
+				return;
+			}
 
 			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_OBSTACLE) {
 				e.deleteFromWorld();
@@ -508,6 +513,7 @@ public class CollisionSystem extends VoidEntitySystem {
 				for (int b = 0; receivers.size() > b; b++) {
 					Entity enemy = receivers.get(b);
 					if (pm.get(enemy).z == pm.get(atk).z && attack.processor.collision(atk, enemy)) {
+						am.get(enemy).processor.delete();
 						enemy.deleteFromWorld();
 					}
 				}
