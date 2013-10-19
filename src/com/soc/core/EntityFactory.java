@@ -200,7 +200,7 @@ public class EntityFactory {
 		e.addComponent(new Velocity(0,0,200));
 		e.addComponent(new Bounds(25, 25));
 		e.addComponent(new State(1));
-		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 10));
+		e.addComponent(new Attack(new HarmfulEnemyProcessor(), 5));
 		e.addComponent(new Feet(25, 25));
 		e.addComponent(new Enemy(0, new MaggotAI()));
 		e.addComponent(new Stats(
