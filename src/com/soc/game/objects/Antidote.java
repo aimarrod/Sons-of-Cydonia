@@ -16,6 +16,7 @@ public class Antidote extends Item {
 		for(Class<? extends Alteration> clazz: debuffs){
 			this.debuffs.add(clazz);
 		}
+		this.iconPath=iconPath;
 
 	}
 
