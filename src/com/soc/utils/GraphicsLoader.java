@@ -166,7 +166,7 @@ public class GraphicsLoader {
 		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
 		tmp = TextureRegion.split(tex, 64, 64);
 	   	spin.animation = new Animation(0.2f/tmp[0].length, tmp[0]);
-	   	tmp = TextureRegion.split(load("warrior-fall.png"), 64, 64);
+	   	tmp = TextureRegion.split(load("mage-fall.png"), 64, 64);
 	   	fall.animation = new Animation(1.2f/tmp[0].length, tmp[0]);
 		
 		character.renderers[State.IDLE] = idle;
@@ -617,17 +617,17 @@ public class GraphicsLoader {
 	}
 	
 	public static void loadSatan(Character character){
-		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		AnimatedRenderer attack = new AnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
 		DirectionalAnimatedRenderer movement= new DirectionalAnimatedRenderer(true);
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		character.renderers = new Renderer[State.STATENUM];
-		attack.ox = -20;
-		attack.oy = 0;
-		idle.ox = 0;
+		attack.ox = -48;
+		attack.oy = -32;
+		idle.ox = -16;
 		idle.oy = 0;
-		movement.ox =-20;
+		movement.ox =-16;
 		movement.oy = 0;
 		
 		
@@ -636,9 +636,9 @@ public class GraphicsLoader {
 	   		movement.animations[i]= new Animation(1f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
-		tmp = TextureRegion.split(load("skull-knight-attack.png"), 64, 64);
+		tmp = TextureRegion.split(load("skull-knight-attack.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
-	   		attack.animations [i]= new Animation(1f/tmp[i].length, tmp[i]);
+	   		attack.animation= new Animation(0.3f/tmp[i].length, tmp[i]);
 	   	}
 		tmp = TextureRegion.split(load("skull-knight-death.png"),64, 64);
         TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
@@ -818,12 +818,14 @@ public class GraphicsLoader {
 	
 	public static void loadEyeball(Character character){
 		DirectionalAnimatedRenderer move = new DirectionalAnimatedRenderer(true);
+		StaticRenderer idle=new StaticRenderer();
 		AnimatedRenderer death = new AnimatedRenderer(false);
 		
 		TextureRegion[][] tmp = TextureRegion.split(load("eyeball-walk.png"), 32, 38);
 		for(int i = 0; i < tmp.length; i++){
 	   		move.animations[i] = new Animation(2f/tmp[i].length, tmp[i]);
 	   	}
+		idle.sprite=tmp[1][0];
 		
 		tmp = TextureRegion.split(load("eyeball-death.png"), 32, 38);
 		TextureRegion [] deathFrames = new TextureRegion[tmp.length * tmp[0].length];
@@ -837,7 +839,9 @@ public class GraphicsLoader {
 		character.deathTime=0.8f;
 		
 		character.renderers[State.WALK] = move;
+		character.renderers[State.ATTACK]=move;
 		character.renderers[State.DYING] = death;
+		character.renderers[State.IDLE]=idle;
 		
 	}
 	
@@ -947,10 +951,15 @@ public class GraphicsLoader {
 		TextureRegion[][] tmp = TextureRegion.split(load("magic-icicle.png"), 64, 64);
 		int direction = 0;
 		if(dir.y == -1){
-			direction = 2; 
+			direction = 2;
+			icicle.ox = -16;
+		} else if(dir.y == 1){
+			icicle.ox = -16;
 		} else if(dir.x == 1){
+			icicle.oy = -16f;
 			direction = 3;
 		} else if(dir.x == -1){
+			icicle.oy = -16f;
 			direction = 1;
 		}
 		icicle.animation = new Animation(0.2f/4, tmp[direction]);

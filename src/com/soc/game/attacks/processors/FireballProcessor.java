@@ -14,6 +14,7 @@ import com.soc.game.components.State;
 import com.soc.game.components.Velocity;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.graphics.DirectionalStaticRenderer;
+import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GraphicsLoader;
 
@@ -41,7 +42,7 @@ public class FireballProcessor implements AttackProcessor {
 			delete();
 		}
 	}
-
+	
 	@Override
 	public boolean collision(Entity attack, Entity victim) {
 		Position attackpos = SoC.game.positionmapper.get(attack);
@@ -59,7 +60,7 @@ public class FireballProcessor implements AttackProcessor {
 	}
 
 	@Override
-	public void handle(Entity attack, Entity victim) {		
+	public void handle(Entity attack, Entity victim) {
 		Attack a = SoC.game.attackmapper.get(attack);
 		hit=true;
 		if(SoC.game.damagemapper.has(victim)){
@@ -69,12 +70,12 @@ public class FireballProcessor implements AttackProcessor {
 			victim.changedInWorld();
 		}
 		attack.deleteFromWorld();
-		
+		delete();
+
 	}
 
 	@Override
 	public void delete() {
-		
 	}
 
 }

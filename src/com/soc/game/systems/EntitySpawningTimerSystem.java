@@ -32,7 +32,6 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 		
 		if(spawn.max > 0 && playerpos.z == pos.z && Math.hypot(pos.x-playerpos.x, pos.y-playerpos.y) <= spawn.range){
 			if(spawn.time <= 0){
-				System.out.println("Entra2 " + spawn.type);
 				spawn.time = spawn.interval;
 				spawn.max -= 1;
 				Entity spawned=null;

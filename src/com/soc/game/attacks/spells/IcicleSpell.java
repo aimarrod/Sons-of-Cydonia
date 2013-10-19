@@ -9,8 +9,8 @@ import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.utils.GraphicsLoader;
 
-public class FireballSpell extends Spell {
-	public FireballSpell(){
+public class IcicleSpell extends Spell {
+	public IcicleSpell(){
 		this.icon = GraphicsLoader.load("arrow-icon.png");
 		this.tooltip = "Throws a fireball!";
 		this.cast = 0.3f;
@@ -21,7 +21,7 @@ public class FireballSpell extends Spell {
 
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createFireball(group, pos, (int) (stats.intelligence));
+		Entity e = EntityFactory.createIcicle(group, pos, (int) (stats.intelligence));
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	    SoC.game.groupmanager.add(e, Constants.Groups.PROJECTILES);

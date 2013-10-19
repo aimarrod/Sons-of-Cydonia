@@ -103,8 +103,10 @@ public class Constants {
 		
 		public static final int SPELL_NUMBER = 16;
 		
-		public static final float FIREBALL_SPEED = 250f;
-		public static final float FIREBALL_RANGE = 500f;
+		public static final float ICICLE_SPEED = 300f;
+		public static final float ICICLE_RANGE = 500f;
+		public static final float FIREBALL_SPEED = 400f;
+		public static final float FIREBALL_RANGE = 800f;
 		public static final int TORNADO_RANGE = 1000;
 		public static final int TORNADO_SPEED = 500;
 		public static final int FIREBREATH_SPEED = 1000;
@@ -134,6 +136,7 @@ public class Constants {
 		public static final float TENTACLES_RADIUS = 170f;
 		public static final float AIR_CIRCLE_TIME = 2f;
 		public static final float BONE_THROW_SPEED = 1000f;
+		public static final float FIREBALL_THROW_SPEED = 1000f;
 		public static final int STOMP_RADIUS = 100;
 	}
 	

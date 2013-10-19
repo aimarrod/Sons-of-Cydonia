@@ -118,7 +118,7 @@ public class EntityFactory {
 	    	animations.damageSound = "male-damage.ogg";
 	    	animations.deathSound = "male-death.ogg";
 	    } else if(clazz.equals(Constants.Characters.MAGE)){
-		    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.FIREBALL, new int[]{Constants.Spells.DAGGER_THROW, -1, -1, -1}, Constants.Characters.WARRIOR));
+		    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.ICICLE, new int[]{Constants.Spells.DAGGER_THROW, -1, -1, -1}, Constants.Characters.WARRIOR));
 	 	    GraphicsLoader.loadMage(animations);
 	 	    animations.damageSound = "female-damage.ogg";
 	 	    animations.deathSound = "female-death.ogg";
@@ -599,27 +599,13 @@ public class EntityFactory {
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent(new Position(x, y, z));
-		e.addComponent(new Velocity(0,0,0));
+		e.addComponent(new Velocity(0,0,150));
 		e.addComponent(new Bounds(32, 38));
 		e.addComponent(new Feet(32, 38));
 		e.addComponent(new Flying());
 		e.addComponent(new State(1));
 		e.addComponent(new Enemy(5, new EyeballAI()));
-		e.addComponent(new Stats(
-				100, 
-				0, 
-				0, 
-				100, 
-				0, 
-				0, 
-				1, 
-				0, 
-				0, 
-				0, 
-				0, 
-				0, 
-				null,
-				Constants.Groups.EYEBALLS));
+	    e.addComponent(new Stats(15, 0, 0, 15, 0, 0, 1, 0, 5, 5, 0, Constants.Spells.FIREBALL, new int[]{}, Constants.Groups.EYEBALLS));
 		Character animations = new Character();
 		GraphicsLoader.loadEyeball(animations);
 		e.addComponent(animations);
@@ -791,7 +777,8 @@ public class EntityFactory {
 	   	
 	   	return e;
 	}
-	public static Entity createIcicle(String group ,Position pos, int damage, int range, Vector2 dir){
+	public static Entity createIcicle(String group ,Position pos, int damage){
+		
 		Entity e=SoC.game.world.createEntity();
 		
 		float posx = 0;
@@ -1121,6 +1108,19 @@ public class EntityFactory {
 		SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 
 		
+		return e;
+	}
+
+	public static Entity createFireball(String group, Position pos, int damage,
+			Position pos2) {
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(Constants.Spells.FIREBALL_THROW_SPEED*pos.direction.x, Constants.Spells.FIREBALL_THROW_SPEED*pos.direction.y, 0) );
+		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction) );
+		e.addComponent( new Bounds(32, 32) );
+		e.addComponent( new Flying() );
+	   	e.addComponent( new Attack(new FireballProcessor(pos.direction), damage) );
+	   	
 		return e;
 	}
 	
