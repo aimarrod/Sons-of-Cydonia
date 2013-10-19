@@ -66,6 +66,7 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 		}
 		
 		if(stats.health<=0){
+			stats.health=0;
 			if(cm.has(e)) EffectsPlayer.play(cm.get(e).deathSound);
 			state.state=State.DYING;
 			if(cm.has(e)) e.addComponent(new Expires((cm.get(e).deathTime)));
