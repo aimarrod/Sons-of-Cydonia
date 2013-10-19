@@ -7,7 +7,7 @@ import com.soc.core.SoC;
 import com.soc.game.components.Player;
 import com.soc.utils.GraphicsLoader;
 
-public abstract class Item {
+public abstract class Item implements Cloneable{
 	public TextureRegion icon;
 	public String tooltip;
 	public String name;
@@ -21,4 +21,9 @@ public abstract class Item {
 	}
 	
 	public abstract void use();
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return null;
+	}
 }

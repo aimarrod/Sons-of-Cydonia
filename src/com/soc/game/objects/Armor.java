@@ -6,10 +6,12 @@ import com.soc.game.components.Stats;
 
 public class Armor extends Item{
 	public float gainArmor;
+	public String iconPath;
 	
 	public Armor(int num,String name,String iconPath ,String tooltip, float gainArmor){
 		super(name, iconPath,tooltip,num);
 		this.gainArmor=gainArmor;
+		this.iconPath=iconPath;
 	}
 	
 	public void use(){
@@ -38,5 +40,11 @@ public class Armor extends Item{
 			return this;
 		}
 		return null;
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Armor clone=new Armor(this.num,this.name,this.iconPath,this.tooltip,this.gainArmor);
+		return clone;
 	}
 }
