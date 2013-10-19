@@ -49,10 +49,7 @@ public class WhirlbladeProcessor implements AttackProcessor {
 
 	@Override 
 	public void process(Entity attack) {
-		if(!sounded){
-			EffectsPlayer.playLooping("swing.ogg");
-			sounded = true;
-		}
+		SoC.game.effectSystem.addSound(attack, "swing.ogg");
 		
 		timer -= SoC.game.world.delta;
 		if(timer <= 0){
@@ -109,7 +106,6 @@ public class WhirlbladeProcessor implements AttackProcessor {
 
 	@Override
 	public void delete() {
-		EffectsPlayer.stop("swing.ogg");
 	}
 
 }

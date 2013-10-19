@@ -84,7 +84,7 @@ public class TornadoProcessor implements AttackProcessor{
 		victim.changedInWorld();
 		Buff.addbuff(victim, new Inmune());
 		SoC.game.statemapper.get(victim).state = State.SPINNING;
-		EffectsPlayer.playLooping("swing.ogg");
+		SoC.game.effectSystem.addSound(attack, "swing.ogg");
 	}
 
 	@Override
@@ -96,7 +96,6 @@ public class TornadoProcessor implements AttackProcessor{
 	@Override
 	public void delete() {
 		if(hit != null){
-			EffectsPlayer.stop("swing.ogg");
 			SoC.game.buffmapper.get(hit).removebuff(Inmune.class,hit);
 			SoC.game.statemapper.get(hit).state = State.IDLE;
 			int damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.1);

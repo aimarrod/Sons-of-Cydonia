@@ -27,23 +27,18 @@ public class DaggerThrowProcessor implements AttackProcessor{
 	public float range;
 	public boolean reached;
 	public boolean backing;
-	public boolean sounded;
 	
 	public DaggerThrowProcessor(Position source) {
 		this.hit = new Bag<Entity>();
 		this.renderer = GraphicsLoader.loadDaggerThrow();
 		this.range = Constants.Spells.DAGGER_RANGE;
 		this.backing = false;
-		this.sounded = false;
 		this.source = source;
 	}
 
 	@Override 
 	public void process(Entity attack) {
-		if(!sounded){
-			EffectsPlayer.playLooping("throw.ogg");
-			sounded = true;
-		}
+		SoC.game.effectSystem.addSound(attack, "throw.ogg");
 		
 		Position p = SoC.game.positionmapper.get(attack);
 		Velocity v = SoC.game.velocitymapper.get(attack);
@@ -112,6 +107,5 @@ public class DaggerThrowProcessor implements AttackProcessor{
 
 	@Override
 	public void delete() {
-		EffectsPlayer.stop("throw.ogg");		
 	}
 }

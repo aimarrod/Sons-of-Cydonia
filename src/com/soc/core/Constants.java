@@ -100,14 +100,19 @@ public class Constants {
 		public static final int TENTACLES = 13;
 		public static final int FLAME=14;
 		public static final int FIREBREATH=15;
+		public static final int RIDE_THE_LIGHTNING=16;
 		
-		public static final int SPELL_NUMBER = 16;
+		public static final int SPELL_NUMBER = 17;
 		
+		public static final float AIR_BLAST_TIME = 0.5f;
+		public static final float AIR_BLAST_TICK_INTERVAL = 0.1f;
+		public static final float AIR_BLAST_RADIUS_INCREASE = 50f; 
+		public static final float RIDE_THE_LIGHTNING_DURATION = 1.5f;
 		public static final float ICICLE_SPEED = 300f;
 		public static final float ICICLE_RANGE = 500f;
 		public static final float FIREBALL_SPEED = 400f;
 		public static final float FIREBALL_RANGE = 800f;
-		public static final int TORNADO_RANGE = 1000;
+		public static final int TORNADO_RANGE = 600;
 		public static final int TORNADO_SPEED = 500;
 		public static final int FIREBREATH_SPEED = 1000;
 		public static final float BALLISTA_FIRE_RATE = 1.75f;

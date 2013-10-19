@@ -36,14 +36,13 @@ public class EffectsPlayer {
 		sound.play(instance.volume);
 	}
 	
-	public static void playLooping(String name){
-		if(name == null || name == "") return;
+	public static Sound get(String name){
 		Sound sound = instance.sounds.get(name);
 		if(sound == null){
 			sound = Gdx.audio.newSound(Gdx.files.internal("resources/effects/"+name));
 			instance.sounds.put(name, sound);
 		}
-		sound.loop(instance.volume);
+		return sound;
 	}
 	
 	public static void stop(String name){

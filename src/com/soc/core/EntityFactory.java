@@ -25,6 +25,7 @@ import com.soc.ai.normals.SlimeAI;
 import com.soc.ai.normals.ZombiAI;
 import com.soc.core.Constants.Spells;
 import com.soc.core.Constants.World;
+import com.soc.game.attacks.processors.AirBlastProcessor;
 import com.soc.game.attacks.processors.AirCircleProcessor;
 import com.soc.game.attacks.processors.AntiVenomFountain;
 import com.soc.game.attacks.processors.ArrowProcessor;
@@ -45,6 +46,7 @@ import com.soc.game.attacks.processors.MeteorProcessor;
 import com.soc.game.attacks.processors.PoisonCloudProcessor;
 import com.soc.game.attacks.processors.QuakeBladeProcessor;
 import com.soc.game.attacks.processors.RedPushAttackProcessor;
+import com.soc.game.attacks.processors.RideTheLightningProcessor;
 import com.soc.game.attacks.processors.SlashProcessor;
 import com.soc.game.attacks.processors.StompProcessor;
 import com.soc.game.attacks.processors.TentaclesProcessor;
@@ -118,7 +120,7 @@ public class EntityFactory {
 	    	animations.damageSound = "male-damage.ogg";
 	    	animations.deathSound = "male-death.ogg";
 	    } else if(clazz.equals(Constants.Characters.MAGE)){
-		    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.ICICLE, new int[]{Constants.Spells.DAGGER_THROW, -1, -1, -1}, Constants.Characters.WARRIOR));
+		    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.ICICLE, new int[]{Constants.Spells.RIDE_THE_LIGHTNING, -1, -1, -1}, Constants.Characters.WARRIOR));
 	 	    GraphicsLoader.loadMage(animations);
 	 	    animations.damageSound = "female-damage.ogg";
 	 	    animations.deathSound = "female-death.ogg";
@@ -843,6 +845,7 @@ public class EntityFactory {
 	   	
 	   	return e;
 	}
+
 	public static Entity createCharge(Entity source, String group, Position pos, int damage){
 		Entity e=SoC.game.world.createEntity();
 				
@@ -850,6 +853,29 @@ public class EntityFactory {
 		e.addComponent( new Bounds(Spells.CHARGE_BOX, Spells.CHARGE_BOX) );
 		e.addComponent( new Velocity(300*pos.direction.x, 300*pos.direction.y, Constants.Spells.CHARGE_SPEED) );
 	   	e.addComponent( new Attack(new ChargeProcessor(source, Constants.Spells.CHARGE_DURATION), damage) );
+	   	
+	   	return e;
+	}
+	
+	public static Entity createRideTheLightning(Entity source, String group, Position pos, int damage){
+		Entity e=SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction.cpy()) );
+		e.addComponent( new Bounds(Spells.CHARGE_BOX, Spells.CHARGE_BOX) );
+		e.addComponent( new Velocity(Constants.Spells.CHARGE_SPEED*pos.direction.x, Constants.Spells.CHARGE_SPEED*pos.direction.y, Constants.Spells.CHARGE_SPEED) );
+	   	e.addComponent( new Attack(new RideTheLightningProcessor(source), damage) );
+	   	
+	   	return e;
+	}
+	
+	public static Entity createAirBlast(Entity source, Position pos, int damage){
+		Entity e=SoC.game.world.createEntity();
+		
+		Bounds bon = SoC.game.boundsmapper.get(source);
+		e.addComponent( new Position(pos.x+bon.width*0.5f, pos.y+bon.height*0.5f, pos.z, pos.direction.cpy()) );
+		e.addComponent( new Bounds(50, 50) );
+		e.addComponent( new Velocity(0, 0, 0) );
+	   	e.addComponent( new Attack(new AirBlastProcessor(), damage) );
 	   	
 	   	return e;
 	}
