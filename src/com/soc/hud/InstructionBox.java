@@ -1,96 +1,81 @@
 package com.soc.hud;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 import com.soc.core.SoC;
 import com.soc.utils.GraphicsLoader;
 
 public class InstructionBox extends Actor{
-	String text;
-	float timer;
+	
+
+
+
+
 	
 	private static String instructions = 
-			"INSTRUCTIONS: "
-			+ ""
-			+ ""
-			+ ""
-			+ "";
+			"INSTRUCTIONS:\n\n\n"
+			+ "INGAME\n\n"
+			+ "SPACE - Attack                   NUM KEYS - Skills\n"
+			+ "SHIFT LEFT - Shield              I - Inventory\n"
+			+ "ESC - Game menu                  C - Character menu\n"
+			+ "Q - Use health potion            E - Use mana potion\n"
+			+ "H - Pause and see this instructions again\n"
+			+ "Double tap a movement key to sprint\n\n"
+			+ "Inventory\n\n"
+			+ "TAB - Switch item focus			E - Use focused item\n"
+			+ "B - Drop item\n\n"
+			+ "Press H to continue";
 	
-	private Texture container;
+	
 	private Skin skin;
 	private BitmapFont font;
-	private float duration;
-	private boolean blocked, dissapearing;
+	private Texture container;
 	public HudSystem parent;
+	private boolean h;
 	
 	public InstructionBox(HudSystem parent){
-		this.text = null;
-		this.timer = 0;
-		this.container = GraphicsLoader.load("dialog-box.png");
-		skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
-		this.font =skin.getFont("gameFont");
-		this.parent = parent;
-		parent.stage.addActor(this);
 
+		this.container = new Texture(Gdx.files.internal("resources/character-menu.png"));
+		this.skin = new Skin(  Gdx.files.internal( "resources/skin2.json" ) );
+		this.font =skin.getFont("buttonFont");
+		this.parent = parent;
+		h = true;
 	}
 	
 	@Override
-	public void draw (SpriteBatch batch, float parentAlpha) {
-		if(text == null) return;
-		batch.setColor(1, 1, 1, 1);
-		font.setColor(1, 1, 1, 1);
-		font.setScale(0.45f);
-		timer += SoC.game.world.delta*((dissapearing)?-1:1);
-		if(timer > 1){
-			timer = 1;
-		} else {
-			if(timer < 0){
-				timer = 0;
+	public void act(float delta){
+		if(!h && Gdx.input.isKeyPressed(Input.Keys.H)){
+			Array<Actor> actors = parent.stage.getActors();
+			for(int i = 0; i < parent.stage.getActors().size; i++){
+				if(actors.get(i) == this){
+					actors.removeIndex(i);
+				}
 			}
+			h = true;
+			SoC.game.pause = false;
 		}
-		
-		batch.draw(container, getX(), getY());
-		font.drawWrapped(batch, text, getX()+10, getY()+container.getHeight()-10, getWidth());
-		batch.setColor(1, 1, 1, 1);
-		
-		if(blocked){
-			duration -= SoC.game.world.delta;
-			if(duration <= 0){
-				timer = 1;
-				dissapearing = true;
-				blocked = false;
-			}
-		} else {
-			if(timer == 0){
-				dissapearing=false;
-				text=null;
-			}
+		if(!Gdx.input.isKeyPressed(Input.Keys.H)){
+			h = false;
 		}
 	}
 	
-	public void setText(String text, float appearTime){
-		if(this.text == text || blocked) return;
-		this.text = text;
-		this.timer = 1 - appearTime;
-		this.dissapearing=false;
-	}
-	
-	//Compare items
-	public void setForWeapong(String text, int armor, float appearTime){
-		if(this.text == text || blocked) return;
-		this.text = text;
-		this.timer = 1 - appearTime;
-		this.dissapearing=false;
-	}
-	
-	public void pop(String text, float appearTime, float duration){
-		this.duration = duration;
-		this.timer = 1 - appearTime;
-		this.text = text;
-		this.blocked = true;
+	@Override
+	public void draw(SpriteBatch batch, float parentAlpha){
+		batch.setColor(1,1,1,0.7f);
+		batch.draw(container, getX(), getY(), getWidth(), getHeight());
+		batch.setColor(1,1,1,1f);
+		font.setColor(0,0,0,1);
+		font.setScale(0.8f);
+		font.drawWrapped(batch, instructions, getX()+40, getY()+getHeight()-40, getWidth()-20);
 	}
 }

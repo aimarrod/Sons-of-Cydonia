@@ -10,6 +10,7 @@ import com.soc.game.systems.PlayerInputSystem;
 public class GameScreen implements Screen {
 
 	private FPSLogger fps;
+	private boolean pause;
 	
 	public GameScreen() {
 		fps=new FPSLogger();
@@ -24,9 +25,11 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
 		SoC.game.world.setDelta(delta);
-	    SoC.game.world.process();
-	     
-	    SoC.game.cameraSystem.process();
+	    
+		if(!SoC.game.pause){
+			SoC.game.world.process(); 
+	    	SoC.game.cameraSystem.process();
+		}
 	    SoC.game.renderSystem.process();
 	    SoC.game.hudSystem.process();
 	    fps.log();

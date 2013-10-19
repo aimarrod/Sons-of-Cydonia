@@ -27,7 +27,7 @@ public class TentacleSpell extends Spell{
 	@Override
 	public void create(Entity source, String group, Position p, Stats stats) {
 		Position pos = SoC.game.positionmapper.get(SoC.game.player);
-		Entity e = EntityFactory.createTentacles(pos.x, pos.y, pos.z, (int) (stats.intelligence));
+		Entity e = EntityFactory.createTentacles(pos.x, pos.y, pos.z, (int) (stats.intelligence*2));
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	    SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);

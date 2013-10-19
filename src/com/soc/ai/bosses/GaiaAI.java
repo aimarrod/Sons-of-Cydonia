@@ -152,10 +152,9 @@ public class GaiaAI extends AI{
 				
 				avatarSpawned = true;
 			} else if(SoC.game.progress.gaiaAvatarDefeated){
-					SoC.game.buffmapper.get(e).removebuff(Inmune.class,e);
+					SoC.game.buffmapper.get(e).removebuff(Inmune.class, e);
 					fighting = true;
 					return;
-
 			}
 		}
 	}

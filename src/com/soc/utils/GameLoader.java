@@ -67,6 +67,7 @@ public class GameLoader {
 		SoC.game.world.getManager(TagManager.class).register(Constants.Tags.PLAYER, SoC.game.player);
 		SoC.game.world.addEntity(SoC.game.player);
 		
+		SoC.game.hudSystem.popInstructions();
 	}
 	
 	public static void loadGame(FileHandle file){

@@ -139,6 +139,8 @@ public class SoC extends Game {
 	
 	public Skin skin;
 	
+	public boolean pause;
+	
 	public Stack<Screen> screens;
 	public Stack<InputProcessor> processors;
 		

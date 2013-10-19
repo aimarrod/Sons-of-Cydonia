@@ -20,6 +20,7 @@ public class HudSystem extends VoidEntitySystem{
 	public TextButton textButton;
 	public TooltipBox tooltip;
 	public GameMenu gameMenu;
+	public InstructionBox instructions;
 	public Skin skin;
 	
 	
@@ -34,7 +35,7 @@ public class HudSystem extends VoidEntitySystem{
 		this.characterMenu = new CharacterMenu(this);
 		this.gameMenu=new GameMenu(this);
 		this.tooltip = new TooltipBox(this);
-		
+		this.instructions = new InstructionBox(this);
 	}
 	
 	@Override
@@ -57,7 +58,9 @@ public class HudSystem extends VoidEntitySystem{
 		gameMenu.setPosition(width/2,height/2+50 );
 		gameMenu.setViewport(height);
 		tooltip.setBounds(width-350, 20, 200, 200);
+		instructions.setBounds(width/2 - width/4, 100, width/2, height-200);
 	}
+	
 	public void toggleInventory(){
 		if(!inventory.hasParent()){
 			stage.addActor(inventory);
@@ -75,6 +78,20 @@ public class HudSystem extends VoidEntitySystem{
 		} else {
 			characterMenu.remove();
 		}
+	}
+	
+	public void popInstructions(){
+		stage.addActor(instructions);
+		SoC.game.pause = true;
+		if(characterMenu.hasParent()){
+			characterMenu.remove();
+		}
+		if(!inventory.hasParent()){
+			tooltip.setText(null, 0);
+			inventory.remove();
+			SoC.game.inputMultiplexer.removeProcessor(inventory);
+		}
+		
 	}
 	
 	public void toogleGameMenu(){

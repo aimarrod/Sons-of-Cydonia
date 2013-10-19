@@ -10,22 +10,10 @@ public class Dialog {
 	}
 	
 	static Dialog[] dialogs = new Dialog[]{
-		new Dialog("\nCONTROLS 1:\n\n"
-				+ "SPACE: attack\n"
-				+ "NUM-KEYS:  skills\n"
-				+ "I Inventory \n\n" 
-				+ "INVENTORY\n"
-				+ "ENTER: use object\n"
-				+ "TAB: Switch object\n"
-				+ "E: Use object"
-				+ "B: Drop item"),
-		new Dialog("\nCONTROLS 2:\n\n"
-				+ "ESC:  menu\n"
-				+ "C:  stats-menu\n"
-				+ "SHIFT LEFT: Shield\n\n"
-				+ "Rembember, your shield can only block certain attacks!"),
+		new Dialog("Press H to open the instructions."),
+		new Dialog("\nTo loot items, just walk over them."),
 		new Dialog("\nTip:\n\n"
-				+ "Double tap a movement key to run"),
+				+ "You can destroy some enemy attacks"),
 		new Dialog("\nTip:\n\n"
 				+ "Save your game ofter, you never know what may lie ahead!")
 	};

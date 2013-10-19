@@ -107,6 +107,8 @@ public class Inventory extends Actor implements InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
+		if(SoC.game.pause) return true;
+
 		if (Gdx.input.isKeyPressed(Keys.TAB)) {
 			if (focusedSlot == 20) {
 				focusedSlot = 1;
@@ -131,6 +133,8 @@ public class Inventory extends Actor implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		if(SoC.game.pause) return true;
+		
 		Vector2 pos = parent.stage.screenToStageCoordinates(new Vector2(screenX, screenY));
 
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {

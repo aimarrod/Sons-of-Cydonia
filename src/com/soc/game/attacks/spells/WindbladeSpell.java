@@ -26,7 +26,7 @@ public class WindbladeSpell extends Spell{
 
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createWindblade(group, pos, (int) (stats.agility), pos);
+		Entity e = EntityFactory.createWindblade(group, pos, (int) (stats.intelligence*0.5f), pos);
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	    SoC.game.groupmanager.add(e, Constants.Groups.PROJECTILES);

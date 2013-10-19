@@ -8,6 +8,7 @@ import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.attacks.spells.Spell;
@@ -119,12 +120,17 @@ import com.soc.utils.FloatingText;
 
 		@Override
 		public boolean keyDown(int keycode) {
+			if(SoC.game.pause) return true;
 			Player controls = plm.get(SoC.game.player);
 			Entity player = SoC.game.player;
 			Position pos = pm.get(player);
 			State state = sm.get(player);
 			Stats stats = stm.get(player);
 			Velocity vel = vm.get(player);
+			
+			if(keycode==Keys.H){
+				SoC.game.hudSystem.popInstructions();
+			}
 			
 			if(keycode==controls.inventory){
 				world.getSystem(HudSystem.class).toggleInventory();
@@ -138,6 +144,8 @@ import com.soc.utils.FloatingText;
 				world.getSystem(HudSystem.class).toogleGameMenu();
 				return true;
 			}
+
+			
 			if(controls.blocking || state.state >= State.BLOCKED) return false;
 
 			if(keycode == controls.attack){
@@ -210,6 +218,8 @@ import com.soc.utils.FloatingText;
 
 		@Override
 		public boolean keyUp(int keycode) {
+			if(SoC.game.pause) return true;
+
 			Player controls = SoC.game.playermapper.get(SoC.game.player);
 			if(keycode == controls.shield){
 				if(controls.blocking){
@@ -223,8 +233,6 @@ import com.soc.utils.FloatingText;
 
 		@Override
 		public boolean keyTyped(char character) {
-
-			
 			return false;
 		}
 
