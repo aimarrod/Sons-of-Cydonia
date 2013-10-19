@@ -101,8 +101,9 @@ public class Constants {
 		public static final int FLAME=14;
 		public static final int FIREBREATH=15;
 		public static final int RIDE_THE_LIGHTNING=16;
+		public static final int INFERNO=17;
 		
-		public static final int SPELL_NUMBER = 17;
+		public static final int SPELL_NUMBER = 18;
 		
 		public static final float AIR_BLAST_TIME = 0.5f;
 		public static final float AIR_BLAST_TICK_INTERVAL = 0.1f;

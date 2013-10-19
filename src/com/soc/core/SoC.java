@@ -18,6 +18,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
+import com.soc.game.attacks.processors.InfernoProcessor;
 import com.soc.game.attacks.spells.ArrowSpell;
 import com.soc.game.attacks.spells.BiteSpell;
 import com.soc.game.attacks.spells.BoneThrowSpell;
@@ -27,6 +28,7 @@ import com.soc.game.attacks.spells.FireBreathSpell;
 import com.soc.game.attacks.spells.FireballSpell;
 import com.soc.game.attacks.spells.FlameSpell;
 import com.soc.game.attacks.spells.IcicleSpell;
+import com.soc.game.attacks.spells.InfernoSpell;
 import com.soc.game.attacks.spells.QuakebladeSpell;
 import com.soc.game.attacks.spells.RideTheLightningSpell;
 import com.soc.game.attacks.spells.SlashSpell;
@@ -172,7 +174,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.ICICLE] = new IcicleSpell();
 		spells[Constants.Spells.FIREBREATH]=new FireBreathSpell();
 		spells[Constants.Spells.RIDE_THE_LIGHTNING]=new RideTheLightningSpell();
-
+		spells[Constants.Spells.INFERNO]=new InfernoSpell();
 		
 		items=new Item[Constants.Items.ITEM_NUMBER];
 		items[Constants.Items.NONE] = null;
