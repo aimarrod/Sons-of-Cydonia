@@ -36,6 +36,7 @@ import com.soc.game.attacks.processors.ChargeProcessor;
 import com.soc.game.attacks.processors.DaggerThrowProcessor;
 import com.soc.game.attacks.processors.FireBreathProcessor;
 import com.soc.game.attacks.processors.FireStoneProcessor;
+import com.soc.game.attacks.processors.FireballProcessor;
 import com.soc.game.attacks.processors.FlameProcessor;
 import com.soc.game.attacks.processors.FlameWallProcessor;
 import com.soc.game.attacks.processors.HarmfulEnemyProcessor;
@@ -90,12 +91,16 @@ public class EntityFactory {
 	    	GraphicsLoader.loadWarrior(animations);
 	    	animations.damageSound = "male-damage.ogg";
 	    	animations.deathSound = "male-death.ogg";
+	    } else if(clazz.equals(Constants.Characters.MAGE)){
+	    	GraphicsLoader.loadWarrior(animations);
+	    	animations.damageSound = "female-damage.ogg";
+	    	animations.deathSound = "female-death.ogg";
 	    }
 	    
 		return e;
 	}
 
-	public static Entity createCharacter(float px, float py, int pz,float range, int damage, int type){
+	public static Entity createCharacter(float px, float py, int pz,float range, int damage, String clazz){
 		Entity e = SoC.game.world.createEntity();
 		Character animations = new Character();
 		
@@ -103,18 +108,20 @@ public class EntityFactory {
 	    e.addComponent(new Player());
 	    e.addComponent(new Velocity(0,0,Constants.Characters.VELOCITY));
 	    e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
-	    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.SLASH, new int[]{Constants.Spells.DAGGER_THROW, -1, -1, -1}, Constants.Characters.WARRIOR));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(animations);
 	    
-	    if(type == Constants.Classes.HUNTER){
-	    } else if(type == Constants.Classes.WARRIOR){
+	    if(clazz.equals(Constants.Characters.WARRIOR)){
+		    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.SLASH, new int[]{Constants.Spells.DAGGER_THROW, -1, -1, -1}, Constants.Characters.WARRIOR));
 	    	GraphicsLoader.loadWarrior(animations);
 	    	animations.damageSound = "male-damage.ogg";
 	    	animations.deathSound = "male-death.ogg";
-	    } else if(type == Constants.Classes.MAGE){
-	    	
+	    } else if(clazz.equals(Constants.Characters.MAGE)){
+		    e.addComponent(new Stats(100, 100, 0, 100, 100, 100, 1, 0, 5, 5, 5, Constants.Spells.FIREBALL, new int[]{Constants.Spells.DAGGER_THROW, -1, -1, -1}, Constants.Characters.WARRIOR));
+	 	    GraphicsLoader.loadMage(animations);
+	 	    animations.damageSound = "female-damage.ogg";
+	 	    animations.deathSound = "female-death.ogg";
 	    } else {
 	    	
 	    }
@@ -786,24 +793,46 @@ public class EntityFactory {
 	}
 	public static Entity createIcicle(String group ,Position pos, int damage, int range, Vector2 dir){
 		Entity e=SoC.game.world.createEntity();
-				
-		e.addComponent( new Position(pos.x,pos.y, pos.z) );
-		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
-		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
+		
+		float posx = 0;
+		float posy = 0;
+		
+		if(pos.direction.y != 0){
+			posx = pos.x+4;
+			posy = pos.y + Math.signum(pos.direction.y)*32;
+		} else if(pos.direction.x != 0){
+			posx = pos.x + ((Math.signum(pos.direction.x)==1.0)?20:-50);
+			posy = pos.y + 16;
+		}
+		
+		e.addComponent( new Position(posx, posy, pos.z) );
+		e.addComponent( new Bounds(32, 32) );
+		e.addComponent( new Velocity(Constants.Spells.ICICLE_SPEED*pos.direction.x, Constants.Spells.ICICLE_SPEED*pos.direction.y, (int) Constants.Spells.ICICLE_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new IcicleProcessor(dir, range), damage ) );
+	   	e.addComponent( new Attack(new IcicleProcessor(pos.direction), damage) );
 	   	
 	   	return e;
 	}
 	
-	public static Entity createFireball(String group, Position pos, int damage, int range, Vector2 dir){
+	public static Entity createFireball(String group, Position pos, int damage){
 		Entity e=SoC.game.world.createEntity();
-				
-		e.addComponent( new Position(pos.x, pos.y, pos.z) );
-		e.addComponent( new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT) );
-		e.addComponent( new Velocity(300*dir.x, 300*dir.y, Constants.Spells.DAGGER_SPEED) );
+		
+		float posx = 0;
+		float posy = 0;
+		
+		if(pos.direction.y != 0){
+			posx = pos.x+4;
+			posy = pos.y + Math.signum(pos.direction.y)*32;
+		} else if(pos.direction.x != 0){
+			posx = pos.x + ((Math.signum(pos.direction.x)==1.0)?20:-50);
+			posy = pos.y + 16;
+		}
+		
+		e.addComponent( new Position(posx, posy, pos.z) );
+		e.addComponent( new Bounds(32, 32) );
+		e.addComponent( new Velocity(Constants.Spells.FIREBALL_SPEED*pos.direction.x, Constants.Spells.FIREBALL_SPEED*pos.direction.y, (int) Constants.Spells.FIREBALL_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new IcicleProcessor(dir, range), damage) );
+	   	e.addComponent( new Attack(new FireballProcessor(pos.direction), damage) );
 	   	
 	   	return e;
 	}

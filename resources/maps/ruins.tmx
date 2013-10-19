@@ -907,7 +907,7 @@
     <property name="type" value="zombie"/>
    </properties>
   </object>
-  <object x="896" y="1120" width="32" height="32">
+  <object x="896" y="1184" width="32" height="32">
    <properties>
     <property name="interval" value="15"/>
     <property name="max" value="3"/>
@@ -916,7 +916,7 @@
     <property name="type" value="slime"/>
    </properties>
   </object>
-  <object x="1792" y="288" width="32" height="32">
+  <object x="1760" y="576" width="32" height="32">
    <properties>
     <property name="interval" value="15"/>
     <property name="max" value="3"/>
@@ -934,25 +934,7 @@
     <property name="type" value="slime"/>
    </properties>
   </object>
-  <object x="1696" y="1088" width="32" height="32">
-   <properties>
-    <property name="interval" value="15"/>
-    <property name="max" value="3"/>
-    <property name="range" value="500"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="slime"/>
-   </properties>
-  </object>
-  <object x="1024" y="768" width="32" height="32">
-   <properties>
-    <property name="interval" value="15"/>
-    <property name="max" value="3"/>
-    <property name="range" value="200"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="slime"/>
-   </properties>
-  </object>
-  <object x="896" y="448" width="32" height="32">
+  <object x="896" y="544" width="32" height="32">
    <properties>
     <property name="interval" value="15"/>
     <property name="max" value="3"/>
@@ -961,7 +943,7 @@
     <property name="type" value="slime"/>
    </properties>
   </object>
-  <object x="1632" y="1440" width="32" height="32">
+  <object x="1824" y="1440" width="32" height="32">
    <properties>
     <property name="interval" value="15"/>
     <property name="max" value="3"/>
@@ -977,15 +959,6 @@
     <property name="range" value="700"/>
     <property name="respawn" value="true"/>
     <property name="type" value="eyeball"/>
-   </properties>
-  </object>
-  <object x="1632" y="800" width="32" height="32">
-   <properties>
-    <property name="interval" value="15"/>
-    <property name="max" value="3"/>
-    <property name="range" value="400"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="slime"/>
    </properties>
   </object>
   <object x="4704" y="2208" width="64" height="64">

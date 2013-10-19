@@ -9,6 +9,7 @@ public class Constants {
 		public static final int FEET_HEIGTH = 10;
 		public static final int VELOCITY=150;
 		public static final String WARRIOR = "warrior";
+		public static final String MAGE = "mage";
 	}
 	
 	public static class Groups{
@@ -102,6 +103,8 @@ public class Constants {
 		
 		public static final int SPELL_NUMBER = 16;
 		
+		public static final float FIREBALL_SPEED = 250f;
+		public static final float FIREBALL_RANGE = 500f;
 		public static final int TORNADO_RANGE = 1000;
 		public static final int TORNADO_SPEED = 500;
 		public static final int FIREBREATH_SPEED = 1000;
