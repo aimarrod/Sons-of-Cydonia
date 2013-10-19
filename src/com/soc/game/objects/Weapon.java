@@ -7,12 +7,14 @@ public class Weapon extends Item {
 	public int gainStrenght;
 	public int gainAgility;
 	public int gainIntelligence;
+	public String iconPath;
 	
 	public Weapon(int num,String name,String iconPath ,String tooltip, int gainStrenght, int gainAgility, int gainIntelligence){
 		super(name,iconPath,tooltip,num);
 		this.gainStrenght=gainStrenght;
 		this.gainIntelligence=gainIntelligence;
 		this.gainAgility=gainAgility;
+		this.iconPath=iconPath;
 		
 	}
 	
@@ -46,5 +48,11 @@ public class Weapon extends Item {
 			return this;
 		}
 		return null;
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		Weapon clone=new Weapon(this.num,this.name,this.iconPath,this.tooltip,this.gainStrenght,this.gainAgility,this.gainIntelligence);
+		return clone;
 	}
 }

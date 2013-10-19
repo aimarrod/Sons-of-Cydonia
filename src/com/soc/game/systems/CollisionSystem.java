@@ -30,6 +30,7 @@ import com.soc.game.map.DialogTile;
 import com.soc.game.map.Gate;
 import com.soc.game.map.Push;
 import com.soc.game.map.Stairs;
+import com.soc.game.objects.Item;
 import com.soc.game.states.alterations.Burn;
 import com.soc.game.states.benefits.Unmovable;
 import com.soc.utils.EffectsPlayer;
@@ -135,19 +136,23 @@ public class CollisionSystem extends VoidEntitySystem {
 				
 				if(current.overlaps(otherrect)){
 					Player p = SoC.game.playermapper.get(SoC.game.player);
-					if(p.addToInventary(SoC.game.items[SoC.game.dropmapper.get(item).item])) {
-						item.deleteFromWorld();
-						if(!sounded){
-							EffectsPlayer.play("pickup.ogg");
-							sounded = true;
+					try {
+						if(p.addToInventary((Item)((Item)SoC.game.items[SoC.game.dropmapper.get(item).item]).clone())) {
+							item.deleteFromWorld();
+							if(!sounded){
+								EffectsPlayer.play("pickup.ogg");
+								sounded = true;
+							}
+						} else if(timer <= 0){
+							FloatingText text = new FloatingText("Inventory is full.", 1f, pos.x, pos.y, 50);
+							text.b = 0;
+							text.r = 0;
+							text.g = 0;
+							SoC.game.renderSystem.texts.add(text);
+							timer = 1f;
 						}
-					} else if(timer <= 0){
-						FloatingText text = new FloatingText("Inventory is full.", 1f, pos.x, pos.y, 50);
-						text.b = 0;
-						text.r = 0;
-						text.g = 0;
-						SoC.game.renderSystem.texts.add(text);
-						timer = 1f;
+					} catch (CloneNotSupportedException e) {
+						e.printStackTrace();
 					}
 				}	
 		}

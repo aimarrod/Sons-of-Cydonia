@@ -197,6 +197,12 @@ import com.soc.utils.FloatingText;
 					timer = 0.2f;
 				}
 			}
+			if(keycode==controls.healthPotion){
+				SoC.game.hudSystem.inventory.useFirstHealthPotion();
+			}
+			if(keycode==controls.manaPotion){
+				SoC.game.hudSystem.inventory.useFirstManaPotion();
+			}
 			return false;
 		}
 

@@ -2,6 +2,7 @@ package com.soc.game.components;
 
 import com.artemis.Component;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.soc.core.Constants;
 import com.soc.core.SoC;
 import com.soc.game.objects.Armor;
@@ -19,6 +20,8 @@ public class Player extends Component {
 	public int inventory;
 	public int characterMenu;
 	public int gameMenu;
+	public int healthPotion;
+	public int manaPotion;
 	public int [] spellkeys;
 	public Weapon weapon;
 	public Armor armor;
@@ -35,6 +38,8 @@ public class Player extends Component {
 		characterMenu = Input.Keys.C;
 		shield = Input.Keys.SHIFT_LEFT;
 		gameMenu=Input.Keys.ESCAPE;
+		this.healthPotion=Keys.Q;
+		this.manaPotion=Keys.E;
 		spellkeys = new int[]{Input.Keys.NUM_1, Input.Keys.NUM_2, Input.Keys.NUM_3, Input.Keys.NUM_4};
 		inventary=new Item[Constants.Items.INVENTORY_SIZE];
 		inventary[0] = SoC.game.items[Constants.Items.HEALTH_POTION];
