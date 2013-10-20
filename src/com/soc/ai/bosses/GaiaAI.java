@@ -165,6 +165,7 @@ public class GaiaAI extends AI{
 		Position pos = SoC.game.positionmapper.get(e);
 		Stats stat = SoC.game.statsmapper.get(SoC.game.player);
 		
+		EntityFactory.createItem(Constants.Items.MIX_POTION, pos.x, pos.y, pos.z);
 		if(stat.clazz.equals(Constants.Characters.WARRIOR)){
 			EntityFactory.createItem(Constants.Items.SILVER_SWORD, pos.x, pos.y, pos.z);
 		} else if(stat.clazz.equals(Constants.Characters.MAGE)){
