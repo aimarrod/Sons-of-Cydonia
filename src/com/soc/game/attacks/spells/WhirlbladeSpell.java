@@ -26,7 +26,7 @@ public class WhirlbladeSpell extends Spell{
 
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createWhirlblade(SoC.game.positionmapper.get(source), SoC.game.boundsmapper.get(source),(int) (stats.agility*0.7f + stats.strength*0.7));
+		Entity e = EntityFactory.createWhirlblade(SoC.game.positionmapper.get(source), SoC.game.boundsmapper.get(source),SoC.game.statsmapper.get(source),(int) (stats.agility*0.7f + stats.strength*0.7));
 	    SoC.game.groupmanager.add(e, group);
 		SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 		SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);

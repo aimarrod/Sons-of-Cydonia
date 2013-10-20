@@ -34,10 +34,11 @@ public class WhirlbladeProcessor implements AttackProcessor {
 	public Circle hitbox;
 	private Rectangle enemy;
 	public boolean sounded;
+	public Stats stats;
 	
 	@Mapper
 	ComponentMapper<Damage> dm = SoC.game.world.getMapper(Damage.class);
-	public WhirlbladeProcessor(Position pos, Bounds bon) {
+	public WhirlbladeProcessor(Position pos, Bounds bon, Stats s) {
 		this.hit = new Bag<Entity>();
 		this.pos = pos;
 		this.bon = bon;
@@ -45,12 +46,16 @@ public class WhirlbladeProcessor implements AttackProcessor {
 		this.interval = Constants.Spells.SPIN_DURATION*0.2f;
 		this.enemy = new Rectangle();
 		this.hitbox = new Circle();
+		this.stats=s;
 	}
 
 	@Override 
 	public void process(Entity attack) {
+		if(stats.health<=0){
+			attack.deleteFromWorld();
+			return;
+		}
 		SoC.game.effectSystem.addSound(attack, "swing.ogg");
-		
 		timer -= SoC.game.world.delta;
 		if(timer <= 0){
 			attack.deleteFromWorld();

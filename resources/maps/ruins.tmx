@@ -71,7 +71,7 @@
    eJztwYEAAAAAw6D5U1/hAFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwGcR4AAQ==
   </data>
  </layer>
- <objectgroup name="level0-obstacle" width="200" height="200" visible="0">
+ <objectgroup name="level0-obstacle" width="200" height="200">
   <object x="0" y="0" width="192" height="6240"/>
   <object x="384" y="256" width="32" height="192"/>
   <object x="192" y="0" width="6208" height="256"/>
@@ -194,7 +194,7 @@
   <object x="2688" y="2176" width="32" height="32"/>
   <object x="6176" y="3968" width="32" height="2208"/>
  </objectgroup>
- <objectgroup name="level0-unwalkable" width="200" height="200" visible="0">
+ <objectgroup name="level0-unwalkable" width="200" height="200">
   <object x="544" y="352" width="320" height="160"/>
   <object x="544" y="576" width="320" height="160"/>
   <object x="960" y="576" width="320" height="160"/>
@@ -416,7 +416,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level1-obstacle" width="200" height="200" visible="0">
+ <objectgroup name="level1-obstacle" width="200" height="200">
   <object x="6208" y="224" width="192" height="6176"/>
   <object x="0" y="6176" width="6208" height="224"/>
   <object x="0" y="0" width="6400" height="224"/>
@@ -475,17 +475,17 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level2-obstacle" width="200" height="200" visible="0">
+ <objectgroup name="level2-obstacle" width="200" height="200">
   <object x="0" y="-32" width="6400" height="224"/>
   <object x="0" y="6272" width="6400" height="224"/>
   <object x="0" y="192" width="192" height="5952"/>
   <object x="6208" y="192" width="192" height="6080"/>
  </objectgroup>
- <objectgroup name="level2-unwalkable" width="200" height="200" visible="0">
+ <objectgroup name="level2-unwalkable" width="200" height="200">
   <object x="4960" y="3008" width="32" height="416"/>
   <object x="4832" y="3008" width="32" height="416"/>
  </objectgroup>
- <objectgroup name="level2-special" width="200" height="200" visible="0">
+ <objectgroup name="level2-special" width="200" height="200">
   <object x="4864" y="3392" width="96" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -872,7 +872,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200" visible="0">
+ <objectgroup name="level0-spawners" width="200" height="200">
   <object x="256" y="320" width="64" height="64">
    <properties>
     <property name="interval" value="0"/>
@@ -1407,7 +1407,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level2-spawners" width="200" height="200" visible="0">
+ <objectgroup name="level2-spawners" width="200" height="200">
   <object x="4416" y="2176" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>

@@ -959,12 +959,12 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createWhirlblade(Position pos, Bounds bon,int damage) {
+	public static Entity createWhirlblade(Position pos, Bounds bon,Stats stats,int damage) {
 		Entity e=SoC.game.world.createEntity();
 		
 		e.addComponent( new Velocity(0, 0, Constants.Spells.DAGGER_SPEED) );
 		e.addComponent(new Position(pos.x, pos.y, pos.z));
-	   	e.addComponent( new Attack(new WhirlbladeProcessor(pos, bon), damage) );
+	   	e.addComponent( new Attack(new WhirlbladeProcessor(pos, bon,stats), damage) );
 	   	
 	   	return e;		
 	}
@@ -1160,7 +1160,7 @@ public class EntityFactory {
 	public static Entity createItem(int number, float x, float y, int z){
 		Entity e = SoC.game.world.createEntity();
 		
-		e.addComponent( new Position(x + Constants.World.TILE_SIZE*0.5f, y + Constants.World.TILE_SIZE*0.5f, z) );
+		e.addComponent( new Position(x + Constants.World.TILE_SIZE*0.5f, y , z) );
 		e.addComponent( new Bounds(Constants.Items.ITEM_SIZE, Constants.Items.ITEM_SIZE));
 		e.addComponent( new Drop(number) );
 		
