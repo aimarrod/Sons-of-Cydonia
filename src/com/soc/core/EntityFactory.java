@@ -610,7 +610,7 @@ public class EntityFactory {
 		e.addComponent(new Flying());
 		e.addComponent(new State(1));
 		e.addComponent(new Enemy(5, new EyeballAI()));
-	    e.addComponent(new Stats(15, 0, 0, 15, 0, 0, 1, 0, 5, 5, 0, Constants.Spells.FIREBALL, new int[]{}, Constants.Groups.EYEBALLS));
+	    e.addComponent(new Stats(15, 0, 0, 15, 0, 0, 1, 0, 5, 5, 35, Constants.Spells.FIREBALL, new int[]{}, Constants.Groups.EYEBALLS));
 		Character animations = new Character();
 		GraphicsLoader.loadEyeball(animations);
 		e.addComponent(animations);
