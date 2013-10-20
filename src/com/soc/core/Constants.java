@@ -190,7 +190,7 @@ public class Constants {
 		public final static int MAGIC_WAND=22;
 		public final static int DIVINE_WAND=23;
 		
-		public final static int ITEM_SIZE = 64;
+		public final static int ITEM_SIZE = 32;
 
 
 	}
