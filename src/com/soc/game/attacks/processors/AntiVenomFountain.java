@@ -7,6 +7,7 @@ import com.soc.game.components.Bounds;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Debuff;
 import com.soc.game.components.Position;
+import com.soc.game.components.Stats;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.states.alterations.Venom;
 import com.soc.game.states.benefits.Rage;
@@ -42,9 +43,14 @@ public class AntiVenomFountain implements AttackProcessor {
 
 	@Override
 	public void handle(Entity attack, Entity enemy) {
+		Stats s=SoC.game.statsmapper.get(enemy);
+		int halfHealth=s.maxHealth/2;
 		if(SoC.game.debuffmapper.has(enemy)){
 			Debuff debuff=SoC.game.debuffmapper.get(enemy);
 			debuff.removeDebuff(Venom.class,enemy);
+			if(s.health<=halfHealth){
+				s.health=halfHealth;
+			}
 		}
 		
 		if(SoC.game.buffmapper.has(enemy)){
