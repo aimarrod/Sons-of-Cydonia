@@ -31,7 +31,7 @@ public class CharacterMenu extends Actor{
         Stats stats = SoC.game.statsmapper.get(SoC.game.player);
         Player player = SoC.game.playermapper.get(SoC.game.player);
         
-        batch.draw(container, getX(),  getY());
+        batch.draw(container, getX(),  getY()-30, container.getWidth(), container.getHeight()+30);
         font.setScale(0.5f);
         font.setColor(Color.WHITE);
         font.draw(batch, "HP: ", getX()+15, getY()+190);
@@ -90,6 +90,9 @@ public class CharacterMenu extends Actor{
         	batch.draw(player.armor.icon, getX()+105, getY()+8, 25, 25);
         }
 		
+        font.setColor(Color.WHITE);
+        font.draw(batch, "Level:", getX()+15, getY()+0);
+        font.draw(batch, stats.level+"", getX()+105, getY()+0);        
         batch.setColor(1, 1, 1, 1);
 	}
 }
