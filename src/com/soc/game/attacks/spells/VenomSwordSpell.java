@@ -12,7 +12,7 @@ public class VenomSwordSpell extends Spell {
 	public VenomSwordSpell() {
 		// this.icon = GraphicsLoader.load("punch-icon.png");
 		this.tooltip = "Venom!";
-		this.cast = 0.9f;
+		this.cast = 0.2f;
 		this.sound = "";
 		this.blocking = 1f;
 		this.state = State.ATTACK;

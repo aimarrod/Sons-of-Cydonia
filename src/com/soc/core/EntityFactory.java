@@ -419,10 +419,10 @@ public class EntityFactory {
 	public static Entity createSkullKnight(float px, float py, int pz){
 		Entity e = SoC.game.world.createEntity();
 		e.addComponent(new Position(px, py, pz));
-		e.addComponent(new Velocity(0,0,100));
+		e.addComponent(new Velocity(0,0,150));
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 		e.addComponent(new State(1));
-	    e.addComponent(new Stats(50, 0, 0, 50, 0, 0, 1, 1, 1, 1, 1, Constants.Spells.VENOMSWORD, new int[]{}, Constants.Groups.SKULL_KNIGHT));
+	    e.addComponent(new Stats(2000, 0, 0, 2000, 0, 0, 1, 10, 50, 1, 1, Constants.Spells.VENOMSWORD, new int[]{}, Constants.Groups.SKULL_KNIGHT));
 		e.addComponent(new Feet(32, 15));
 		e.addComponent(new Enemy(5, new SkullKnightAI()));
 		Character animations = new Character();
