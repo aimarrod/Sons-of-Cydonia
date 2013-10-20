@@ -63,9 +63,9 @@ public class RedPushAttackProcessor implements AttackProcessor{
 		Position pos1 = SoC.game.positionmapper.get(attack);
 		Position pos2 = SoC.game.positionmapper.get(victim);
 		if(SoC.game.damagemapper.has(victim)){
-			SoC.game.damagemapper.get(victim).damage+=a.damage;
+			SoC.game.damagemapper.get(victim).damage+=0;
 		}else{
-			victim.addComponent(new Damage(a.damage, false));
+			victim.addComponent(new Damage(0, false));
 			victim.changedInWorld();
 		}
 		Vector2 [] directions=new Vector2 [2];
