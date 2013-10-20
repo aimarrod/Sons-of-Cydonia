@@ -130,6 +130,7 @@ public class Constants {
 		public static final int QUAKEBLADE_RADIUS_INCREASE = 16;
 		public static final float SPIN_DURATION = 3.5f;
 		public static final float SPIN_RADIUS = 60f;
+		public static final float FIREBREATH_RADIUS = 20f;
 		public static final float POISON_CLOUD_DURATION = 7f;
 		public static final float POISON_CLOUD_RADIUS = 65f;
 		public static final float METEOR_BLAST_TICK_INTERVAL = 0.1f;

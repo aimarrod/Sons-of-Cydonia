@@ -252,7 +252,7 @@ public class MidMonsterAI extends AI{
 				//int tileX=r.nextInt(20)+1+37;
 				//int tileX=(int)(playerPos.x*Constants.World.TILE_FACTOR)-4+r.nextInt(9);
 				float tileX=(playerPos.x);
-				Buff.addbuff(e, new Teleport(tileX, 78*Constants.World.TILE_SIZE, 0));
+				//Buff.addbuff(e, new Teleport(tileX, 78*Constants.World.TILE_SIZE, 0));
 				float currentPosition=0;
 				float newPosition=0;
 				for(int i=0;i<flameWallsLeft.size();i++){
@@ -269,6 +269,13 @@ public class MidMonsterAI extends AI{
 					if(newPosition<currentPosition)
 						pFlame.x=newPosition*Constants.World.TILE_SIZE;
 				}
+				
+				float leftBorder=SoC.game.positionmapper.get(flameWallsLeft.get(0)).x;
+				float rightBorder=SoC.game.positionmapper.get(flameWallsRight.get(0)).x;
+				leftBorder*=Constants.World.TILE_FACTOR;
+				rightBorder*=Constants.World.TILE_FACTOR;
+				int difference=(int) (rightBorder-leftBorder);
+				Buff.addbuff(e, new Teleport((leftBorder+(r.nextInt(difference)+1))*Constants.World.TILE_SIZE, 78*Constants.World.TILE_SIZE, 0));
 				Buff.addbuff(e, new Casting(2f,Constants.BuffColors.RED));
 				pos.direction.x=0;
 				pos.direction.y=-1;

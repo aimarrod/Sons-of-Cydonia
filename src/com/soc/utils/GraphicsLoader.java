@@ -1374,7 +1374,7 @@ public class GraphicsLoader {
 	
 	public static AnimatedRenderer loadInitialFireBreath(){
 		AnimatedRenderer flame = new AnimatedRenderer(false);
-		flame.ox=0;
+		flame.ox=-20;
 		flame.oy-=20;
 		TextureRegion[][] tmp = TextureRegion.split(load("fire-breath-initial.png"), 64,64);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
@@ -1389,7 +1389,7 @@ public class GraphicsLoader {
 	}
 	public static AnimatedRenderer loadMidFireBreath(){
 		AnimatedRenderer flame = new AnimatedRenderer(true);
-		flame.ox=0;
+		flame.ox=-20;
 		flame.oy-=20;
 		TextureRegion[][] tmp = TextureRegion.split(load("fire-breath.png"), 64,64);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
@@ -1404,7 +1404,7 @@ public class GraphicsLoader {
 	}
 	public static AnimatedRenderer loadEndFireBreath(){
 		AnimatedRenderer flame = new AnimatedRenderer(false);
-		flame.ox=0;
+		flame.ox=-20;
 		flame.oy-=20;
 		TextureRegion[][] tmp = TextureRegion.split(load("fire-breath-end.png"), 64,64);
 		TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];

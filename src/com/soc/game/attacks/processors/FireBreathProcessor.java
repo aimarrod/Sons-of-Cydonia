@@ -55,7 +55,7 @@ if(hit != null) return false;
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
-		hitbox = new Circle(attackpos.x, attackpos.y, Constants.Spells.SPIN_RADIUS);
+		hitbox = new Circle(attackpos.x, attackpos.y, Constants.Spells.FIREBREATH_RADIUS);
 		enemy = new Rectangle(victimpos.x, victimpos.y, victimbounds.width, victimbounds.height);
 		return (hit==null && Intersector.overlaps(hitbox, enemy));
 	}

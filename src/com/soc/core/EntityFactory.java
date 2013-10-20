@@ -627,17 +627,17 @@ public class EntityFactory {
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
 		e.addComponent(new Stats(
-				1500, 
+				100, 
 				0, 
 				0, 
-				1500, 
+				100, 
 				0, 
 				0, 
 				1, 
-				40, 
 				0, 
 				0, 
-				45, 
+				0, 
+				0, 
 				0, 
 				null,
 				Constants.Groups.RED_MONSTER));
@@ -658,15 +658,15 @@ public class EntityFactory {
 		e.addComponent(new Feet(32, 32));
 		e.addComponent(new State(0));
 		e.addComponent(new Stats(
-				700, 
+				100, 
 				0, 
 				0, 
-				700, 
+				100, 
 				0, 
 				0, 
 				1, 
-				40, 
-				46, 
+				0, 
+				0, 
 				0, 
 				0, 
 				0, 
@@ -1024,7 +1024,7 @@ public class EntityFactory {
 		Entity e=SoC.game.world.createEntity();
 		e.addComponent( new Velocity(Constants.Spells.TORNADO_SPEED*direction.x, Constants.Spells.TORNADO_SPEED*direction.y, 0) );
 		e.addComponent( new Position(x, y, z, direction));
-		e.addComponent( new Bounds(84, 75) );
+		e.addComponent( new Bounds(40, 40) );
 		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new FireBreathProcessor(), damage) );	   	
 	   	return e;		
