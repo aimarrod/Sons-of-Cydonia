@@ -138,6 +138,7 @@ import com.soc.utils.GameLoader;
 			if(keycode == Keys.F5){
 				try {
 					GameLoader.quickSave();
+					SoC.game.hudSystem.tooltip.pop("Game saved!", 0, 2f);
 				} catch (IOException e) {
 					SoC.game.hudSystem.tooltip.pop("Could not save the game!", 0, 2f);
 				}
