@@ -422,7 +422,7 @@
   <object x="0" y="0" width="6400" height="224"/>
   <object x="-32" y="224" width="192" height="5952"/>
  </objectgroup>
- <objectgroup name="level1-unwalkable" width="200" height="200" visible="0">
+ <objectgroup name="level1-unwalkable" width="200" height="200">
   <object x="5120" y="4768" width="1088" height="1472"/>
   <object x="5152" y="4768" width="544"/>
   <object x="5152" y="3712" width="1056" height="1056"/>
@@ -448,7 +448,7 @@
    </properties>
   </object>
   <object x="160" y="160" width="832" height="5536"/>
-  <object x="1024" y="160" width="3584" height="3840"/>
+  <object x="1024" y="192" width="3584" height="3840"/>
   <object x="4608" y="3616" width="96" height="416"/>
   <object x="4704" y="3680" width="32" height="352"/>
   <object x="4736" y="3712" width="128" height="320"/>
