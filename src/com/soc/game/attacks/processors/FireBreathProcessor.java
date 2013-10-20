@@ -50,7 +50,7 @@ public class FireBreathProcessor implements AttackProcessor {
 	@Override
 	public boolean collision(Entity attack, Entity victim) {
 		// TODO Auto-generated method stub
-if(hit != null) return false;
+		if(hit != null) return false;
 		
 		Position attackpos = SoC.game.positionmapper.get(attack);
 		Position victimpos = SoC.game.positionmapper.get(victim);

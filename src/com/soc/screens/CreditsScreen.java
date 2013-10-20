@@ -15,6 +15,13 @@ public class CreditsScreen extends AbstractScreen{
 	public String title;
 	public String devs;
 	public String devsBody;
+	public String graphics;
+	public String graphicsBody;
+	public String audio;
+	public String audioBody;
+	public String specialThanks;
+	public String testers;
+	public String testersBody;
 	public OrthographicCamera cam;
 	public BitmapFont font;
 	public SpriteBatch batch;
@@ -23,9 +30,28 @@ public class CreditsScreen extends AbstractScreen{
 	public CreditsScreen(SoC game) {
 		super(game);
 		this.title = "Sons of Cydonia";
-		this.devs = "Designers and Programmers";
+		this.devs = "Design and Programming";
 		this.devsBody = "Aritz Bilbao Jayo @aritzbi\n\n"
 				+ "Aimar Rodriguez Soto @aimarrodr";
+		this.graphics = "Art";
+		this.graphicsBody = "Johannes Sjolund\n"
+				+ "Johann Charlot\n"
+				+ "Daniel Eddeland\n"
+				+ "Artur Reterski\n"
+				+ "Dethe Elza\n"
+				+ "Skyler Robert Colladay\n"
+				+ "Casper Nilsson\n"
+				+ "Joe White\n"
+				+ "";
+		this.audio = "Music and Sound effects";
+		this.audioBody = "Alexandr Zelanhov\n"
+				+ "Johan Brood\n"
+				+ "Matthew Pablo\n"
+				+ "Jordan Trudgett\n"
+				+ "Gobusto";
+		this.specialThanks = "Special Thanks";
+		this.testers = "Testers";
+		this.testersBody = "";
 		this.cam = SoC.game.camera;
 		this.batch = super.getBatch();
 		this.font = new Skin(Gdx.files.internal("resources/skin2.json" )).getFont("gameFont");
