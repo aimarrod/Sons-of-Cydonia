@@ -129,7 +129,12 @@ public class MidMonsterAI extends AI{
 //			EntityFactory.createWall(e, 48, 54, 0).addToWorld();
 //			EntityFactory.createWall(e, 49, 54, 0).addToWorld();
 //			EntityFactory.createWall(e, 50, 54, 0).addToWorld();
-			EntityFactory.createWall(e, 52, 54, 0).addToWorld();
+			EntityFactory.createWall(e, 47, 81, 0).addToWorld();
+			EntityFactory.createWall(e, 48, 81, 0).addToWorld();
+			EntityFactory.createWall(e, 49, 81, 0).addToWorld();
+			EntityFactory.createWall(e, 50, 81, 0).addToWorld();
+			EntityFactory.createWall(e, 51, 81, 0).addToWorld();
+			EntityFactory.createWall(e, 52, 81, 0).addToWorld();
 			EntityFactory.createWall(e, 53, 54, 0).addToWorld();
 			EntityFactory.createWall(e, 54, 54, 0).addToWorld();
 			EntityFactory.createWall(e, 55, 54, 0).addToWorld();

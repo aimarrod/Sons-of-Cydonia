@@ -15,13 +15,20 @@ import com.soc.utils.GraphicsLoader;
 
 public class AntiVenomFountain implements AttackProcessor {
 	public AnimatedRenderer renderer;
+	public float timer;
+	public boolean available;
 	
 	public AntiVenomFountain(){
 		this.renderer = GraphicsLoader.loadAntiVenomFountain();
+		this.available=true;
+		this.timer=0;
 	}
 	@Override
 	public void process(Entity attack) {
-		// TODO Auto-generated method stub
+		timer-=SoC.game.world.delta;
+		if(timer<=0 && !available){
+			available=true;
+		}
 
 	}
 
@@ -31,12 +38,13 @@ public class AntiVenomFountain implements AttackProcessor {
 		Position victimpos = SoC.game.positionmapper.get(victim);
 		Bounds attackbounds = SoC.game.boundsmapper.get(attack);
 		Bounds victimbounds = SoC.game.boundsmapper.get(victim);
-		return (attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
+		return (available && attackpos.x < victimpos.x + victimbounds.width && attackpos.x + attackbounds.width > victimpos.x && attackpos.y < victimpos.y + victimbounds.height && attackpos.y + attackbounds.height > victimpos.y);
 	}
 
 	@Override
 	public void frame(Entity attack, SpriteBatch sprite) {
 		Position pos = SoC.game.positionmapper.get(attack);
+		if(available)
 		sprite.draw(renderer.frame(SoC.game.world.delta), pos.x+renderer.ox, pos.y+renderer.oy);
 
 	}
@@ -56,9 +64,9 @@ public class AntiVenomFountain implements AttackProcessor {
 		if(SoC.game.buffmapper.has(enemy)){
 			Buff buff=SoC.game.buffmapper.get(enemy);
 			buff.removebuff(Rage.class,enemy);
+			available=false;
+			timer=5f;
 		}
-			
-		
 
 	}
 
