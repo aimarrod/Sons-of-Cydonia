@@ -21,7 +21,6 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 	FileHandle[] files;
 	private Texture background;
 	private int focusedButton;
-	private Texture handT;
 	private TextButton[] buttons;
 	private TextButtonStyle normalStyle;
 	private TextButtonStyle focusedStyle;

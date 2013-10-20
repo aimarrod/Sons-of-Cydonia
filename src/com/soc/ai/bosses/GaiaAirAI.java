@@ -11,6 +11,7 @@ import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Position;
+import com.soc.game.components.Stats;
 
 public class GaiaAirAI extends AI{
 
@@ -72,7 +73,12 @@ public class GaiaAirAI extends AI{
 	public void death(Entity e) {
 		SoC.game.progress.gaiaAirDefeated=true;
 		Position pos = SoC.game.positionmapper.get(e);
-		EntityFactory.createItem(Constants.Items.BRONZE_SWORD, pos.x, pos.y, pos.z).addToWorld();	
+		Stats stat = SoC.game.statsmapper.get(SoC.game.player);
+		
+		if(stat.clazz.equals(Constants.Characters.WARRIOR)){
+			EntityFactory.createItem(Constants.Items.BRONZE_SWORD, pos.x, pos.y, pos.z);
+		} else if(stat.clazz.equals(Constants.Characters.MAGE)){
+		}
 	}
 
 }

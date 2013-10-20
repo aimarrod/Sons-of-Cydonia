@@ -202,8 +202,10 @@ public class SoC extends Game {
 		items[Constants.Items.LEATHER_HELM] = new Armor(Constants.Items.LEATHER_HELM, "Leather helm", "leather-helm.png", "\nWOODEN SHIELD\n\n+3 armor", 5);
 		items[Constants.Items.IRON_HELM] = new Armor(Constants.Items.IRON_HELM, "Iron helm", "iron-helm.png", "\nIRON HELM\n\n+8 armor", 8);
 		items[Constants.Items.GOLD_HELM] = new Armor(Constants.Items.GOLD_HELM, "Gold helm", "gold-helm.png", "\nGOLD HELM\n\n+15 armor", 15);
-		
-		
+		items[Constants.Items.WOOD_WAND] = new Weapon(Constants.Items.WOOD_WAND, "Wood wand", "wood-wand.png","\nWOOD WAND\n\n+10 intelligence", 0,0,10);
+		items[Constants.Items.MAGIC_WAND] = new Weapon(Constants.Items.MAGIC_WAND, "Magic wand", "magic-wand.png","\nMAGIC WAND\n\n+25 intelligence", 0,0,25);
+		items[Constants.Items.DIVINE_WAND] = new Weapon(Constants.Items.DIVINE_WAND, "Divine wand", "divine-wand.png","\nDIVINE WAND\n\n+45 intelligence", 0,0,40);
+
 		world = new World();
 		positionmapper = world.getMapper(Position.class);
 		feetmapper = world.getMapper(Feet.class);

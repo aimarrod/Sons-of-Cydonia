@@ -83,7 +83,7 @@ public class BlackMageAI extends AI{
 		Position pos = SoC.game.positionmapper.get(e);
 		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
 		EntityFactory.createItem(Constants.Items.ANTIBURN, pos.x, pos.y, pos.z).addToWorld();
-		EntityFactory.createItem(Constants.Items.IRON_SHIELD, pos.x, pos.y, pos.z).addToWorld();		
+		EntityFactory.createItem(Constants.Items.GOLD_HELM, pos.x, pos.y, pos.z).addToWorld();		
 	}
 
 }

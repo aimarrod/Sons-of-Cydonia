@@ -11,6 +11,7 @@ import com.soc.core.SoC;
 import com.soc.game.components.Bounds;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
+import com.soc.game.components.Stats;
 
 public class GaiaFlameAI extends AI{
 
@@ -55,8 +56,13 @@ public class GaiaFlameAI extends AI{
 	public void death(Entity e) {
 		SoC.game.progress.gaiaFlameDefeated=true;		
 		Position pos = SoC.game.positionmapper.get(e);
-		EntityFactory.createItem(Constants.Items.IRON_AXE, pos.x, pos.y, pos.z).addToWorld();
-		EntityFactory.createItem(Constants.Items.GOLD_HELM, pos.x, pos.y, pos.z).addToWorld();	
+		Stats stat = SoC.game.statsmapper.get(SoC.game.player);
+		
+		if(stat.clazz.equals(Constants.Characters.WARRIOR)){
+			EntityFactory.createItem(Constants.Items.IRON_AXE, pos.x, pos.y, pos.z);
+		} else if(stat.clazz.equals(Constants.Characters.MAGE)){
+		}
+		EntityFactory.createItem(Constants.Items.IRON_SHIELD, pos.x, pos.y, pos.z).addToWorld();	
 	}
 
 }

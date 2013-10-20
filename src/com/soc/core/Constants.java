@@ -164,7 +164,7 @@ public class Constants {
 		
 	public static class Items{
 		public final static int INVENTORY_SIZE=20;
-		public final static int ITEM_NUMBER=21;
+		public final static int ITEM_NUMBER=24;
 		public final static int NONE=0;
 		public final static int HEALTH_POTION=1;
 		public final static int MANA_POTION=2;
@@ -186,6 +186,9 @@ public class Constants {
 		public final static int GOLD_SHIELD=18;
 		public final static int ANTIDOTE=19;
 		public final static int ANTIBURN=20;
+		public final static int WOOD_WAND=21;
+		public final static int MAGIC_WAND=22;
+		public final static int DIVINE_WAND=23;
 		
 		public final static int ITEM_SIZE = 32;
 

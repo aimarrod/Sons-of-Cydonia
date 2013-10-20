@@ -73,7 +73,6 @@ public class FireStoneMonsterAI extends AI {
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
 
 	}
 

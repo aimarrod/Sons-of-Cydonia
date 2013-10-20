@@ -163,7 +163,13 @@ public class GaiaAI extends AI{
 	public void death(Entity e) {
 		SoC.game.progress.gaiaDefeated=true;
 		Position pos = SoC.game.positionmapper.get(e);
-		EntityFactory.createItem(Constants.Items.SILVER_SWORD, pos.x, pos.y, pos.z).addToWorld();	
+		Stats stat = SoC.game.statsmapper.get(SoC.game.player);
+		
+		if(stat.clazz.equals(Constants.Characters.WARRIOR)){
+			EntityFactory.createItem(Constants.Items.SILVER_SWORD, pos.x, pos.y, pos.z);
+		} else if(stat.clazz.equals(Constants.Characters.MAGE)){
+			EntityFactory.createItem(Constants.Items.MAGIC_WAND, pos.x, pos.y, pos.z);
+		}
 	}
 
 }

@@ -963,15 +963,6 @@
     <property name="type" value="eyeball"/>
    </properties>
   </object>
-  <object x="4704" y="2208" width="64" height="64">
-   <properties>
-    <property name="interval" value="2.5"/>
-    <property name="max" value="1"/>
-    <property name="range" value="100"/>
-    <property name="respawn" value="true"/>
-    <property name="type" value="bow knight"/>
-   </properties>
-  </object>
   <object x="2688" y="2112" width="32" height="32">
    <properties>
     <property name="interval" value="30"/>

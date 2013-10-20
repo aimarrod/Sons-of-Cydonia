@@ -27,7 +27,7 @@ public class GameLoader {
 		FileHandle[] handles = new FileHandle[3]; 
 		FileHandle[] list = Gdx.files.external("saves").list(".json");
 		for(int i = 0; i < handles.length; i++){
-			if(i < list.length && !list[i].name().equals("quicksave.json")){
+			if(i < list.length){
 				handles[i] = list[i];
 			} else {
 				handles[i] = null;
