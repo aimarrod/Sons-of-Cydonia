@@ -1,5 +1,7 @@
 package com.soc.ai.bosses;
 
+import java.util.ArrayList;
+
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.AI;
@@ -13,6 +15,7 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
+import com.soc.game.components.Wall;
 import com.soc.game.states.benefits.Inmune;
 
 public class RightMonsterAI extends AI{
@@ -29,6 +32,7 @@ public class RightMonsterAI extends AI{
 	float timerCharge;
 	float timerQuaqueBlade;
 	boolean stomp;
+	ArrayList<Entity> toRemove;
 	
 	public RightMonsterAI(){
 		timerCast=0;
@@ -44,6 +48,7 @@ public class RightMonsterAI extends AI{
 		timerCharge=3f;
 		timerQuaqueBlade=6f;
 		stomp=false;
+		toRemove=new ArrayList<Entity>();
 	}
 	@Override
 	public void process(Entity e) {
@@ -72,6 +77,26 @@ public class RightMonsterAI extends AI{
 			EntityFactory.createWall(e, 82, 21, 0).addToWorld();
 			EntityFactory.createWall(e, 83, 21, 0).addToWorld();
 			EntityFactory.createWall(e, 84, 21, 0).addToWorld();
+			
+			Entity wall=null;
+			wall=EntityFactory.createWall(e, 78, 55, 0);
+			toRemove.add(wall);
+			wall.addToWorld();
+			wall=EntityFactory.createWall(e, 79, 55, 0);
+			toRemove.add(wall);
+			wall.addToWorld();
+			wall=EntityFactory.createWall(e, 80, 55, 0);
+			toRemove.add(wall);
+			wall.addToWorld();
+			wall=EntityFactory.createWall(e, 81, 55, 0);
+			toRemove.add(wall);
+			wall.addToWorld();
+			wall=EntityFactory.createWall(e, 82, 55, 0);
+			toRemove.add(wall);
+			wall.addToWorld();
+			wall=EntityFactory.createWall(e, 83, 55, 0);
+			toRemove.add(wall);
+			wall.addToWorld();
 			playerInside=true;
 		}
 		
@@ -84,6 +109,9 @@ public class RightMonsterAI extends AI{
 				if(SoC.game.damagemapper.has(e)){
 					SoC.game.damagemapper.get(e).damage=0;
 					stats.health=1;
+				}
+				for(int i=0;i<toRemove.size();i++){
+					toRemove.get(i).deleteFromWorld();
 				}
 				Buff.addbuff(e, new Inmune());
 				inmune=true;
