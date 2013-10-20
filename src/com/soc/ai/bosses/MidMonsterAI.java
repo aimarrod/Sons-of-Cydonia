@@ -13,6 +13,7 @@ import com.soc.game.components.Buff;
 import com.soc.game.components.Delay;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
+import com.soc.game.components.Stats;
 import com.soc.game.components.Velocity;
 import com.soc.game.states.benefits.Casting;
 import com.soc.game.states.benefits.Teleport;
@@ -196,6 +197,9 @@ public class MidMonsterAI extends AI{
 			EntityFactory.createWall(e, 48, 54, 0).addToWorld();
 			EntityFactory.createWall(e, 49, 54, 0).addToWorld();
 			EntityFactory.createWall(e, 50, 54, 0).addToWorld();
+			
+			SoC.game.musicmanager.play(e, "dark-descent.ogg");
+
 			characterInside=true;
 		}
 
@@ -289,6 +293,16 @@ public class MidMonsterAI extends AI{
 	@Override
 	public void death(Entity e) {
 		SoC.game.progress.midMonsterDefeated=true;
+		Position pos = SoC.game.positionmapper.get(e);
+		EntityFactory.createItem(Constants.Items.GOLD_SHIELD, pos.x, pos.y, pos.z);
+		
+		Stats s = SoC.game.statsmapper.get(SoC.game.player);
+		System.out.println(s.clazz);
+		if(s.clazz.equals(Constants.Characters.WARRIOR)){
+			EntityFactory.createItem(Constants.Items.GOLD_SWORD, pos.x, pos.y, pos.z);
+		} else if(s.clazz.equals(Constants.Characters.MAGE)){
+			EntityFactory.createItem(Constants.Items.DIVINE_WAND, pos.x, pos.y, pos.z);
+		}
 	}
 
 }

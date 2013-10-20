@@ -289,6 +289,10 @@ public class RightMonsterAI extends AI{
 	@Override
 	public void death(Entity e) {
 		SoC.game.progress.rightMonsterDefetead=true;
+		Position pos = SoC.game.positionmapper.get(e);
+		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z);
+		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z);
+		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z);
 	}
 
 }
