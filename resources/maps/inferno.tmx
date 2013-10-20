@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="100" height="200" tilewidth="32" tileheight="32">
  <properties>
+  <property name="ambiance" value="dark-ambiance.ogg"/>
   <property name="layers" value="1"/>
   <property name="music" value="dark-ambiance.ogg"/>
  </properties>
