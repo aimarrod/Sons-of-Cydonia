@@ -424,7 +424,7 @@ public class EntityFactory {
 		e.addComponent(new State(1));
 	    e.addComponent(new Stats(2000, 0, 0, 2000, 0, 0, 1, 10, 50, 1, 1, Constants.Spells.VENOMSWORD, new int[]{}, Constants.Groups.SKULL_KNIGHT));
 		e.addComponent(new Feet(32, 15));
-		e.addComponent(new Enemy(5, new SkullKnightAI()));
+		e.addComponent(new Enemy(5000, new SkullKnightAI()));
 		Character animations = new Character();
 		GraphicsLoader.loadSatan(animations);
 		animations.damageSound = "undead-damage.ogg";
@@ -627,21 +627,21 @@ public class EntityFactory {
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
 		e.addComponent(new Stats(
-				100, 
+				2500, 
 				0, 
 				0, 
-				100, 
+				2500, 
 				0, 
 				0, 
 				1, 
+				40, 
 				0, 
 				0, 
-				0, 
-				0, 
+				46, 
 				0, 
 				null,
 				Constants.Groups.RED_MONSTER));
-	    e.addComponent(new Enemy(5, new MidMonsterAI()));
+	    e.addComponent(new Enemy(5000, new MidMonsterAI()));
 	    Character animations = new Character();
 	    animations.damageSound = "monster-damage.ogg";
 	    animations.deathSound = "monster-death.ogg";
@@ -660,21 +660,21 @@ public class EntityFactory {
 		e.addComponent(new Feet(32, 32));
 		e.addComponent(new State(0));
 		e.addComponent(new Stats(
-				100, 
+				700, 
 				0, 
 				0, 
-				100, 
+				700, 
 				0, 
 				0, 
 				1, 
-				0, 
-				0, 
-				0, 
-				0, 
+				40, 
+				40, 
+				40, 
+				40, 
 				0, 
 				null,
 				Constants.Groups.RIGHT_MONSTER));
-	    e.addComponent(new Enemy(5, new RightMonsterAI()));
+	    e.addComponent(new Enemy(10000, new RightMonsterAI()));
 	    Character animations = new Character();
 	    animations.damageSound = "monster-damage.ogg";
 	    animations.deathSound = "monster-death.ogg";
