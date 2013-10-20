@@ -31,10 +31,10 @@ public class GreenKnightAI extends AI{
 	@Override
 	public void death(Entity e) {
 		Position pos = SoC.game.positionmapper.get(e);
-		if(AI.rng.nextFloat() < 0.2){
+		if(AI.rng.nextFloat() < 0.5){
 			EntityFactory.createItem(Constants.Items.HEALTH_POTION, pos.x, pos.y, pos.z).addToWorld();
 		}		
-		if(AI.rng.nextFloat() < 0.02){
+		if(AI.rng.nextFloat() < 0.2){
 			EntityFactory.createItem(Constants.Items.HEALTH_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
 		}	
 	}

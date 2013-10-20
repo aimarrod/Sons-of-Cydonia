@@ -29,10 +29,10 @@ public class GoldKnightAI extends AI{
 	@Override
 	public void death(Entity e) {
 		Position pos = SoC.game.positionmapper.get(e);
-		if(AI.rng.nextFloat() < 0.05){
+		if(AI.rng.nextFloat() < 0.2){
 			EntityFactory.createItem(Constants.Items.MANA_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
 		}		
-		if(AI.rng.nextFloat() < 0.05){
+		if(AI.rng.nextFloat() < 0.2){
 			EntityFactory.createItem(Constants.Items.HEALTH_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
 		}			
 	}
