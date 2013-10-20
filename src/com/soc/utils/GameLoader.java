@@ -26,8 +26,9 @@ public class GameLoader {
 	public static FileHandle[] getHandles(){
 		FileHandle[] handles = new FileHandle[3]; 
 		FileHandle[] list = Gdx.files.external("saves").list(".json");
+		
 		for(int i = 0; i < handles.length; i++){
-			if(i < list.length && !list[i].name().equals("quicksave.json")){
+			if(i < list.length && !list[i].name().equals("quicksave")){
 				handles[i] = list[i];
 			} else {
 				handles[i] = null;
@@ -37,12 +38,12 @@ public class GameLoader {
 	}
 	
 	public static boolean isQuickLoad(){
-		return (Gdx.files.external("saves").child("quicksave.json").exists());
+		return (Gdx.files.external("saves").child("quicksave").exists());
 	}
 	 
 	public static void quickLoad(){
 		Json json = new Json();
-		SavedGame save = json.fromJson(SavedGame.class, Gdx.files.external("saves/quicksave.json"));
+		SavedGame save = json.fromJson(SavedGame.class, Gdx.files.external("saves/quicksave"));
 
 		
 		SoC.game.progress = save.progress;
@@ -60,7 +61,7 @@ public class GameLoader {
 	public static void quickSave() throws IOException{
 		
 		Json json = new Json();
-		FileHandle handle = Gdx.files.external("saves/quicksave.json");
+		FileHandle handle = Gdx.files.external("saves/quicksave");
 		if(handle.exists()){
 			handle.file().delete();
 		} 
