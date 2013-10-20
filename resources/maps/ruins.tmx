@@ -192,6 +192,7 @@
   <object x="2688" y="2720" width="32" height="32"/>
   <object x="2208" y="2176" width="32" height="32"/>
   <object x="2688" y="2176" width="32" height="32"/>
+  <object x="6176" y="3968" width="32" height="2208"/>
  </objectgroup>
  <objectgroup name="level0-unwalkable" width="200" height="200">
   <object x="544" y="352" width="320" height="160"/>
@@ -228,7 +229,6 @@
   <object x="3712" y="4992" width="1344" height="64"/>
   <object x="3296" y="1504" width="416" height="1760"/>
   <object x="3680" y="1504" width="2496" height="2464"/>
-  <object x="6144" y="3968" width="64" height="2208"/>
   <object x="3552" y="4960" width="64" height="1088"/>
  </objectgroup>
  <objectgroup name="level0-special" width="200" height="200">
@@ -860,6 +860,15 @@
   <object x="4992" y="3008" width="1248" height="384">
    <properties>
     <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="4864" y="1664" width="96" height="32">
+   <properties>
+    <property name="destination" value="inferno.tmx"/>
+    <property name="type" value="gate"/>
+    <property name="x" value="1550"/>
+    <property name="y" value="100"/>
+    <property name="z" value="0"/>
    </properties>
   </object>
  </objectgroup>

@@ -71,7 +71,7 @@ public class GaiaAvatarAI extends AI{
 
 		
 		int attack = r.nextInt(105);
-		if(attack <= 80){
+		if(attack <= 90){
 			x = playerPos.x - pos.x;
 			y = playerPos.y - pos.y;
 			
@@ -86,7 +86,7 @@ public class GaiaAvatarAI extends AI{
 			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS, s.cast, s.blocking, Constants.Spells.WINDBLADE));
 			SoC.game.statemapper.get(e).state = s.state;
 			e.changedInWorld();
-		} else if(attack <= 84){
+		} else if(attack <= 95){
 			Spell s = SoC.game.spells[Constants.Spells.TENTACLES];
 			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS, s.cast, s.blocking, Constants.Spells.TENTACLES));
 			SoC.game.statemapper.get(e).state = s.state;

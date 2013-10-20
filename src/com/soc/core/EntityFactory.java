@@ -586,7 +586,7 @@ public class EntityFactory {
 				15, 
 				0, 
 				0, 
-				30, 
+				40, 
 				0, 
 				null,
 				Constants.Groups.GAIAS));
