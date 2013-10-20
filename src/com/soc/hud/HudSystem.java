@@ -96,13 +96,11 @@ public class HudSystem extends VoidEntitySystem{
 	
 	public void toogleGameMenu(){
 		if(!gameMenu.hasParent()){
-			SoC.game.pause = true;
 			stage.addActor(gameMenu);
 			SoC.game.inputMultiplexer.addProcessor(gameMenu);
 		}else{
 			gameMenu.remove();
 			SoC.game.inputMultiplexer.removeProcessor(gameMenu);
-			SoC.game.pause = false;
 		}
 	}
 	
