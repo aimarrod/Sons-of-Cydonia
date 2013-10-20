@@ -25,6 +25,7 @@ import com.soc.game.attacks.spells.BoneThrowSpell;
 import com.soc.game.attacks.spells.ChargeSpell;
 import com.soc.game.attacks.spells.DaggerThrowSpell;
 import com.soc.game.attacks.spells.FireBreathSpell;
+import com.soc.game.attacks.spells.FireLionSpell;
 import com.soc.game.attacks.spells.FireballSpell;
 import com.soc.game.attacks.spells.FlameSpell;
 import com.soc.game.attacks.spells.IcicleSpell;
@@ -176,7 +177,8 @@ public class SoC extends Game {
 		spells[Constants.Spells.ICICLE] = new IcicleSpell();
 		spells[Constants.Spells.FIREBREATH]=new FireBreathSpell();
 		spells[Constants.Spells.RIDE_THE_LIGHTNING]=new RideTheLightningSpell();
-		spells[Constants.Spells.INFERNO]=new InfernoSpell();
+		spells[Constants.Spells.INFERNO]= new InfernoSpell();
+		spells[Constants.Spells.FIRELION] = new FireLionSpell();
 		
 		items=new Item[Constants.Items.ITEM_NUMBER];
 		items[Constants.Items.NONE] = null;

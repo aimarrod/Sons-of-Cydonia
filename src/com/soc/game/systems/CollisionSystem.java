@@ -352,7 +352,7 @@ public class CollisionSystem extends VoidEntitySystem {
 			Velocity v = vm.get(e);
 			Feet feet = fm.get(e);
 			
-			if(st.state == State.FALLING || st.state == State.DYING) return;
+			//if(st.state == State.FALLING || st.state == State.DYING) return;
 
 			int nextleft = (int) ((pos.x + v.vx * world.delta + feet.width) * World.TILE_FACTOR);
 			int nextright = (int) ((pos.x + v.vx * world.delta) * World.TILE_FACTOR);

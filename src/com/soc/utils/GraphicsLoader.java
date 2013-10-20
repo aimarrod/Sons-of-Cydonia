@@ -776,7 +776,7 @@ public class GraphicsLoader {
 	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
-		tmp = TextureRegion.split(load("warrior-death.png"), 64, 64);
+		tmp = TextureRegion.split(load("gaia-avatar-death.png"), 64, 64);
 	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
 	   	
 	   	character.deathTime = 1f;
@@ -984,6 +984,32 @@ public class GraphicsLoader {
 		}
 		fireball.animation = new Animation(0.2f/4, tmp[direction]);
 		return fireball;
+	}
+	
+	public static AnimatedRenderer loadFirelion(Vector2 dir) {
+		AnimatedRenderer lion = new AnimatedRenderer(true);
+		TextureRegion[][] tmp = null; 
+		int direction = 0;
+		if(dir.y == -1){
+			tmp = TextureRegion.split(load("magic-firelion-down.png"), 128, 128);
+			lion.ox = -24;
+		} else if(dir.y == 1){
+			tmp = TextureRegion.split(load("magic-firelion-up.png"), 128, 128);
+			lion.ox = -24;
+		} else if(dir.x == 1){
+			tmp = TextureRegion.split(load("magic-firelion-right.png"), 128, 128);
+		} else if(dir.x == -1){
+			tmp = TextureRegion.split(load("magic-firelion-left.png"), 128, 128);
+		}
+        TextureRegion [] frames = new TextureRegion[tmp.length * tmp[0].length];
+        int index = 0;
+        for (int i = 0; i < tmp.length; i++) {
+            for (int j = 0; j < tmp[0].length; j++) {
+                    frames[index++] = tmp[i][j];
+            }
+    }
+		lion.animation = new Animation(Constants.Spells.FIRELION_DELAY*2/frames.length, frames);
+		return lion;
 	}
 	
 	public static AnimatedRenderer loadCloud(){

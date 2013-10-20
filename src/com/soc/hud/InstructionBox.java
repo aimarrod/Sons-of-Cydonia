@@ -25,14 +25,19 @@ public class InstructionBox extends Actor{
 	private static String instructions = 
 			"INSTRUCTIONS:\n\n\n"
 			+ "INGAME\n\n"
-			+ "SPACE - Attack                   NUM KEYS - Skills\n"
-			+ "SHIFT LEFT - Shield              I - Inventory\n"
-			+ "ESC - Game menu                  C - Character menu\n"
-			+ "Q - Use health potion            E - Use mana potion\n"
-			+ "H - Pause and see this instructions again\n"
+			+ "SPACE - Attack\n"
+			+ "NUM KEYS - Skills\n"
+			+ "SHIFT LEFT - Shield\n"
+			+ "I - Inventory\n"
+			+ "ESC - Game menu\n"
+			+ "C - Character menu\n"
+			+ "Q - Use health potion\n"
+			+ "E - Use mana potion\n"
+			+ "H - Pause and see this instructions again\n\n"
 			+ "Double tap a movement key to sprint\n\n"
-			+ "Inventory\n\n"
-			+ "TAB - Switch item focus			E - Use focused item\n"
+			+ "INVENTORY\n\n"
+			+ "TAB - Switch item focus			"
+			+ "E - Use focused item\n"
 			+ "B - Drop item\n\n"
 			+ "Press H to continue";
 	
@@ -75,7 +80,7 @@ public class InstructionBox extends Actor{
 		batch.draw(container, getX(), getY(), getWidth(), getHeight());
 		batch.setColor(1,1,1,1f);
 		font.setColor(0,0,0,1);
-		font.setScale(0.8f);
+		font.setScale(0.6f);
 		font.drawWrapped(batch, instructions, getX()+40, getY()+getHeight()-40, getWidth()-20);
 	}
 }

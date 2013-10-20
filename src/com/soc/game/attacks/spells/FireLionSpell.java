@@ -9,19 +9,19 @@ import com.soc.game.components.State;
 import com.soc.game.components.Stats;
 import com.soc.utils.GraphicsLoader;
 
-public class InfernoSpell extends Spell{
+public class FireLionSpell extends Spell{
 	
-	public InfernoSpell(){
-		this.icon = GraphicsLoader.load("inferno-icon.png");
-		this.tooltip = "\nINFERNO\n\n70 mana\n\nCall down a rain of fire\nscales with intelligence";
-		this.cast = 0.1f; 
-		this.blocking = 0.1f;
+	public FireLionSpell(){
+		this.icon = GraphicsLoader.load("firelion-icon.png");
+		this.tooltip = "\nFIRE LION\n\n30 mana\n\nSummon a lion of fire to scorch and push your foes.\n Scales with intelligence.";
+		this.cast = 0.1f;
+		this.blocking = 0.1f + Constants.Spells.FIRELION_DELAY*2;
 		this.state = State.ATTACK;
-		this.mana = 70;
+		this.mana = 30;
 	}
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createInferno(group, pos, (int) (stats.intelligence*1));
+		Entity e = EntityFactory.createFirelion(group, pos, (int) (stats.intelligence*1.5));
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	    SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);

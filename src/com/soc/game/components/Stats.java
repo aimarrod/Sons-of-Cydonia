@@ -92,10 +92,11 @@ public class Stats extends Component{
 		
 		if(clazz.equals(Constants.Characters.MAGE)){
 			if(level == 2){
-				spells[1] = Constants.Spells.INFERNO;
+				spells[1] = Constants.Spells.FIRELION;
 				skill = true;
 			} else if(level == 5) {
 			} else if(level == 8){
+				spells[3] = Constants.Spells.INFERNO;
 			}
 		}
 		

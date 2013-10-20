@@ -38,6 +38,7 @@ import com.soc.game.attacks.processors.DaggerThrowProcessor;
 import com.soc.game.attacks.processors.FireBreathProcessor;
 import com.soc.game.attacks.processors.FireStoneProcessor;
 import com.soc.game.attacks.processors.FireballProcessor;
+import com.soc.game.attacks.processors.FirelionProcessor;
 import com.soc.game.attacks.processors.FlameProcessor;
 import com.soc.game.attacks.processors.FlameWallProcessor;
 import com.soc.game.attacks.processors.HarmfulEnemyProcessor;
@@ -391,14 +392,14 @@ public class EntityFactory {
 	    e.addComponent(new State(0));
 		e.addComponent(new Enemy(800, new KnightCaptainAI()));
 		e.addComponent(new Stats(
-				300, 
+				500, 
 				0, 
 				0, 
-				300, 
+				500, 
 				0, 
 				0, 
 				10, 
-				10, 
+				20, 
 				25, 
 				25, 
 				25, 
@@ -515,7 +516,7 @@ public class EntityFactory {
 				0, 
 				0, 
 				1, 
-				0, 
+				10, 
 				0, 
 				0, 
 				0, 
@@ -582,7 +583,7 @@ public class EntityFactory {
 				0, 
 				0, 
 				1, 
-				8, 
+				15, 
 				0, 
 				0, 
 				30, 
@@ -722,17 +723,17 @@ public class EntityFactory {
 		e.addComponent(new Enemy(1000, new BlackMageAI()));
 		e.addComponent(new Flying());
 		e.addComponent(new Stats(
-				200, 
+				400, 
 				0, 
 				0, 
-				200, 
+				400, 
 				0, 
 				0, 
 				10, 
 				6, 
 				0, 
 				0, 
-				20, 
+				15, 
 				0, 
 				null,
 				Constants.Groups.BLACK_MAGE));
@@ -823,6 +824,39 @@ public class EntityFactory {
 		e.addComponent( new Velocity(Constants.Spells.FIREBALL_SPEED*pos.direction.x, Constants.Spells.FIREBALL_SPEED*pos.direction.y, (int) Constants.Spells.FIREBALL_SPEED) );
 	   	e.addComponent( new Flying());
 	   	e.addComponent( new Attack(new FireballProcessor(pos.direction), damage) );
+	   	
+	   	return e;
+	}
+	
+	public static Entity createFirelion(String group, Position pos, int damage){
+		// TODO
+		Entity e=SoC.game.world.createEntity();
+		
+		float posx = 0;
+		float posy = 0;
+		int width = 128;
+		int height = 128;
+		
+		if(pos.direction.y != 0){
+			posy = pos.y + ((Math.signum(pos.direction.y)==1)?32:-128);
+			width = 90;
+		} else {
+			posy = pos.y - 32;
+		}
+		if(pos.direction.x != 0){
+			posx = pos.x + ((Math.signum(pos.direction.x)==1.0)?32:-128);
+			if(pos.direction.y == 0){
+				height = 90;
+			}
+		} else {
+			posx = pos.x - 24;
+		}
+		
+		e.addComponent( new Position(posx, posy, pos.z, pos.direction.cpy()) );
+		e.addComponent( new Bounds(width, height) );
+		e.addComponent( new Velocity(0,0,0) );
+	   	e.addComponent( new Flying());
+	   	e.addComponent( new Attack(new FirelionProcessor(pos), damage) );
 	   	
 	   	return e;
 	}
