@@ -27,6 +27,7 @@ public class Teleport implements Benefit{
 	public void process(Entity e) {
 		if(!sounded){
 			EffectsPlayer.play("teleport.ogg");
+			sounded = true;
 		}
 		timer -= SoC.game.world.delta;
 		if(timer <= 0){

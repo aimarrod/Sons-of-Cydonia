@@ -643,6 +643,8 @@ public class EntityFactory {
 				Constants.Groups.RED_MONSTER));
 	    e.addComponent(new Enemy(5, new MidMonsterAI()));
 	    Character animations = new Character();
+	    animations.damageSound = "monster-damage.ogg";
+	    animations.deathSound = "monster-death.ogg";
 		GraphicsLoader.loadMidMonster(animations);
 		e.addComponent(animations);
 		
@@ -674,6 +676,8 @@ public class EntityFactory {
 				Constants.Groups.RIGHT_MONSTER));
 	    e.addComponent(new Enemy(5, new RightMonsterAI()));
 	    Character animations = new Character();
+	    animations.damageSound = "monster-damage.ogg";
+	    animations.deathSound = "monster-death.ogg";
 		GraphicsLoader.loadRightMonster(animations);
 		e.addComponent(animations);
 		
