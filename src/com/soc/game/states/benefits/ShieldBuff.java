@@ -27,7 +27,7 @@ public class ShieldBuff implements Benefit{
 		if(timer>0 && !buffAdded){
 			initialHealth=stats.health;
 			stats.maxHealth+=gainHealth;
-			stats.health+=gainHealth;
+			stats.health*=gainHealth;
 			buffAdded=true;
 		}else{
 			if(timer>0 && buffAdded){

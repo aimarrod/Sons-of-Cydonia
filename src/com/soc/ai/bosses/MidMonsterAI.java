@@ -230,7 +230,7 @@ public class MidMonsterAI extends AI{
 		
 		
 			if(timer<=0){
-				timer=1f;
+				timer=2f;
 				Entity spawned=EntityFactory.createFlame((playerPos.x-(Constants.Characters.WIDTH/2)), playerPos.y, playerPos.z,SoC.game.statsmapper.get(player).intelligence);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
 				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);

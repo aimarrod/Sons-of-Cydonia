@@ -32,6 +32,7 @@ import com.soc.game.states.alterations.Poison;
 import com.soc.game.states.alterations.Push;
 import com.soc.game.states.alterations.Venom;
 import com.soc.game.states.benefits.Casting;
+import com.soc.game.states.benefits.Inmune;
 import com.soc.game.states.benefits.LevelUp;
 import com.soc.game.states.benefits.Rage;
 import com.soc.game.states.benefits.Shield;
@@ -179,6 +180,9 @@ public class RenderSystem extends VoidEntitySystem{
 				shield.renderer.direction = r.direction;
 				
 				batch.draw(shield.renderer.frame(world.delta), posx+shield.renderer.ox, posy+shield.renderer.oy);
+			}
+			if(buff.buffClasses.contains(Inmune.class)){
+				batch.setColor(1,1,1,0.5f);
 			}
 		}
 		batch.draw(r.frame(world.delta), pos.x+r.ox, pos.y+r.oy);

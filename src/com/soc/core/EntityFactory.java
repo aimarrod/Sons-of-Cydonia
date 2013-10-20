@@ -627,17 +627,17 @@ public class EntityFactory {
 		e.addComponent(new Feet(32, 64));
 		e.addComponent(new State(0));
 		e.addComponent(new Stats(
-				100, 
+				1500, 
 				0, 
 				0, 
-				100, 
+				1500, 
 				0, 
 				0, 
 				1, 
+				40, 
 				0, 
 				0, 
-				0, 
-				0, 
+				45, 
 				0, 
 				null,
 				Constants.Groups.RED_MONSTER));
@@ -658,15 +658,15 @@ public class EntityFactory {
 		e.addComponent(new Feet(32, 32));
 		e.addComponent(new State(0));
 		e.addComponent(new Stats(
-				100, 
+				700, 
 				0, 
 				0, 
-				100, 
+				700, 
 				0, 
 				0, 
 				1, 
-				0, 
-				0, 
+				40, 
+				46, 
 				0, 
 				0, 
 				0, 

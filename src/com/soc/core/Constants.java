@@ -212,7 +212,7 @@ public class Constants {
 	
 	public static class Buff{
 		public final static float SHIELD_DURATION=10F;
-		public final static float SHIELD_GAINHEALTH=50F;
+		public final static float SHIELD_GAINHEALTH=1.5f;
 		public final static float RAGE_DURATION = 60f;
 		public final static float GAIN_STRENGTH = 5f;
 		public final static float TELEPORT_CAST_TIME = 1f;
