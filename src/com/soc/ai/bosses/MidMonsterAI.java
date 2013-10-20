@@ -270,15 +270,24 @@ public class MidMonsterAI extends AI{
 			if(teleportTimer<=0 ){ 
 				//The bounds are 37 and 57. So, a random number between 0-19->+1(1-20)-->+37
 				//int tileX=r.nextInt(20)+1+37;
-				int tileX=(int)(playerPos.x*Constants.World.TILE_FACTOR)-4+r.nextInt(9);
-				Buff.addbuff(e, new Teleport(tileX*Constants.World.TILE_SIZE, 78*Constants.World.TILE_SIZE, 0));
+				//int tileX=(int)(playerPos.x*Constants.World.TILE_FACTOR)-4+r.nextInt(9);
+				float tileX=(playerPos.x);
+				Buff.addbuff(e, new Teleport(tileX, 78*Constants.World.TILE_SIZE, 0));
+				float currentPosition=0;
+				float newPosition=0;
 				for(int i=0;i<flameWallsLeft.size();i++){
 					Position pFlame=SoC.game.positionmapper.get(flameWallsLeft.get(i));
-					pFlame.x=(tileX-4)*Constants.World.TILE_SIZE;
+					currentPosition=pFlame.x*Constants.World.TILE_FACTOR;
+					newPosition=((tileX)*Constants.World.TILE_FACTOR)-4;
+					if(newPosition>currentPosition)
+					pFlame.x=newPosition*Constants.World.TILE_SIZE;
 				}
 				for(int i=0;i<flameWallsRight.size();i++){
 					Position pFlame=SoC.game.positionmapper.get(flameWallsRight.get(i));
-					pFlame.x=(tileX+4)*Constants.World.TILE_SIZE;
+					currentPosition=pFlame.x*Constants.World.TILE_FACTOR;
+					newPosition=((tileX)*Constants.World.TILE_FACTOR)+4;
+					if(newPosition<currentPosition)
+						pFlame.x=newPosition*Constants.World.TILE_SIZE;
 				}
 				Buff.addbuff(e, new Casting(2f,Constants.BuffColors.RED));
 				pos.direction.x=0;
