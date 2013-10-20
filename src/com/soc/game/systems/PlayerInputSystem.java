@@ -1,6 +1,8 @@
 
 package com.soc.game.systems;
 
+import java.io.IOException;
+
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
@@ -27,6 +29,7 @@ import com.soc.game.states.benefits.ShieldBuff;
 import com.soc.game.states.benefits.Teleport;
 import com.soc.hud.HudSystem;
 import com.soc.utils.FloatingText;
+import com.soc.utils.GameLoader;
 
 
 	public class PlayerInputSystem extends VoidEntitySystem implements InputProcessor{
@@ -130,6 +133,14 @@ import com.soc.utils.FloatingText;
 			
 			if(keycode==Keys.H){
 				SoC.game.hudSystem.popInstructions();
+			}
+			
+			if(keycode == Keys.F5){
+				try {
+					GameLoader.quickSave();
+				} catch (IOException e) {
+					SoC.game.hudSystem.tooltip.pop("Could not save the game!", 0, 2f);
+				}
 			}
 			
 			if(keycode==controls.inventory){

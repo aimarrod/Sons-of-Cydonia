@@ -262,7 +262,7 @@ public class SoC extends Game {
 		Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 		screens=new Stack<Screen>();
 		processors = new Stack<InputProcessor>();
-				
+			
 		//Save, New, Load game handler.
 		setScreen(new MenuScreen(this));
 	}

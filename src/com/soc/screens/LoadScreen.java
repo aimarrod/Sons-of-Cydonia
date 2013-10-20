@@ -25,6 +25,7 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 	private TextButton[] buttons;
 	private TextButtonStyle normalStyle;
 	private TextButtonStyle focusedStyle;
+	private boolean quicksave;
 
 	public LoadScreen(SoC game) {
 		super(game);
@@ -41,10 +42,21 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 
 		files = GameLoader.getHandles();
 		System.out.println(files.length);
-		buttons = new TextButton[files.length + 1];
-		for (int i = 0; i < files.length+1; i++) {
-			if (i == files.length) {
+		buttons = new TextButton[files.length + 2];
+		for (int i = 0; i < files.length+2; i++) {
+			if (i == files.length+1) {
+				System.out.println(i);
 				buttons[i] = new TextButton("Exit", normalStyle);
+				continue;
+			}
+			if(i == files.length){
+				if(GameLoader.isQuickLoad()){
+					buttons[i] = new TextButton("Resume game", normalStyle);
+					quicksave = true;
+				} else {
+					buttons[i] = new TextButton("No quicksave", normalStyle);
+					quicksave = false;
+				}
 				continue;
 			}
 			if (files[i] == null) {
@@ -65,7 +77,7 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 		for (int i = 0; i < buttons.length; i++) {
 			final int position = i;
 			final LoadScreen screen = this;
-			if (i != files.length) {
+			if (i < files.length) {
 				final FileHandle handle = files[i];
 				
 				buttons[i].addListener(new InputListener() {
@@ -100,32 +112,65 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 				table.row();
 				
 			} else {
-				buttons[i].addListener(new InputListener() {
-					@Override
-					public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-						super.touchUp(event, x, y, pointer, button);
-						SoC.game.clearProcessors();
-						SoC.game.setScreen(new MenuScreen(game));
-					}
-
-					@Override
-					public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-						return true;
-					}
-				});
-
-				buttons[i].addListener(new ClickListener() {
-					public boolean mouseMoved(InputEvent event, float x, float y) {
-						if (focusedButton != position+1) {
-							buttons[focusedButton - 1].setStyle(normalStyle);
+				if(i == files.length+1){
+					buttons[i].addListener(new InputListener() {
+						@Override
+						public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+							super.touchUp(event, x, y, pointer, button);
+							SoC.game.clearProcessors();
+							SoC.game.setScreen(new MenuScreen(game));
 						}
-						focusedButton = position+1;
-						return true;
+	
+						@Override
+						public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+							return true;
+						}
+					});
+	
+					buttons[i].addListener(new ClickListener() {
+						public boolean mouseMoved(InputEvent event, float x, float y) {
+							if (focusedButton != position+1) {
+								buttons[focusedButton - 1].setStyle(normalStyle);
+							}
+							focusedButton = position+1;
+							return true;
 
-					}
+						}
 
-				});
-				table.add(buttons[i]).uniform().fill();
+					});
+					table.add(buttons[i]).uniform().fill();
+				} else {
+					buttons[i].addListener(new InputListener() {
+						
+						@Override
+						public boolean touchDown(InputEvent event, float x,
+								float y, int pointer, int button) {
+							return true;
+						}
+
+						@Override
+						public void touchUp(InputEvent event, float x, float y,
+								int pointer, int button) {
+							if(quicksave){
+								SoC.game.clearProcessors();
+								GameLoader.quickLoad();
+							}
+						}
+					});
+
+					buttons[i].addListener(new ClickListener() {
+						public boolean mouseMoved(InputEvent event, float x, float y) {
+							if (focusedButton != position+1) {
+								buttons[focusedButton - 1].setStyle(normalStyle);
+							}
+							focusedButton = position + 1;
+							return true;
+
+						}
+					});
+					table.add(buttons[i]).size(300, 60).uniform().spaceBottom(10);
+					table.row();
+				}
 			}
 		}
 	}
@@ -181,9 +226,16 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 									GameLoader.loadGame(files[2]);
 								}
 							}else{
-								if(focusedButton==4){
-									SoC.game.clearProcessors();
-									SoC.game.setScreen(new MenuScreen(game));
+								if(focusedButton == 4){
+									if(quicksave){
+										SoC.game.clearProcessors();
+										GameLoader.quickLoad();
+									}
+								} else {
+									if(focusedButton==4){
+										SoC.game.clearProcessors();
+										SoC.game.setScreen(new MenuScreen(game));
+									}
 								}
 							}
 						}
