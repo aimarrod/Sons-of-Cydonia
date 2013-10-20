@@ -291,7 +291,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));
-		e.addComponent(new Enemy(75, new GreenKnightAI()));
+		e.addComponent(new Enemy(120, new GreenKnightAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -324,7 +324,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));
-		e.addComponent(new Enemy(75, new GoldBowKnightAI()));
+		e.addComponent(new Enemy(120, new GoldBowKnightAI()));
 		e.addComponent(new Stats(
 				60, 
 				0, 
@@ -357,7 +357,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));
-		e.addComponent(new Enemy(100, new GoldKnightAI()));
+		e.addComponent(new Enemy(150, new GoldKnightAI()));
 		e.addComponent(new Stats(
 				100, 
 				0, 
@@ -391,9 +391,9 @@ public class EntityFactory {
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Flying());
-		e.addComponent(new Enemy(800, new KnightCaptainAI()));
+		e.addComponent(new Enemy(1500, new KnightCaptainAI()));
 		e.addComponent(new Stats(
-				500, 
+				600, 
 				0, 
 				0, 
 				500, 
@@ -721,7 +721,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 		e.addComponent(new Feet(32, 10));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(1000, new BlackMageAI()));
+		e.addComponent(new Enemy(1500, new BlackMageAI()));
 		e.addComponent(new Flying());
 		e.addComponent(new Stats(
 				400, 
