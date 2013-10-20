@@ -47,7 +47,7 @@ public class EffectSystem extends EntityProcessingSystem{
 				if(stopped.contains(e)){
 					stopped.remove(e);
 					Sound s = effects.get(e);
-					long id = s.play();
+					long id = s.play(EffectsPlayer.instance.volume);
 					s.setLooping(id, true);
 					System.out.println(e);
 					ids.put(e, id);
@@ -61,7 +61,7 @@ public class EffectSystem extends EntityProcessingSystem{
 		if(!effects.containsKey(e)){
 			Sound s = EffectsPlayer.get(sound);
 			effects.put(e, s);
-			long id = s.play();
+			long id = s.play(EffectsPlayer.instance.volume);
 			s.setLooping(id, true);
 			ids.put(e, id);
 		}

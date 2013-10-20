@@ -11,9 +11,9 @@ public class Dialog {
 	
 	static Dialog[] dialogs = new Dialog[]{
 		new Dialog("Press H to open the instructions."),
-		new Dialog("\nTo loot items, just walk over them."),
+		new Dialog("\nBe careful, quicksaving a game (F5) will override the previous quick save."),
 		new Dialog("\nTip:\n\n"
-				+ "You can destroy some enemy attacks"),
+				+ "You can destroy some enemy attacks, attacking them, or shielding yourself (SHIFT LEFT)."),
 		new Dialog("\nTip:\n\n"
 				+ "Save your game ofter, you never know what may lie ahead!")
 	};
