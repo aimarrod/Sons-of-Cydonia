@@ -5,6 +5,7 @@ import com.artemis.Entity;
 import com.artemis.utils.Bag;
 import com.soc.core.SoC;
 import com.soc.game.states.alterations.Alteration;
+import com.soc.game.states.alterations.Burn;
 
 public class Debuff extends Component{
 	public Bag<Alteration> debuffs;
@@ -34,7 +35,10 @@ public class Debuff extends Component{
 		Debuff d;
 		if(SoC.game.debuffmapper.has(e)){
 			d = SoC.game.debuffmapper.get(e);
-			if(d.debuffClasses.contains(alteration.getClass())){
+			if(d.debuffClasses.contains(alteration.getClass()) && !alteration.getClass().equals(Burn.class)){
+				return;
+			} else if(d.debuffClasses.contains(alteration.getClass()) && alteration.getClass().equals(Burn.class)){
+				d.getDebuff(Burn.class).increaseDamage();
 				return;
 			}
 		}

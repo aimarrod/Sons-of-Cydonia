@@ -241,26 +241,6 @@ public class MidMonsterAI extends AI{
 				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
 				spawned.addToWorld();
-				spawned=EntityFactory.createFlame(playerPos.x-(Constants.Characters.WIDTH), playerPos.y+(Constants.Characters.HEIGHT), playerPos.z,0);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-				spawned.addToWorld();
-				spawned=EntityFactory.createFlame(playerPos.x+(Constants.Characters.WIDTH), playerPos.y+(Constants.Characters.HEIGHT), playerPos.z,0);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-				spawned.addToWorld();
-				spawned=EntityFactory.createFlame((playerPos.x-(Constants.Characters.WIDTH/2)), playerPos.y+(Constants.Characters.HEIGHT), playerPos.z,0);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-				spawned.addToWorld();
-				spawned=EntityFactory.createFlame(playerPos.x+(Constants.Characters.WIDTH/2), playerPos.y+(Constants.Characters.HEIGHT), playerPos.z,0);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
-				SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
-				SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +pos.z);
-				spawned.addToWorld();
 			}
 
 			state.state = State.WALK;
