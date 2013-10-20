@@ -59,6 +59,7 @@ public class GameMenu extends Table implements InputProcessor {
 	public void setViewport(int height){
 		this.height=height;
 	}
+	
 	@Override
 	public boolean keyDown(int keycode) {
 		if(keycode==SoC.game.playermapper.get(SoC.game.player).gameMenu){
