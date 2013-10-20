@@ -192,7 +192,7 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 		if (keycode==Keys.W || keycode==Keys.UP) {
 			buttons[focusedButton - 1].setStyle(normalStyle);
 			if (focusedButton == 1)
-				focusedButton = 4;
+				focusedButton = 5;
 			else
 				focusedButton--;
 			return true;
@@ -200,7 +200,7 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 			if (keycode==Keys.S
 					|| keycode==Keys.DOWN) {
 				buttons[focusedButton - 1].setStyle(normalStyle);
-				if (focusedButton == 4)
+				if (focusedButton == 5)
 					focusedButton = 1;
 				else
 					focusedButton++;
@@ -231,7 +231,7 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 										GameLoader.quickLoad();
 									}
 								} else {
-									if(focusedButton==4){
+									if(focusedButton==5){
 										SoC.game.clearProcessors();
 										SoC.game.setScreen(new MenuScreen(game));
 									}
