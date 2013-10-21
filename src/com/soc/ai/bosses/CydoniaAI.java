@@ -24,21 +24,18 @@ public class CydoniaAI extends AI{
 	public int bottomTile = 156;
 	public float timer;
 	public float x, y;
-	public boolean init, teleported, standard,waving;
-	public Random r;
+	public boolean init, teleported, standard, waving;
 	
 	public CydoniaAI(){
-		standard = false;
+		standard = true;
 		init = false;
 		teleported = false;
 		timer=5f;
-		r=new Random();
-		waving=true;
+		waving=false;
 	}
 	
 	
 	public void standard(Entity e){
-		timer -= SoC.game.world.delta;
 		if(!teleported){
 			x = AI.rng.nextInt(29) + leftTile;
 			y = AI.rng.nextInt(21) + bottomTile;
@@ -50,6 +47,24 @@ public class CydoniaAI extends AI{
 		} else {
 			if(timer <= 0){
 				teleported = false;
+				int attack = AI.rng.nextInt(4);
+				if(attack == 3){
+					//Create poison cloud
+					Position pos = SoC.game.positionmapper.get(SoC.game.player);
+					Entity circle = EntityFactory.createCircle(pos.x, pos.y, pos.z);
+					SoC.game.levelmanager.setLevel(circle, Constants.Groups.LEVEL + pos.z);
+					
+					circle.addToWorld();
+				} else if(attack == 2){
+					//Create 
+					Position pos = SoC.game.positionmapper.get(SoC.game.player);
+					Position myPos = SoC.game.positionmapper.get(e);
+					
+					float dstx = pos.x - myPos.x;
+					float dsty = pos.y - myPos.y;
+					
+					
+				}
 			}
 		}
 	}
@@ -67,7 +82,7 @@ public class CydoniaAI extends AI{
 		Entity fireStone=null;
 		int holeWave=0;
 		if(direction.x==0 && direction.y==-1){
-			holeWave=leftmostTile+r.nextInt(rightmostTile-leftmostTile)+1;
+			holeWave=leftmostTile+AI.rng.nextInt(rightmostTile-leftmostTile)+1;
 			for(int i=this.leftmostTile;i<rightmostTile;i=i+2){
 				System.out.println(i);
 			fireStone = EntityFactory.createFireStone(i*Constants.World.TILE_SIZE, topTile*Constants.World.TILE_SIZE, p.z,direction,true);
@@ -97,16 +112,18 @@ public class CydoniaAI extends AI{
 			return;
 		}
 		timer-=SoC.game.world.delta;
+		if(standard){
+			standard(e);
+			return;
+		}
 		if(waving){
 			if(timer<=0){
-				
 				wave(e,new Vector2(0,-1));
 				timer=5f;
 			}
+			return;
 		}
-		if(standard){
-			standard(e);
-		}
+
 	}
 
 

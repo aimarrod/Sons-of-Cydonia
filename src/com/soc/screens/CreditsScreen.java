@@ -63,7 +63,7 @@ public class CreditsScreen extends AbstractScreen{
 				+ "Jon Lorente @jonlorente";
 		this.cam = SoC.game.camera;
 		this.batch = super.getBatch();
-		this.font = new Skin(Gdx.files.internal("resources/skin2.json" )).getFont("buttonFont");
+		this.font = new Skin(Gdx.files.internal("resources/skin2.json" )).getFont("menuFont");
 		
 		cam.position.set(0,5000,0);
 	}
@@ -94,13 +94,13 @@ public class CreditsScreen extends AbstractScreen{
 	     //  float fontX = buttonX + buttonWidth/2 - font.getBounds(fontText).width/2;
 	      // float fontY = buttonY + buttonHeight/2 + font.getBounds(fontText).height/2;
 	       
-	       font.setScale(1.5f);
+	       font.setScale(4f);
 	       font.drawWrapped(batch, title, 100, 4900, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(1.2f);
+	       font.setScale(2f);
 	       font.drawWrapped(batch, devs, 100, 4700, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(0.8f);
+	       font.setScale(1f);
 	       font.drawWrapped(batch, devsBody, 100, 4600, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(1.0f);
+	       font.setScale(2f);
 	       font.drawWrapped(batch, graphics, 100, 4400, width - 100, BitmapFont.HAlignment.CENTER);
 	       batch.end();	       
 	       
