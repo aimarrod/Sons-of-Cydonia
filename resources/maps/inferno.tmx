@@ -3,7 +3,7 @@
  <properties>
   <property name="ambiance" value="dark-ambiance.ogg"/>
   <property name="layers" value="1"/>
-  <property name="music" value="gaia-battle.ogg"/>
+  <property name="music" value="dark-descent.ogg"/>
  </properties>
  <tileset firstgid="1" name="base_out_atlas" tilewidth="32" tileheight="32">
   <image source="tiles/base_out_atlas.png" width="1024" height="1024"/>
@@ -18,17 +18,17 @@
  </layer>
  <layer name="level0-high" width="100" height="200">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="level0-object-low" width="100" height="200">
   <data encoding="base64" compression="zlib">
-   eJzt3EFOwkAYBeAuxF7CkxivYTxLyzmM19Cb6N7DyIYFtRQ1zvQx/b6kIWyYP308Cg2ZrgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACo47Hvurvd/PHUrz3d9tzvlg/qkkcWeWSRRxZ5ZJFHFnlkkUcWeWSRRxZ5ZJFHFnlkkUeW577rPm/mjxf32wEAAAAAAAAAAIArc24vgoeV9yJY2iOh1F4JCfsypP53+NJcJeZLOBcJM/xlrtbzGEPzGDaaxzX0Y5jJp/Sae3mcnWuuK6XX1I/luWr3IyGPMSgP14+sfkzzqNmPvTy+zbVGP6Y5rJHHGJrHtBtbvH6k5THIIyqPNfvh98fluYaKeejH6VzTTkyfl1gzMY8xJA/9yOpHzfkSzsVcJ5LymH5Wlc5j+tvD9fz8XO4n1plhztIeO6X22vnJvj6vh3PyVvC81Nxb6P12+Uh73dm1Dll8rPg+5VTpfvA7+pFFP7LoR5aW+lHze1Ap+pGlpX60QD+y6EcW/ciiH1la6kcL33eP/Sj1WGr9Vh37Ueqx1PpsVwufgwAAAAAAAAD/6QvAiS1n
+   eJzt3EFOwkAYBeAuBC6gO4/hyngN41mAcxivoSdR9x5GNiysQ1HjTF/b70sacGP/9PEYIM10HQAAAABQy+W6/Jxx3KzLzwHSWD+yWD+AKSitF9aQ8ZTWC2sIAAAAAAAAAAAAU3Pl/sQopXsRX1ft5wA4x/3tWdzfDkxFaa0ofSehDesHAAAAAAAAAAAAAAAAAAAAAAAArdxvuu56VT4eNmNPtzy3q+GDtuSRRR5Z5JFFHlnkkUUeWeSRRR5Z5JFFHlnkkUUeWeSR5XHTdR8X5ePJ7+0AAAAAAAAAAADAxJzai+Bu5L0IhvZIqLVXQsK+DKn3Dp+bq8Z8CdciYYa/zDX3PHaheWwXmscU+rEt5FP7nHt5nJyr1JXa59SP4bla9yMhj11QHtaPrH7082jZj708vs01Rj/6OYyRxy40j343lrh+pOWxlUdUHmP2w/eP83NtG+ahH1/n6nei/3eNcybmsQvJQz+y+tFyvoRrUepEUh7996raefS/e1jPT8/l98Q2M5QM7bFTa6+dn+zr83y4Ji8Vr0vLvYXe1sNH2v8tnuuQxfuIr1O+qt0Pfkc/suhHFv3IMqd+tPwcVIt+ZJlTP+ZAP7LoRxb9yKIfWebUjzl83j32o9ZjrfPP1bEftR5rnZ/lmsP7IAAAAAAAAMB/+gRP4DHz
   </data>
  </layer>
  <layer name="level0-object-high" width="100" height="200">
   <data encoding="base64" compression="zlib">
-   eJzt2jEKwkAURdE00RWL29CduEQru5+AMMN/jueAWATMw8tICrcNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgH90ux5fu59cYw49suiRRY8semTRI4seWfTIokcWPbLokUWPLHpk0QMAAAAAAAAAAAAA/kPqf4fPdn2M3pfwXSRsqOjRt6GiR9+Gih59Gyp69G2o6NG3oaJH34aKHn0bKnr0bajo0behokffhooefRsqevRtqOjRt6GiR9+Gih59Gyp69G2opPZ47Nv23Mfe99sNo7wu56+0zyXf7PMBv8z5gGMrnQ/PQYy20vmA0ZwPOOZ8MMsKz7uf8zHrfdb9gQwr/A4CAAAAAAAAsK432U1+MQ==
+   eJzt2kFqAkEURdGedLJiyTbiTrK4LMCRg8DvBk0V/1meA8GAoI9cKuXAbQMAAABgJb97/TsAnHF/APCo6r5whwAAAAAAAAAAAAD/4fuJADzD/QHAM9wfAAAAAAAAAAAAAAAAAAAAAAAAAPDX5fP4ua+T55hDjyx6ZNEjix5Z9MiiRxY9suiRRY8semTRI4seWfQAAAAAAAAAAAAAgPeQ+t3hs113o/cl/C0SNlT06NtQ0aNvQ0WPvg0VPfo2VPTo21DRo29DRY++DRU9+jZU9OjbUNGjb0NFj74NFT36NlT06NtQ0aNvQ0WPvg0VPfo2VFJ7fO/bdt3Hvu+jG0b5+Tj/SXtd8s0+H/DKnA84ttL58DmI0VY6HzCa8wHHnA9mWeHz7v18zHqc9f5AhhX+DwIAAAAAAACwrhtjGYnd
   </data>
  </layer>
  <objectgroup name="level0-unwalkable" width="100" height="200">
@@ -54,6 +54,18 @@
   <object x="3168" y="0" width="32" height="6400"/>
   <object x="0" y="0" width="3200" height="128"/>
   <object x="1696" y="5248" width="64" height="448"/>
+  <object x="1504" y="1728" width="32" height="64"/>
+  <object x="1664" y="1728" width="32" height="64"/>
+  <object x="1664" y="1600" width="32" height="64"/>
+  <object x="1504" y="1600" width="32" height="64"/>
+  <object x="1504" y="1472" width="32" height="64"/>
+  <object x="1664" y="1472" width="32" height="64"/>
+  <object x="1504" y="640" width="32" height="64"/>
+  <object x="1664" y="640" width="32" height="64"/>
+  <object x="1536" y="512" width="32" height="64"/>
+  <object x="1632" y="512" width="32" height="64"/>
+  <object x="1536" y="384" width="32" height="64"/>
+  <object x="1632" y="384" width="32" height="64"/>
  </objectgroup>
  <objectgroup name="level0-special" width="100" height="200">
   <object x="1696" y="5856" width="1472" height="512">
@@ -101,7 +113,6 @@
     <property name="type" value="lava"/>
    </properties>
   </object>
-  <object x="2720" y="704"/>
   <object x="1056" y="3744" width="128" height="960">
    <properties>
     <property name="type" value="lava"/>
@@ -320,6 +331,162 @@
   <object x="2720" y="5632" width="384" height="64">
    <properties>
     <property name="type" value="hole"/>
+   </properties>
+  </object>
+  <object x="1664" y="1856" width="1504" height="512">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2240" y="2080" width="32"/>
+  <object x="1760" y="1824" width="128" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1888" y="1408" width="1280" height="448">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="32" y="1856" width="1504" height="512">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1312" y="1824" width="128" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="32" y="1408" width="1280" height="448">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2112" y="1376" width="64" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2176" y="1312" width="64" height="96">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2240" y="1248" width="64" height="160">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2304" y="1184" width="32" height="224">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2304" y="832" width="32" height="64">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2240" y="768" width="96" height="64">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2176" y="704" width="160" height="64">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2112" y="672" width="224" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="2336" y="128" width="832" height="1280">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1728" y="128" width="608" height="544">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1696" y="128" width="32" height="416">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1664" y="128" width="32" height="256">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1536" y="128" width="128" height="96">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1504" y="128" width="32" height="256">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="1472" y="128" width="32" height="416">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="32" y="128" width="832" height="1280">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="864" y="1376" width="224" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="864" y="1312" width="160" height="64">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="864" y="1248" width="96" height="64">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="864" y="1184" width="32" height="64">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="864" y="832" width="32" height="64">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="864" y="768" width="96" height="64">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="864" y="704" width="160" height="64">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="864" y="672" width="224" height="32">
+   <properties>
+    <property name="type" value="lava"/>
+   </properties>
+  </object>
+  <object x="864" y="128" width="608" height="544">
+   <properties>
+    <property name="type" value="lava"/>
    </properties>
   </object>
  </objectgroup>

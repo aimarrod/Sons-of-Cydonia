@@ -111,6 +111,44 @@ public class GraphicsLoader {
 		character.renderers[State.RUN] = run;
 	}
 	
+	public static void loadCydonia(Character character){
+		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
+		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
+		DirectionalAnimatedRenderer movement = new DirectionalAnimatedRenderer(true);
+		AnimatedRenderer death = new AnimatedRenderer(false);
+		
+		attack.ox = -16;
+		attack.oy = -0;
+		movement.ox = -16;
+		movement.oy = 0;
+		idle.ox = -16;
+		idle.oy = -0;
+		death.ox = -16;
+		death.oy = 0;
+
+		
+		Texture tex = load("cydonia-cast.png");
+		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 128, 128);
+		for(int i = 0; i < tmp.length; i++){
+	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
+	   	}
+		tmp = TextureRegion.split(load("cydonia-walk.png"), 64, 64);
+		for(int i = 0; i < tmp.length; i++){
+	   		movement.animations [i]= new Animation(0.7f/tmp[i].length, tmp[i]);
+	   		idle.sprites[i] = tmp[i][0];
+	   	}
+
+		tmp = TextureRegion.split(load("cydonia-death.png"), 64, 64);
+	   	death.animation = new Animation(1f/tmp[0].length, tmp[0]);
+	   	character.deathTime = 3f;
+		
+		character.renderers[State.IDLE] = idle;
+		character.renderers[State.DYING] = death;
+		character.renderers[State.ATTACK] = attack;
+		character.renderers[State.WALK] = movement;
+	}
+	
 	public static void loadMage(Character character){
 		DirectionalAnimatedRenderer attack = new DirectionalAnimatedRenderer(false);
 		DirectionalStaticRenderer idle = new DirectionalStaticRenderer();
