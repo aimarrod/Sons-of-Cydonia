@@ -1018,6 +1018,17 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
+	public static Entity createMovingCloud(Position pos, Bounds bon){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Position(pos.x+bon.width*0.5f, pos.y+bon.height+0.5f, pos.z, pos.direction));
+		e.addComponent( new Bounds(0,0));
+		e.addComponent( new Velocity(Constants.Spells.FIREBALL_SPEED*pos.direction.x, Constants.Spells.FIREBALL_SPEED*pos.direction.y, (int)Constants.Spells.FIREBALL_SPEED));
+		e.addComponent( new Attack(new PoisonCloudProcessor(), 0) );
+			
+		return e;
+	}
+	
 	public static Entity createQuake(Position pos, Feet feet, int damage) {
 		Entity e=SoC.game.world.createEntity();
 		
@@ -1116,24 +1127,35 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createMeteor(float x, float y, int z) {
+	public static Entity createMeteor(float x, float y, int z, int damage) {
 		Entity e=SoC.game.world.createEntity();
 		
 		e.addComponent( new Flying() );
 		e.addComponent( new Position(x, y, z));
 		e.addComponent( new Bounds(32, 32) );
-	   	e.addComponent( new Attack(new MeteorProcessor(), 20) );
+	   	e.addComponent( new Attack(new MeteorProcessor(), damage) );
 	   	
 	   	return e;		
 	}
 
-	public static Entity createWindblade(String group, Position pos, int damage,
-			Position pos2) {
+	public static Entity createWindblade(Position pos, int damage) {
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent( new Velocity(Constants.Spells.WINDBLADE_SPEED*pos.direction.x, Constants.Spells.WINDBLADE_SPEED*pos.direction.y, 0) );
 		e.addComponent( new Position(pos.x, pos.y, pos.z, pos.direction) );
-		e.addComponent( new Bounds(48, 48) );
+		e.addComponent( new Bounds(40, 40) );
+		e.addComponent( new Flying() );
+	   	e.addComponent( new Attack(new WindbladeProcessor(), damage) );
+	   	
+		return e;
+	}
+	
+	public static Entity createWindblade(float x, float y, int z, Vector2 dir, int damage) {
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent( new Velocity(Constants.Spells.WINDBLADE_SPEED*dir.x, Constants.Spells.WINDBLADE_SPEED*dir.y, 0) );
+		e.addComponent( new Position(x, y, z, dir) );
+		e.addComponent( new Bounds(40, 40) );
 		e.addComponent( new Flying() );
 	   	e.addComponent( new Attack(new WindbladeProcessor(), damage) );
 	   	

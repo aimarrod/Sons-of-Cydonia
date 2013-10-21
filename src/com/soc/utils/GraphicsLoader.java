@@ -131,7 +131,7 @@ public class GraphicsLoader {
 		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
 		TextureRegion[][] tmp = TextureRegion.split(tex, 64, 64);
 		for(int i = 0; i < tmp.length; i++){
-	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
+	   		attack.animations[i]= new Animation(1f/tmp[i].length, tmp[i]);
 	   	}
 		tmp = TextureRegion.split(load("cydonia-walk.png"), 64, 64);
 		for(int i = 0; i < tmp.length; i++){

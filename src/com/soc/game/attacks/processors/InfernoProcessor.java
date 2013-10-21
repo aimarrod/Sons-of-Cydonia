@@ -33,7 +33,7 @@ public class InfernoProcessor implements AttackProcessor {
 		if(timer<3.5f){
 			Entity e=null;
 			for(int i=0;i<posMeteors.length;i++){
-				e=EntityFactory.createMeteor(posMeteors[i].x,posMeteors[i].y, posMeteors[i].z);
+				e=EntityFactory.createMeteor(posMeteors[i].x,posMeteors[i].y, posMeteors[i].z, SoC.game.attackmapper.get(attack).damage);
 				SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL + posMeteors[i].z);
 				SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 				SoC.game.groupmanager.add(e, Constants.Groups.PLAYER_ATTACKS);

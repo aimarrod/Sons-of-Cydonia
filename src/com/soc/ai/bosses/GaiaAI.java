@@ -96,7 +96,7 @@ public class GaiaAI extends AI{
 					do{
 					x = r.nextInt(rigthTile-leftTile) + leftTile;
 					y = r.nextInt(topTile - bottomTile) + bottomTile;
-					Entity spawned = EntityFactory.createMeteor(x*World.TILE_SIZE+World.TILE_SIZE*0.5f, y*World.TILE_SIZE+World.TILE_SIZE*0.5f, SoC.game.positionmapper.get(SoC.game.player).z);	
+					Entity spawned = EntityFactory.createMeteor(x*World.TILE_SIZE+World.TILE_SIZE*0.5f, y*World.TILE_SIZE+World.TILE_SIZE*0.5f, SoC.game.positionmapper.get(SoC.game.player).z, 50);	
 					SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 					SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +(SoC.game.positionmapper.get(SoC.game.player).z+1));

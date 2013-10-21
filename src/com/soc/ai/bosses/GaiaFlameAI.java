@@ -45,7 +45,7 @@ public class GaiaFlameAI extends AI{
 			tileX = r.nextInt(25) + 160;
 		}
 		int tileY = r.nextInt(35) + 157;
-			Entity spawned = EntityFactory.createMeteor(tileX*World.TILE_SIZE+World.TILE_SIZE*0.5f, tileY*World.TILE_SIZE+World.TILE_SIZE*0.5f, p.z);	
+			Entity spawned = EntityFactory.createMeteor(tileX*World.TILE_SIZE+World.TILE_SIZE*0.5f, tileY*World.TILE_SIZE+World.TILE_SIZE*0.5f, p.z, 50);	
 			SoC.game.groupmanager.add(spawned, Constants.Groups.ENEMY_ATTACKS);
 			SoC.game.groupmanager.add(spawned, Constants.Groups.MAP_BOUND);
 			SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +(p.z+1));
