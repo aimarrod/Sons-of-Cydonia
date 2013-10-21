@@ -20,20 +20,24 @@ public class CydoniaAI extends AI{
 	public int leftTile = 35;
 	public int rightTile = 65;
 	public int rightmostTile = 72;
-	public int topTile = 176;
+	public int topTile = 179;
 	public int bottomTile = 156;
 	public float timer;
 	public float x, y;
-	public boolean init, teleported, standard,waving;
+	public boolean init, teleported, standard,waving,horizontalWave;
+	public int waveCounter;
 	public Random r;
 	
 	public CydoniaAI(){
 		standard = false;
 		init = false;
 		teleported = false;
-		timer=5f;
+		timer=3.5f;
 		r=new Random();
 		waving=true;
+		horizontalWave=true;
+		waveCounter=10;
+		
 	}
 	
 	
@@ -69,8 +73,11 @@ public class CydoniaAI extends AI{
 		if(direction.x==0 && direction.y==-1){
 			holeWave=leftmostTile+r.nextInt(rightmostTile-leftmostTile)+1;
 			for(int i=this.leftmostTile;i<rightmostTile;i=i+2){
-				System.out.println(i);
-			fireStone = EntityFactory.createFireStone(i*Constants.World.TILE_SIZE, topTile*Constants.World.TILE_SIZE, p.z,direction,true);
+				if(i==holeWave || holeWave-1==i  ||holeWave+1==i) {
+					i+=4;
+					continue;
+				}
+			fireStone = EntityFactory.createFireStone(i*Constants.World.TILE_SIZE, (topTile-2)*Constants.World.TILE_SIZE, p.z,direction,true);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
@@ -78,7 +85,12 @@ public class CydoniaAI extends AI{
 		    fireStone.addToWorld();
 			}
 		}else if(direction.x==-1 && direction.y==0){
-			for(int i=this.bottomTile;i<(topTile);i=i+2){
+			holeWave=bottomTile+r.nextInt(topTile-bottomTile)+1;
+			for(int i=this.bottomTile;i<=(topTile);i=i+2){
+				if(i==holeWave || holeWave-1==i  ||holeWave+1==i) {
+					i+=4;
+					continue;
+				}
 			fireStone = EntityFactory.createFireStone(rightmostTile*Constants.World.TILE_SIZE, i*Constants.World.TILE_SIZE, p.z,direction,true);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
@@ -98,10 +110,19 @@ public class CydoniaAI extends AI{
 		}
 		timer-=SoC.game.world.delta;
 		if(waving){
-			if(timer<=0){
-				
-				wave(e,new Vector2(0,-1));
-				timer=5f;
+			if(waveCounter>0){
+				if(timer<=0){
+					if(horizontalWave)
+						wave(e,new Vector2(0,-1));
+					else
+						wave(e,new Vector2(-1,0));
+					horizontalWave=!horizontalWave;
+					waveCounter--;
+					timer=3.5f;
+				}
+			}else{
+				waving=false;
+				waveCounter=10;
 			}
 		}
 		if(standard){

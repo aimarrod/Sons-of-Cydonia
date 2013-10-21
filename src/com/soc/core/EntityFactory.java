@@ -1042,7 +1042,10 @@ public class EntityFactory {
 	public static Entity createFireStone(float x, float y, int z, Vector2 direction, boolean finalBoss) {
 		Entity e=SoC.game.world.createEntity();
 		if(finalBoss){
-			e.addComponent( new Velocity(100*direction.x, 100*direction.y, 0) );
+			if(direction.x==-1)
+				e.addComponent( new Velocity(400*direction.x, 400*direction.y, 0) );
+			else
+				e.addComponent( new Velocity(200*direction.x, 200*direction.y, 0) );
 			e.addComponent( new Bounds(64, 64) );
 		}
 		else{
