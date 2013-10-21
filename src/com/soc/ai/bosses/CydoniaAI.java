@@ -1,11 +1,13 @@
 package com.soc.ai.bosses;
 
+import java.util.Random;
+
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.AI;
 import com.soc.core.Constants;
-import com.soc.core.EntityFactory;
 import com.soc.core.Constants.World;
+import com.soc.core.EntityFactory;
 import com.soc.core.SoC;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Position;
@@ -23,11 +25,14 @@ public class CydoniaAI extends AI{
 	public float timer;
 	public float x, y;
 	public boolean init, teleported, standard;
+	public Random r;
 	
 	public CydoniaAI(){
 		standard = true;
 		init = false;
 		teleported = false;
+		timer=0f;
+		r=new Random();
 	}
 	
 	
@@ -50,23 +55,40 @@ public class CydoniaAI extends AI{
 		}
 	}
 	
-	public void wave(Vector2 direction){
+	public void wave(Entity e, Vector2 direction){
+		Position p=SoC.game.positionmapper.get(e);
 		Entity fireStone=null;
+		int holeWave=0;
 		if(direction.x==0 && direction.y==-1){
-			fireStone = EntityFactory.createFireStone(1, 1, 1, new Vector2(Math.signum(1),0),false);
+			holeWave=leftmostTile+r.nextInt(rightmostTile-leftmostTile)+1;
+			for(int i=this.leftmostTile;i<(rightmostTile-leftmostTile);i++){
+			fireStone = EntityFactory.createFireStone(i, topTile, p.z,direction,false);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
-		    SoC.game.levelmanager.setLevel(fireStone, Constants.Groups.LEVEL+1);
+		    SoC.game.levelmanager.setLevel(fireStone, Constants.Groups.LEVEL+p.z);
 		    fireStone.addToWorld();
+			}
 		}else if(direction.x==-1 && direction.y==0){
-			
+			for(int i=this.bottomTile;i<(topTile-bottomTile);i++){
+			fireStone = EntityFactory.createFireStone(rightmostTile, i, p.z,direction,false);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
+		    SoC.game.levelmanager.setLevel(fireStone, Constants.Groups.LEVEL+p.z);
+		    fireStone.addToWorld();
+			}
 		}
 
 	}
 
 	@Override
 	public void process(Entity e) {
+		timer-=SoC.game.world.delta;
+		if(timer<=0){
+			wave(e,new Vector2(0,-1));
+			timer=20f;
+		}
 		if(!init){
 			init(e);
 			return;
