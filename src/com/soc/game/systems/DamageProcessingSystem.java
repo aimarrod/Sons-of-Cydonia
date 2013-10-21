@@ -41,9 +41,10 @@ public class DamageProcessingSystem extends EntityProcessingSystem {
 
 	@Override
 	protected void process(Entity e) {	
+		State state = stm.get(e);
+		if(state.state == State.DYING || state.state == State.FALLING) return;
 		Stats stats=sm.get(e);
 		Damage dr=dm.get(e);
-		State state=stm.get(e);
 		Position pos = pm.get(e);
 		Velocity velocity=vm.get(e);
 		int pureDamage=dr.pureDamage;

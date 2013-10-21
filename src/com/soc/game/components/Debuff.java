@@ -61,4 +61,12 @@ public class Debuff extends Component{
 			}
 		}
 	}
+	
+	public void removeAll(Entity e){
+		for(int i =0; i < debuffs.size(); i++){
+			debuffs.get(i).delete(e);
+		}
+		debuffs.clear();
+		debuffClasses.clear();
+	}
 }

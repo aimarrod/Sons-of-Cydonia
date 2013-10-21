@@ -129,7 +129,7 @@ public class GraphicsLoader {
 		
 		Texture tex = load("cydonia-cast.png");
 		tex.setFilter(TextureFilter.Nearest, TextureFilter.Linear);
-		TextureRegion[][] tmp = TextureRegion.split(tex, 128, 128);
+		TextureRegion[][] tmp = TextureRegion.split(tex, 64, 64);
 		for(int i = 0; i < tmp.length; i++){
 	   		attack.animations[i]= new Animation(0.35f/tmp[i].length, tmp[i]);
 	   	}

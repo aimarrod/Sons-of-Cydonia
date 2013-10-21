@@ -6,6 +6,7 @@ import com.artemis.Entity;
 import com.artemis.annotations.Mapper;
 import com.artemis.systems.EntityProcessingSystem;
 import com.soc.core.SoC;
+import com.soc.game.components.Debuff;
 import com.soc.game.components.Enemy;
 import com.soc.game.components.Expires;
 import com.soc.game.components.Player;
@@ -14,6 +15,8 @@ public class ExpiringSystem extends EntityProcessingSystem{
 	 @Mapper ComponentMapper<Expires> em;
 	 @Mapper ComponentMapper<Player> pm;
 	 @Mapper ComponentMapper<Enemy> enm;
+	 @Mapper ComponentMapper<Debuff> dbm;
+
 
 	 
      @SuppressWarnings("unchecked")
@@ -35,5 +38,12 @@ public class ExpiringSystem extends EntityProcessingSystem{
              }
          }
 
+     }
+     
+    @Override
+	public void inserted(Entity e){
+    	 if(dbm.has(e)){
+    		 dbm.get(e).removeAll(e);
+    	 }
      }
 }

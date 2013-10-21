@@ -70,7 +70,6 @@ if(hit != null) return false;
 	public void handle(Entity attack, Entity enemy) {
 		hit=enemy;
 		Debuff.addDebuff(hit, new Push(SoC.game.positionmapper.get(attack).direction,100,100));
-		
 	}
 
 	@Override

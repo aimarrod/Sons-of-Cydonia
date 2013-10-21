@@ -554,5 +554,14 @@
     <property name="type" value="anti-venom-fountain"/>
    </properties>
   </object>
+  <object x="1568" y="320" width="64" height="32">
+   <properties>
+    <property name="interval" value="2.5"/>
+    <property name="max" value="1"/>
+    <property name="range" value="1000000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="cydonia"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

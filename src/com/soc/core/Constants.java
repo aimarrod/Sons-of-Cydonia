@@ -39,6 +39,7 @@ public class Constants {
 		public static final String RIGHT_MONSTER = "right-monster";
 		public static final String BLACK_MAGE = "black mage";
 		public static final String KNIGHT_CAPTAIN = "knight captain";
+		public static final String CYDONIA = "cydonia";
 		
 		public static final String ENEMY_ATTACKS = "enemyattack";
 		public static final String PLAYER_ATTACKS = "playerattack";

@@ -4,6 +4,7 @@ import com.artemis.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.bosses.BallistaAI;
 import com.soc.ai.bosses.BlackMageAI;
+import com.soc.ai.bosses.CydoniaAI;
 import com.soc.ai.bosses.FireStoneMonsterAI;
 import com.soc.ai.bosses.GaiaAI;
 import com.soc.ai.bosses.GaiaAirAI;
@@ -646,6 +647,39 @@ public class EntityFactory {
 	    animations.damageSound = "monster-damage.ogg";
 	    animations.deathSound = "monster-death.ogg";
 		GraphicsLoader.loadMidMonster(animations);
+		e.addComponent(animations);
+		
+		return e;
+	}
+	
+	public static Entity createCydonia(float px, float py, int pz){
+		Entity e = SoC.game.world.createEntity();
+		
+		e.addComponent(new Position(px, py, pz));
+		e.addComponent(new Velocity(0,0,150));
+		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
+		e.addComponent(new Feet(Constants.Characters.WIDTH, 10));
+		e.addComponent(new State(0));
+		e.addComponent(new Stats(
+				2500, 
+				0, 
+				0, 
+				2500, 
+				0, 
+				0, 
+				1, 
+				40, 
+				0, 
+				0, 
+				46, 
+				0, 
+				null,
+				Constants.Groups.CYDONIA));
+	    e.addComponent(new Enemy(0, new CydoniaAI()));
+	    Character animations = new Character();
+	    animations.damageSound = "female-damage.ogg";
+	    animations.deathSound = "female-death.ogg";
+		GraphicsLoader.loadCydonia(animations);
 		e.addComponent(animations);
 		
 		return e;
