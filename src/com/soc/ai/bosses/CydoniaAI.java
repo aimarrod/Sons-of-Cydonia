@@ -20,19 +20,20 @@ public class CydoniaAI extends AI{
 	public int leftTile = 35;
 	public int rightTile = 65;
 	public int rightmostTile = 72;
-	public int topTile = 177;
+	public int topTile = 176;
 	public int bottomTile = 156;
 	public float timer;
 	public float x, y;
-	public boolean init, teleported, standard;
+	public boolean init, teleported, standard,waving;
 	public Random r;
 	
 	public CydoniaAI(){
-		standard = true;
+		standard = false;
 		init = false;
 		teleported = false;
-		timer=0f;
+		timer=5f;
 		r=new Random();
+		waving=true;
 	}
 	
 	
@@ -67,8 +68,9 @@ public class CydoniaAI extends AI{
 		int holeWave=0;
 		if(direction.x==0 && direction.y==-1){
 			holeWave=leftmostTile+r.nextInt(rightmostTile-leftmostTile)+1;
-			for(int i=this.leftmostTile;i<(rightmostTile-leftmostTile);i++){
-			fireStone = EntityFactory.createFireStone(i, topTile, p.z,direction,false);
+			for(int i=this.leftmostTile;i<rightmostTile;i=i+2){
+				System.out.println(i);
+			fireStone = EntityFactory.createFireStone(i*Constants.World.TILE_SIZE, topTile*Constants.World.TILE_SIZE, p.z,direction,true);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
@@ -76,8 +78,8 @@ public class CydoniaAI extends AI{
 		    fireStone.addToWorld();
 			}
 		}else if(direction.x==-1 && direction.y==0){
-			for(int i=this.bottomTile;i<(topTile-bottomTile);i++){
-			fireStone = EntityFactory.createFireStone(rightmostTile, i, p.z,direction,false);
+			for(int i=this.bottomTile;i<(topTile);i=i+2){
+			fireStone = EntityFactory.createFireStone(rightmostTile*Constants.World.TILE_SIZE, i*Constants.World.TILE_SIZE, p.z,direction,true);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
@@ -90,14 +92,17 @@ public class CydoniaAI extends AI{
 
 	@Override
 	public void process(Entity e) {
-		timer-=SoC.game.world.delta;
-		if(timer<=0){
-			wave(e,new Vector2(0,-1));
-			timer=20f;
-		}
 		if(!init){
 			init(e);
 			return;
+		}
+		timer-=SoC.game.world.delta;
+		if(waving){
+			if(timer<=0){
+				
+				wave(e,new Vector2(0,-1));
+				timer=5f;
+			}
 		}
 		if(standard){
 			standard(e);
