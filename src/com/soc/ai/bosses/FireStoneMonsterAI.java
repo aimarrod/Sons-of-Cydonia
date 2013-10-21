@@ -46,7 +46,7 @@ public class FireStoneMonsterAI extends AI {
 		float tileY=pPlayer.y*Constants.World.TILE_FACTOR;
 		if(tileY>200-117 && tileY<200-90 && timer<=0){
 			posYStone=(97+r.nextInt(13))*Constants.World.TILE_SIZE;
-			Entity fireStone = EntityFactory.createFireStone(pos.x, posYStone, pos.z, new Vector2(Math.signum(dstx),0));
+			Entity fireStone = EntityFactory.createFireStone(pos.x, posYStone, pos.z, new Vector2(Math.signum(dstx),0),false);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
@@ -58,7 +58,7 @@ public class FireStoneMonsterAI extends AI {
 		}
 		if(tileY>200-100 && tileY<200-74 && timer2<=0){
 			posYStone=(115+r.nextInt(12))*Constants.World.TILE_SIZE;
-			Entity fireStone = EntityFactory.createFireStone(pos.x, posYStone, pos.z, new Vector2(Math.signum(dstx),0));
+			Entity fireStone = EntityFactory.createFireStone(pos.x, posYStone, pos.z, new Vector2(Math.signum(dstx),0),false);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);

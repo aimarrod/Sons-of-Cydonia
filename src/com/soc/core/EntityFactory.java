@@ -1039,13 +1039,13 @@ public class EntityFactory {
 	   	return e;		
 	}
 	
-	public static Entity createFireStone(float x, float y, int z, Vector2 direction) {
+	public static Entity createFireStone(float x, float y, int z, Vector2 direction, boolean finalBoss) {
 		Entity e=SoC.game.world.createEntity();
 		e.addComponent( new Velocity(Constants.Spells.FIREBREATH_SPEED*direction.x, Constants.Spells.FIREBREATH_SPEED*direction.y, 0) );
 		e.addComponent( new Position(x, y, z, direction));
 		e.addComponent( new Bounds(84, 75) );
 		e.addComponent( new Flying() );
-	   	e.addComponent( new Attack(new FireStoneProcessor(), 0) );
+	   	e.addComponent( new Attack(new FireStoneProcessor(finalBoss), 0) );
 	   	
 	   	return e;		
 	}

@@ -1,14 +1,15 @@
 package com.soc.ai.bosses;
 
 import com.artemis.Entity;
+import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.AI;
 import com.soc.core.Constants;
-import com.soc.core.SoC;
+import com.soc.core.EntityFactory;
 import com.soc.core.Constants.World;
+import com.soc.core.SoC;
 import com.soc.game.components.Buff;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
-import com.soc.game.states.benefits.Inmune;
 import com.soc.game.states.benefits.Teleport;
 
 public class CydoniaAI extends AI{
@@ -54,7 +55,21 @@ public class CydoniaAI extends AI{
 			Buff.addbuff(SoC.game.player, new Teleport(50*World.TILE_SIZE, 165*World.TILE_SIZE, 0));
 		}
 	}
+	
+	public void wave(Vector2 direction){
+		Entity fireStone=null;
+		if(direction.x==0 && direction.y==-1){
+			fireStone = EntityFactory.createFireStone(1, 1, 1, new Vector2(Math.signum(1),0),false);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
+		    SoC.game.levelmanager.setLevel(fireStone, Constants.Groups.LEVEL+1);
+		    fireStone.addToWorld();
+		}else if(direction.x==-1 && direction.y==0){
+			
+		}
 
+	}
 
 	@Override
 	public void process(Entity e) {
