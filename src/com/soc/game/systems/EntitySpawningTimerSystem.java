@@ -98,6 +98,9 @@ public class EntitySpawningTimerSystem extends EntityProcessingSystem{
 				} else if(spawn.type.equals(Constants.Groups.RIGHT_MONSTER) && !SoC.game.progress.rightMonsterDefetead){
 					spawned=EntityFactory.createRightMonster(pos.x,pos.y,pos.z);
 					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
+				} else if(spawn.type.equals(Constants.Groups.CYDONIA)){
+					spawned=EntityFactory.createCydonia(pos.x,pos.y,pos.z);
+					SoC.game.groupmanager.add(spawned, Constants.Groups.CHARACTERS);
 				}
 				if(spawn.type.equals(Constants.Groups.ANTI_VENOM_FOUNTAIN)){
 					spawned=EntityFactory.createAntiVenomFountain(pos.x,pos.y,pos.z, new Vector2(0,0));

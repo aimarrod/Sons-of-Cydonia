@@ -37,19 +37,25 @@ public class CydoniaAI extends AI{
 	
 	
 	public void standard(Entity e){
+		timer -= SoC.game.world.delta;
 		if(!teleported){
-			x = AI.rng.nextInt(29) + rightTile;
+			x = AI.rng.nextInt(29) + leftTile;
 			y = AI.rng.nextInt(21) + bottomTile;
 			Buff.addbuff(e, new Teleport(x*World.TILE_SIZE, y*World.TILE_SIZE, 0));
 			timer = Constants.Buff.TELEPORT_CAST_TIME;
 			SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
 			SoC.game.statemapper.get(e).state = State.ATTACK;
+			teleported = true;
+		} else {
+			if(timer <= 0){
+				teleported = false;
+			}
 		}
 	}
 	
 	public void init(Entity e){
 		Position pos = SoC.game.positionmapper.get(SoC.game.player);
-		if(pos.x * World.TILE_FACTOR > 47 && pos.x * World.TILE_FACTOR < 52 && pos.y < 185){
+		if(pos.x * World.TILE_FACTOR > 47 && pos.x * World.TILE_FACTOR < 52 && pos.y *World.TILE_FACTOR > 185){
 			init = true;
 			Buff.addbuff(SoC.game.player, new Teleport(50*World.TILE_SIZE, 165*World.TILE_SIZE, 0));
 		}

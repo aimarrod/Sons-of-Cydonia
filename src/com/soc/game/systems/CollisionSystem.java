@@ -417,7 +417,7 @@ public class CollisionSystem extends VoidEntitySystem {
 					Bounds b=SoC.game.boundsmapper.get(e);
 					pos.x += pos.direction.x*(b.width);
 					pos.y += pos.direction.y*(b.height);
-					e.addComponent(new Expires(1));
+					e.addComponent(new Expires(0.5f));
 					e.changedInWorld();
 					v.vx=0;
 					v.vy=0;

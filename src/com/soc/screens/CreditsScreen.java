@@ -1,5 +1,7 @@
 package com.soc.screens;
 
+import javax.swing.GroupLayout.Alignment;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
@@ -51,10 +53,17 @@ public class CreditsScreen extends AbstractScreen{
 				+ "Gobusto";
 		this.specialThanks = "Special Thanks";
 		this.testers = "Testers";
-		this.testersBody = "";
+		this.testersBody = "Joseba Rojo @PitilinFutxinJo\n"
+				+ "Peio Iñurrigarro\n"
+				+ "Jesus Semsa @Alchemy_Meister\n"
+				+ "Iban Eguia @Razican\n"
+				+ "Aitor Brazaola @kronoshz\n"
+				+ "Ariane Lazaga @NancyCallahan88"
+				+ "Anaïs Galván @aanais"
+				+ "Jon Lorente @jonlorente";
 		this.cam = SoC.game.camera;
 		this.batch = super.getBatch();
-		this.font = new Skin(Gdx.files.internal("resources/skin2.json" )).getFont("gameFont");
+		this.font = new Skin(Gdx.files.internal("resources/skin2.json" )).getFont("buttonFont");
 		
 		cam.position.set(0,5000,0);
 	}
@@ -71,7 +80,7 @@ public class CreditsScreen extends AbstractScreen{
 	       Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
 	       Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	       
-	       cam.position.y -= 100*delta;
+	       cam.position.y -= 50*delta;
 	       cam.update();
 	       
 	       System.out.println(cam.position.y);
@@ -85,10 +94,14 @@ public class CreditsScreen extends AbstractScreen{
 	     //  float fontX = buttonX + buttonWidth/2 - font.getBounds(fontText).width/2;
 	      // float fontY = buttonY + buttonHeight/2 + font.getBounds(fontText).height/2;
 	       
-	       font.drawWrapped(batch, title, width/2-width/4, 4900, width/2);
-	       font.drawWrapped(batch, devs, width/2-width/4, 4700, width/2);
+	       font.setScale(1.5f);
+	       font.drawWrapped(batch, title, 100, 4900, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.setScale(1.2f);
+	       font.drawWrapped(batch, devs, 100, 4700, width - 100, BitmapFont.HAlignment.CENTER);
 	       font.setScale(0.8f);
-	       font.drawWrapped(batch, devsBody, width/2-width/4.5f, 4600, width/2);
+	       font.drawWrapped(batch, devsBody, 100, 4600, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.setScale(1.0f);
+	       font.drawWrapped(batch, graphics, 100, 4400, width - 100, BitmapFont.HAlignment.CENTER);
 	       batch.end();	       
 	       
 	       font.setScale(1);
