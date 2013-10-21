@@ -21,14 +21,16 @@ public class FireStoneProcessor implements AttackProcessor{
 	public Entity hit;
 	float timer;
 	float deathTimer;
+	boolean finalBoss;
 	
-	public FireStoneProcessor(){
+	public FireStoneProcessor(boolean finalBoss){
 		this.hit=null;
 		this.initial=GraphicsLoader.loadFireStoneInitial();
 		this.running = GraphicsLoader.loadFireStoneRunning();
 		this.death=GraphicsLoader.loadFireStoneDeath();
 		timer=0;
 		deathTimer=0;
+		this.finalBoss=finalBoss;
 	}
 	@Override
 	public void process(Entity attack) {
@@ -69,15 +71,14 @@ if(hit != null) return false;
 	@Override
 	public void handle(Entity attack, Entity enemy) {
 		hit=enemy;
-		Debuff.addDebuff(hit, new Push(SoC.game.positionmapper.get(attack).direction,100,100));
-		
-	}
-
-	@Override
-	public void delete() {
+		Debuff.addDebuff(hit, new Push(SoC.game.positionmapper.get(attack).direction,100,500));
 		if(hit != null){
 			SoC.game.statemapper.get(hit).state = State.IDLE;
-			int damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.1);
+			int damage=0;
+			if(finalBoss)
+				damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.4);
+			else
+				damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.1);
 			if(SoC.game.damagemapper.has(hit)){
 				SoC.game.damagemapper.get(hit).pureDamage+=damage;
 			}else{
@@ -85,6 +86,11 @@ if(hit != null) return false;
 				hit.changedInWorld();
 			}
 		}
+	}
+
+	@Override
+	public void delete() {
+
 		
 	}
 
