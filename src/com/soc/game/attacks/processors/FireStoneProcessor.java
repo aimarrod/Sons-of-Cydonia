@@ -73,7 +73,6 @@ if(hit != null) return false;
 		hit=enemy;
 		Debuff.addDebuff(hit, new Push(SoC.game.positionmapper.get(attack).direction,100,500));
 		if(hit != null){
-			SoC.game.statemapper.get(hit).state = State.IDLE;
 			int damage=0;
 			if(finalBoss)
 				damage = (int) (SoC.game.statsmapper.get(hit).maxHealth*0.4);
