@@ -23,12 +23,13 @@ public class CydoniaAI extends AI{
 	public int leftTile = 35;
 	public int rightTile = 65;
 	public int rightmostTile = 72;
-	public int topTile = 176;
+	public int topTile = 179;
 	public int bottomTile = 156;
-	public int attackCounter = 0;
+	public int counter = 0;
 	public float timer;
 	public float x, y;
-	public boolean init, teleported, standard, waving, horizontal;
+	public boolean init, teleported, standard, waving, horizontal, horizontalWave;
+
 	public int state;
 	
 	public static final int STANDARD = 0;
@@ -36,6 +37,7 @@ public class CydoniaAI extends AI{
 	public static final int WAVING = 2;
 	
 	public Vector2[] windblades;
+	public int waveCounter;
 	
 	public CydoniaAI(){
 		standard = true;
@@ -49,6 +51,7 @@ public class CydoniaAI extends AI{
 				new Vector2(rightTile+7, topTile+12),
 				new Vector2(rightTile+7, bottomTile-12),
 		};
+
 	}
 
 
@@ -69,24 +72,32 @@ public class CydoniaAI extends AI{
 		if(direction.x==0 && direction.y==-1){
 			holeWave=leftmostTile+AI.rng.nextInt(rightmostTile-leftmostTile)+1;
 			for(int i=this.leftmostTile;i<rightmostTile;i=i+2){
-				fireStone = EntityFactory.createFireStone(i*Constants.World.TILE_SIZE, topTile*Constants.World.TILE_SIZE, p.z,direction,true);
-		    	SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
-		    	SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
-		    	SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
-		    	SoC.game.levelmanager.setLevel(fireStone, Constants.Groups.LEVEL+p.z);
-		    	fireStone.addToWorld();
+				if(i==holeWave || holeWave-1==i  ||holeWave+1==i) {
+					i+=4;
+					continue;
+				}
+			fireStone = EntityFactory.createFireStone(i*Constants.World.TILE_SIZE, (topTile-3)*Constants.World.TILE_SIZE, p.z,direction,true);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
+		    SoC.game.levelmanager.setLevel(fireStone, Constants.Groups.LEVEL+p.z);
+		    fireStone.addToWorld();
 			}
 		}else if(direction.x==-1 && direction.y==0){
-			for(int i=this.bottomTile;i<(topTile);i=i+2){
-				fireStone = EntityFactory.createFireStone(rightmostTile*Constants.World.TILE_SIZE, i*Constants.World.TILE_SIZE, p.z,direction,true);
-				SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
-				SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
-				SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
-				SoC.game.levelmanager.setLevel(fireStone, Constants.Groups.LEVEL+p.z);
-				fireStone.addToWorld();
+			holeWave=bottomTile+AI.rng.nextInt(topTile-bottomTile)+1;
+			for(int i=this.bottomTile;i<=(topTile);i=i+2){
+				if(i==holeWave || holeWave-1==i  ||holeWave+1==i) {
+					i+=4;
+					continue;
+				}
+			fireStone = EntityFactory.createFireStone(rightmostTile*Constants.World.TILE_SIZE, i*Constants.World.TILE_SIZE, p.z,direction,true);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
+		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
+		    SoC.game.levelmanager.setLevel(fireStone, Constants.Groups.LEVEL+p.z);
+		    fireStone.addToWorld();
 			}
 		}
-
 	}
 
 	@Override
@@ -105,10 +116,7 @@ public class CydoniaAI extends AI{
 			return;
 		}
 		if(state == WAVING){
-			if(timer<=0){
-				wave(e,new Vector2(0,-1));
-				timer=0f;
-			}
+			waving(e);
 			return;
 		}
 
@@ -208,7 +216,7 @@ public class CydoniaAI extends AI{
 				SoC.game.statemapper.get(e).state = State.ATTACK;
 			} else {
 				teleported = false;
-				if(attackCounter > 1){
+				if(counter > 1){
 					Position pos = SoC.game.positionmapper.get(e);
 
 					pos.direction.x = 0;
@@ -222,7 +230,7 @@ public class CydoniaAI extends AI{
 					SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
 					SoC.game.statemapper.get(e).state = State.ATTACK;
 					
-					attackCounter = 0;
+					counter = 0;
 				} else {
 					int attack = AI.rng.nextInt(10);
 					if(attack <= 2){
@@ -232,7 +240,7 @@ public class CydoniaAI extends AI{
 					} else {
 						sendPoisonCloud(e);
 					}
-					attackCounter++;
+					counter++;
 				}
 			}
 		}
@@ -243,6 +251,7 @@ public class CydoniaAI extends AI{
 			Stats stats = SoC.game.statsmapper.get(e);
 			if((stats.maxHealth/stats.health - (SoC.game.damagemapper.get(e).damage - stats.armor)) <= 0.5){
 				state = WAVING;
+				counter = 10;
 			} else {
 				state = STANDARD;
 			}
@@ -259,6 +268,23 @@ public class CydoniaAI extends AI{
 				}
 				timer = 20f;
 			}
+		}
+	}
+	
+	public void waving(Entity e){
+		if(counter>0){
+			if(timer<=0){
+				if(horizontalWave)
+					wave(e,new Vector2(0,-1));
+				else
+					wave(e,new Vector2(-1,0));
+				horizontalWave=!horizontalWave;
+				counter--;
+				timer=3.5f;
+			}
+		}else{
+			state = STANDARD;
+			counter=0;
 		}
 	}
 }
