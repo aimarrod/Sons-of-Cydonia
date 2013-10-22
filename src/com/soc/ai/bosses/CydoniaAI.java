@@ -363,10 +363,6 @@ public class CydoniaAI extends AI{
 	}
 	
 	public void casting(Entity e){
-		Buff b = SoC.game.buffmapper.get(e);
-		if(!b.buffClasses.contains(Inmune.class)){
-			Buff.addbuff(e, new Inmune());
-		}
 		if(SoC.game.damagemapper.has(e)){
 			Stats stats = SoC.game.statsmapper.get(e);
 			System.out.println("Que pone: "+stats.health+" "+stats.maxHealth+""+((stats.health - (SoC.game.damagemapper.get(e).damage - stats.armor))/stats.maxHealth) );
@@ -397,6 +393,10 @@ public class CydoniaAI extends AI{
 	}
 	
 	public void waving(Entity e){
+		Buff b = SoC.game.buffmapper.get(e);
+		if(!b.buffClasses.contains(Inmune.class)){
+			Buff.addbuff(e, new Inmune());
+		}
 		if(counter>0){
 			if(timer<=0){
 				if(horizontalWave)

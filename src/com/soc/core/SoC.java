@@ -268,8 +268,8 @@ public class SoC extends Game {
 		processors = new Stack<InputProcessor>();
 			
 		//Save, New, Load game handler.
-		//setScreen(new MenuScreen(this));
-		setScreen(new CreditsScreen(this));
+		setScreen(new MenuScreen(this));
+		//setScreen(new CreditsScreen(this));
 
 	}
 	
