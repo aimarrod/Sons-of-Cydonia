@@ -678,6 +678,7 @@ public class EntityFactory {
 				Constants.Groups.CYDONIA));
 	    e.addComponent(new Enemy(0, new CydoniaAI()));
 	    Buff.addbuff(e, new Inmune());
+	    Buff.addbuff(e, new Unmovable());
 	    Character animations = new Character();
 	    animations.damageSound = "female-damage.ogg";
 	    animations.deathSound = "female-death.ogg";

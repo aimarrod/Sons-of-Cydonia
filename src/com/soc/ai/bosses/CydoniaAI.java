@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import com.artemis.Entity;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.soc.ai.AI;
 import com.soc.core.Constants;
@@ -14,6 +15,7 @@ import com.soc.game.components.Buff;
 import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.components.Stats;
+import com.soc.game.states.benefits.Casting;
 import com.soc.game.states.benefits.Inmune;
 import com.soc.game.states.benefits.Teleport;
 
@@ -198,25 +200,12 @@ public class CydoniaAI extends AI{
 	
 	
 	public void standard(Entity e){
+		Buff b = SoC.game.buffmapper.get(e);
+		if(!b.buffClasses.contains(Inmune.class)){
+			Buff.addbuff(e, new Inmune());
+		}
 		if(timer <= 0){
 			if(!teleported){
-				teleported = true;
-
-				Position pos = SoC.game.positionmapper.get(e);
-
-				pos.direction.x = 0;
-				pos.direction.y = -1;
-			
-				x = AI.rng.nextInt(29) + leftTile;
-				y = AI.rng.nextInt(21) + bottomTile;
-			
-				Buff.addbuff(e, new Teleport(x*World.TILE_SIZE, y*World.TILE_SIZE, 0));
-			
-				timer = Constants.Buff.TELEPORT_CAST_TIME;
-				SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
-				SoC.game.statemapper.get(e).state = State.ATTACK;
-			} else {
-				teleported = false;
 				if(counter > 5){
 					Position pos = SoC.game.positionmapper.get(e);
 
@@ -224,15 +213,34 @@ public class CydoniaAI extends AI{
 					pos.direction.y = -1;
 					
 					Buff.addbuff(e, new Teleport((leftTile+(rightTile-leftTile)*0.5f)*World.TILE_SIZE, (bottomTile+(topTile-bottomTile)*0.5f)*World.TILE_SIZE, 0));
-					SoC.game.buffmapper.get(e).removebuff(Inmune.class, e);
 					
 					timer = 5f;
 					state = CASTING;
+					Buff.addbuff(e, new Casting(5f, Constants.BuffColors.RED));
+					SoC.game.buffmapper.get(e).removebuff(Inmune.class, e);
 					SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
 					SoC.game.statemapper.get(e).state = State.ATTACK;
 					
 					counter = 0;
 				} else {
+					teleported = true;
+
+					Position pos = SoC.game.positionmapper.get(e);
+
+					pos.direction.x = 0;
+					pos.direction.y = -1;
+			
+					x = AI.rng.nextInt(29) + leftTile;
+					y = AI.rng.nextInt(21) + bottomTile;
+			
+					Buff.addbuff(e, new Teleport(x*World.TILE_SIZE, y*World.TILE_SIZE, 0));
+			
+					timer = Constants.Buff.TELEPORT_CAST_TIME;
+					SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
+					SoC.game.statemapper.get(e).state = State.ATTACK;
+				}
+			} else {
+				teleported = false;
 					int attack = AI.rng.nextInt(10);
 					if(attack <= 2){
 						callFireRain(horizontal);
@@ -243,7 +251,7 @@ public class CydoniaAI extends AI{
 						sendPoisonCloud(e);
 					}
 					counter++;
-				}
+				
 			}
 		}
 	}
@@ -260,7 +268,7 @@ public class CydoniaAI extends AI{
 			} else {
 				state = STANDARD;
 			}
-			Buff.addbuff(e, new Inmune());
+			SoC.game.buffmapper.get(e).removebuff(Casting.class, e);
 		} else {
 			if(timer <= 0){
 				for(int i=this.leftmostTile;i < rightmostTile;i++){
