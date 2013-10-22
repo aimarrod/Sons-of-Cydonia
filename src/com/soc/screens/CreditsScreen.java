@@ -58,9 +58,9 @@ public class CreditsScreen extends AbstractScreen{
 				+ "Peio Iñurrigarro\n"
 				+ "Jesus Semsa @Alchemy_Meister\n"
 				+ "Iban Eguia @Razican\n"
+				+ "Anaïs Galván @aanais\n"
 				+ "Aitor Brazaola @kronoshz\n"
 				+ "Ariane Lazaga @NancyCallahan88\n"
-				+ "Anaïs Galván @aanais\n"
 				+ "Jon Lorente @jonlorente";
 		this.cam = SoC.game.camera;
 		this.batch = super.getBatch();
