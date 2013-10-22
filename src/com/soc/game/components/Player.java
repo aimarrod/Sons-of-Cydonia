@@ -43,7 +43,7 @@ public class Player extends Component {
 		spellkeys = new int[]{Input.Keys.NUM_1, Input.Keys.NUM_2, Input.Keys.NUM_3, Input.Keys.NUM_4};
 		inventary=new Item[Constants.Items.INVENTORY_SIZE];
 		inventary[0] = SoC.game.items[Constants.Items.HEALTH_POTION];
-		inventary[1] = SoC.game.items[Constants.Items.BRONZE_SWORD];
+		inventary[1] = SoC.game.items[Constants.Items.MANA_POTION];
 		weapon=null;
 		armor=null;
 		blocking = false;

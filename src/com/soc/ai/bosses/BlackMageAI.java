@@ -51,7 +51,7 @@ public class BlackMageAI extends AI{
 				if(timer <= 0){
 					state.state = State.ATTACK;
 					Buff.addbuff(e, new Casting(2f, Constants.BuffColors.DARK));
-					castTimer = 2f;
+					castTimer = 1.75f;
 					timer = 0.5f;
 				}
 			}
@@ -81,6 +81,7 @@ public class BlackMageAI extends AI{
 		SoC.game.progress.blackMageDefeated = true;
 		
 		Position pos = SoC.game.positionmapper.get(e);
+		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
 		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
 		EntityFactory.createItem(Constants.Items.ANTIBURN, pos.x, pos.y, pos.z).addToWorld();
 		EntityFactory.createItem(Constants.Items.GOLD_HELM, pos.x, pos.y, pos.z).addToWorld();		

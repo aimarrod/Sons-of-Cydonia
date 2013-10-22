@@ -63,6 +63,7 @@ import com.soc.game.objects.Potion;
 import com.soc.game.objects.Weapon;
 import com.soc.game.states.alterations.Burn;
 import com.soc.game.states.alterations.Poison;
+import com.soc.game.states.alterations.Venom;
 import com.soc.game.systems.AttackDelaySystem;
 import com.soc.game.systems.AttackProcessingSystem;
 import com.soc.game.systems.BuffProcessingSystem;
@@ -189,7 +190,7 @@ public class SoC extends Game {
 		items[Constants.Items.MANA_ULTRAPOTION] = new Potion(Constants.Items.MANA_ULTRAPOTION,"Mana ultrapotion","potion-mana-big.png","\nMANA ULTRAPOTION\n\nRecovers 300 mana.",0,300);
 		items[Constants.Items.MIX_POTION] = new Potion(Constants.Items.MIX_POTION,"Mix potion","potion-mix.png","\nREMEDY\n\nRecovers 150 health and mana.",150,150);
 		items[Constants.Items.MIX_ULTRAPOTION] = new Potion(Constants.Items.MIX_ULTRAPOTION,"Mix Ultrapotion","potion-mix-big.png","\nELIXIR\n\nRecovers 300 health and mana.",300,300);
-		items[Constants.Items.ANTIDOTE] = new Antidote(Constants.Items.ANTIDOTE,"Antidote","antidote.png","\nANTIDOTE\n\nCures poison.", Poison.class);
+		items[Constants.Items.ANTIDOTE] = new Antidote(Constants.Items.ANTIDOTE,"Antidote","antidote.png","\nANTIDOTE\n\nCures poison.", Poison.class, Venom.class);
 		items[Constants.Items.ANTIBURN] = new Antidote(Constants.Items.ANTIBURN,"Antiburn","antiburn.png","\nANTIBURN\n\nRemoves burn.", Burn.class);	
 		items[Constants.Items.STONE_AXE] = new Weapon(Constants.Items.STONE_AXE, "Stone axe", "stone-axe.png", "\nSTONE AXE:\n\n+10 strength", 10, 0, 0);
 		items[Constants.Items.IRON_AXE] = new Weapon(Constants.Items.IRON_AXE, "Iron axe", "iron-axe.png", "\nIRON AXE:\n\n+25 strength", 25, 0, 0);

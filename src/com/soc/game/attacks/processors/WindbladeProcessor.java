@@ -12,10 +12,11 @@ import com.soc.game.components.Position;
 import com.soc.game.components.State;
 import com.soc.game.graphics.AnimatedRenderer;
 import com.soc.game.graphics.DirectionalStaticRenderer;
+import com.soc.utils.EffectsPlayer;
 import com.soc.utils.GraphicsLoader;
 
 public class WindbladeProcessor implements AttackProcessor {
-	public boolean hit;
+	public boolean hit, sounded;
 	public AnimatedRenderer renderer;
 	
 	public WindbladeProcessor() {
@@ -27,7 +28,10 @@ public class WindbladeProcessor implements AttackProcessor {
 
 	@Override
 	public void process(Entity attack) {
-		
+		if(!sounded){
+			EffectsPlayer.play("throw.ogg");
+			sounded = true;
+		}
 	}
 
 	@Override

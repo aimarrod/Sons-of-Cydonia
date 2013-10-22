@@ -57,6 +57,7 @@ public class KnightCaptainAI extends AI{
 		SoC.game.progress.knightCaptainDefeated = true;
 		Position pos = SoC.game.positionmapper.get(e);
 			EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
+			EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z).addToWorld();
 			Stats stat = SoC.game.statsmapper.get(SoC.game.player);
 			
 			if(stat.clazz.equals(Constants.Characters.WARRIOR)){

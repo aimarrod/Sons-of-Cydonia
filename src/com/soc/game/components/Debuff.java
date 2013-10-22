@@ -52,6 +52,7 @@ public class Debuff extends Component{
 	}
 	
 	public void removeDebuff(Class<? extends Alteration> clazz, Entity e){
+		System.out.println(clazz);
 		for(int i = 0; i < debuffs.size(); i++){
 			if(debuffs.get(i).getClass().equals(clazz)){
 				debuffs.get(i).delete(e);

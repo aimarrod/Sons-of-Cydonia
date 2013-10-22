@@ -342,8 +342,8 @@ public class EntityFactory {
 				null,
 				Constants.Groups.GREEN_KNIGHTS));
 		Character animations = new Character();
-		animations.damageSound = "male-damage.ogg";
-		animations.deathSound = "male-death.ogg";
+		animations.damageSound = "female-damage.ogg";
+		animations.deathSound = "female-death.ogg";
 		GraphicsLoader.loadGoldBowKnight(animations);
 		e.addComponent(animations);
 		
@@ -375,8 +375,8 @@ public class EntityFactory {
 				null,
 				Constants.Groups.GOLD_KNIGHTS));
 		Character animations = new Character();
-		animations.damageSound = "male-damage.ogg";
-		animations.deathSound = "male-death.ogg";
+		animations.damageSound = "female-damage.ogg";
+		animations.deathSound = "female-death.ogg";
 		GraphicsLoader.loadGoldKnight(animations);
 		e.addComponent(animations);
 		
@@ -387,12 +387,12 @@ public class EntityFactory {
 		Entity e = SoC.game.world.createEntity();
 		
 		e.addComponent(new Position(px, py, pz));
-		e.addComponent(new Velocity(0,0,150));
+		e.addComponent(new Velocity(0,0,175));
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 	    e.addComponent(new Feet(32, 10));
 	    e.addComponent(new State(0));
 	    e.addComponent(new Flying());
-		e.addComponent(new Enemy(1500, new KnightCaptainAI()));
+		e.addComponent(new Enemy(2000, new KnightCaptainAI()));
 		e.addComponent(new Stats(
 				700, 
 				0, 
@@ -402,8 +402,8 @@ public class EntityFactory {
 				0, 
 				10, 
 				20, 
-				35, 
-				30, 
+				28, 
+				45, 
 				25, 
 				Constants.Spells.SLASH, 
 				null,
@@ -762,13 +762,13 @@ public class EntityFactory {
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 		e.addComponent(new Feet(32, 10));
 		e.addComponent(new State(0));
-		e.addComponent(new Enemy(1500, new BlackMageAI()));
+		e.addComponent(new Enemy(2000, new BlackMageAI()));
 		e.addComponent(new Flying());
 		e.addComponent(new Stats(
-				400, 
+				500, 
 				0, 
 				0, 
-				400, 
+				500, 
 				0, 
 				0, 
 				10, 

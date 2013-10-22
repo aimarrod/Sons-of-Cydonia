@@ -35,8 +35,8 @@ public class Antidote extends Item {
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		@SuppressWarnings("unchecked")
-		Antidote clone=new Antidote(this.num,this.name,this.iconPath,this.tooltip,Burn.class);
-		this.debuffs=clone.debuffs;
+		Antidote clone=new Antidote(this.num,this.name,this.iconPath,this.tooltip);
+		clone.debuffs=this.debuffs;
 		return clone;
 	}
 }

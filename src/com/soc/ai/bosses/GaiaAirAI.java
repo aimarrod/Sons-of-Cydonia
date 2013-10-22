@@ -30,7 +30,12 @@ public class GaiaAirAI extends AI{
 		if(init){
 		timer -= SoC.game.world.delta;
 		if(timer > 0) return;
+		
+		Position player = SoC.game.positionmapper.get(SoC.game.player);
 		Position pos = SoC.game.positionmapper.get(e);
+		
+		if(player.y >= pos.y - 70) return;
+
 		Bounds bon = SoC.game.boundsmapper.get(e);
 		float posx;
 		float posy;

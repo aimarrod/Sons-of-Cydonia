@@ -31,9 +31,9 @@ public class GaiaAI extends AI{
 	public GaiaAI(){
 		timer = 0;
 		r = new Random();
-		topTile = 38;
+		topTile = 41;
 		bottomTile = 14;
-		leftTile = 114;
+		leftTile = 113;
 		rigthTile = 114+78;
 		horizontal = true;
 		tornadoSpeed = 0.8f;
@@ -140,7 +140,7 @@ public class GaiaAI extends AI{
 				
 				SoC.game.hudSystem.tooltip.pop("You hear an echo:\n I see you have defeated my aspects, warrior. Very well, now prove your worth to me.", 0f, 8f);
 
-				Entity gaia = EntityFactory.createGaiaAvatar(158*World.TILE_SIZE, 40*World.TILE_SIZE, 0);
+				Entity gaia = EntityFactory.createGaiaAvatar(158*World.TILE_SIZE, 30*World.TILE_SIZE, 0);
 				SoC.game.groupmanager.add(gaia, Constants.Groups.MAP_BOUND);
 				SoC.game.levelmanager.setLevel(gaia, Constants.Groups.LEVEL +0);
 				SoC.game.groupmanager.add(gaia, Constants.Groups.ENEMIES);

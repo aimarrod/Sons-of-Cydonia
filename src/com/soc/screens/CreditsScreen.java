@@ -116,12 +116,8 @@ public class CreditsScreen extends AbstractScreen{
 	       Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
 	       Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	       
-	       if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-	    	   game.setScreen(new MenuScreen(game));
-	       }
-	       
 	       if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-		       timer += delta*5;
+		       timer += delta*10;
 	       } else {
 	    	   timer += delta;
 	       }

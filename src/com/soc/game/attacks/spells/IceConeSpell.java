@@ -13,7 +13,7 @@ import com.soc.utils.GraphicsLoader;
 public class IceConeSpell extends Spell {
 	public IceConeSpell(){
 		this.icon = GraphicsLoader.load("ice-cone-icon.png");
-		this.tooltip = "Ice Cone\n35 mana\nThrow icicles in a cone in front of you, dealing normal damage with each of them";
+		this.tooltip = "Ice Cone\n35 mana\nThrow icicles in a cone in front of you, dealing few damage with each of them";
 		this.cast = 0.3f;
 		this.blocking = 0.4f;
 		this.state = State.ATTACK;
@@ -27,7 +27,7 @@ public class IceConeSpell extends Spell {
 			Vector2 dir = pos.direction.cpy();
 			dir.y = -0.3f;
 			while(dir.y < 0.3f){
-				Entity e = EntityFactory.createIcicle(pos, (int) (stats.intelligence), dir);
+				Entity e = EntityFactory.createIcicle(pos, (int) (stats.intelligence*0.25f), dir);
 			    SoC.game.groupmanager.add(e, group);
 			    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 			    SoC.game.groupmanager.add(e, Constants.Groups.PROJECTILES);
@@ -39,7 +39,7 @@ public class IceConeSpell extends Spell {
 			Vector2 dir = pos.direction.cpy();
 			dir.x = -0.3f;
 			while(dir.x < 0.3f){
-				Entity e = EntityFactory.createIcicle(pos, (int) (stats.intelligence), dir);
+				Entity e = EntityFactory.createIcicle(pos, (int) (stats.intelligence*0.25f), dir);
 			    SoC.game.groupmanager.add(e, group);
 			    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 			    SoC.game.groupmanager.add(e, Constants.Groups.PROJECTILES);
