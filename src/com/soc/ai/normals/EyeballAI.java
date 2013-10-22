@@ -6,6 +6,10 @@ import com.soc.ai.modules.AIModule;
 import com.soc.ai.modules.BasicAttack;
 import com.soc.ai.modules.BasicFollowing;
 import com.soc.ai.modules.BasicVision;
+import com.soc.core.Constants;
+import com.soc.core.EntityFactory;
+import com.soc.core.SoC;
+import com.soc.game.components.Position;
 
 public class EyeballAI extends AI{
 	public EyeballAI(){
@@ -21,8 +25,10 @@ public class EyeballAI extends AI{
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
-		
+		Position pos = SoC.game.positionmapper.get(e);
+		if(AI.rng.nextFloat() < 0.15f){
+			EntityFactory.createItem(Constants.Items.MIX_POTION, pos.x, pos.y, pos.z).addToWorld();
+		}		
 	}
 
 }

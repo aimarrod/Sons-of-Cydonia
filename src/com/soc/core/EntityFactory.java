@@ -394,16 +394,16 @@ public class EntityFactory {
 	    e.addComponent(new Flying());
 		e.addComponent(new Enemy(1500, new KnightCaptainAI()));
 		e.addComponent(new Stats(
-				600, 
+				700, 
 				0, 
 				0, 
-				500, 
+				700, 
 				0, 
 				0, 
 				10, 
 				20, 
-				25, 
-				25, 
+				35, 
+				30, 
 				25, 
 				Constants.Spells.SLASH, 
 				null,
@@ -660,6 +660,7 @@ public class EntityFactory {
 		e.addComponent(new Bounds(Constants.Characters.WIDTH, Constants.Characters.HEIGHT));
 		e.addComponent(new Feet(Constants.Characters.WIDTH, 10));
 		e.addComponent(new State(0));
+		e.addComponent(new Flying());
 		e.addComponent(new Stats(
 				1000, 
 				0, 

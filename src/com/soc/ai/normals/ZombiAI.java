@@ -48,7 +48,7 @@ public class ZombiAI extends AI{
 		if(AI.rng.nextFloat() < 0.1f){
 			EntityFactory.createItem(Constants.Items.ANTIDOTE, pos.x, pos.y, pos.z).addToWorld();
 		}
-		if(AI.rng.nextFloat() < 0.1f){
+		if(AI.rng.nextFloat() < 0.15f){
 			EntityFactory.createItem(Constants.Items.MIX_POTION, pos.x, pos.y, pos.z).addToWorld();
 		}
 	}

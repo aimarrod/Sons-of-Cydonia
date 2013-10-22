@@ -71,7 +71,7 @@ public class GaiaAvatarAI extends AI{
 
 		
 		int attack = r.nextInt(105);
-		if(attack <= 90){
+		if(attack <= 100){
 			x = playerPos.x - pos.x;
 			y = playerPos.y - pos.y;
 			
@@ -86,23 +86,12 @@ public class GaiaAvatarAI extends AI{
 			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS, s.cast, s.blocking, Constants.Spells.WINDBLADE));
 			SoC.game.statemapper.get(e).state = s.state;
 			e.changedInWorld();
-		} else if(attack <= 98){
+		} else {
 			Spell s = SoC.game.spells[Constants.Spells.TENTACLES];
 			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS, s.cast, s.blocking, Constants.Spells.TENTACLES));
 			SoC.game.statemapper.get(e).state = s.state;
 			e.changedInWorld();
-		} else{
-			x = r.nextInt(78) + 114;
-			y = r.nextInt(25) + 14;
-			Buff.addbuff(e, new Teleport(x*World.TILE_SIZE, y*World.TILE_SIZE, 0));
-			Buff.addbuff(e, new Inmune());
-			timer = Constants.Buff.TELEPORT_CAST_TIME;
-			SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
-			SoC.game.statemapper.get(e).state = State.ATTACK;
-			teleport = true;
 		}
-
-		
 	}
 
 	@Override
