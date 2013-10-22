@@ -661,10 +661,10 @@ public class EntityFactory {
 		e.addComponent(new Feet(Constants.Characters.WIDTH, 10));
 		e.addComponent(new State(0));
 		e.addComponent(new Stats(
-				2500, 
+				1000, 
 				0, 
 				0, 
-				2500, 
+				1000, 
 				0, 
 				0, 
 				1, 

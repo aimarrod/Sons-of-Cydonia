@@ -29,7 +29,7 @@ public class CydoniaAI extends AI{
 	public float timer;
 	public float x, y;
 	public boolean init, teleported, standard, waving, horizontal, horizontalWave;
-
+	public float phasesLife;
 	public int state;
 	
 	public static final int STANDARD = 0;
@@ -51,6 +51,7 @@ public class CydoniaAI extends AI{
 				new Vector2(rightTile+7, topTile+12),
 				new Vector2(rightTile+7, bottomTile-12),
 		};
+		phasesLife=0.75f;
 
 	}
 
@@ -70,7 +71,7 @@ public class CydoniaAI extends AI{
 		Entity fireStone=null;
 		int holeWave=0;
 		if(direction.x==0 && direction.y==-1){
-			holeWave=leftmostTile+AI.rng.nextInt(rightmostTile-leftmostTile)+1;
+			holeWave=leftmostTile+6+AI.rng.nextInt((rightmostTile-leftmostTile)-12)+1;
 			for(int i=this.leftmostTile;i<rightmostTile;i=i+2){
 				if(i==holeWave || holeWave-1==i  ||holeWave+1==i) {
 					i+=4;
@@ -84,7 +85,7 @@ public class CydoniaAI extends AI{
 		    fireStone.addToWorld();
 			}
 		}else if(direction.x==-1 && direction.y==0){
-			holeWave=bottomTile+AI.rng.nextInt(topTile-bottomTile)+1;
+			holeWave=bottomTile+6+AI.rng.nextInt(topTile-bottomTile-12)+1;
 			for(int i=this.bottomTile;i<=(topTile);i=i+2){
 				if(i==holeWave || holeWave-1==i  ||holeWave+1==i) {
 					i+=4;
@@ -216,7 +217,7 @@ public class CydoniaAI extends AI{
 				SoC.game.statemapper.get(e).state = State.ATTACK;
 			} else {
 				teleported = false;
-				if(counter > 1){
+				if(counter > 5){
 					Position pos = SoC.game.positionmapper.get(e);
 
 					pos.direction.x = 0;
@@ -235,6 +236,7 @@ public class CydoniaAI extends AI{
 					int attack = AI.rng.nextInt(10);
 					if(attack <= 2){
 						callFireRain(horizontal);
+						horizontal=!horizontal;
 					} else if(attack <= 7){
 						sendWindBlades();
 					} else {
@@ -249,7 +251,9 @@ public class CydoniaAI extends AI{
 	public void casting(Entity e){
 		if(SoC.game.damagemapper.has(e)){
 			Stats stats = SoC.game.statsmapper.get(e);
-			if((stats.maxHealth/stats.health - (SoC.game.damagemapper.get(e).damage - stats.armor)) <= 0.5){
+			System.out.println("Que pone: "+stats.health+" "+stats.maxHealth+""+((stats.health - (SoC.game.damagemapper.get(e).damage - stats.armor))/stats.maxHealth) );
+			if(((float)(stats.health - (SoC.game.damagemapper.get(e).damage - stats.armor))/(float)stats.maxHealth) <= phasesLife){
+				phasesLife-=0.25;
 				state = WAVING;
 				counter = 10;
 				Buff.addbuff(e, new Teleport(50*World.TILE_SIZE, 187*World.TILE_SIZE, 0));
