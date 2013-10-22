@@ -3,7 +3,7 @@
  <properties>
   <property name="ambiance" value="dark-ambiance.ogg"/>
   <property name="layers" value="1"/>
-  <property name="music" value="dark-descent.ogg"/>
+  <property name="music" value="dark-descent.ogg,steeps-of-destiny.ogg"/>
  </properties>
  <tileset firstgid="1" name="base_out_atlas" tilewidth="32" tileheight="32">
   <image source="tiles/base_out_atlas.png" width="1024" height="1024"/>

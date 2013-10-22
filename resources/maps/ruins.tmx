@@ -874,7 +874,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200" visible="0">
+ <objectgroup name="level0-spawners" width="200" height="200">
   <object x="256" y="320" width="64" height="64">
    <properties>
     <property name="interval" value="0"/>
@@ -1217,16 +1217,25 @@
     <property name="type" value="eyeball"/>
    </properties>
   </object>
-  <object x="5184" y="416" width="32" height="32">
+  <object x="5024" y="448" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>
     <property name="max" value="1"/>
     <property name="range" value="2000"/>
     <property name="respawn" value="false"/>
-    <property name="type" value="bow-knight"/>
+    <property name="type" value="bow knight"/>
    </properties>
   </object>
-  <object x="5184" y="1216" width="32" height="32">
+  <object x="5024" y="1184" width="32" height="32">
+   <properties>
+    <property name="interval" value="0"/>
+    <property name="max" value="1"/>
+    <property name="range" value="2000"/>
+    <property name="respawn" value="false"/>
+    <property name="type" value="bow knight"/>
+   </properties>
+  </object>
+  <object x="5408" y="928" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>
     <property name="max" value="1"/>
@@ -1241,16 +1250,7 @@
     <property name="max" value="1"/>
     <property name="range" value="2000"/>
     <property name="respawn" value="false"/>
-    <property name="type" value="bow-knight"/>
-   </properties>
-  </object>
-  <object x="5408" y="928" width="32" height="32">
-   <properties>
-    <property name="interval" value="0"/>
-    <property name="max" value="1"/>
-    <property name="range" value="2000"/>
-    <property name="respawn" value="false"/>
-    <property name="type" value="gold-knight"/>
+    <property name="type" value="gold knight"/>
    </properties>
   </object>
   <object x="5408" y="704" width="32" height="32">
@@ -1259,7 +1259,7 @@
     <property name="max" value="1"/>
     <property name="range" value="2000"/>
     <property name="respawn" value="false"/>
-    <property name="type" value="bow-knight"/>
+    <property name="type" value="gold knight"/>
    </properties>
   </object>
   <object x="960" y="5952" width="32" height="32">
@@ -1290,7 +1290,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level1-spawners" width="200" height="200" visible="0">
+ <objectgroup name="level1-spawners" width="200" height="200">
   <object x="2688" y="5664" width="32" height="32">
    <properties>
     <property name="interval" value="60"/>
@@ -1409,7 +1409,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level2-spawners" width="200" height="200" visible="0">
+ <objectgroup name="level2-spawners" width="200" height="200">
   <object x="4416" y="2176" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>

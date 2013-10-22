@@ -164,7 +164,7 @@ public class CydoniaAI extends AI{
 			EntityFactory.createWall(e, 58, bottomTile-15, 0).addToWorld();
 			EntityFactory.createWall(e, 58, bottomTile-16, 0).addToWorld();
 
-
+			SoC.game.musicmanager.play(e, "steeps-of-destiny.ogg");
 		}
 	}
 	
@@ -306,7 +306,7 @@ public class CydoniaAI extends AI{
 		if(timer <= 0){
 			if(!teleported){
 				if(counter > 5){
-					timer = 1f;
+					timer = Constants.Buff.TELEPORT_CAST_TIME;
 					teleported = true;
 					Position pos = SoC.game.positionmapper.get(e);
 
@@ -363,6 +363,10 @@ public class CydoniaAI extends AI{
 	}
 	
 	public void casting(Entity e){
+		Buff b = SoC.game.buffmapper.get(e);
+		if(!b.buffClasses.contains(Inmune.class)){
+			Buff.addbuff(e, new Inmune());
+		}
 		if(SoC.game.damagemapper.has(e)){
 			Stats stats = SoC.game.statsmapper.get(e);
 			System.out.println("Que pone: "+stats.health+" "+stats.maxHealth+""+((stats.health - (SoC.game.damagemapper.get(e).damage - stats.armor))/stats.maxHealth) );

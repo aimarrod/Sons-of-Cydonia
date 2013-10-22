@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.soc.core.SoC;
 import com.soc.utils.GraphicsLoader;
+import com.soc.utils.MusicPlayer;
 
 public class CreditsScreen extends AbstractScreen{
 
@@ -98,6 +99,11 @@ public class CreditsScreen extends AbstractScreen{
 	}
 	
 	@Override
+	public void show(){
+		MusicPlayer.play("beyond-the-clouds.ogg");
+	}
+	
+	@Override
 	public void resize(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -126,48 +132,48 @@ public class CreditsScreen extends AbstractScreen{
 	       batch.setColor(1,1,1,1);
 	       font.setColor(1,1,1,1);
 	       
-	       if(timer <= 7){
-	    	   setTransparency(7, 0, 2);
+	       if(timer <= 5.5f){
+	    	   setTransparency(5.5f, 0, 1.5f);
 		       font.setScale(4f);
 		       batch.draw(screenshots[5], width/2 -screenshots[5].getWidth()*0.5f, height/2);
 		       font.drawWrapped(batch, title, 100, height/2, width - 100, BitmapFont.HAlignment.CENTER);
-	       } else if(timer > 8 && timer <= 13){
-	    	   setTransparency(13, 8, 1);
+	       } else if(timer > 5 && timer <= 12){
+	    	   setTransparency(12, 5, 1);
 		       batch.draw(screenshots[0], 100, height/2-height/4, width/2.5f, height/2);
 		       font.setScale(2f);
 		       font.drawWrapped(batch, devs, width/2, height/2 + height/4, width/2, BitmapFont.HAlignment.CENTER);
 		       font.setScale(1f);
 		       font.drawWrapped(batch, devsBody, width/2, height/2 + 100, width/2, BitmapFont.HAlignment.CENTER);
-	       } else if(timer > 14 && timer <= 19){
-	    	   setTransparency(19, 14, 1);
+	       } else if(timer > 13 && timer <= 18){
+	    	   setTransparency(18, 13, 1);
 		       batch.draw(screenshots[1], width/2, height/2-height/4, width/2.5f, height/2);
 		       font.setScale(2f);
 		       font.drawWrapped(batch, graphics, 100, height/2 + height/4, width-width/2, BitmapFont.HAlignment.CENTER);
 		       font.setScale(1f);
 		       font.drawWrapped(batch, graphicsBody, 100, height/2 + 100, width-width/2, BitmapFont.HAlignment.CENTER);
-	       }  else if(timer > 20 && timer <= 25){
-	    	   setTransparency(25, 20, 1);
+	       }  else if(timer > 19 && timer <= 25){
+	    	   setTransparency(25, 19, 1);
 		       batch.draw(screenshots[2], 100, height/2-height/4, width/2.5f, height/2);
 		       font.setScale(2f);
 		       font.drawWrapped(batch, audio, width/2, height/2 + height/4, width/2, BitmapFont.HAlignment.CENTER);
 		       font.setScale(1f);
 		       font.drawWrapped(batch, audioBody, width/2, height/2 + 100, width/2, BitmapFont.HAlignment.CENTER);
-	       } else if(timer > 26 && timer <= 31){
-	    	   setTransparency(31, 26, 2);
+	       } else if(timer > 26 && timer <= 31.5f){
+	    	   setTransparency(31.5f, 26, 2);
 		       font.setScale(2.5f);
 		       batch.draw(screenshots[3], 50, height/2- 100);
 		       batch.draw(screenshots[4], width-50-250, height/2 - 100);
 		       font.drawWrapped(batch, specialThanks, width/4, height/2, width/2, BitmapFont.HAlignment.CENTER);
-	       }  else if(timer > 32 && timer <= 37){
-	    	   setTransparency(37, 32, 1);
+	       }  else if(timer > 33 && timer <= 39){
+	    	   setTransparency(39, 33, 1.5f);
 		       batch.draw(screenshots[9], width/2 - 100, height/2-height/3);
 		       batch.draw(screenshots[8], width/2 + 100, height/2);
 		       font.setScale(2f);
 		       font.drawWrapped(batch, testers, 100, height/2 + height/4, width-width/2, BitmapFont.HAlignment.CENTER);
 		       font.setScale(1f);
 		       font.drawWrapped(batch, testersBody, 100, height/2 + 100, width-width/2, BitmapFont.HAlignment.CENTER);
-	       }   else if(timer > 38 && timer <= 43){
-	    	   setTransparency(43, 38, 1);
+	       }   else if(timer > 40 && timer <= 50){
+	    	   setTransparency(50, 40, 3.5f);
 		       batch.draw(screenshots[7], 50, height/2- 100);
 		       batch.draw(screenshots[6], width-50-250, height/2 - 100);
 		       font.setScale(1.5f);
@@ -176,7 +182,9 @@ public class CreditsScreen extends AbstractScreen{
 		       font.drawWrapped(batch, bybody, width/4, height/2, width/2, BitmapFont.HAlignment.CENTER);
 		       font.setScale(0.8f);
 		       font.drawWrapped(batch, devforBody, width/4, height/4, width/2, BitmapFont.HAlignment.CENTER);
-	       } else if(timer > 44) {
+	       } else if(timer > 52.3f && timer < 53f) {
+	    	   MusicPlayer.pause();
+	       } else if(timer > 53f){
 	    	   game.setScreen(new MenuScreen(game));
 	       }
 	       
