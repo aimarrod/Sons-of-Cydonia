@@ -86,7 +86,7 @@ public class HudSystem extends VoidEntitySystem{
 		if(characterMenu.hasParent()){
 			characterMenu.remove();
 		}
-		if(!inventory.hasParent()){
+		if(inventory.hasParent()){
 			tooltip.setText(null, 0);
 			inventory.remove();
 			SoC.game.inputMultiplexer.removeProcessor(inventory);
