@@ -244,7 +244,7 @@ public class Inventory extends Actor implements InputProcessor {
 						candidate.use();
 						return;
 					}else if(candidate.gainHealth>0 && candidate.gainMana>0){
-						i=candidateValue;
+						candidateValue=i;
 					}
 				}
 		}
@@ -268,7 +268,7 @@ public class Inventory extends Actor implements InputProcessor {
 						candidate.use();
 						return;
 					}else if(candidate.gainMana>0 && candidate.gainHealth>0){
-						i=candidateValue;
+						candidateValue=i;
 					}
 				}
 				

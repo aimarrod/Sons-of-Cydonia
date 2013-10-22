@@ -57,6 +57,9 @@ public class Player extends Component {
 		inventory=player.inventory;
 		characterMenu = player.characterMenu;
 		gameMenu=player.gameMenu;
+		this.shield=player.shield;
+		this.healthPotion=player.healthPotion;
+		this.manaPotion=player.manaPotion;
 		this.spellkeys = player.spellkeys;
 		this.inventary=new Item[Constants.Items.INVENTORY_SIZE];
 		this.armor=(Armor) SoC.game.items[player.armor];

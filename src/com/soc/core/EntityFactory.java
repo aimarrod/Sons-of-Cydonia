@@ -703,7 +703,7 @@ public class EntityFactory {
 				0, 
 				1, 
 				40, 
-				40, 
+				85, 
 				40, 
 				40, 
 				0, 
