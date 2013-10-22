@@ -89,7 +89,7 @@ public class HudSystem extends VoidEntitySystem{
 		if(inventory.hasParent()){
 			tooltip.setText(null, 0);
 			inventory.remove();
-			SoC.game.inputMultiplexer.removeProcessor(inventory);
+			//SoC.game.inputMultiplexer.removeProcessor(inventory);
 		}
 		
 	}

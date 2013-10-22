@@ -296,7 +296,9 @@ public class MidMonsterAI extends AI{
 		SoC.game.progress.midMonsterDefeated=true;
 		Position pos = SoC.game.positionmapper.get(e);
 		EntityFactory.createItem(Constants.Items.GOLD_SHIELD, pos.x, pos.y, pos.z);
-		
+		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z);
+		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z);
+		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z);
 		Stats s = SoC.game.statsmapper.get(SoC.game.player);
 		System.out.println(s.clazz);
 		if(s.clazz.equals(Constants.Characters.WARRIOR)){

@@ -17,6 +17,9 @@ public class SavedPlayer {
 	public int weapon;
 	public int armor;
 	public int [] inventary;
+	public int shield;
+	public int healthPotion;
+	public int manaPotion;
 	
 	public SavedPlayer(Player p){
 		this.move_up=p.move_up;
@@ -27,6 +30,9 @@ public class SavedPlayer {
 		this.inventory=p.inventory;
 		this.characterMenu=p.characterMenu;
 		this.gameMenu=p.gameMenu;
+		this.shield=p.shield;
+		this.healthPotion=p.healthPotion;
+		this.manaPotion=p.manaPotion;
 		this.spellkeys=p.spellkeys;
 		if(p.armor==null){
 			this.armor=0;
@@ -52,7 +58,7 @@ public class SavedPlayer {
 	public SavedPlayer(int move_up, int move_down, int move_left,
 			int move_right, int attack, int inventory, int characterMenu,
 			int gameMenu, int[] spellkeys, int weapon, int armor,
-			int[] inventary) {
+			int[] inventary,int shield,int healthPotion,int manaPotion) {
 		super();
 		this.move_up = move_up;
 		this.move_down = move_down;
@@ -66,6 +72,9 @@ public class SavedPlayer {
 		this.weapon = weapon;
 		this.armor = armor;
 		this.inventary = inventary;
+		this.shield=shield;
+		this.healthPotion=healthPotion;
+		this.manaPotion=manaPotion;
 	}
 	
 	public SavedPlayer(){
