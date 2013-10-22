@@ -86,7 +86,7 @@ public class GaiaAvatarAI extends AI{
 			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS, s.cast, s.blocking, Constants.Spells.WINDBLADE));
 			SoC.game.statemapper.get(e).state = s.state;
 			e.changedInWorld();
-		} else if(attack <= 95){
+		} else if(attack <= 98){
 			Spell s = SoC.game.spells[Constants.Spells.TENTACLES];
 			e.addComponent(new Delay(Constants.Groups.ENEMY_ATTACKS, s.cast, s.blocking, Constants.Spells.TENTACLES));
 			SoC.game.statemapper.get(e).state = s.state;

@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -25,10 +26,16 @@ public class CreditsScreen extends AbstractScreen{
 	public String specialThanks;
 	public String testers;
 	public String testersBody;
+	public String by;
+	public String bybody;
+	public String devfor;
+	public String devforBody;
 	public OrthographicCamera cam;
 	public BitmapFont font;
 	public SpriteBatch batch;
-	public float width;
+	public float timer, width, height, duration;
+	public Texture[] screenshots;
+	
 	
 	public CreditsScreen(SoC game) {
 		super(game);
@@ -53,7 +60,7 @@ public class CreditsScreen extends AbstractScreen{
 				+ "Jordan Trudgett\n"
 				+ "Gobusto";
 		this.specialThanks = "Special Thanks";
-		this.testers = "Testers";
+		this.testers = "To our testers";
 		this.testersBody = "Joseba Rojo @PitilinFutxinJo\n"
 				+ "Peio Iñurrigarro\n"
 				+ "Jesus Semsa @Alchemy_Meister\n"
@@ -62,16 +69,38 @@ public class CreditsScreen extends AbstractScreen{
 				+ "Aitor Brazaola @kronoshz\n"
 				+ "Ariane Lazaga @NancyCallahan88\n"
 				+ "Jon Lorente @jonlorente";
+		this.by = "A game by";
+		this.bybody = "Aritz Bilbao Jayo\n"
+				+ "and\n"
+				+ "Aimar Rodriguez Soto";
+		this.devforBody = "developed for TDDD23 (Design and Programming of Computer Games) at LiU university, 2013";
 		this.cam = SoC.game.camera;
 		this.batch = super.getBatch();
 		this.font = new Skin(Gdx.files.internal("resources/skin2.json" )).getFont("menuFont");
 		
-		cam.position.set(0,5000,0);
+		this.timer = 0f;
+		this.duration = 5f;
+		
+		screenshots = new Texture[]{
+			GraphicsLoader.load("credits-screen-1.png"),
+			GraphicsLoader.load("credits-screen-2.png"),
+			GraphicsLoader.load("credits-screen-3.png"),
+			GraphicsLoader.load("credits-screen-4.png"),
+			GraphicsLoader.load("credits-screen-5.png"),
+			GraphicsLoader.load("credits-screen-6.png"),
+			GraphicsLoader.load("credits-screen-7.png"),
+			GraphicsLoader.load("credits-screen-8.png"),
+			GraphicsLoader.load("credits-screen-9.png"),
+			GraphicsLoader.load("credits-screen-10.png")
+		};
+		
+		cam.position.set(0,0,0);
 	}
 	
 	@Override
 	public void resize(int width, int height) {
 		this.width = width;
+		this.height = height;
 		float y = cam.position.y;
 		cam.setToOrtho(false, width, height);
 		cam.position.y = y;
@@ -81,48 +110,94 @@ public class CreditsScreen extends AbstractScreen{
 	       Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
 	       Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	       
-	       if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-		       cam.position.y -= 450*delta;
-	       } else {
-	    	   cam.position.y -= 50*delta;
+	       if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+	    	   game.setScreen(new MenuScreen(game));
 	       }
-	       cam.update();
 	       
-	       System.out.println(cam.position.y);
+	       if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+		       timer += delta*5;
+	       } else {
+	    	   timer += delta;
+	       }
 	       
-	       font.setColor(1,1,1,1);
-	       batch.setColor(1,1,1,1);
 	       
 	       batch.begin();
 	       batch.setProjectionMatrix(cam.combined);
-	       	       
-	       font.setScale(4f);
-	       font.drawWrapped(batch, title, 100, 4900, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(2f);
-	       font.drawWrapped(batch, devs, 100, 4700, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(1f);
-	       font.drawWrapped(batch, devsBody, 100, 4620, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(2f);
-	       font.drawWrapped(batch, graphics, 100, 4450, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(1f);
-	       font.drawWrapped(batch, graphicsBody, 100, 4370, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(2f);
-	       font.drawWrapped(batch, audio, 100, 4000, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(1f);
-	       font.drawWrapped(batch, audioBody, 100, 3920, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(2f);
-	       font.drawWrapped(batch, specialThanks, 100, 3600, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(1.5f);
-	       font.drawWrapped(batch, testers, 100, 3450, width - 100, BitmapFont.HAlignment.CENTER);
-	       font.setScale(1f);
-	       font.drawWrapped(batch, testersBody, 100, 3380, width - 100, BitmapFont.HAlignment.CENTER);
+	       batch.setColor(1,1,1,1);
+	       font.setColor(1,1,1,1);
 	       
+	       if(timer <= 7){
+	    	   setTransparency(7, 0, 2);
+		       font.setScale(4f);
+		       batch.draw(screenshots[5], width/2 -screenshots[5].getWidth()*0.5f, height/2);
+		       font.drawWrapped(batch, title, 100, height/2, width - 100, BitmapFont.HAlignment.CENTER);
+	       } else if(timer > 8 && timer <= 13){
+	    	   setTransparency(13, 8, 1);
+		       batch.draw(screenshots[0], 100, height/2-height/4, width/2.5f, height/2);
+		       font.setScale(2f);
+		       font.drawWrapped(batch, devs, width/2, height/2 + height/4, width/2, BitmapFont.HAlignment.CENTER);
+		       font.setScale(1f);
+		       font.drawWrapped(batch, devsBody, width/2, height/2 + 100, width/2, BitmapFont.HAlignment.CENTER);
+	       } else if(timer > 14 && timer <= 19){
+	    	   setTransparency(19, 14, 1);
+		       batch.draw(screenshots[1], width/2, height/2-height/4, width/2.5f, height/2);
+		       font.setScale(2f);
+		       font.drawWrapped(batch, graphics, 100, height/2 + height/4, width-width/2, BitmapFont.HAlignment.CENTER);
+		       font.setScale(1f);
+		       font.drawWrapped(batch, graphicsBody, 100, height/2 + 100, width-width/2, BitmapFont.HAlignment.CENTER);
+	       }  else if(timer > 20 && timer <= 25){
+	    	   setTransparency(25, 20, 1);
+		       batch.draw(screenshots[2], 100, height/2-height/4, width/2.5f, height/2);
+		       font.setScale(2f);
+		       font.drawWrapped(batch, audio, width/2, height/2 + height/4, width/2, BitmapFont.HAlignment.CENTER);
+		       font.setScale(1f);
+		       font.drawWrapped(batch, audioBody, width/2, height/2 + 100, width/2, BitmapFont.HAlignment.CENTER);
+	       } else if(timer > 26 && timer <= 31){
+	    	   setTransparency(31, 26, 2);
+		       font.setScale(2.5f);
+		       batch.draw(screenshots[3], 50, height/2- 100);
+		       batch.draw(screenshots[4], width-50-250, height/2 - 100);
+		       font.drawWrapped(batch, specialThanks, width/4, height/2, width/2, BitmapFont.HAlignment.CENTER);
+	       }  else if(timer > 32 && timer <= 37){
+	    	   setTransparency(37, 32, 1);
+		       batch.draw(screenshots[9], width/2 - 100, height/2-height/3);
+		       batch.draw(screenshots[8], width/2 + 100, height/2);
+		       font.setScale(2f);
+		       font.drawWrapped(batch, testers, 100, height/2 + height/4, width-width/2, BitmapFont.HAlignment.CENTER);
+		       font.setScale(1f);
+		       font.drawWrapped(batch, testersBody, 100, height/2 + 100, width-width/2, BitmapFont.HAlignment.CENTER);
+	       }   else if(timer > 38 && timer <= 43){
+	    	   setTransparency(43, 38, 1);
+		       batch.draw(screenshots[7], 50, height/2- 100);
+		       batch.draw(screenshots[6], width-50-250, height/2 - 100);
+		       font.setScale(1.5f);
+		       font.drawWrapped(batch, by, width/4, height/2+height/4, width/2, BitmapFont.HAlignment.CENTER);
+		       font.setScale(1f);
+		       font.drawWrapped(batch, bybody, width/4, height/2, width/2, BitmapFont.HAlignment.CENTER);
+		       font.setScale(0.8f);
+		       font.drawWrapped(batch, devforBody, width/4, height/4, width/2, BitmapFont.HAlignment.CENTER);
+	       } else if(timer > 44) {
+	    	   game.setScreen(new MenuScreen(game));
+	       }
 	       
 	       
 	       batch.end();	       
 	       
 	       font.setScale(1);
 
+	}
+	
+	private void setTransparency(float max, float min, float fadeDuration){
+		if(timer < min+fadeDuration){
+			font.setColor(1,1,1, (timer-min)/fadeDuration);
+			batch.setColor(1,1,1, (timer-min)/fadeDuration);
+		} else if(timer > max-fadeDuration){
+			font.setColor(1,1,1, (max-timer)/fadeDuration);
+			batch.setColor(1,1,1, (max-timer)/fadeDuration);
+		} else {
+			font.setColor(1,1,1,1);
+			batch.setColor(1,1,1,1);
+		}
 	}
 
 }

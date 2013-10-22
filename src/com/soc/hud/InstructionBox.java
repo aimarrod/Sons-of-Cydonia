@@ -37,7 +37,7 @@ public class InstructionBox extends Actor{
 			+ "F5 - Quick save\n\n"
 			+ "Double tap a movement key to sprint\n\n"
 			+ "INVENTORY\n\n"
-			+ "TAB - Switch item focus			"
+			+ "TAB - Switch item focus\n"
 			+ "E - Use focused item\n"
 			+ "B - Drop item\n\n"
 			+ "Press H to continue";
