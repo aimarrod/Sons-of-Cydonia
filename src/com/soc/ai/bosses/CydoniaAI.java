@@ -63,6 +63,11 @@ public class CydoniaAI extends AI{
 		if(pos.x * World.TILE_FACTOR > 47 && pos.x * World.TILE_FACTOR < 52 && pos.y *World.TILE_FACTOR > 185){
 			init = true;
 			Buff.addbuff(SoC.game.player, new Teleport(50*World.TILE_SIZE, 165*World.TILE_SIZE, 0));
+			for(int i=leftmostTile;i<rightmostTile;i++){
+					EntityFactory.createWall(e, i, bottomTile, 0).addToWorld();
+					EntityFactory.createWall(e, i, topTile, 0).addToWorld();
+			}
+			EntityFactory.createWall(e, 23, 36, 0).addToWorld();
 		}
 	}
 	
