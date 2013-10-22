@@ -45,10 +45,10 @@ public class ZombiAI extends AI{
 		spawned.addToWorld();
 		
 		SoC.game.levelmanager.setLevel(spawned, Constants.Groups.LEVEL +(pos.z+1));
-		if(AI.rng.nextFloat() < 0.1){
+		if(AI.rng.nextFloat() < 0.1f){
 			EntityFactory.createItem(Constants.Items.ANTIDOTE, pos.x, pos.y, pos.z).addToWorld();
 		}
-		if(AI.rng.nextFloat() < 0.1){
+		if(AI.rng.nextFloat() < 0.1f){
 			EntityFactory.createItem(Constants.Items.MIX_POTION, pos.x, pos.y, pos.z).addToWorld();
 		}
 	}

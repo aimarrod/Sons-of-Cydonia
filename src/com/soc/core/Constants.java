@@ -134,7 +134,7 @@ public class Constants {
 		public static final float SPIN_RADIUS = 60f;
 		public static final float FIREBREATH_RADIUS = 20f;
 		public static final float POISON_CLOUD_DURATION = 7f;
-		public static final float POISON_CLOUD_RADIUS = 65f;
+		public static final float POISON_CLOUD_RADIUS = 50f;
 		public static final float METEOR_BLAST_TICK_INTERVAL = 0.1f;
 		public static final int METEOR_BLAST_TICK_NUMBER = 6;
 		public static final float METEOR_FALL_DISTANCE = 800f;
@@ -144,7 +144,7 @@ public class Constants {
 		public static final float WINDBLADE_SPEED = 700f;
 		public static final float TENTACLES_DURATION = 1.5f;
 		public static final float TENTACLES_PREPARE = 1.03f;
-		public static final float TENTACLES_RADIUS = 170f;
+		public static final float TENTACLES_RADIUS = 140f;
 		public static final float AIR_CIRCLE_TIME = 2f;
 		public static final float BONE_THROW_SPEED = 1000f;
 		public static final float FIREBALL_THROW_SPEED = 1000f;

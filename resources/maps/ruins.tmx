@@ -28,7 +28,7 @@
  </layer>
  <layer name="level0-object-high" width="200" height="200">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="level1-low" width="200" height="200">
@@ -193,8 +193,10 @@
   <object x="2208" y="2176" width="32" height="32"/>
   <object x="2688" y="2176" width="32" height="32"/>
   <object x="6176" y="3968" width="32" height="2208"/>
+  <object x="1984" y="2976" width="736" height="96"/>
+  <object x="1632" y="1728" width="288" height="512"/>
  </objectgroup>
- <objectgroup name="level0-unwalkable" width="200" height="200">
+ <objectgroup name="level0-unwalkable" width="200" height="200" visible="0">
   <object x="544" y="352" width="320" height="160"/>
   <object x="544" y="576" width="320" height="160"/>
   <object x="960" y="576" width="320" height="160"/>
@@ -231,7 +233,7 @@
   <object x="3680" y="1504" width="2496" height="2464"/>
   <object x="3552" y="4960" width="64" height="1088"/>
  </objectgroup>
- <objectgroup name="level0-special" width="200" height="200">
+ <objectgroup name="level0-special" width="200" height="200" visible="0">
   <object x="5056" y="5024" width="64" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -416,13 +418,13 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level1-obstacle" width="200" height="200">
+ <objectgroup name="level1-obstacle" width="200" height="200" visible="0">
   <object x="6208" y="224" width="192" height="6176"/>
   <object x="0" y="6176" width="6208" height="224"/>
   <object x="0" y="0" width="6400" height="224"/>
   <object x="-32" y="224" width="192" height="5952"/>
  </objectgroup>
- <objectgroup name="level1-unwalkable" width="200" height="200">
+ <objectgroup name="level1-unwalkable" width="200" height="200" visible="0">
   <object x="5120" y="4768" width="1088" height="1472"/>
   <object x="5152" y="4768" width="544"/>
   <object x="5152" y="3712" width="1056" height="1056"/>
@@ -461,7 +463,7 @@
   <object x="4960" y="3392" width="64" height="32"/>
   <object x="4800" y="3392" width="64" height="32"/>
  </objectgroup>
- <objectgroup name="level1-special" width="200" height="200">
+ <objectgroup name="level1-special" width="200" height="200" visible="0">
   <object x="5056" y="5056" width="64" height="32">
    <properties>
     <property name="level" value="1"/>
@@ -475,17 +477,17 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level2-obstacle" width="200" height="200">
+ <objectgroup name="level2-obstacle" width="200" height="200" visible="0">
   <object x="0" y="-32" width="6400" height="224"/>
   <object x="0" y="6272" width="6400" height="224"/>
   <object x="0" y="192" width="192" height="5952"/>
   <object x="6208" y="192" width="192" height="6080"/>
  </objectgroup>
- <objectgroup name="level2-unwalkable" width="200" height="200">
+ <objectgroup name="level2-unwalkable" width="200" height="200" visible="0">
   <object x="4960" y="3008" width="32" height="416"/>
   <object x="4832" y="3008" width="32" height="416"/>
  </objectgroup>
- <objectgroup name="level2-special" width="200" height="200">
+ <objectgroup name="level2-special" width="200" height="200" visible="0">
   <object x="4864" y="3392" width="96" height="32">
    <properties>
     <property name="level" value="2"/>
@@ -872,7 +874,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level0-spawners" width="200" height="200">
+ <objectgroup name="level0-spawners" width="200" height="200" visible="0">
   <object x="256" y="320" width="64" height="64">
    <properties>
     <property name="interval" value="0"/>
@@ -1288,7 +1290,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level1-spawners" width="200" height="200">
+ <objectgroup name="level1-spawners" width="200" height="200" visible="0">
   <object x="2688" y="5664" width="32" height="32">
    <properties>
     <property name="interval" value="60"/>
@@ -1407,7 +1409,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="level2-spawners" width="200" height="200">
+ <objectgroup name="level2-spawners" width="200" height="200" visible="0">
   <object x="4416" y="2176" width="32" height="32">
    <properties>
     <property name="interval" value="0"/>
