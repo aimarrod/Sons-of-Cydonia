@@ -23,12 +23,12 @@
  </layer>
  <layer name="level0-object-low" width="100" height="200">
   <data encoding="base64" compression="zlib">
-   eJzt3M9RwkAcBeAcBBrQm2V4cmzDsRagDsc2tBL1bjFy4UBcgv9280i+byYDXsxv8nxZYWC7DgAAAACo5XJZfs44bpbl5wBprB9ZrB9QVro/uWeNp3R/cs8CAAAAAAAAAAAA/uLK50WjlD4b+rpoPwfAKb5vkMX3DYBzUVorSq9JaMP6AQAAAAAAAAAAAAAAAAAAAAAAQCv3q667XpSPh9XY083P7WL4oC15ZJFHFnlkkUcWeWSRRxZ5ZJFHFnlkkUcWeWSRRxZ5ZHlcdd3HRfl48n47AAAAAAAAAAAAcGaO7UVwN/JeBEN7JNTaKyFhX4bUzw6fmqvGfAnXImGG38w19Tw2oXmsZ5rHOfRjXcin9jm38jg6V6krtc+pH8Nzte5HQh6boDysH1n96OfRsh9beXyZa4x+9HMYI49NaB79bsxx/UjLYy2PqDzG7IfXH6fnWjfMQz8O5+p3ov9zjXMm5rEJyUM/svrRcr6Ea1HqRFIe/XtV7Tz6rz2s58fn8n5imxlKhvbYqbXXznf29XneXZOXitel5d5Cb8vhI+33Fs+1y+J9xL9TDtXuBz+jH1n0I4t+ZJlSP1r+H1SLfmSZUj+mQD+y6EcW/ciiH1mm1I8p/L+770etx1rnn6p9P2o91jo/8zWF+yAAAAAAAADAf/oEVm8x8w==
+   eJzt3MFNAkEYBeA9CDSgN8vwZGzDWAtQh7ENrUS9W4xcOLgOixpn9jF8X7IBL+6ffTwGCMwwAAAAAAC1XC7L95nHzbJ8HyCN9SOL9SNHqQ86Mp9SH3QEAAAAAAAAAAAAoB9Xvr8bpfRd3ddF+zkAjvH7jyx+/wGcitJaUXpPQhvWDwAAAAAAAAAAAAAAAAAAAAAAAFq5Xw3D9aJ8PKzmnu783C6mD9qSRxZ5ZJFHFnlkkUcWeWSRRxZ5ZJFHFnlkkUcWeWSRR5bH1TB8XJSPJ5+3AwAAAAAAAAAAACfm0F4EdzPvRTC1R0KtvRIS9mVI/e7wsblqzJdwLRJm+MtcveexCc1jfaZ5nEI/1oV8ap9zK4+Dc5W6Uvuc+jE9V+t+JOSxCcrD+pHVj3EeLfuxlce3ueboxziHOfLYhOYx7sY5rh9peazlEZXHnP3w/uP4XOuGeejH17nGnRj/XeOciXlsQvLQj6x+tJwv4VqUOpGUx/i5qnYe4/ce1vPDc/k8sc0MJVN77NTaa+cn+/o8767JS8Xr0nJvobfl9JH2f4vn2mXxPuPjlK9q94Pf0Y8s+pFFP7L01I+Wr4Nq0Y8sPfWjB/qRRT+y6EcW/cjSUz96eL2770et21rn79W+H7Vua52f89XD8yAAAAAAAADAf/oEXP4x8w==
   </data>
  </layer>
  <layer name="level0-object-high" width="100" height="200">
   <data encoding="base64" compression="zlib">
-   eJzt2kFqAkEURdGedFyxZBvJTlycC3DkIPC7IVLFf5bnQDAg6MNLdTtw2wAAAABYyX2v/weAM+4fwDuork+uWQAAAAAAAAAAAADr8HtRAF7h/gHAK9w/AAAAAAAAAAAAAAAAAAAAAAAAAOCv6+X4ue+T55hDjyx6ZNEjix5Z9MiiRxY9suiRRY8semTRI4seWfQAAAAAAAAAAAAAgM+Q+tvhs11Po/clfBYJGyp69G2o6NG3oaJH34aKHn0bKnr0bajo0behokffhooefRsqevRtqOjRt6GiR9+Gih59Gyp69G2o6NG3oaJH34aKHn0bKqk9fvZt+93Hvu9/N4xy+zr/S3td8s0+H/DOnA84ttL58D2I0VY6HzCa8wHHnA9mWeH77vN8zHqc9f5AhhWugwAAAAAAAACs6wFtZond
+   eJzt2kFqAkEURdGetK5Ysg2zkyzOBWTkIPC6Qani/5TngCgI+vBStgO3DQAAAICVPPb8GADOuH5Als6DMwIAAAAAAAAAAAAAc/j/LgDvcP0A4B2uHwAAAAAAAAAAAAAAAAAAAAAAAADw1+16/NzXyXPMoUcvevSiRy969KJHL3r0okcvevSiRy969KJHL3r0ogcAAAAAAAAAAAAAfIau/x0+2/U0el+Hz6LDhkSPug2JHnUbEj3qNiR61G1I9KjbkOhRtyHRo25DokfdhkSPug2JHnUbEj3qNiR61G1I9KjbkOhRtyHRo25DokfdhqRrj/u+bd/72Pd9dcMoP5fzW7fXpb/Z5wP+M+cDjq10PvwOYrSVzgeM5nzAMeeDWVb4vfs8H7PuZ70/0MMK34MAAAAAAAAArOsXd7OJ3Q==
   </data>
  </layer>
  <objectgroup name="level0-unwalkable" width="100" height="200">
@@ -60,8 +60,8 @@
   <object x="1504" y="1600" width="32" height="64"/>
   <object x="1504" y="1472" width="32" height="64"/>
   <object x="1664" y="1472" width="32" height="64"/>
-  <object x="1504" y="608" width="32" height="64"/>
-  <object x="1664" y="608" width="32" height="64"/>
+  <object x="1504" y="576" width="32" height="64"/>
+  <object x="1664" y="576" width="32" height="64"/>
   <object x="1536" y="512" width="32" height="64"/>
   <object x="1632" y="512" width="32" height="64"/>
   <object x="1536" y="384" width="32" height="64"/>

@@ -18,6 +18,7 @@ import com.soc.game.components.Stats;
 import com.soc.game.states.benefits.Casting;
 import com.soc.game.states.benefits.Inmune;
 import com.soc.game.states.benefits.Teleport;
+import com.soc.screens.CreditsScreen;
 
 public class CydoniaAI extends AI{
 	
@@ -48,10 +49,10 @@ public class CydoniaAI extends AI{
 		timer=5f;
 		waving=false;
 		windblades = new Vector2[]{
-				new Vector2(leftTile-7, topTile+12),
-				new Vector2(leftTile-7, bottomTile-12),
-				new Vector2(rightTile+7, topTile+12),
-				new Vector2(rightTile+7, bottomTile-12),
+				new Vector2(leftmostTile, topTile),
+				new Vector2(leftmostTile, bottomTile),
+				new Vector2(rightmostTile, topTile),
+				new Vector2(rightmostTile, bottomTile),
 		};
 		phasesLife=0.75f;
 
@@ -63,13 +64,107 @@ public class CydoniaAI extends AI{
 	public void init(Entity e){
 		Position pos = SoC.game.positionmapper.get(SoC.game.player);
 		if(pos.x * World.TILE_FACTOR > 47 && pos.x * World.TILE_FACTOR < 52 && pos.y *World.TILE_FACTOR > 185){
+			state = STANDARD;
 			init = true;
 			Buff.addbuff(SoC.game.player, new Teleport(50*World.TILE_SIZE, 165*World.TILE_SIZE, 0));
-			for(int i=leftmostTile;i<rightmostTile;i++){
-					EntityFactory.createWall(e, i, bottomTile, 0).addToWorld();
-					EntityFactory.createWall(e, i, topTile, 0).addToWorld();
-			}
-			EntityFactory.createWall(e, 23, 36, 0).addToWorld();
+			EntityFactory.createWall(e, 46, topTile, 0).addToWorld();
+			EntityFactory.createWall(e, 47, topTile, 0).addToWorld();
+			EntityFactory.createWall(e, 48, topTile, 0).addToWorld();
+			EntityFactory.createWall(e, 49, topTile, 0).addToWorld();
+			EntityFactory.createWall(e, 50, topTile, 0).addToWorld();
+			EntityFactory.createWall(e, 51, topTile, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile, 0).addToWorld();
+			EntityFactory.createWall(e, 53, topTile, 0).addToWorld();
+			
+			EntityFactory.createWall(e, 46, topTile+1, 0).addToWorld();
+			EntityFactory.createWall(e, 46, topTile+2, 0).addToWorld();
+			EntityFactory.createWall(e, 46, topTile+3, 0).addToWorld();
+			EntityFactory.createWall(e, 46, topTile+4, 0).addToWorld();
+			EntityFactory.createWall(e, 47, topTile+5, 0).addToWorld();
+			EntityFactory.createWall(e, 47, topTile+6, 0).addToWorld();
+			EntityFactory.createWall(e, 47, topTile+7, 0).addToWorld();
+			EntityFactory.createWall(e, 47, topTile+8, 0).addToWorld();
+			EntityFactory.createWall(e, 47, topTile+9, 0).addToWorld();
+			EntityFactory.createWall(e, 47, topTile+10, 0).addToWorld();
+			EntityFactory.createWall(e, 47, topTile+11, 0).addToWorld();
+			EntityFactory.createWall(e, 47, topTile+12, 0).addToWorld();
+			
+			EntityFactory.createWall(e, 53, topTile, 0).addToWorld();
+			EntityFactory.createWall(e, 53, topTile+1, 0).addToWorld();
+			EntityFactory.createWall(e, 53, topTile+2, 0).addToWorld();
+			EntityFactory.createWall(e, 53, topTile+3, 0).addToWorld();
+			EntityFactory.createWall(e, 53, topTile+4, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile+5, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile+6, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile+7, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile+8, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile+9, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile+10, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile+11, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile+12, 0).addToWorld();
+			
+			EntityFactory.createWall(e, 47, topTile+13, 0).addToWorld();
+			EntityFactory.createWall(e, 48, topTile+13, 0).addToWorld();
+			EntityFactory.createWall(e, 49, topTile+13, 0).addToWorld();
+			EntityFactory.createWall(e, 50, topTile+13, 0).addToWorld();
+			EntityFactory.createWall(e, 51, topTile+13, 0).addToWorld();
+			EntityFactory.createWall(e, 52, topTile+13, 0).addToWorld();
+			
+			EntityFactory.createWall(e, 41, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 42, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 43, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 44, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 45, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 46, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 47, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 48, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 49, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 50, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 51, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 52, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 53, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 54, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 55, bottomTile, 0).addToWorld();			
+			EntityFactory.createWall(e, 50, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 56, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 57, bottomTile, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile, 0).addToWorld();
+			
+			EntityFactory.createWall(e, 41, bottomTile-1, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-2, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-3, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-4, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-5, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-6, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-7, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-8, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-9, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-10, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-11, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-12, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-13, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-14, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-15, 0).addToWorld();
+			EntityFactory.createWall(e, 41, bottomTile-16, 0).addToWorld();
+			
+			EntityFactory.createWall(e, 58, bottomTile-1, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-2, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-3, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-4, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-5, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-6, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-7, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-8, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-9, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-10, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-11, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-12, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-13, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-14, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-15, 0).addToWorld();
+			EntityFactory.createWall(e, 58, bottomTile-16, 0).addToWorld();
+
+
 		}
 	}
 	
@@ -81,10 +176,10 @@ public class CydoniaAI extends AI{
 			holeWave=leftmostTile+6+AI.rng.nextInt((rightmostTile-leftmostTile)-12)+1;
 			for(int i=this.leftmostTile;i<rightmostTile;i=i+2){
 				if(i==holeWave || holeWave-1==i  ||holeWave+1==i) {
-					i+=4;
+					i+=2;
 					continue;
 				}
-			fireStone = EntityFactory.createFireStone(i*Constants.World.TILE_SIZE, (topTile-3)*Constants.World.TILE_SIZE, p.z,direction,true);
+			fireStone = EntityFactory.createFireStone(i*Constants.World.TILE_SIZE, (topTile-2)*Constants.World.TILE_SIZE, p.z,direction,true);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.ENEMY_ATTACKS);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.MAP_BOUND);
 		    SoC.game.groupmanager.add(fireStone, Constants.Groups.PROJECTILES);
@@ -93,9 +188,9 @@ public class CydoniaAI extends AI{
 			}
 		}else if(direction.x==-1 && direction.y==0){
 			holeWave=bottomTile+6+AI.rng.nextInt(topTile-bottomTile-12)+1;
-			for(int i=this.bottomTile;i<=(topTile);i=i+2){
-				if(i==holeWave || holeWave-1==i  ||holeWave+1==i) {
-					i+=4;
+			for(int i=this.bottomTile;i<=(topTile);i++){
+				if(i==holeWave) {
+					i+=3;
 					continue;
 				}
 			fireStone = EntityFactory.createFireStone(rightmostTile*Constants.World.TILE_SIZE, i*Constants.World.TILE_SIZE, p.z,direction,true);
@@ -133,8 +228,7 @@ public class CydoniaAI extends AI{
 
 	@Override
 	public void death(Entity e) {
-		// TODO Auto-generated method stub
-		
+		SoC.game.setScreen(new CreditsScreen(SoC.game));
 	}
 	
 	private void sendWindBlades(){
@@ -212,6 +306,8 @@ public class CydoniaAI extends AI{
 		if(timer <= 0){
 			if(!teleported){
 				if(counter > 5){
+					timer = 1f;
+					teleported = true;
 					Position pos = SoC.game.positionmapper.get(e);
 
 					pos.direction.x = 0;
@@ -219,15 +315,10 @@ public class CydoniaAI extends AI{
 					
 					Buff.addbuff(e, new Teleport((leftTile+(rightTile-leftTile)*0.5f)*World.TILE_SIZE, (bottomTile+(topTile-bottomTile)*0.5f)*World.TILE_SIZE, 0));
 					
-					timer = 5f;
-					state = CASTING;
-					Buff.addbuff(e, new Casting(5f, Constants.BuffColors.RED));
-					SoC.game.buffmapper.get(e).removebuff(Inmune.class, e);
 					SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
 					SoC.game.statemapper.get(e).state = State.ATTACK;
-					
-					counter = 0;
 				} else {
+
 					teleported = true;
 
 					Position pos = SoC.game.positionmapper.get(e);
@@ -246,16 +337,26 @@ public class CydoniaAI extends AI{
 				}
 			} else {
 				teleported = false;
-					int attack = AI.rng.nextInt(10);
-					if(attack <= 2){
-						callFireRain(horizontal);
-						horizontal=!horizontal;
-					} else if(attack <= 7){
-						sendWindBlades();
-					} else {
-						sendPoisonCloud(e);
-					}
-					counter++;
+				if(counter > 5){
+					state = CASTING;
+					SoC.game.buffmapper.get(e).removebuff(Inmune.class, e);
+					Buff.addbuff(e, new Casting(5f, Constants.BuffColors.RED));
+					timer = 5f;
+					SoC.game.charactermapper.get(e).renderers[State.ATTACK].time=0;
+					SoC.game.statemapper.get(e).state = State.ATTACK;
+					counter = 0;
+					return;
+				}
+				int attack = AI.rng.nextInt(10);
+				if(attack <= 2){
+					callFireRain(horizontal);
+					horizontal=!horizontal;
+				} else if(attack <= 7){
+					sendWindBlades();
+				} else {
+					sendPoisonCloud(e);
+				}
+				counter++;
 				
 			}
 		}
