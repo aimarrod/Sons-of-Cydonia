@@ -95,8 +95,11 @@ public class Stats extends Component{
 				spells[1] = Constants.Spells.FIRELION;
 				skill = true;
 			} else if(level == 5) {
+				spells[2] = Constants.Spells.ICECONE;
+				skill = true;
 			} else if(level == 8){
 				spells[3] = Constants.Spells.INFERNO;
+				skill = true;
 			}
 		}
 		

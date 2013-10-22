@@ -3,6 +3,7 @@ package com.soc.screens;
 import javax.swing.GroupLayout.Alignment;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -33,9 +34,9 @@ public class CreditsScreen extends AbstractScreen{
 		super(game);
 		this.title = "Sons of Cydonia";
 		this.devs = "Design and Programming";
-		this.devsBody = "Aritz Bilbao Jayo @aritzbi\n\n"
+		this.devsBody = "Aritz Bilbao Jayo @aritzbi\n"
 				+ "Aimar Rodriguez Soto @aimarrodr";
-		this.graphics = "Art";
+		this.graphics = "Art and Animation";
 		this.graphicsBody = "Johannes Sjolund\n"
 				+ "Johann Charlot\n"
 				+ "Daniel Eddeland\n"
@@ -58,8 +59,8 @@ public class CreditsScreen extends AbstractScreen{
 				+ "Jesus Semsa @Alchemy_Meister\n"
 				+ "Iban Eguia @Razican\n"
 				+ "Aitor Brazaola @kronoshz\n"
-				+ "Ariane Lazaga @NancyCallahan88"
-				+ "Anaïs Galván @aanais"
+				+ "Ariane Lazaga @NancyCallahan88\n"
+				+ "Anaïs Galván @aanais\n"
 				+ "Jon Lorente @jonlorente";
 		this.cam = SoC.game.camera;
 		this.batch = super.getBatch();
@@ -80,7 +81,11 @@ public class CreditsScreen extends AbstractScreen{
 	       Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
 	       Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 	       
-	       cam.position.y -= 50*delta;
+	       if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+		       cam.position.y -= 450*delta;
+	       } else {
+	    	   cam.position.y -= 50*delta;
+	       }
 	       cam.update();
 	       
 	       System.out.println(cam.position.y);
@@ -90,18 +95,30 @@ public class CreditsScreen extends AbstractScreen{
 	       
 	       batch.begin();
 	       batch.setProjectionMatrix(cam.combined);
-	       
-	     //  float fontX = buttonX + buttonWidth/2 - font.getBounds(fontText).width/2;
-	      // float fontY = buttonY + buttonHeight/2 + font.getBounds(fontText).height/2;
-	       
+	       	       
 	       font.setScale(4f);
 	       font.drawWrapped(batch, title, 100, 4900, width - 100, BitmapFont.HAlignment.CENTER);
 	       font.setScale(2f);
 	       font.drawWrapped(batch, devs, 100, 4700, width - 100, BitmapFont.HAlignment.CENTER);
 	       font.setScale(1f);
-	       font.drawWrapped(batch, devsBody, 100, 4600, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.drawWrapped(batch, devsBody, 100, 4620, width - 100, BitmapFont.HAlignment.CENTER);
 	       font.setScale(2f);
-	       font.drawWrapped(batch, graphics, 100, 4400, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.drawWrapped(batch, graphics, 100, 4450, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.setScale(1f);
+	       font.drawWrapped(batch, graphicsBody, 100, 4370, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.setScale(2f);
+	       font.drawWrapped(batch, audio, 100, 4000, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.setScale(1f);
+	       font.drawWrapped(batch, audioBody, 100, 3920, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.setScale(2f);
+	       font.drawWrapped(batch, specialThanks, 100, 3600, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.setScale(1.5f);
+	       font.drawWrapped(batch, testers, 100, 3450, width - 100, BitmapFont.HAlignment.CENTER);
+	       font.setScale(1f);
+	       font.drawWrapped(batch, testersBody, 100, 3380, width - 100, BitmapFont.HAlignment.CENTER);
+	       
+	       
+	       
 	       batch.end();	       
 	       
 	       font.setScale(1);

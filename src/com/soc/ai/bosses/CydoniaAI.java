@@ -252,9 +252,11 @@ public class CydoniaAI extends AI{
 			if((stats.maxHealth/stats.health - (SoC.game.damagemapper.get(e).damage - stats.armor)) <= 0.5){
 				state = WAVING;
 				counter = 10;
+				Buff.addbuff(e, new Teleport(50*World.TILE_SIZE, 187*World.TILE_SIZE, 0));
 			} else {
 				state = STANDARD;
 			}
+			Buff.addbuff(e, new Inmune());
 		} else {
 			if(timer <= 0){
 				for(int i=this.leftmostTile;i < rightmostTile;i++){
@@ -267,6 +269,7 @@ public class CydoniaAI extends AI{
 					}
 				}
 				timer = 20f;
+				Buff.addbuff(e, new Inmune());
 			}
 		}
 	}

@@ -821,7 +821,7 @@ public class EntityFactory {
 	   	
 	   	return e;
 	}
-	public static Entity createIcicle(String group ,Position pos, int damage){
+	public static Entity createIcicle(Position pos, int damage){
 		
 		Entity e=SoC.game.world.createEntity();
 		
@@ -840,7 +840,31 @@ public class EntityFactory {
 		e.addComponent( new Bounds(32, 32) );
 		e.addComponent( new Velocity(Constants.Spells.ICICLE_SPEED*pos.direction.x, Constants.Spells.ICICLE_SPEED*pos.direction.y, (int) Constants.Spells.ICICLE_SPEED) );
 	   	e.addComponent( new Flying());
-	   	e.addComponent( new Attack(new IcicleProcessor(pos.direction), damage) );
+	   	e.addComponent( new Attack(new IcicleProcessor(pos.direction, Constants.Spells.ICICLE_RANGE), damage) );
+	   	
+	   	return e;
+	}
+	
+	public static Entity createIcicle(Position pos, int damage, Vector2 dir){
+		
+		Entity e=SoC.game.world.createEntity();
+		
+		float posx = 0;
+		float posy = 0;
+		
+		if(pos.direction.y != 0){
+			posx = pos.x+4;
+			posy = pos.y + Math.signum(pos.direction.y)*32;
+		} else if(pos.direction.x != 0){
+			posx = pos.x + ((Math.signum(pos.direction.x)==1.0)?20:-50);
+			posy = pos.y + 16;
+		}
+		
+		e.addComponent( new Position(posx, posy, pos.z) );
+		e.addComponent( new Bounds(32, 32) );
+		e.addComponent( new Velocity(Constants.Spells.ICICLE_SPEED*3*dir.x, Constants.Spells.ICICLE_SPEED*3*dir.y, (int) Constants.Spells.ICICLE_SPEED*3) );
+	   	e.addComponent( new Flying());
+	   	e.addComponent( new Attack(new IcicleProcessor(pos.direction, Constants.Spells.ICICLE_RANGE*1.5f), damage) );
 	   	
 	   	return e;
 	}

@@ -25,10 +25,10 @@ public class IcicleProcessor implements AttackProcessor {
 	public AnimatedRenderer renderer;
 	public float distance;
 	
-	public IcicleProcessor(Vector2 dir) {
+	public IcicleProcessor(Vector2 dir, float distance) {
 		this.hit = false;
 		this.renderer = GraphicsLoader.loadIcicle(dir);
-		this.distance = Constants.Spells.ICICLE_RANGE;
+		this.distance = distance;
 	}
 
 	@Override

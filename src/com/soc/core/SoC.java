@@ -27,6 +27,7 @@ import com.soc.game.attacks.spells.FireBreathSpell;
 import com.soc.game.attacks.spells.FireLionSpell;
 import com.soc.game.attacks.spells.FireballSpell;
 import com.soc.game.attacks.spells.FlameSpell;
+import com.soc.game.attacks.spells.IceConeSpell;
 import com.soc.game.attacks.spells.IcicleSpell;
 import com.soc.game.attacks.spells.InfernoSpell;
 import com.soc.game.attacks.spells.QuakebladeSpell;
@@ -178,6 +179,7 @@ public class SoC extends Game {
 		spells[Constants.Spells.RIDE_THE_LIGHTNING]=new RideTheLightningSpell();
 		spells[Constants.Spells.INFERNO]= new InfernoSpell();
 		spells[Constants.Spells.FIRELION] = new FireLionSpell();
+		spells[Constants.Spells.ICECONE] = new IceConeSpell();
 		
 		items=new Item[Constants.Items.ITEM_NUMBER];
 		items[Constants.Items.NONE] = null;
@@ -265,8 +267,8 @@ public class SoC extends Game {
 		processors = new Stack<InputProcessor>();
 			
 		//Save, New, Load game handler.
-		setScreen(new MenuScreen(this));
-		//setScreen(new CreditsScreen(this));
+		//setScreen(new MenuScreen(this));
+		setScreen(new CreditsScreen(this));
 
 	}
 	
