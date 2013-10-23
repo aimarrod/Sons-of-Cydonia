@@ -49,7 +49,6 @@ public class EffectSystem extends EntityProcessingSystem{
 					Sound s = effects.get(e);
 					long id = s.play(EffectsPlayer.instance.volume);
 					s.setLooping(id, true);
-					System.out.println(e);
 					ids.put(e, id);
 				}
 			}

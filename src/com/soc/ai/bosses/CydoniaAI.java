@@ -365,7 +365,6 @@ public class CydoniaAI extends AI{
 	public void casting(Entity e){
 		if(SoC.game.damagemapper.has(e)){
 			Stats stats = SoC.game.statsmapper.get(e);
-			System.out.println("Que pone: "+stats.health+" "+stats.maxHealth+""+((stats.health - (SoC.game.damagemapper.get(e).damage - stats.armor))/stats.maxHealth) );
 			if(((float)(stats.health - (SoC.game.damagemapper.get(e).damage - stats.armor))/(float)stats.maxHealth) <= phasesLife){
 				phasesLife-=0.25;
 				state = WAVING;

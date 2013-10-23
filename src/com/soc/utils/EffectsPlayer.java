@@ -32,7 +32,6 @@ public class EffectsPlayer {
 			sound = Gdx.audio.newSound(Gdx.files.internal("resources/effects/"+name));
 			instance.sounds.put(name, sound);
 		}
-		System.out.println(instance.volume);
 		sound.play(instance.volume);
 	}
 	

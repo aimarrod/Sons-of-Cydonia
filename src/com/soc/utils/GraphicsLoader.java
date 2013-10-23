@@ -891,7 +891,6 @@ public class GraphicsLoader {
 		
 		TextureRegion [][]tmp = TextureRegion.split(load("fire-stone-monster.png"), 128, 128);
 		for(int i = 0; i < tmp.length; i++){
-			System.out.println(i);
 	   		idle.sprites[i] = tmp[i][0];
 	   	}
 		

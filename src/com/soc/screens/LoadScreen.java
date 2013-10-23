@@ -40,11 +40,9 @@ public class LoadScreen extends AbstractScreen implements InputProcessor {
 		focusedStyle.down = getSkin().getDrawable("pushed-button");
 
 		files = GameLoader.getHandles();
-		System.out.println(files.length);
 		buttons = new TextButton[files.length + 2];
 		for (int i = 0; i < files.length+2; i++) {
 			if (i == files.length+1) {
-				System.out.println(i);
 				buttons[i] = new TextButton("Exit", normalStyle);
 				continue;
 			}
