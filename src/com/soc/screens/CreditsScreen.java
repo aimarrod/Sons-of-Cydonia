@@ -75,7 +75,6 @@ public class CreditsScreen extends AbstractScreen{
 				+ "and\n"
 				+ "Aimar Rodriguez Soto";
 		this.devforBody = "developed for TDDD23 (Design and Programming of Computer Games) at LiU university, 2013";
-		this.cam = SoC.game.camera;
 		this.batch = super.getBatch();
 		this.font = new Skin(Gdx.files.internal("resources/skin2.json" )).getFont("menuFont");
 		
@@ -95,12 +94,14 @@ public class CreditsScreen extends AbstractScreen{
 			GraphicsLoader.load("credits-screen-10.png")
 		};
 		
-		cam.position.set(0,0,0);
+		cam = new OrthographicCamera();
 	}
 	
 	@Override
 	public void show(){
 		MusicPlayer.play("beyond-the-clouds.ogg");
+	    cam.position.set(0,0,0);
+	    cam.update();
 	}
 	
 	@Override
@@ -115,6 +116,7 @@ public class CreditsScreen extends AbstractScreen{
 	public void render(float delta) {
 	       Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
 	       Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
+	       
 	       
 	       if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
 		       timer += delta*10;

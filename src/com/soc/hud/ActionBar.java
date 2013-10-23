@@ -119,6 +119,37 @@ public class ActionBar extends Actor implements InputProcessor{
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		Vector2 coords = parent.stage.stageToScreenCoordinates(new Vector2(screenX, screenY));
+		
+		spells = SoC.game.statsmapper.get(SoC.game.player).spells;
+		if(coords.x > getX() && coords.x < getX() + (64+2)*spells.length && coords.y > getY() && coords.y < getY() + 64){
+			for(int i = 0; i < spells.length; i++){
+				if(coords.x > getX()+(64+2)*(i) && coords.x < (64+2)*(i+1) && coords.y > getY() && coords.y < getY() + 64){
+					if(spells[i] == Constants.Spells.NO_SPELL) return false;
+					
+					State state = SoC.game.statemapper.get(SoC.game.player);
+					Velocity vel = SoC.game.velocitymapper.get(SoC.game.player);
+					Stats stats = SoC.game.statsmapper.get(SoC.game.player);
+					Position pos = SoC.game.positionmapper.get(SoC.game.player);
+					
+					Spell spell = SoC.game.spells[spells[i]];
+					if(stats.mana < spell.mana){
+						FloatingText text = new FloatingText("No mana!", 1f, pos.x, pos.y, 50);
+						text.r = 0.5f;
+						text.b = 1;
+						text.g = 0.5f;
+						SoC.game.renderSystem.texts.add(text);
+						return true;
+					}
+					stats.mana -= spell.mana;
+					state.state = spell.state;
+					SoC.game.player.addComponent(new Delay(Constants.Groups.PLAYER_ATTACKS, spell.cast, spell.blocking, spells[i]));
+					SoC.game.player.changedInWorld();
+					vel.vx = 0;
+					vel.vy = 0;
+					return true;
+				}
+			}
+		}
 
 		if(coords.x > getX()+10 && coords.x < getX() + 50 && coords.y > getY()+90 && coords.y < getY() + 144){
 			State state = SoC.game.statemapper.get(SoC.game.player);

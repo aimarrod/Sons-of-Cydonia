@@ -9,15 +9,15 @@ import com.soc.utils.GraphicsLoader;
 
 public class Rage implements Benefit{
 	public float timer;
-	public float gainStrength;
-	public int initialStrength;
+	public float gainAttr;
+	public int initialAttr;
 	boolean buffAdded;
 	public float lastBuff;
 	public AnimatedRenderer renderer; 
 	public Rage(){
 		timer=Constants.Buff.RAGE_DURATION;
-		initialStrength=0;
-		gainStrength=Constants.Buff.GAIN_STRENGTH;
+		initialAttr=0;
+		gainAttr=Constants.Buff.GAIN_STRENGTH;
 		buffAdded=false;
 		lastBuff=Constants.Buff.RAGE_DURATION;
 		renderer=GraphicsLoader.loadRageAura();
@@ -27,18 +27,29 @@ public class Rage implements Benefit{
 		timer -= SoC.game.world.delta;
 		Stats stats=SoC.game.statsmapper.get(e);
 		if(!buffAdded && timer>0){
-			initialStrength=stats.strength;
-			stats.strength+=Constants.Buff.GAIN_STRENGTH;
+			if(stats.clazz.equals(Constants.Characters.WARRIOR)){
+				initialAttr=stats.strength;
+			} else if(stats.clazz.equals(Constants.Characters.MAGE)){
+				initialAttr = stats.intelligence;
+			}
 			lastBuff=timer;
 			buffAdded=true;
 		}else{
 			if(timer>0){
 				if((lastBuff-timer)>=1){
-					stats.strength+=Constants.Buff.GAIN_STRENGTH;
+					if(stats.clazz.equals(Constants.Characters.WARRIOR)){
+						stats.strength+=Constants.Buff.GAIN_STRENGTH;
+					} else if(stats.clazz.equals(Constants.Characters.MAGE)){
+						stats.intelligence+=Constants.Buff.GAIN_STRENGTH;
+					}
 					lastBuff=timer;
 				}
 			}else{
-				stats.strength=initialStrength;
+				if(stats.clazz.equals(Constants.Characters.WARRIOR)){
+					stats.strength=initialAttr;
+				} else if(stats.clazz.equals(Constants.Characters.MAGE)){
+					stats.intelligence=initialAttr;
+				}
 				SoC.game.buffmapper.get(e).removebuff(e,this);
 			}
 		}
@@ -47,8 +58,11 @@ public class Rage implements Benefit{
 	@Override
 	public void delete(Entity e) {
 		Stats stats=SoC.game.statsmapper.get(e);
-		stats.strength=initialStrength;
-		
+		if(stats.clazz.equals(Constants.Characters.WARRIOR)){
+			stats.strength=initialAttr;
+		} else if(stats.clazz.equals(Constants.Characters.MAGE)){
+			stats.intelligence=initialAttr;
+		}		
 	}
 
 }
