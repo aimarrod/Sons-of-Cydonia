@@ -232,6 +232,7 @@ public class Inventory extends Actor implements InputProcessor {
 	}
 
 	public void useFirstHealthPotion() {
+		if(this.hasParent())return;
 		Potion candidate=null;
 		boolean found=false;
 		int candidateValue=-1;
@@ -256,6 +257,7 @@ public class Inventory extends Actor implements InputProcessor {
 }
 
 	public void useFirstManaPotion() {
+		if(this.hasParent())return;
 		Potion candidate=null;
 		boolean found=false;
 		int candidateValue=-1;
