@@ -14,6 +14,7 @@ public class GameMenu extends Table implements InputProcessor {
 	private Table table;
 	private TextButton resumeGameButton;
 	private TextButton saveGameButton;
+	private TextButton controlsButton;
 	private TextButton optionsButton;
 	private TextButton exitButton;
 	private TextButton [] buttons;
@@ -41,15 +42,19 @@ public class GameMenu extends Table implements InputProcessor {
 		saveGameButton = new TextButton( "Save Game", normalStyle);
 		optionsButton = new TextButton( "Options", normalStyle);
 		exitButton = new TextButton( "Exit", normalStyle );
-		buttons=new TextButton[4];
+		controlsButton=new TextButton("Controls",normalStyle);
+		buttons=new TextButton[5];
 		buttons[0]=resumeGameButton;
 		buttons[1]=saveGameButton;
-		buttons[2]=optionsButton;
-		buttons[3]=exitButton;
+		buttons[2]=controlsButton;
+		buttons[3]=optionsButton;
+		buttons[4]=exitButton;
 		focusedButton=1;
 	    table.add( resumeGameButton ).size( 300, 60 ).uniform().spaceBottom( 10 );
 	    table.row();
 	    table.add( saveGameButton ).uniform().fill().spaceBottom( 10 );
+	    table.row();
+	    table.add( controlsButton ).uniform().fill().spaceBottom(10);
 	    table.row();
 	    table.add( optionsButton ).uniform().fill().spaceBottom(10);
 	    table.row();
@@ -75,23 +80,25 @@ public class GameMenu extends Table implements InputProcessor {
 				SoC.game.archiveProcessors();
 				SoC.game.setScreen(new SaveScreen(SoC.game));
 			}else if(focusedButton==3){
+				SoC.game.world.getSystem(HudSystem.class).popInstructions();
+			}else if(focusedButton==4){
 				SoC.game.screens.push(SoC.game.getScreen());
             	SoC.game.hudSystem.hideCharacterGameMenu();
 				SoC.game.archiveProcessors();
 				SoC.game.setScreen(new OptionsScreen(SoC.game,false));
-			}else if(focusedButton==4){
+			}else if(focusedButton==5){
             	SoC.game.player.deleteFromWorld();
             	SoC.game.resetWorld();
             	SoC.game.hudSystem.hideCharacterGameMenu();
             	SoC.game.clearProcessors();
             	SoC.game.openMenuScreen();
-			}	
+			}
 			return true;
 		}
 		if(keycode==Input.Keys.UP){
 			buttons[focusedButton-1].setStyle(normalStyle);
 			if(focusedButton==1)
-				focusedButton=4;
+				focusedButton=5;
 			else
 				focusedButton--;
 			buttons[focusedButton-1].setStyle(focusedStyle);
@@ -99,7 +106,7 @@ public class GameMenu extends Table implements InputProcessor {
 		}else{
 			if(keycode==Input.Keys.DOWN){
 				buttons[focusedButton-1].setStyle(normalStyle);
-				if(focusedButton==4)
+				if(focusedButton==5)
 					focusedButton=1;
 				else
 					focusedButton++;
@@ -137,12 +144,15 @@ public class GameMenu extends Table implements InputProcessor {
 			SoC.game.setScreen(new SaveScreen(SoC.game));
 			return true;
 		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-5)>height-screenY && (getY()-65)<height-screenY){
+			SoC.game.world.getSystem(HudSystem.class).popInstructions();
+			return true;
+		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-75)>height-screenY && (getY()-135)<height-screenY){
 			SoC.game.screens.push(SoC.game.getScreen());
         	SoC.game.hudSystem.hideCharacterGameMenu();
 			SoC.game.archiveProcessors();
 			SoC.game.setScreen(new OptionsScreen(SoC.game,false));
 			return true;
-		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-75)>height-screenY && (getY()-135)<height-screenY){
+		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-145)>height-screenY && (getY()-200)<height-screenY){
         	SoC.game.player.deleteFromWorld();
         	SoC.game.resetWorld();
         	SoC.game.hudSystem.hideCharacterGameMenu();
@@ -178,6 +188,11 @@ public class GameMenu extends Table implements InputProcessor {
 		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-75)>height-screenY && (getY()-135)<height-screenY){
 			buttons[focusedButton-1].setStyle(normalStyle);
 			focusedButton=4;
+			buttons[focusedButton-1].setStyle(focusedStyle);
+			return true;
+		}else if(getX()-150<screenX && getX()+150>screenX && (getY()-145)>height-screenY && (getY()-200)<height-screenY){
+			buttons[focusedButton-1].setStyle(normalStyle);
+			focusedButton=5;
 			buttons[focusedButton-1].setStyle(focusedStyle);
 			return true;
 		}
