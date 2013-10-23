@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -254,7 +255,55 @@ public class Inventory extends Actor implements InputProcessor {
 		} else {
 			EffectsPlayer.play("negative.ogg");
 		}
-}
+	}
+	
+	public TextureRegion getFirstHealthPotion() {
+		Potion candidate=null;
+		boolean found=false;
+		int candidateValue=-1;
+		for (int i = Constants.Items.INVENTORY_SIZE ; i > 0 && !found; i--) {
+				Item item = SoC.game.playermapper.get(SoC.game.player).inventary[i - 1];
+				if (item != null && item instanceof Potion) {
+					candidate=(Potion)item;
+					if(candidate.gainHealth>0 && candidate.gainMana==0){
+						found=true;
+						return candidate.icon;
+					}else if(candidate.gainHealth>0 && candidate.gainMana>0){
+						candidateValue=i;
+					}
+				}
+		}
+		if(candidateValue != -1){
+			return SoC.game.playermapper.get(SoC.game.player).inventary[candidateValue - 1].icon;
+		} else {
+			return null;
+		}
+	}
+	
+	public TextureRegion getFirstManaPotion() {
+		Potion candidate=null;
+		boolean found=false;
+		int candidateValue=-1;
+		for (int i = Constants.Items.INVENTORY_SIZE ; i > 0 && !found; i--) {
+				Item item = SoC.game.playermapper.get(SoC.game.player).inventary[i - 1];
+				if (item != null && item instanceof Potion) {
+					candidate=(Potion)item;
+					if(candidate.gainMana>0 && candidate.gainHealth==0){
+						found=true;
+						return candidate.icon;
+					}else if(candidate.gainMana>0 && candidate.gainHealth>0){
+						candidateValue=i;
+					}
+				}
+				
+		}
+		if(candidateValue!=-1){
+			return SoC.game.playermapper.get(SoC.game.player).inventary[candidateValue - 1].icon;
+		} else {
+			return null;
+		}
+		
+	}
 
 	public void useFirstManaPotion() {
 		if(this.hasParent())return;

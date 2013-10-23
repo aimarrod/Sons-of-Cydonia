@@ -193,7 +193,7 @@ import com.soc.utils.GameLoader;
 					return true;
 				}
 			}
-			if(keycode == controls.shield){
+			if(keycode == controls.shield && !controls.blocking){
 				if(stats.mana <= 0){
 					FloatingText text = new FloatingText("No mana!", 1f, pos.x, pos.y, 50);
 					text.r = 0.5f;
