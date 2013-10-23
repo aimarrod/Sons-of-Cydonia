@@ -158,7 +158,7 @@ public class CharacterScreen extends AbstractScreen implements InputProcessor{
 		}else{
 			if(keycode == Keys.S || keycode == Keys.DOWN){
 				buttons[focusedBotton-1].setStyle(normalStyle);
-				if(focusedBotton==4)
+				if(focusedBotton==2)
 					focusedBotton=1;
 				else
 					focusedBotton++;
