@@ -203,6 +203,7 @@ public class CollisionSystem extends VoidEntitySystem {
 				Position pos = pm.get(character);
 				Velocity v = vm.get(character);
 				Feet feet = fm.get(character);
+				System.out.println(wall);
 				Position wallpos = pm.get(wall);
 				Bounds wallbounds = bm.get(wall);
 

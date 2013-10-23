@@ -25,6 +25,7 @@ public class InstructionBox extends Actor{
 	private static String instructions = 
 			"INSTRUCTIONS:\n\n\n"
 			+ "INGAME\n\n"
+			+ "WASD - Move\n"
 			+ "SPACE - Attack\n"
 			+ "NUM KEYS - Skills\n"
 			+ "SHIFT LEFT - Shield\n"

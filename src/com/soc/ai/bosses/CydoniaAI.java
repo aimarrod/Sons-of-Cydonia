@@ -229,6 +229,7 @@ public class CydoniaAI extends AI{
 	@Override
 	public void death(Entity e) {
 		SoC.game.setScreen(new CreditsScreen(SoC.game));
+		SoC.game.camera.position.set(0,0,0);
 	}
 	
 	private void sendWindBlades(){
