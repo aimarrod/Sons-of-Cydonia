@@ -36,7 +36,6 @@ public class FireBreathProcessor implements AttackProcessor {
 	}
 	@Override
 	public void process(Entity attack) {
-		System.out.println(timer);
 		timer+=SoC.game.world.delta;
 		if(hit!=null){
 			deathTimer+=SoC.game.world.delta;

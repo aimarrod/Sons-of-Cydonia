@@ -300,7 +300,6 @@ public class MidMonsterAI extends AI{
 		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z);
 		EntityFactory.createItem(Constants.Items.MIX_ULTRAPOTION, pos.x, pos.y, pos.z);
 		Stats s = SoC.game.statsmapper.get(SoC.game.player);
-		System.out.println(s.clazz);
 		if(s.clazz.equals(Constants.Characters.WARRIOR)){
 			EntityFactory.createItem(Constants.Items.GOLD_SWORD, pos.x, pos.y, pos.z);
 		} else if(s.clazz.equals(Constants.Characters.MAGE)){
