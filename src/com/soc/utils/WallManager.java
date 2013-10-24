@@ -37,6 +37,12 @@ public class WallManager extends Manager{
     			walls.get(i).deleteFromWorld();
     			bossByWall.remove(walls.get(i));
     		}
+    	} else {
+    		Entity boss = bossByWall.get(e);
+    		if(boss != null){
+    			wallsByBoss.get(boss).remove(e);
+    			bossByWall.remove(e);
+    		}
     	}
     }
     

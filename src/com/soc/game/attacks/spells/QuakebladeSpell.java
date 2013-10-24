@@ -22,7 +22,7 @@ public class QuakebladeSpell extends Spell{
 	}
 	@Override
 	public void create(Entity source, String group, Position pos, Stats stats) {
-		Entity e = EntityFactory.createQuake(pos, SoC.game.feetmapper.get(source),stats.strength*2);	
+		Entity e = EntityFactory.createQuake(pos, SoC.game.feetmapper.get(source),(int)(stats.strength*1.2f));	
 	    SoC.game.groupmanager.add(e, group);
 	    SoC.game.groupmanager.add(e, Constants.Groups.MAP_BOUND);
 	    SoC.game.levelmanager.setLevel(e, Constants.Groups.LEVEL+pos.z);

@@ -24,9 +24,9 @@ public class FlameWallProcessor implements AttackProcessor{
 	@Override 
 	public void process(Entity attack) {
 		timer-=SoC.game.world.delta;
-//		if(timer<=0){
-//			attack.deleteFromWorld();
-//		}
+		if(timer<=0){
+			attack.deleteFromWorld();
+		}
 	}
 
 	@Override

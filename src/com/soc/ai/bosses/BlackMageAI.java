@@ -43,6 +43,7 @@ public class BlackMageAI extends AI{
 				if(castTimer <= 0){
 					Entity spell = EntityFactory.createParadigmShift(e);
 					SoC.game.groupmanager.add(spell, Constants.Groups.ENEMY_ATTACKS);
+					SoC.game.groupmanager.add(spell, Constants.Groups.MAP_BOUND);
 					spell.addToWorld();
 					state.state = State.SPINNING;
 				}

@@ -138,8 +138,6 @@ public class GaiaAI extends AI{
 				EntityFactory.createWall(e, 114, 9, 0).addToWorld();
 				EntityFactory.createWall(e, 114, 10, 0).addToWorld();
 				
-				SoC.game.hudSystem.tooltip.pop("You hear an echo:\n I see you have defeated my aspects, warrior. Very well, now prove your worth to me.", 0f, 8f);
-
 				Entity gaia = EntityFactory.createGaiaAvatar(158*World.TILE_SIZE, 30*World.TILE_SIZE, 0);
 				SoC.game.groupmanager.add(gaia, Constants.Groups.MAP_BOUND);
 				SoC.game.levelmanager.setLevel(gaia, Constants.Groups.LEVEL +0);

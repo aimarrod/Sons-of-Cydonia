@@ -81,8 +81,8 @@ public class CollisionSystem extends VoidEntitySystem {
 				Constants.Groups.PLAYERS));
 		collisionGroups.add(new CharacterCollision());
 		collisionGroups.add(new WallCollision());
-		collisionGroups.add(new CharacterMapCollision());
 		collisionGroups.add(new ProjectileMapCollision());
+		collisionGroups.add(new CharacterMapCollision());
 		collisionGroups.add(new DropPicking());
 	}
 
@@ -199,6 +199,7 @@ public class CollisionSystem extends VoidEntitySystem {
 					projectile.deleteFromWorld();
 				}	
 			}
+			
 			public void process(Entity character, Entity wall) {
 				Position pos = pm.get(character);
 				Velocity v = vm.get(character);
@@ -311,6 +312,12 @@ public class CollisionSystem extends VoidEntitySystem {
 			}
 
 			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_OBSTACLE) {
+				e.deleteFromWorld();
+				a.processor.delete();
+				return;
+			}
+			
+			if (SoC.game.map.tiles[pos.z][centerx][centery].type == World.TILE_GATE) {
 				e.deleteFromWorld();
 				a.processor.delete();
 				return;
